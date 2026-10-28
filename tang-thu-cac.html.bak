@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tàng Thư Các - Kho Tàng Tri Thức Lịch Sử</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #F4ECD8;
+            --red: #7B1E1E;
+            --red-dark: #581313;
+            --gold: #D4AF37;
+            --gold-light: #F7E8B5;
+            --ink: #2C1E18;
+            --card: #FFFDF8;
+            --green: #2E6F40;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Noto Serif', 'Times New Roman', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.65;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(rgba(212,175,55,.14) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--red-dark), var(--red));
+            color: var(--paper);
+            border-bottom: 4px double var(--gold);
+            padding: 20px;
+            box-shadow: 0 4px 12px #2c1e184d;
+        }
+        .header-top {
+            max-width: 1100px;
+            margin: 0 auto 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-back, .progress, .btn-music {
+            padding: 7px 14px;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            color: var(--gold-light);
+            text-decoration: none;
+            background: #fffdf81f;
+            font: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-back:hover, .btn-music:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+        .header-center {
+            text-align: center;
+            max-width: 850px;
+            margin: auto;
+        }
+        .header h1 {
+            font-size: clamp(21px, 4vw, 29px);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header p { margin: 8px 0 18px; }
+        .search-wrap { position: relative; max-width: 620px; margin: auto; }
+        .search {
+            width: 100%;
+            padding: 13px 18px;
+            border: 2px solid var(--gold);
+            border-radius: 28px;
+            font: inherit;
+            background: var(--card);
+            color: var(--ink);
+            outline: none;
+        }
+        main {
+            max-width: 1050px;
+            width: 100%;
+            margin: auto;
+            padding: 30px 16px 50px;
+            flex: 1;
+        }
+        .grade-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .tab, .toggle-all, .study {
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 7px;
+        }
+        .tab {
+            padding: 13px 8px;
+            border: 2px solid #c8b996;
+            background: #e8dec5;
+            color: var(--ink);
+            transition: all 0.2s ease;
+        }
+        .tab.active {
+            background: var(--red);
+            color: var(--gold-light);
+            border-color: var(--gold);
+            box-shadow: 0 5px 12px #7b1e1e44;
+        }
+        .tab small {
+            display: block;
+            font-weight: normal;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            color: var(--red);
+            font-weight: bold;
+        }
+        .toggle-all {
+            padding: 7px 12px;
+            border: 1px solid var(--red);
+            background: transparent;
+            color: var(--red);
+        }
+        .topic {
+            background: var(--card);
+            border: 1px solid #d5c5a1;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+        .topic-head {
+            width: 100%;
+            padding: 15px 18px;
+            border: 0;
+            text-align: left;
+            background: linear-gradient(90deg, #7b1e1e12, #d4af3718);
+            font: inherit;
+            font-weight: bold;
+            color: var(--red);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .topic-list {
+            display: none;
+            list-style: none;
+            border-top: 1px solid #e5d9bc;
+        }
+        .topic.open .topic-list { display: block; }
+        .lesson {
+            padding: 12px 18px;
+            border-bottom: 1px dashed #e8dec5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .lesson:last-child { border: 0; }
+        .lesson.done .lesson-name {
+            color: var(--green);
+            font-weight: bold;
+        }
+        .study {
+            padding: 7px 14px;
+            border: 1px solid var(--gold);
+            background: var(--red);
+            color: var(--gold-light);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .study:hover {
+            background: var(--red-dark);
+            transform: translateY(-1px);
+        }
+        .empty {
+            text-align: center;
+            padding: 30px;
+            background: var(--card);
+            border: 1px dashed var(--gold);
+            border-radius: 8px;
+        }
+        /* MODAL CHI TIẾT BÀI HỌC */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: #140c08d9;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 100;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            position: relative;
+            width: min(880px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px 26px;
+            background: var(--paper);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        .close {
+            position: sticky;
+            top: 0;
+            float: right;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            background: var(--red);
+            color: var(--gold-light);
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #7b1e1e18;
+            color: var(--red);
+            border: 1px solid #7b1e1e33;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .modal h2 {
+            margin: 10px 45px 16px 0;
+            color: var(--red);
+            font-size: clamp(20px, 3vw, 25px);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 8px;
+        }
+        .section {
+            padding: 18px 20px;
+            margin: 14px 0;
+            background: var(--card);
+            border: 1px solid #dfd2b5;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: var(--red);
+            font-size: 17px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--gold);
+            padding-left: 10px;
+        }
+        .lesson-content h4 {
+            color: var(--red-dark);
+            font-size: 16px;
+            margin: 16px 0 8px;
+            padding: 6px 10px;
+            background: linear-gradient(90deg, #d4af3726, transparent);
+            border-left: 3px solid var(--red);
+            border-radius: 0 4px 4px 0;
+        }
+        .lesson-content h4:first-child { margin-top: 0; }
+        .lesson-content ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .lesson-content li {
+            margin-bottom: 7px;
+            text-align: justify;
+        }
+        .lesson-content b { color: #581313; }
+        .key-term {
+            background: #fff8e6;
+            border: 1px dashed var(--gold);
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        .mindmap {
+            background: linear-gradient(135deg, #2c1e18, #4a2c22);
+            color: var(--gold-light);
+            padding: 18px;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .nodes {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .node {
+            padding: 7px 12px;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            background: #d4af372e;
+            font-size: 14px;
+        }
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .modal-actions button {
+            padding: 10px 18px;
+            border-radius: 6px;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .done-btn {
+            background: var(--green);
+            border: 1px solid var(--gold);
+            color: white;
+        }
+        .footer {
+            padding: 18px;
+            text-align: center;
+            background: var(--ink);
+            color: var(--gold);
+            border-top: 3px solid var(--gold);
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 21px; }
+            .lesson { align-items: flex-start; flex-direction: column; }
+            .study { width: 100%; }
+            .grade-tabs { gap: 7px; }
+            .tab { font-size: 14px; padding: 10px 4px; }
+            .modal-box { padding: 18px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-top">
+        <a class="btn-back" href="trang-chinh.html">⬅ Quay lại Sảnh Chính</a>
+        <div class="header-right">
+            <button class="btn-music" id="btn-music" onclick="toggleMusic()">🎵 Nhạc nền: Đang bật</button>
+            <div class="progress" id="progress">📜 Đã lĩnh hội: 0 / 43 bài học</div>
+        </div>
+    </div>
+    <div class="header-center">
+        <h1>Tàng Thư Các - Kho Tàng Tri Thức Lịch Sử</h1>
+        <p>Hệ thống hóa toàn diện Khái niệm, Kiến thức cốt lõi & Sự kiện trọng tâm Lịch sử THPT (Khối 10, 11, 12)</p>
+        <div class="search-wrap">
+            <input class="search" id="search" type="search" placeholder="Tìm tên bài học, khái niệm hoặc chủ đề (VD: Hiện thực lịch sử, Văn Lang, Đại Việt, ASEAN...)">
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="grade-tabs" id="tabs"></div>
+    <div class="toolbar">
+        <span id="view-title"></span>
+        <button class="toggle-all" id="toggle-all">↕ Mở rộng / Thu gọn tất cả</button>
+    </div>
+    <div id="topics"></div>
+</main>
+
+<!-- MODAL HIỂN THỊ NỘI DUNG CHI TIẾT TỪNG BÀI -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+        <button class="close" id="close" aria-label="Đóng">×</button>
+        <span class="badge" id="breadcrumb"></span>
+        <h2 id="modal-title"></h2>
+        <section class="section">
+            <h3>📌 Hệ Thống Khái Niệm & Kiến Thức Cốt Lõi Cần Học Thuộc</h3>
+            <div class="lesson-content" id="summary"></div>
+        </section>
+        <section class="mindmap">
+            <h3>🧠 Sơ Đồ Tư Duy & Mạch Logic Bài Học</h3>
+            <div class="nodes" id="nodes"></div>
+        </section>
+        <section class="section">
+            <h3>🕊️ Góc Tư Duy & Giá Trị Hòa Bình</h3>
+            <p id="reflection"></p>
+        </section>
+        <div class="modal-actions">
+            <button id="mark-done" class="done-btn">✅ Đánh dấu Đã học</button>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p><strong>Tàng Thư Các - Hệ Thống Học Tập Và Trải Nghiệm Lịch Sử</strong></p>
+    <p>Tiến độ học tập và nhạc nền được lưu đồng bộ tự động trên trình duyệt này.</p>
+</footer>
+
+<!-- THẺ AUDIO ĐỒNG BỘ NHẠC NỀN -->
+<audio id="bg-music" loop preload="auto">
+    <source src="nhac-nen.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// =========================================================================
+// 1. KHO DỮ LIỆU KIẾN THỨC CHI TIẾT (ĐẦY ĐỦ KHỐI 10 SGK KẾT NỐI TRI THỨC & KHỐI 11, 12)
+// =========================================================================
+const DU_LIEU_BAI_HOC = {
+    // ---------------- CHỦ ĐỀ 1 (KHỐI 10) ----------------
+    "Hiện thực lịch sử và lịch sử được con người nhận thức": {
+        summary: `
+            <h4>1. Các khái niệm cốt lõi cần học thuộc</h4>
+            <div class="key-term">
+                <ul>
+                    <li><b>Lịch sử:</b> Là tất cả những gì đã diễn ra trong quá khứ.</li>
+                    <li><b>Lịch sử loài người:</b> Là toàn bộ những hoạt động của con người từ khi xuất hiện đến ngày nay, bao gồm cả quá trình con người tương tác với tự nhiên và tương tác với nhau.</li>
+                    <li><b>Hiện thực lịch sử:</b> Là tất cả những gì đã diễn ra trong quá khứ, tồn tại <b>hoàn toàn khách quan</b>, độc lập, không phụ thuộc vào ý muốn chủ quan của con người (chúng ta chỉ có thể tìm hiểu, nhận thức chứ không thể thay đổi hiện thực lịch sử). <i>Ví dụ: Mũi tên đồng Cổ Loa tìm thấy năm 1959, khuôn đúc tên đồng tìm thấy năm 2004.</i></li>
+                    <li><b>Nhận thức lịch sử:</b> Là những hiểu biết của con người về hiện thực lịch sử, được trình bày, tái hiện theo nhiều cách khác nhau (kể chuyện, ghi chép, nghiên cứu, lập đài tưởng niệm, văn học nghệ thuật...). <i>Ví dụ: Tác phẩm "Chuyện nỏ thần" của Tô Hoài.</i></li>
+                </ul>
+            </div>
+            <ul>
+                <li><b>Khoảng cách giữa Hiện thực lịch sử và Nhận thức lịch sử:</b> Luôn có khoảng cách vì con người không thể tái hiện hoàn toàn 100% quá khứ đúng như nó đã xảy ra. Nhận thức lịch sử phụ thuộc vào: (1) Nhu cầu và năng lực người tìm hiểu; (2) Điều kiện và phương pháp nghiên cứu; (3) Độ phong phú và xác thực của sử liệu; (4) Mục đích, thái độ, đạo đức và thế giới quan của nhà sử học.</li>
+            </ul>
+
+            <h4>2. Sử học: Khái niệm, Đối tượng, Chức năng & Nhiệm vụ</h4>
+            <ul>
+                <li><b>Khái niệm Sử học:</b> Là khoa học nghiên cứu về quá khứ của loài người. Sản phẩm của Sử học là nhận thức khoa học về hiện thực lịch sử.</li>
+                <li><b>Đối tượng nghiên cứu của Sử học:</b> Toàn bộ quá khứ của loài người (của một cá nhân, nhóm người, cộng đồng, quốc gia, khu vực hoặc toàn nhân loại).</li>
+                <li><b>2 Chức năng cơ bản của Sử học:</b>
+                    <ul>
+                        <li><i>Chức năng khoa học:</i> Khôi phục các sự kiện lịch sử diễn ra trong quá khứ; rút ra bản chất của các quá trình lịch sử để phát hiện quy luật vận động và phát triển của lịch sử.</li>
+                        <li><i>Chức năng xã hội:</i> Giáo dục tư tưởng, tình cảm, đạo đức; rút ra bài học kinh nghiệm cho cuộc sống hiện tại.</li>
+                    </ul>
+                </li>
+                <li><b>3 Nhiệm vụ của Sử học:</b>
+                    <ul>
+                        <li><i>Nhiệm vụ nhận thức:</i> Cung cấp tri thức khoa học, giúp con người tìm hiểu, khám phá hiện thực lịch sử một cách khách quan, chân thực.</li>
+                        <li><i>Nhiệm vụ giáo dục:</i> Truyền bá giá trị và truyền thống tốt đẹp, giáo dục đạo đức, tinh thần dân tộc, tình yêu quê hương đất nước, lòng khoan dung, nhân ái.</li>
+                        <li><i>Nhiệm vụ dự báo:</i> Thông qua tổng kết thực tiễn và rút ra bài học kinh nghiệm để góp phần dự báo về tương lai của đất nước, nhân loại.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>3. Ba nguyên tắc cơ bản của Sử học</h4>
+            <ul>
+                <li><b>Nguyên tắc khách quan (Quan trọng nhất):</b> Tái hiện hiện thực lịch sử, đưa lại nhận thức đầy đủ nhất về quá khứ dựa trên những thông tin đáng tin cậy.</li>
+                <li><b>Nguyên tắc trung thực:</b> Tôn trọng sự thật lịch sử, tái hiện chân thực dựa trên sử liệu tin cậy, không xuyên tạc sự thật (tiêu biểu như câu chuyện các viên Thái sử nước Tề năm 558 TCN thà chịu chết chứ không sửa chép sử vụ <i>"Thôi Trữ giết vua"</i>).</li>
+                <li><b>Nguyên tắc nhân văn, tiến bộ:</b> Phản ánh sự thật quá khứ nhưng không kích động hận thù, xung đột hay kì thị; góp phần bảo vệ hoà bình, xây dựng xã hội văn minh, nhân ái.</li>
+            </ul>
+
+            <h4>4. Bốn phương pháp cơ bản của Sử học</h4>
+            <ul>
+                <li><b>Phương pháp lịch sử:</b> Xem xét, mô tả sự vật, hiện tượng theo các giai đoạn phát triển cụ thể (hình thành, phát triển, tiêu vong) gắn với bối cảnh lịch sử cụ thể, tránh suy diễn hay hiện đại hoá lịch sử.</li>
+                <li><b>Phương pháp lô-gích:</b> Nghiên cứu mối liên hệ biện chứng bên trong (nguyên nhân – kết quả, bản chất – hiện tượng) để tìm ra bản chất, quy luật vận động.</li>
+                <li><b>Phương pháp lịch đại và đồng đại:</b> <i>Lịch đại</i> là tìm hiểu theo trình tự thời gian trước – sau (mối liên hệ dọc); <i>Đồng đại</i> là tìm hiểu các sự kiện diễn ra trong cùng một thời gian (mối liên hệ ngang).</li>
+                <li><b>Phương pháp liên ngành:</b> Vận dụng phương pháp, kĩ thuật của nhiều ngành khoa học khác (KHXH&NV, KHTN và công nghệ) để nghiên cứu sâu sắc quá khứ.</li>
+            </ul>
+
+            <h4>5. Các nguồn sử liệu & Công tác chuẩn bị sử liệu</h4>
+            <ul>
+                <li><b>Khái niệm Sử liệu:</b> Là toàn bộ những hình thức khác nhau của tư liệu lịch sử, chứa đựng thông tin về quá khứ của loài người.</li>
+                <li><b>Phân loại sử liệu:</b>
+                    <ul>
+                        <li><i>Theo hình thức:</i> Sử liệu hiện vật, sử liệu truyền miệng, sử liệu chữ viết, sử liệu hình ảnh, sử liệu đa phương tiện (phim, băng, đĩa)...</li>
+                        <li><i>Theo tính chất:</i> Sử liệu trực tiếp (sử liệu gốc, sơ cấp) và sử liệu gián tiếp (sử liệu thứ cấp, phái sinh).</li>
+                    </ul>
+                </li>
+                <li><b>Sưu tầm sử liệu:</b> Lập danh mục sử liệu cần sưu tầm; tìm kiếm, thu thập thông tin liên quan đến đối tượng tìm hiểu.</li>
+                <li><b>Xử lí thông tin sử liệu:</b> Phân loại, đánh giá, thẩm định, so sánh nguồn sử liệu nhằm xác định tính xác thực, độ tin cậy và giá trị của sử liệu.</li>
+            </ul>
+        `,
+        nodes: ['Hiện thực khách quan', 'Nhận thức lịch sử', 'Chức năng & Nhiệm vụ', '3 Nguyên tắc & 4 Phương pháp', 'Sưu tầm & Xử lí Sử liệu'],
+        reflection: 'Hiểu rõ khoảng cách giữa hiện thực lịch sử và nhận thức lịch sử giúp ta luôn giữ thái độ khách quan, trung thực, biết trân trọng sự thật và hướng tới các giá trị nhân văn, hòa bình.'
+    },
+
+    "Tri thức lịch sử và cuộc sống": {
+        summary: `
+            <h4>1. Vai trò và ý nghĩa của tri thức lịch sử</h4>
+            <ul>
+                <li><b>Kết nối Quá khứ – Hiện tại – Tương lai:</b> Hiện tại luôn kế thừa và được xây dựng trên nền tảng những gì quá khứ để lại. Tìm hiểu quá khứ giúp hiểu rõ hiện tại, dự đoán và có niềm tin vào tương lai theo phương châm <b>"Ôn cố, tri tân"</b> (Ôn cũ, biết mới).</li>
+                <li><b>Đáp ứng nhu cầu tìm hiểu cội nguồn:</b> Cung cấp thông tin về nguồn gốc, tổ tiên của bản thân, gia đình, dòng họ, dân tộc và nhân loại; lưu giữ truyền thống qua vách đá, sử thi, nghi lễ, gia phả, thư tịch (như bộ <i>Đại Việt sử ký toàn thư</i>).</li>
+                <li><b>Đúc kết bài học kinh nghiệm:</b>
+                    <ul>
+                        <li>Ngô Sỹ Liên và các sử thần nhà Lê viết: <i>"Sử để ghi việc, mà việc hay hoặc dở đều dùng làm gương răn cho đời sau."</i></li>
+                        <li>Chủ tịch Hồ Chí Minh khẳng định (1942): <i>"Dân ta phải biết sử ta / Cho tường gốc tích nước nhà Việt Nam."</i></li>
+                    </ul>
+                </li>
+                <li><b>Hình thành ý thức và bản sắc dân tộc:</b> Hiểu biết lịch sử là yếu tố cốt lõi tạo nên ý thức dân tộc và bản sắc văn hoá của mỗi cộng đồng, quốc gia.</li>
+            </ul>
+
+            <h4>2. Sự cần thiết phải học tập và khám phá lịch sử suốt đời</h4>
+            <ul>
+                <li><b>Vận dụng vào cuộc sống thực tiễn:</b> Cuộc sống hằng ngày luôn đòi hỏi vận dụng tri thức, kinh nghiệm từ quá khứ để xử lí vấn đề hiện tại và định hướng tương lai.</li>
+                <li><b>Giải mã những khoảng trống, bí ẩn lịch sử:</b> Nhiều sự kiện, công trình trong quá khứ vẫn còn là bí ẩn chưa có lời giải chính xác (như cách xây dựng Kim tự tháp Ai Cập cổ đại), thôi thúc thế hệ sau tiếp tục tìm tòi, làm giàu tri thức nhân loại.</li>
+                <li><b>Hội nhập quốc tế trong kỉ nguyên toàn cầu hoá:</b> Giúp tôn trọng sự khác biệt và đa dạng văn hoá của các dân tộc, chủ động tiếp thu có chọn lọc tinh hoa nhân loại, đồng thời bảo tồn và phát huy bản sắc văn hoá Việt Nam.</li>
+                <li><b>Mở ra cơ hội nghề nghiệp mới:</b> Tri thức lịch sử – văn hoá là nguồn cảm hứng và ý tưởng sáng tạo cho các ngành công nghiệp văn hoá, phát triển du lịch.</li>
+            </ul>
+
+            <h4>3. Kết nối lịch sử với cuộc sống</h4>
+            <ul>
+                <li>Lịch sử hiện hữu ở khắp mọi nơi: trong mỗi nếp nhà, con phố, bản làng, đình làng, nhà thờ cổ, chùa, đền, miếu, tượng đài, quảng trường và truyền thống ngôi trường đang học.</li>
+                <li>Các hình thức học tập lịch sử đa dạng, sinh động: tham quan bảo tàng, khu tưởng niệm, di tích lịch sử, đọc sách, xem phim, nghe các bài hát "đi cùng năm tháng".</li>
+            </ul>
+        `,
+        nodes: ['Quá khứ - Hiện tại - Tương lai', 'Ôn cố tri tân', 'Bản sắc dân tộc', 'Học tập suốt đời', 'Hội nhập & Sáng tạo'],
+        reflection: 'Biết sử ta để thêm yêu từng tấc đất quê hương, trân trọng công lao tiền nhân và tự tin bước ra thế giới với bản sắc văn hóa Việt Nam vững vàng.'
+    },
+
+    // ---------------- CHỦ ĐỀ 2 (KHỐI 10) ----------------
+    "Vai trò của Sử học": {
+        summary: `
+            <h4>I. SỬ HỌC VỚI CÁC LĨNH VỰC KHOA HỌC (BÀI 3)</h4>
+            <ul>
+                <li><b>1. Sử học là môn khoa học có tính liên ngành:</b>
+                    <ul>
+                        <li>Do Sử học nghiên cứu toàn bộ đời sống loài người trong quá khứ trên mọi lĩnh vực (chính trị, quân sự, kinh tế, xã hội, văn hoá, khoa học, giáo dục...), nhà sử học bắt buộc phải phối hợp thông tin và phương pháp của nhiều ngành khoa học khác nhau để tìm hiểu toàn diện, sâu sắc và chính xác.</li>
+                    </ul>
+                </li>
+                <li><b>2. Mối liên hệ hai chiều giữa Sử học và các ngành Khoa học xã hội – Nhân văn (KHXH&NV):</b>
+                    <ul>
+                        <li><i>Các ngành KHXH&NV gồm:</i> Ngôn ngữ, Văn hoá, Văn học, Tâm lí, Triết học, Kinh tế, Khoa học chính trị, Xã hội học, Nhân học, Địa lí kinh tế – xã hội...</li>
+                        <li><i>Vai trò của Sử học với KHXH&NV:</i> Lịch sử đời sống xã hội là chất liệu, nguồn cảm hứng cho sự ra đời các tác phẩm KHXH&NV (VD: <i>Bình Ngô đại cáo</i> của Nguyễn Trãi, <i>Hoàng Lê nhất thống chí</i> của Ngô Gia văn phái).</li>
+                        <li><i>Vai trò của KHXH&NV với Sử học:</i> Hỗ trợ phục dựng, giải thích, chứng minh và rút ra quy luật lịch sử (VD: Các tác phẩm <i>Tắt đèn, Bỉ vỏ, Chí Phèo, Số đỏ</i> giúp hiểu sinh động xã hội Việt Nam giai đoạn 1930 – 1945).</li>
+                    </ul>
+                </li>
+                <li><b>3. Mối liên hệ giữa Sử học với các ngành Khoa học tự nhiên (KHTN) và Công nghệ:</b>
+                    <ul>
+                        <li><i>Vai trò của Sử học với KHTN & Công nghệ:</i> Nghiên cứu bối cảnh ra đời, ý nghĩa xã hội của các phát minh; tái hiện lịch sử ngành khoa học (như <i>Lịch sử Toán học</i>, <i>Lịch sử tìm ra các nguyên tố hoá học</i>) giúp nhà khoa học đi sau kế thừa kinh nghiệm và không lặp lại sai lầm.</li>
+                        <li><i>Vai trò của KHTN & Công nghệ với Sử học:</i> Toán học giúp thống kê, phân tích kinh tế – xã hội (như thống kê tỉ lệ ruộng công/ruộng tư thời Nguyễn); Vật lí, Hoá học, Sinh học, Địa chất giúp giám định sử liệu, đo niên đại bằng đồng vị phóng xạ <b>$^{14}\\text{C}$</b> (như xác định niên đại văn hoá Đông Sơn khoảng thế kỉ IX – I TCN); Công nghệ số, Viễn thám, AI, IoT, Thực tế ảo 3D hỗ trợ lập bản đồ và tái hiện quá khứ (như Bảo tàng ảo 3D tại Bảo tàng Lịch sử quốc gia).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>II. SỬ HỌC VỚI MỘT SỐ LĨNH VỰC, NGÀNH NGHỀ HIỆN ĐẠI (BÀI 4)</h4>
+            <ul>
+                <li><b>1. Sử học với công tác bảo tồn và phát huy giá trị di sản văn hoá, di sản thiên nhiên:</b>
+                    <ul>
+                        <li><i>Nguyên tắc cốt lõi trong bảo tồn di sản:</i> Phải đảm bảo <b>tính nguyên trạng</b>, giữ được <b>"yếu tố gốc cấu thành di tích"</b>, đảm bảo "tính xác thực", "tính toàn vẹn", "giá trị nổi bật" của di sản dựa trên cứ liệu và phương pháp khoa học.</li>
+                        <li><i>Vai trò của công tác bảo tồn:</i> Khắc phục nguy cơ biến dạng, xuống cấp của <b>di sản văn hoá vật thể</b> (Cố đô Huế, Hoàng thành Thăng Long, Cung điện Véc-xây); ngăn chặn nguy cơ mai một của <b>di sản văn hoá phi vật thể</b> thông qua sưu tầm, truyền nghề, trình diễn (như Hát Xoan – Phú Thọ); bảo vệ đa dạng sinh học và giá trị khoa học của <b>di sản thiên nhiên</b> (Vịnh Hạ Long, Hang Sơn Đoòng – Phong Nha Kẻ Bàng) và di sản hỗn hợp (Tràng An – Ninh Bình).</li>
+                    </ul>
+                </li>
+                <li><b>2. Sử học với sự phát triển Công nghiệp văn hoá:</b>
+                    <ul>
+                        <li><i>Khái niệm Công nghiệp văn hoá:</i> Là lĩnh vực công nghiệp sản xuất và phân phối hàng hoá dựa trên sự khai thác và phát huy giá trị của di sản văn hoá vật thể và phi vật thể, góp phần gia tăng "sức mạnh mềm" quốc gia.</li>
+                        <li><i>12 ngành công nghiệp văn hoá ở Việt Nam:</i> Quảng cáo; kiến trúc; phần mềm và các trò chơi giải trí; thủ công mĩ nghệ; thiết kế; điện ảnh; xuất bản; thời trang; nghệ thuật biểu diễn; mĩ thuật, nhiếp ảnh và triển lãm; truyền hình và phát thanh; du lịch văn hoá.</li>
+                        <li><i>Tương tác hai chiều:</i> Sử học cung cấp tri thức, ý tưởng, cảm hứng sáng tạo cho công nghiệp văn hoá; ngược lại, công nghiệp văn hoá giúp quảng bá rộng rãi lịch sử dân tộc và đóng góp nguồn lực vật chất để tái đầu tư nghiên cứu, bảo tồn di tích.</li>
+                    </ul>
+                </li>
+                <li><b>3. Sử học với sự phát triển Du lịch:</b>
+                    <ul>
+                        <li><i>Khái niệm Tài nguyên du lịch văn hoá:</i> Gồm di tích lịch sử – văn hoá, di tích cách mạng, khảo cổ, kiến trúc; giá trị văn hoá truyền thống, lễ hội, văn nghệ dân gian và các công trình lao động sáng tạo dùng cho mục đích du lịch.</li>
+                        <li><i>Quan hệ tương tác:</i> Di sản lịch sử – văn hoá là nguồn lực thu hút du khách, tạo việc làm và tăng trưởng kinh tế; ngược lại, nhu cầu du lịch thôi thúc cộng đồng gìn giữ di sản và trích doanh thu du lịch để tái đầu tư tôn tạo, phục dựng di tích.</li>
+                    </ul>
+                </li>
+            </ul>
+        `,
+        nodes: ['Khoa học liên ngành', 'Hỗ trợ KHXH & KHTN', 'Bảo tồn nguyên trạng Di sản', '12 ngành Công nghiệp văn hóa', 'Du lịch văn hóa bền vững'],
+        reflection: 'Mỗi di sản văn hóa và thiên nhiên là tài sản vô giá không thể thay thế của dân tộc và nhân loại. Bảo tồn di sản trên nền tảng khoa học lịch sử chính là giữ gìn linh hồn dân tộc cho muôn đời sau.'
+    },
+
+    // ---------------- CHỦ ĐỀ 3 (KHỐI 10) ----------------
+    "Khái niệm văn minh và văn minh phương Đông": {
+        summary: `
+            <h4>I. KHÁI NIỆM VĂN MINH & VĂN HOÁ (CẦN HỌC THUỘC)</h4>
+            <div class="key-term">
+                <ul>
+                    <li><b>Văn minh:</b> Là sự tiến bộ về vật chất và tinh thần của xã hội loài người; là <b>trạng thái phát triển cao của nền văn hoá</b>, khi xã hội loài người vượt qua trình độ của thời kì dã man.</li>
+                    <li><b>Tiêu chuẩn nhận diện văn minh:</b> Nhà nước, đô thị, chữ viết, những tiến bộ về tổ chức xã hội, luân lí và kĩ thuật để cải thiện cuộc sống con người.</li>
+                    <li><b>Văn hoá:</b> Là tổng thể những giá trị vật chất và tinh thần mà con người sáng tạo nên, tạo ra đặc tính, bản sắc của một xã hội hoặc nhóm người trong xã hội.</li>
+                    <li><b>Phân biệt Văn hoá và Văn minh:</b> Văn hoá xuất hiện đồng thời với sự xuất hiện của loài người, còn văn minh chỉ được sáng tạo trong thời kì phát triển cao của xã hội.</li>
+                </ul>
+            </div>
+
+            <h4>II. BA NỀN VĂN MINH LỚN Ở PHƯƠNG ĐÔNG THỜI CỔ – TRUNG ĐẠI</h4>
+            <h4>1. Văn minh Ai Cập cổ đại (Khoảng năm 3200 – 30 TCN)</h4>
+            <ul>
+                <li><b>Cơ sở hình thành:</b> Gắn liền với <b>sông Nin</b> ở Đông Bắc châu Phi ("Ai Cập là tặng phẩm của sông Nin", vùng đất phù sa màu mỡ gọi là "Vùng đất đen"). Kinh tế nông nghiệp là nền tảng. Khoảng năm <b>3200 TCN</b>, Nhà nước Ai Cập thống nhất ra đời từ các <i>nôm</i>, đứng đầu là <b>Pha-ra-ông</b> nắm quyền tối cao về cả chính trị và tôn giáo. Xã hội gồm: quý tộc, tăng lữ, nông dân, thợ thủ công, thương nhân và nô lệ.</li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Tín ngưỡng, tôn giáo:</i> Sùng bái đa thần (thần Mặt Trời Ra, thần Mặt Trăng Thốt, thần cái chết và phục sinh Ô-di-rít); tin vào sự bất tử của linh hồn và sự phán xét của thần A-nu-bít bằng cách cân trái tim (<i>Sách của người chết</i>).</li>
+                        <li><i>Chữ viết:</i> Sáng tạo <b>chữ tượng hình</b> từ hơn 3000 năm TCN (giải mã năm 1822 bởi Săm-pô-li-ông nhờ bia đá Rô-sét-ta); là cơ sở cho bảng chữ cái Phê-ni-xi.</li>
+                        <li><i>Kiến trúc & Điêu khắc:</i> Cung điện, đền thờ và <b>Kim tự tháp</b> (đã phát hiện 138 kim tự tháp, nổi tiếng nhất là quần thể kim tự tháp và <b>Tượng Nhân sư ở Ghi-da</b>, tượng bán thân Nê-phéc-ti-ti, mặt nạ vàng Tu-tan-kha-mun).</li>
+                        <li><i>Khoa học, kĩ thuật:</i> Toán học (hệ đếm thập phân, phép cộng trừ, tính diện tích tam giác, chữ nhật, số $\\pi \\approx 3,16$); Thiên văn học (làm lịch theo chu kì Mặt Trời); Y học (giải phẫu và <b>kĩ thuật ướp xác</b>).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Văn minh Ấn Độ thời kì cổ – trung đại (Giữa thiên niên kỉ III TCN – 1857)</h4>
+            <ul>
+                <li><b>Cơ sở hình thành:</b> Lưu vực hai dòng sông lớn là <b>sông Ấn và sông Hằng</b> ở Nam Á, ba mặt giáp biển. Cư dân đầu tiên là người <b>Đra-vi-đa</b>, sau có người <b>A-ri-a</b> từ giữa thiên niên kỉ II TCN. Đặc trưng xã hội nổi bật là <b>chế độ đẳng cấp Vác-na</b> chia xã hội thành 4 đẳng cấp: <b>Bra-man, Ksa-tri-a, Vai-si-a và Su-đra</b>. Các triều đại tiêu biểu: Vương triều Mô-ri-a, Vương triều Gúp-ta, Vương triều Hác-sa.</li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Tôn giáo:</i> Quê hương của <b>Hin-đu giáo</b> (ra đời từ Bà La Môn giáo khoảng thiên niên kỉ I TCN) và <b>Phật giáo</b> (ra đời giữa thiên niên kỉ I TCN).</li>
+                        <li><i>Chữ viết & Văn học:</i> Chữ viết cổ trên con dấu sông Ấn, chữ Kha-rốt-thi, chữ Bra-mi cải biên thành chữ <b>San-xcrít (tiếng Phạn)</b>. Văn học rực rỡ với kinh <b>Vê-đa</b>, hai bộ sử thi <b>Ma-ha-bha-ra-ta</b> và <b>Ra-ma-y-a-na</b>, kịch <i>Sơ-kun-tơ-la</i> của Ca-li-đa-sa.</li>
+                        <li><i>Kiến trúc, điêu khắc:</i> Đền Ma-ha-bô-đi, chùa hang A-gian-ta (Phật giáo); đền thờ Hin-đu giáo; <b>Lăng Ta-giơ Ma-han</b> (Hồi giáo).</li>
+                        <li><i>Khoa học, kĩ thuật:</i> Toán học (sáng tạo <b>10 chữ số</b> dùng ngày nay, đặc biệt là số 0; tính số $\\pi \\approx 3,1416$); Vật lí – Hoá học (thuyết nguyên tử, lực hấp dẫn Trái Đất, kĩ thuật luyện kim chống ăn mòn); Y – Dược học (phẫu thuật chắp xương sọ, lấy sỏi thận).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>3. Văn minh Trung Hoa thời kì cổ – trung đại (Thế kỉ XXI TCN – 1911)</h4>
+            <ul>
+                <li><b>Cơ sở hình thành:</b> Lưu vực <b>Hoàng Hà và Trường Giang</b>. Cư dân đầu tiên ở Hoàng Hà là người <b>Hoa – Hạ</b> (tổ tiên dân tộc Hán). Xã hội gồm quý tộc, địa chủ, nông dân, thợ thủ công, thương nhân. Kinh tế nông nghiệp là nền tảng, thủ công nghiệp nổi tiếng với tơ lụa, gốm sứ hình thành <b>"Con đường tơ lụa"</b>. Chính trị theo thể chế <b>quân chủ chuyên chế trung ương tập quyền</b>.</li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Tư tưởng, tôn giáo:</i> <b>Nho giáo, Đạo giáo, Mặc gia, Pháp gia</b>, thuyết Âm dương, Bát quái, Ngũ hành; tiếp thu và phát triển Phật giáo.</li>
+                        <li><i>Chữ viết & Văn học:</i> Từ <b>chữ giáp cốt</b> (khắc trên mai rùa, xương thú thời Thương) và <b>kim văn</b> phát triển thành <b>chữ Hán</b>. Văn học đỉnh cao với <b>Đường thi</b> (Đỗ Phủ, Bạch Cư Dị, Lý Bạch) và <b>tiểu thuyết Minh – Thanh</b> (<i>Tam quốc diễn nghĩa, Thuỷ hử, Tây du kí, Hồng lâu mộng</i>).</li>
+                        <li><i>Kiến trúc, điêu khắc, hội hoạ:</i> <b>Vạn Lý Trường Thành, Tử Cấm Thành, Di Hoà Viên, Thập Tam Lăng</b>, tượng binh sĩ đất nung lăng Tần Thuỷ Hoàng; tranh thuỷ mặc mang tính ước lệ.</li>
+                        <li><i>Khoa học, kĩ thuật:</i> Toán học (lần đầu tiên tính số $\\pi$ chính xác tới 7 chữ số thập phân, phát minh bàn tính); Thiên văn học (ghi chép sớm nhất nhật thực, nguyệt thực); Y – Dược học (Hoa Đà, Trương Trọng Cảnh); Sử học (sách <i>Xuân Thu</i>, <i>Sử kí</i> của Tư Mã Thiên); <b>Bốn phát minh lớn về kĩ thuật:</b> <b>Kĩ thuật làm giấy, Kĩ thuật in, Thuốc súng và La bàn</b>.</li>
+                    </ul>
+                </li>
+            </ul>
+        `,
+        nodes: ['Văn hóa vs Văn minh', 'Ai Cập: Sông Nin & Kim tự tháp', 'Ấn Độ: Tôn giáo & 10 chữ số', 'Trung Hoa: Tư tưởng & 4 phát minh lớn'],
+        reflection: 'Các nền văn minh phương Đông hình thành bên những dòng sông lớn đã đặt nền móng tri thức, chữ viết, tôn giáo và khoa học kĩ thuật vô giá cho toàn nhân loại.'
+    },
+
+    "Một số nền văn minh phương Tây": {
+        summary: `
+            <h4>1. Văn minh Hy Lạp – La Mã cổ đại (Cuối thiên niên kỉ III TCN – năm 476)</h4>
+            <ul>
+                <li><b>Cơ sở hình thành:</b>
+                    <ul>
+                        <li><i>Tự nhiên & Kinh tế:</i> Hình thành trên các bán đảo Nam Âu ven biển Địa Trung Hải; đất đai khô rắn hợp trồng cây lâu năm (nho, ô-liu), giàu khoáng sản, nhiều hải cảng tự nhiên -> Kinh tế chủ đạo là <b>thủ công nghiệp và thương mại đường biển</b> (ở La Mã phát triển thêm kinh tế điền trang).</li>
+                        <li><i>Dân cư, Xã hội & Chính trị:</i> Gồm người Mi-nô-an, A-kê-an, Đô-ri-an (Hy Lạp) và người I-ta-li-ốt/La-tinh (La Mã). Hai giai cấp cơ bản là <b>chủ nô và nô lệ</b>. Các thành bang phát triển thể chế <b>cộng hoà</b> (A-ten, La Mã), từ năm <b>27 TCN</b> La Mã chuyển sang thời kì đế chế (mở đầu bởi Ốc-ta-vi-út). Tiếp thu nhiều thành tựu văn minh phương Đông.</li>
+                    </ul>
+                </li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Chữ viết:</i> Hệ thống 24 chữ cái ghi âm Hy Lạp; người La Mã kế thừa tạo thành <b>chữ La-tinh</b> (phổ biến nhất thế giới hiện nay) và hệ thống <b>chữ số La Mã</b>.</li>
+                        <li><i>Văn học:</i> Thần thoại Hy Lạp – La Mã; hai bộ sử thi <b>I-li-át và Ô-đi-xê</b> của <b>Hô-me</b>; kịch Hy Lạp (A-chi-lút với <i>Prô-mê-tê bị xiềng</i>, Xô-phô-clơ với <i>Vua Ơ-đíp</i>, Ơ-ri-pít với <i>Những phụ nữ thành Tơ-roa</i>); thơ La Mã của Ô-vi-đi-ớt.</li>
+                        <li><i>Kiến trúc, điêu khắc:</i> <b>Đền Pác-tê-nông</b>, đền thờ thần Dớt (Hy Lạp); <b>Đấu trường Cô-li-dê</b>, Khải hoàn môn Công-xtan-ti-nút (La Mã); tượng <i>Lực sĩ ném đĩa, Thần Vệ nữ thành Mi-lô, A-tê-na</i>.</li>
+                        <li><i>Khoa học, kĩ thuật:</i> Thiên văn và lịch pháp (nhận biết Trái Đất hình cầu, tính dương lịch 1 năm có 365 và 1/4 ngày); Toán học & Vật lí (<b>Ta-lét, Pi-ta-go, Ơ-cơ-lít, Ác-si-mét</b>, Ptô-lê-mê với thuyết Địa tâm); Y học (<b>Hi-pô-crát</b> – cha đẻ Y học phương Tây); Sử học (<b>Hê-rô-đốt, Tuy-xi-đít, Xê-nô-phôn, Pô-li-bi-út, Ti-tút Li-vi-út</b>); chế tạo bê tông, đòn bẩy, máy bắn đá.</li>
+                        <li><i>Tư tưởng & Tôn giáo:</i> Quê hương triết học phương Tây với hai trường phái <b>duy vật</b> (Ta-lét, Hê-ra-clít, Đê-mô-crít) và <b>duy tâm</b> (Xô-crát, Pla-tôn, Pi-ta-go). Thờ đa thần và là nơi ra đời <b>Cơ Đốc giáo</b> vào thế kỉ I (được Giê-su sáng lập theo truyền thuyết).</li>
+                        <li><i>Thể thao:</i> Đại hội <b>Ô-lim-píc</b> tổ chức định kì 4 năm/lần từ năm <b>776 TCN</b> tại Ô-lim-pi-a với 5 môn (chạy, nhảy xa, phóng lao, ném đĩa, đấu vật).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Văn minh Tây Âu thời kì Phục hưng (Thế kỉ XV – XVII)</h4>
+            <ul>
+                <li><b>Bối cảnh lịch sử:</b> Quan hệ sản xuất tư bản chủ nghĩa hình thành ở Tây Âu; giai cấp tư sản mới ra đời cần một hệ tư tưởng – văn hoá mới chống lại sự lũng đoạn của Giáo hội Cơ Đốc và chế độ phong kiến lỗi thời. Khởi đầu tại <b>I-ta-li-a</b> rồi lan rộng khắp Tây Âu.</li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Văn học:</i> Thơ của <b>Đan-tê</b> (<i>Thần khúc</i>), Pê-trác-ca; tiểu thuyết của Bô-ca-xi-ô (<i>Mười ngày</i>), Ra-bơ-le, <b>Xéc-van-téc</b> (<i>Đôn Ki-hô-tê</i>); đỉnh cao kịch nghệ của <b>Uy-li-am Sếch-xpia</b> (<i>Ham-lét, Ô-ten-lô, Rô-mê-ô và Giu-li-ét</i>).</li>
+                        <li><i>Hội hoạ, điêu khắc, kiến trúc:</i> "Thời đại của những người khổng lồ" với <b>Lê-ô-na đờ Vanh-xi</b> (<i>Bữa tiệc cuối cùng, Nàng Mô-na Li-sa</i>), <b>Mi-ken-lăng-giơ</b> (<i>Tượng Đa-vít, Tượng Đức Mẹ sầu bi</i>), <b>Ra-pha-en</b> (<i>Đức Mẹ Sít-tin, Trường học A-ten</i>); kiến trúc Vương cung Thánh đường Thánh Phê-rô.</li>
+                        <li><i>Khoa học, kĩ thuật & Tư tưởng:</i> Đột phá Thiên văn học đẩy lùi thần học với <b>Ni-cô-lai Cô-péc-ních</b> (Thuyết Nhật tâm), <b>Gioóc-đa-nô Bru-nô</b> (vũ trụ vô tận), <b>Ga-li-lê-ô Ga-li-lê</b> (chế tạo kính thiên văn); triết học duy vật của <b>Phran-xít Bê-cơn, Đê-các-tơ</b>.</li>
+                    </ul>
+                </li>
+                <li><b>Ý nghĩa:</b> Lên án gay gắt Giáo hội lũng đoạn và chế độ phong kiến thối nát; đề cao giá trị con người, quyền tự do cá nhân và tinh thần dân tộc; là cuộc đấu tranh công khai đầu tiên trên lĩnh vực văn hoá, tư tưởng của giai cấp tư sản, mở đường cho văn minh Tây Âu phát triển.</li>
+            </ul>
+        `,
+        nodes: ['Hy Lạp - La Mã cổ đại', 'Chữ La-tinh & Khoa học', 'Triết học & Ô-lim-píc', 'Văn hóa Phục hưng (XV-XVII)', 'Đề cao con người & Khoa học'],
+        reflection: 'Tinh thần Olympic từ thời Hy Lạp cổ đại và tư tưởng nhân văn thời Phục hưng mãi là biểu tượng cho khát vọng hòa bình, bình đẳng và giải phóng trí tuệ con người.'
+    },
+
+    // ---------------- CHỦ ĐỀ 4 (KHỐI 10) ----------------
+    "Các cuộc cách mạng công nghiệp thời cận đại": {
+        summary: `
+            <h4>1. Cách mạng công nghiệp lần thứ nhất (Giữa thế kỉ XVIII – giữa thế kỉ XIX)</h4>
+            <ul>
+                <li><b>Bối cảnh lịch sử:</b> Khởi đầu tại <b>nước Anh</b> vào giữa thế kỉ XVIII, sau đó lan ra châu Âu và Bắc Mỹ. Nước Anh hội tụ đủ các tiền đề: cách mạng tư sản nổ ra sớm và thành công; tích luỹ tư bản lớn (buôn bán nô lệ, thuộc địa); giàu than đá và quặng sắt; hiện tượng <i>"rào đất cướp ruộng"</i> tạo nguồn lao động dồi dào; nhu cầu cơ khí hoá ngành dệt.</li>
+                <li><b>Bản chất:</b> Là sự nhảy vọt từ lao động thủ công sang lao động bằng máy móc (cơ khí hoá).</li>
+                <li><b>Các mốc thành tựu bắt buộc phải nhớ:</b>
+                    <ul>
+                        <li><b>1733:</b> Giôn Cay phát minh <b>"Con thoi bay"</b> (năng suất dệt tăng gấp đôi).</li>
+                        <li><b>1764:</b> Giêm Ha-gri-vơ chế tạo máy kéo sợi <b>Gien-ni</b>.</li>
+                        <li><b>1769:</b> Ri-chác Ác-rai phát minh máy kéo sợi chạy bằng sức nước.</li>
+                        <li><b>1784 (Phát minh quan trọng nhất):</b> <b>Giêm Oát</b> phát minh ra <b>máy hơi nước</b>, tạo nguồn động lực mới, khởi đầu quá trình công nghiệp hoá.</li>
+                        <li><b>1784:</b> Hen-ri Cót phát minh phương pháp luyện sắt <b>"pút-đinh"</b> (nhào trộn).</li>
+                        <li><b>1785:</b> Ét-mơn Các-rai phát minh máy dệt chạy bằng hơi nước (năng suất tăng 40 lần).</li>
+                        <li><b>1804:</b> Ri-chác Tơ-re-vi-thích chế tạo <b>đầu máy xe lửa</b> chạy trên đường ray đầu tiên.</li>
+                        <li><b>1807:</b> Rô-bớt Phơn-tơn (Mỹ) chế tạo thành công <b>tàu thuỷ chở khách chạy bằng hơi nước</b> đầu tiên.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Cách mạng công nghiệp lần thứ hai (Giữa thế kỉ XIX – năm 1914)</h4>
+            <ul>
+                <li><b>Bối cảnh lịch sử:</b> Kế thừa thành tựu CMCN lần thứ nhất; gắn liền với các khám phá khoa học lớn (Thuyết vạn vật hấp dẫn của Niu-tơn, Định luật bảo toàn vật chất và năng lượng của Lô-mô-nô-xốp, Thuyết tiến hoá của Đác-uyn). Mỹ và Đức vươn lên dẫn đầu công nghiệp thế giới vào năm 1913.</li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Luyện kim:</i> Năm <b>1856</b>, Hen-ri Bê-sê-mơ phát minh <b>lò cao luyện gang lỏng thành thép</b>.</li>
+                        <li><i>Năng lượng điện & Thông tin liên lạc:</i> Động cơ điện của Mai-cơn Pha-ra-đây (1821); <b>bóng đèn sợi đốt của Tô-mát Ê-đi-xơn (1879)</b>; điện xoay chiều của Ni-cô-la Tét-la; <b>điện thoại của A-lếch-xan-đơ Gra-ham Beo (1876)</b>; <b>máy vô tuyến điện của Mác-cô-ni (1897)</b>.</li>
+                        <li><i>Động cơ đốt trong & Giao thông vận tải:</i> Thúc đẩy khai thác dầu mỏ; <b>Can Ben</b> chế tạo xe hơi thực tế đầu tiên (1886); <b>Hen-ri Pho</b> áp dụng dây chuyền lắp ráp ô tô hàng loạt với dòng xe Mô-đen T (1908); <b>hai anh em nhà Rai</b> thử nghiệm thành công <b>máy bay chạy bằng động cơ xăng (1903)</b>.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>3. Ý nghĩa và tác động</h4>
+            <ul>
+                <li><b>Kinh tế:</b> Thay đổi cách thức tổ chức sản xuất, nâng cao năng suất lao động, thúc đẩy nông nghiệp, giao thông và thông tin liên lạc phát triển vượt bậc.</li>
+                <li><b>Xã hội:</b> Hình thành các đô thị công nghiệp đông dân (Luân Đôn, Man-chét-xtơ, Pa-ri, Béc-lin) và hai giai cấp đối kháng: <b>tư sản công nghiệp</b> và <b>vô sản làm thuê</b>.</li>
+                <li><b>Văn hoá & Hệ luỵ:</b> Hình thành lối sống công nghiệp, giao lưu văn hoá toàn cầu; nhưng gây ô nhiễm môi trường, bóc lột lao động phụ nữ – trẻ em và thúc đẩy chiến tranh xâm lược thuộc địa.</li>
+            </ul>
+        `,
+        nodes: ['CMCN 1: Cơ khí hóa (Anh)', '1784: Máy hơi nước Giêm Oát', 'CMCN 2: Điện & Động cơ đốt trong', 'Điện thoại, Ô tô & Máy bay', 'Hình thành Tư sản & Vô sản'],
+        reflection: 'Khoa học kĩ thuật giúp giải phóng sức lao động con người, nhưng lịch sử cũng nhắc nhở nhân loại phải phát triển công nghiệp đi đôi với bảo vệ môi trường và công bằng xã hội.'
+    },
+
+    "Các cuộc cách mạng công nghiệp thời hiện đại": {
+        summary: `
+            <h4>1. Cách mạng công nghiệp lần thứ ba (Nửa sau thế kỉ XX – Cách mạng kĩ thuật số)</h4>
+            <ul>
+                <li><b>Bối cảnh lịch sử:</b> Kế thừa các bước tiến khoa học đầu thế kỉ XX (lí thuyết nguyên tử hiện đại, <b>Thuyết tương đối của An-be Anh-xtanh</b>); nhu cầu phục vụ chiến tranh và chạy đua vũ trang; sự vơi cạn tài nguyên hoá thạch (than đá, dầu mỏ) và thách thức dân số.</li>
+                <li><b>Thành tựu cơ bản:</b>
+                    <ul>
+                        <li><i>Máy tính (Thành tựu quan trọng đầu tiên):</i> Máy tính điện tử đầu tiên <b>ENIAC (1946)</b> của Giôn Mau-li và Prét-pơ Éc-cơ; máy tính cá nhân đầu tiên <b>An-te 8800 (1975)</b> do Pôn A-len và Bin Gết viết phần mềm; máy tính <b>Mác-xin-tốt (1984)</b> của hãng Áp-pô do Stíp Gióp giới thiệu.</li>
+                        <li><i>Internet & Công nghệ thông tin:</i> Phát minh <b>Mạng lưới toàn cầu (WWW)</b> của <b>Tim Béc-nơ (1990)</b>; kết nối không dây <b>(Wifi)</b> do nhóm của <b>Giôn Su-li-van</b> được cấp bằng sáng chế (1996).</li>
+                        <li><i>Tự động hoá, Vật liệu mới & Chinh phục vũ trụ:</i> Cánh tay rô-bốt tự động, rô-bốt ASIMO (2000); Liên Xô phóng thành công vệ tinh nhân tạo đầu tiên <b>Xpút-ních 1 (1957)</b>; nhà du hành Mỹ <b>Neo Am-strong</b> đặt chân lên Mặt Trăng (1969).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Cách mạng công nghiệp lần thứ tư (Từ đầu thế kỉ XXI đến nay – Cách mạng 4.0)</h4>
+            <ul>
+                <li><b>Bối cảnh lịch sử:</b> Trực tiếp kế thừa nền tảng công nghệ kĩ thuật số và internet của CMCN lần thứ ba; kết hợp các công nghệ làm mờ ranh giới giữa Vật lí, kĩ thuật số và Sinh học.</li>
+                <li><b>Thành tựu đột phá:</b>
+                    <ul>
+                        <li><b>Trí tuệ nhân tạo (AI):</b> Tiêu biểu như rô-bốt Xô-phi-a (được A-rập Xê-út cấp quyền công dân ngày 25-10-2017).</li>
+                        <li><b>Internet vạn vật (IoT), Điện toán đám mây, Dữ liệu lớn (Big Data):</b> Kết nối thiết bị thông minh trong quản lí đô thị, giao thông, y tế.</li>
+                        <li><b>Công nghệ in 3D, Công nghệ gen và Công nghệ na-nô:</b> Điều khiển vật chất ở quy mô na-nô mét ($1\\text{ m} = 1.000.000.000\\text{ nm}$), ứng dụng rộng rãi trong y học, sinh học, năng lượng.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>3. Ý nghĩa và tác động hai mặt của CMCN lần thứ ba và thứ tư</h4>
+            <ul>
+                <li><b>Ý nghĩa kinh tế:</b> Ra đời nhà máy thông minh, thương mại điện tử, tăng năng suất lao động gấp nhiều lần, thúc đẩy khu vực hoá và toàn cầu hoá kinh tế.</li>
+                <li><b>Tác động Tích cực về xã hội – văn hoá:</b> Tự động hoá giải phóng con người khỏi lao động nguy hiểm, độc hại; tăng lao động trình độ cao; làm việc từ xa; tìm kiếm thông tin và giao lưu văn hoá siêu tốc.</li>
+                <li><b>Tác động Tiêu cực (Thách thức):</b> Nguy cơ mất việc làm; nới rộng khoảng cách giàu – nghèo; con người lệ thuộc thiết bị thông minh, xa cách giao tiếp gia đình; nguy cơ lộ lọt dữ liệu cá nhân, tin giả và nguy cơ đánh mất bản sắc văn hoá dân tộc.</li>
+            </ul>
+        `,
+        nodes: ['CMCN 3: Máy tính & Internet', 'WWW (1990) & Vũ trụ', 'CMCN 4.0: AI, IoT, Big Data', 'In 3D & Công nghệ Nano', 'Tích cực & Thách thức thời số hóa'],
+        reflection: 'Làm chủ công nghệ hiện đại nhưng không để công nghệ chi phối nhân tính và bản sắc văn hóa dân tộc là bản lĩnh của thế hệ công dân toàn cầu hôm nay.'
+    },
+
+    // ---------------- CHỦ ĐỀ 5 (KHỐI 10) ----------------
+    "Hành trình phát triển và thành tựu của văn minh Đông Nam Á": {
+        summary: `
+            <h4>I. CƠ SỞ HÌNH THÀNH VĂN MINH ĐÔNG NAM Á (BÀI 9)</h4>
+            <ul>
+                <li><b>1. Cơ sở tự nhiên:</b>
+                    <ul>
+                        <li><i>Vị trí địa lí:</i> Gồm 11 quốc gia chia thành <b>Đông Nam Á lục địa</b> (Việt Nam, Lào, Cam-pu-chia, Thái Lan, Mi-an-ma) và <b>Đông Nam Á hải đảo</b> (Bru-nây, In-đô-nê-xi-a, Ma-lai-xi-a, Phi-líp-pin, Xin-ga-po, Đông Ti-mo). Nằm trên đường hàng hải nối Ấn Độ Dương và Thái Bình Dương, được coi là <b>"ngã tư đường"</b>, cầu nối các nền văn minh lớn.</li>
+                        <li><i>Điều kiện tự nhiên:</i> Khí hậu nhiệt đới gió mùa, mạng lưới sông ngòi dày đặc (sông Mê Công...) tạo nên nền <b>văn minh nông nghiệp lúa nước bản địa</b> (thuần dưỡng trâu bò, làm thuỷ lợi) và phát triển sớm thương mại hàng hải (như vương quốc Sri Vi-giay-a thế kỉ VII – XIII).</li>
+                    </ul>
+                </li>
+                <li><b>2. Cơ sở xã hội:</b>
+                    <ul>
+                        <li><i>Cư dân đa tộc người:</i> Thuộc 5 ngữ hệ chính: <b>Nam Á</b> (Môn – Khơ-me, Việt – Mường), <b>Thái – Ka-đai</b>, <b>Mông – Dao</b>, <b>Nam Đảo</b> và <b>Hán – Tạng</b>.</li>
+                        <li><i>Tổ chức xã hội cơ bản:</i> <b>Làng</b> là đơn vị cư trú phổ biến, gắn kết cộng đồng để trị thuỷ và chống ngoại xâm, tạo cơ sở hình thành các quốc gia đầu tiên.</li>
+                    </ul>
+                </li>
+                <li><b>3. Ảnh hưởng của văn minh Ấn Độ và Trung Hoa:</b>
+                    <ul>
+                        <li><i>Văn minh Ấn Độ:</i> Truyền bá chủ yếu qua <b>con đường thương mại biển</b> một cách hoà bình (Phật giáo, Hin-đu giáo, chữ Phạn với <b>Bia Võ Cạnh</b> thế kỉ III – IV ở Việt Nam là bia chữ Phạn cổ nhất ĐNÁ, kiến trúc đền Pram-ba-nan).</li>
+                        <li><i>Văn minh Trung Hoa:</i> Qua giao thương và sự thống trị phong kiến phương Bắc (Nho giáo, chữ Hán, giáo dục khoa cử như Văn Miếu – Quốc Tử Giám, đền Cheng Hun Teng ở Ma-lai-xi-a).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>II. HÀNH TRÌNH PHÁT TRIỂN & THÀNH TỰU TIÊU BIỂU (BÀI 10)</h4>
+            <ul>
+                <li><b>1. Ba giai đoạn phát triển trên trục thời gian:</b>
+                    <ul>
+                        <li><b>Giai đoạn 1 (Trước và đầu Công nguyên – thế kỉ VII):</b> <i>Hình thành và bước đầu phát triển</i>, gắn với sự ra đời các quốc gia đầu tiên (Văn Lang – Âu Lạc, Phù Nam, các quốc gia hạ lưu sông Chao Phray-a...).</li>
+                        <li><b>Giai đoạn 2 (Thế kỉ VII – cuối thế kỉ XV):</b> <i>Phát triển rực rỡ</i>, gắn với sự thịnh đạt của các quốc gia phong kiến dân tộc (Đại Việt, Ăng-co, Pa-gan, Mô-giô-pa-hít...).</li>
+                        <li><b>Giai đoạn 3 (Thế kỉ XVI – thế kỉ XIX):</b> <i>Chuyển biến quan trọng</i>, gắn với sự suy yếu của các vương triều phong kiến và sự xâm nhập của chủ nghĩa tư bản phương Tây.</li>
+                    </ul>
+                </li>
+                <li><b>2. Các thành tựu tiêu biểu:</b>
+                    <ul>
+                        <li><i>Tín ngưỡng bản địa (3 nhóm chính):</i> Tín ngưỡng sùng bái tự nhiên (thờ thần Lúa), tín ngưỡng phồn thực và tín ngưỡng thờ cúng người đã mất (thờ tổ tiên).</li>
+                        <li><i>Tôn giáo:</i> Đa tôn giáo cùng tồn tại hoà hợp: Phật giáo, Hin-đu giáo (từ đầu CN), Hồi giáo (du nhập thế kỉ XIII qua thương nhân Ấn Độ, lập các vương quốc Hồi giáo Ma-lắc-ca, A-chê...), Công giáo (thế kỉ XVI từ Phi-líp-pin).</li>
+                        <li><i>Chữ viết & Văn học:</i> Tiếp thu chữ Phạn, chữ Pa-li, chữ Hán để sáng tạo chữ viết riêng: <b>chữ Chăm cổ, Khơ-me cổ, Mã Lai cổ, Miến cổ, chữ Nôm của người Việt</b>. Văn học dân gian phong phú và văn học viết kiệt xuất: <b>Truyện Kiều</b> (Việt Nam), <b>Riêm Kê</b> (Cam-pu-chia), <b>Ra-ma-kiên</b> (Thái Lan).</li>
+                        <li><i>Kiến trúc & Điêu khắc:</i> Nghệ thuật tạo hình bản địa đỉnh cao với <b>trống đồng, thạp đồng Đông Sơn</b> (Việt Nam), gốm Bản Chiêng (Thái Lan); quần thể kiến trúc tôn giáo kỳ vĩ: <b>Đền Bô-rô-bu-đua</b> (In-đô-nê-xi-a), <b>Ăng-co Vát và Ăng-co Thom</b> (Cam-pu-chia), <b>Tháp Thạt Luổng</b> (Lào), <b>Chùa Phật Ngọc</b> (Thái Lan), <b>Chùa Vàng</b> (Mi-an-ma), <b>Khu đền tháp Mỹ Sơn</b> (Việt Nam).</li>
+                    </ul>
+                </li>
+            </ul>
+        `,
+        nodes: ['Văn minh lúa nước bản địa', 'Tiếp thu Ấn Độ & Trung Hoa', '3 Giai đoạn phát triển', 'Chữ viết riêng & Văn học', 'Ăng-co Vát, Bô-rô-bu-đua, Mỹ Sơn'],
+        reflection: 'Biểu tượng bó lúa vàng của ASEAN bắt nguồn từ cội rễ văn minh nông nghiệp lúa nước hàng ngàn năm, nơi các dân tộc Đông Nam Á luôn dung dị, hòa hợp và tôn trọng sự đa dạng văn hóa.'
+    },
+
+    // ---------------- CHỦ ĐỀ 6 (KHỐI 10) ----------------
+    "Một số nền văn minh cổ trên đất nước Việt Nam": {
+        summary: `
+            <h4>1. Văn minh Văn Lang – Âu Lạc (Văn minh sông Hồng / Văn minh Đông Sơn)</h4>
+            <ul>
+                <li><b>Không gian & Thời gian:</b> Khu vực Bắc Bộ và Bắc Trung Bộ (lưu vực sông Hồng, sông Mã, sông Cả) từ đầu thiên niên kỉ I TCN đến vài thế kỉ đầu Công nguyên. Cội nguồn từ văn hoá Phùng Nguyên (khoảng 4000 năm trước) phát triển rực rỡ ở văn hoá Đông Sơn.</li>
+                <li><b>Cơ sở hình thành:</b> Đất phù sa màu mỡ, khí hậu nhiệt đới ẩm gió mùa, giàu mỏ đồng, sắt, thiếc; cư dân Việt cổ liên kết các làng để trị thuỷ, làm thuỷ lợi và chống ngoại xâm.</li>
+                <li><b>Thành tựu tiêu biểu:</b>
+                    <ul>
+                        <li><i>Nhà nước:</i> <b>Nhà nước Văn Lang</b> (khoảng 2700 năm trước – 208 TCN, kinh đô Phong Châu – Phú Thọ; đứng đầu là <b>Hùng Vương</b>, giúp việc có <b>Lạc hầu</b>; địa phương chia thành các <b>Bộ</b> do <b>Lạc tướng</b> đứng đầu, dưới Bộ là <b>Chiềng, chạ</b> do <b>Bồ chính</b> đứng đầu). Tiếp nối là <b>Nhà nước Âu Lạc</b> (208 – 179 TCN, kinh đô <b>Cổ Loa</b> – Hà Nội, đứng đầu là <b>Thục Phán – An Dương Vương</b>).</li>
+                        <li><i>Kinh tế:</i> Nông nghiệp lúa nước dùng lưỡi cày đồng; kĩ thuật <b>đúc đồng Đông Sơn</b> đạt trình độ bậc thầy với biểu tượng <b>trống đồng Ngọc Lũ, trống đồng Hoàng Hạ, thạp đồng Đào Thịnh</b>, nỏ liên châu.</li>
+                        <li><i>Đời sống vật chất & tinh thần:</i> Ăn cơm – rau – cá, ở <b>nhà sàn</b>, đi lại bằng thuyền bè; phụ nữ mặc váy và áo yếm, đàn ông đóng khố; thờ cúng tổ tiên, thần tự nhiên, tín ngưỡng phồn thực và nghệ thuật âm nhạc trống đồng.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Văn minh Chăm-pa (Thế kỉ II – thế kỉ XV)</h4>
+            <ul>
+                <li><b>Cơ sở hình thành:</b> Hình thành ở duyên hải miền Trung và một phần cao nguyên Trường Sơn (lưu vực sông Thu Bồn...), phát triển trên nền tảng văn hoá Sa Huỳnh kết hợp tiếp thu ảnh hưởng văn minh Ấn Độ qua thương mại biển.</li>
+                <li><b>Thành tựu tiêu biểu:</b>
+                    <ul>
+                        <li><i>Nhà nước:</i> Năm <b>192</b>, Khu Liên lãnh đạo nhân dân Tượng Lâm giành độc lập, lập ra nhà nước Lâm Ấp (sau là Chăm-pa) theo thể chế quân chủ chuyên chế.</li>
+                        <li><i>Kinh tế:</i> Trồng lúa nước (giống lúa chịu hạn hai vụ/năm), khai thác lâm thổ sản, làm gốm, gạch và giỏi buôn bán đường biển.</li>
+                        <li><i>Chữ viết, Tôn giáo & Nghệ thuật:</i> Sáng tạo <b>chữ Chăm cổ</b> trên cơ sở chữ Phạn; sùng bái <b>Hin-đu giáo</b> (thờ thần Si-va) và <b>Phật giáo</b>; nổi tiếng với nghệ thuật xây tháp gạch nung không mạch vữa (<b>Khu đền tháp Mỹ Sơn</b>, tháp Bà Pô Na-ga) và điêu khắc phù điêu, tượng tròn đá sa thạch (<b>Đài thờ Trà Kiệu</b>, vũ nữ Áp-sa-ra).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>3. Văn minh Phù Nam (Thế kỉ I – thế kỉ VII)</h4>
+            <ul>
+                <li><b>Cơ sở hình thành:</b> Hình thành trên vùng châu thổ sông Cửu Long (Nam Bộ Việt Nam) gắn với nền <b>văn hoá Óc Eo</b>, có hệ thống kênh rạch chằng chịt và vị trí thuận lợi trên tuyến hàng hải quốc tế.</li>
+                <li><b>Thành tựu tiêu biểu:</b>
+                    <ul>
+                        <li><i>Nhà nước & Kinh tế:</i> Quốc gia Phù Nam ra đời khoảng thế kỉ I, phát triển cực thịnh vào thế kỉ III – V. Là đế chế thương mại hàng hải sầm uất bậc nhất Đông Nam Á với cảng thị <b>Óc Eo</b> (tìm thấy tiền đồng La Mã, gương đồng thời Hán, bình gốm ken-đi, đồ trang sức vàng và đá quý tinh xảo).</li>
+                        <li><i>Đời sống vật chất & tinh thần:</i> Cư trú trong nhà sàn làm trên mặt nước; tiếp thu sớm chữ Phạn, Hin-đu giáo và Phật giáo (tượng Phật bằng gỗ và đá phong cách Óc Eo); phong tục chôn cất người chết đa dạng gồm 4 hình thức: <b>thuỷ táng, hoả táng, thổ táng và điểu táng</b> (khi có tang người thân cạo đầu, cạo râu, mặc đồ trắng).</li>
+                    </ul>
+                </li>
+            </ul>
+        `,
+        nodes: ['Văn Lang - Âu Lạc (Sông Hồng)', 'Trống đồng Đông Sơn & Cổ Loa', 'Văn minh Chăm-pa (Mỹ Sơn)', 'Văn minh Phù Nam (Óc Eo)', 'Cội nguồn văn hóa Việt Nam'],
+        reflection: 'Ba nền văn minh cổ Văn Lang – Âu Lạc, Chăm-pa và Phù Nam đã hòa quyện vào dòng chảy lịch sử, tạo nên một nền văn hóa Việt Nam thống nhất trong đa dạng.'
+    },
+
+    "Văn minh Đại Việt": {
+        summary: `
+            <h4>1. Khái niệm, Cơ sở hình thành & Quá trình phát triển</h4>
+            <ul>
+                <li><b>Khái niệm Văn minh Đại Việt:</b> Là những sáng tạo vật chất và tinh thần tiêu biểu của cư dân Đại Việt trong kỉ nguyên độc lập, tồn tại và phát triển từ <b>thế kỉ X đến giữa thế kỉ XIX</b> (gắn với quốc hiệu Đại Việt từ thời Lý).</li>
+                <li><b>Cơ sở hình thành:</b> (1) Kế thừa trực tiếp nền văn minh Văn Lang – Âu Lạc; (2) Dựa trên nền độc lập, tự chủ của quốc gia thống nhất và công cuộc mở rộng lãnh thổ; (3) Tiếp thu có chọn lọc thành tựu văn minh Trung Hoa, Ấn Độ, phương Tây.</li>
+                <li><b>Quá trình phát triển:</b> Bước đầu định hình ở thế kỉ X (họ Khúc, Ngô, Đinh, Tiền Lê) -> Phát triển toàn diện và mang đậm tính dân tộc ở thời Lý – Trần – Hồ (thế kỉ XI – đầu XV) -> Đạt đỉnh cao chính quy hoá thời Lê sơ (thế kỉ XV) -> Có nhiều yếu tố mới và tiếp xúc phương Tây từ thế kỉ XVI – giữa thế kỉ XIX (Mạc, Lê trung hưng, Tây Sơn, Nguyễn).</li>
+            </ul>
+
+            <h4>2. Những thành tựu tiêu biểu cần học thuộc</h4>
+            <ul>
+                <li><b>Chính trị & Pháp luật:</b>
+                    <ul>
+                        <li>Tổ chức bộ máy nhà nước quân chủ trung ương tập quyền ngày càng hoàn chỉnh (đạt đỉnh cao qua cải cách của <b>Lê Thánh Tông</b> thế kỉ XV và <b>Minh Mạng</b> nửa đầu thế kỉ XIX).</li>
+                        <li><b>4 Bộ luật thành văn tiêu biểu:</b> <b>Hình thư</b> (1042 – thời Lý, bộ luật thành văn đầu tiên của nước ta), <b>Hình luật</b> (thời Trần), <b>Quốc triều hình luật / Luật Hồng Đức</b> (thời Lê sơ – tiến bộ nhất, bảo vệ quyền lợi phụ nữ), <b>Hoàng Việt luật lệ / Luật Gia Long</b> (thời Nguyễn).</li>
+                    </ul>
+                </li>
+                <li><b>Kinh tế:</b>
+                    <ul>
+                        <li><i>Nông nghiệp:</i> Là ngành kinh tế chủ đạo; đắp đê "quai vạc", đặt chức Hà đê sứ, Khuyến nông sứ, thực hiện phép <b>"Ngụ binh ư nông"</b> và chính sách <b>Quân điền</b>.</li>
+                        <li><i>Thủ công nghiệp & Thương nghiệp:</i> Làng nghề truyền thống (gốm Bát Tràng, Chu Đậu) và quan xưởng nhà nước (Cục Bách tác); phát triển đô thị cổ: <b>Thăng Long (Kẻ Chợ - 36 phố phường), Phố Hiến (Hưng Yên), Thanh Hà (Huế), Hội An (Quảng Nam), Gia Định</b>.</li>
+                    </ul>
+                </li>
+                <li><b>Tư tưởng, Tín ngưỡng & Tôn giáo:</b>
+                    <ul>
+                        <li>Tín ngưỡng thờ cúng tổ tiên, thờ Thành hoàng làng, thờ Mẫu, thờ Quốc tổ Hùng Vương.</li>
+                        <li>Thời Lý – Trần thịnh hành <b>"Tam giáo đồng nguyên"</b> (Phật giáo, Nho giáo, Đạo giáo cùng hoà hợp, Thiền phái Trúc Lâm Yên Tử do Trần Nhân Tông sáng lập); thời Lê sơ và Nguyễn đưa <b>Nho giáo</b> lên vị trí độc tôn; từ thế kỉ XVI du nhập <b>Công giáo</b>.</li>
+                    </ul>
+                </li>
+                <li><b>Giáo dục, Chữ viết & Văn học:</b>
+                    <ul>
+                        <li><i>Giáo dục:</i> Năm <b>1070</b> lập Văn Miếu; năm <b>1075</b> mở khoa thi Nho học đầu tiên; năm <b>1076</b> lập Quốc Tử Giám; năm <b>1484</b> vua Lê Thánh Tông cho dựng bia Tiến sĩ ("Hiền tài là nguyên khí của quốc gia").</li>
+                        <li><i>Chữ viết:</i> Trên cơ sở chữ Hán sáng tạo ra <b>chữ Nôm</b>; thế kỉ XVII xuất hiện <b>chữ Quốc ngữ</b> (gắn với đóng góp của các giáo sĩ phương Tây như A-lếch-xan đơ Rốt và người Việt).</li>
+                        <li><i>Văn học:</i> Văn học chữ Hán (<i>Nam quốc sơn hà, Hịch tướng sĩ, Bình Ngô đại cáo</i>) và văn học chữ Nôm (<i>Quốc âm thi tập</i> của Nguyễn Trãi, <i>Truyện Kiều</i> của Nguyễn Du, thơ Hồ Xuân Hương).</li>
+                    </ul>
+                </li>
+                <li><b>Khoa học – Kĩ thuật & Nghệ thuật:</b>
+                    <ul>
+                        <li><i>Sử học:</i> <b>Đại Việt sử ký</b> (1272 – Lê Văn Hưu), <b>Đại Việt sử ký toàn thư</b> (Ngô Sỹ Liên), <i>Đại Việt thông sử</i> (Lê Quý Đôn), <i>Lịch triều hiến chương loại chí</i> (Phan Huy Chú).</li>
+                        <li><i>Địa lí:</i> <b>Dư địa chí</b> (Nguyễn Trãi), <i>Hồng Đức bản đồ</i>, <i>Gia Định thành thông chí</i>.</li>
+                        <li><i>Toán học, Quân sự & Y học:</i> <b>Đại thành toán pháp</b> (Lương Thế Vinh), <i>Lập thành toán pháp</i> (Vũ Hữu); <i>Binh thư yếu lược</i> (Trần Quốc Tuấn), súng thần cơ và <b>thành nhà Hồ</b> (Hồ Nguyên Trừng); danh y <b>Tuệ Tĩnh</b> và <b>Hải Thượng Lãn Ông Lê Hữu Trác</b>.</li>
+                        <li><i>Kiến trúc & Nghệ thuật:</i> <b>Hoàng thành Thăng Long, Thành nhà Hồ, Cố đô Huế</b>, chùa Một Cột, tháp Phổ Minh, đình Tây Đằng; múa rối nước, chèo, tuồng, <b>Nhã nhạc cung đình Huế</b>.</li>
+                    </ul>
+                </li>
+            </ul>
+        `,
+        nodes: ['Kỉ nguyên độc lập (X - XIX)', 'Luật Hồng Đức & Quân điền', 'Văn Miếu (1070) & Chữ Nôm', 'Đại Việt sử ký toàn thư', 'Hoàng thành Thăng Long & Huế'],
+        reflection: 'Văn minh Đại Việt là minh chứng hùng hồn cho sức sống quật cường, trí tuệ uyên bác và tinh thần nhân nghĩa ("Đem đại nghĩa để thắng hung tàn") của dân tộc Việt Nam.'
+    },
+
+    // ---------------- CHỦ ĐỀ 7 (KHỐI 10) ----------------
+    "Các dân tộc trên đất nước Việt Nam": {
+        summary: `
+            <h4>1. Thành phần dân tộc theo dân số</h4>
+            <ul>
+                <li>Việt Nam là một quốc gia thống nhất gồm <b>54 dân tộc anh em</b> cùng chung sống.</li>
+                <li><b>Dân tộc đa số:</b> Dân tộc <b>Kinh (Việt)</b> chiếm khoảng <b>85,3%</b> tổng dân số (theo tổng điều tra năm 2019), cư trú chủ yếu ở vùng đồng bằng, trung du và duyên hải.</li>
+                <li><b>Các dân tộc thiểu số:</b> Gồm <b>53 dân tộc</b> chiếm khoảng <b>14,7%</b> dân số, phân bố chủ yếu ở miền núi, trung du và cao nguyên (từ Bắc vào Nam). Một số dân tộc thiểu số có dân số trên 1 triệu người như: Tày, Thái, Mường, H'Mông, Khơ-me, Nùng. Một số dân tộc có dân số rất ít (dưới 1000 người) như: Ơ Đu, Brâu, Rơ Măm, Pu Péo, Si La.</li>
+                <li><b>Đặc điểm phân bố cư trú:</b> Cư trú <b>đan xen nhau</b> trên khắp lãnh thổ (không có một lãnh thổ tộc người riêng biệt khép kín), tạo điều kiện giao lưu văn hoá và thắt chặt tình đoàn kết.</li>
+            </ul>
+
+            <h4>2. Thành phần dân tộc theo ngữ hệ (5 ngữ hệ – 8 nhóm ngôn ngữ)</h4>
+            <div class="key-term">
+                <ul>
+                    <li><b>1. Ngữ hệ Nam Á (25 dân tộc):</b> Chia thành 2 nhóm: Nhóm <b>Việt – Mường</b> (4 dân tộc: Kinh, Mường, Thổ, Chứt) và Nhóm <b>Môn – Khơ-me</b> (21 dân tộc: Khơ-me, Ba-na, Xơ-đăng, Cơ-ho, Hrê, Mnông...).</li>
+                    <li><b>2. Ngữ hệ Thái – Ka-đai (12 dân tộc):</b> Chia thành 2 nhóm: Nhóm <b>Tày – Thái</b> (8 dân tộc: Tày, Thái, Nùng, Sán Chay, Giáy, Lào, Lự, Bố Y) và Nhóm <b>Ka-đai</b> (4 dân tộc: La Chí, La Ha, Cờ Lao, Pu Péo).</li>
+                    <li><b>3. Ngữ hệ Mông – Dao (3 dân tộc):</b> Gồm 1 nhóm ngôn ngữ Mông – Dao (H'Mông, Dao, Pà Thẻn).</li>
+                    <li><b>4. Ngữ hệ Nam Đảo (5 dân tộc):</b> Gồm 1 nhóm ngôn ngữ Ma-lay-ô – Pô-li-nê-di (Gia-rai, Ê-đê, Chăm, Ra-glai, Chu-ru).</li>
+                    <li><b>5. Ngữ hệ Hán – Tạng (9 dân tộc):</b> Chia thành 2 nhóm: Nhóm <b>Hán</b> (3 dân tộc: Hoa, Sán Dìu, Ngái) và Nhóm <b>Tạng – Miến</b> (6 dân tộc: Hà Nhì, Phù Lá, La Hủ, Lô Lô, Cống, Si La).</li>
+                </ul>
+            </div>
+        `,
+        nodes: ['54 Dân tộc anh em', 'Kinh (85,3%) & 53 DT thiểu số (14,7%)', 'Cư trú đan xen khắp lãnh thổ', '5 Ngữ hệ & 8 Nhóm ngôn ngữ'],
+        reflection: 'Năm mươi tư dân tộc anh em trên dải đất hình chữ S như năm mươi tư cánh hoa cùng chung một cội nguồn Bọc Trăm Trứng, bình đẳng và gắn bó keo sơn.'
+    },
+
+    "Đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam": {
+        summary: `
+            <h4>1. Đời sống vật chất của cộng đồng các dân tộc Việt Nam</h4>
+            <ul>
+                <li><b>Hoạt động sản xuất nông nghiệp:</b>
+                    <ul>
+                        <li><i>Người Kinh và các dân tộc vùng thung lũng, đồng bằng (Tày, Thái, Mường, Khơ-me, Chăm):</i> Chủ yếu canh tác <b>lúa nước</b> kết hợp hệ thống thuỷ lợi (đê điều, kênh mương, cọn nước).</li>
+                        <li><i>Các dân tộc vùng núi cao và Trường Sơn – Tây Nguyên:</i> Canh tác <b>nương rẫy</b> (trồng lúa cạn, ngô, khoai, cây ăn quả, cây dược liệu) và sáng tạo kĩ thuật làm <b>ruộng bậc thang</b> độc đáo (Mù Cang Chải, Hoàng Su Phì, Sa Pa).</li>
+                    </ul>
+                </li>
+                <li><b>Thủ công nghiệp & Thương mại:</b> Nghề dệt thổ cẩm (với hoa văn mang bản sắc riêng từng tộc người), đan lát mây tre, làm gốm, rèn đúc, chế tác trang sức bạc; hình thành văn hoá <b>chợ phiên vùng cao</b> và <b>chợ nổi miền Tây Nam Bộ</b>.</li>
+                <li><b>Ăn, mặc, ở, đi lại:</b>
+                    <ul>
+                        <li><i>Ẩm thực:</i> Cơ cấu bữa ăn truyền thống là <b>Cơm – Rau – Cá</b> (người vùng cao ăn xôi nếp, thắng cố, cơm lam, mèn mén); sử dụng nước mắm, tương và các gia vị tự nhiên.</li>
+                        <li><i>Trang phục:</i> Người Kinh truyền thống có áo dài, áo tứ thân, áo bà ba; các dân tộc thiểu số nổi bật với trang phục thổ cẩm rực rỡ hoa văn.</li>
+                        <li><i>Nhà ở:</i> Người Kinh ở <b>nhà trệt</b> (3 gian 2 chái gắn với luỹ tre làng); phần lớn các dân tộc thiểu số ở <b>nhà sàn</b> (nhà Rông, nhà Dài ở Tây Nguyên) hoặc nhà trình tường bằng đất (vùng biên giới phía Bắc).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Đời sống tinh thần của cộng đồng các dân tộc Việt Nam</h4>
+            <ul>
+                <li><b>Tín ngưỡng, tôn giáo:</b> Tín ngưỡng vạn vật hữu linh, thờ cúng tổ tiên, thờ thần Nông, thần Rừng, thần Nước; các tôn giáo lớn chung sống hoà bình.</li>
+                <li><b>Phong tục, tập quán & Lễ hội:</b> Tết Nguyên đán, lễ hội Đền Hùng, lễ hội Lồng tồng (xuống đồng của người Tày, Nùng), lễ hội Gầu tào (người H'Mông), lễ hội Ka-tê (người Chăm), lễ hội Đua ghe Ngo – Ok Om Bok (người Khơ-me).</li>
+                <li><b>Văn học – Nghệ thuật dân gian:</b> Sử thi (<i>Đẻ đất đẻ nước, Đam San</i>), dân ca Quan họ, Hát Xoan, hát Then (Tày, Nùng, Thái), múa Xoè Thái và <b>Không gian văn hoá Cồng chiêng Tây Nguyên</b>.</li>
+            </ul>
+        `,
+        nodes: ['Lúa nước & Ruộng bậc thang', 'Thổ cẩm, Nhà sàn & Ẩm thực', 'Thờ cúng tổ tiên & Vạn vật hữu linh', 'Lễ hội truyền thống & Di sản văn hóa'],
+        reflection: 'Mỗi điệu múa Xòe, tiếng Cồng chiêng hay thửa ruộng bậc thang đều kết tinh trí tuệ thích ứng với tự nhiên và tâm hồn yêu chuộng cái đẹp của cộng đồng các dân tộc Việt Nam.'
+    },
+
+    "Khối đại đoàn kết dân tộc trong lịch sử Việt Nam": {
+        summary: `
+            <h4>1. Sự hình thành và vai trò của khối đại đoàn kết dân tộc</h4>
+            <ul>
+                <li><b>Cơ sở hình thành từ rất sớm:</b> Xuất phát từ hai nhu cầu sống còn của lịch sử dân tộc: (1) <b>Yêu cầu liên kết trị thuỷ, làm thuỷ lợi</b> phục vụ nông nghiệp lúa nước; (2) <b>Yêu cầu hợp sức chống giặc ngoại xâm</b> lớn mạnh hơn nhiều lần để bảo vệ bờ cõi (phản ánh qua truyền thuyết <i>Con Rồng cháu Tiên – Bọc trăm trứng</i> và <i>Thánh Gióng</i>).</li>
+                <li><b>Vai trò xuyên suốt lịch sử:</b>
+                    <ul>
+                        <li>Trong <b>dựng nước và giữ nước thời phong kiến</b>: Các dân tộc miền xuôi và miền ngược cùng kề vai sát cánh (như cuộc kháng chiến chống Tống với thủ lĩnh Tày Nùng Tôn Đản, Thân Cảnh Phúc; Hội nghị Diên Hồng thời Trần; Hội thề Lũng Nhai thời khởi nghĩa Lam Sơn). Các vương triều thực thi chính sách <b>"Nhu viễn"</b> (mềm dẻo, gả công chúa cho các tù trưởng miền núi để gắn kết biên cương).</li>
+                        <li>Trong <b>đấu tranh giải phóng dân tộc thời cận – hiện đại</b>: Dưới ngọn cờ của Đảng và Chủ tịch Hồ Chí Minh, khối đại đoàn kết toàn dân được tập hợp trong các mặt trận thống nhất (Mặt trận Việt Minh, Mặt trận Liên Việt, Mặt trận Dân tộc giải phóng miền Nam Việt Nam), làm nên thắng lợi Cách mạng tháng Tám 1945, Điện Biên Phủ 1954 và Đại thắng mùa Xuân 1975.</li>
+                        <li>Trong <b>xây dựng và bảo vệ Tổ quốc hiện nay</b>: Là đường lối chiến lược, nguồn sức mạnh, động lực chủ yếu để phát triển đất nước bền vững và bảo vệ chủ quyền biên giới, biển đảo.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2. Chính sách dân tộc của Đảng và Nhà nước hiện nay</h4>
+            <div class="key-term">
+                <ul>
+                    <li><b>Nguyên tắc cốt lõi cần học thuộc:</b> <b>"Bình đẳng, đoàn kết, tôn trọng và giúp nhau cùng phát triển"</b> giữa các dân tộc. Nghiêm cấm mọi hành vi kì thị, chia rẽ dân tộc.</li>
+                    <li><b>Vai trò của Mặt trận Tổ quốc Việt Nam:</b> Là tổ chức liên minh chính trị, tập hợp và phát huy sức mạnh khối đại đoàn kết toàn dân tộc.</li>
+                    <li><b>Các chương trình trọng điểm:</b> Đầu tư phát triển kinh tế – xã hội vùng đồng bào dân tộc thiểu số và miền núi (Chương trình 135, xây dựng hạ tầng, giáo dục, y tế, bảo tồn tiếng nói, chữ viết và bản sắc văn hoá các dân tộc).</li>
+                </ul>
+            </div>
+        `,
+        nodes: ['Trị thủy & Chống ngoại xâm', 'Nghĩa đồng bào (Bọc trăm trứng)', 'Tư tưởng Hồ Chí Minh & Mặt trận', 'Bình đẳng - Đoàn kết - Cùng phát triển'],
+        reflection: 'Như lời Chủ tịch Hồ Chí Minh căn dặn: "Đoàn kết, đoàn kết, đại đoàn kết / Thành công, thành công, đại thành công." Đại đoàn kết chính là cội nguồn sức mạnh giữ nước và dựng nước ngàn đời của Việt Nam.'
+    },
+
+    // ---------------- TÓM TẮT TRỌNG TÂM KHỐI 11 ----------------
+    "Một số vấn đề chung về cách mạng tư sản": {
+        summary: `
+            <h4>1. Tiền đề của các cuộc cách mạng tư sản</h4>
+            <ul>
+                <li><b>Kinh tế:</b> Phương thức sản xuất tư bản chủ nghĩa phát triển mạnh trong lòng chế độ phong kiến hoặc thuộc địa (công trường thủ công, đồn điền ở Tây Âu và Bắc Mỹ), nhưng bị kìm hãm bởi các rào cản phong kiến/thực dân.</li>
+                <li><b>Chính trị – Xã hội:</b> Chế độ quân chủ chuyên chế (Pháp) hoặc ách cai trị thực dân (Anh ở Bắc Mỹ) gây mâu thuẫn gay gắt với giai cấp tư sản, quý tộc mới và quần chúng nhân dân (Đẳng cấp thứ ba ở Pháp).</li>
+                <li><b>Tư tưởng:</b> Trào lưu <b>Triết học Ánh sáng</b> thế kỉ XVIII (Mông-te-xki-ơ, Vôn-te, Rút-xô) phê phán chế độ chuyên chế và đề xướng quyền tự do, dân chủ, phân chia quyền lực.</li>
+            </ul>
+            <h4>2. Mục tiêu, Nhiệm vụ, Giai cấp lãnh đạo & Động lực</h4>
+            <ul>
+                <li><b>Nhiệm vụ dân tộc:</b> Xoá bỏ tình trạng phong kiến cát cứ hoặc đánh đuổi thực dân giải phóng dân tộc, thống nhất thị trường dân tộc.</li>
+                <li><b>Nhiệm vụ dân chủ:</b> Xoá bỏ chế độ phong kiến chuyên chế, xác lập nền dân chủ tư sản và quyền tự do kinh doanh.</li>
+                <li><b>Lãnh đạo:</b> Giai cấp tư sản hoặc liên minh tư sản – quý tộc mới (Anh), chủ nô (Bắc Mỹ). <b>Động lực chính:</b> Quần chúng nhân dân (nông dân, thợ thủ công, công nhân).</li>
+            </ul>
+            <h4>3. Kết quả và Ý nghĩa</h4>
+            <ul>
+                <li>Lật đổ chế độ phong kiến/thực dân, thiết lập nhà nước tư sản (Bản Tuyên ngôn Độc lập Mỹ 1776, Tuyên ngôn Nhân quyền và Dân quyền Pháp 1789), mở đường cho chủ nghĩa tư bản phát triển.</li>
+            </ul>
+        `,
+        nodes: ['Tiền đề Kinh tế - Tư tưởng', 'Nhiệm vụ Dân tộc & Dân chủ', 'Lãnh đạo: Giai cấp Tư sản', 'Động lực: Quần chúng nhân dân', 'Xác lập Chủ nghĩa Tư bản'],
+        reflection: 'Các bản Tuyên ngôn thời cách mạng tư sản đã khẳng định quyền sống, quyền tự do và quyền mưu cầu hạnh phúc — những giá trị phổ quát mà Chủ tịch Hồ Chí Minh đã trích dẫn trong Tuyên ngôn Độc lập năm 1945.'
+    },
+
+    "Sự xác lập và phát triển của chủ nghĩa tư bản": {
+        summary: `
+            <h4>1. Sự xác lập của chủ nghĩa tư bản (Nửa sau thế kỉ XIX)</h4>
+            <ul>
+                <li>Sau các cuộc cách mạng tư sản ở Âu – Mỹ và cải cách Minh Trị ở Nhật Bản (1868), thống nhất Đức và I-ta-li-a (1870–1871), chủ nghĩa tư bản chính thức được xác lập trên phạm vi thế giới.</li>
+            </ul>
+            <h4>2. Chuyển sang giai đoạn Chủ nghĩa đế quốc (Cuối thế kỉ XIX – đầu thế kỉ XX)</h4>
+            <ul>
+                <li>Sự tập trung sản xuất và tư bản cao độ dẫn tới sự ra đời của các <b>tổ chức độc quyền</b> (Các-ten, Xanh-đi-ca, Tơ-rớt). Sự dung hợp giữa tư bản ngân hàng và tư bản công nghiệp tạo thành <b>tư bản tài chính</b>.</li>
+                <li>Các nước đế quốc đẩy mạnh xuất khẩu tư bản và xâm lược thuộc địa, dẫn tới mâu thuẫn gay gắt về thị trường và thuộc địa.</li>
+            </ul>
+            <h4>3. Chủ nghĩa tư bản hiện đại (Sau Chiến tranh thế giới thứ hai đến nay)</h4>
+            <ul>
+                <li>Kết hợp giữa sức mạnh kinh tế của các tổ chức độc quyền tư nhân với sức mạnh chính trị của nhà nước tư sản; có khả năng tự điều chỉnh và thích ứng nhờ cách mạng KH-CN, nhưng vẫn tiềm ẩn khủng hoảng và bất bình đẳng xã hội.</li>
+            </ul>
+        `,
+        nodes: ['Xác lập CNTB (Giữa TK XIX)', 'Tổ chức độc quyền & Tư bản tài chính', 'Chủ nghĩa đế quốc & Thuộc địa', 'CNTB hiện đại: Tiềm năng & Thách thức'],
+        reflection: 'Nhận diện rõ lịch sử phát triển của chủ nghĩa tư bản giúp ta hiểu được nguồn gốc các cuộc chiến tranh giành thuộc địa và bài học tận dụng khoa học công nghệ để phát triển kinh tế.'
+    },
+
+    "Sự hình thành Liên bang Cộng hòa xã hội chủ nghĩa Xô viết": {
+        summary: `
+            <h4>1. Cách mạng tháng Mười Nga năm 1917</h4>
+            <ul>
+                <li>Sau Cách mạng tháng Hai (lật đổ chế độ Nga hoàng, tồn tại cục diện hai chính quyền song song), dưới sự lãnh đạo của <b>V.I. Lê-nin</b> và Đảng Bôn-sê-vích, ngày <b>25-10-1917 (tức 7-11-1917)</b>, Cách mạng tháng Mười giành thắng lợi tại Pê-tơ-rô-grát, lập nên Nhà nước Xô viết công – nông đầu tiên trên thế giới.</li>
+            </ul>
+            <h4>2. Sự thành lập Liên Xô (30-12-1922)</h4>
+            <ul>
+                <li>Để hợp sức chống thù trong giặc ngoài và khôi phục kinh tế, ngày <b>30-12-1922</b>, Đại hội lần thứ nhất các Xô viết toàn Liên bang tuyên bố thành lập <b>Liên bang Cộng hoà xã hội chủ nghĩa Xô viết (Liên Xô)</b> dựa trên nguyên tắc bình đẳng, tự nguyện của 4 nước cộng hoà Xô viết đầu tiên (Nga, U-crai-na, Bê-lô-rút-xi-a và Ngoại Cáp-ca-dơ).</li>
+                <li><b>Ý nghĩa:</b> Mở ra con đường giải phóng cho các dân tộc bị áp bức trên thế giới (trong đó có cách mạng Việt Nam khi Nguyễn Ái Quốc đọc <i>Luận cương của Lê-nin</i> năm 1920).</li>
+            </ul>
+        `,
+        nodes: ['Cách mạng tháng Hai (1917)', 'Cách mạng tháng Mười (7/11/1917)', 'Thành lập Liên Xô (30/12/1922)', 'Cổ vũ phong trào giải phóng dân tộc'],
+        reflection: 'Sự ra đời của Liên Xô gắn liền với Sắc lệnh Hòa bình của Lê-nin, thể hiện khát vọng chấm dứt chiến tranh đế quốc và quyền bình đẳng giữa các dân tộc.'
+    },
+
+    "Sự phát triển của chủ nghĩa xã hội từ sau Chiến tranh thế giới thứ hai": {
+        summary: `
+            <h4>1. Chủ nghĩa xã hội trở thành hệ thống thế giới</h4>
+            <ul>
+                <li>Sau Chiến tranh thế giới thứ hai (1945), chủ nghĩa xã hội mở rộng sang các nước Đông Âu, châu Á (Việt Nam 1945, Triều Tiên 1948, Trung Quốc 1949, Lào 1975) và khu vực Mỹ La-tinh (Cu-ba 1959/1961).</li>
+            </ul>
+            <h4>2. Sự sụp đổ mô hình CNXH ở Đông Âu và Liên Xô (1989 – 1991)</h4>
+            <ul>
+                <li><b>Nguyên nhân:</b> Đường lối lãnh đạo chủ quan, duy ý chí, cơ chế tập trung quan liêu bao cấp chậm đổi mới; không bắt kịp cuộc cách mạng KH-CN hiện đại; sai lầm trong cải tổ (xa rời nguyên tắc cơ bản của chủ nghĩa Mác – Lê-nin) và sự chống phá của các thế lực thù địch.</li>
+            </ul>
+            <h4>3. Công cuộc cải cách, đổi mới ở châu Á và Mỹ La-tinh</h4>
+            <ul>
+                <li>Trung Quốc (cải cách mở cửa từ <b>12-1978</b>), Việt Nam và Lào (Đổi mới từ <b>1986</b>), Cu-ba kiên định con đường XHCN và đạt được những thành tựu to lớn về kinh tế, xã hội, nâng cao vị thế quốc tế.</li>
+            </ul>
+        `,
+        nodes: ['Mở rộng sang Đông Âu, Á, Mỹ La-tinh', 'Khủng hoảng & Sụp đổ ở Liên Xô (1991)', 'Cải cách - Đổi mới ở Trung Quốc, Việt Nam', 'Bài học đổi mới phù hợp thực tiễn'],
+        reflection: 'Thực tiễn lịch sử chứng minh mọi sự phát triển bền vững đều phải xuất phát từ đời sống nhân dân, linh hoạt đổi mới và ứng dụng tiến bộ khoa học kĩ thuật.'
+    },
+
+    "Quá trình xâm lược và cai trị của chủ nghĩa thực dân ở Đông Nam Á": {
+        summary: `
+            <h4>1. Quá trình thực dân phương Tây xâm lược Đông Nam Á (Thế kỉ XVI – XIX)</h4>
+            <ul>
+                <li><b>Nguyên nhân:</b> Đông Nam Á có vị trí chiến lược trên tuyến hàng hải quốc tế, giàu hương liệu, tài nguyên và chế độ phong kiến đang khủng hoảng, suy yếu.</li>
+                <li><b>Kết quả:</b> Đến cuối thế kỉ XIX, hầu hết các nước Đông Nam Á đều trở thành thuộc địa của thực dân phương Tây (Anh chiếm Mi-an-ma, Mã Lai, Xin-ga-po, Bru-nây; Pháp chiếm Việt Nam, Lào, Cam-pu-chia; Hà Lan chiếm In-đô-nê-xi-a; Tây Ban Nha rồi Mỹ chiếm Phi-líp-pin). Chỉ có duy nhất <b>Xiêm (Thái Lan)</b> giữ được nền độc lập tương đối nhờ chính sách cải cách mở cửa của vua Ra-ma V và ngoại giao mềm dẻo làm "vùng đệm" giữa Anh và Pháp.</li>
+            </ul>
+            <h4>2. Chính sách cai trị thực dân</h4>
+            <ul>
+                <li>Thực hiện chính sách <b>"Chia để trị"</b> thâm độc, vơ vét tài nguyên, bóc lột nhân công rẻ mạt và kìm hãm sự phát triển kinh tế – văn hoá bản địa.</li>
+            </ul>
+        `,
+        nodes: ['Thực dân phương Tây xâm lược (XVI-XIX)', 'Chính sách "Chia để trị" & Vơ vét', 'Cải cách giữ độc lập của Xiêm (Rama V)'],
+        reflection: 'Bài học từ lịch sử Đông Nam Á thế kỉ XIX cho thấy: muốn giữ vững độc lập dân tộc, quốc gia phải tự cường, chủ động cải cách canh tân và đoàn kết nội bộ.'
+    },
+
+    "Hành trình đi đến độc lập dân tộc ở Đông Nam Á": {
+        summary: `
+            <h4>1. Các giai đoạn đấu tranh giành độc lập</h4>
+            <ul>
+                <li><b>Cuối thế kỉ XIX – đầu thế kỉ XX:</b> Phong trào đấu tranh theo ý thức hệ phong kiến (như phong trào Cần vương ở Việt Nam) và nông dân diễn ra sôi nổi nhưng thất bại; sau đó chuyển sang khuynh hướng dân chủ tư sản và vô sản.</li>
+                <li><b>Năm 1945 (Thời cơ Nhật đầu hàng Đồng minh):</b> Ba quốc gia giành độc lập sớm nhất vào tháng 8 và tháng 10-1945 là <b>In-đô-nê-xi-a (17-8-1945), Việt Nam (2-9-1945) và Lào (12-10-1945)</b>.</li>
+                <li><b>Giai đoạn 1945 – 1975:</b> Nhân dân Đông Dương tiến hành kháng chiến chống Pháp và chống Mỹ thắng lợi (1975); các nước khác lần lượt giành độc lập qua đấu tranh chính trị, ngoại giao và vũ trang (Đông Ti-mo tuyên bố độc lập năm 2002).</li>
+            </ul>
+        `,
+        nodes: ['Phong trào chống thực dân đầu TK XX', 'Chớp thời cơ 1945: Indonesia, Việt Nam, Lào', 'Kháng chiến bảo vệ độc lập (1945-1975)', 'Đông Nam Á độc lập & Tự chủ'],
+        reflection: 'Độc lập, tự do của mỗi dân tộc Đông Nam Á đều được đánh đổi bằng biết bao xương máu, nhắc nhở thế hệ trẻ trân quý hòa bình và tình đoàn kết khu vực.'
+    },
+
+    "Khái quát về chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam": {
+        summary: `
+            <h4>1. Vị trí địa chiến lược và vai trò của chiến tranh bảo vệ Tổ quốc</h4>
+            <ul>
+                <li>Việt Nam nằm ở cầu nối giữa Đông Bắc Á và Đông Nam Á, kiểm soát tuyến đường biển huyết mạch qua Biển Đông nên thường xuyên đối mặt với các cuộc xâm lược từ nước ngoài.</li>
+                <li>Chiến tranh bảo vệ Tổ quốc quyết định sự sinh tồn của dân tộc, hun đúc truyền thống yêu nước, đoàn kết và nghệ thuật quân sự độc đáo.</li>
+            </ul>
+            <h4>2. Các cuộc kháng chiến thắng lợi tiêu biểu (Cần nhớ mốc thời gian & Tướng lĩnh)</h4>
+            <ul>
+                <li><b>Năm 938:</b> <b>Ngô Quyền</b> đánh tan quân Nam Hán trên sông Bạch Đằng (đóng cọc gỗ bịt sắt lợi dụng thuỷ triều), chấm dứt hơn 1000 năm Bắc thuộc.</li>
+                <li><b>Năm 981:</b> <b>Lê Hoàn</b> đánh tan quân Tống xâm lược lần thứ nhất.</li>
+                <li><b>Năm 1075 – 1077:</b> <b>Lý Thường Kiệt</b> chủ động tiến công tự vệ ("Tiên phát chế nhân") và thắng lớn tại <b>phòng tuyến sông Như Nguyệt</b>, sau đó chủ động "giảng hoà" để giữ gìn xương máu tướng sĩ.</li>
+                <li><b>Thế kỉ XIII (1258, 1285, 1287–1288):</b> <b>Vương triều Trần</b> (Trần Thái Tông, Trần Thánh Tông, Trần Nhân Tông, <b>Trần Quốc Tuấn</b>) ba lần đánh tan quân Mông – Nguyên với các chiến thắng Đông Bộ Đầu, Chương Dương, Hàm Tử, Tây Kết, Vạn Kiếp và <b>Bạch Đằng (1288)</b>.</li>
+                <li><b>Năm 1785 & 1789:</b> <b>Nguyễn Huệ – Quang Trung</b> đại phá 5 vạn quân Xiêm tại <b>Rạch Gầm – Xoài Mút (1785)</b> và đại phá 29 vạn quân Thanh tại <b>Ngọc Hồi – Đống Đa (Xuân Kỷ Dậu 1789)</b>.</li>
+            </ul>
+            <h4>3. Các cuộc kháng chiến không thành công & Bài học lịch sử</h4>
+            <ul>
+                <li>An Dương Vương chống Triệu Đà (179 TCN), nhà Hồ chống quân Minh (1406–1407) và nhà Nguyễn chống thực dân Pháp (1858–1884) thất bại do mất cảnh giác, không đoàn kết được sức dân hoặc đường lối phòng thủ bị động.</li>
+            </ul>
+        `,
+        nodes: ['Bạch Đằng (938 - Ngô Quyền)', 'Sông Như Nguyệt (1077 - Lý Thường Kiệt)', '3 lần thắng Mông - Nguyên (Nhà Trần)', 'Rạch Gầm (1785) & Đống Đa (1789)', 'Bài học: Khoan thư sức dân làm kế sâu rễ bền gốc'],
+        reflection: 'Nghệ thuật quân sự Việt Nam luôn kết hợp đánh giặc với mở đường hiếu sinh và giảng hòa (như Lý Thường Kiệt trên sông Như Nguyệt) vì mục tiêu tối thượng là hòa bình và sinh mạng con người.'
+    },
+
+    "Một số cuộc khởi nghĩa và chiến tranh giải phóng trong lịch sử Việt Nam": {
+        summary: `
+            <h4>1. Các cuộc khởi nghĩa tiêu biểu thời Bắc thuộc</h4>
+            <ul>
+                <li><b>Khởi nghĩa Hai Bà Trưng (40 – 43):</b> Đánh đuổi thái thú Tô Định, xưng vương ở Mê Linh, mở đầu truyền thống quật khởi của phụ nữ Việt Nam.</li>
+                <li><b>Khởi nghĩa Bà Triệu (248):</b> Tại Thanh Hoá với câu nói bất hủ: <i>"Tôi chỉ muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ..."</i></li>
+                <li><b>Khởi nghĩa Lý Bí (542 – 602):</b> Đánh đuổi quân Lương, năm <b>544</b> Lý Nam Đế dựng nước <b>Vạn Xuân</b>, đóng đô ở cửa sông Tô Lịch; sau đó <b>Triệu Quang Phục</b> dùng chiến thuật du kích ở đầm Dạ Trạch đánh thắng quân Lương (550).</li>
+                <li><b>Khởi nghĩa Mai Thúc Loan (713–722), Phùng Hưng (cuối TK VIII) và Khúc Thừa Dụ (905):</b> Giành quyền tự chủ, tạo tiền đề cho chiến thắng Bạch Đằng 938.</li>
+            </ul>
+            <h4>2. Khởi nghĩa Lam Sơn (1418 – 1427)</h4>
+            <ul>
+                <li>Do <b>Lê Lợi</b> và <b>Nguyễn Trãi</b> lãnh đạo chống ách đô hộ nhà Minh. Thắng lợi tại <b>Tốt Động – Chúc Động (1426)</b> và <b>Chi Lăng – Xương Giang (1427)</b>, sau đó mở <b>Hội thề Đông Quan</b> cấp thuyền, ngựa cho 10 vạn quân Minh về nước trong hoà bình.</li>
+            </ul>
+            <h4>3. Phong trào Tây Sơn (1771 – 1802)</h4>
+            <ul>
+                <li>Do ba anh em <b>Nguyễn Nhạc, Nguyễn Huệ, Nguyễn Lữ</b> lãnh đạo: lật đổ các tập đoàn phong kiến Nguyễn – Trịnh, xoá bỏ ranh giới sông Gianh bước đầu thống nhất đất nước và đánh tan quân xâm lược Xiêm, Thanh.</li>
+            </ul>
+        `,
+        nodes: ['Hai Bà Trưng (40) & Bà Triệu (248)', 'Lý Bí dựng nước Vạn Xuân (544)', 'Khởi nghĩa Lam Sơn (1418-1427)', 'Hội thề Đông Quan nhân đạo', 'Phong trào Tây Sơn thống nhất đất nước'],
+        reflection: 'Hội thề Đông Quan năm 1427 — tha mạng và cấp thuyền lương cho hàng vạn quân giặc về nước đoàn tụ gia đình — là đỉnh cao của tư tưởng nhân nghĩa và khát vọng tắt muôn đời chiến tranh.'
+    },
+
+    "Cuộc cải cách của Hồ Quý Ly và Triều Hồ": {
+        summary: `
+            <h4>1. Bối cảnh và Nội dung cải cách (Cuối thế kỉ XIV – đầu thế kỉ XV)</h4>
+            <ul>
+                <li><b>Chính trị – Quân sự:</b> Chấn chỉnh bộ máy quan lại, xây dựng <b>Thành Tây Đô (Thành nhà Hồ)</b> kiên cố, chế tạo <b>súng thần cơ</b> và thuyền chiến cổ lâu hai tầng.</li>
+                <li><b>Kinh tế – Xã hội:</b> Ban hành chính sách <b>Hạn điền</b> (năm 1397, hạn chế ruộng tư của quý tộc) và <b>Hạn nô</b> (năm 1401, hạn chế số gia nô); phát hành <b>tiền giấy "Thông bảo hội sao"</b> (1396) thay thế tiền đồng.</li>
+                <li><b>Văn hoá – Giáo dục:</b> Đề cao <b>chữ Nôm</b>, dịch sách chữ Hán ra chữ Nôm để dạy học, cải cách thi cử theo hướng thiết thực (bổ sung môn Toán và viết chính tả).</li>
+            </ul>
+            <h4>2. Kết quả và Bài học</h4>
+            <ul>
+                <li>Cải cách có nhiều tư tưởng táo bạo, tiến bộ nhưng chưa triệt để và làm mất lòng dân (như việc cưỡng bức dùng tiền giấy, huy động sức dân xây thành), khiến nhà Hồ bị cô lập khi quân Minh xâm lược.</li>
+            </ul>
+        `,
+        nodes: ['Hạn điền (1397) & Hạn nô (1401)', 'Tiền giấy Thông bảo hội sao (1396)', 'Chế tạo Súng thần cơ & Thành nhà Hồ', 'Đề cao chữ Nôm & Giáo dục thực tiễn'],
+        reflection: 'Mọi cuộc cải cách dù tiến bộ đến đâu cũng chỉ thành công khi hợp lòng dân và đặt lợi ích thiết thực của nhân dân lên hàng đầu.'
+    },
+
+    "Cuộc cải cách của Lê Thánh Tông": {
+        summary: `
+            <h4>1. Nội dung cải cách toàn diện (Nửa sau thế kỉ XV – Hiệu Hồng Đức)</h4>
+            <ul>
+                <li><b>Chính trị – Hành chính:</b> Bãi bỏ chức Tể tướng và Đại hành khiển, nhà vua trực tiếp nắm quyền điều hành <b>Lục bộ</b> (Lại, Hộ, Lễ, Binh, Hình, Công), bên cạnh có <b>Lục tự</b> và <b>Lục khoa</b> giám sát chéo nhau. Ở địa phương, xoá bỏ 5 đạo, chia cả nước thành <b>13 đạo thừa tuyên</b> (mỗi đạo có 3 ty: Đô ty, Thừa ty, Hiến ty cùng cai quản để chống lộng quyền).</li>
+                <li><b>Luật pháp & Quân đội:</b> Ban hành bộ <b>Quốc triều hình luật (Luật Hồng Đức)</b>; tổ chức quân đội theo chế độ <i>"Ngụ binh ư nông"</i>.</li>
+                <li><b>Kinh tế & Văn hoá:</b> Thực hiện phép <b>Quân điền</b> chia ruộng công cho dân làng; đưa Nho giáo lên độc tôn, dựng bia Tiến sĩ tại Văn Miếu (1484) và cho vẽ bộ <b>Bản đồ Hồng Đức (1490)</b> khẳng định chủ quyền lãnh thổ.</li>
+            </ul>
+            <h4>2. Ý nghĩa</h4>
+            <ul>
+                <li>Đưa chế độ quân chủ trung ương tập quyền và văn minh Đại Việt đạt tới đỉnh cao thịnh trị.</li>
+            </ul>
+        `,
+        nodes: ['Lục bộ - Lục tự - Lục khoa', '13 Đạo thừa tuyên (Tam ty)', 'Luật Hồng Đức & Phép Quân điền', 'Bản đồ Hồng Đức (1490) & Bia Tiến sĩ'],
+        reflection: 'Cơ chế kiểm soát quyền lực chặt chẽ và tư tưởng coi "Hiền tài là nguyên khí của quốc gia" thời Lê Thánh Tông vẫn còn nguyên giá trị trong quản trị đất nước hiện đại.'
+    },
+
+    "Cuộc cải cách của Minh Mạng": {
+        summary: `
+            <h4>1. Nội dung cải cách hành chính (Nửa đầu thế kỉ XIX, trọng tâm 1831–1832)</h4>
+            <ul>
+                <li><b>Ở Trung ương:</b> Hoàn thiện hệ thống Lục bộ, thành lập <b>Nội các</b> (1829) và <b>Cơ mật viện</b> (1834) để tư vấn các vấn đề trọng đại về an ninh, quốc phòng; củng cố Đô sát viện.</li>
+                <li><b>Ở Địa phương (Quan trọng nhất):</b> Năm <b>1831 – 1832</b>, xoá bỏ Bắc Thành và Gia Định Thành, thống nhất chia cả nước thành <b>30 tỉnh và 1 phủ Thừa Thiên</b>, đặt các chức Tổng đốc, Tuần phủ, Bố chính, Án sát cai quản.</li>
+                <li><b>Với vùng dân tộc thiểu số:</b> Thực hiện chính sách <b>"Cải thổ quy lưu"</b> (đổi tù trưởng thế袭 sang quan lại lưu động do triều đình bổ nhiệm để thống nhất quản lí biên cương).</li>
+            </ul>
+            <h4>2. Ý nghĩa lịch sử</h4>
+            <ul>
+                <li>Thống nhất nền hành chính quốc gia từ Bắc vào Nam; tạo cơ sở cho cách phân chia đơn vị hành chính cấp tỉnh của Việt Nam ngày nay.</li>
+            </ul>
+        `,
+        nodes: ['Thành lập Nội các & Cơ mật viện', 'Chia 30 tỉnh & 1 phủ Thừa Thiên (1831-1832)', 'Chính sách Cải thổ quy lưu', 'Thống nhất nền hành chính quốc gia'],
+        reflection: 'Cuộc cải cách của vua Minh Mạng đã kiến tạo một bộ máy hành chính thống nhất xuyên suốt từ Lạng Sơn đến mũi Cà Mau và thực thi chủ quyền chặt chẽ trên Biển Đông.'
+    },
+
+    "Vị trí và tầm quan trọng của Biển Đông": {
+        summary: `
+            <h4>1. Vị trí địa lí chiến lược của Biển Đông</h4>
+            <ul>
+                <li>Biển Đông là biển nửa kín thuộc Thái Bình Dương, trải rộng khoảng 3,5 triệu $\\text{km}^2$, là <b>tuyến đường giao thông hàng hải huyết mạch</b> nhộn nhịp thứ hai thế giới, kết nối Thái Bình Dương với Ấn Độ Dương, châu Âu – Trung Đông với Đông Á.</li>
+                <li>Có các điểm kiểm soát chiến lược như eo biển Ma-lắc-ca, eo biển Đài Loan, quần đảo <b>Hoàng Sa</b> và quần đảo <b>Trường Sa</b> nằm ở vị trí trung tâm Biển Đông.</li>
+            </ul>
+            <h4>2. Tầm quan trọng về kinh tế và quốc phòng – an ninh</h4>
+            <ul>
+                <li>Giàu tài nguyên sinh vật biển, khoáng sản (đặc biệt là dầu khí và băng cháy); là "cửa ngõ" giao thương quốc tế và là tuyến phòng thủ chiến lược bảo vệ an ninh chủ quyền từ hướng biển của Việt Nam.</li>
+            </ul>
+        `,
+        nodes: ['Tuyến hàng hải nhộn nhịp thứ 2 thế giới', 'Nối Ấn Độ Dương - Thái Bình Dương', 'Tài nguyên biển & Dầu khí dồi dào', 'Vị trí trọng yếu của Hoàng Sa & Trường Sa'],
+        reflection: 'Biển Đông là không gian sinh tồn và giao thương ngàn đời của dân tộc Việt Nam; bảo vệ hòa bình, an ninh hàng hải trên Biển Đông là lợi ích chung của cả khu vực và thế giới.'
+    },
+
+    "Việt Nam và Biển Đông": {
+        summary: `
+            <h4>1. Lịch sử xác lập và thực thi chủ quyền của Việt Nam đối với Hoàng Sa và Trường Sa</h4>
+            <ul>
+                <li><b>Thời chúa Nguyễn và Tây Sơn (Thế kỉ XVII – XVIII):</b> Thành lập và duy trì hoạt động liên tục của <b>đội Hoàng Sa</b> và <b>đội Bắc Hải</b> ra khai thác sản vật, thu lượm hàng hoá tàu đắm và bảo vệ chủ quyền tại Bãi Cát Vàng (Hoàng Sa) và Vạn Lý Trường Sa.</li>
+                <li><b>Thời nhà Nguyễn (Thế kỉ XIX):</b> Dưới triều Gia Long (năm <b>1816</b>) và Minh Mạng, nhà nước cử thuỷ quân ra Hoàng Sa đo đạc thuỷ trình, <b>cắm cờ, dựng miếu, khắc bia đá và trồng cây</b> xác lập chủ quyền chính thức ở cấp nhà nước (ghi chép rõ trong <i>Phủ biên tạp lục, Đại Nam thực lục, Đại Nam nhất thống chí</i> và <i>Châu bản triều Nguyễn</i>).</li>
+                <li><b>Từ thời Pháp thuộc đến nay:</b> Chính quyền bảo hộ Pháp và sau đó là Nhà nước Việt Nam tiếp tục quản lí hành chính (huyện đảo Hoàng Sa thuộc TP. Đà Nẵng, huyện đảo Trường Sa thuộc tỉnh Khánh Hoà).</li>
+            </ul>
+            <h4>2. Chủ trương giải quyết tranh chấp của Việt Nam hiện nay</h4>
+            <ul>
+                <li>Kiên quyết, kiên trì đấu tranh bảo vệ chủ quyền biển đảo bằng <b>các biện pháp hoà bình</b> trên cơ sở luật pháp quốc tế, đặc biệt là <b>Công ước Liên hợp quốc về Luật Biển năm 1982 (UNCLOS 1982)</b> và Tuyên bố ứng xử của các bên ở Biển Đông (DOC).</li>
+            </ul>
+        `,
+        nodes: ['Đội Hoàng Sa & Đội Bắc Hải (TK XVII)', 'Nhà Nguyễn cắm cờ, dựng bia (1816)', 'Châu bản triều Nguyễn & Sử liệu cổ', 'Đấu tranh hòa bình theo UNCLOS 1982'],
+        reflection: 'Chủ quyền của Việt Nam đối với Hoàng Sa và Trường Sa được xác lập liên tục, hòa bình từ hàng trăm năm trước với đầy đủ bằng chứng lịch sử và cơ sở pháp lý quốc tế vững chắc.'
+    },
+
+    // ---------------- TÓM TẮT TRỌNG TÂM KHỐI 12 ----------------
+    "Liên hợp quốc": {
+        summary: `
+            <h4>1. Bối cảnh thành lập và Mục tiêu</h4>
+            <ul>
+                <li><b>Quá trình hình thành:</b> Trải qua Tuyên ngôn Liên hợp quốc (1942), Hội nghị Tê-hê-ran (1943), <b>Hội nghị I-an-ta (tháng 2-1945)</b> của 3 cường quốc Liên Xô – Mỹ – Anh và Hội nghị Xan Phran-xi-xcô (từ 25-4 đến 26-6-1945) thông qua Hiến chương. Ngày <b>24-10-1945</b>, Liên hợp quốc chính thức thành lập.</li>
+                <li><b>4 Mục tiêu cơ bản (Điều 1 Hiến chương):</b> (1) <b>Duy trì hoà bình và an ninh quốc tế (Mục tiêu hàng đầu)</b>; (2) Thúc đẩy quan hệ hữu nghị giữa các dân tộc; (3) Hợp tác quốc tế giải quyết các vấn đề kinh tế, xã hội, văn hoá, nhân đạo; (4) Làm trung tâm điều hoà hành động của các quốc gia.</li>
+            </ul>
+            <h4>2. Nguyên tắc hoạt động & Vai trò</h4>
+            <ul>
+                <li><b>Nguyên tắc:</b> Bình đẳng chủ quyền quốc gia; tôn trọng toàn vẹn lãnh thổ và độc lập chính trị; không can thiệp vào công việc nội bộ; giải quyết tranh chấp quốc tế bằng biện pháp hoà bình; chung sống hoà bình và sự nhất trí giữa 5 nước Ủy viên thường trực Hội đồng Bảo an (Liên Xô/Nga, Mỹ, Anh, Pháp, Trung Quốc).</li>
+                <li><b>Vai trò:</b> Ngăn ngừa không để xảy ra một cuộc chiến tranh thế giới mới từ 1945 đến nay, thúc đẩy phi thực dân hoá, thúc đẩy phát triển bền vững (17 mục tiêu SDGs) và bảo đảm quyền con người. Việt Nam gia nhập Liên hợp quốc ngày <b>20-9-1977</b>.</li>
+            </ul>
+        `,
+        nodes: ['Hội nghị I-an-ta (2/1945)', 'Hiến chương LHQ (24/10/1945)', 'Mục tiêu số 1: Duy trì Hòa bình', 'Việt Nam gia nhập (20/9/1977)'],
+        reflection: 'Ra đời từ đống tro tàn của Chiến tranh thế giới thứ hai, Liên hợp quốc là biểu tượng cho khát vọng chung của nhân loại: giải quyết mọi xung đột bằng đối thoại và luật pháp quốc tế.'
+    },
+
+    "Trật tự thế giới trong Chiến tranh lạnh": {
+        summary: `
+            <h4>1. Sự hình thành Trật tự hai cực I-an-ta (1945 – 1991)</h4>
+            <ul>
+                <li>Tại <b>Hội nghị I-an-ta (từ 4 đến 11-2-1945)</b>, nguyên thủ 3 cường quốc Liên Xô (I. Xta-lin), Mỹ (Ph. Ru-dơ-ven) và Anh (U. Sớc-sin) đã đưa ra các quyết định quan trọng: tiêu diệt tận gốc chủ nghĩa phát xít, thành lập Liên hợp quốc và phân chia phạm vi ảnh hưởng ở châu Âu và châu Á.</li>
+                <li>Hệ quả là hình thành một trật tự thế giới mới: <b>Trật tự thế giới hai cực I-an-ta</b> do <b>Liên Xô</b> và <b>Mỹ</b> đứng đầu mỗi cực.</li>
+            </ul>
+            <h4>2. Sự đối đầu Đông – Tây và sự xói mòn, sụp đổ</h4>
+            <ul>
+                <li><b>Giai đoạn 1947 – đầu những năm 1970:</b> Đối đầu căng thẳng (Học thuyết Tru-man 1947, Kế hoạch Mác-san, khối NATO 1949 đối trọng với Hội đồng tương trợ kinh tế SEV 1949 và Tổ chức Hiệp ước Vác-sa-va 1955) cùng các cuộc chiến tranh cục bộ (Triều Tiên, Việt Nam).</li>
+                <li><b>Từ đầu những năm 1970 – 1991:</b> Xu thế hoà hoãn Đông – Tây xuất hiện; tháng <b>12-1989</b> tại đảo Man-ta, Liên Xô và Mỹ tuyên bố chấm dứt Chiến tranh lạnh; năm <b>1991</b> Liên Xô tan rã, Trật tự hai cực I-an-ta sụp đổ hoàn toàn.</li>
+            </ul>
+        `,
+        nodes: ['Hội nghị I-an-ta (2/1945)', 'Trật tự 2 cực: Mỹ & Liên Xô', 'Đối đầu NATO vs Vác-sa-va', 'Tuyên bố Man-ta (1989) & Sụp đổ (1991)'],
+        reflection: 'Hơn bốn thập kỉ Chiến tranh lạnh cho thấy chạy đua vũ trang và đối đầu ý thức hệ chỉ làm kiệt quệ nguồn lực của các quốc gia và đe dọa hòa bình nhân loại.'
+    },
+
+    "Trật tự thế giới sau Chiến tranh lạnh": {
+        summary: `
+            <h4>1. Xu thế phát triển chính của thế giới sau Chiến tranh lạnh</h4>
+            <ul>
+                <li><b>Xu thế đa cực:</b> Sau năm 1991, thế giới vận động theo xu thế <b>đa cực, nhiều trung tâm</b> với sự vươn lên mạnh mẽ của các trung tâm quyền lực như Mỹ, Trung Quốc, Liên minh châu Âu (EU), Nhật Bản, Liên bang Nga, Ấn Độ.</li>
+                <li><b>Lấy phát triển kinh tế làm trọng tâm:</b> Các quốc gia điều chỉnh chiến lược, đặt trọng tâm vào phát triển kinh tế và khoa học – công nghệ để xây dựng sức mạnh tổng hợp quốc gia.</li>
+                <li><b>Xu thế đối thoại, hợp tác và toàn cầu hoá:</b> Thay thế đối đầu bằng đối thoại, thoả hiệp, cùng tồn tại hoà bình; tuy nhiên thế giới vẫn tiềm ẩn nhiều xung đột cục bộ, tranh chấp lãnh thổ và thách thức an ninh phi truyền thống.</li>
+            </ul>
+        `,
+        nodes: ['Xu thế Đa cực, nhiều trung tâm', 'Trọng tâm: Phát triển Kinh tế & KH-CN', 'Đối thoại, Hợp tác & Toàn cầu hóa'],
+        reflection: 'Trong thế giới đa cực và toàn cầu hóa, sức mạnh thực sự của một dân tộc nằm ở nội lực kinh tế, trí tuệ công nghệ và đường lối đối ngoại hòa bình, độc lập.'
+    },
+
+    "Sự ra đời và phát triển của ASEAN": {
+        summary: `
+            <h4>1. Sự thành lập Hiệp hội các quốc gia Đông Nam Á (ASEAN)</h4>
+            <ul>
+                <li>Ngày <b>8-8-1967</b>, tại <b>Băng Cốc (Thái Lan)</b>, Ngoại trưởng 5 nước (In-đô-nê-xi-a, Ma-lai-xi-a, Phi-líp-pin, Xin-ga-po và Thái Lan) kí Tuyên bố Băng Cốc thành lập ASEAN nhằm thúc đẩy tăng trưởng kinh tế, tiến bộ xã hội và hoà bình ổn định khu vực.</li>
+            </ul>
+            <h4>2. Hành trình phát triển từ ASEAN 5 đến ASEAN 10</h4>
+            <ul>
+                <li><b>1967 – 1976:</b> Giai đoạn khởi đầu, bước ngoặt là <b>Hiệp ước Bali (2-1976)</b> xác lập các nguyên tắc quan hệ cơ bản giữa các nước.</li>
+                <li><b>1976 – 1999 (Mở rộng thành viên lên ASEAN 10):</b> Kết nạp Bru-nây (1984), <b>Việt Nam (28-7-1995)</b>, Lào và Mi-an-ma (1997), Cam-pu-chia (30-4-1999).</li>
+                <li><b>1999 – 2015:</b> Thông qua <b>Hiến chương ASEAN (2007)</b> tạo cơ sở pháp lí vững chắc hướng tới xây dựng Cộng đồng ASEAN.</li>
+            </ul>
+        `,
+        nodes: ['Tuyên bố Băng Cốc (8/8/1967)', 'Hiệp ước Bali (2/1976)', 'Việt Nam gia nhập (28/7/1995)', 'Hoàn thành ASEAN 10 (1999) & Hiến chương (2007)'],
+        reflection: 'Việc Việt Nam gia nhập ASEAN năm 1995 đã khép lại thời kì đối đầu ý thức hệ ở Đông Nam Á, mở ra kỉ nguyên hòa bình, hữu nghị và hợp tác phát triển cho toàn khu vực.'
+    },
+
+    "Cộng đồng ASEAN: Từ ý tưởng đến hiện thực": {
+        summary: `
+            <h4>1. Quá trình hình thành và Sự ra đời Cộng đồng ASEAN</h4>
+            <ul>
+                <li>Khởi nguồn từ <b>Tầm nhìn ASEAN 2020</b> (năm 1997) -> Tuyên bố Hoà hợp ASEAN II (Bali II năm 2003) -> Lộ trình xây dựng Cộng đồng ASEAN (2009–2015).</li>
+                <li>Ngày <b>22-11-2015</b> tại Cu-a-la Lăm-pơ (Ma-lai-xi-a), các nhà lãnh đạo ASEAN kí Tuyên bố thành lập Cộng đồng ASEAN và chính thức có hiệu lực từ ngày <b>31-12-2015</b>.</li>
+            </ul>
+            <h4>2. Ba trụ cột của Cộng đồng ASEAN (Cần học thuộc)</h4>
+            <div class="key-term">
+                <ul>
+                    <li><b>1. Cộng đồng Chính trị – An ninh ASEAN (APSC):</b> Xây dựng môi trường hoà bình, an ninh, ổn định, không có vũ khí hạt nhân và giải quyết tranh chấp bằng biện pháp hoà bình.</li>
+                    <li><b>2. Cộng đồng Kinh tế ASEAN (AEC):</b> Tạo ra một thị trường chung và cơ sở sản xuất thống nhất, lưu chuyển tự do hàng hoá, dịch vụ, đầu tư và lao động có tay nghề.</li>
+                    <li><b>3. Cộng đồng Văn hoá – Xã hội ASEAN (ASCC):</b> Hướng tới người dân, lấy người dân làm trung tâm, phát triển bền vững và tạo dựng bản sắc chung <i>"Một tầm nhìn, một bản sắc, một cộng đồng"</i>.</li>
+                </ul>
+            </div>
+        `,
+        nodes: ['Tầm nhìn ASEAN 2020 (1997)', 'Thành lập Cộng đồng (31/12/2015)', 'Trụ cột 1: Chính trị - An ninh (APSC)', 'Trụ cột 2: Kinh tế (AEC)', 'Trụ cột 3: Văn hóa - Xã hội (ASCC)'],
+        reflection: 'Với phương châm "Một tầm nhìn, một bản sắc, một cộng đồng", Cộng đồng ASEAN mở ra không gian hợp tác rộng lớn cho thế hệ trẻ các nước Đông Nam Á.'
+    },
+
+    "Cách mạng tháng Tám năm 1945": {
+        summary: `
+            <h4>1. Bối cảnh lịch sử và Thời cơ "Ngàn năm có một"</h4>
+            <ul>
+                <li>Đảng Cộng sản Đông Dương và Chủ tịch Hồ Chí Minh đã chuẩn bị chu đáo suốt 15 năm (qua các cao trào 1930–1931, 1936–1939, 1939–1945, thành lập Mặt trận Việt Minh tháng 5-1941, Đội Việt Nam Tuyên truyền Giải phóng quân 22-12-1944 và Cao trào kháng Nhật cứu nước từ 3-1945).</li>
+                <li>Ngày <b>15-8-1945</b>, Nhật Bản tuyên bố đầu hàng Đồng minh không điều kiện -> <b>Thời cơ "ngàn năm có một"</b> xuất hiện (từ khi Nhật đầu hàng đến trước khi quân Đồng minh vào giải giáp quân Nhật).</li>
+            </ul>
+            <h4>2. Diễn biến chính & Thắng lợi</h4>
+            <ul>
+                <li>Hội nghị toàn quốc của Đảng (14–15/8/1945) và Đại hội Quốc dân tại <b>Tân Trào (16–17/8/1945)</b> phát lệnh Tổng khởi nghĩa.</li>
+                <li>Giành chính quyền thắng lợi tại <b>Hà Nội (19-8)</b>, <b>Huế (23-8)</b>, <b>Sài Gòn (25-8)</b>; ngày <b>30-8-1945</b> vua Bảo Đại thoái vị.</li>
+                <li>Ngày <b>2-9-1945</b>, tại Quảng trường Ba Đình, Chủ tịch Hồ Chí Minh đọc <b>Tuyên ngôn Độc lập</b>, khai sinh nước <b>Việt Nam Dân chủ Cộng hoà</b> — nhà nước dân chủ nhân dân đầu tiên ở Đông Nam Á.</li>
+            </ul>
+        `,
+        nodes: ['Chuẩn bị lực lượng (1930-1945)', 'Thời cơ Nhật đầu hàng (15/8/1945)', 'Thắng lợi ở Hà Nội (19/8), Huế (23/8), Sài Gòn (25/8)', 'Tuyên ngôn Độc lập (2/9/1945)'],
+        reflection: 'Cách mạng tháng Tám năm 1945 là nghệ thuật chớp thời cơ thiên tài, giành chính quyền nhanh gọn trên cả nước, hạn chế tối đa đổ máu cho nhân dân.'
+    },
+
+    "Cuộc kháng chiến chống thực dân Pháp (1945-1954)": {
+        summary: `
+            <h4>1. Đường lối kháng chiến và những mốc thắng lợi lớn</h4>
+            <ul>
+                <li><b>Đường lối kháng chiến:</b> <b>"Toàn dân, toàn diện, trường kì, tự lực cánh sinh và tranh thủ sự ủng hộ của quốc tế"</b> (thể hiện qua <i>Lời kêu gọi toàn quốc kháng chiến</i> ngày <b>19-12-1946</b> của Chủ tịch Hồ Chí Minh).</li>
+                <li><b>Chiến dịch Việt Bắc thu – đông 1947:</b> Đập tan kế hoạch "Đánh nhanh thắng nhanh" của Pháp, bảo vệ cơ quan đầu não kháng chiến.</li>
+                <li><b>Chiến dịch Biên giới thu – đông 1950:</b> Khai thông biên giới Việt – Trung, quân dân ta giành được <b>quyền chủ động chiến lược trên chiến trường chính Bắc Bộ</b>.</li>
+                <li><b>Cuộc Tiến công chiến lược Đông – Xuân 1953–1954 và Chiến dịch Điện Biên Phủ (13/3 – 7/5/1954):</b> Đập tan kế hoạch Na-va và tập đoàn cứ điểm mạnh nhất Đông Dương trong 56 ngày đêm (với phương châm chuyển từ "Đánh nhanh, thắng nhanh" sang <b>"Đánh chắc, tiến chắc"</b> của Đại tướng Võ Nguyên Giáp).</li>
+                <li><b>Hiệp định Giơ-ne-vơ (21-7-1954):</b> Các nước cam kết tôn trọng độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Việt Nam, Lào, Cam-pu-chia; miền Bắc hoàn toàn giải phóng.</li>
+            </ul>
+        `,
+        nodes: ['Toàn quốc kháng chiến (19/12/1946)', 'Việt Bắc (1947) & Biên giới (1950)', 'Đông - Xuân 1953-1954', 'Điện Biên Phủ (7/5/1954) & Hiệp định Giơ-ne-vơ'],
+        reflection: 'Quyết định chuyển phương châm sang "Đánh chắc, tiến chắc" tại Điện Biên Phủ là quyết định lịch sử nhằm bảo toàn sinh mạng cho hàng vạn chiến sĩ.'
+    },
+
+    "Cuộc kháng chiến chống Mỹ, cứu nước (1954-1975)": {
+        summary: `
+            <h4>1. Nhiệm vụ chiến lược của hai miền Nam – Bắc</h4>
+            <ul>
+                <li><b>Miền Bắc:</b> Tiến hành cách mạng XHCN, làm <b>hậu phương lớn</b> chi viện sức người, sức của cho tiền tuyến lớn miền Nam và đánh thắng hai cuộc chiến tranh phá hoại bằng không quân, hải quân của Mỹ (đỉnh cao là trận <b>"Điện Biên Phủ trên không"</b> 12 ngày đêm cuối tháng 12-1972).</li>
+                <li><b>Miền Nam (Tiền tuyến lớn):</b> Lần lượt đánh bại 4 chiến lược chiến tranh của Mỹ:
+                    <ul>
+                        <li><b>Phong trào Đồng khởi (1959–1960):</b> Chuyển cách mạng miền Nam từ thế giữ gìn lực lượng sang thế tiến công, ra đời Mặt trận Dân tộc giải phóng miền Nam Việt Nam (20-12-1960).</li>
+                        <li>Đánh bại <b>"Chiến tranh đặc biệt" (1961–1965)</b> với các chiến thắng Ấp Bắc (1963), Bình Giã, Ba Gia, Đồng Xoài.</li>
+                        <li>Đánh bại <b>"Chiến tranh cục bộ" (1965–1968)</b> với chiến thắng Vạn Tường (1965) và cuộc <b>Tổng tiến công và nổi dậy Xuân Mậu Thân 1968</b> buộc Mỹ phải ngồi vào bàn đàm phán ở Pa-ri.</li>
+                        <li>Đánh bại <b>"Việt Nam hoá chiến tranh" (1969–1973)</b> qua Tiến công chiến lược 1972 và trận Điện Biên Phủ trên không, buộc Mỹ kí <b>Hiệp định Pa-ri (27-1-1973)</b> rút hết quân Mỹ về nước ("Đánh cho Mỹ cút").</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>2. Đại thắng mùa Xuân năm 1975 ("Đánh cho ngụy nhào")</h4>
+            <ul>
+                <li>Trải qua 3 chiến dịch lớn: <b>Chiến dịch Tây Nguyên</b> (mở màn bằng trận Buôn Ma Thuột 10-3-1975) -> <b>Chiến dịch Huế – Đà Nẵng</b> -> <b>Chiến dịch Hồ Chí Minh lịch sử (26/4 – 30/4/1975)</b> giải phóng hoàn toàn miền Nam, thống nhất đất nước.</li>
+            </ul>
+        `,
+        nodes: ['Đồng khởi (1960) & Mậu Thân (1968)', 'Điện Biên Phủ trên không (12/1972)', 'Hiệp định Pa-ri (27/1/1973)', 'Đại thắng mùa Xuân (30/4/1975)'],
+        reflection: 'Kháng chiến chống Mỹ cứu nước là thiên anh hùng ca vĩ đại của ý chí "Không có gì quý hơn độc lập, tự do" và khát vọng non sông thu về một mối.'
+    },
+
+    "Cuộc đấu tranh bảo vệ Tổ quốc từ sau tháng 4-1975": {
+        summary: `
+            <h4>1. Cuộc chiến tranh bảo vệ biên giới Tây Nam (1975 – 1979)</h4>
+            <ul>
+                <li>Tập đoàn Pôn Pốt – Iêng Xa-ri phản bội tình đoàn kết, liên tục xâm phạm lãnh thổ và tàn sát dã man đồng bào ta ở biên giới Tây Nam (Ba Chúc – An Giang...).</li>
+                <li>Thực hiện quyền tự vệ chính đáng, quân dân Việt Nam đã đánh đuổi quân xâm lược và theo yêu cầu của Mặt trận Đoàn kết dân tộc cứu nước Cam-pu-chia, tiến vào giải phóng Phnôm Pênh ngày <b>7-1-1979</b>, cứu nhân dân Cam-pu-chia thoát khỏi thảm hoạ diệt chủng.</li>
+            </ul>
+            <h4>2. Cuộc chiến tranh bảo vệ biên giới phía Bắc (1979 – 1989) và Biển Đông</h4>
+            <ul>
+                <li>Ngày <b>17-2-1979</b>, quân dân 6 tỉnh biên giới phía Bắc (từ Quảng Ninh đến Lai Châu) kiên cường chiến đấu bảo vệ từng tấc đất thiêng liêng của Tổ quốc (như mặt trận Vị Xuyên – Hà Giang giai đoạn 1984–1989).</li>
+                <li>Kiên quyết đấu tranh bảo vệ chủ quyền tại quần đảo Hoàng Sa và Trường Sa (trận Gạc Ma ngày <b>14-3-1988</b>).</li>
+            </ul>
+        `,
+        nodes: ['Bảo vệ biên giới Tây Nam & Giúp Campuchia (1979)', 'Bảo vệ biên giới phía Bắc (17/2/1979)', 'Bảo vệ chủ quyền Trường Sa (14/3/1988)'],
+        reflection: 'Máu của các thế hệ chiến sĩ đã thấm đẫm nơi biên cương và biển đảo sau năm 1975 để giữ trọn vẹn từng tấc đất, sải biển thiêng liêng của Tổ quốc.'
+    },
+
+    "Khái quát về công cuộc Đổi mới": {
+        summary: `
+            <h4>1. Bối cảnh và Đường lối Đổi mới từ Đại hội VI (12-1986)</h4>
+            <ul>
+                <li>Giữa thập niên 1980, đất nước lâm vào khủng hoảng kinh tế – xã hội trầm trọng do duy trì quá lâu cơ chế tập trung quan liêu, bao cấp và bị bao vây cấm vận.</li>
+                <li>Tại <b>Đại hội đại biểu toàn quốc lần thứ VI của Đảng (tháng 12-1986)</b>, công cuộc Đổi mới toàn diện được khởi xướng với trọng tâm là <b>đổi mới về kinh tế</b>: xoá bỏ cơ chế tập trung quan liêu bao cấp, phát triển nền kinh tế hàng hoá nhiều thành phần vận hành theo cơ chế thị trường có sự quản lí của Nhà nước theo định hướng XHCN; mở rộng quan hệ kinh tế đối ngoại.</li>
+            </ul>
+            <h4>2. Các giai đoạn Đổi mới</h4>
+            <ul>
+                <li><b>1986 – 1995:</b> Khởi đầu Đổi mới, đưa đất nước ra khỏi khủng hoảng kinh tế – xã hội.</li>
+                <li><b>1996 – 2006:</b> Đẩy mạnh công nghiệp hoá, hiện đại hoá và hội nhập kinh tế khu vực.</li>
+                <li><b>2006 đến nay:</b> Tiếp tục đẩy mạnh công nghiệp hoá, hiện đại hoá và hội nhập quốc tế toàn diện, sâu rộng (gia nhập WTO năm 2007).</li>
+            </ul>
+        `,
+        nodes: ['Đại hội VI của Đảng (12/1986)', 'Trọng tâm: Đổi mới Kinh tế', 'Xóa bỏ bao cấp -> Kinh tế thị trường định hướng XHCN', 'Công nghiệp hóa - Hiện đại hóa & Hội nhập'],
+        reflection: 'Công cuộc Đổi mới năm 1986 là bước ngoặt lịch sử vĩ đại, xuất phát từ tinh thần "nhìn thẳng vào sự thật" để giải phóng sức sản xuất và nâng cao đời sống nhân dân.'
+    },
+
+    "Thành tựu cơ bản và bài học của công cuộc Đổi mới": {
+        summary: `
+            <h4>1. Thành tựu cơ bản sau gần 40 năm Đổi mới</h4>
+            <ul>
+                <li><b>Chính trị – Kinh tế:</b> Giữ vững ổn định chính trị; từ một nước thiếu lương thực vươn lên thành nước xuất khẩu gạo hàng đầu thế giới và trở thành nước đang phát triển có thu nhập trung bình; quy mô GDP không ngừng tăng trưởng.</li>
+                <li><b>Xã hội – Văn hoá & Đối ngoại:</b> Hoàn thành sớm mục tiêu Thiên niên kỉ về xoá đói giảm nghèo được Liên hợp quốc ghi nhận; thiết lập quan hệ ngoại giao với 193 quốc gia, có quan hệ Đối tác chiến lược và Đối tác chiến lược toàn diện với tất cả các cường quốc lớn trên thế giới.</li>
+            </ul>
+            <h4>2. Bốn bài học kinh nghiệm lớn</h4>
+            <ul>
+                <li>(1) Kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội; (2) Đổi mới toàn diện, đồng bộ, có bước đi phù hợp; (3) Đổi mới phải luôn <b>vì lợi ích của nhân dân, dựa vào nhân dân</b>; (4) Kết hợp sức mạnh dân tộc với sức mạnh thời đại.</li>
+            </ul>
+        `,
+        nodes: ['Thoát khủng hoảng & Tăng trưởng kinh tế', 'Xóa đói giảm nghèo & An sinh xã hội', 'Hội nhập quốc tế sâu rộng', 'Bài học: Lấy dân làm gốc'],
+        reflection: 'Như cố Tổng Bí thư Nguyễn Phú Trọng từng khẳng định: "Đất nước ta chưa bao giờ có được cơ đồ, tiềm lực, vị thế và uy tín quốc tế như ngày nay."'
+    },
+
+    "Hoạt động đối ngoại trong đấu tranh giành độc lập dân tộc": {
+        summary: `
+            <h4>1. Hoạt động đối ngoại của các sĩ phu yêu nước đầu thế kỉ XX</h4>
+            <ul>
+                <li><b>Phan Bội Châu:</b> Tổ chức <b>Phong trào Đông du (1905–1908)</b> đưa thanh niên sang Nhật Bản học tập; năm 1912 lập <b>Việt Nam Quang phục hội</b> tại Trung Quốc, liên kết với các lực lượng chống đế quốc ở châu Á.</li>
+                <li><b>Phan Châu Trinh:</b> Hoạt động tại Pháp (1911–1925), gửi kiến nghị và diễn thuyết tranh thủ dư luận tiến bộ Pháp ủng hộ cải cách dân chủ ở Việt Nam.</li>
+            </ul>
+            <h4>2. Hoạt động đối ngoại của Nguyễn Ái Quốc và Đảng Cộng sản Đông Dương (1911–1945)</h4>
+            <ul>
+                <li><b>Nguyễn Ái Quốc:</b> Gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Véc-xây (1919); tham gia sáng lập Đảng Cộng sản Pháp (12-1920), Hội Liên hiệp thuộc địa (1921); hoạt động tại Liên Xô, Trung Quốc, Thái Lan gắn cách mạng Việt Nam với cách mạng thế giới.</li>
+                <li>Trong Chiến tranh thế giới thứ hai (1939–1945), Mặt trận Việt Minh đứng hẳn về phe Đồng minh chống phát xít, phối hợp với lực lượng Đồng minh (cơ quan OSS của Mỹ, lực lượng kháng Nhật ở Trung Quốc) tạo thế thuận lợi cho Cách mạng tháng Tám 1945.</li>
+            </ul>
+        `,
+        nodes: ['Phan Bội Châu (Đông du) & Phan Châu Trinh', 'Nguyễn Ái Quốc gắn CMVN với CM thế giới', 'Việt Minh liên minh với phe Đồng minh chống phát xít'],
+        reflection: 'Hoạt động đối ngoại từ đầu thế kỉ XX đã mở ra tầm nhìn thời đại: gắn liền sự nghiệp giải phóng dân tộc Việt Nam với phong trào tiến bộ và hòa bình thế giới.'
+    },
+
+    "Hoạt động đối ngoại trong kháng chiến chống Pháp và chống Mỹ": {
+        summary: `
+            <h4>1. Đối ngoại trong kháng chiến chống Pháp (1945 – 1954)</h4>
+            <ul>
+                <li><b>1945 – 1946 ("Hoà để tiến"):</b> Nhân nhượng có nguyên tắc với quân Trung Hoa Dân quốc để tập trung đánh Pháp ở Nam Bộ; sau đó kí <b>Hiệp định Sơ bộ (6-3-1946)</b> và <b>Tạm ước (14-9-1946)</b> với Pháp để đẩy nhanh 20 vạn quân Tưởng về nước và có thêm thời gian hoà bình chuẩn bị kháng chiến.</li>
+                <li><b>Năm 1950:</b> Thiết lập quan hệ ngoại giao chính thức với <b>Trung Quốc (18-1-1950), Liên Xô (30-1-1950)</b> và các nước Đông Âu, phá thế bị bao vây cô lập.</li>
+                <li><b>Năm 1954:</b> Phối hợp thắng lợi quân sự Điện Biên Phủ với đấu tranh ngoại giao kí kết <b>Hiệp định Giơ-ne-vơ (21-7-1954)</b>.</li>
+            </ul>
+            <h4>2. Đối ngoại trong kháng chiến chống Mỹ (1954 – 1975)</h4>
+            <ul>
+                <li>Ngoại giao trở thành một <b>mặt trận có ý nghĩa chiến lược</b> với phương châm <b>"Vừa đánh, vừa đàm"</b>; tranh thủ sự viện trợ to lớn của cả Liên Xô và Trung Quốc, hình thành mặt trận nhân dân thế giới (kể cả nhân dân Mỹ) ủng hộ Việt Nam và kí kết thắng lợi <b>Hiệp định Pa-ri (27-1-1973)</b>.</li>
+            </ul>
+        `,
+        nodes: ['Hiệp định Sơ bộ (6/3/1946) - Hòa để tiến', 'Mở rộng ngoại giao năm 1950', 'Hiệp định Giơ-ne-vơ (1954)', 'Vừa đánh vừa đàm & Hiệp định Pa-ri (1973)'],
+        reflection: 'Nghệ thuật ngoại giao "Dĩ bất biến, ứng vạn biến" của Chủ tịch Hồ Chí Minh đã biến chính nghĩa của dân tộc Việt Nam thành lương tri của toàn nhân loại.'
+    },
+
+    "Hoạt động đối ngoại của Việt Nam từ năm 1975 đến nay": {
+        summary: `
+            <h4>1. Giai đoạn 1975 – 1985: Phá thế bao vây, cấm vận</h4>
+            <ul>
+                <li>Đẩy mạnh hợp tác toàn diện với Liên Xô và các nước XHCN (gia nhập SEV năm 1978); gia nhập <b>Liên hợp quốc (20-9-1977)</b>; kiên trì đấu tranh ngoại giao nhằm phá thế bao vây, cấm vận và giải quyết vấn đề Cam-pu-chia.</li>
+            </ul>
+            <h4>2. Giai đoạn từ năm 1986 đến nay: Đa phương hoá, đa dạng hoá quan hệ đối ngoại</h4>
+            <ul>
+                <li><b>Đường lối:</b> Thực hiện nhất quán đường lối đối ngoại <b>độc lập, tự chủ, hoà bình, hữu nghị, hợp tác và phát triển, đa phương hoá, đa dạng hoá</b>; Việt Nam là bạn, là đối tác tin cậy và là thành viên tích cực, có trách nhiệm của cộng đồng quốc tế.</li>
+                <li><b>Các cột mốc lịch sử:</b> Bình thường hoá quan hệ với Trung Quốc (11-1991); bình thường hoá quan hệ với <b>Mỹ (11-7-1995)</b>; gia nhập <b>ASEAN (28-7-1995)</b>, APEC (1998), <b>WTO (2007)</b>; đảm nhiệm thành công vai trò Ủy viên không thường trực Hội đồng Bảo an LHQ (2008–2009, 2020–2021) và cử lực lượng tham gia Gìn giữ hoà bình Liên hợp quốc.</li>
+            </ul>
+        `,
+        nodes: ['Gia nhập Liên hợp quốc (1977)', 'Phá thế bao vây cấm vận', 'Bình thường hóa với Mỹ & Gia nhập ASEAN (7/1995)', 'Đa phương hóa, Đa dạng hóa & Gìn giữ hòa bình LHQ'],
+        reflection: 'Hình ảnh những chiến sĩ mũ nồi xanh Việt Nam làm nhiệm vụ Gìn giữ hòa bình Liên hợp quốc là minh chứng sống động cho một Việt Nam yêu chuộng hòa bình và có trách nhiệm với thế giới.'
+    },
+
+    "Khái quát cuộc đời và sự nghiệp của Hồ Chí Minh": {
+        summary: `
+            <h4>1. Những yếu tố ảnh hưởng đến cuộc đời và sự nghiệp của Hồ Chí Minh</h4>
+            <ul>
+                <li><b>Hoàn cảnh đất nước:</b> Nước mất nhà tan dưới ách thống trị của thực dân Pháp, các phong trào yêu nước cuối thế kỉ XIX – đầu thế kỉ XX (Cần vương, Đông du, Duy tân) đều lâm vào khủng hoảng về đường lối cứu nước.</li>
+                <li><b>Hoàn cảnh quê hương và gia đình:</b> Sinh ngày <b>19-5-1890</b> tại làng Sen (Kim Liên, Nam Đàn, Nghệ An) — vùng đất giàu truyền thống hiếu học và yêu nước; xuất thân trong gia đình nhà nho yêu nước (thân phụ là Cụ Phó bảng Nguyễn Sinh Sắc, thân mẫu là bà Hoàng Thị Loan).</li>
+            </ul>
+            <h4>2. Hành trình bôn ba và hoạt động cách mạng (1911 – 1969)</h4>
+            <ul>
+                <li><b>5-6-1911:</b> Từ Bến cảng Nhà Rồng ra đi tìm đường cứu nước với tên Văn Ba.</li>
+                <li><b>1920:</b> Đọc <i>Luận cương của Lê-nin</i>, bỏ phiếu tán thành Quốc tế thứ ba và tham gia sáng lập Đảng Cộng sản Pháp — trở thành người Cộng sản Việt Nam đầu tiên.</li>
+                <li><b>1925:</b> Thành lập <b>Hội Việt Nam Cách mạng Thanh niên</b> tại Quảng Châu (Trung Quốc), xuất bản báo <i>Thanh niên</i> và tác phẩm <i>Đường Kách mệnh</i> (1927).</li>
+                <li><b>Đầu năm 1930:</b> Chủ trì Hội nghị hợp nhất thành lập <b>Đảng Cộng sản Việt Nam</b> và soạn thảo <i>Cương lĩnh chính trị đầu tiên</i>.</li>
+                <li><b>1941 – 1969:</b> Trở về Tổ quốc (28-1-1941) trực tiếp lãnh đạo Cách mạng tháng Tám 1945, kháng chiến chống Pháp và chống Mỹ cho đến khi qua đời (2-9-1969).</li>
+            </ul>
+        `,
+        nodes: ['Truyền thống quê hương Nghệ An & Gia đình', 'Ra đi tìm đường cứu nước (5/6/1911)', 'Tìm thấy con đường cứu nước (1920)', 'Sáng lập Đảng CSVN (1930) & Nước VNDCCH (1945)'],
+        reflection: 'Cả cuộc đời Chủ tịch Hồ Chí Minh chỉ có một ham muốn tột bậc: "Làm sao cho nước ta được hoàn toàn độc lập, dân ta được hoàn toàn tự do, đồng bào ai cũng có cơm ăn áo mặc, ai cũng được học hành."'
+    },
+
+    "Hồ Chí Minh - Anh hùng giải phóng dân tộc": {
+        summary: `
+            <h4>1. Công lao to lớn của Chủ tịch Hồ Chí Minh đối với dân tộc Việt Nam</h4>
+            <ul>
+                <li><b>Tìm ra con đường cứu nước đúng đắn (1911 – 1920):</b> Chấm dứt cuộc khủng hoảng về đường lối và giai cấp lãnh đạo của cách mạng Việt Nam bằng con đường cách mạng vô sản: <b>Độc lập dân tộc gắn liền với chủ nghĩa xã hội</b>.</li>
+                <li><b>Sáng lập và rèn luyện Đảng Cộng sản Việt Nam (1930):</b> Chuẩn bị về tư tưởng, chính trị, tổ chức (Hội Việt Nam Cách mạng Thanh niên 1925) và thống nhất các tổ chức cộng sản thành một chính đảng duy nhất, soạn thảo Cương lĩnh chính trị đầu tiên đúng đắn, sáng tạo.</li>
+                <li><b>Sáng lập Mặt trận Việt Minh, Quân đội nhân dân và lãnh đạo Cách mạng tháng Tám (1945):</b> Xây dựng khối đại đoàn kết dân tộc, căn cứ địa Cao Bằng – Việt Bắc và chớp thời cơ giành độc lập, khai sinh nước Việt Nam Dân chủ Cộng hoà.</li>
+                <li><b>Lãnh đạo thắng lợi hai cuộc kháng chiến chống Pháp và chống Mỹ (1945 – 1969):</b> Đề ra đường lối kháng chiến kiêm kiến quốc đúng đắn, đặt nền móng cho thắng lợi trọn vẹn năm 1975.</li>
+            </ul>
+        `,
+        nodes: ['Tìm ra con đường cách mạng vô sản (1920)', 'Sáng lập Đảng Cộng sản Việt Nam (1930)', 'Lãnh đạo Cách mạng tháng Tám (1945)', 'Lãnh đạo kháng chiến chống Pháp & chống Mỹ'],
+        reflection: 'Hồ Chí Minh là biểu tượng cao đẹp nhất của chủ nghĩa yêu nước Việt Nam gắn liền với chủ nghĩa quốc tế trong sáng và khát vọng hòa bình cho mọi dân tộc.'
+    },
+
+    "Dấu ấn Hồ Chí Minh trong lòng nhân dân thế giới và Việt Nam": {
+        summary: `
+            <h4>1. Vinh danh của UNESCO và Thế giới đối với Chủ tịch Hồ Chí Minh</h4>
+            <ul>
+                <li>Năm <b>1987</b>, tại khoá họp lần thứ 24 ở Pa-ri, Tổ chức Giáo dục, Khoa học và Văn hoá của Liên hợp quốc (<b>UNESCO</b>) đã thông qua Nghị quyết 24C/18.65 kỉ niệm 100 năm Ngày sinh Chủ tịch Hồ Chí Minh (1890–1990), tôn vinh Người là <b>"Anh hùng giải phóng dân tộc và Nhà văn hoá kiệt xuất của Việt Nam"</b>.</li>
+                <li>Nhiều quốc gia trên thế giới đã xây dựng tượng đài, quảng trường, trường học và đặt tên đường mang tên Hồ Chí Minh.</li>
+            </ul>
+            <h4>2. Chủ tịch Hồ Chí Minh sống mãi trong lòng nhân dân Việt Nam</h4>
+            <ul>
+                <li>Tư tưởng, đạo đức, phong cách Hồ Chí Minh (Cần, Kiệm, Liêm, Chính, Chí công vô tư, suốt đời phục vụ nhân dân) là nền tảng tinh thần vững chắc của xã hội Việt Nam thông qua cuộc vận động <i>"Học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh"</i>.</li>
+            </ul>
+        `,
+        nodes: ['Nghị quyết UNESCO (1987)', 'Anh hùng giải phóng dân tộc', 'Nhà văn hóa kiệt xuất', 'Học tập & Làm theo Tư tưởng, Đạo đức, Phong cách Hồ Chí Minh'],
+        reflection: 'Di sản lớn nhất mà Chủ tịch Hồ Chí Minh để lại cho thế hệ hôm nay là một Tổ quốc độc lập, thống nhất cùng tấm gương đạo đức trong sáng, nhân ái và yêu chuộng hòa bình.'
+    }
+};
+
+// =========================================================================
+// 2. CẤU TRÚC CHƯƠNG TRÌNH HỌC KHỐI 10, 11, 12
+// =========================================================================
+const curriculumData = {
+    10: [
+        ['Lịch sử và Sử học', ['Hiện thực lịch sử và lịch sử được con người nhận thức', 'Tri thức lịch sử và cuộc sống']],
+        ['Vai trò của Sử học', ['Vai trò của Sử học']],
+        ['Một số nền văn minh thế giới thời cổ - trung đại', ['Khái niệm văn minh và văn minh phương Đông', 'Một số nền văn minh phương Tây']],
+        ['Các cuộc cách mạng công nghiệp trong lịch sử thế giới', ['Các cuộc cách mạng công nghiệp thời cận đại', 'Các cuộc cách mạng công nghiệp thời hiện đại']],
+        ['Văn minh Đông Nam Á thời cổ - trung đại', ['Hành trình phát triển và thành tựu của văn minh Đông Nam Á']],
+        ['Một số nền văn minh trên đất nước Việt Nam trước năm 1858', ['Một số nền văn minh cổ trên đất nước Việt Nam', 'Văn minh Đại Việt']],
+        ['Cộng đồng các dân tộc Việt Nam', ['Các dân tộc trên đất nước Việt Nam', 'Đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam', 'Khối đại đoàn kết dân tộc trong lịch sử Việt Nam']]
+    ],
+    11: [
+        ['Cách mạng tư sản và sự phát triển của chủ nghĩa tư bản', ['Một số vấn đề chung về cách mạng tư sản', 'Sự xác lập và phát triển của chủ nghĩa tư bản']],
+        ['Chủ nghĩa xã hội từ năm 1917 đến nay', ['Sự hình thành Liên bang Cộng hòa xã hội chủ nghĩa Xô viết', 'Sự phát triển của chủ nghĩa xã hội từ sau Chiến tranh thế giới thứ hai']],
+        ['Quá trình giành độc lập dân tộc của các quốc gia Đông Nam Á', ['Quá trình xâm lược và cai trị của chủ nghĩa thực dân ở Đông Nam Á', 'Hành trình đi đến độc lập dân tộc ở Đông Nam Á']],
+        ['Chiến tranh bảo vệ Tổ quốc và giải phóng dân tộc trước năm 1945', ['Khái quát về chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam', 'Một số cuộc khởi nghĩa và chiến tranh giải phóng trong lịch sử Việt Nam']],
+        ['Một số cuộc cải cách lớn trong lịch sử Việt Nam trước năm 1858', ['Cuộc cải cách của Hồ Quý Ly và Triều Hồ', 'Cuộc cải cách của Lê Thánh Tông', 'Cuộc cải cách của Minh Mạng']],
+        ['Lịch sử bảo vệ chủ quyền Việt Nam ở Biển Đông', ['Vị trí và tầm quan trọng của Biển Đông', 'Việt Nam và Biển Đông']]
+    ],
+    12: [
+        ['Thế giới trong và sau Chiến tranh lạnh', ['Liên hợp quốc', 'Trật tự thế giới trong Chiến tranh lạnh', 'Trật tự thế giới sau Chiến tranh lạnh']],
+        ['ASEAN: Những chặng đường lịch sử', ['Sự ra đời và phát triển của ASEAN', 'Cộng đồng ASEAN: Từ ý tưởng đến hiện thực']],
+        ['Cách mạng tháng Tám, chiến tranh giải phóng và bảo vệ Tổ quốc', ['Cách mạng tháng Tám năm 1945', 'Cuộc kháng chiến chống thực dân Pháp (1945-1954)', 'Cuộc kháng chiến chống Mỹ, cứu nước (1954-1975)', 'Cuộc đấu tranh bảo vệ Tổ quốc từ sau tháng 4-1975']],
+        ['Công cuộc Đổi mới ở Việt Nam từ năm 1986 đến nay', ['Khái quát về công cuộc Đổi mới', 'Thành tựu cơ bản và bài học của công cuộc Đổi mới']],
+        ['Lịch sử đối ngoại của Việt Nam thời cận - hiện đại', ['Hoạt động đối ngoại trong đấu tranh giành độc lập dân tộc', 'Hoạt động đối ngoại trong kháng chiến chống Pháp và chống Mỹ', 'Hoạt động đối ngoại của Việt Nam từ năm 1975 đến nay']],
+        ['Hồ Chí Minh trong lịch sử Việt Nam', ['Khái quát cuộc đời và sự nghiệp của Hồ Chí Minh', 'Hồ Chí Minh - Anh hùng giải phóng dân tộc', 'Dấu ấn Hồ Chí Minh trong lòng nhân dân thế giới và Việt Nam']]
+    ]
+};
+
+// =========================================================================
+// 3. LOGIC HIỂN THỊ GIAO DIỆN & TÌM KIẾM
+// =========================================================================
+const totalLessons = Object.values(curriculumData).flatMap(groups => groups.flatMap(([, lessons]) => lessons)).length;
+let currentGrade = 10, currentLesson = null, allOpen = false;
+const completedKey = 'dcls_completedLessons';
+
+function getCompleted() {
+    try { return JSON.parse(localStorage.getItem(completedKey) || '[]'); }
+    catch { return []; }
+}
+
+function updateProgress() {
+    const done = getCompleted();
+    document.getElementById('progress').textContent = `📜 Đã lĩnh hội: ${done.length} / ${totalLessons} bài học`;
+    [10, 11, 12].forEach(g => {
+        const tab = document.querySelector(`[data-grade="${g}"]`);
+        const count = curriculumData[g].flatMap(([, items]) => items).length;
+        tab.innerHTML = `<span>KHỐI ${g}</span><small>${curriculumData[g].length} Chủ đề • ${count} Bài</small>`;
+    });
+}
+
+function setGrade(grade) {
+    currentGrade = grade;
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.toggle('active', Number(tab.dataset.grade) === grade));
+    document.getElementById('view-title').textContent = `Danh mục Chương trình Lịch sử Khối ${grade}`;
+    render();
+}
+
+function render() {
+    const container = document.getElementById('topics');
+    container.replaceChildren();
+    const done = getCompleted();
+    const query = document.getElementById('search').value.trim().toLocaleLowerCase('vi');
+    let matches = 0;
+    const grades = query ? [10, 11, 12] : [currentGrade];
+
+    grades.forEach(grade => curriculumData[grade].forEach(([topic, lessons], topicIndex) => {
+        const filtered = lessons.filter(lesson => {
+            if (!query) return true;
+            const detailText = DU_LIEU_BAI_HOC[lesson]?.summary || '';
+            return `${topic} ${lesson} ${detailText}`.toLocaleLowerCase('vi').includes(query);
+        });
+        if (!filtered.length) return;
+        matches += filtered.length;
+
+        const card = document.createElement('section');
+        card.className = 'topic' + ((allOpen || (!query && topicIndex === 0) || Boolean(query)) ? ' open' : '');
+
+        const head = document.createElement('button');
+        head.className = 'topic-head';
+        head.innerHTML = `<span>${query ? `[KHỐI ${grade}] ` : ''}📁 CHỦ ĐỀ ${topicIndex + 1}. ${topic}</span><span>▼</span>`;
+        head.onclick = () => card.classList.toggle('open');
+
+        const list = document.createElement('ul');
+        list.className = 'topic-list';
+
+        filtered.forEach(title => {
+            const id = `k${grade}-${topicIndex}-${lessons.indexOf(title)}`;
+            const li = document.createElement('li');
+            li.className = 'lesson' + (done.includes(id) ? ' done' : '');
+            li.innerHTML = `<span class="lesson-name">${done.includes(id) ? '✅' : '📜'} ${title}</span><button class="study">📖 Vào học</button>`;
+            li.querySelector('button').onclick = () => openLesson({ id, title, topic, grade });
+            list.append(li);
+        });
+
+        card.append(head, list);
+        container.append(card);
+    }));
+
+    if (!matches) {
+        container.innerHTML = '<div class="empty">Không tìm thấy bài học hoặc khái niệm phù hợp. Hãy thử từ khóa khác.</div>';
+    }
+    document.getElementById('view-title').textContent = query
+        ? `Kết quả tìm kiếm cho: "${document.getElementById('search').value.trim()}"`
+        : `Danh mục Chương trình Lịch sử Khối ${currentGrade}`;
+}
+
+function openLesson(lesson) {
+    currentLesson = lesson;
+    document.getElementById('breadcrumb').textContent = `Khối ${lesson.grade} • ${lesson.topic}`;
+    document.getElementById('modal-title').textContent = lesson.title;
+
+    const data = DU_LIEU_BAI_HOC[lesson.title] || {
+        summary: `<ul><li>Nội dung chi tiết cho bài <b>${lesson.title}</b> đang được cập nhật.</li></ul>`,
+        nodes: ['Bối cảnh lịch sử', 'Sự kiện & Nhân vật', 'Kết quả', 'Ý nghĩa'],
+        reflection: 'Tìm hiểu lịch sử giúp ta trân trọng giá trị của hòa bình, hiểu cội nguồn và suy nghĩ có trách nhiệm hơn với tương lai.'
+    };
+
+    document.getElementById('summary').innerHTML = data.summary;
+    document.getElementById('nodes').innerHTML = data.nodes.map(x => `<span class="node">${x}</span>`).join(' ➜ ');
+    document.getElementById('reflection').textContent = data.reflection;
+
+    const button = document.getElementById('mark-done');
+    button.textContent = getCompleted().includes(lesson.id)
+        ? '✓ Đã hoàn thành (bấm để bỏ đánh dấu)'
+        : '✅ Đánh dấu Đã học';
+
+    document.getElementById('modal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+}
+
+document.getElementById('tabs').innerHTML = [10, 11, 12].map(g => `<button class="tab${g === 10 ? ' active' : ''}" data-grade="${g}"></button>`).join('');
+document.querySelectorAll('.tab').forEach(tab => tab.onclick = () => setGrade(Number(tab.dataset.grade)));
+document.getElementById('search').addEventListener('input', render);
+document.getElementById('toggle-all').onclick = () => {
+    allOpen = !allOpen;
+    document.querySelectorAll('.topic').forEach(card => card.classList.toggle('open', allOpen));
+};
+document.getElementById('close').onclick = closeModal;
+document.getElementById('modal').addEventListener('click', event => {
+    if (event.target.id === 'modal') closeModal();
+});
+document.getElementById('mark-done').onclick = () => {
+    if (!currentLesson) return;
+    let done = getCompleted();
+    done = done.includes(currentLesson.id) ? done.filter(id => id !== currentLesson.id) : [...done, currentLesson.id];
+    localStorage.setItem(completedKey, JSON.stringify(done));
+    updateProgress();
+    openLesson(currentLesson);
+    render();
+};
+
+// =========================================================================
+// 4. ĐỒNG BỘ NHẠC NỀN XUYÊN SUỐT CÁC TRANG (KHÔNG BỊ NGẮT KHI CHUYỂN MỤC)
+// =========================================================================
+const bgMusic = document.getElementById('bg-music');
+const btnMusic = document.getElementById('btn-music');
+
+function updateMusicButton() {
+    if (bgMusic.paused) {
+        btnMusic.textContent = '🔇 Nhạc nền: Đang tắt';
+    } else {
+        btnMusic.textContent = '🎵 Nhạc nền: Đang bật';
+    }
+}
+
+function toggleMusic() {
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+            localStorage.setItem('nhacDangPhat', 'true');
+            updateMusicButton();
+        }).catch(() => {});
+    } else {
+        bgMusic.pause();
+        localStorage.setItem('nhacDangPhat', 'false');
+        updateMusicButton();
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTime = localStorage.getItem('audioTime');
+    const isPlaying = localStorage.getItem('nhacDangPhat');
+    if (savedTime) {
+        bgMusic.currentTime = parseFloat(savedTime);
+    }
+    if (isPlaying !== 'false') {
+        bgMusic.play().then(() => {
+            localStorage.setItem('nhacDangPhat', 'true');
+            updateMusicButton();
+        }).catch(() => {
+            updateMusicButton();
+        });
+    } else {
+        updateMusicButton();
+    }
+});
+
+// Tự động phát nhạc ngay khi người dùng nhấp chuột lần đầu nếu trình duyệt chặn autoplay
+document.body.addEventListener('click', (e) => {
+    if (e.target.id === 'btn-music') return;
+    if (bgMusic.paused && localStorage.getItem('nhacDangPhat') !== 'false') {
+        bgMusic.play().then(() => {
+            localStorage.setItem('nhacDangPhat', 'true');
+            updateMusicButton();
+        }).catch(() => {});
+    }
+}, { once: true });
+
+// Lưu thời gian nhạc mỗi 500ms để chuyển trang mượt mà
+setInterval(() => {
+    if (!bgMusic.paused) {
+        localStorage.setItem('audioTime', bgMusic.currentTime);
+    }
+}, 500);
+
+updateProgress();
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quần Anh Hội — Diễn Đàn Đàm Luận Lịch Sử Đại Việt</title>
+
+    <!-- Google Fonts Cổ Điển -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ====================================================== */
+        /*  BIẾN MÀU CỔ TRANG ĐỒNG BỘ VỚI TRANG-CHINH.HTML        */
+        /* ====================================================== */
+        :root {
+            --giay-co:       #F4ECD8;
+            --giay-co-dam:   #EDE3CF;
+            --do-ba-trau:    #7B1E1E;
+            --do-hover:      #9B2E2E;
+            --do-sang:       #B71C1C;
+            --vang-dong:     #D4AF37;
+            --vang-hover:    #E8C84A;
+            --nau-den:       #2C1E18;
+            --nau-go:        #5C3A21;
+            --nen-toi:       #1E1815;
+            --nen-card:      #FDF8EE;
+            --chu-phu:       #5A4838;
+            --bo-tron:       14px;
+            --shadow-co:     0 6px 24px rgba(44, 30, 24, 0.12);
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Serif', 'Times New Roman', serif;
+            color: var(--nau-den);
+            background-color: var(--giay-co);
+            background-image: radial-gradient(circle at 50% 0%, #FFF9EB 0%, #F4ECD8 65%, #EADBBE 100%);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ====================================================== */
+        /*  HEADER & SUB-NAVBAR                                   */
+        /* ====================================================== */
+        .site-header {
+            background: linear-gradient(180deg, #1A0E08 0%, #2A170E 100%);
+            border-bottom: 2px solid var(--vang-dong);
+            color: #FDF8EE;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-top {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--vang-dong);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-logo span.emblem {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.6));
+        }
+
+        .header-user-status {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.88rem;
+        }
+
+        .user-pill {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--vang-dong);
+            padding: 5px 14px;
+            border-radius: 20px;
+            color: #FFF2A8;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .user-pill .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #2ECC71;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 6px #2ECC71;
+        }
+
+        /* Thanh Menu Điều Hướng */
+        .sub-navbar {
+            background: #24140D;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .sub-navbar__menu {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            list-style: none;
+            gap: 6px;
+        }
+
+        .sub-navbar__item a {
+            display: block;
+            padding: 10px 16px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #E0CEB3;
+            transition: all 0.25s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .sub-navbar__item a:hover,
+        .sub-navbar__item.active a {
+            color: var(--vang-dong);
+            background: rgba(212, 175, 55, 0.1);
+            border-bottom-color: var(--vang-dong);
+        }
+
+        /* ====================================================== */
+        /*  HERO BANNER CỔ ĐIỂN                                   */
+        /* ====================================================== */
+        .forum-hero {
+            position: relative;
+            background: linear-gradient(135deg, #24140D 0%, #3D1C12 50%, #1A0D08 100%);
+            border-bottom: 3px solid var(--vang-dong);
+            color: #FFF8EE;
+            padding: 48px 24px 40px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .forum-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .forum-hero__inner {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .forum-hero__badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--vang-dong);
+            border: 1px solid var(--vang-dong);
+            background: rgba(44, 24, 16, 0.7);
+            padding: 4px 18px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+
+        .forum-hero__title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            color: #FFF2A8;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.4);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .forum-hero__desc {
+            font-size: 1.02rem;
+            color: #E2CFB4;
+            max-width: 720px;
+            margin: 0 auto 24px;
+            line-height: 1.7;
+        }
+
+        .forum-stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-badge {
+            background: rgba(18, 10, 6, 0.65);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: #F5E5C8;
+        }
+
+        .stat-badge strong {
+            color: var(--vang-dong);
+            font-size: 1.1rem;
+        }
+
+        /* ====================================================== */
+        /*  MAIN CONTAINER LAYOUT                                 */
+        /* ====================================================== */
+        .forum-container {
+            max-width: 1100px;
+            margin: 36px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        /* Thông báo trạng thái kết nối Firebase */
+        .firebase-status-banner {
+            border-radius: 10px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+            border: 1.5px solid;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .firebase-status-banner.connected {
+            background: #E8F8F0;
+            border-color: #2ECC71;
+            color: #165B33;
+        }
+
+        .firebase-status-banner.mock {
+            background: #FFF8E7;
+            border-color: #F39C12;
+            color: #875A00;
+        }
+
+        .firebase-status-banner button {
+            background: transparent;
+            border: 1px solid currentColor;
+            color: inherit;
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .firebase-status-banner button:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ====================================================== */
+        /*  KHU VỰC 1: KHAI BÚT ĐĂNG BÀI (Post Composer)          */
+        /* ====================================================== */
+        .scroll-composer {
+            position: relative;
+            background: #FFFDF8;
+            border: 2px solid var(--vang-dong);
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(44, 30, 24, 0.15);
+            padding: 28px 28px 24px;
+            background-image: 
+                radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom right, rgba(123, 30, 30, 0.05) 0%, transparent 60%);
+        }
+
+        /* Họa tiết góc cổ điển */
+        .scroll-composer::before,
+        .scroll-composer::after {
+            content: '✦';
+            position: absolute;
+            color: var(--vang-dong);
+            font-size: 1rem;
+            line-height: 1;
+        }
+        .scroll-composer::before { top: 8px; left: 10px; }
+        .scroll-composer::after { bottom: 8px; right: 10px; }
+
+        .composer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1.5px dashed #D3C3A6;
+            padding-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .composer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--do-ba-trau);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .composer-author-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--nau-go);
+        }
+
+        .composer-author-input {
+            background: #F4ECD8;
+            border: 1px solid #C4A575;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--do-ba-trau);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .composer-author-input:focus {
+            border-color: var(--do-ba-trau);
+            background: #FFF;
+        }
+
+        .composer-topic-select {
+            background: #F4ECD8;
+            border: 1px solid #C4A575;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--nau-den);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .composer-textarea {
+            width: 100%;
+            min-height: 110px;
+            background: #FFFDF8;
+            border: 1.5px solid #D8C7A5;
+            border-radius: 10px;
+            padding: 16px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.96rem;
+            color: var(--nau-den);
+            line-height: 1.7;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .composer-textarea:focus {
+            border-color: var(--vang-dong);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+            background: #FFFFFF;
+        }
+
+        .composer-footer {
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .composer-tags-preview {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .topic-pill {
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 14px;
+            background: rgba(123, 30, 30, 0.08);
+            color: var(--do-ba-trau);
+            border: 1px solid rgba(123, 30, 30, 0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .topic-pill:hover, .topic-pill.active {
+            background: var(--do-ba-trau);
+            color: #FFF;
+            border-color: var(--do-ba-trau);
+        }
+
+        .btn-submit-post {
+            background: linear-gradient(135deg, var(--do-ba-trau) 0%, #9B2E2E 100%);
+            color: #FFF;
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.98rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(123, 30, 30, 0.3);
+            transition: all 0.25s ease;
+        }
+
+        .btn-submit-post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(123, 30, 30, 0.45);
+            background: linear-gradient(135deg, #901B1B 0%, var(--do-ba-trau) 100%);
+        }
+
+        .btn-submit-post:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ====================================================== */
+        /*  KHU VỰC 2: BẢNG TIN (Feed) VỚI KHUNG VIỀN CUỘN GIẤY   */
+        /* ====================================================== */
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--do-ba-trau);
+            padding-bottom: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feed-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-weight: 900;
+            color: var(--do-ba-trau);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feed-filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .feed-filter-btn {
+            background: #EFE6D5;
+            border: 1px solid #C4A575;
+            color: #4A301D;
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .feed-filter-btn.active, .feed-filter-btn:hover {
+            background: var(--do-ba-trau);
+            color: #FFF;
+            border-color: var(--do-ba-trau);
+        }
+
+        .feed-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        /* KHUNG VIỀN CUỘN GIẤY CỔ ĐIỂN (Scroll Card Frame) */
+        .scroll-post-card {
+            position: relative;
+            background: #FFFDF8;
+            border: 2px solid #C5AC81;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(44, 30, 24, 0.08);
+            padding: 24px 26px;
+            transition: all 0.25s ease;
+            background-image: 
+                radial-gradient(circle at top right, rgba(212, 175, 55, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at bottom left, rgba(123, 30, 30, 0.04) 0%, transparent 40%);
+        }
+
+        .scroll-post-card:hover {
+            border-color: var(--vang-dong);
+            box-shadow: 0 8px 26px rgba(44, 30, 24, 0.14);
+            transform: translateY(-2px);
+        }
+
+        /* Họa tiết thanh cuốn hai đầu */
+        .scroll-post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 14px;
+            right: 14px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, var(--vang-dong) 50%, transparent 100%);
+        }
+
+        .post-top-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .post-author-cluster {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-seal-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7B1E1E 0%, #4A1212 100%);
+            border: 2px solid var(--vang-dong);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #FFF2A8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+
+        .post-author-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--do-ba-trau);
+        }
+
+        .post-author-badge {
+            font-size: 0.72rem;
+            background: rgba(212, 175, 55, 0.2);
+            color: #7B1E1E;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .post-timestamp {
+            font-size: 0.78rem;
+            color: #7D6B58;
+            display: block;
+        }
+
+        .post-category-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #8C6239;
+            background: #F7EEDB;
+            border: 1px solid #D6C2A0;
+            padding: 3px 12px;
+            border-radius: 12px;
+        }
+
+        .post-body-content {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: #2C1E18;
+            margin-bottom: 18px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Thanh tác vụ dưới bài đăng */
+        .post-action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px dashed #E2D4BC;
+            padding-top: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .action-btns-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-post-action {
+            background: transparent;
+            border: 1px solid #D6C2A0;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--nau-go);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-post-action:hover {
+            background: #F7EEDB;
+            border-color: var(--vang-dong);
+            color: var(--do-ba-trau);
+        }
+
+        .btn-post-action.liked {
+            color: #C0392B;
+            border-color: #C0392B;
+            background: rgba(192, 57, 43, 0.08);
+        }
+
+        .btn-post-action.comment-active {
+            background: var(--do-ba-trau);
+            color: #FFF;
+            border-color: var(--do-ba-trau);
+        }
+
+        /* ====================================================== */
+        /*  KHU VỰC 3: BÌNH LUẬN (Reply Drawer)                   */
+        /* ====================================================== */
+        .comments-drawer {
+            margin-top: 16px;
+            border-top: 1.5px solid #EFE4CF;
+            padding-top: 16px;
+            background: rgba(244, 236, 216, 0.35);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .comments-drawer.hidden {
+            display: none;
+        }
+
+        .comment-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .comment-input {
+            flex: 1;
+            background: #FFF;
+            border: 1.5px solid #D4C3A3;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.9rem;
+            color: var(--nau-den);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .comment-input:focus {
+            border-color: var(--do-ba-trau);
+        }
+
+        .btn-send-comment {
+            background: var(--do-ba-trau);
+            color: #FFF;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .btn-send-comment:hover {
+            background: var(--do-hover);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .comment-item {
+            background: #FFFDF8;
+            border: 1px solid #E6D9C2;
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #4A1212;
+            color: var(--vang-dong);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            border: 1px solid var(--vang-dong);
+        }
+
+        .comment-content-box {
+            flex: 1;
+        }
+
+        .comment-author-name {
+            font-weight: 700;
+            color: var(--do-ba-trau);
+            font-size: 0.86rem;
+            margin-bottom: 2px;
+        }
+
+        .comment-time {
+            font-size: 0.72rem;
+            color: #8C7B6B;
+            margin-left: 6px;
+            font-weight: normal;
+        }
+
+        .comment-text {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #3C2B22;
+            white-space: pre-wrap;
+        }
+
+        .no-comments-hint {
+            text-align: center;
+            font-style: italic;
+            font-size: 0.84rem;
+            color: #8C7B6B;
+            padding: 8px 0;
+        }
+
+        /* Trạng thái rỗng / Tải dữ liệu */
+        .empty-feed-state, .loading-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: #FFFDF8;
+            border: 2px dashed #C4A575;
+            border-radius: 12px;
+            color: var(--nau-go);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            border: 3px solid rgba(212, 175, 55, 0.3);
+            border-top-color: var(--do-ba-trau);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* FOOTER */
+        .forum-footer {
+            background: #1A0E08;
+            border-top: 2px solid var(--vang-dong);
+            color: #CDBBA0;
+            padding: 32px 20px;
+            text-align: center;
+            font-size: 0.88rem;
+        }
+
+        .forum-footer a {
+            color: var(--vang-dong);
+            text-decoration: underline;
+        }
+
+        /* TOAST THÔNG BÁO */
+        .toast-box {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #2C1810;
+            color: #FFF;
+            border: 1.5px solid var(--vang-dong);
+            padding: 12px 22px;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            font-size: 0.92rem;
+            z-index: 9999;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; gap: 8px; text-align: center; }
+            .composer-header { flex-direction: column; align-items: flex-start; }
+            .composer-footer { flex-direction: column; align-items: stretch; }
+            .btn-submit-post { width: 100%; justify-content: center; }
+            .feed-header { flex-direction: column; align-items: flex-start; }
+            .post-top-meta { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!--  1. HEADER & SUB-NAVBAR                                      -->
+    <!-- ============================================================ -->
+    <header class="site-header">
+        <div class="header-top">
+            <a href="trang-chinh.html" class="brand-logo" title="Quay về Sảnh Chính">
+                <span class="emblem">🏛️</span>
+                <span>DẤU CHÂN LỊCH SỬ</span>
+            </a>
+            <div class="header-user-status">
+                <div class="user-pill">
+                    <span class="status-dot"></span>
+                    <span id="header-user-display">Tướng quân Khách</span>
+                </div>
+                <a href="dang-nhap.html" style="color: var(--vang-dong); font-size: 0.84rem; text-decoration: underline;" id="btn-switch-account">Đổi tài khoản</a>
+            </div>
+        </div>
+
+        <nav class="sub-navbar">
+            <ul class="sub-navbar__menu">
+                <li class="sub-navbar__item"><a href="index.html">🏠 TRANG CHỦ</a></li>
+                <li class="sub-navbar__item"><a href="trang-chinh.html">📜 SẢNH CHÍNH</a></li>
+                <li class="sub-navbar__item"><a href="tang-thu-cac.html">📖 TÀNG THƯ CÁC</a></li>
+                <li class="sub-navbar__item"><a href="thao-truong.html">🎯 THAO TRƯỜNG</a></li>
+                <li class="sub-navbar__item"><a href="sa-ban.html">🗺️ SA BÀN 2D</a></li>
+                <li class="sub-navbar__item"><a href="sa-ban-3d.html">🚀 SA BÀN 3D</a></li>
+                <li class="sub-navbar__item active"><a href="quan-anh-hoi.html">⚔️ QUẦN ANH HỘI</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ============================================================ -->
+    <!--  2. HERO BANNER CỔ ĐIỂN                                      -->
+    <!-- ============================================================ -->
+    <section class="forum-hero">
+        <div class="forum-hero__inner">
+            <span class="forum-hero__badge">ĐÀM ĐẠO SỬ HỌC ĐẠI VIỆT</span>
+            <h1 class="forum-hero__title">QUẦN ANH HỘI</h1>
+            <p class="forum-hero__desc">
+                Nơi anh hào tụ hội, cùng nhau đặt câu hỏi, khảo cứu tư liệu, luận bàn mưu lược 
+                và thấu hiểu khát vọng độc lập tự chủ ngàn năm của dân tộc Việt Nam.
+            </p>
+            <div class="forum-stats-bar">
+                <div class="stat-badge">
+                    <span>📜 Luận đề đã đăng:</span>
+                    <strong id="stat-total-posts">0</strong>
+                </div>
+                <div class="stat-badge">
+                    <span>💬 Lời luận bàn:</span>
+                    <strong id="stat-total-replies">0</strong>
+                </div>
+                <div class="stat-badge">
+                    <span>⚡ Trạng thái:</span>
+                    <strong id="stat-network-status">Đang kết nối</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!--  3. NỘI DUNG CHÍNH (COMPOSER & FEED)                         -->
+    <!-- ============================================================ -->
+    <main class="forum-container">
+
+        <!-- Banner thông báo kết nối Firebase -->
+        <div id="firebase-status-banner" class="firebase-status-banner mock">
+            <div id="firebase-status-text">
+                ⚡ <strong>Chế độ Vận hành:</strong> Đang hoạt động ở chế độ Demo Cục bộ (Local Storage). Khi bạn cấu hình Firebase Firestore thật, dữ liệu sẽ tự động đồng bộ thời gian thực toàn cầu!
+            </div>
+            <button id="btn-show-config-guide" onclick="moHuongDanFirebase()">📋 Xem Hướng Dẫn Kích Hoạt Firestore</button>
+        </div>
+
+        <!-- KHU VỰC 1: KHAI BÚT ĐĂNG BÀI (POST COMPOSER) -->
+        <section class="scroll-composer" id="post-composer-box">
+            <div class="composer-header">
+                <h2 class="composer-title">
+                    <span>✍️</span> Khai Bút Luận Sử
+                </h2>
+                <div class="composer-author-box">
+                    <span>Danh xưng:</span>
+                    <input type="text" id="composer-author" class="composer-author-input" placeholder="Tướng quân / Hiền sĩ..." maxlength="32">
+                    <select id="composer-topic" class="composer-topic-select" aria-label="Chủ đề đàm luận">
+                        <option value="Bạch Đằng 938">🌊 Bạch Đằng 938</option>
+                        <option value="Như Nguyệt 1077">🎋 Như Nguyệt 1077</option>
+                        <option value="Khảo Cứu Bảo Vật">🏺 Khảo Cứu Bảo Vật</option>
+                        <option value="Chiến Thuật Quân Sự">⚔️ Chiến Thuật Quân Sự</option>
+                        <option value="Di Sản Biển Đảo">🗺️ Di Sản Biển Đảo</option>
+                        <option value="Hỏi Đáp Ôn Thi GDPT">🎯 Hỏi Đáp Ôn Thi GDPT</option>
+                    </select>
+                </div>
+            </div>
+
+            <textarea 
+                id="composer-content" 
+                class="composer-textarea" 
+                placeholder="Kính mời chư vị anh hào đặt câu hỏi, chia sẻ kiến thức lịch sử, khảo luận cổ vật hoặc nêu thắc mắc ôn tập..." 
+                maxlength="1500"
+            ></textarea>
+
+            <div class="composer-footer">
+                <div class="composer-tags-preview">
+                    <span class="topic-pill active" onclick="chonNhanhTopic(this, 'Bạch Đằng 938')">#BạchĐằng</span>
+                    <span class="topic-pill" onclick="chonNhanhTopic(this, 'Như Nguyệt 1077')">#NhưNguyệt</span>
+                    <span class="topic-pill" onclick="chonNhanhTopic(this, 'Khảo Cứu Bảo Vật')">#TrốngĐồng</span>
+                    <span class="topic-pill" onclick="chonNhanhTopic(this, 'Di Sản Biển Đảo')">#ChâuBản</span>
+                    <span class="topic-pill" onclick="chonNhanhTopic(this, 'Hỏi Đáp Ôn Thi GDPT')">#ÔnThi2025</span>
+                </div>
+                <button type="button" id="btn-submit-post" class="btn-submit-post" onclick="dangBaiMoi()">
+                    <span>📜</span>
+                    <span>Đăng Lên Diễn Đàn</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- KHU VỰC 2: BẢNG TIN BÀI VIẾT (FEED) -->
+        <section class="feed-section">
+            <div class="feed-header">
+                <h3 class="feed-heading">
+                    <span>📜</span> Bảng Tin Luận Đàm
+                </h3>
+                <div class="feed-filter-tabs">
+                    <button class="feed-filter-btn active" onclick="locBaiViet(this, 'all')">Tất cả</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Bạch Đằng 938')">Bạch Đằng</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Như Nguyệt 1077')">Như Nguyệt</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Khảo Cứu Bảo Vật')">Bảo Vật</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Hỏi Đáp Ôn Thi GDPT')">Ôn Thi</button>
+                </div>
+            </div>
+
+            <!-- Danh sách bài đăng -->
+            <div id="posts-container" class="feed-list">
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Đang tải dòng suy ngẫm của chư vị anh hào...</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="forum-footer">
+        <p>© 2026 Dấu Chân Lịch Sử — Diễn Đàn Quần Anh Hội</p>
+        <p style="margin-top: 6px; font-size: 0.82rem;">
+            Tất cả vì tình yêu lịch sử Việt Nam 🇻🇳 • <a href="trang-chinh.html">Quay về Sảnh Chính</a> • <a href="dang-nhap.html">Quản lý Tài Khoản</a>
+        </p>
+    </footer>
+
+    <!-- TOAST THÔNG BÁO -->
+    <div id="forum-toast" class="toast-box">Thông báo</div>
+
+    <!-- ============================================================ -->
+    <!--  4. FIREBASE SDK V9 & LOGIC DIỄN ĐÀN (JAVASCRIPT THUẦN)       -->
+    <!-- ============================================================ -->
+    <script type="module">
+        // ===================================================
+        //  IMPORT FIREBASE V9 MODULES TỪ CDN CHUẨN
+        // ===================================================
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs,
+            onSnapshot,
+            query,
+            orderBy,
+            where,
+            serverTimestamp,
+            doc,
+            updateDoc,
+            increment
+        } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        // ===================================================
+        //  CẤU HÌNH FIREBASE CLOUD FIRESTORE
+        //  👉 Dán đoạn firebaseConfig của bạn vào đây (hoặc truyền qua window.__FIREBASE_CONFIG__)
+        // ===================================================
+        const firebaseConfig = window.__FIREBASE_CONFIG__ || {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Kiểm tra xem cấu hình đã được thay bằng key thật chưa
+        const isRealFirebase = !Object.values(firebaseConfig).some(val => 
+            typeof val === 'string' && val.includes('YOUR_')
+        );
+
+        let db = null;
+        let isFirestoreActive = false;
+
+        // Khởi tạo Firebase nếu có cấu hình thật
+        if (isRealFirebase) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                isFirestoreActive = true;
+                console.log("🔥 Đã kết nối thành công Firebase Cloud Firestore!");
+                capNhatTrangThaiKetNoi(true, "Firebase Cloud Firestore Trực Tuyến");
+            } catch (err) {
+                console.warn("⚠️ Không thể kết nối Firebase Firestore, chuyển sang chế độ dự phòng:", err);
+                isFirestoreActive = false;
+                capNhatTrangThaiKetNoi(false, "Lỗi kết nối Firebase (Dùng LocalStorage)");
+            }
+        } else {
+            console.log("ℹ️ Đang chạy Quần Anh Hội ở chế độ Local Demo. Hãy cập nhật firebaseConfig để lưu lên mây.");
+            capNhatTrangThaiKetNoi(false, "Chế Độ Thử Nghiệm (Local Storage)");
+        }
+
+        // ===================================================
+        //  DỮ LIỆU MẪU MẶC ĐỊNH CHO LẦN ĐẦU
+        // ===================================================
+        const SAMPLE_POSTS = [
+            {
+                id: "post_sample_1",
+                author: "Thái Úy Lý Thường Kiệt",
+                topic: "Như Nguyệt 1077",
+                content: "Chiến lũy tre xanh bên bờ Nam sông Cầu kết hợp cùng bãi chông ngầm và bài thơ thần 'Nam Quốc Sơn Hà' chính là đỉnh cao của nghệ thuật chiến tranh nhân dân: Đánh bằng thế, diệt bằng tâm, thắng bằng chính nghĩa!",
+                createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+                likes: 28,
+                commentsCount: 2
+            },
+            {
+                id: "post_sample_2",
+                author: "Tiền Ngô Vương Ngô Quyền",
+                topic: "Bạch Đằng 938",
+                content: "Mấu chốt của trận địa cọc ngầm Bạch Đằng năm 938 là nằm ở việc thấu triệt quy luật nhật triều và chọn đúng khúc sông hiểm yếu. Thuyền giặc to lớn cồng kềnh, khi triều rút ắt phải cắm vỡ lòng sông!",
+                createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
+                likes: 45,
+                commentsCount: 1
+            },
+            {
+                id: "post_sample_3",
+                author: "Học Giả Khảo Cổ",
+                topic: "Khảo Cứu Bảo Vật",
+                content: "Trống đồng Ngọc Lũ I với 14 cánh sao mặt trời và 16 vành hoa văn đồng tâm chính là bức tranh toàn cảnh về vũ trụ quan và tín ngưỡng phồn thực của người Việt cổ. Mọi người có để ý dấu con kê đúc đồng tinh xảo không?",
+                createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+                likes: 19,
+                commentsCount: 0
+            }
+        ];
+
+        const SAMPLE_COMMENTS = {
+            "post_sample_1": [
+                {
+                    id: "c1",
+                    postId: "post_sample_1",
+                    author: "Trương Hát",
+                    content: "Hồn thiêng sông núi ngàn đời che chở cho con dân Đại Việt!",
+                    createdAt: new Date(Date.now() - 3600000 * 1.5).toISOString()
+                },
+                {
+                    id: "c2",
+                    postId: "post_sample_1",
+                    author: "Hào Kiệt Áo Vải",
+                    content: "Bản tuyên ngôn đập tan sĩ khí quân Tống ngay trong đêm tối, công đức của Thái úy thật vô lượng.",
+                    createdAt: new Date(Date.now() - 3600000 * 1).toISOString()
+                }
+            ],
+            "post_sample_2": [
+                {
+                    id: "c3",
+                    postId: "post_sample_2",
+                    author: "Dương Tam Kha",
+                    content: "Mưu kế diệt giặc vạn đời sau con cháu vẫn mãi tôn kính!",
+                    createdAt: new Date(Date.now() - 3600000 * 4).toISOString()
+                }
+            ]
+        };
+
+        // ===================================================
+        //  QUẢN LÝ TRẠNG THÁI & LOCAL STORAGE DỰ PHÒNG
+        // ===================================================
+        let danhSachBaiViet = [];
+        let boLocHienTai = 'all';
+
+        // Lấy danh xưng người dùng từ localStorage
+        const tenLuuTru = localStorage.getItem('tenNguoiDung') || 'Tướng quân Khách';
+        const authorInput = document.getElementById('composer-author');
+        const headerUserDisplay = document.getElementById('header-user-display');
+
+        if (authorInput) authorInput.value = tenLuuTru;
+        if (headerUserDisplay) headerUserDisplay.textContent = tenLuuTru;
+
+        // Lưu danh xưng mới nếu người dùng gõ sửa
+        if (authorInput) {
+            authorInput.addEventListener('change', function() {
+                const val = this.value.trim();
+                if (val) {
+                    localStorage.setItem('tenNguoiDung', val);
+                    if (headerUserDisplay) headerUserDisplay.textContent = val;
+                }
+            });
+        }
+
+        function capNhatTrangThaiKetNoi(isOnline, text) {
+            const banner = document.getElementById('firebase-status-banner');
+            const statusText = document.getElementById('firebase-status-text');
+            const networkBadge = document.getElementById('stat-network-status');
+
+            if (networkBadge) networkBadge.textContent = isOnline ? "Trực Tuyến" : "Thử Nghiệm";
+            if (banner && statusText) {
+                if (isOnline) {
+                    banner.className = "firebase-status-banner connected";
+                    statusText.innerHTML = `🟢 <strong>Đã kết nối Firebase Cloud Firestore:</strong> Dữ liệu thảo luận của Quần Anh Hội được đồng bộ trực tuyến thời gian thực!`;
+                } else {
+                    banner.className = "firebase-status-banner mock";
+                    statusText.innerHTML = `⚡ <strong>Chế độ Vận hành:</strong> ${text}. Mọi bài đăng và bình luận đều hoạt động mượt mà ngay trên máy của bạn.`;
+                }
+            }
+        }
+
+        // ===================================================
+        //  KHỞI TẠO BẢNG TIN (FEED) TỪ FIRESTORE HOẶC LOCAL
+        // ===================================================
+        function khoiTaoBangTin() {
+            if (isFirestoreActive && db) {
+                // Tải từ Firestore theo thời gian mới nhất
+                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+                onSnapshot(q, (snapshot) => {
+                    const posts = [];
+                    snapshot.forEach(docSnap => {
+                        posts.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    danhSachBaiViet = posts;
+                    renderBangTin();
+                    capNhatThongSo();
+                }, (error) => {
+                    console.error("Lỗi khi lắng nghe bài đăng từ Firestore:", error);
+                    taiTuLocalStorage();
+                });
+            } else {
+                taiTuLocalStorage();
+            }
+        }
+
+        function taiTuLocalStorage() {
+            const raw = localStorage.getItem('quanAnhHoi_posts');
+            if (raw) {
+                try {
+                    danhSachBaiViet = JSON.parse(raw);
+                } catch(e) {
+                    danhSachBaiViet = [...SAMPLE_POSTS];
+                }
+            } else {
+                danhSachBaiViet = [...SAMPLE_POSTS];
+                localStorage.setItem('quanAnhHoi_posts', JSON.stringify(danhSachBaiViet));
+            }
+            renderBangTin();
+            capNhatThongSo();
+        }
+
+        // ===================================================
+        //  TÍNH NĂNG 1: ĐĂNG BÀI MỚI (POST)
+        // ===================================================
+        window.dangBaiMoi = async function() {
+            const author = (document.getElementById('composer-author').value || 'Hiền sĩ ẩn danh').trim();
+            const topic = document.getElementById('composer-topic').value;
+            const contentEl = document.getElementById('composer-content');
+            const content = contentEl.value.trim();
+            const btnSubmit = document.getElementById('btn-submit-post');
+
+            if (!content) {
+                hienToast("⚠️ Xin vui lòng nhập nội dung đàm đạo trước khi đăng!");
+                contentEl.focus();
+                return;
+            }
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = "<span>⏳</span> Đang lưu...";
+
+            const newPostData = {
+                author: author,
+                topic: topic,
+                content: content,
+                likes: 0,
+                commentsCount: 0
+            };
+
+            try {
+                if (isFirestoreActive && db) {
+                    // Lưu lên Firestore
+                    const docRef = await addDoc(collection(db, "posts"), {
+                        ...newPostData,
+                        createdAt: serverTimestamp()
+                    });
+                    console.log("Đã thêm bài viết mới vào Firestore ID:", docRef.id);
+                } else {
+                    // Lưu vào LocalStorage
+                    const localPost = {
+                        id: "post_local_" + Date.now(),
+                        ...newPostData,
+                        createdAt: new Date().toISOString()
+                    };
+                    danhSachBaiViet.unshift(localPost);
+                    localStorage.setItem('quanAnhHoi_posts', JSON.stringify(danhSachBaiViet));
+                    renderBangTin();
+                    capNhatThongSo();
+                }
+
+                contentEl.value = "";
+                hienToast("🎉 Đã đăng bài thành công lên Quần Anh Hội!");
+            } catch (err) {
+                console.error("Lỗi khi đăng bài:", err);
+                hienToast("❌ Có lỗi xảy ra khi đăng bài. Vui lòng thử lại!");
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = "<span>📜</span> Đăng Lên Diễn Đàn";
+            }
+        };
+
+        // ===================================================
+        //  TÍNH NĂNG 2: THÁN PHỤC (LIKE)
+        // ===================================================
+        window.thichBaiViet = async function(postId, btnEl) {
+            btnEl.classList.toggle('liked');
+            const isLiked = btnEl.classList.contains('liked');
+
+            if (isFirestoreActive && db) {
+                try {
+                    const postRef = doc(db, "posts", postId);
+                    await updateDoc(postRef, {
+                        likes: increment(isLiked ? 1 : -1)
+                    });
+                } catch(e) {
+                    console.error("Lỗi cập nhật like:", e);
+                }
+            } else {
+                const p = danhSachBaiViet.find(item => item.id === postId);
+                if (p) {
+                    p.likes = (p.likes || 0) + (isLiked ? 1 : -1);
+                    if (p.likes < 0) p.likes = 0;
+                    localStorage.setItem('quanAnhHoi_posts', JSON.stringify(danhSachBaiViet));
+                    btnEl.innerHTML = `<span>❤️</span> <span>Thán Phục (${p.likes})</span>`;
+                }
+            }
+        };
+
+        // ===================================================
+        //  TÍNH NĂNG 3: BÌNH LUẬN (REPLY / LUẬN BÀN)
+        // ===================================================
+        window.batTatLuanBan = function(postId) {
+            const drawer = document.getElementById(`comments-drawer-${postId}`);
+            const btn = document.getElementById(`btn-luanban-${postId}`);
+            if (!drawer) return;
+
+            const isHidden = drawer.classList.contains('hidden');
+            if (isHidden) {
+                drawer.classList.remove('hidden');
+                if (btn) btn.classList.add('comment-active');
+                taiBinhLuan(postId);
+            } else {
+                drawer.classList.add('hidden');
+                if (btn) btn.classList.remove('comment-active');
+            }
+        };
+
+        async function taiBinhLuan(postId) {
+            const listEl = document.getElementById(`comments-list-${postId}`);
+            if (!listEl) return;
+
+            listEl.innerHTML = `<p class="no-comments-hint">⏳ Đang tải lời luận bàn...</p>`;
+
+            if (isFirestoreActive && db) {
+                try {
+                    const q = query(
+                        collection(db, "comments"),
+                        where("postId", "==", postId),
+                        orderBy("createdAt", "asc")
+                    );
+                    const querySnapshot = await getDocs(q);
+                    const comments = [];
+                    querySnapshot.forEach(docSnap => {
+                        comments.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    renderDanhSachBinhLuan(postId, comments);
+                } catch(e) {
+                    console.warn("Lỗi tải bình luận từ Firestore, kiểm tra chỉ mục:", e);
+                    // Fallback sang query không orderBy nếu chưa tạo index
+                    try {
+                        const fallbackQ = query(collection(db, "comments"), where("postId", "==", postId));
+                        const snap = await getDocs(fallbackQ);
+                        const comments = [];
+                        snap.forEach(d => comments.push({ id: d.id, ...d.data() }));
+                        renderDanhSachBinhLuan(postId, comments);
+                    } catch(err2) {
+                        renderDanhSachBinhLuan(postId, []);
+                    }
+                }
+            } else {
+                const rawComments = localStorage.getItem('quanAnhHoi_comments');
+                let allComments = SAMPLE_COMMENTS;
+                if (rawComments) {
+                    try { allComments = JSON.parse(rawComments); } catch(e) {}
+                }
+                const postComments = allComments[postId] || [];
+                renderDanhSachBinhLuan(postId, postComments);
+            }
+        }
+
+        function renderDanhSachBinhLuan(postId, comments) {
+            const listEl = document.getElementById(`comments-list-${postId}`);
+            if (!listEl) return;
+
+            if (!comments || comments.length === 0) {
+                listEl.innerHTML = `<p class="no-comments-hint">Chưa có lời luận bàn nào. Hãy là người đầu tiên khai mở đàm luận!</p>`;
+                return;
+            }
+
+            listEl.innerHTML = comments.map(c => `
+                <div class="comment-item">
+                    <div class="comment-avatar">📜</div>
+                    <div class="comment-content-box">
+                        <div class="comment-author-name">
+                            ${escapeHtml(c.author || 'Hiền sĩ')}
+                            <span class="comment-time">• ${dinhDangThoiGian(c.createdAt)}</span>
+                        </div>
+                        <div class="comment-text">${escapeHtml(c.content || '')}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.guiBinhLuan = async function(postId) {
+            const inputEl = document.getElementById(`input-comment-${postId}`);
+            if (!inputEl) return;
+            const content = inputEl.value.trim();
+            const author = (localStorage.getItem('tenNguoiDung') || 'Tướng quân Khách').trim();
+
+            if (!content) {
+                hienToast("⚠️ Xin vui lòng nhập lời luận bàn trước khi gửi!");
+                inputEl.focus();
+                return;
+            }
+
+            const newComment = {
+                postId: postId,
+                author: author,
+                content: content
+            };
+
+            try {
+                if (isFirestoreActive && db) {
+                    // Lưu bình luận lên Firestore
+                    await addDoc(collection(db, "comments"), {
+                        ...newComment,
+                        createdAt: serverTimestamp()
+                    });
+
+                    // Cập nhật số lượng bình luận bài viết
+                    const postRef = doc(db, "posts", postId);
+                    await updateDoc(postRef, {
+                        commentsCount: increment(1)
+                    });
+                } else {
+                    // Lưu cục bộ
+                    const rawComments = localStorage.getItem('quanAnhHoi_comments');
+                    let allComments = SAMPLE_COMMENTS;
+                    if (rawComments) {
+                        try { allComments = JSON.parse(rawComments); } catch(e) {}
+                    }
+                    if (!allComments[postId]) allComments[postId] = [];
+                    allComments[postId].push({
+                        id: "c_" + Date.now(),
+                        ...newComment,
+                        createdAt: new Date().toISOString()
+                    });
+                    localStorage.setItem('quanAnhHoi_comments', JSON.stringify(allComments));
+
+                    // Cập nhật số lượng bình luận bài viết
+                    const p = danhSachBaiViet.find(item => item.id === postId);
+                    if (p) p.commentsCount = (p.commentsCount || 0) + 1;
+                    localStorage.setItem('quanAnhHoi_posts', JSON.stringify(danhSachBaiViet));
+                    
+                    // Cập nhật nhãn nút Luận bàn trực tiếp
+                    const btnLuanBan = document.getElementById(`btn-luanban-${postId}`);
+                    if (btnLuanBan && p) {
+                        btnLuanBan.innerHTML = `<span>💬</span> <span>Luận Bàn (${p.commentsCount})</span>`;
+                    }
+                    capNhatThongSo();
+                }
+
+                inputEl.value = "";
+                hienToast("💬 Lời luận bàn đã được khắc ghi thành công!");
+                await taiBinhLuan(postId);
+            } catch(e) {
+                console.error("Lỗi khi gửi bình luận:", e);
+                hienToast("❌ Không thể gửi bình luận, vui lòng thử lại!");
+            }
+        };
+
+        // ===================================================
+        //  RENDER GIAO DIỆN BẢNG TIN (FEED HTML)
+        // ===================================================
+        function renderBangTin() {
+            const container = document.getElementById('posts-container');
+            if (!container) return;
+
+            let filtered = danhSachBaiViet;
+            if (boLocHienTai !== 'all') {
+                filtered = danhSachBaiViet.filter(p => p.topic === boLocHienTai);
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-feed-state">
+                        <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">📭</span>
+                        <h4 style="font-family: 'Playfair Display', serif; color: var(--do-ba-trau); font-size: 1.25rem;">Chưa Có Luận Đề Nào Trong Chủ Đề Này</h4>
+                        <p style="font-size: 0.92rem; margin-top: 6px;">Hãy là vị hào kiệt đầu tiên khai bút đàm đạo!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(post => {
+                const postId = post.id;
+                const author = escapeHtml(post.author || 'Hiền sĩ ẩn danh');
+                const content = escapeHtml(post.content || '');
+                const topic = escapeHtml(post.topic || 'Luận Đạo');
+                const timeStr = dinhDangThoiGian(post.createdAt);
+                const likes = post.likes || 0;
+                const commentsCount = post.commentsCount || 0;
+
+                return `
+                    <article class="scroll-post-card" id="post-${postId}">
+                        <div class="post-top-meta">
+                            <div class="post-author-cluster">
+                                <div class="post-seal-avatar" title="${author}">
+                                    ${layBieuTuongAuthor(author)}
+                                </div>
+                                <div>
+                                    <span class="post-author-name">${author}</span>
+                                    <span class="post-author-badge">Anh Hào</span>
+                                    <span class="post-timestamp">⏱️ ${timeStr}</span>
+                                </div>
+                            </div>
+                            <span class="post-category-tag">📜 ${topic}</span>
+                        </div>
+
+                        <div class="post-body-content">${content}</div>
+
+                        <div class="post-action-bar">
+                            <div class="action-btns-group">
+                                <button class="btn-post-action" onclick="thichBaiViet('${postId}', this)">
+                                    <span>❤️</span>
+                                    <span>Thán Phục (${likes})</span>
+                                </button>
+                                <button class="btn-post-action" id="btn-luanban-${postId}" onclick="batTatLuanBan('${postId}')">
+                                    <span>💬</span>
+                                    <span>Luận Bàn (${commentsCount})</span>
+                                </button>
+                            </div>
+                            <button class="btn-post-action" onclick="saoChepLienKet('${postId}')" title="Sao chép luận đề">
+                                <span>🔗</span> Chia sẻ
+                            </button>
+                        </div>
+
+                        <!-- KHU VỰC BÌNH LUẬN XỔ XUỐNG -->
+                        <div class="comments-drawer hidden" id="comments-drawer-${postId}">
+                            <div class="comment-input-row">
+                                <input 
+                                    type="text" 
+                                    id="input-comment-${postId}" 
+                                    class="comment-input" 
+                                    placeholder="Viết lời đàm đạo, bình luận..."
+                                    onkeydown="if(event.key==='Enter') guiBinhLuan('${postId}')"
+                                >
+                                <button class="btn-send-comment" onclick="guiBinhLuan('${postId}')">
+                                    Gửi Luận Bàn ➔
+                                </button>
+                            </div>
+                            <div class="comments-list" id="comments-list-${postId}">
+                                <!-- Các bình luận sẽ được tải vào đây -->
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // ===================================================
+        //  CÁC HÀM TIỆN ÍCH HỖ TRỢ
+        // ===================================================
+        function capNhatThongSo() {
+            const statPosts = document.getElementById('stat-total-posts');
+            const statReplies = document.getElementById('stat-total-replies');
+            if (statPosts) statPosts.textContent = danhSachBaiViet.length;
+
+            let totalReplies = 0;
+            danhSachBaiViet.forEach(p => {
+                totalReplies += (p.commentsCount || 0);
+            });
+            if (statReplies) statReplies.textContent = totalReplies;
+        }
+
+        window.locBaiViet = function(btn, topic) {
+            document.querySelectorAll('.feed-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            boLocHienTai = topic;
+            renderBangTin();
+        };
+
+        window.chonNhanhTopic = function(pill, topicName) {
+            document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            const select = document.getElementById('composer-topic');
+            if (select) select.value = topicName;
+        };
+
+        window.saoChepLienKet = function(postId) {
+            const url = window.location.href.split('#')[0] + `#post-${postId}`;
+            navigator.clipboard.writeText(url).then(() => {
+                hienToast("📋 Đã sao chép liên kết luận đề!");
+            }).catch(() => {
+                hienToast("Đã chọn luận đề!");
+            });
+        };
+
+        function layBieuTuongAuthor(name) {
+            if (!name) return '⚔️';
+            if (name.includes('Lý')) return '🎋';
+            if (name.includes('Ngô')) return '🌊';
+            if (name.includes('Trần')) return '🗡️';
+            if (name.includes('Khảo Cổ')) return '🏺';
+            return '📜';
+        }
+
+        function dinhDangThoiGian(timestamp) {
+            if (!timestamp) return 'Vừa xong';
+            let date;
+            if (typeof timestamp.toDate === 'function') {
+                date = timestamp.toDate();
+            } else {
+                date = new Date(timestamp);
+            }
+            if (isNaN(date.getTime())) return 'Vừa xong';
+
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMin = Math.floor(diffMs / 60000);
+            const diffHour = Math.floor(diffMin / 60);
+
+            if (diffMin < 1) return 'Vừa xong';
+            if (diffMin < 60) return `${diffMin} phút trước`;
+            if (diffHour < 24) return `${diffHour} giờ trước`;
+
+            return date.toLocaleDateString('vi-VN', {
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        window.hienToast = function(msg) {
+            const t = document.getElementById('forum-toast');
+            if (!t) return;
+            t.textContent = msg;
+            t.style.display = 'block';
+            setTimeout(() => {
+                t.style.display = 'none';
+            }, 3200);
+        };
+
+        // Hướng dẫn mở modal bật Firestore
+        window.moHuongDanFirebase = function() {
+            alert(
+                "📋 CÁC BƯỚC BẬT FIRESTORE DATABASE TRÊN FIREBASE CONSOLE:\n\n" +
+                "1. Truy cập https://console.firebase.google.com và chọn dự án của bạn.\n" +
+                "2. Ở menu cột bên trái, nhấn vào mục 'Build' → chọn 'Firestore Database'.\n" +
+                "3. Nhấn nút 'Create Database' (Tạo cơ sở dữ liệu).\n" +
+                "4. Chọn vị trí lưu trữ (ví dụ: asia-southeast1 - Singapore) → nhấn 'Next'.\n" +
+                "5. Tại bước Security Rules: chọn 'Start in test mode' (Bắt đầu ở chế độ thử nghiệm) → nhấn 'Create'.\n" +
+                "6. Copy cấu hình web (firebaseConfig) từ Project Settings dán vào đầu script trang này.\n\n" +
+                "Sau khi xong, Quần Anh Hội sẽ lưu và đồng bộ trực tuyến toàn cầu!"
+            );
+        };
+
+        // Khởi động khi tải xong DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            khoiTaoBangTin();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dấu Chân Lịch Sử — Hành Trình Bốn Ngàn Năm</title>
+
+    <!-- Font chữ từ Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ====================================================== */
+        /*  RESET & BIẾN MÀU                                       */
+        /* ====================================================== */
+        :root {
+            --vang-dong:     #D4AF37;
+            --do-ba-trau:    #7B1E1E;
+            --nau-den:       #2C1E18;
+            --nen-toi:       #1E1815;
+            --chu-sang:      #E8D5B0;
+            --vang-nhat:     #FFF3D6;
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Khoá cuộn - trang splash fullscreen */
+        }
+
+        body {
+            font-family: 'Noto Serif', 'Times New Roman', serif;
+            color: var(--chu-sang);
+            background: var(--nen-toi);
+        }
+
+        /* ====================================================== */
+        /*  NỀN TOÀN MÀN HÌNH VỚI ẢNH LỊCH SỬ                    */
+        /* ====================================================== */
+
+        .splash {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 1;
+
+            /* Ảnh nền: Chiến thắng Điện Biên Phủ */
+            background:
+                url('anh-nen.jpg') center 40% / cover no-repeat;
+            background-color: var(--nen-toi);
+        }
+
+        /* ====================================================== */
+        /*  LỚP OVERLAY TỐI + HIỆU ỨNG VIGNETTE                  */
+        /* ====================================================== */
+
+        .splash__overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(30, 24, 21, 0.80) 0%,
+                    rgba(123, 30, 30, 0.40) 30%,
+                    rgba(44, 30, 24, 0.35) 55%,
+                    rgba(30, 24, 21, 0.85) 100%
+                );
+            z-index: 1;
+        }
+
+        /* Hiệu ứng Vignette (tối 4 góc) tạo chiều sâu */
+        .splash__vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 50%,
+                rgba(10, 8, 6, 0.6) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ====================================================== */
+        /*  HIỆU ỨNG HẠT LỬA BAY (Fire Sparks)                   */
+        /* ====================================================== */
+
+        .particles-container {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .spark {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkRise linear infinite;
+        }
+
+        @keyframes sparkRise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(1);
+            }
+            10% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(0.3);
+            }
+        }
+
+        /* ====================================================== */
+        /*  HIỆU ỨNG SƯƠNG MÙ (Fog)                              */
+        /* ====================================================== */
+
+        .fog {
+            position: absolute;
+            bottom: 0;
+            left: -10%;
+            width: 120%;
+            height: 30%;
+            z-index: 3;
+            pointer-events: none;
+            background: linear-gradient(
+                0deg,
+                rgba(30, 24, 21, 0.7) 0%,
+                transparent 100%
+            );
+            animation: fogDrift 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes fogDrift {
+            0%   { transform: translateX(-3%); opacity: 0.7; }
+            100% { transform: translateX(3%);  opacity: 0.5; }
+        }
+
+        /* ====================================================== */
+        /*  VIỀN HOA VĂN TRANG TRÍ (trên & dưới)                  */
+        /* ====================================================== */
+
+        .ornament-top, .ornament-bottom {
+            position: absolute;
+            left: 0; right: 0;
+            height: 6px;
+            z-index: 10;
+            background:
+                linear-gradient(90deg,
+                    transparent 0%,
+                    var(--vang-dong) 15%,
+                    var(--vang-dong) 50%,
+                    var(--vang-dong) 85%,
+                    transparent 100%
+                );
+            opacity: 0.6;
+        }
+
+        .ornament-top    { top: 0; }
+        .ornament-bottom { bottom: 0; }
+
+        .side-ornament {
+            position: absolute;
+            top: 10%; bottom: 10%;
+            width: 3px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .side-ornament--left  { left: 20px; }
+        .side-ornament--right { right: 20px; }
+
+        .side-ornament::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    180deg,
+                    var(--vang-dong) 0px,
+                    var(--vang-dong) 8px,
+                    transparent 8px,
+                    transparent 20px
+                );
+            opacity: 0.25;
+        }
+
+        /* ====================================================== */
+        /*  NỘI DUNG CHÍNH - TIÊU ĐỀ & CTA                       */
+        /* ====================================================== */
+
+        .splash__content {
+            position: relative;
+            z-index: 5;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .emblem {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 15px;
+            animation: emblemPulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+        }
+
+        @keyframes emblemPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(212,175,55,0.5)); }
+            50%      { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(212,175,55,0.8)); }
+        }
+
+        .splash__quote {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            color: rgba(232, 213, 176, 0.7);
+            font-style: italic;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            animation: fadeInSlow 2s ease-out 0.5s both;
+        }
+
+        .splash__line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            animation: fadeInSlow 2s ease-out 0.8s both;
+        }
+
+        .splash__line span {
+            display: inline-block;
+            width: 60px;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, var(--vang-dong), transparent);
+        }
+
+        .splash__line em {
+            color: var(--vang-dong);
+            font-size: 1.2rem;
+        }
+
+        .splash__title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 7vw, 4.5rem);
+            font-weight: 900;
+            color: var(--vang-dong);
+            line-height: 1.15;
+            letter-spacing: 5px;
+            text-shadow:
+                0 0 30px rgba(212, 175, 55, 0.4),
+                2px 4px 8px rgba(0, 0, 0, 0.7);
+            margin-bottom: 8px;
+            animation: titleReveal 1.5s ease-out 1s both;
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                letter-spacing: 15px;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                letter-spacing: 5px;
+            }
+        }
+
+        .splash__subtitle {
+            font-size: clamp(0.95rem, 2.5vw, 1.3rem);
+            color: var(--chu-sang);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            animation: fadeInSlow 2s ease-out 1.8s both;
+        }
+
+        .splash__desc {
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            color: rgba(212, 196, 168, 0.85);
+            line-height: 1.9;
+            max-width: 600px;
+            margin: 0 auto 35px;
+            animation: fadeInSlow 2s ease-out 2.2s both;
+        }
+
+        .splash__desc .highlight {
+            color: var(--vang-dong);
+            font-weight: 700;
+        }
+
+        @keyframes fadeInSlow {
+            from { opacity: 0; transform: translateY(15px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+
+        /* ====================================================== */
+        /*  DÒNG CHỮ CÂU NÓI NỔI TIẾNG                           */
+        /* ====================================================== */
+
+        .famous-quotes {
+            position: relative;
+            height: 28px;
+            overflow: hidden;
+            margin-bottom: 35px;
+            animation: fadeInSlow 2s ease-out 2.5s both;
+        }
+
+        .famous-quotes__track {
+            animation: quoteScroll 16s ease-in-out infinite;
+        }
+
+        .famous-quotes__item {
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.8rem, 1.6vw, 0.92rem);
+            color: rgba(212, 175, 55, 0.7);
+            font-style: italic;
+            white-space: nowrap;
+        }
+
+        @keyframes quoteScroll {
+            0%, 22%   { transform: translateY(0); }
+            25%, 47%  { transform: translateY(-28px); }
+            50%, 72%  { transform: translateY(-56px); }
+            75%, 97%  { transform: translateY(-84px); }
+            100%      { transform: translateY(-112px); }
+        }
+
+        /* ====================================================== */
+        /*  NÚT "BẮT ĐẦU HÀNH TRÌNH"                             */
+        /* ====================================================== */
+
+        .cta-wrapper {
+            animation: fadeInSlow 2s ease-out 2.8s both;
+        }
+
+        .splash__cta {
+            position: relative;
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, var(--do-ba-trau), #5A1515);
+            color: var(--vang-dong);
+            border: 2px solid var(--vang-dong);
+            border-radius: 50px;
+            font-family: 'Noto Serif', serif;
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .splash__cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(212, 175, 55, 0.25),
+                transparent
+            );
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%   { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .splash__cta::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50px;
+            border: 1px solid var(--vang-dong);
+            opacity: 0;
+            animation: ctaPulseRing 2.5s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulseRing {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(1.05); }
+        }
+
+        .splash__cta:hover {
+            background: linear-gradient(135deg, #9B3030, var(--do-ba-trau));
+            transform: translateY(-4px) scale(1.03);
+            box-shadow:
+                0 8px 30px rgba(212, 175, 55, 0.35),
+                0 0 40px rgba(123, 30, 30, 0.3);
+            border-color: var(--vang-nhat);
+        }
+
+        .splash__cta:active {
+            transform: translateY(-1px) scale(1);
+        }
+
+        .cta-hint {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: rgba(184, 168, 138, 0.5);
+            letter-spacing: 1px;
+            animation: fadeInSlow 2s ease-out 3.2s both;
+        }
+
+        /* ====================================================== */
+        /*  TIMELINE NHỎ Ở CẠNH PHẢI                             */
+        /* ====================================================== */
+
+        .timeline-strip {
+            position: absolute;
+            right: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            animation: fadeInSlow 2s ease-out 3s both;
+        }
+
+        .timeline-strip__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1.5px solid var(--vang-dong);
+            background: transparent;
+            position: relative;
+            cursor: default;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-strip__dot::after {
+            content: attr(data-year);
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.65rem;
+            color: rgba(212, 175, 55, 0.5);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-strip__dot:hover {
+            background: var(--vang-dong);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .timeline-strip__dot:hover::after {
+            opacity: 1;
+        }
+
+        .timeline-strip__line {
+            width: 1px;
+            height: 18px;
+            background: linear-gradient(180deg, rgba(212,175,55,0.3), rgba(212,175,55,0.1));
+            margin: 0 auto;
+        }
+
+        /* ====================================================== */
+        /*  ÂM THANH NHỎ GÓC DƯỚI TRÁI                            */
+        /* ====================================================== */
+
+        .audio-badge {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(44, 30, 24, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInSlow 2s ease-out 3.5s both;
+        }
+
+        .audio-badge:hover {
+            background: rgba(44, 30, 24, 0.9);
+            border-color: var(--vang-dong);
+        }
+
+        .audio-badge__icon {
+            font-size: 1.1rem;
+        }
+
+        .audio-badge__text {
+            font-size: 0.75rem;
+            color: var(--chu-sang);
+        }
+
+        .sound-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 14px;
+        }
+
+        .sound-bars span {
+            display: block;
+            width: 2.5px;
+            background: var(--vang-dong);
+            border-radius: 1px;
+            animation: none;
+        }
+
+        .sound-bars.playing span {
+            animation: barJump 0.6s ease-in-out infinite alternate;
+        }
+
+        .sound-bars span:nth-child(1) { height: 4px; animation-delay: 0s; }
+        .sound-bars span:nth-child(2) { height: 8px; animation-delay: 0.1s; }
+        .sound-bars span:nth-child(3) { height: 5px; animation-delay: 0.2s; }
+        .sound-bars span:nth-child(4) { height: 10px; animation-delay: 0.15s; }
+        .sound-bars span:nth-child(5) { height: 6px; animation-delay: 0.25s; }
+
+        @keyframes barJump {
+            0%   { height: 3px; }
+            100% { height: 14px; }
+        }
+
+        /* ====================================================== */
+        /*  HIỆU ỨNG CHUYỂN CẢNH VIDEO (Cinematic Video Transition)*/
+        /* ====================================================== */
+
+        .page-transition {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            overflow: hidden;
+            cursor: pointer; /* Cho phép người dùng nhấp chuột bỏ qua */
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Video toàn màn hình */
+        .page-transition__video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Lớp phủ điện ảnh: tối viền và hai mép trên dưới */
+        .page-transition__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 8, 6, 0.75) 0%,
+                rgba(10, 8, 6, 0.1) 35%,
+                rgba(10, 8, 6, 0.2) 65%,
+                rgba(10, 8, 6, 0.9) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .page-transition__vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Dòng chữ hướng dẫn nhấp chuột để bỏ qua video */
+        .page-transition__hint {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: rgba(232, 213, 176, 0.65);
+            font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+            font-style: italic;
+            letter-spacing: 1.5px;
+            text-align: center;
+            white-space: nowrap;
+            pointer-events: none;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            animation: hintPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.45; }
+            50%      { opacity: 0.85; }
+        }
+
+        /* Thanh tiến trình phát video */
+        .page-transition__progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.18);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .page-transition__progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--do-ba-trau), var(--vang-dong));
+            transition: width 0.1s linear;
+        }
+
+        /* ====================================================== */
+        /*  CHỮ KÝ GÓC DƯỚI PHẢI                                  */
+        /* ====================================================== */
+
+        .corner-badge {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            z-index: 10;
+            font-size: 0.7rem;
+            color: rgba(184, 168, 138, 0.35);
+            letter-spacing: 1px;
+            animation: fadeInSlow 2s ease-out 3.5s both;
+        }
+
+        /* ====================================================== */
+        /*  RESPONSIVE                                             */
+        /* ====================================================== */
+
+        @media (max-width: 768px) {
+            .timeline-strip { display: none; }
+            .side-ornament  { display: none; }
+
+            .splash__title {
+                letter-spacing: 3px;
+            }
+
+            .splash__cta {
+                padding: 14px 36px;
+                font-size: 0.95rem;
+            }
+
+            .corner-badge { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .page-transition__hint {
+                bottom: 18px;
+                font-size: 0.72rem;
+                white-space: normal;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .famous-quotes { display: none; }
+
+            .audio-badge {
+                bottom: 15px;
+                left: 15px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!--  LỚP CHUYỂN TRANG VIDEO (Cinematic Video Transition)          -->
+    <!--  Yêu cầu 2: Video luôn muted                                  -->
+    <!--  Yêu cầu 3: Chỉ giữ lại video, lớp phủ tối và thanh tiến trình-->
+    <!--  Yêu cầu 4: Nhấp chuột vào bất cứ đâu để bỏ qua video         -->
+    <!-- ============================================================ -->
+    <div class="page-transition" id="page-transition" aria-hidden="true" onclick="ketThucChuyenCanh(event)">
+        <!-- Video toàn màn hình (Mặc định tắt tiếng để nhạc nền phát liên tục) -->
+        <video id="transition-video" class="page-transition__video" playsinline preload="auto" muted>
+            <source src="" type="video/mp4">
+        </video>
+
+        <!-- Lớp phủ tối gradient & vignette điện ảnh -->
+        <div class="page-transition__overlay"></div>
+        <div class="page-transition__vignette"></div>
+
+        <!-- Dòng ghi chú nhấp chuột để bỏ qua đoạn phim -->
+        <div class="page-transition__hint">
+            Nhấp chuột vào bất kỳ đâu để bỏ qua đoạn phim
+        </div>
+
+        <!-- Thanh tiến trình phát video -->
+        <div class="page-transition__progress-track">
+            <div class="page-transition__progress-bar" id="trans-progress"></div>
+        </div>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!--  TRANG SPLASH - MÀN HÌNH MỞ ĐẦU                              -->
+    <!-- ============================================================ -->
+    <div class="splash" id="splash">
+
+        <!-- Lớp overlay gradient tối -->
+        <div class="splash__overlay"></div>
+
+        <!-- Hiệu ứng Vignette (tối 4 góc) -->
+        <div class="splash__vignette"></div>
+
+        <!-- Hạt lửa bay (tạo bằng JS) -->
+        <div class="particles-container" id="particles" aria-hidden="true"></div>
+
+        <!-- Sương mù phía dưới -->
+        <div class="fog"></div>
+
+        <!-- Viền hoa văn trang trí trên & dưới -->
+        <div class="ornament-top"></div>
+        <div class="ornament-bottom"></div>
+
+        <!-- Hoa văn dọc 2 bên -->
+        <div class="side-ornament side-ornament--left"></div>
+        <div class="side-ornament side-ornament--right"></div>
+
+
+        <!-- ======== NỘI DUNG TRUNG TÂM ======== -->
+        <div class="splash__content">
+
+            <!-- Biểu tượng -->
+            <span class="emblem">🏛️</span>
+
+            <!-- Câu mở đầu -->
+            <p class="splash__quote">
+                "Dân ta phải biết sử ta, cho tường gốc tích nước nhà Việt Nam"
+            </p>
+
+            <!-- Đường phân cách hoa văn -->
+            <div class="splash__line">
+                <span></span>
+                <em>✦</em>
+                <span></span>
+            </div>
+
+            <!-- TIÊU ĐỀ LỚN -->
+            <h1 class="splash__title">DẤU CHÂN<br>LỊCH SỬ</h1>
+
+            <!-- Phụ đề -->
+            <p class="splash__subtitle">
+                Tích hợp Học và Chơi Lịch Sử Việt Nam
+            </p>
+
+            <!-- Đoạn văn truyền cảm hứng -->
+            <p class="splash__desc">
+                Hãy bước vào hành trình bốn ngàn năm dựng nước và giữ nước,
+                nơi mỗi trang sử đều vang vọng khát vọng 
+                <span class="highlight">hoà bình</span> và 
+                <span class="highlight">tự do</span> 
+                của dân tộc Việt Nam.
+            </p>
+
+            <!-- Câu nói nổi tiếng xoay vòng -->
+            <div class="famous-quotes">
+                <div class="famous-quotes__track">
+                    <div class="famous-quotes__item">
+                        "Không có gì quý hơn Độc lập Tự do" — Hồ Chí Minh
+                    </div>
+                    <div class="famous-quotes__item">
+                        "Đánh cho sử tri Nam quốc anh hùng chi hữu chủ" — Quang Trung
+                    </div>
+                    <div class="famous-quotes__item">
+                        "Sông núi nước Nam vua Nam ở" — Lý Thường Kiệt
+                    </div>
+                    <div class="famous-quotes__item">
+                        "Ta thà làm quỷ nước Nam chứ không thèm làm vương đất Bắc" — Trần Bình Trọng
+                    </div>
+                    <!-- Lặp lại câu đầu để animation liền mạch -->
+                    <div class="famous-quotes__item">
+                        "Không có gì quý hơn Độc lập Tự do" — Hồ Chí Minh
+                    </div>
+                </div>
+            </div>
+
+            <!-- NÚT BẮT ĐẦU HÀNH TRÌNH -->
+            <div class="cta-wrapper">
+                <a href="#" class="splash__cta" id="btn-bat-dau" onclick="batDauHanhTrinh(event)">
+                    ⚔️ BẮT ĐẦU HÀNH TRÌNH
+                </a>
+            </div>
+
+            <span class="cta-hint">Nhấn để mở cổng thành lịch sử</span>
+
+        </div><!-- /.splash__content -->
+
+
+        <!-- ======== TIMELINE NHỎ CẠNH PHẢI ======== -->
+        <div class="timeline-strip">
+            <div class="timeline-strip__dot" data-year="938 — Ngô Quyền"></div>
+            <div class="timeline-strip__line"></div>
+            <div class="timeline-strip__dot" data-year="1258 — Kháng Nguyên Mông"></div>
+            <div class="timeline-strip__line"></div>
+            <div class="timeline-strip__dot" data-year="1428 — Lê Lợi"></div>
+            <div class="timeline-strip__line"></div>
+            <div class="timeline-strip__dot" data-year="1789 — Quang Trung"></div>
+            <div class="timeline-strip__line"></div>
+            <div class="timeline-strip__dot" data-year="1945 — Độc Lập"></div>
+            <div class="timeline-strip__line"></div>
+            <div class="timeline-strip__dot" data-year="1954 — Điện Biên Phủ"></div>
+            <div class="timeline-strip__line"></div>
+            <div class="timeline-strip__dot" data-year="1975 — Thống Nhất"></div>
+        </div>
+
+
+        <!-- ======== NÚT NHẠC NỀN GÓC DƯỚI TRÁI ======== -->
+        <div class="audio-badge" id="audio-badge" onclick="toggleNhac()">
+            <div class="sound-bars" id="sound-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <span class="audio-badge__text" id="audio-text">Nhạc nền</span>
+        </div>
+
+        <!-- Chữ ký góc dưới phải -->
+        <div class="corner-badge">
+            DỰ ÁN KHKT 2026 🇻🇳
+        </div>
+
+    </div><!-- /.splash -->
+
+
+    <!-- ============================================================ -->
+    <!--  THẺ AUDIO: Nhạc nền                                         -->
+    <!-- ============================================================ -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="nhac-nen.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- ============================================================ -->
+    <!--  JAVASCRIPT                                                   -->
+    <!-- ============================================================ -->
+    <script>
+        // ===================================================
+        //  1. TẠO HẠT LỬA BAY (Fire Sparks / Ember particles)
+        // ===================================================
+
+        (function taoHatLua() {
+            var container = document.getElementById('particles');
+            if (!container) return;
+            var soHat = 35; // Số hạt lửa
+
+            for (var i = 0; i < soHat; i++) {
+                var hat = document.createElement('div');
+                hat.className = 'spark';
+
+                var size = Math.random() * 3 + 2;
+                hat.style.width = size + 'px';
+                hat.style.height = size + 'px';
+
+                var colors = [
+                    'rgba(255, 140, 50, 0.8)',   // Cam lửa
+                    'rgba(212, 175, 55, 0.7)',    // Vàng đồng
+                    'rgba(200, 80, 30, 0.6)',     // Đỏ cam
+                    'rgba(255, 200, 80, 0.5)',    // Vàng nhạt
+                ];
+                hat.style.background = colors[Math.floor(Math.random() * colors.length)];
+                hat.style.boxShadow = '0 0 ' + (size + 2) + 'px ' + hat.style.background;
+
+                hat.style.left = Math.random() * 100 + '%';
+                hat.style.bottom = Math.random() * 30 + '%';
+
+                hat.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                hat.style.animationDelay = (Math.random() * 6) + 's';
+
+                container.appendChild(hat);
+            }
+        })();
+
+
+        // ===================================================
+        //  2. QUẢN LÝ NHẠC NỀN & LƯU TIẾN TRÌNH VÀO LOCALSTORAGE
+        // ===================================================
+
+        var dangPhatNhac = false;
+
+        function toggleNhac() {
+            var nhac = document.getElementById('bg-music');
+            var bars = document.getElementById('sound-bars');
+            var text = document.getElementById('audio-text');
+            if (!nhac) return;
+
+            if (dangPhatNhac) {
+                nhac.pause();
+                if (bars) bars.classList.remove('playing');
+                if (text) text.textContent = 'Nhạc nền';
+                dangPhatNhac = false;
+                localStorage.setItem('nhacDangPhat', 'false');
+            } else {
+                nhac.play().then(function() {
+                    if (bars) bars.classList.add('playing');
+                    if (text) text.textContent = 'Đang phát';
+                    dangPhatNhac = true;
+                    localStorage.setItem('nhacDangPhat', 'true');
+                }).catch(function(err) {
+                    console.warn('Không phát được nhạc:', err);
+                });
+            }
+        }
+
+        // Tự động khôi phục vị trí bài hát và phát tiếp thông minh khi vừa vào web
+        window.addEventListener('DOMContentLoaded', function() {
+            var nhac = document.getElementById('bg-music');
+            var bars = document.getElementById('sound-bars');
+            var text = document.getElementById('audio-text');
+            if (!nhac) return;
+
+            var savedTime = localStorage.getItem('audioTime');
+            var trangThaiNhac = localStorage.getItem('nhacDangPhat');
+
+            if (savedTime && isFinite(savedTime)) {
+                nhac.currentTime = parseFloat(savedTime);
+            }
+
+            // Tự động phát nếu người dùng chưa chủ động tắt
+            if (trangThaiNhac !== 'false') {
+                var playPromise = nhac.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        dangPhatNhac = true;
+                        if (bars) bars.classList.add('playing');
+                        if (text) text.textContent = 'Đang phát';
+                        localStorage.setItem('nhacDangPhat', 'true');
+                    }).catch(function() {
+                        console.log('Trình duyệt cần tương tác để mở tiếng, sẵn sàng mở tiếng ngay.');
+                        nhac.muted = true;
+                        nhac.play().then(function() {
+                            var moTieng = function() {
+                                nhac.muted = false;
+                                dangPhatNhac = true;
+                                if (bars) bars.classList.add('playing');
+                                if (text) text.textContent = 'Đang phát';
+                                localStorage.setItem('nhacDangPhat', 'true');
+                                ['click', 'touchstart', 'pointerdown', 'mousemove', 'keydown', 'scroll'].forEach(function(e) {
+                                    window.removeEventListener(e, moTieng);
+                                });
+                            };
+                            ['click', 'touchstart', 'pointerdown', 'mousemove', 'keydown', 'scroll'].forEach(function(e) {
+                                window.addEventListener(e, moTieng, { once: true, passive: true });
+                            });
+                        }).catch(function() {
+                            var kichHoat = function() {
+                                nhac.muted = false;
+                                nhac.play().then(function() {
+                                    dangPhatNhac = true;
+                                    if (bars) bars.classList.add('playing');
+                                    if (text) text.textContent = 'Đang phát';
+                                    localStorage.setItem('nhacDangPhat', 'true');
+                                });
+                                ['click', 'touchstart', 'pointerdown', 'keydown'].forEach(function(e) {
+                                    window.removeEventListener(e, kichHoat);
+                                });
+                            };
+                            ['click', 'touchstart', 'pointerdown', 'keydown'].forEach(function(e) {
+                                window.addEventListener(e, kichHoat, { once: true });
+                            });
+                        });
+                    });
+                }
+            }
+        });
+
+        // YÊU CẦU 1: Liên tục lưu thời gian currentTime vào localStorage mỗi 500ms
+        setInterval(function() {
+            var nhac = document.getElementById('bg-music');
+            if (nhac && !nhac.paused) {
+                localStorage.setItem('audioTime', nhac.currentTime);
+            }
+        }, 500);
+
+
+        // ==========================================================================
+        //  3. CẤU HÌNH & XỬ LÝ CHUYỂN CẢNH BẰNG VIDEO
+        // ==========================================================================
+
+        const DANH_SACH_VIDEO = [
+            {
+                src: 'video1.mp4',
+                fallbackSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                tieuDe: 'Chiến Thắng Điện Biên Phủ (1954)',
+                moTa: 'Lừng lẫy năm châu, chấn động địa cầu — Đập tan tập đoàn cứ điểm bất khả xâm phạm.'
+            },
+            {
+                src: 'video2.mp4',
+                fallbackSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+                tieuDe: 'Bạch Đằng Giang Dậy Sóng (938)',
+                moTa: 'Cọc gỗ chôn ngầm theo dòng thủy triều, Ngô Quyền đập tan giặc Nam Hán mở nền độc lập.'
+            },
+            {
+                src: 'video3.mp4',
+                fallbackSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+                tieuDe: 'Hào Khí Thăng Long — Ngàn Năm Văn Hiến',
+                moTa: 'Bốn ngàn năm lịch sử hào hùng — Dấu chân tiền nhân dựng nước và giữ nước trường tồn.'
+            }
+        ];
+
+        const CHE_DO_CHON_VIDEO = 'ngau_nhien';
+        const TRANG_DICH = 'trang-chinh.html';
+
+        var videoDaKetThuc = false;
+        var videoElement = null;
+
+        /**
+         * Lấy video cho lượt click này (đảm bảo khác video lượt trước)
+         */
+        function layVideoTiepTheo() {
+            if (!DANH_SACH_VIDEO || DANH_SACH_VIDEO.length === 0) return null;
+            if (DANH_SACH_VIDEO.length === 1) return DANH_SACH_VIDEO[0];
+
+            var lastIndex = parseInt(sessionStorage.getItem('lichSuVideoIndex'), 10);
+            if (isNaN(lastIndex)) lastIndex = -1;
+
+            var newIndex;
+            if (CHE_DO_CHON_VIDEO === 'xoay_vong') {
+                newIndex = (lastIndex + 1) % DANH_SACH_VIDEO.length;
+            } else {
+                do {
+                    newIndex = Math.floor(Math.random() * DANH_SACH_VIDEO.length);
+                } while (newIndex === lastIndex);
+            }
+
+            sessionStorage.setItem('lichSuVideoIndex', newIndex);
+            console.log('🎬 Chọn video #' + (newIndex + 1) + ': ' + DANH_SACH_VIDEO[newIndex].tieuDe);
+            return DANH_SACH_VIDEO[newIndex];
+        }
+
+        /**
+         * Chuyển hướng sang trang chính (khi video kết thúc hoặc người dùng bấm/nhấp chuột bỏ qua)
+         * (Yêu cầu 4: Bỏ qua video khi nhấp chuột vào bất cứ đâu)
+         */
+        function ketThucChuyenCanh(event) {
+            if (event) event.stopPropagation();
+            if (videoDaKetThuc) return;
+            videoDaKetThuc = true;
+
+            // Lưu chính xác tiến trình nhạc trước khi chuyển hướng
+            var nhac = document.getElementById('bg-music');
+            if (nhac && !nhac.paused) {
+                localStorage.setItem('audioTime', nhac.currentTime);
+                localStorage.setItem('nhacDangPhat', 'true');
+            }
+
+            if (videoElement) {
+                videoElement.pause();
+            }
+
+            var transition = document.getElementById('page-transition');
+            if (transition) {
+                transition.style.transition = 'opacity 0.4s ease';
+                transition.style.opacity = '0';
+            }
+
+            sessionStorage.setItem('vuaXemVideo', 'true');
+            sessionStorage.setItem('daXemChuyenCanh', 'true');
+            setTimeout(function() {
+                window.location.href = TRANG_DICH;
+            }, 400);
+        }
+
+        /**
+         * Xử lý khi người dùng nhấn nút "⚔️ BẮT ĐẦU HÀNH TRÌNH"
+         */
+        function batDauHanhTrinh(event) {
+            if (event) event.preventDefault();
+
+            // =========================================================================
+            // YÊU CẦU 1: TUYỆT ĐỐI KHÔNG dùng nhac.pause() ở đây.
+            // Nhạc nền tiếp tục phát trong lúc xem video chuyển cảnh.
+            // Nếu nhạc chưa chạy do trình duyệt chặn trước đó, kích hoạt phát nhạc ngay:
+            // =========================================================================
+            var nhacNen = document.getElementById('bg-music');
+            if (nhacNen && nhacNen.paused && localStorage.getItem('nhacDangPhat') !== 'false') {
+                nhacNen.play().then(function() {
+                    dangPhatNhac = true;
+                    var bars = document.getElementById('sound-bars');
+                    if (bars) bars.classList.add('playing');
+                    var text = document.getElementById('audio-text');
+                    if (text) text.textContent = 'Đang phát';
+                    localStorage.setItem('nhacDangPhat', 'true');
+                }).catch(function(e) {
+                    console.warn('Không thể tự động phát nhạc:', e);
+                });
+            }
+
+            videoDaKetThuc = false;
+            var transition = document.getElementById('page-transition');
+            videoElement = document.getElementById('transition-video');
+            var progressBar = document.getElementById('trans-progress');
+
+            // 1. Lấy video cho lần bấm này
+            var currentVideo = layVideoTiepTheo();
+            if (!currentVideo) {
+                window.location.href = TRANG_DICH;
+                return;
+            }
+
+            if (progressBar) progressBar.style.width = '0%';
+
+            // 2. Hiện overlay chuyển cảnh toàn màn hình
+            transition.classList.add('active');
+            transition.style.opacity = '1';
+
+            // 3. Cơ chế tự động thử link nội bộ trước, nếu lỗi chuyển sang dự phòng online
+            var daThuFallback = false;
+
+            videoElement.onerror = function() {
+                console.warn('Không tìm thấy hoặc lỗi video từ nguồn:', videoElement.src);
+                if (!daThuFallback && currentVideo.fallbackSrc && videoElement.src !== currentVideo.fallbackSrc) {
+                    daThuFallback = true;
+                    console.log('🔄 Đang chuyển sang video dự phòng:', currentVideo.fallbackSrc);
+                    videoElement.src = currentVideo.fallbackSrc;
+                    videoElement.load();
+                    videoElement.play().catch(function() {
+                        ketThucChuyenCanh();
+                    });
+                } else {
+                    ketThucChuyenCanh();
+                }
+            };
+
+            // 4. Thanh tiến trình chạy theo thời gian thực của video
+            videoElement.ontimeupdate = function() {
+                if (videoElement.duration && progressBar) {
+                    var phanTram = (videoElement.currentTime / videoElement.duration) * 100;
+                    progressBar.style.width = phanTram + '%';
+                }
+            };
+
+            // 5. Khi video kết thúc -> tự động chuyển vào Sảnh chính
+            videoElement.onended = function() {
+                ketThucChuyenCanh();
+            };
+
+            // =========================================================================
+            // YÊU CẦU 2: Đảm bảo video chuyển cảnh luôn có muted (tắt tiếng)
+            // =========================================================================
+            videoElement.muted = true;
+            videoElement.src = currentVideo.src;
+            videoElement.load();
+
+            var playPromise = videoElement.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(function(err) {
+                    console.warn('Trình duyệt cần thử video dự phòng hoặc bị chặn:', err);
+                    if (currentVideo.fallbackSrc && !daThuFallback) {
+                        daThuFallback = true;
+                        videoElement.src = currentVideo.fallbackSrc;
+                        videoElement.load();
+                        videoElement.play().catch(function() {
+                            ketThucChuyenCanh();
+                        });
+                    } else {
+                        ketThucChuyenCanh();
+                    }
+                });
+            }
+
+            // An toàn: Tối đa 15 giây nếu video bị treo thì tự động chuyển trang
+            setTimeout(function() {
+                if (!videoDaKetThuc) {
+                    ketThucChuyenCanh();
+                }
+            }, 15000);
+        }
+    </script>
+</body>
+</html>

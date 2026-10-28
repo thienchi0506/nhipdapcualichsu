@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đại Việt Hùng Ca - Báo Danh Nhập Ngũ</title>
+
+    <!-- ======================================================== -->
+    <!--  FONT CHỮ: Noto Serif & Playfair Display từ Google Fonts  -->
+    <!-- ======================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ====================================================== */
+        /*  PHẦN 1: RESET & BIẾN MÀU - CHỦ ĐỀ CỔNG THÀNH ĐÊM    */
+        /* ====================================================== */
+
+        :root {
+            /* --- Bảng màu Cổng thành ban đêm --- */
+            --mau-nen-toi:       #1E1815;   /* Nền tối tĩnh mịch     */
+            --mau-go-sam:        #2C1E18;   /* Gỗ sẫm (khung form)   */
+            --mau-go-nhat:       #3D2B22;   /* Gỗ nhạt hơn           */
+            --mau-vang-dong:     #D4AF37;   /* Vàng đồng cao quý     */
+            --mau-vang-hover:    #E8C84A;   /* Vàng sáng khi hover   */
+            --mau-do-sam:        #7B1E1E;   /* Đỏ sẫm (nút bấm)     */
+            --mau-do-hover:      #9B3030;   /* Đỏ sáng lên khi hover */
+            --mau-loi:           #FF6B6B;   /* Màu thông báo lỗi     */
+            --mau-thanh-cong:    #4ECB71;   /* Màu thành công         */
+            --mau-chu-sang:      #E8D5B0;   /* Chữ sáng trên nền tối */
+        }
+
+        /* --- Reset mặc định --- */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Noto Serif', 'Times New Roman', serif;
+            color: var(--mau-chu-sang);
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            /* ======================================================
+               ẢNH NỀN CỔNG THÀNH BAN ĐÊM:
+               👉 Thay 'cong-thanh.jpg' bằng tên file ảnh của bạn.
+               - Lớp overlay gradient đen phủ lên để chữ dễ đọc.
+               - Nếu chưa có ảnh, nền tối gradient sẽ hiển thị.
+            ====================================================== */
+            background:
+                /* Lớp overlay gradient tối */
+                linear-gradient(
+                    180deg,
+                    rgba(30, 24, 21, 0.85) 0%,
+                    rgba(30, 24, 21, 0.70) 40%,
+                    rgba(30, 24, 21, 0.90) 100%
+                ),
+                /* Ảnh nền cổng thành */
+                url('anh-nen.jpg') center/cover no-repeat fixed;
+
+            /* Màu nền dự phòng nếu chưa có ảnh */
+            background-color: var(--mau-nen-toi);
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 2: KHUNG CHỨA CHÍNH (CONTAINER)                   */
+        /* ====================================================== */
+
+        .container {
+            width: 100%;
+            max-width: 460px;
+            padding: 20px;
+            animation: fadeSlideUp 0.8s ease-out; /* Hiệu ứng xuất hiện */
+        }
+
+        /* Hiệu ứng xuất hiện ban đầu */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 3: TIÊU ĐỀ TRANG                                 */
+        /* ====================================================== */
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title__main {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 900;
+            color: var(--mau-vang-dong);
+            letter-spacing: 3px;
+            text-shadow: 2px 3px 6px rgba(0,0,0,0.6);
+            line-height: 1.3;
+        }
+
+        .page-title__sub {
+            font-size: 0.9rem;
+            color: #B8A88A;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .page-title__divider {
+            display: inline-block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--mau-vang-dong), transparent);
+            margin-top: 12px;
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 4: KHUNG FORM - BẢNG GỖ SẪM                      */
+        /* ====================================================== */
+
+        .form-box {
+            background: var(--mau-go-sam);
+            border: 2px solid var(--mau-vang-dong);
+            border-radius: 12px;
+            padding: 30px 28px;
+
+            /* Bóng đổ 3D để form nổi bật như bảng gỗ */
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 2px 8px rgba(212, 175, 55, 0.15),
+                inset 0 1px 0 rgba(212, 175, 55, 0.1);
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 5: TAB CHUYỂN ĐỔI (Đăng Nhập / Ghi Danh)         */
+        /* ====================================================== */
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 0;
+            background: none;
+            border: none;
+            font-family: 'Noto Serif', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #8A7A66;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tab đang được chọn (active) */
+        .tab-btn.active {
+            color: var(--mau-vang-dong);
+        }
+
+        /* Thanh vàng đồng dưới tab active - chuyển động mượt mà */
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--mau-vang-dong);
+            transition: all 0.35s ease;
+            transform: translateX(-50%);
+        }
+
+        .tab-btn.active::after {
+            width: 100%;
+        }
+
+        .tab-btn:hover {
+            color: var(--mau-vang-dong);
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 6: NỘI DUNG TAB (Form Đăng nhập & Đăng ký)       */
+        /* ====================================================== */
+
+        .tab-content {
+            display: none;                  /* Ẩn mặc định         */
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;                 /* Hiện tab đang chọn  */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 7: TRƯỜNG NHẬP LIỆU (INPUT)                       */
+        /* ====================================================== */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #B8A88A;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+            color: var(--mau-chu-sang);
+            font-family: 'Noto Serif', serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: #6A5A48;
+            font-style: italic;
+        }
+
+        /* Hiệu ứng focus: viền dưới sáng vàng đồng */
+        .form-group input:focus {
+            border-bottom-color: var(--mau-vang-dong);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 8: NÚT BẤM CHÍNH (Đăng Nhập / Ghi Danh)          */
+        /* ====================================================== */
+
+        .btn-primary {
+            width: 100%;
+            padding: 13px 0;
+            background: linear-gradient(135deg, var(--mau-do-sam), #5A1515);
+            color: var(--mau-vang-dong);
+            border: 2px solid var(--mau-vang-dong);
+            border-radius: 8px;
+            font-family: 'Noto Serif', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--mau-do-hover), #7B1E1E);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(123, 30, 30, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 9: ĐƯỜNG PHÂN CÁCH "HOẶC"                         */
+        /* ====================================================== */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            gap: 12px;
+        }
+
+        .divider__line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+        }
+
+        .divider__text {
+            font-size: 0.8rem;
+            color: #8A7A66;
+            white-space: nowrap;
+            font-style: italic;
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 10: NÚT ĐĂNG NHẬP BẰNG GOOGLE                    */
+        /* ====================================================== */
+
+        .btn-google {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 0;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            color: var(--mau-chu-sang);
+            font-family: 'Noto Serif', serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-google:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--mau-vang-dong);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Icon Google (SVG inline) */
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 11: THÔNG BÁO LỖI / THÀNH CÔNG                   */
+        /* ====================================================== */
+
+        .message-box {
+            min-height: 24px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+
+        .message-box.error {
+            color: var(--mau-loi);
+        }
+
+        .message-box.success {
+            color: var(--mau-thanh-cong);
+        }
+
+        /* ====================================================== */
+        /*  PHẦN 12: NÚT QUAY VỀ TRANG CHỦ                        */
+        /* ====================================================== */
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #8A7A66;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--mau-vang-dong);
+        }
+
+        .back-link a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 13: HIỆU ỨNG LOADING KHI ĐANG XÁC THỰC          */
+        /* ====================================================== */
+
+        .btn-primary.loading,
+        .btn-google.loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn-primary.loading::after,
+        .btn-google.loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--mau-vang-dong);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+
+        /* ====================================================== */
+        /*  PHẦN 14: RESPONSIVE BỔ SUNG                             */
+        /* ====================================================== */
+
+        @media (max-width: 480px) {
+            .form-box {
+                padding: 24px 18px;
+                border-radius: 8px;
+            }
+
+            .page-title__main {
+                font-size: 1.4rem;
+                letter-spacing: 2px;
+            }
+
+            .tab-btn {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Hiệu ứng ngôi sao lấp lánh trang trí (tuỳ chọn) */
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out alternate;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* ====================================================== */
+        /*  HIỆU ỨNG CHUYỂN CẢNH VIDEO (Cinematic Video Transition)*/
+        /* ====================================================== */
+
+        .page-transition {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            overflow: hidden;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .page-transition__video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .page-transition__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 8, 6, 0.75) 0%,
+                rgba(10, 8, 6, 0.1) 35%,
+                rgba(10, 8, 6, 0.2) 65%,
+                rgba(10, 8, 6, 0.9) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .page-transition__vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .page-transition__info {
+            position: absolute;
+            bottom: 35px;
+            left: 35px;
+            right: 240px;
+            z-index: 10;
+            color: #fff;
+            pointer-events: none;
+            animation: fadeInSlow 1s ease-out 0.2s both;
+        }
+
+        .page-transition__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--mau-vang-dong);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            background: rgba(30, 24, 21, 0.75);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .page-transition__title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3.2vw, 1.9rem);
+            font-weight: 700;
+            color: var(--mau-vang-dong);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .page-transition__desc {
+            font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+            color: rgba(232, 213, 176, 0.92);
+            line-height: 1.5;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .page-transition__controls {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trans-btn {
+            background: rgba(30, 24, 21, 0.85);
+            color: var(--mau-chu-sang);
+            border: 1px solid var(--mau-vang-dong);
+            border-radius: 25px;
+            padding: 8px 18px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(8px);
+        }
+
+        .trans-btn:hover {
+            background: var(--mau-do-sam);
+            border-color: #FFF3D6;
+            color: #FFF3D6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        }
+
+        .trans-btn--skip {
+            background: linear-gradient(135deg, var(--mau-do-sam), #5A1515);
+            font-weight: 700;
+            color: var(--mau-vang-dong);
+        }
+
+        .page-transition__progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.18);
+            z-index: 10;
+        }
+
+        .page-transition__progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--mau-do-sam), var(--mau-vang-dong));
+            transition: width 0.1s linear;
+        }
+
+        .page-transition__fallback {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(ellipse at center, rgba(123, 30, 30, 0.4) 0%, rgba(10, 8, 6, 0.95) 75%);
+        }
+
+        .page-transition__fallback.active {
+            display: flex;
+        }
+
+        .page-transition__fallback-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(212, 175, 55, 0.2);
+            border-top-color: var(--mau-vang-dong);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .btn-demo-transition {
+            background: rgba(44, 30, 24, 0.8);
+            color: var(--mau-vang-dong);
+            border: 1px dashed var(--mau-vang-dong);
+            border-radius: 20px;
+            padding: 7px 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .btn-demo-transition:hover {
+            background: var(--mau-do-sam);
+            color: #FFF3D6;
+            border-style: solid;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .page-transition__info {
+                bottom: 25px;
+                left: 20px;
+                right: 20px;
+            }
+            .page-transition__controls {
+                top: 15px;
+                right: 15px;
+            }
+            .trans-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!--  LỚP CHUYỂN TRANG VIDEO (Cinematic Video Transition)          -->
+    <!-- ============================================================ -->
+    <div class="page-transition" id="page-transition" aria-hidden="true">
+        <video id="transition-video" class="page-transition__video" playsinline preload="none" muted></video>
+
+        <div class="page-transition__overlay"></div>
+        <div class="page-transition__vignette"></div>
+
+        <div class="page-transition__fallback" id="trans-fallback">
+            <div class="page-transition__fallback-spinner"></div>
+            <h3 class="page-transition__title" id="fallback-title">⚔️ Đang mở cổng thành nhập ngũ...</h3>
+            <p class="page-transition__desc">Chuẩn bị tiến vào sảnh chính Đại Việt</p>
+        </div>
+
+        <div class="page-transition__info" id="trans-info">
+            <div class="page-transition__tag">
+                <span>⚔️</span> Cảnh Chuyển Nhập Thành
+            </div>
+            <h2 class="page-transition__title" id="trans-title">Hào Khí Thăng Long</h2>
+            <p class="page-transition__desc" id="trans-desc">Báo danh thành công — Mở cổng tiến vào sảnh chính</p>
+        </div>
+
+        <div class="page-transition__controls">
+            <button class="trans-btn" id="btn-trans-audio" onclick="toggleAmThanhVideo(event)" type="button">
+                🔊 <span id="trans-audio-text">Bật tiếng</span>
+            </button>
+            <button class="trans-btn trans-btn--skip" onclick="ketThucChuyenCanh(event)" type="button">
+                Vào ngay ⏭️
+            </button>
+        </div>
+
+        <div class="page-transition__progress-track">
+            <div class="page-transition__progress-bar" id="trans-progress"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!--  HIỆU ỨNG NGÔI SAO LẤP LÁNH TRÊN NỀN (trang trí)           -->
+    <!-- ============================================================ -->
+    <div class="stars" id="stars-container" aria-hidden="true"></div>
+
+
+    <!-- ============================================================ -->
+    <!--  KHUNG CHỨA CHÍNH                                             -->
+    <!-- ============================================================ -->
+    <div class="container">
+
+        <!-- ======== TIÊU ĐỀ TRANG ======== -->
+        <div class="page-title">
+            <h1 class="page-title__main">
+                ĐẠI VIỆT HÙNG CA
+            </h1>
+            <p class="page-title__sub">
+                ⚔️ Báo Danh Nhập Ngũ ⚔️
+            </p>
+            <div class="page-title__divider"></div>
+        </div>
+
+
+        <!-- ======== KHUNG FORM CHÍNH (bảng gỗ sẫm) ======== -->
+        <div class="form-box">
+
+            <!-- ---- TAB CHUYỂN ĐỔI ---- -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="dang-nhap" onclick="chuyenTab('dang-nhap')">
+                    🔓 Đăng Nhập
+                </button>
+                <button class="tab-btn" data-tab="dang-ky" onclick="chuyenTab('dang-ky')">
+                    📝 Ghi Danh
+                </button>
+            </div>
+
+            <!-- ======================================================== -->
+            <!--  FORM ĐĂNG NHẬP                                           -->
+            <!-- ======================================================== -->
+            <div class="tab-content active" id="tab-dang-nhap">
+                <form id="form-dang-nhap" onsubmit="xuLyDangNhap(event)">
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="login-email">📧 Thư tín (Email)</label>
+                        <input type="email" id="login-email" 
+                               placeholder="Nhập email của tướng quân..." 
+                               required autocomplete="email">
+                    </div>
+
+                    <!-- Mật khẩu -->
+                    <div class="form-group">
+                        <label for="login-password">🔑 Mật lệnh (Mật khẩu)</label>
+                        <input type="password" id="login-password" 
+                               placeholder="Nhập mật lệnh..." 
+                               required autocomplete="current-password"
+                               minlength="6">
+                    </div>
+
+                    <!-- Nút Đăng nhập -->
+                    <button type="submit" class="btn-primary" id="btn-dang-nhap">
+                        ⚔️ ĐĂNG NHẬP
+                    </button>
+                </form>
+            </div>
+
+
+            <!-- ======================================================== -->
+            <!--  FORM ĐĂNG KÝ (GHI DANH)                                  -->
+            <!-- ======================================================== -->
+            <div class="tab-content" id="tab-dang-ky">
+                <form id="form-dang-ky" onsubmit="xuLyDangKy(event)">
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="reg-email">📧 Thư tín (Email)</label>
+                        <input type="email" id="reg-email" 
+                               placeholder="Nhập email để ghi danh..." 
+                               required autocomplete="email">
+                    </div>
+
+                    <!-- Mật khẩu -->
+                    <div class="form-group">
+                        <label for="reg-password">🔑 Mật lệnh (Mật khẩu)</label>
+                        <input type="password" id="reg-password" 
+                               placeholder="Đặt mật lệnh (ít nhất 6 ký tự)..." 
+                               required autocomplete="new-password"
+                               minlength="6">
+                    </div>
+
+                    <!-- Xác nhận Mật khẩu -->
+                    <div class="form-group">
+                        <label for="reg-password-confirm">🔑 Xác nhận Mật lệnh</label>
+                        <input type="password" id="reg-password-confirm" 
+                               placeholder="Nhập lại mật lệnh..." 
+                               required autocomplete="new-password"
+                               minlength="6">
+                    </div>
+
+                    <!-- Nút Ghi Danh -->
+                    <button type="submit" class="btn-primary" id="btn-dang-ky">
+                        📜 GHI DANH
+                    </button>
+                </form>
+            </div>
+
+
+            <!-- ======================================================== -->
+            <!--  ĐƯỜNG PHÂN CÁCH                                          -->
+            <!-- ======================================================== -->
+            <div class="divider">
+                <span class="divider__line"></span>
+                <span class="divider__text">Hoặc báo danh qua thẻ bài Google</span>
+                <span class="divider__line"></span>
+            </div>
+
+
+            <!-- ======================================================== -->
+            <!--  NÚT ĐĂNG NHẬP BẰNG GOOGLE                               -->
+            <!-- ======================================================== -->
+            <button class="btn-google" id="btn-google" onclick="dangNhapGoogle()">
+                <!-- Icon Google (SVG) -->
+                <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Đăng nhập bằng Google
+            </button>
+
+
+            <!-- ======================================================== -->
+            <!--  VÙNG HIỂN THỊ THÔNG BÁO LỖI / THÀNH CÔNG               -->
+            <!-- ======================================================== -->
+            <div class="message-box" id="message-box"></div>
+
+        </div><!-- /.form-box -->
+
+
+        <!-- Nút quay về trang chủ -->
+        <div class="back-link">
+            <a href="index.html">🏛️ ← Quay về Trang Chủ Dấu Chân Lịch Sử</a>
+        </div>
+
+        <!-- Nút trải nghiệm nhanh cảnh chuyển video nhập thành -->
+        <div style="text-align: center; margin-top: 15px;">
+            <button type="button" class="btn-demo-transition" onclick="kichHoatChuyenCanhVideo()">
+                🎬 Xem thử Cảnh Chuyển Video (Nhập Thành)
+            </button>
+        </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- ============================================================ -->
+    <!--  FIREBASE SDK v9 (Modular) qua CDN                           -->
+    <!--  Sử dụng bản "compat" để chạy trực tiếp trong trình duyệt    -->
+    <!--  mà không cần bundler (Webpack/Vite).                         -->
+    <!-- ============================================================ -->
+    <script type="module">
+
+        // ===================================================
+        //  IMPORT FIREBASE MODULES (v9 Modular qua CDN)
+        // ===================================================
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import {
+            getAuth,
+            signInWithPopup,
+            GoogleAuthProvider,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword
+        } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+
+        // ===================================================
+        //  CẤU HÌNH FIREBASE
+        //  👉👉👉 DÁN FIREBASE CONFIG CỦA BẠN VÀO ĐÂY 👈👈👈
+        //
+        //  Hướng dẫn:
+        //  1. Vào Firebase Console (https://console.firebase.google.com)
+        //  2. Chọn Project → Project Settings → General
+        //  3. Kéo xuống "Your apps" → chọn Web app (</>)
+        //  4. Copy đoạn firebaseConfig và dán thay thế bên dưới
+        // ===================================================
+        const firebaseConfig = window.__FIREBASE_CONFIG__ || {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const hasRealFirebaseConfig = !Object.values(firebaseConfig).some(function(value) {
+            return typeof value === 'string' && value.includes('YOUR_');
+        });
+
+        let app = null;
+        let auth = null;
+        let googleProvider = null;
+
+        if (hasRealFirebaseConfig) {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            googleProvider = new GoogleAuthProvider();
+        } else {
+            console.warn('Firebase chưa được cấu hình với project thật. Hãy thay giá trị trong firebaseConfig hoặc window.__FIREBASE_CONFIG__.');
+        }
+
+
+        // ===================================================
+        //  HÀM TIỆN ÍCH: Hiển thị thông báo
+        // ===================================================
+
+        /**
+         * Hiển thị thông báo lỗi hoặc thành công trên giao diện.
+         * @param {string} noiDung - Nội dung thông báo
+         * @param {string} loai   - 'error' hoặc 'success'
+         */
+        function hienThongBao(noiDung, loai = 'error') {
+            const box = document.getElementById('message-box');
+            box.textContent = noiDung;
+            box.className = 'message-box ' + loai;
+        }
+
+        /**
+         * Chuyển mã lỗi Firebase sang thông báo tiếng Việt dễ hiểu.
+         * @param {string} errorCode - Mã lỗi từ Firebase
+         * @returns {string} Thông báo tiếng Việt
+         */
+        function dịchLỗi(errorCode) {
+            const bangLoi = {
+                'auth/email-already-in-use':     '⚠️ Email này đã được ghi danh! Hãy đăng nhập.',
+                'auth/invalid-email':            '⚠️ Định dạng email không hợp lệ.',
+                'auth/weak-password':            '⚠️ Mật lệnh quá yếu! Cần ít nhất 6 ký tự.',
+                'auth/user-not-found':           '⚠️ Không tìm thấy tướng quân nào với email này.',
+                'auth/wrong-password':           '⚠️ Sai mật lệnh! Hãy thử lại.',
+                'auth/invalid-credential':       '⚠️ Thông tin đăng nhập không chính xác.',
+                'auth/too-many-requests':        '⚠️ Quá nhiều lần thử! Hãy đợi một lát.',
+                'auth/popup-closed-by-user':     '⚠️ Cửa sổ đăng nhập Google đã bị đóng.',
+                'auth/network-request-failed':   '⚠️ Lỗi mạng! Kiểm tra kết nối internet.',
+                'auth/popup-blocked':            '⚠️ Trình duyệt chặn popup. Cho phép popup và thử lại.'
+            };
+            return bangLoi[errorCode] || ('⚠️ Có lỗi xảy ra: ' + errorCode);
+        }
+
+        /**
+         * Lưu tên người dùng và chuyển hướng sang sảnh game.
+         * @param {object} user - Đối tượng user từ Firebase Auth
+         */
+        function luuVaChuyenHuong(user) {
+            // Lấy tên hiển thị: ưu tiên displayName, nếu không có thì lấy phần đầu email
+            const tenHienThi = user.displayName || user.email.split('@')[0];
+
+            // Lưu vào localStorage để các trang khác sử dụng
+            localStorage.setItem('tenNguoiDung', tenHienThi);
+            localStorage.setItem('emailNguoiDung', user.email);
+            localStorage.setItem('uidNguoiDung', user.uid);
+
+            hienThongBao('✅ Báo danh thành công! Đang kích hoạt cổng thành...', 'success');
+
+            // Kích hoạt video chuyển cảnh điện ảnh vào Sảnh chính
+            setTimeout(function() {
+                if (typeof window.kichHoatChuyenCanhVideo === 'function') {
+                    window.kichHoatChuyenCanhVideo('trang-chinh.html');
+                } else {
+                    window.location.href = 'trang-chinh.html';
+                }
+            }, 600);
+        }
+
+
+        // ===================================================
+        //  XỬ LÝ ĐĂNG NHẬP BẰNG EMAIL & MẬT KHẨU
+        // ===================================================
+
+        /**
+         * Xử lý khi người dùng bấm nút "Đăng Nhập".
+         * Gọi signInWithEmailAndPassword từ Firebase Auth.
+         */
+        window.xuLyDangNhap = async function(event) {
+            event.preventDefault(); // Ngăn form submit mặc định
+
+            if (!auth) {
+                hienThongBao('⚠️ Firebase chưa được cấu hình với project thật. Hãy cập nhật cấu hình Firebase trước khi đăng nhập.', 'error');
+                return;
+            }
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const btnDangNhap = document.getElementById('btn-dang-nhap');
+
+            // Hiển thị trạng thái loading
+            btnDangNhap.classList.add('loading');
+            btnDangNhap.textContent = 'Đang xác thực...';
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                luuVaChuyenHuong(userCredential.user);
+            } catch (error) {
+                console.error('Lỗi đăng nhập:', error);
+                hienThongBao(dịchLỗi(error.code));
+            } finally {
+                btnDangNhap.classList.remove('loading');
+                btnDangNhap.textContent = '⚔️ ĐĂNG NHẬP';
+            }
+        };
+
+
+        // ===================================================
+        //  XỬ LÝ ĐĂNG KÝ (GHI DANH) BẰNG EMAIL & MẬT KHẨU
+        // ===================================================
+
+        /**
+         * Xử lý khi người dùng bấm nút "Ghi Danh".
+         * Kiểm tra mật khẩu khớp nhau, rồi gọi createUserWithEmailAndPassword.
+         */
+        window.xuLyDangKy = async function(event) {
+            event.preventDefault();
+
+            if (!auth) {
+                hienThongBao('⚠️ Firebase chưa được cấu hình với project thật. Hãy cập nhật cấu hình Firebase trước khi ghi danh.', 'error');
+                return;
+            }
+
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-password-confirm').value;
+            const btnDangKy = document.getElementById('btn-dang-ky');
+
+            // Kiểm tra mật khẩu khớp nhau
+            if (password !== confirmPassword) {
+                hienThongBao('⚠️ Mật lệnh xác nhận không khớp! Hãy kiểm tra lại.');
+                return;
+            }
+
+            // Kiểm tra độ dài mật khẩu
+            if (password.length < 6) {
+                hienThongBao('⚠️ Mật lệnh phải có ít nhất 6 ký tự!');
+                return;
+            }
+
+            // Hiển thị trạng thái loading
+            btnDangKy.classList.add('loading');
+            btnDangKy.textContent = 'Đang ghi danh...';
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                luuVaChuyenHuong(userCredential.user);
+            } catch (error) {
+                console.error('Lỗi đăng ký:', error);
+                hienThongBao(dịchLỗi(error.code));
+            } finally {
+                btnDangKy.classList.remove('loading');
+                btnDangKy.textContent = '📜 GHI DANH';
+            }
+        };
+
+
+        // ===================================================
+        //  XỬ LÝ ĐĂNG NHẬP BẰNG GOOGLE
+        // ===================================================
+
+        /**
+         * Xử lý khi người dùng bấm nút "Đăng nhập bằng Google".
+         * Mở popup Google Sign-In.
+         */
+        window.dangNhapGoogle = async function() {
+            const btnGoogle = document.getElementById('btn-google');
+
+            if (!auth || !googleProvider) {
+                hienThongBao('⚠️ Firebase chưa được cấu hình với project thật. Hãy cập nhật cấu hình Firebase trước khi dùng Google Sign-In.', 'error');
+                return;
+            }
+
+            // Hiển thị trạng thái loading
+            btnGoogle.classList.add('loading');
+
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                luuVaChuyenHuong(result.user);
+            } catch (error) {
+                console.error('Lỗi đăng nhập Google:', error);
+                hienThongBao(dịchLỗi(error.code));
+            } finally {
+                btnGoogle.classList.remove('loading');
+            }
+        };
+
+    </script>
+
+
+    <!-- ============================================================ -->
+    <!--  JAVASCRIPT KHÔNG LIÊN QUAN FIREBASE                          -->
+    <!--  (Chuyển tab, hiệu ứng ngôi sao - không cần type="module")   -->
+    <!-- ============================================================ -->
+    <script>
+
+        // ===================================================
+        //  CHUYỂN ĐỔI TAB (Đăng Nhập ↔ Ghi Danh)
+        // ===================================================
+
+        /**
+         * Chuyển đổi giữa tab Đăng Nhập và Ghi Danh.
+         * Sử dụng class .active để điều khiển hiển thị & hiệu ứng CSS.
+         * @param {string} tabId - ID của tab cần hiển thị ('dang-nhap' hoặc 'dang-ky')
+         */
+        function chuyenTab(tabId) {
+            // Xóa class active khỏi tất cả tab button
+            document.querySelectorAll('.tab-btn').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+
+            // Ẩn tất cả nội dung tab
+            document.querySelectorAll('.tab-content').forEach(function(content) {
+                content.classList.remove('active');
+            });
+
+            // Kích hoạt tab được chọn
+            document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            // Xóa thông báo cũ khi chuyển tab
+            document.getElementById('message-box').textContent = '';
+            document.getElementById('message-box').className = 'message-box';
+        }
+
+        // ===================================================
+        //  HIỆU ỨNG NGÔI SAO LẤP LÁNH (trang trí nền trời)
+        // ===================================================
+
+        /**
+         * Tạo các "ngôi sao" nhỏ lấp lánh trên nền tối
+         * để tăng thêm cảm giác "cổng thành ban đêm".
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.getElementById('stars-container');
+            const soNgoiSao = 50; // Số lượng ngôi sao
+
+            for (let i = 0; i < soNgoiSao; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                // Vị trí ngẫu nhiên
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+
+                // Kích thước ngẫu nhiên (1px - 3px)
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+
+                // Độ trễ animation ngẫu nhiên (để các sao lấp lánh không đồng bộ)
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+
+                starsContainer.appendChild(star);
+            }
+        });
+
+        // ==========================================================================
+        //  HỆ THỐNG VIDEO CHUYỂN CẢNH (MỖI LẦN CLICK 1 VIDEO KHÁC NHAU)
+        // ==========================================================================
+
+        const DANH_SACH_VIDEO = [
+            {
+                src: 'video1.mp4',
+                fallbackSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                tieuDe: 'Chiến Thắng Điện Biên Phủ (1954)',
+                moTa: 'Lừng lẫy năm châu, chấn động địa cầu — Đập tan tập đoàn cứ điểm bất khả xâm phạm.'
+            },
+            {
+                src: 'video2.mp4',
+                fallbackSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+                tieuDe: 'Bạch Đằng Giang Dậy Sóng (938)',
+                moTa: 'Cọc gỗ chôn ngầm theo dòng thủy triều, Ngô Quyền đập tan giặc Nam Hán mở nền độc lập.'
+            },
+            {
+                src: 'video3.mp4',
+                fallbackSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+                tieuDe: 'Hào Khí Thăng Long — Ngàn Năm Văn Hiến',
+                moTa: 'Bốn ngàn năm lịch sử hào hùng — Dấu chân tiền nhân dựng nước và giữ nước trường tồn.'
+            }
+        ];
+
+        const CHE_DO_CHON_VIDEO = 'xoay_vong'; // 'xoay_vong' hoặc 'ngau_nhien'
+        var trangDichMacDinh = 'trang-chinh.html';
+        var videoDaKetThuc = false;
+        var videoElement = null;
+
+        function layVideoTiepTheo() {
+            if (!DANH_SACH_VIDEO || DANH_SACH_VIDEO.length === 0) return null;
+            if (DANH_SACH_VIDEO.length === 1) return DANH_SACH_VIDEO[0];
+
+            var lastIndex = parseInt(sessionStorage.getItem('lichSuVideoIndex'), 10);
+            if (isNaN(lastIndex)) lastIndex = -1;
+
+            var newIndex;
+            if (CHE_DO_CHON_VIDEO === 'xoay_vong') {
+                newIndex = (lastIndex + 1) % DANH_SACH_VIDEO.length;
+            } else {
+                do {
+                    newIndex = Math.floor(Math.random() * DANH_SACH_VIDEO.length);
+                } while (newIndex === lastIndex);
+            }
+
+            sessionStorage.setItem('lichSuVideoIndex', newIndex);
+            return DANH_SACH_VIDEO[newIndex];
+        }
+
+        window.toggleAmThanhVideo = function(event) {
+            if (event) event.stopPropagation();
+            if (!videoElement) return;
+
+            var btnText = document.getElementById('trans-audio-text');
+            if (videoElement.muted) {
+                videoElement.muted = false;
+                if (btnText) btnText.textContent = 'Tắt tiếng';
+            } else {
+                videoElement.muted = true;
+                if (btnText) btnText.textContent = 'Bật tiếng';
+            }
+        };
+
+        window.ketThucChuyenCanh = function(event) {
+            if (event) event.stopPropagation();
+            if (videoDaKetThuc) return;
+            videoDaKetThuc = true;
+
+            if (videoElement) {
+                videoElement.pause();
+            }
+
+            var transition = document.getElementById('page-transition');
+            if (transition) {
+                transition.style.transition = 'opacity 0.5s ease';
+                transition.style.opacity = '0';
+            }
+
+            setTimeout(function() {
+                window.location.href = trangDichMacDinh;
+            }, 500);
+        };
+
+        window.kichHoatChuyenCanhVideo = function(urlDich) {
+            if (urlDich) trangDichMacDinh = urlDich;
+            videoDaKetThuc = false;
+
+            var transition = document.getElementById('page-transition');
+            videoElement = document.getElementById('transition-video');
+            var progressBar = document.getElementById('trans-progress');
+            var titleEl = document.getElementById('trans-title');
+            var descEl = document.getElementById('trans-desc');
+            var fallback = document.getElementById('trans-fallback');
+
+            var currentVideo = layVideoTiepTheo();
+            if (!currentVideo) {
+                window.location.href = trangDichMacDinh;
+                return;
+            }
+
+            if (titleEl) titleEl.textContent = currentVideo.tieuDe || 'Cổng Thành Lịch Sử';
+            if (descEl) descEl.textContent = currentVideo.moTa || 'Đang mở cổng thành...';
+            if (progressBar) progressBar.style.width = '0%';
+            if (fallback) fallback.classList.remove('active');
+
+            transition.classList.add('active');
+            transition.style.opacity = '1';
+
+            var daThuFallback = false;
+
+            function hienFallbackVaChuyenTrang() {
+                if (fallback) fallback.classList.add('active');
+                setTimeout(function() {
+                    window.ketThucChuyenCanh();
+                }, 2000);
+            }
+
+            videoElement.onerror = function() {
+                console.warn('Lỗi tải video nội bộ, chuyển sang dự phòng');
+                if (!daThuFallback && currentVideo.fallbackSrc && videoElement.src !== currentVideo.fallbackSrc) {
+                    daThuFallback = true;
+                    videoElement.src = currentVideo.fallbackSrc;
+                    videoElement.load();
+                    videoElement.play().catch(function() {
+                        hienFallbackVaChuyenTrang();
+                    });
+                } else {
+                    hienFallbackVaChuyenTrang();
+                }
+            };
+
+            videoElement.ontimeupdate = function() {
+                if (videoElement.duration && progressBar) {
+                    var phanTram = (videoElement.currentTime / videoElement.duration) * 100;
+                    progressBar.style.width = phanTram + '%';
+                }
+            };
+
+            videoElement.onended = function() {
+                window.ketThucChuyenCanh();
+            };
+
+            videoElement.src = currentVideo.src;
+            videoElement.muted = true;
+            videoElement.load();
+
+            var playPromise = videoElement.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(function(err) {
+                    console.warn('Autoplay bị chặn hoặc lỗi:', err);
+                    if (currentVideo.fallbackSrc && !daThuFallback) {
+                        daThuFallback = true;
+                        videoElement.src = currentVideo.fallbackSrc;
+                        videoElement.load();
+                        videoElement.play().catch(function() {
+                            hienFallbackVaChuyenTrang();
+                        });
+                    } else {
+                        hienFallbackVaChuyenTrang();
+                    }
+                });
+            }
+
+            setTimeout(function() {
+                if (!videoDaKetThuc) {
+                    window.ketThucChuyenCanh();
+                }
+            }, 15000);
+        };
+
+    </script>
+
+</body>
+</html>

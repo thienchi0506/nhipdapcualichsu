@@ -1,0 +1,3901 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử</title>
+
+    <!-- Google Fonts: Playfair Display & Noto Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================================================== */
+        /*  1. BIẾN MÀU CỔ TRANG & THIẾT LẬP CƠ BẢN                                   */
+        /* ========================================================================== */
+        :root {
+            --vang-dong:      #D4AF37;
+            --vang-sang:      #F5D77F;
+            --vang-nhat:      #FFF3D6;
+            --do-ba-trau:     #7B1E1E;
+            --do-sang:        #A52A2A;
+            --do-dam:         #4A0E0E;
+            --nau-den:        #2C1E18;
+            --nau-go:         #3A281E;
+            --nen-toi:        #1E1815;
+            --nen-den:        #120D0B;
+            --chu-sang:       #E8D5B0;
+            --chu-phu:        #BFA888;
+            --xanh-ngoc:      #2E8B57;
+            --xanh-la:        #27ae60;
+            --cam-chay:       #e67e22;
+            --bo-goc:         12px;
+            --bong-co:        0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            font-family: 'Noto Serif', serif;
+            background-color: var(--nen-den);
+            color: var(--chu-sang);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        button, input { font-family: inherit; }
+
+        /* ========================================================================== */
+        /*  2. CANVAS NỀN TÀN LỬA & KHÓI SƯƠNG                                        */
+        /* ========================================================================== */
+        #bg-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: 
+                radial-gradient(circle at 50% 15%, rgba(123, 30, 30, 0.35) 0%, transparent 60%),
+                radial-gradient(circle at 10% 90%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(123, 30, 30, 0.18) 0%, transparent 45%),
+                linear-gradient(180deg, rgba(18, 13, 11, 0.88) 0%, rgba(30, 24, 21, 0.95) 100%),
+                url('anh-nen2.jpg') center/cover no-repeat;
+            pointer-events: none;
+            transition: background 1.5s ease;
+        }
+
+        .bg-layer.peaceful {
+            background: 
+                radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.35) 0%, transparent 65%),
+                radial-gradient(circle at 10% 90%, rgba(46, 139, 87, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.22) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(20, 16, 12, 0.82) 0%, rgba(36, 28, 22, 0.92) 100%),
+                url('anh-nen2.jpg') center/cover no-repeat;
+        }
+
+        /* ========================================================================== */
+        /*  3. HEADER NHỎ GỌN                                                         */
+        /* ========================================================================== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background: rgba(20, 15, 12, 0.94);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .site-header__left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn-nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(123, 30, 30, 0.45);
+            color: var(--vang-sang);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 7px 16px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-nav-back:hover {
+            background: var(--do-ba-trau);
+            border-color: var(--vang-sang);
+            color: #fff;
+            transform: translateX(-3px);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .site-header__title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--vang-dong);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-header__title .badge {
+            background: var(--do-ba-trau);
+            color: var(--vang-nhat);
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--vang-dong);
+            letter-spacing: 1px;
+            font-family: 'Noto Serif', serif;
+        }
+
+        .site-header__right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: rgba(44, 30, 24, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--chu-sang);
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .header-btn:hover {
+            border-color: var(--vang-dong);
+            color: var(--vang-sang);
+            background: rgba(60, 40, 32, 0.95);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .header-btn.active {
+            border-color: var(--vang-dong);
+            background: rgba(123, 30, 30, 0.65);
+            color: var(--vang-nhat);
+        }
+
+        .voice-pulse {
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
+            border-radius: 50%;
+            display: none;
+            box-shadow: 0 0 8px #2ecc71;
+            animation: pulseWave 1s infinite alternate;
+        }
+
+        .voice-pulse.speaking { display: inline-block; }
+
+        @keyframes pulseWave {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            100% { transform: scale(1.3); opacity: 1; }
+        }
+
+        /* ========================================================================== */
+        /*  4. THANH CHỈ SỐ TRẬN ĐÁNH (TOP HUD BAR)                                   */
+        /* ========================================================================== */
+        .game-hud {
+            position: sticky;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(28, 20, 16, 0.98) 0%, rgba(20, 14, 11, 0.95) 100%);
+            border-bottom: 2px solid var(--vang-dong);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+            z-index: 90;
+            padding: 10px 24px;
+            display: none;
+            animation: slideDownHud 0.4s ease forwards;
+        }
+
+        .game-hud.active { display: block; }
+
+        @keyframes slideDownHud {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hud-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            position: relative;
+        }
+
+        .hud-stats-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hud-stat-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(14, 10, 8, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 6px 14px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .hud-stat-box .stat-icon { font-size: 1.2rem; }
+        .hud-stat-box .stat-info { display: flex; flex-direction: column; }
+        .hud-stat-box .stat-label {
+            font-size: 0.65rem;
+            color: var(--chu-phu);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .hud-stat-box .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--vang-sang);
+            transition: color 0.3s;
+        }
+
+        .stat-value.red-val { color: #ff6b6b; }
+        .stat-value.gold-val { color: #ffd152; }
+        .stat-value.green-val { color: #2ecc71; }
+
+        /* Floating text feedback trên HUD */
+        .hud-floating-container {
+            position: absolute;
+            top: 42px;
+            left: 20px;
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            z-index: 105;
+        }
+
+        .hud-floating-badge {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: rgba(10, 7, 5, 0.92);
+            border: 1.5px solid var(--vang-dong);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+            animation: floatUpFade 2.2s ease-out forwards;
+        }
+
+        @keyframes floatUpFade {
+            0% { transform: translateY(0); opacity: 1; }
+            70% { transform: translateY(-20px); opacity: 1; }
+            100% { transform: translateY(-34px); opacity: 0; }
+        }
+
+        .hud-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-hud-action {
+            background: rgba(123, 30, 30, 0.55);
+            border: 1px solid var(--vang-dong);
+            color: var(--chu-sang);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-hud-action:hover {
+            background: var(--do-ba-trau);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ========================================================================== */
+        /*  5. SẢNH CHỜ & BẢN ĐỒ CHỌN ẢI                                              */
+        /* ========================================================================== */
+        .lobby-screen {
+            position: relative;
+            z-index: 10;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .lobby-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lobby-title-tag {
+            display: inline-block;
+            background: rgba(123, 30, 30, 0.7);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-sang);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            padding: 4px 18px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .lobby-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--vang-dong);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .lobby-desc {
+            font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+            color: var(--chu-phu);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-style: italic;
+        }
+
+        .lobby-profile-bar {
+            background: rgba(30, 20, 16, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: var(--bo-goc);
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            margin-bottom: 46px;
+        }
+
+        .profile-commander {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .commander-avatar-frame {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 2px solid var(--vang-dong);
+            background: linear-gradient(135deg, var(--do-ba-trau), var(--nau-den));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+        }
+
+        .commander-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .commander-label {
+            font-size: 0.75rem;
+            color: var(--chu-phu);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-commander-name {
+            background: rgba(14, 10, 8, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 6px;
+            color: var(--vang-sang);
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            outline: none;
+            width: 220px;
+            transition: all 0.25s;
+        }
+
+        .profile-quick-nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-lobby-feat {
+            background: linear-gradient(135deg, rgba(123, 30, 30, 0.7), rgba(60, 20, 16, 0.9));
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-nhat);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-lobby-feat:hover {
+            background: var(--do-ba-trau);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .campaign-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--vang-dong);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .campaign-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.6) 0%, transparent 100%);
+        }
+
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .stage-card {
+            background: rgba(26, 18, 14, 0.88);
+            border: 2px solid rgba(212, 175, 55, 0.35);
+            border-radius: var(--bo-goc);
+            overflow: hidden;
+            box-shadow: var(--bong-co);
+            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(6px);
+        }
+
+        .stage-card.unlocked {
+            border-color: var(--vang-dong);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+        }
+
+        .stage-card.unlocked:hover {
+            transform: translateY(-6px);
+            border-color: var(--vang-sang);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.45);
+        }
+
+        .stage-card.locked {
+            border-color: rgba(140, 120, 100, 0.25);
+            opacity: 0.85;
+            cursor: pointer;
+        }
+
+        .stage-card.locked:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            transform: translateY(-3px);
+            opacity: 1;
+        }
+
+        .stage-card__banner {
+            height: 180px;
+            width: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .stage-card.unlocked .stage-card__banner {
+            background-image: 
+                linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(26, 18, 14, 0.95) 100%),
+                url('anh-nen2.jpg');
+        }
+
+        .stage-card.locked--bachdang .stage-card__banner {
+            background-image: 
+                linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(26, 18, 14, 0.95) 100%),
+                url('hinh-4.jpg');
+            filter: grayscale(40%);
+        }
+
+        .stage-card.locked--chilang .stage-card__banner {
+            background-image: 
+                linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(26, 18, 14, 0.95) 100%),
+                url('anh-nen.jpg');
+            filter: grayscale(60%);
+        }
+
+        .stage-status-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .badge--unlocked {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: #fff;
+            border: 1px solid var(--vang-sang);
+            animation: pulseGlow 1.8s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px #e67e22; }
+            100% { box-shadow: 0 0 16px #f39c12; }
+        }
+
+        .badge--locked {
+            background: rgba(30, 24, 20, 0.85);
+            color: #b0a090;
+            border: 1px solid rgba(160, 140, 120, 0.4);
+        }
+
+        .stage-year-pill {
+            position: absolute;
+            bottom: 12px;
+            left: 14px;
+            background: rgba(14, 10, 8, 0.85);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-sang);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+
+        .stage-card__content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .stage-card__title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--vang-dong);
+            margin-bottom: 8px;
+        }
+
+        .stage-card__desc {
+            font-size: 0.88rem;
+            color: var(--chu-phu);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        .stage-meta-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .stage-meta-tag {
+            background: rgba(44, 30, 24, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--chu-sang);
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .btn-enter-stage {
+            width: 100%;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, var(--do-ba-trau), #9c2727);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-nhat);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(123, 30, 30, 0.5);
+        }
+
+        .btn-enter-stage:hover {
+            background: linear-gradient(135deg, #9c2727, #b83232);
+            border-color: var(--vang-sang);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-locked-stage {
+            width: 100%;
+            padding: 12px 18px;
+            background: rgba(40, 30, 26, 0.6);
+            border: 1px solid rgba(140, 120, 100, 0.3);
+            color: #8c7e72;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ========================================================================== */
+        /*  6. PHẦN 2 & 3: SÂN KHẤU CHIẾN THUẬT (#GAME-STAGE)                         */
+        /* ========================================================================== */
+        .game-stage-wrapper {
+            position: relative;
+            z-index: 10;
+            max-width: 1140px;
+            margin: 24px auto 80px;
+            padding: 0 20px;
+            display: none;
+            animation: fadeInStage 0.5s ease forwards;
+        }
+
+        .game-stage-wrapper.active { display: block; }
+
+        @keyframes fadeInStage {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #game-stage {
+            background: rgba(26, 18, 14, 0.94);
+            border: 2px solid var(--vang-dong);
+            border-radius: var(--bo-goc);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.85);
+            padding: 30px 28px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .stage-chapter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .chapter-badge-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chapter-pill {
+            background: var(--do-ba-trau);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-sang);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 14px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .chapter-pill.postwar {
+            background: linear-gradient(135deg, #2e8b57, #1e5e3a);
+            border-color: #2ecc71;
+            color: #fff;
+        }
+
+        .chapter-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--vang-dong);
+            font-weight: 700;
+        }
+
+        .chapter-progress-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .prog-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            transition: all 0.3s;
+        }
+
+        .prog-dot.active {
+            background: var(--vang-dong);
+            box-shadow: 0 0 10px var(--vang-sang);
+            transform: scale(1.15);
+        }
+
+        .prog-dot.completed {
+            background: var(--xanh-la);
+            border-color: #2ecc71;
+        }
+
+        /* Hộp thoại Visual Novel */
+        .vn-dialogue-card {
+            background: linear-gradient(180deg, rgba(32, 22, 17, 0.95) 0%, rgba(18, 12, 10, 0.95) 100%);
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 10px;
+            padding: 22px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            margin-bottom: 26px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .vn-dialogue-card:hover {
+            border-color: var(--vang-sang);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .vn-speaker-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .vn-avatar-frame {
+            width: 68px;
+            height: 68px;
+            border-radius: 10px;
+            border: 2px solid var(--vang-dong);
+            background: linear-gradient(135deg, var(--do-ba-trau), #160e0c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .vn-speaker-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vn-speaker-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: var(--vang-sang);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .vn-speaker-role {
+            font-size: 0.8rem;
+            color: var(--chu-phu);
+            letter-spacing: 0.5px;
+        }
+
+        .vn-text-box {
+            min-height: 72px;
+            font-size: 1.05rem;
+            color: var(--chu-sang);
+            line-height: 1.75;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .vn-tap-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 14px;
+            font-size: 0.78rem;
+            color: var(--vang-sang);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: blinkHint 1.2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes blinkHint {
+            0%, 100% { opacity: 0.35; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(3px); }
+        }
+
+        .vn-voice-replay {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(14, 10, 8, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: var(--vang-sang);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .vn-voice-replay:hover {
+            border-color: var(--vang-dong);
+            background: var(--do-ba-trau);
+            color: #fff;
+        }
+
+        /* 4 Lựa chọn */
+        .choices-section {
+            display: none;
+            animation: fadeInChoices 0.45s ease forwards;
+        }
+
+        .choices-section.active { display: block; }
+
+        @keyframes fadeInChoices {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .choices-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--vang-dong);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .choices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 16px;
+        }
+
+        .choice-card {
+            background: rgba(22, 16, 13, 0.9);
+            border: 1.5px solid rgba(212, 175, 55, 0.35);
+            border-radius: 8px;
+            padding: 16px 18px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .choice-card:hover {
+            background: rgba(45, 30, 24, 0.95);
+            border-color: var(--vang-sang);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+        }
+
+        .choice-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .choice-key-badge {
+            background: linear-gradient(135deg, var(--do-ba-trau), #4a1010);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-sang);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .choice-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--vang-nhat);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .choice-desc {
+            font-size: 0.86rem;
+            color: var(--chu-phu);
+            line-height: 1.6;
+        }
+
+        /* ========================================================================== */
+        /*  7. MODAL PHỐI HÌNH KẾT QUẢ & LỜI KHUYÊN (OUTCOME & ADVICE)                */
+        /* ========================================================================== */
+        .outcome-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 6, 5, 0.88);
+            backdrop-filter: blur(8px);
+            z-index: 250;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInOutcome 0.35s ease forwards;
+        }
+
+        .outcome-modal-overlay.open { display: flex; }
+
+        @keyframes fadeInOutcome {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .outcome-card {
+            background: linear-gradient(180deg, #241914 0%, #150f0c 100%);
+            border: 2px solid var(--vang-dong);
+            border-radius: var(--bo-goc);
+            max-width: 820px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 26px 28px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.95);
+            position: relative;
+        }
+
+        .outcome-visual-box {
+            width: 100%;
+            height: 220px;
+            border-radius: 8px;
+            border: 1px solid var(--vang-dong);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            background: #0f0a08;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .outcome-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .outcome-svg-fallback {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .outcome-badge-pill {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            z-index: 5;
+        }
+
+        .badge--optimal {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            color: #fff;
+            border: 1px solid #2ecc71;
+        }
+
+        .badge--trap {
+            background: linear-gradient(135deg, #c0392b, #962d22);
+            color: #fff;
+            border: 1px solid #e74c3c;
+            animation: pulseGlow 1.4s infinite alternate;
+        }
+
+        .badge--moderate {
+            background: linear-gradient(135deg, #d35400, #a04000);
+            color: #fff;
+            border: 1px solid var(--vang-sang);
+        }
+
+        .outcome-stats-changes {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            padding: 10px 14px;
+            background: rgba(12, 8, 6, 0.65);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 6px;
+        }
+
+        .stat-change-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-change-tag.positive { color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+        .stat-change-tag.negative { color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
+        .stat-change-tag.gold { color: #f1c40f; border: 1px solid rgba(241, 196, 15, 0.3); }
+
+        .outcome-desc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--vang-dong);
+            margin-bottom: 8px;
+        }
+
+        .outcome-desc-text {
+            font-size: 0.98rem;
+            color: var(--chu-sang);
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .advice-golden-box {
+            background: linear-gradient(135deg, rgba(60, 40, 20, 0.5) 0%, rgba(30, 20, 14, 0.8) 100%);
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 24px;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .advice-golden-box::before {
+            content: '“';
+            position: absolute;
+            top: -10px;
+            left: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--vang-dong);
+            line-height: 1;
+            opacity: 0.7;
+        }
+
+        .advice-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--vang-sang);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .advice-content {
+            font-size: 0.92rem;
+            color: var(--vang-nhat);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .btn-outcome-next {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--do-ba-trau), #9c2727);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-nhat);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.25s;
+        }
+
+        .btn-outcome-next:hover {
+            background: #b02a2a;
+            border-color: var(--vang-sang);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .screen-shake {
+            animation: shakeScreen 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shakeScreen {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        /* ========================================================================== */
+        /*  8. PHẦN 3: POPUP RƠI VẬT PHẨM BẢO VẬT PHÁT SÁNG                           */
+        /* ========================================================================== */
+        .loot-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 3, 2, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInLoot 0.4s ease forwards;
+        }
+
+        .loot-popup-overlay.open { display: flex; }
+
+        @keyframes fadeInLoot {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loot-card {
+            background: linear-gradient(180deg, #2d2019 0%, #17100c 100%);
+            border: 2px solid var(--vang-dong);
+            border-radius: 16px;
+            max-width: 520px;
+            width: 100%;
+            padding: 34px 28px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+            animation: zoomLoot 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes zoomLoot {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        .loot-icon-halo {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            border: 2px solid var(--vang-sang);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(123, 30, 30, 0.6) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 0 30px rgba(245, 215, 127, 0.8);
+            animation: haloPulse 1.8s infinite alternate;
+        }
+
+        @keyframes haloPulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 20px rgba(245, 215, 127, 0.6); }
+            100% { transform: scale(1.08); box-shadow: 0 0 40px rgba(245, 215, 127, 1); }
+        }
+
+        .loot-pill-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--do-ba-trau), #a52a2a);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-sang);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 14px;
+            border-radius: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .loot-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--vang-sang);
+            margin-bottom: 10px;
+        }
+
+        .loot-desc {
+            font-size: 0.92rem;
+            color: var(--chu-sang);
+            line-height: 1.65;
+            margin-bottom: 18px;
+        }
+
+        .loot-reward-box {
+            background: rgba(14, 10, 8, 0.7);
+            border: 1px dashed var(--vang-dong);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #2ecc71;
+            font-weight: 700;
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+        }
+
+        .btn-claim-loot {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--vang-dong), #b8860b);
+            border: 1px solid var(--vang-nhat);
+            color: #1a100a;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.25s;
+        }
+
+        .btn-claim-loot:hover {
+            background: linear-gradient(135deg, #f5d77f, #d4af37);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* ========================================================================== */
+        /*  9. PHẦN 3: BẢNG TỔNG KẾT CHIẾN DỊCH & HÉ LỘ ẢI 2 (BẠCH ĐẰNG GIANG)        */
+        /* ========================================================================== */
+        .summary-dashboard {
+            text-align: center;
+            padding: 10px 0 20px;
+        }
+
+        .summary-hero-crest {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            border: 2px solid var(--vang-dong);
+            background: linear-gradient(135deg, var(--do-ba-trau), #160e0c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .summary-title-top {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            color: var(--vang-dong);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .summary-subtitle {
+            font-size: 0.95rem;
+            color: var(--chu-phu);
+            max-width: 720px;
+            margin: 0 auto 24px;
+            font-style: italic;
+        }
+
+        .title-awarded-card {
+            background: linear-gradient(135deg, rgba(123, 30, 30, 0.6) 0%, rgba(45, 25, 18, 0.8) 100%);
+            border: 2px solid var(--vang-dong);
+            border-radius: 10px;
+            padding: 16px 20px;
+            max-width: 650px;
+            margin: 0 auto 28px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .title-awarded-label {
+            font-size: 0.78rem;
+            color: var(--chu-phu);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        .title-awarded-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--vang-sang);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .summary-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .summary-stat-cell {
+            background: rgba(14, 10, 8, 0.75);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 8px;
+            padding: 14px 18px;
+        }
+
+        .summary-stat-cell .stat-icon { font-size: 1.4rem; margin-bottom: 4px; }
+        .summary-stat-cell .stat-name { font-size: 0.72rem; color: var(--chu-phu); text-transform: uppercase; letter-spacing: 0.8px; }
+        .summary-stat-cell .stat-val {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--vang-sang);
+        }
+
+        .summary-loot-shelf {
+            background: rgba(18, 12, 10, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .loot-shelf-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--vang-dong);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .loot-items-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+
+        .shelf-item-card {
+            background: rgba(28, 20, 16, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.25s;
+        }
+
+        .shelf-item-card.obtained {
+            border-color: var(--vang-dong);
+            background: rgba(45, 30, 20, 0.9);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .shelf-item-card.locked {
+            opacity: 0.5;
+            filter: grayscale(80%);
+        }
+
+        .shelf-item-icon {
+            font-size: 1.8rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: rgba(14, 10, 8, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .shelf-item-info h5 {
+            font-size: 0.88rem;
+            color: var(--vang-sang);
+            margin-bottom: 2px;
+        }
+
+        .shelf-item-info span {
+            font-size: 0.72rem;
+            color: var(--chu-phu);
+        }
+
+        .next-campaign-preview {
+            background: linear-gradient(135deg, rgba(14, 25, 35, 0.85) 0%, rgba(20, 15, 12, 0.95) 100%);
+            border: 2px dashed rgba(212, 175, 55, 0.6);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 30px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .next-campaign-preview::before {
+            content: '🌊';
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+            font-size: 6rem;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .preview-badge-status {
+            display: inline-block;
+            background: rgba(41, 128, 185, 0.7);
+            border: 1px solid #3498db;
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .preview-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #5dade2;
+            margin-bottom: 6px;
+        }
+
+        .preview-desc {
+            font-size: 0.9rem;
+            color: var(--chu-sang);
+            line-height: 1.65;
+            max-width: 800px;
+        }
+
+        .summary-actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-summary-action {
+            padding: 12px 26px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-replay-stage {
+            background: linear-gradient(135deg, var(--do-ba-trau), #9c2727);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-nhat);
+        }
+
+        .btn-replay-stage:hover {
+            background: #b02a2a;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-view-leaderboard {
+            background: rgba(30, 20, 16, 0.85);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-sang);
+        }
+
+        .btn-view-leaderboard:hover {
+            background: rgba(45, 30, 24, 0.95);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================================================== */
+        /*  10. CÁC MODAL HỆ THỐNG: BẢNG XẾP HẠNG, KHO BẢO VẬT, ẢI KHÓA                */
+        /* ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 6, 5, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open { display: flex; opacity: 1; }
+
+        .ancient-modal {
+            background: linear-gradient(180deg, #241a15 0%, #17110e 100%);
+            border: 2px solid var(--vang-dong);
+            border-radius: var(--bo-goc);
+            max-width: 650px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);
+            position: relative;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.open .ancient-modal { transform: scale(1); }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: var(--chu-phu);
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close-btn:hover { color: var(--vang-sang); }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--vang-dong);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-subtitle {
+            font-size: 0.88rem;
+            color: var(--chu-phu);
+            margin-bottom: 22px;
+            font-style: italic;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .leaderboard-table th {
+            background: rgba(123, 30, 30, 0.5);
+            color: var(--vang-sang);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--vang-dong);
+        }
+
+        .leaderboard-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            font-size: 0.88rem;
+        }
+
+        .leaderboard-table tr:hover td { background: rgba(44, 30, 24, 0.5); }
+        .leaderboard-table tr.current-player td {
+            background: rgba(212, 175, 55, 0.12);
+            font-weight: 700;
+            color: var(--vang-sang);
+        }
+
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .vault-item-card {
+            background: rgba(14, 10, 8, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .vault-item-card.obtained {
+            border-color: var(--vang-dong);
+            background: rgba(45, 30, 20, 0.85);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+        }
+
+        .vault-item-icon {
+            font-size: 1.8rem;
+            background: rgba(123, 30, 30, 0.4);
+            border: 1px solid var(--vang-dong);
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .vault-item-info h4 {
+            font-size: 0.92rem;
+            color: var(--vang-sang);
+            margin-bottom: 2px;
+        }
+
+        .vault-item-info p {
+            font-size: 0.78rem;
+            color: var(--chu-phu);
+        }
+
+        .modal-notice-text {
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: var(--chu-sang);
+            margin-bottom: 24px;
+            background: rgba(14, 10, 8, 0.5);
+            border-left: 3px solid var(--vang-dong);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .btn-modal-action {
+            width: 100%;
+            padding: 12px;
+            background: var(--do-ba-trau);
+            border: 1px solid var(--vang-dong);
+            color: var(--vang-nhat);
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .btn-modal-action:hover {
+            background: #9c2727;
+            border-color: var(--vang-sang);
+        }
+
+        /* ========================================================================== */
+        /*  11. RESPONSIVE DESIGN                                                    */
+        /* ========================================================================== */
+        @media (max-width: 768px) {
+            .site-header { padding: 0 14px; }
+            .site-header__title { font-size: 1rem; }
+            .site-header__title .badge { display: none; }
+            .lobby-profile-bar { flex-direction: column; align-items: stretch; }
+            .input-commander-name { width: 100%; }
+            .profile-quick-nav { justify-content: space-between; }
+            .hud-inner { flex-direction: column; align-items: stretch; }
+            .hud-stats-group { justify-content: space-between; }
+            .choices-grid { grid-template-columns: 1fr; }
+            #game-stage { padding: 20px 16px; }
+            .outcome-card { padding: 20px 16px; }
+            .outcome-visual-box { height: 180px; }
+            .loot-card { padding: 24px 18px; }
+            .summary-stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lớp nền và canvas tàn lửa -->
+    <div class="bg-layer" id="bg-layer-el"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Thẻ âm thanh nhạc nền đồng bộ xuyên suốt các trang -->
+    <audio id="bg-music" src="nhac-nen-1.mp3" loop preload="none"></audio>
+
+    <!-- ========================================================================== -->
+    <!--  HEADER NHỎ GỌN                                                            -->
+    <!-- ========================================================================== -->
+    <header class="site-header">
+        <div class="site-header__left">
+            <a href="trang-chinh.html" class="btn-nav-back" title="Trở về Trang Chủ Dấu Chân Lịch Sử">
+                <span>←</span>
+                <span>Về Trang Chính</span>
+            </a>
+            <a href="sa-ban.html#nhu-nguyet" class="btn-nav-back" style="background: linear-gradient(135deg, #1b633e, #0e3d25); border-color: #2ecc71; color: #FFF; font-weight: bold;" title="Vào Chế Độ Sa Bàn Mô Phỏng 2D RPG">
+                <span>⚔️</span>
+                <span>Chế Độ Sa Bàn 2D RPG</span>
+            </a>
+            <div class="site-header__title">
+                <span>Sa Bàn Chiến Thuật</span>
+                <span class="badge" id="header-phase-badge">Ải Như Nguyệt</span>
+            </div>
+        </div>
+
+        <div class="site-header__right">
+            <!-- Nút Bật/Tắt Giọng Đọc Dẫn Chuyện -->
+            <button id="btn-toggle-voice" class="header-btn active" title="Bật/Tắt Giọng Đọc Dẫn Chuyện (Web Speech API)">
+                <span class="voice-pulse" id="voice-indicator"></span>
+                <span class="icon">🔊</span>
+                <span id="voice-btn-text">Giọng Đọc: Bật</span>
+            </button>
+
+            <!-- Nút Bật/Tắt Nhạc Nền -->
+            <button id="btn-toggle-music" class="header-btn active" title="Bật/Tắt Nhạc Nền">
+                <span class="icon">🎵</span>
+                <span id="music-btn-text">Nhạc: Bật</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========================================================================== -->
+    <!--  THANH CHỈ SỐ TRẬN ĐÁNH (TOP HUD BAR)                                      -->
+    <!-- ========================================================================== -->
+    <aside class="game-hud" id="top-hud">
+        <div class="hud-inner">
+            <div class="hud-stats-group">
+                <!-- Binh Lực -->
+                <div class="hud-stat-box" id="hud-box-army" title="Quân số hiện tại sẵn sàng chiến đấu">
+                    <span class="stat-icon">🛡️</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Số Quân</span>
+                        <span class="stat-value" id="hud-army">50.000</span>
+                    </div>
+                </div>
+
+                <!-- Thương Binh -->
+                <div class="hud-stat-box" id="hud-box-injured" title="Thương binh cần chăm sóc và cứu chữa">
+                    <span class="stat-icon">🩸</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Thương Binh</span>
+                        <span class="stat-value red-val" id="hud-injured">0</span>
+                    </div>
+                </div>
+
+                <!-- Ngân Khố -->
+                <div class="hud-stat-box" id="hud-box-treasury" title="Ngân quỹ quân lương">
+                    <span class="stat-icon">💰</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Ngân Khố</span>
+                        <span class="stat-value gold-val" id="hud-treasury">10.000</span>
+                    </div>
+                </div>
+
+                <!-- Điểm Thưởng -->
+                <div class="hud-stat-box" id="hud-box-points" title="Điểm Chiến Công & Nhân Đạo tích lũy">
+                    <span class="stat-icon">✨</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Điểm Thưởng</span>
+                        <span class="stat-value gold-val" id="hud-points">100</span>
+                    </div>
+                </div>
+
+                <!-- Túi Vật Phẩm -->
+                <div class="hud-stat-box" style="cursor: pointer;" onclick="moModalKhoBaoVat()" title="Xem vật phẩm thu thập được">
+                    <span class="stat-icon">🎁</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Túi Đồ</span>
+                        <span class="stat-value" id="hud-items">0 / 4</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hud-floating-container" id="hud-floating-container"></div>
+
+            <div class="hud-actions">
+                <button class="btn-hud-action" onclick="moModalKhoBaoVat()">
+                    <span>🎒</span> Kho Bảo Vật
+                </button>
+                <button class="btn-hud-action" onclick="quayVeLobby()">
+                    <span>🗺️</span> Bản Đồ Ải
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ========================================================================== -->
+    <!--  MÀN HÌNH SẢNH CHỜ (GAME LOBBY) & BẢN ĐỒ CHỌN ẢI                            -->
+    <!-- ========================================================================== -->
+    <main class="lobby-screen" id="lobby-screen">
+        <section class="lobby-hero">
+            <span class="lobby-title-tag">Bản Đồ Chiến Dịch Lịch Sử</span>
+            <h1 class="lobby-title">Sa Bàn Chiến Dịch Đại Việt</h1>
+            <p class="lobby-desc">
+                "Cầm gươm giữ vững non sông — Dùng mưu phạt tâm công — Giữ gìn sinh mạng tướng sĩ để kiến tạo thái bình muôn thuở."
+            </p>
+
+            <div class="lobby-profile-bar">
+                <div class="profile-commander">
+                    <div class="commander-avatar-frame">⚔️</div>
+                    <div class="commander-inputs">
+                        <span class="commander-label">Tên Danh Tướng:</span>
+                        <input type="text" id="player-name-input" class="input-commander-name" value="Lý Tướng Quân" maxlength="24" placeholder="Nhập tên danh tướng..." />
+                    </div>
+                </div>
+
+                <div class="profile-quick-nav">
+                    <button class="btn-lobby-feat" onclick="moModalBangXepHang()">
+                        <span>🏆</span> Bảng Xếp Hạng
+                    </button>
+                    <button class="btn-lobby-feat" onclick="moModalKhoBaoVat()">
+                        <span>🎒</span> Kho Bảo Vật
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Danh sách các Ải Chiến Dịch -->
+        <section>
+            <div class="campaign-section-title">
+                <span>Chọn Ải Tiến Vào Sa Bàn</span>
+            </div>
+
+            <div class="campaign-grid">
+                <!-- ẢI 1: SÔNG NHƯ NGUYỆT -->
+                <article class="stage-card unlocked" id="stage-card-1">
+                    <div class="stage-card__banner">
+                        <span class="stage-status-badge badge--unlocked">🔥 ĐÃ MỞ KHÓA</span>
+                        <span class="stage-year-pill">Năm 1077</span>
+                    </div>
+                    <div class="stage-card__content">
+                        <h3 class="stage-card__title">Ải 1: Phòng Tuyến Sông Như Nguyệt</h3>
+                        <p class="stage-card__desc">
+                            Cùng Thái úy Lý Thường Kiệt dựng lũy tre bên dòng sông lịch sử, dùng mưu phạt tâm công để giữ gìn sinh mạng tướng sĩ và kiến tạo hòa bình.
+                        </p>
+                        <div class="stage-meta-tags">
+                            <span class="stage-meta-tag">⚔️ Kháng Tống</span>
+                            <span class="stage-meta-tag">🛡️ Binh lực: 50.000</span>
+                            <span class="stage-meta-tag">✨ Điểm khởi đầu: 100</span>
+                        </div>
+                        <button class="btn-enter-stage" onclick="vaoAiNhuNguyet()">
+                            <span>⚔️ Vào Trận Ngay</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ẢI 2: BẠCH ĐẰNG GIANG -->
+                <article class="stage-card locked locked--bachdang" onclick="baoAiDangPhatTrien('Bạch Đằng Giang Dậy Sóng (938 & 1288)')">
+                    <div class="stage-card__banner">
+                        <span class="stage-status-badge badge--locked">🔒 ĐANG PHÁT TRIỂN</span>
+                        <span class="stage-year-pill">Năm 938 & 1288</span>
+                    </div>
+                    <div class="stage-card__content">
+                        <h3 class="stage-card__title">Ải 2: Bạch Đằng Giang Dậy Sóng</h3>
+                        <p class="stage-card__desc">
+                            Trận địa cọc ngầm lịch sử đánh tan quân Nam Hán của Ngô Quyền và ba lần đại thắng Nguyên Mông dưới sự lãnh đạo của Quốc Công Tiết Chế Trần Hưng Đạo.
+                        </p>
+                        <div class="stage-meta-tags">
+                            <span class="stage-meta-tag">🌊 Thủy chiến</span>
+                            <span class="stage-meta-tag">🪵 Cọc ngầm hiểm địa</span>
+                            <span class="stage-meta-tag">⏳ Sắp ra mắt</span>
+                        </div>
+                        <button class="btn-locked-stage">
+                            <span>🔒 Nhấn Để Xem Chi Tiết</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ẢI 3: CHI LĂNG — XƯƠNG GIANG -->
+                <article class="stage-card locked locked--chilang" onclick="baoAiDangPhatTrien('Chi Lăng — Xương Giang (1427)')">
+                    <div class="stage-card__banner">
+                        <span class="stage-status-badge badge--locked">🔒 ĐANG PHÁT TRIỂN</span>
+                        <span class="stage-year-pill">Năm 1427</span>
+                    </div>
+                    <div class="stage-card__content">
+                        <h3 class="stage-card__title">Ải 3: Chi Lăng — Xương Giang</h3>
+                        <p class="stage-card__desc">
+                            Khởi nghĩa Lam Sơn chém Liễu Thăng tại gò Mã Yên, giải phóng giang sơn và kết thúc 20 năm đô hộ tàn bạo của nhà Minh, mở ra triều đại Hậu Lê rực rỡ.
+                        </p>
+                        <div class="stage-meta-tags">
+                            <span class="stage-meta-tag">🏹 Khởi nghĩa Lam Sơn</span>
+                            <span class="stage-meta-tag">📜 Bình Ngô Đại Cáo</span>
+                            <span class="stage-meta-tag">⏳ Đang điêu khắc sa bàn</span>
+                        </div>
+                        <button class="btn-locked-stage">
+                            <span>🔒 Nhấn Để Xem Chi Tiết</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================================================== -->
+    <!--  PHẦN 2 & 3: SÂN KHẤU CHIẾN THUẬT (#GAME-STAGE)                         -->
+    <!-- ========================================================================== -->
+    <div class="game-stage-wrapper" id="game-stage-wrapper">
+        <section id="game-stage">
+            <!-- Thanh trạng thái tiến trình Màn -->
+            <div class="stage-chapter-bar">
+                <div class="chapter-badge-wrap">
+                    <span class="chapter-pill" id="stage-badge-number">Tình Huống 1 / 5</span>
+                    <h2 class="chapter-name" id="stage-title-text">Đắp Lũy Tre & Bố Trí Phòng Tuyến</h2>
+                </div>
+                <div class="chapter-progress-dots" id="chapter-dots-container">
+                    <span class="prog-dot active" id="dot-1"></span>
+                    <span class="prog-dot" id="dot-2"></span>
+                    <span class="prog-dot" id="dot-3"></span>
+                    <span class="prog-dot" id="dot-4"></span>
+                    <span class="prog-dot" id="dot-5"></span>
+                </div>
+            </div>
+
+            <!-- Hộp thoại Visual Novel: Nhân vật dẫn chuyện có Giọng đọc + Tap to continue -->
+            <div class="vn-dialogue-card" id="vn-dialogue-box" onclick="xuLyTapHopThoai(event)">
+                <button class="vn-voice-replay" onclick="ngheLaiGiongDocThoai(event)" title="Phát lại giọng đọc lời thoại">
+                    <span>🔊</span> Nghe Lại
+                </button>
+
+                <div class="vn-speaker-row">
+                    <div class="vn-avatar-frame" id="vn-speaker-avatar">👑</div>
+                    <div class="vn-speaker-meta">
+                        <span class="vn-speaker-title" id="vn-speaker-name">Thái úy Lý Thường Kiệt</span>
+                        <span class="vn-speaker-role" id="vn-speaker-role">Tổng chỉ huy chiến dịch phòng tuyến sông Cầu</span>
+                    </div>
+                </div>
+
+                <div class="vn-text-box" id="vn-text-content">
+                    <!-- Chữ chạy theo hiệu ứng Typewriter -->
+                </div>
+
+                <div class="vn-tap-hint" id="vn-tap-hint">
+                    <span>▼ Nhấp chuột hoặc chạm để tiếp tục...</span>
+                </div>
+            </div>
+
+            <!-- Khu vực 4 Lựa chọn Quyết định -->
+            <div class="choices-section" id="choices-section">
+                <div class="choices-header">
+                    <span id="choices-header-text">⚔️ Mời Tướng quân hạ lệnh định đoạt phương án:</span>
+                </div>
+                <div class="choices-grid" id="choices-container">
+                    <!-- Sẽ render tự động 3 hoặc 4 thẻ lựa chọn -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!--  PHẦN 2: MODAL PHỐI HÌNH KẾT QUẢ & LỜI KHUYÊN                               -->
+    <!-- ========================================================================== -->
+    <div class="outcome-modal-overlay" id="outcome-modal">
+        <div class="outcome-card">
+            <div class="outcome-visual-box" id="outcome-visual-box">
+                <span class="outcome-badge-pill" id="outcome-badge-type">🎉 THẮNG LỢI MƯU LƯỢC</span>
+                <img src="anh-nen.jpg" class="outcome-img" id="outcome-img" alt="Minh họa diễn biến" onerror="hienThiSvgThayThe()" />
+                <div class="outcome-svg-fallback" id="outcome-svg-wrap"></div>
+            </div>
+
+            <div class="outcome-stats-changes" id="outcome-stats-changes"></div>
+
+            <h3 class="outcome-desc-title" id="outcome-desc-title">Diễn Biến Chiến Cuộc</h3>
+            <p class="outcome-desc-text" id="outcome-desc-text"></p>
+
+            <div class="advice-golden-box">
+                <div class="advice-header">
+                    <span>💡 LỜI KHUYÊN & ĐẠO LÀM TƯỚNG:</span>
+                </div>
+                <div class="advice-content" id="outcome-advice-text"></div>
+            </div>
+
+            <button class="btn-outcome-next" onclick="tiepTucHanhTrinh()">
+                <span id="btn-outcome-text">Tiếp Tục Hành Trình →</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!--  PHẦN 3: POPUP RƠI VẬT PHẨM BẢO VẬT PHÁT SÁNG (LOOT POPUP)                  -->
+    <!-- ========================================================================== -->
+    <div class="loot-popup-overlay" id="item-drop-popup">
+        <div class="loot-card">
+            <span class="loot-pill-badge">✨ BẢO VẬT ĐẠI VIỆT KHAI MỞ</span>
+            <div class="loot-icon-halo" id="popup-item-icon">🏅</div>
+            <h3 class="loot-title" id="popup-item-name">Lệnh Bài Quân Y Nhân Từ</h3>
+            <p class="loot-desc" id="popup-item-desc">
+                Cứu chữa thương binh, giảm thương vong về 0 sau khói lửa chiến tranh.
+            </p>
+            <div class="loot-reward-box" id="popup-item-reward">
+                +500 Điểm Thưởng & Chữa lành toàn bộ Thương Binh!
+            </div>
+            <button class="btn-claim-loot" onclick="dongPopupVatPhamVaTiepTuc()">
+                Thu Nhận Vào Túi Bảo Vật 🎒
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!--  CÁC MODAL HỆ THỐNG: BẢNG XẾP HẠNG, KHO BẢO VẬT, ẢI KHÓA                 -->
+    <!-- ========================================================================== -->
+    <!-- Modal Bảng Xếp Hạng -->
+    <div class="modal-overlay" id="modal-leaderboard" onclick="dongModalNgoai(event, 'modal-leaderboard')">
+        <div class="ancient-modal">
+            <button class="modal-close-btn" onclick="dongModal('modal-leaderboard')">&times;</button>
+            <h3 class="modal-title">🏆 Bảng Vàng Danh Tướng</h3>
+            <p class="modal-subtitle">Ghi danh những bậc hiền tướng bảo quốc an dân với Điểm Nhân Đạo cao nhất</p>
+
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Hạng</th>
+                        <th>Danh Tướng</th>
+                        <th>Chiến Dịch</th>
+                        <th>Điểm Thưởng</th>
+                        <th>Danh Hiệu</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <tr class="current-player">
+                        <td>⭐</td>
+                        <td id="lb-current-name">Lý Tướng Quân</td>
+                        <td>Như Nguyệt</td>
+                        <td id="lb-current-score">100</td>
+                        <td id="lb-current-title">Bậc Khởi Sự</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Thái Úy Thường Kiệt</td>
+                        <td>Như Nguyệt</td>
+                        <td>3.850</td>
+                        <td>Đại Tướng Quân Nhân Nghĩa</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Quốc Công Tiết Chế</td>
+                        <td>Bạch Đằng</td>
+                        <td>3.620</td>
+                        <td>Vạn Cổ Anh Hùng</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Bình Định Vương</td>
+                        <td>Chi Lăng</td>
+                        <td>3.490</td>
+                        <td>Kiến Tạo Hòa Bình</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Tiền Quân Đô Đốc</td>
+                        <td>Như Nguyệt</td>
+                        <td>2.450</td>
+                        <td>Bảo Dân Như Tử</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="btn-modal-action" onclick="dongModal('modal-leaderboard')">Đóng Bảng Xếp Hạng</button>
+        </div>
+    </div>
+
+    <!-- Modal Kho Bảo Vật -->
+    <div class="modal-overlay" id="modal-vault" onclick="dongModalNgoai(event, 'modal-vault')">
+        <div class="ancient-modal">
+            <button class="modal-close-btn" onclick="dongModal('modal-vault')">&times;</button>
+            <h3 class="modal-title">🎒 Kho Tàng Bảo Vật Chiến Dịch</h3>
+            <p class="modal-subtitle">Bộ sưu tập 4 bảo vật biểu trưng cho lòng nhân ái và trí tuệ giữ nước</p>
+
+            <div class="vault-grid" id="vault-items-grid">
+                <!-- Sẽ render tự động trạng thái đã mở khóa / chưa mở khóa -->
+            </div>
+
+            <button class="btn-modal-action" onclick="dongModal('modal-vault')">Đã Rõ</button>
+        </div>
+    </div>
+
+    <!-- Modal Ải Đang Phát Triển -->
+    <div class="modal-overlay" id="modal-stage-locked" onclick="dongModalNgoai(event, 'modal-stage-locked')">
+        <div class="ancient-modal">
+            <button class="modal-close-btn" onclick="dongModal('modal-stage-locked')">&times;</button>
+            <h3 class="modal-title" id="locked-stage-title">⚔️ Chiến Dịch Sắp Ra Mắt</h3>
+            <p class="modal-subtitle">Phòng quân cơ đang đắp sa bàn chi tiết</p>
+
+            <div class="modal-notice-text" id="locked-stage-desc">
+                ⚔️ Chiến dịch Bạch Đằng Giang đang được hoàn thiện! Hãy vượt qua Ải Sông Như Nguyệt với Điểm Nhân Đạo cao nhất để sẵn sàng mở khóa.
+            </div>
+
+            <button class="btn-modal-action" onclick="dongModal('modal-stage-locked'); vaoAiNhuNguyet();">
+                Vào Ải Sông Như Nguyệt Trước
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!--  JAVASCRIPT CỐT LÕI: LOGIC PHẦN 1, 2 & 3                                   -->
+    <!-- ========================================================================== -->
+    <script>
+        /* ========================================================================== */
+        /*  1. TRẠNG THÁI TOÀN CỤC                                                    */
+        /* ========================================================================== */
+        var dangPhatNhac = true;
+        var giongDocBat = true;
+        var currentVoiceAudio = null;
+        var cachedVoices = [];
+
+        var gameState = {
+            tenDanhTuong: 'Lý Tướng Quân',
+            binhLuc: 50000,
+            thuongBinh: 0,
+            nganKho: 10000,
+            diemThuong: 100,
+            soVatPham: 0,
+            danhSachVatPham: [], // Mảng chứa ID các bảo vật đã thu thập
+            aiHienTai: 1,
+            giaiDoan: 'chien-tranh', // 'chien-tranh' hoặc 'hau-chien'
+            manHienTai: 1, // 1..5 trong chiến tranh, 1..3 trong hậu chiến
+            tongThuongBinhDaCuu: 0
+        };
+
+        // Danh mục 4 Bảo Vật Hậu Chiến
+        var khoVatPhamData = [
+            {
+                id: "lenh-bai-quan-y",
+                ten: "Lệnh Bài Quân Y Nhân Từ",
+                icon: "🏅",
+                diemThuong: 500,
+                moTa: "Mở Đại Y Quán bên sông Như Nguyệt, cứu chữa toàn bộ thương binh về 0, xoa dịu nỗi đau thể xác của hàng ngàn chiến sĩ.",
+                hieuUng: "Chữa lành toàn bộ Thương Binh về 0, +500 Điểm Thưởng"
+            },
+            {
+                id: "sac-chi-tri-an",
+                ten: "Sắc Chỉ Đền Ơn Đáp Nghĩa",
+                icon: "📜",
+                diemThuong: 600,
+                moTa: "Cấp ruộng đất vĩnh viễn và trợ cấp trọn đời cho thân nhân tử sĩ, dựng Bia Đá Liệt Sĩ nghìn thu bất hủ bên dòng sông.",
+                hieuUng: "+600 Điểm Thưởng, ghi danh muôn đời"
+            },
+            {
+                id: "doan-kiem-hoa-binh",
+                ten: "Đoản Kiếm Gác Lại — Biểu Tượng Hòa Bình",
+                icon: "🗡️",
+                diemThuong: 500,
+                moTa: "Người lính gác gươm cầm cuốc giúp dân cày cấy, mở ra kỷ nguyên thái bình thịnh trị cho bờ cõi Đại Việt.",
+                hieuUng: "+500 Điểm Thưởng, tượng trưng cho hòa ước"
+            },
+            {
+                id: "bo-lua-vang",
+                ten: "Bó Lúa Vàng Thịnh Trị",
+                icon: "🌾",
+                diemThuong: 400,
+                moTa: "Kho lương quân đội mở toang cứu tế dân lành, khôi phục mùa màng trĩu hạt đôi bờ sông Cầu sau khói lửa.",
+                hieuUng: "+400 Điểm Thưởng, bách tính ấm no"
+            }
+        ];
+
+        /* ========================================================================== */
+        /*  2. DỮ LIỆU 5 TÌNH HUỐNG CHIẾN TRANH                                      */
+        /* ========================================================================== */
+        var cacTinhHuongNhuNguyet = [
+            /* --- TÌNH HUỐNG 1 --- */
+            {
+                id: 1,
+                tieuDe: "Đắp Lũy Tre & Bố Trí Phòng Tuyến",
+                nhanVat: {
+                    ten: "Thái úy Lý Thường Kiệt",
+                    chucDanh: "Tổng chỉ huy chiến dịch",
+                    avatar: "👑"
+                },
+                cacCauThoai: [
+                    "Hơn 10 vạn đại quân Quách Quỳ đang ùn ùn kéo tới bờ bắc sông Như Nguyệt. Phía nam, ta cần gấp rút gia cố phòng tuyến trước khi kỵ binh giặc tìm được điểm vượt sông.",
+                    "Binh sĩ đã đào đất đắp lũy nhiều ngày trong gió bấc căm căm và bùn lầy buốt giá, sức cùng lực kiệt. Các tướng hãy định đoạt kế sách gia cố phòng lũy sao cho vẹn toàn nhất!"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        tieuDe: "Dựng Lũy Tre Già & Nấu Cháo Nóng Ấm Lòng Binh Sĩ",
+                        moTa: "Ken dày tre đực nhiều tầng cắm chông ngầm dưới sông; chia ca luân phiên cho quân sĩ nghỉ ngơi, trích 1.000 ngân khố nấu cháo nóng bồi dưỡng khí lực.",
+                        bienDong: { binhLuc: 0, thuongBinh: 0, nganKho: -1000, diemThuong: 350 },
+                        ketQua: {
+                            tieuDe: "Bức Tường Thành Tre Xanh Bất Khả Xâm Phạm",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "bamboo-fortress",
+                            loaiKetQua: "optimal",
+                            dienBien: "Được ăn ấm mặc kín và nghỉ ngơi hợp lý, quân sĩ hăng say đắp lũy ngày đêm. Trong 3 ngày, hàng triệu thân tre già ken dày thành chiến lũy kiên cố dài hàng trăm dặm dọc bờ sông. Dưới mép nước chông tre tua tủa, sẵn sàng bẻ gãy mọi đợt tấn công.",
+                            loiKhuyen: "Đạo làm tướng: 'Binh quý ở tinh thần, không quý ở sự hà khắc'. Dùng tre làm lũy là thuận theo thế đất non sông; chăm sóc binh sĩ chu đáo là thu phục lòng người. Quân dân một lòng, hiểm địa tự khắc vững như bàn thạch."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Hạ Lệnh Đào Hào Đắp Ụ Đất Thâu Đêm, Hứa Thưởng Bạc Sau",
+                        moTa: "Tập trung toàn lực đào hào sâu đắp ụ đất cao liên tục không ngừng nghỉ, hứa sau trận thắng sẽ trích bạc ban thưởng hậu hĩnh.",
+                        bienDong: { binhLuc: -500, thuongBinh: 400, nganKho: -500, diemThuong: 150 },
+                        ketQua: {
+                            tieuDe: "Hào Lũy Hoàn Thành Nhưng Quân Sĩ Hao Tổn",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "earth-trench",
+                            loaiKetQua: "moderate",
+                            dienBien: "Ụ đất đắp xong nhưng không ít chiến sĩ ngã quỵ vì lao lực trong mưa rét. Tuy phòng tuyến cơ bản hoàn thành nhưng sức chiến đấu ban đầu của toàn quân bị sứt mẻ rõ rệt.",
+                            loiKhuyen: "Lời khuyên: Lời hứa bạc thưởng trong tương lai không thể bù đắp cho bát cháo ấm và giấc ngủ lúc hiểm nguy. Trận địa tuy xong nhưng hao tổn sinh lực binh sĩ, đó là thắng lợi nửa vời."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Tiết Kiệm Ngân Khố, Ép Buộc Quân Pháp Lao Dịch Thâu Đêm",
+                        moTa: "Tiết kiệm tối đa ngân khố mua thêm cung nỏ, ban quân lệnh nghiêm: ai chậm trễ đắp lũy phạt trượng, bắt lao dịch thâu đêm không nghỉ.",
+                        bienDong: { binhLuc: -2000, thuongBinh: 1500, nganKho: 0, diemThuong: -200 },
+                        ketQua: {
+                            tieuDe: "Lòng Quân Oán Thán, Phòng Lũy Sạt Lở",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-collapse",
+                            loaiKetQua: "trap",
+                            dienBien: "Binh sĩ uất ức, kiệt sức đổ bệnh hàng loạt trong bùn lầy lạnh giá. Đất đắp vội vã gặp mưa bão sạt lở nghiêm trọng, tinh thần quân ngũ hoang mang, kỵ binh giặc nhòm ngó.",
+                            loiKhuyen: "BẪY TƯ DUY: Nghiêm khắc quá hóa tàn bạo! Tướng quân tiết kiệm được chút bạc nhưng đánh mất trọn vẹn lòng tin của sĩ tốt. Khi lòng quân đã oán, vũ khí dù bén cũng chẳng ai chịu cầm gươm liều chết."
+                        }
+                    },
+                    {
+                        key: "D",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Thừa Cơ Giặc Mệt Mỏi, Xua 2 Vạn Tinh Binh Vượt Sông Đánh Úp",
+                        moTa: "Thấy giặc vừa tới chân ướt chân ráo chưa kịp hạ trại, lập tức xua 2 vạn tinh binh vượt sông tập kích ban ngày để phá tan dã tâm giặc từ đầu!",
+                        bienDong: { binhLuc: -4500, thuongBinh: 2200, nganKho: -1200, diemThuong: -350 },
+                        ketQua: {
+                            tieuDe: "Trúng Kế Mai Phục, Mưa Tên Rợp Bờ Bắc",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-ambush",
+                            loaiKetQua: "trap",
+                            dienBien: "Giặc bờ bắc tuy mệt mỏi nhưng kỵ binh thiết giáp tinh nhuệ đã sớm mai phục trong rừng rậm. Quân ta vượt sông nửa chừng bị mưa tên chặn đánh, lên bờ bị kỵ binh giặc bao vây chém giết thảm khốc!",
+                            loiKhuyen: "BẪY TƯ DUY: Cái dũng của kẻ thất phu! Đem quân vượt sông đánh giặc đang đông gấp bội là tự chui đầu vào rọ. Bỏ sở trường thủy chiến bờ lũy để đấu kỵ binh trên đất bằng là sai lầm chí mạng trong binh pháp."
+                        }
+                    }
+                ]
+            },
+
+            /* --- TÌNH HUỐNG 2 --- */
+            {
+                id: 2,
+                tieuDe: "Đêm Sương Dịch Bệnh & Tinh Thần Quân Sĩ",
+                nhanVat: {
+                    ten: "Lão Quân Y Tuệ Minh",
+                    chucDanh: "Trưởng Y Quan tiền tuyến",
+                    avatar: "🌿"
+                },
+                cacCauThoai: [
+                    "Bẩm Thái úy! Mùa đông xứ Bắc gió bấc buốt giá, sương muối ẩm ướt ven sông làm dịch sốt rét và chứng phong hàn bùng phát dữ dội trong các lều trại.",
+                    "Hơn hai ngàn binh sĩ phát sốt mê man rên xiết bên đống lửa, thảo dược dự trữ đã cạn kiệt. Nếu không kịp cứu chữa, quân ta chưa đánh đã tự tan rã!"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        tieuDe: "Mở Kho Mua Thảo Dược Quý, Chủ Tướng Đích Thân Thăm Bệnh",
+                        moTa: "Trích 1.800 ngân khố khẩn cấp mua quế, gừng tươi và rượu ấm; đích thân Tướng quân cùng quân y đi thăm hỏi từng lều lính, động viên an ủi.",
+                        bienDong: { binhLuc: 0, thuongBinh: -800, nganKho: -1800, diemThuong: 450 },
+                        ketQua: {
+                            tieuDe: "Dịch Bệnh Tiêu Tan, Lòng Quân Cảm Động Rơi Lệ",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "medical-camp",
+                            loaiKetQua: "optimal",
+                            dienBien: "Khói xông thảo dược lan tỏa khắp doanh trại, bát nước gừng nóng sưởi ấm tâm can người lính. Thương bệnh binh nhanh chóng bình phục. Toàn quân cảm động rơi lệ trước tấm lòng của Chủ tướng, thề dốc cạn sinh mạng báo đền non sông.",
+                            loiKhuyen: "Đạo làm tướng: 'Thương binh sĩ như con em ruột thịt, chia ngọt sẻ bùi'. Tiền bạc trong ngân khố bỏ ra để cứu một mạng người lính chính là tích lũy vạn phân nhuệ khí cho giang sơn."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Cách Ly Lều Bệnh Ra Xa Bờ Sông, Dùng Lá Tre Dân Gian Cầm Cự",
+                        moTa: "Lập khu cách ly cách xa bờ sông, điều các thầy thuốc dân gian dùng lá tre, lá bưởi xông tạm thời để tiết kiệm ngân khố.",
+                        bienDong: { binhLuc: -600, thuongBinh: 600, nganKho: -400, diemThuong: 100 },
+                        ketQua: {
+                            tieuDe: "Dịch Bệnh Được Ngăn Nhưng Hồi Phục Chậm",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "isolated-camp",
+                            loaiKetQua: "moderate",
+                            dienBien: "Biện pháp cách ly ngăn được dịch lan rộng nhưng việc thiếu thuốc đặc trị khiến nhiều binh sĩ chuyển bệnh nặng và qua đời vì kiệt sức trong giá lạnh.",
+                            loiKhuyen: "Lời khuyên: Cách ly là đúng nhưng dùng thuốc cầm chừng khiến người lính phải chịu đau đớn kéo dài. Tiếc ngân khố trong lúc sinh tử sẽ phải trả giá bằng sinh mạng binh sĩ."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Lập Đàn Tế Trời Trừ Tà, Đuổi Người Bệnh Nặng Về Quê",
+                        moTa: "Lập đàn tế lễ trời đất trừ tà ma, cấm than vãn làm nhụt chí; ai sốt nặng lập tức đuổi về quê để tránh lây nhiễm cho toàn quân.",
+                        bienDong: { binhLuc: -3000, thuongBinh: 1800, nganKho: -800, diemThuong: -300 },
+                        ketQua: {
+                            tieuDe: "Lòng Quân Phẫn Nộ, Hàng Loạt Binh Sĩ Đào Ngũ",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-superstition",
+                            loaiKetQua: "trap",
+                            dienBien: "Hàng ngàn người ốm bị bỏ rơi chết rét bên vệ đường, tiếng khóc than xé lòng. Binh sĩ còn lại phẫn nộ, sĩ khí tan rã hoàn toàn, hàng loạt lính trốn trại trong đêm.",
+                            loiKhuyen: "BẪY TƯ DUY: Mê tín dị đoan và tàn nhẫn với đồng đội! Đẩy người ốm ra đường là phản bội lại lời thề bảo quốc an dân. Người làm tướng bất nhân thì muôn quân ắt sinh lòng phản nghịch."
+                        }
+                    },
+                    {
+                        key: "D",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Giữ Chặt Ngân Khố, Lệnh Binh Sĩ Tự Vào Rừng Tìm Lá Thuốc",
+                        moTa: "Giữ ngân quỹ lo việc quân lương đại sự, hạ lệnh cho binh sĩ tự vào rừng sâu tìm cây cỏ tự cứu chữa lẫn nhau.",
+                        bienDong: { binhLuc: -3500, thuongBinh: 2500, nganKho: 0, diemThuong: -400 },
+                        ketQua: {
+                            tieuDe: "Ngộ Độc Trầm Trọng, Phòng Tuyến Bị Bỏ Ngỏ",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-poison",
+                            loaiKetQua: "trap",
+                            dienBien: "Binh sĩ không am hiểu dược tính hái nhầm nấm độc và rễ cây lạ, ngộ độc chết la liệt. Dịch bệnh bùng phát không ai kiểm soát, phòng tuyến canh phòng gần như bỏ trống!",
+                            loiKhuyen: "BẪY TƯ DUY: Cái tiết kiệm mù quáng dẫn đến thảm họa! Để binh sĩ tự sinh tự diệt là biểu hiện của sự vô trách nhiệm. Giữ được tiền bạc mà mất cả một đạo quân là thất bại lớn nhất của người cầm quân."
+                        }
+                    }
+                ]
+            },
+
+            /* --- TÌNH HUỐNG 3 --- */
+            {
+                id: 3,
+                tieuDe: "Giặc Bắc Cầu Phao Vượt Sông Tấn Công",
+                nhanVat: {
+                    ten: "Trinh Sát Tiền Phương",
+                    chucDanh: "Đội tuần thám mạn bắc",
+                    avatar: "🏹"
+                },
+                cacCauThoai: [
+                    "Báo động nguy cấp! Tướng giặc Miêu Cảo dùng hàng trăm thuyền lớn ghép thành cầu phao khổng lồ bắc ngang khúc sông Cầu hẹp!",
+                    "Kỵ binh và bộ binh giặc đã tràn sang bãi bồi, máy bắn đá liên tục ném đá lớn phá sập lũy tre tầng một! Giặc đang xông thẳng vào đại doanh, xin Tướng quân định đoạt!"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        tieuDe: "Dụ Giặc Vào Bãi Lầy, Cho Thủy Quân Hỏa Công Đốt Cầu Phao",
+                        moTa: "Nhử kỵ binh giặc lọt sâu vào bãi bùn lún và trận địa chông ngầm; bất ngờ tung thuyền nhẹ hỏa công thiêu rụi cầu phao, cắt đứt đường lui của giặc.",
+                        bienDong: { binhLuc: -400, thuongBinh: 300, nganKho: -600, diemThuong: 500 },
+                        ketQua: {
+                            tieuDe: "Cầu Phao Đứt Đôi, Đạo Tiên Phong Giặc Bị Tiêu Diệt",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "bridge-fire",
+                            loaiKetQua: "optimal",
+                            dienBien: "Kỵ binh giặc hăm hở đuổi theo sa chân vào bãi bùn lún, tiến thoái lưỡng nan. Đúng lúc đó, ngọn lửa hỏa công từ thủy quân ta bùng lên thiêu rụi cầu phao! Toàn bộ cánh quân giặc bị bao vây tiêu diệt gọn gàng.",
+                            loiKhuyen: "Đạo làm tướng: 'Dĩ đoản chế trường' - lấy sở trường sông nước đánh sở đoản trên cạn của giặc. Dụ địch vào hiểm địa rồi triệt đường lui là đỉnh cao của mưu lược quân sự Đại Việt."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Tập Trung Toàn Bộ Cung Nỏ Bắn Ngăn Chặn, Cố Thủ Trong Lũy",
+                        moTa: "Bắn xối xả nỏ liên châu và máy bắn đá từ sau bờ lũy để ngăn giặc tiến bước, giữ vững thành trì không giao chiến giáp lá cà.",
+                        bienDong: { binhLuc: -1200, thuongBinh: 900, nganKho: -1000, diemThuong: 200 },
+                        ketQua: {
+                            tieuDe: "Chặn Đứng Giặc Nhưng Hao Tổn Tên Đạn Khổng Lồ",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "arrow-barrage",
+                            loaiKetQua: "moderate",
+                            dienBien: "Mưa tên chặn đứng được đợt tấn công nhưng tiêu tốn hàng vạn mũi tên và đá nỏ. Giặc rút về bờ bắc củng cố lại cầu phao, thế trận vẫn giằng co nghẹt thở.",
+                            loiKhuyen: "Lời khuyên: Phòng thủ thụ động tuy giữ được trận tuyến nhưng tốn hao khí tài cực lớn và để quyền chủ động vào tay giặc. Cần có đòn phản công hiểm hóc mới định đoạt được cục diện."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Mở Toang Cửa Lũy, Nghênh Chiến Giáp Lá Cà Trên Bãi Cát",
+                        moTa: "Hiệu lệnh toàn quân mở toang cổng lũy, dàn hàng nghênh chiến giáp lá cà với kỵ binh giặc ngay trên bãi cát ven sông để thể hiện dũng khí không sợ chết!",
+                        bienDong: { binhLuc: -5000, thuongBinh: 2800, nganKho: -800, diemThuong: -450 },
+                        ketQua: {
+                            tieuDe: "Bãi Cát Nhuộm Máu, Bộ Binh Bị Kỵ Binh Nghiền Nát",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-cavalry",
+                            loaiKetQua: "trap",
+                            dienBien: "Bộ binh ta mất đi lũy chắn chở che, lập tức bị khối kỵ binh giáp nặng của địch húc thủng đội hình. Bãi cát ven sông biến thành lò sát sinh thảm khốc, quân ta thương vong vô số!",
+                            loiKhuyen: "BẪY TƯ DUY: Đem sở đoản chọi sở trường! Bộ binh đứng giữa bãi cát bằng phẳng chống kỵ binh xung kích là điều cấm kỵ sơ đẳng trong binh pháp. Dũng cảm mù quáng chỉ đem lại cái chết oan uổng cho binh sĩ."
+                        }
+                    },
+                    {
+                        key: "D",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Bỏ Bờ Sông, Rút Quân Lùi Sâu Vào Rừng Nội Địa 10 Dặm",
+                        moTa: "Thấy lũy tre vỡ, lập tức hạ lệnh bỏ toàn bộ phòng tuyến bờ sông rút sâu vào rừng 10 dặm để bảo toàn lực lượng.",
+                        bienDong: { binhLuc: -2500, thuongBinh: 1200, nganKho: -2000, diemThuong: -400 },
+                        ketQua: {
+                            tieuDe: "Giặc Tràn Qua Sông Cướp Phá, Cửa Ngõ Thăng Long Nguy Cấp",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-retreat",
+                            loaiKetQua: "trap",
+                            dienBien: "Quân giặc tràn qua sông không gặp trở ngại nào, thiêu rụi phòng lũy, tràn vào cướp phá bách tính hai bên bờ. Cửa ngõ tiến vào kinh thành Thăng Long bị đe dọa nghiêm trọng!",
+                            loiKhuyen: "BẪY TƯ DUY: Hèn nhát và mất bình tĩnh! Phòng tuyến sông Như Nguyệt là lá chắn cuối cùng bảo vệ kinh thành. Bỏ bờ sông là trao ngực mình cho lưỡi gươm của giặc, bách tính rơi vào cảnh lầm than."
+                        }
+                    }
+                ]
+            },
+
+            /* --- TÌNH HUỐNG 4 --- */
+            {
+                id: 4,
+                tieuDe: "Giải Cứu Đội Quân Cảm Tử Bị Vây Hãm",
+                nhanVat: {
+                    ten: "Chiến Binh Trẻ",
+                    chucDanh: "Tiền quân cảm tử Hoàng Chân",
+                    avatar: "🩸"
+                },
+                cacCauThoai: [
+                    "Bẩm Chủ tướng! Cánh quân cảm tử 800 huynh đệ vượt sông nghi binh đã bị 5 vạn quân giặc phát hiện và bao vây tại đầm lau mạn bắc!",
+                    "Huynh đệ đã cạn tên hết lương, thương vong quá nửa nhưng vẫn cắm chặt ngọn cờ Đại Việt quyết tử. Xin Tướng quân cứu lấy các huynh đệ!"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        tieuDe: "Dương Đông Kích Tây: Giả Đánh Mạn Đông, Dùng Thuyền Nan Cứu Mạn Tây",
+                        moTa: "Bắn pháo sáng giả tấn công mạn đông để hút toàn bộ quân giặc; bí mật thả đội thuyền nan nhẹ luồn lách lau sậy mạn tây đón 800 huynh đệ an toàn trở về.",
+                        bienDong: { binhLuc: -100, thuongBinh: 250, nganKho: -500, diemThuong: 550 },
+                        ketQua: {
+                            tieuDe: "Giải Cứu Thần Tốc, Huynh Đệ Trùng Phùng Trong Nước Mắt",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "rescue-boats",
+                            loaiKetQua: "optimal",
+                            dienBien: "Quân giặc bờ bắc ùa sang mạn đông chặn đánh thuyền giả. Đội thuyền nan nhẹ áp sát đầm lau đưa toàn bộ thương binh cảm tử vượt sông an toàn trong tiếng reo hò rực sáng tình đồng đội!",
+                            loiKhuyen: "Đạo làm tướng: 'Trí mưu cứu mạng người, nghĩa khí giữ lòng quân'. Một vị tướng không bao giờ bỏ rơi binh sĩ của mình trong hiểm địa; dùng trí mưu giải cứu đồng đội là nghĩa cử cao đẹp nhất."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Bắn Hỏa Tiễn Chi Viện Từ Xa, Thả Bè Gỗ Chở Thuốc & Vũ Khí",
+                        moTa: "Bắn hỏa tiễn tầm xa chế áp từ bờ nam sang và thả bè gỗ chở thêm vũ khí, thuốc men sang bờ bắc để đội cảm tử tự phá vây.",
+                        bienDong: { binhLuc: -400, thuongBinh: 300, nganKho: -700, diemThuong: 180 },
+                        ketQua: {
+                            tieuDe: "Một Nửa Huynh Đệ Thoát Về, Số Còn Lại Nằm Lại Bờ Bắc",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "arrow-support",
+                            loaiKetQua: "moderate",
+                            dienBien: "Đội cảm tử nhận được một phần viện trợ vũ khí, gắng gượng phá vây nhưng chỉ một nửa số anh em bơi được về bờ nam, số còn lại đã vĩnh viễn nằm lại trong đầm lau.",
+                            loiKhuyen: "Lời khuyên: Viện trợ từ xa chỉ là giải pháp tạm thời. Thiếu sự dấn thân và kế sách táo bạo, sinh mạng đồng đội vẫn bị phó mặc cho số phận may rủi."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Bỏ Mặc Đội Cảm Tử, Phong Tỏa Tuyệt Đối Bến Sông",
+                        moTa: "Vì đại cục phòng tuyến, hạ lệnh bỏ mặc đội cảm tử; cấm tuyệt đối mọi thuyền bè qua sông để tránh làm tổn hại đại quân.",
+                        bienDong: { binhLuc: -1500, thuongBinh: 500, nganKho: 0, diemThuong: -500 },
+                        ketQua: {
+                            tieuDe: "800 Anh Em Bị Tàn Sát, Toàn Quân Oán Hận Sôi Sục",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-betrayal",
+                            loaiKetQua: "trap",
+                            dienBien: "Toàn bộ 800 chiến binh cảm tử bị giặc tàn sát man rợ. Tin tức truyền về bờ nam, toàn quân bàng hoàng phẫn nộ, sĩ khí đóng băng, nhiều tướng lĩnh uất ức bất phục mệnh!",
+                            loiKhuyen: "BẪY TƯ DUY: Lãnh huyết vô tình! Lấy danh nghĩa 'đại cục' để vứt bỏ mạng sống của đồng đội đang liều chết vì nước là tội ác lớn nhất của kẻ cầm quân. Khi lòng quân tan rã, đại cục cũng sẽ sụp đổ theo."
+                        }
+                    },
+                    {
+                        key: "D",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Phẫn Nộ Xua Đại Quân Vượt Sông Quyết Chiến Sinh Tử Giữa Ban Ngày",
+                        moTa: "Uất hận vì đồng đội bị vây, lập tức điều toàn bộ chiến thuyền và đại quân vượt sông quyết chiến sinh tử cứu người ngay giữa ban ngày.",
+                        bienDong: { binhLuc: -4000, thuongBinh: 2400, nganKho: -1500, diemThuong: -400 },
+                        ketQua: {
+                            tieuDe: "Trúng Kế 'Vây Điểm Diệt Viện', Thủy Quân Bị Đánh Chìm",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-ambush-river",
+                            loaiKetQua: "trap",
+                            dienBien: "Rơi trúng bẫy 'vây điểm diệt viện' của Quách Quỳ! Giặc đã bố trí sẵn máy bắn đá và bẫy hỏa tiễn dọc bờ sông, đại quân ta vừa cập bến đã bị đánh úp tả tơi, tổn thất vô cùng nặng nề.",
+                            loiKhuyen: "BẪY TƯ DUY: Để tình cảm lấn át lý trí! Cứu đồng đội là nghĩa vụ, nhưng đem tính mạng vạn quân đánh cược trong lúc giận dữ là tự sát. Kẻ địch chỉ chờ có thế để giăng bẫy tiêu diệt toàn bộ lực lượng ta."
+                        }
+                    }
+                ]
+            },
+
+            /* --- TÌNH HUỐNG 5 --- */
+            {
+                id: 5,
+                tieuDe: "Bài Thơ Thần & Mở Đường Giảng Hòa",
+                nhanVat: {
+                    ten: "Thái úy Lý Thường Kiệt",
+                    chucDanh: "Tổng chỉ huy chiến dịch",
+                    avatar: "👑"
+                },
+                cacCauThoai: [
+                    "Đêm nay giặc đã khốn đốn tột cùng, lương thảo cạn kiệt, dịch bệnh hoành hành. Sau khi bài thơ Thần 'Nam Quốc Sơn Hà' rền vang đền Trương Hống, quân giặc đã run sợ mất hết ý chí.",
+                    "Quách Quỳ tiến thoái lưỡng nan, đóng quân thì chết mòn, rút quân thì sợ triều đình xử tội. Đây là thời khắc lịch sử để định đoạt nền hòa bình cho trăm họ Đại Việt!"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        tieuDe: "Tập Kích Đêm Bẻ Gãy Ý Chí, Đưa Thư Giảng Hòa Cho Giặc Rút",
+                        moTa: "Tập kích chớp nhoáng ban đêm đánh tan nhuệ khí giặc, rồi lập tức sai sứ sang đưa thư giảng hòa, mở lối cho Quách Quỳ rút quân trong danh dự, dập tắt vĩnh viễn chiến tranh.",
+                        bienDong: { binhLuc: -200, thuongBinh: 150, nganKho: -800, diemThuong: 700 },
+                        ketQua: {
+                            tieuDe: "Khói Lửa Tan Biến, Nền Hòa Bình Vạn Thuở Mở Ra",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "peace-dawn",
+                            loaiKetQua: "optimal",
+                            dienBien: "Một trận tập kích thần tốc bẻ gãy hoàn toàn dã tâm giặc. Nhận được thư hòa hiếu và thể diện rút lui, Quách Quỳ mừng rỡ triệt thoái toàn bộ 10 vạn quân về nước. Giang sơn sạch bóng quân thù, ngàn năm độc lập vững bền!",
+                            loiKhuyen: "ĐẠO LÀM TƯỚNG TỐI CAO: 'Mưu phạt tâm công - Đánh vào lòng người hơn đánh vào thành trì'. Chiến tranh mục đích cuối cùng là hòa bình chứ không phải thù hận. Đánh thắng mà mở đường cho giặc rút trong danh dự mới là tầm nhìn vĩ đại của bậc danh tướng!"
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Bao Vây Chặt Chẽ Chờ Giặc Cạn Lương Tự Tan Rã Rồi Bắt Sống",
+                        moTa: "Bao vây chặt chẽ các nẻo đường, cắt đứt hoàn toàn tiếp tế, kiên nhẫn chờ giặc chết đói tự tan rã rồi mới bắt sống Quách Quỳ.",
+                        bienDong: { binhLuc: -600, thuongBinh: 500, nganKho: -1500, diemThuong: 250 },
+                        ketQua: {
+                            tieuDe: "Giặc Đầu Hàng Nhưng Chiến Tranh Kéo Dài Hao Tổn",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "siege-wait",
+                            loaiKetQua: "moderate",
+                            dienBien: "Giặc bị đói khát cùng đường cố thủ hơn 2 tháng, chiến tranh kéo dài gây hao tổn quốc khố và dân sinh hai bờ sông trước khi giặc chịu khuất phục.",
+                            loiKhuyen: "Lời khuyên: Kéo dài chiến sự khiến quốc khố hao tổn và dân lành gánh chịu tai ương. Biết dừng đúng lúc khi đã nắm chắc phần thắng mới là thượng sách."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Thừa Thắng Truy Kích Tàn Sát Hết 10 Vạn Quân Giặc Để Rửa Hận",
+                        moTa: "Thừa thắng truy cùng đuổi tận, hạ lệnh tàn sát sạch sẽ 10 vạn quân giặc không chừa một ai để rửa hận ngàn năm cho đất nước!",
+                        bienDong: { binhLuc: -8000, thuongBinh: 4000, nganKho: -2500, diemThuong: -600 },
+                        ketQua: {
+                            tieuDe: "Giặc Liều Chết Tử Chiến, Hai Bên Cùng Chìm Trong Tang Thương",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-bloodbath",
+                            loaiKetQua: "trap",
+                            dienBien: "Bị dồn vào chân tường không còn đường sống, 10 vạn quân giặc liều chết tử chiến 'cùng thú xé lưới'! Quân ta thương vong vô cùng thê thảm, triều đình phương Bắc nuôi hận sâu sắc thề sẽ động binh báo thù!",
+                            loiKhuyen: "BẪY TƯ DUY: Hiếu chiến và tàn sát! Binh pháp dạy: 'Vi tử địa tắc chiến' - dồn giặc vào đường cùng chúng sẽ cắn lại gấp mười. Gieo mầm hận thù chỉ khiến non sông đời đời phải chịu cảnh khói lửa can qua."
+                        }
+                    },
+                    {
+                        key: "D",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Cắt Đất Biên Giới & Nộp 5.000 Lượng Vàng Cầu Hòa Ngay",
+                        moTa: "Thấy giặc còn đông, không cần đánh thêm, lập tức cắt 3 châu biên giới và dâng nộp 5.000 lượng vàng cầu hòa ngay để giặc nhanh rút quân.",
+                        bienDong: { binhLuc: -1000, thuongBinh: 0, nganKho: -5000, diemThuong: -500 },
+                        ketQua: {
+                            tieuDe: "Giặc Lấn Tới Yêu Sách, Ô Danh Khí Phách Đại Việt",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-surrender",
+                            loaiKetQua: "trap",
+                            dienBien: "Tướng giặc thấy ta nhu nhược lập tức lấn tới, vừa lấy vàng bạc vừa đòi giữ đất và yêu cầu nộp thêm cống phẩm hàng năm, làm ô danh khí phách Đại Việt!",
+                            loiKhuyen: "BẪY TƯ DUY: Hèn nhát và cầu an! Hòa bình chỉ có được khi ta đứng trên thế mạnh của chính nghĩa và lòng dũng cảm. Cắt đất cầu hòa là tự rước lấy diệt vong và để lại vết nhơ muôn đời cho hậu thế."
+                        }
+                    }
+                ]
+            }
+        ];
+
+        /* ========================================================================== */
+        /*  3. DỮ LIỆU PHẦN 3: 3 TÌNH HUỐNG HẬU CHIẾN & VẬT PHẨM BẢO VẬT              */
+        /* ========================================================================== */
+        var cacTinhHuongHauChien = [
+            /* --- HẬU CHIẾN 1 --- */
+            {
+                id: 1,
+                tieuDe: "Lập Đại Y Quán & Cứu Chữa Thương Binh",
+                nhanVat: {
+                    ten: "Lão Quân Y Tuệ Minh",
+                    chucDanh: "Trưởng Y Quan tiền tuyến",
+                    avatar: "🌿"
+                },
+                cacCauThoai: [
+                    "Khói lửa vừa dứt trên sông Như Nguyệt, tiếng hò reo chiến thắng vang dậy non sông, nhưng nhìn khắp các chiến hào là hàng ngàn thương binh đang quằn quại trong đau đớn.",
+                    "Quân lương đã vơi, ngân khố còn lại không nhiều. Có tướng khuyên nên cho thương binh tự về quê để giảm gánh nặng ngân khố, nhưng cũng có ý kiến xin dốc cạn ngân khố mời danh y khắp nước về cứu mạng anh em..."
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        vatPhamId: "lenh-bai-quan-y",
+                        tieuDe: "Dốc 2.000 Ngân Khố Mở Đại Y Quán, Chữa Lành Toàn Bộ Thương Binh Về 0",
+                        moTa: "Mời danh y khắp nước, dùng thuốc tốt nhất cứu chữa thương binh đến khi bình phục hoàn toàn trước khi cho về quê.",
+                        bienDong: { binhLuc: 0, thuongBinh: -99999, nganKho: -2000, diemThuong: 500 },
+                        ketQua: {
+                            tieuDe: "Đại Y Quán Bên Sông — Hàng Ngàn Chiến Sĩ Thoát Cửa Tử",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "medical-postwar",
+                            loaiKetQua: "optimal",
+                            dienBien: "Đại Y Quán được dựng lên bên dòng sông thanh bình. Toàn bộ thương binh được chăm sóc chu đáo, vết thương lành lặn. Tiếng rên xiết chuyển thành nụ cười rạng rỡ và những giọt nước mắt biết ơn của binh sĩ.",
+                            loiKhuyen: "Đạo làm tướng: 'Người lính đổ máu cho giang sơn thì giang sơn không được phụ người lính'. Lập Y Quán cứu chữa thương binh là hành động nhân đạo cao cả nhất sau chiến tranh."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Cấp Thuốc Men Cơ Bản Rồi Cho Thuyền Đưa Binh Sĩ Về Quê Tự Chữa",
+                        moTa: "Trích 800 Ngân Khố phát thuốc men cơ bản rồi cho thuyền đưa thương binh về quê điều dưỡng, giảm bớt chi phí hậu chiến cho đại quân.",
+                        bienDong: { binhLuc: 0, thuongBinh: -500, nganKho: -800, diemThuong: 200 },
+                        ketQua: {
+                            tieuDe: "Binh Sĩ Được Về Quê Nhưng Vết Thương Còn Đau Đớn",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "isolated-camp",
+                            loaiKetQua: "moderate",
+                            dienBien: "Binh sĩ được về quê nhưng thiếu thốn thuốc men chữa trị đường dài khiến nhiều vết thương tái phát đau đớn, việc hồi phục kéo dài dai dẳng.",
+                            loiKhuyen: "Lời khuyên: Để người lính tự chữa bệnh ở quê nhà là thiếu trọn vẹn nghĩa tình. Trách nhiệm của chủ tướng chỉ thực sự khép lại khi vết thương của binh sĩ đã lành lặn."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Dùng 3.000 Ngân Khố Xây Cổng Khải Hoàn Nguy Nga Để Phô Trương Uy Thế",
+                        moTa: "Dành 3.000 Ngân Khố xây cổng khải hoàn đồ sộ để đón mừng chiến thắng, giảm tiền thuốc men để binh sĩ tự chịu đựng vì 'thương tích là chuyện thường sau trận'.",
+                        bienDong: { binhLuc: -500, thuongBinh: 500, nganKho: -3000, diemThuong: -400 },
+                        ketQua: {
+                            tieuDe: "Cổng Khải Hoàn Đồ Sộ Mọc Lên Bên Nỗi Đau Binh Sĩ",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-collapse",
+                            loaiKetQua: "trap",
+                            dienBien: "Cổng khải hoàn nguy nga mọc lên bên cạnh những túp lều thương binh lạnh lẽo không thuốc chữa. Lòng dân ngao ngán, binh sĩ oán hờn nhìn cổng thành trong cay đắng.",
+                            loiKhuyen: "BẪY TƯ DUY: Hám danh và vô cảm! Xây tượng đài rực rỡ trên sự đau đớn của người lính là sự sỉ nhục với chiến thắng. Tượng đài vĩ đại nhất của một vị tướng phải được tạc trong lòng dân và sự sống của binh sĩ."
+                        }
+                    }
+                ]
+            },
+
+            /* --- HẬU CHIẾN 2 --- */
+            {
+                id: 2,
+                tieuDe: "Tri Ân Thân Nhân Liệt Sĩ & Lập Đàn Cầu Siêu",
+                nhanVat: {
+                    ten: "Thái úy Lý Thường Kiệt",
+                    chucDanh: "Tổng chỉ huy chiến dịch",
+                    avatar: "👑"
+                },
+                cacCauThoai: [
+                    "Bên bến đò Như Nguyệt, biết bao bà mẹ, người vợ ngóng trông bóng hình người thân trở về trong vô vọng. Hàng ngàn nấm mồ mới đắp cỏ chưa kịp xanh...",
+                    "Chiến tranh đã qua đi, nhưng nỗi đau mất đi trụ cột gia đình đè nặng lên từng nóc nhà. Tướng quân sẽ xử trí việc đền ơn đáp nghĩa này ra sao?"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        vatPhamId: "sac-chi-tri-an",
+                        tieuDe: "Cấp Ruộng Đất Trọn Đời Cho Thân Nhân, Dựng Bia Đá & Lập Đàn Cầu Siêu",
+                        moTa: "Trích 2.000 Ngân Khố cấp ruộng đất canh tác và trợ cấp nuôi con thơ cho gia đình liệt sĩ; dựng Bia Đá Tri Ân và lập đại lễ cầu siêu cho anh linh hai bên bờ.",
+                        bienDong: { binhLuc: 0, thuongBinh: 0, nganKho: -2000, diemThuong: 600 },
+                        ketQua: {
+                            tieuDe: "Bia Đá Ngàn Thu Bất Hủ — Ấm Lòng Người Còn Kẻ Mất",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "memorial-stone",
+                            loaiKetQua: "optimal",
+                            dienBien: "Hàng ngàn gia đình liệt sĩ được cấp ruộng đất sinh kế lâu dài. Bia đá khắc tên từng người lính sừng sững bên dòng sông, hương khói nghi ngút sưởi ấm anh linh những người đã ngã xuống bảo vệ bờ cõi.",
+                            loiKhuyen: "Đạo làm tướng: 'Uống nước nhớ nguồn, đền ơn đáp nghĩa'. Không để gia đình liệt sĩ rơi vào cảnh bần cùng là nền tảng giữ vững vận nước ngàn đời."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Dâng Biểu Về Triều Đình Xin Sắc Phong, Tặng Hũ Gạo & Bạc An Ủi",
+                        moTa: "Dâng biểu chờ triều đình xét duyệt sắc phong sau, trước mắt trích 800 Ngân Khố tặng mỗi gia đình tử sĩ vài hũ gạo và một nén bạc làm quà an ủi.",
+                        bienDong: { binhLuc: 0, thuongBinh: 0, nganKho: -800, diemThuong: 250 },
+                        ketQua: {
+                            tieuDe: "Cứu Trợ Tạm Thời, Nỗi Lo Sinh Kế Vẫn Đè Nặng",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "isolated-camp",
+                            loaiKetQua: "moderate",
+                            dienBien: "Gia đình tử sĩ nhận quà cứu trợ tạm thời nhưng cuộc sống tương lai vẫn bấp bênh khi không có ruộng đất sinh kế lâu dài để nuôi con thơ.",
+                            loiKhuyen: "Lời khuyên: Trợ cấp ngắn hạn chỉ giải quyết được cái đói trước mắt. Sự tri ấn chân chính phải là kế sách sinh kế dài lâu cho gia đình những người đã xả thân vì nước."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Chỉ Khen Thưởng Tướng Soái, Bỏ Rơi Binh Sĩ Tử Trận Để Giữ Quỹ",
+                        moTa: "Tuyên bố tử trận là nghĩa vụ của thảo dân; chỉ chi ngân khố ban thưởng cho các tướng soái lập công đầu, không trợ cấp cho thân nhân binh sĩ để giữ ngân quỹ.",
+                        bienDong: { binhLuc: -1000, thuongBinh: 0, nganKho: 0, diemThuong: -500 },
+                        ketQua: {
+                            tieuDe: "Bách Tính Căm Phẫn, Lòng Người Ly Tán",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-betrayal",
+                            loaiKetQua: "trap",
+                            dienBien: "Bách tính căm phẫn, tiếng than khóc xé lòng nơi thôn xóm. Người đời sau không còn ai muốn tòng quân cứu nước vì sợ gia đình bị bỏ rơi sau chiến tranh.",
+                            loiKhuyen: "BẪY TƯ DUY: Bạc nghĩa vô ân! Coi rẻ máu xương của người lính là tự chặt đứt rễ cây của giang sơn. Một đất nước không biết ơn những người ngã xuống sẽ không bao giờ có người đứng lên bảo vệ khi giặc đến lần sau."
+                        }
+                    }
+                ]
+            },
+
+            /* --- HẬU CHIẾN 3 --- */
+            {
+                id: 3,
+                tieuDe: "Mở Kho Lương Cứu Tế Dân Lành & Tái Thiết Mùa Màng",
+                nhanVat: {
+                    ten: "Lão Nông Dân Bờ Sông",
+                    chucDanh: "Đại diện bách tính vùng Như Nguyệt",
+                    avatar: "🌾"
+                },
+                cacCauThoai: [
+                    "Bẩm Chủ tướng! Chiến sự mấy tháng mùa đông đã làm xóm làng hai bên bờ tan hoang, ruộng đồng trơ trụi, nhà cửa bị giặc đốt phá tiêu điều.",
+                    "Bách tính đang đối mặt với nạn đói mùa giáp hạt. Mùa vụ gieo cấy đã tới nhưng không còn thóc giống, trâu cày bị cướp phá... Xin Tướng quân cứu lấy dân lành!"
+                ],
+                luaChon: [
+                    {
+                        key: "A",
+                        loai: "optimal",
+                        vatPhamId: "bo-lua-vang",
+                        tieuDe: "Mở Toang Kho Lương Cứu Đói, Binh Sĩ Gác Gươm Giúp Dân Làm Mùa",
+                        moTa: "Mở toàn bộ kho lương quân đội phát thóc giống và cứu tế cho dân; cho hàng vạn binh sĩ gác gươm cầm cuốc đắp lại đê điều, cày cấy giúp bách tính.",
+                        bienDong: { binhLuc: 0, thuongBinh: 0, nganKho: -1500, diemThuong: 700 },
+                        ketQua: {
+                            tieuDe: "Mùa Vàng Hồi Sinh — Binh Dân Chung Sức Tạo Thái Bình",
+                            anh: "anh-nen2.jpg",
+                            svgLoai: "golden-rice",
+                            loaiKetQua: "optimal",
+                            dienBien: "Doanh trại quân đội biến thành trung tâm cứu trợ. Binh sĩ xắn tay cày cấy cùng dân lành, tiếng cười rộn rã trên những cánh đồng mạ non xanh biếc. Sông Như Nguyệt hồi sinh trong cảnh thái bình thịnh trị.",
+                            loiKhuyen: "Đạo làm tướng: 'Dân là gốc của nước, gốc có vững thì nước mới yên'. Dốc lương của quân cứu đói cho dân là việc làm thuận lòng trời đất. Khi dân ấm no, non sông ắt thái bình muôn thuở."
+                        }
+                    },
+                    {
+                        key: "B",
+                        loai: "moderate",
+                        tieuDe: "Cho Dân Vay Thóc Giống Lãi Thấp, Miễn Thuế 1 Năm",
+                        moTa: "Cho bách tính vay thóc giống trong kho với lãi suất nhẹ và miễn thuế 1 năm để dân tự lực gầy dựng lại kinh tế gia đình.",
+                        bienDong: { binhLuc: 0, thuongBinh: 0, nganKho: -600, diemThuong: 200 },
+                        ketQua: {
+                            tieuDe: "Mùa Màng Tái Thiết Chậm Chạp, Dân Còn Lo Nợ",
+                            anh: "anh-nen.jpg",
+                            svgLoai: "isolated-camp",
+                            loaiKetQua: "moderate",
+                            dienBien: "Bách tính có giống gieo cấy nhưng gánh nặng trả nợ vẫn khiến việc phục hồi chậm chạp, mất nhiều năm ruộng đồng mới xanh tốt trở lại như xưa.",
+                            loiKhuyen: "Lời khuyên: Giúp dân bằng cách cho vay trong lúc khốn cùng là thiếu sự hào sảng của bậc trượng phu. Lúc dân gặp nạn, cần dốc lòng cứu giúp chứ không nên tính toán thiệt hơn."
+                        }
+                    },
+                    {
+                        key: "C",
+                        loai: "trap",
+                        tieuDe: "[BẪY] Đánh Thuế Chiến Phí Lên Bách Tính Để Bù Đắp Ngân Khố",
+                        moTa: "Ngân khố đã cạn sau trận đánh, ra lệnh cho bách tính hai bờ sông phải đóng thêm phụ thu 'thuế chiến phí' để triều đình bù vào quỹ quân sự.",
+                        bienDong: { binhLuc: -800, thuongBinh: 0, nganKho: 2000, diemThuong: -600 },
+                        ketQua: {
+                            tieuDe: "Dân Kiệt Quệ Bán Con Bỏ Xứ, Oán Khí Ngập Trời",
+                            anh: "hinh-4.jpg",
+                            svgLoai: "trap-surrender",
+                            loaiKetQua: "trap",
+                            dienBien: "Dân lành đã kiệt quệ nay lại bị ép thuế nặng nề, nhiều gia đình phải bán con, bỏ xứ phiêu bạt. Oán khí ngút trời, trộm cướp nổi lên khắp nơi, hậu quả còn tàn khốc hơn cả giặc xâm lăng!",
+                            loiKhuyen: "BẪY TƯ DUY: Bóc ngắn cắn dài, tàn hại dân sinh! Vừa đánh xong giặc ngoài đã quay sang bóc lột dân mình là điều tối kỵ của bậc cầm quyền. Thu được chút vàng bạc mà mất đi lòng dân là tự chuốc lấy họa diệt vong."
+                        }
+                    }
+                ]
+            }
+        ];
+
+        /* ========================================================================== */
+        /*  4. ENGINE VISUAL NOVEL & GIỌNG ĐỌC DẪN CHUYỆN                            */
+        /* ========================================================================== */
+        var cauThoaiChiSo = 0;
+        var dangGoChu = false;
+        var goChuTimeout = null;
+        var vanBanHienTai = "";
+
+        function batDauMan(manIndex) {
+            gameState.manHienTai = manIndex;
+            cauThoaiChiSo = 0;
+
+            var dsTinhHuong = (gameState.giaiDoan === 'hau-chien') ? cacTinhHuongHauChien : cacTinhHuongNhuNguyet;
+            var tinhHuong = dsTinhHuong[manIndex - 1];
+
+            // Cập nhật Header tiến trình
+            var badgeEl = document.getElementById('stage-badge-number');
+            if (gameState.giaiDoan === 'hau-chien') {
+                badgeEl.className = 'chapter-pill postwar';
+                badgeEl.textContent = 'Hậu Chiến ' + manIndex + ' / 3';
+                document.getElementById('header-phase-badge').textContent = 'Hậu Chiến Bù Đắp';
+            } else {
+                badgeEl.className = 'chapter-pill';
+                badgeEl.textContent = 'Tình Huống ' + manIndex + ' / 5';
+                document.getElementById('header-phase-badge').textContent = 'Ải Như Nguyệt';
+            }
+            document.getElementById('stage-title-text').textContent = tinhHuong.tieuDe;
+
+            // Render tiến trình dots
+            var dotsWrap = document.getElementById('chapter-dots-container');
+            dotsWrap.innerHTML = "";
+            var tongSoMan = dsTinhHuong.length;
+            for (var i = 1; i <= tongSoMan; i++) {
+                var dot = document.createElement('span');
+                dot.className = 'prog-dot';
+                if (i < manIndex) dot.classList.add('completed');
+                else if (i === manIndex) dot.classList.add('active');
+                dotsWrap.appendChild(dot);
+            }
+
+            // Cập nhật nhân vật
+            document.getElementById('vn-speaker-avatar').textContent = tinhHuong.nhanVat.avatar;
+            document.getElementById('vn-speaker-name').textContent = tinhHuong.nhanVat.ten;
+            document.getElementById('vn-speaker-role').textContent = tinhHuong.nhanVat.chucDanh;
+
+            // Ẩn lựa chọn, hiện hộp thoại
+            document.getElementById('choices-section').classList.remove('active');
+            document.getElementById('vn-dialogue-box').style.display = 'block';
+
+            hienThiCauThoai(0);
+        }
+
+        function hienThiCauThoai(index) {
+            var dsTinhHuong = (gameState.giaiDoan === 'hau-chien') ? cacTinhHuongHauChien : cacTinhHuongNhuNguyet;
+            var tinhHuong = dsTinhHuong[gameState.manHienTai - 1];
+
+            if (index >= tinhHuong.cacCauThoai.length) {
+                document.getElementById('vn-dialogue-box').style.display = 'none';
+                hienThiBangLuaChon();
+                return;
+            }
+
+            cauThoaiChiSo = index;
+            vanBanHienTai = tinhHuong.cacCauThoai[index];
+            var textBox = document.getElementById('vn-text-content');
+            textBox.textContent = "";
+
+            if (giongDocBat) {
+                phatGiongDoc(vanBanHienTai);
+            }
+
+            dangGoChu = true;
+            if (goChuTimeout) clearTimeout(goChuTimeout);
+            var charIndex = 0;
+
+            function goKyTu() {
+                if (!dangGoChu) {
+                    textBox.textContent = vanBanHienTai;
+                    return;
+                }
+                if (charIndex < vanBanHienTai.length) {
+                    textBox.textContent += vanBanHienTai.charAt(charIndex);
+                    charIndex++;
+                    goChuTimeout = setTimeout(goKyTu, 22);
+                } else {
+                    dangGoChu = false;
+                }
+            }
+            goKyTu();
+        }
+
+        function xuLyTapHopThoai(event) {
+            if (event) event.stopPropagation();
+
+            if (dangGoChu) {
+                dangGoChu = false;
+                if (goChuTimeout) clearTimeout(goChuTimeout);
+                document.getElementById('vn-text-content').textContent = vanBanHienTai;
+            } else {
+                hienThiCauThoai(cauThoaiChiSo + 1);
+            }
+        }
+
+        function ngheLaiGiongDocThoai(event) {
+            if (event) event.stopPropagation();
+            if (vanBanHienTai) {
+                phatGiongDoc(vanBanHienTai);
+            }
+        }
+
+        /* ========================================================================== */
+        /*  5. HIỂN THỊ CÁC LỰA CHỌN QUYẾT ĐỊNH                                       */
+        /* ========================================================================== */
+        function hienThiBangLuaChon() {
+            var dsTinhHuong = (gameState.giaiDoan === 'hau-chien') ? cacTinhHuongHauChien : cacTinhHuongNhuNguyet;
+            var tinhHuong = dsTinhHuong[gameState.manHienTai - 1];
+            var container = document.getElementById('choices-container');
+            container.innerHTML = "";
+
+            var labelPhu = (gameState.giaiDoan === 'hau-chien') ? "Quyết Sách Hậu Chiến" : "Kháng Tuyến Như Nguyệt";
+            document.getElementById('choices-header-text').textContent = (gameState.giaiDoan === 'hau-chien')
+                ? "🕊️ Mời Tướng quân định đoạt chính sách bù đắp & tái thiết:"
+                : "⚔️ Mời Tướng quân hạ lệnh định đoạt phương án:";
+
+            tinhHuong.luaChon.forEach(function(lc) {
+                var card = document.createElement('div');
+                card.className = 'choice-card';
+                card.onclick = function() {
+                    chonPhuongAn(lc);
+                };
+
+                card.innerHTML = `
+                    <div class="choice-card-top">
+                        <span class="choice-key-badge">${(gameState.giaiDoan === 'hau-chien') ? 'Quyết Sách ' + lc.key : 'Kế Sách ' + lc.key}</span>
+                        <span style="font-size: 0.75rem; color: var(--chu-phu);">${labelPhu}</span>
+                    </div>
+                    <h4 class="choice-title">${lc.tieuDe}</h4>
+                    <p class="choice-desc">${lc.moTa}</p>
+                `;
+
+                container.appendChild(card);
+            });
+
+            document.getElementById('choices-section').classList.add('active');
+
+            if (giongDocBat) {
+                var loiNhac = (gameState.giaiDoan === 'hau-chien')
+                    ? "Mời Tướng quân lựa chọn quyết sách nhân đạo cho bách tính và thương binh."
+                    : "Mời Tướng quân hạ lệnh định đoạt phương án cho phòng tuyến sông Như Nguyệt!";
+                phatGiongDoc(loiNhac);
+            }
+        }
+
+        /* ========================================================================== */
+        /*  6. XỬ LÝ LỰA CHỌN, TRAO VẬT PHẨM & PHỐI HÌNH KẾT QUẢ                      */
+        /* ========================================================================== */
+        var pendingItemDrops = [];
+
+        function chonPhuongAn(luaChon) {
+            tatGiongDoc();
+
+            if (luaChon.loai === 'trap') {
+                var stageWrapper = document.getElementById('game-stage-wrapper');
+                stageWrapper.classList.add('screen-shake');
+                setTimeout(function() { stageWrapper.classList.remove('screen-shake'); }, 500);
+            }
+
+            // 1. Cập nhật chỉ số
+            var bd = luaChon.bienDong;
+            gameState.binhLuc = Math.max(0, gameState.binhLuc + bd.binhLuc);
+            
+            // Nếu là tình huống lập Y quán chữa lành về 0
+            if (bd.thuongBinh === -99999) {
+                gameState.tongThuongBinhDaCuu += gameState.thuongBinh;
+                bd.thuongBinh = -gameState.thuongBinh;
+                gameState.thuongBinh = 0;
+            } else {
+                if (bd.thuongBinh < 0) {
+                    gameState.tongThuongBinhDaCuu += Math.abs(bd.thuongBinh);
+                }
+                gameState.thuongBinh = Math.max(0, gameState.thuongBinh + bd.thuongBinh);
+            }
+
+            gameState.nganKho = Math.max(0, gameState.nganKho + bd.nganKho);
+            gameState.diemThuong = Math.max(0, gameState.diemThuong + bd.diemThuong);
+
+            taoFloatingHUD(bd);
+            capNhatHUD();
+
+            // 2. Kiểm tra rơi vật phẩm bảo vật
+            pendingItemDrops = [];
+            if (luaChon.vatPhamId) {
+                var item1 = khoVatPhamData.find(function(it) { return it.id === luaChon.vatPhamId; });
+                if (item1 && !gameState.danhSachVatPham.includes(item1.id)) {
+                    pendingItemDrops.push(item1);
+                }
+                // Nếu chọn cứu tế dân lành, thưởng thêm Đoản Kiếm Hòa Bình
+                if (luaChon.vatPhamId === 'bo-lua-vang') {
+                    var item2 = khoVatPhamData.find(function(it) { return it.id === 'doan-kiem-hoa-binh'; });
+                    if (item2 && !gameState.danhSachVatPham.includes(item2.id)) {
+                        pendingItemDrops.push(item2);
+                    }
+                }
+            }
+
+            // 3. Chuẩn bị Modal Phối Hình & Lời Khuyên
+            var kq = luaChon.ketQua;
+            var badgeEl = document.getElementById('outcome-badge-type');
+            if (luaChon.loai === 'optimal') {
+                badgeEl.className = 'outcome-badge-pill badge--optimal';
+                badgeEl.textContent = (gameState.giaiDoan === 'hau-chien') ? '🕊️ QUYẾT SÁCH NHÂN NGHĨA CAO ĐẸP' : '🎉 THẮNG LỢI MƯU LƯỢC & NHÂN ĐẠO';
+            } else if (luaChon.loai === 'trap') {
+                badgeEl.className = 'outcome-badge-pill badge--trap';
+                badgeEl.textContent = '⚠️ TRÚNG BẪY TƯ DUY TAI HẠI';
+            } else {
+                badgeEl.className = 'outcome-badge-pill badge--moderate';
+                badgeEl.textContent = '⚖️ PHƯƠNG ÁN TRUNG DUNG';
+            }
+
+            var imgEl = document.getElementById('outcome-img');
+            var svgWrap = document.getElementById('outcome-svg-wrap');
+            imgEl.style.display = 'block';
+            svgWrap.style.display = 'none';
+            imgEl.src = kq.anh;
+
+            svgWrap.innerHTML = taoSvgNgheThuat(kq.svgLoai);
+
+            var statsWrap = document.getElementById('outcome-stats-changes');
+            statsWrap.innerHTML = `
+                <span class="stat-change-tag ${bd.binhLuc >= 0 ? 'positive' : 'negative'}">
+                    🛡️ Binh Lực: ${bd.binhLuc >= 0 ? '+' + bd.binhLuc : bd.binhLuc}
+                </span>
+                <span class="stat-change-tag ${bd.thuongBinh <= 0 ? 'positive' : 'negative'}">
+                    🩸 Thương Binh: ${bd.thuongBinh > 0 ? '+' + bd.thuongBinh : bd.thuongBinh}
+                </span>
+                <span class="stat-change-tag ${bd.nganKho >= 0 ? 'positive' : 'negative'}">
+                    💰 Ngân Khố: ${bd.nganKho >= 0 ? '+' + bd.nganKho : bd.nganKho}
+                </span>
+                <span class="stat-change-tag gold">
+                    ✨ Điểm Thưởng: ${bd.diemThuong >= 0 ? '+' + bd.diemThuong : bd.diemThuong}
+                </span>
+            `;
+
+            document.getElementById('outcome-desc-title').textContent = kq.tieuDe;
+            document.getElementById('outcome-desc-text').textContent = kq.dienBien;
+            document.getElementById('outcome-advice-text').textContent = kq.loiKhuyen;
+
+            if (gameState.giaiDoan === 'chien-tranh' && gameState.manHienTai >= 5) {
+                document.getElementById('btn-outcome-text').textContent = 'Bước Sang Giai Đoạn Hậu Chiến (Bù Đắp) →';
+            } else if (gameState.giaiDoan === 'hau-chien' && gameState.manHienTai >= 3) {
+                document.getElementById('btn-outcome-text').textContent = 'Xem Bảng Tổng Kết Chiến Dịch Toàn Diện →';
+            } else {
+                document.getElementById('btn-outcome-text').textContent = 'Tiếp Tục Tình Huống Kế Tiếp →';
+            }
+
+            document.getElementById('outcome-modal').classList.add('open');
+
+            if (giongDocBat) {
+                setTimeout(function() {
+                    phatGiongDoc(kq.dienBien + " " + kq.loiKhuyen);
+                }, 300);
+            }
+        }
+
+        function hienThiSvgThayThe() {
+            var imgEl = document.getElementById('outcome-img');
+            var svgWrap = document.getElementById('outcome-svg-wrap');
+            if (imgEl && svgWrap) {
+                imgEl.style.display = 'none';
+                svgWrap.style.display = 'block';
+            }
+        }
+
+        function taoFloatingHUD(bd) {
+            var container = document.getElementById('hud-floating-container');
+            if (!container) return;
+
+            var badges = [];
+            if (bd.binhLuc !== 0) {
+                badges.push({
+                    text: (bd.binhLuc > 0 ? '+' : '') + bd.binhLuc.toLocaleString('vi-VN') + ' Quân',
+                    color: bd.binhLuc > 0 ? '#2ecc71' : '#ff6b6b'
+                });
+            }
+            if (bd.thuongBinh !== 0) {
+                if (bd.thuongBinh === -99999 || (gameState.thuongBinh === 0 && bd.thuongBinh < 0)) {
+                    badges.push({
+                        text: '-100% Thương Binh (Đã cứu chữa hết!)',
+                        color: '#2ecc71'
+                    });
+                } else {
+                    badges.push({
+                        text: (bd.thuongBinh > 0 ? '+' : '') + bd.thuongBinh.toLocaleString('vi-VN') + ' Thương Binh',
+                        color: bd.thuongBinh > 0 ? '#ff6b6b' : '#2ecc71'
+                    });
+                }
+            }
+            if (bd.nganKho !== 0) {
+                badges.push({
+                    text: (bd.nganKho > 0 ? '+' : '') + bd.nganKho.toLocaleString('vi-VN') + ' Ngân Khố',
+                    color: bd.nganKho > 0 ? '#ffd152' : '#e67e22'
+                });
+            }
+            if (bd.diemThuong !== 0) {
+                badges.push({
+                    text: (bd.diemThuong > 0 ? '+' : '') + bd.diemThuong.toLocaleString('vi-VN') + ' Điểm Thưởng',
+                    color: bd.diemThuong > 0 ? '#ffd152' : '#e74c3c'
+                });
+            }
+
+            badges.forEach(function(b, idx) {
+                setTimeout(function() {
+                    var el = document.createElement('div');
+                    el.className = 'hud-floating-badge';
+                    el.style.color = b.color;
+                    el.style.borderColor = b.color;
+                    el.textContent = b.text;
+                    container.appendChild(el);
+                    setTimeout(function() {
+                        if (el.parentNode) el.parentNode.removeChild(el);
+                    }, 2200);
+                }, idx * 120);
+            });
+        }
+
+        /* Tiếp tục hành trình & Kiểm tra bung Loot Popup */
+        function tiepTucHanhTrinh() {
+            tatGiongDoc();
+            document.getElementById('outcome-modal').classList.remove('open');
+
+            // Nếu có vật phẩm rơi ra, hiện popup nhận quà trước khi chuyển màn
+            if (pendingItemDrops.length > 0) {
+                var itemToDrop = pendingItemDrops.shift();
+                nhanVatPham(itemToDrop, function() {
+                    chuyenManTiepTheo();
+                });
+            } else {
+                chuyenManTiepTheo();
+            }
+        }
+
+        function chuyenManTiepTheo() {
+            if (gameState.giaiDoan === 'chien-tranh') {
+                if (gameState.manHienTai < 5) {
+                    batDauMan(gameState.manHienTai + 1);
+                    window.scrollTo({ top: 100, behavior: 'smooth' });
+                } else {
+                    batDauGiaiDoanHauChien();
+                }
+            } else {
+                if (gameState.manHienTai < 3) {
+                    batDauMan(gameState.manHienTai + 1);
+                    window.scrollTo({ top: 100, behavior: 'smooth' });
+                } else {
+                    hienThiBangTongKetToanDien();
+                }
+            }
+        }
+
+        /* Chuyển sang Giai đoạn Hậu Chiến */
+        function batDauGiaiDoanHauChien() {
+            gameState.giaiDoan = 'hau-chien';
+            gameState.manHienTai = 1;
+
+            document.getElementById('bg-layer-el').classList.add('peaceful');
+            batDauMan(1);
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        /* Xử lý nhận bảo vật & hiển thị Loot Popup */
+        var lootCallbackTiepTheo = null;
+
+        function nhanVatPham(item, callback) {
+            if (!gameState.danhSachVatPham.includes(item.id)) {
+                gameState.danhSachVatPham.push(item.id);
+                gameState.soVatPham = gameState.danhSachVatPham.length;
+                capNhatHUD();
+            }
+
+            lootCallbackTiepTheo = callback;
+
+            var popup = document.getElementById('item-drop-popup');
+            document.getElementById('popup-item-icon').textContent = item.icon;
+            document.getElementById('popup-item-name').textContent = item.ten;
+            document.getElementById('popup-item-desc').textContent = item.moTa;
+            document.getElementById('popup-item-reward').textContent = "🎁 " + item.hieuUng;
+
+            popup.classList.add('open');
+
+            if (giongDocBat) {
+                phatGiongDoc("Chúc mừng Tướng quân đã thu nhận bảo vật: " + item.ten + ". " + item.hieuUng);
+            }
+        }
+
+        function dongPopupVatPhamVaTiepTuc() {
+            tatGiongDoc();
+            document.getElementById('item-drop-popup').classList.remove('open');
+
+            if (pendingItemDrops.length > 0) {
+                var nextItem = pendingItemDrops.shift();
+                setTimeout(function() {
+                    nhanVatPham(nextItem, lootCallbackTiepTheo);
+                }, 300);
+            } else if (lootCallbackTiepTheo) {
+                var cb = lootCallbackTiepTheo;
+                lootCallbackTiepTheo = null;
+                cb();
+            }
+        }
+
+        /* ========================================================================== */
+        /*  7. BẢNG TỔNG KẾT CHIẾN DỊCH TOÀN DIỆN & HÉ LỘ ẢI BẠCH ĐẰNG GIANG           */
+        /* ========================================================================== */
+        function hienThiBangTongKetToanDien() {
+            var box = document.getElementById('game-stage');
+
+            var danhHieu = "Đại Tướng Quân Nhân Nghĩa";
+            var danhHieuDesc = "Lấy lòng nhân ái cảm hóa muôn dân, cứu chữa vẹn toàn sĩ tốt và kiến tạo thái bình thịnh trị cho non sông.";
+            if (gameState.diemThuong >= 3500 && gameState.thuongBinh === 0) {
+                danhHieu = "ĐẠI TƯỚNG QUÂN NHÂN NGHĨA — BẬC KIẾN TẠO HÒA BÌNH";
+                danhHieuDesc = "Hoàn hảo mọi quyết sách! Vừa thắng giặc trên sông vừa cứu lành 100% thương binh, cấp ruộng cho liệt sĩ và ấm no cho bách tính.";
+            } else if (gameState.diemThuong >= 2500) {
+                danhHieu = "HỔ TƯỚNG VẸN TOÀN — BẢO DÂN NHƯ TỬ";
+                danhHieuDesc = "Thao lược kiệt xuất, bảo toàn phần lớn binh lực và vỗ về bách tính sau khói lửa chiến tranh.";
+            } else if (gameState.diemThuong >= 1800) {
+                danhHieu = "DŨNG TƯỚNG TRẬN MẠC";
+                danhHieuDesc = "Trận tuyến giữ vững nhưng còn để hao tổn quân lương và sinh mạng binh sĩ.";
+            } else {
+                danhHieu = "TƯỚNG QUÂN NÓNG VỘI";
+                danhHieuDesc = "Nhiều lần rơi vào bẫy tư duy khiến quân sĩ thương vong. Hãy chơi lại để học cách dụng binh nhân đạo!";
+            }
+
+            var shelfHtml = "";
+            khoVatPhamData.forEach(function(it) {
+                var isGot = gameState.danhSachVatPham.includes(it.id);
+                shelfHtml += `
+                    <div class="shelf-item-card ${isGot ? 'obtained' : 'locked'}">
+                        <div class="shelf-item-icon">${it.icon}</div>
+                        <div class="shelf-item-info">
+                            <h5>${it.ten}</h5>
+                            <span>${isGot ? '✨ ĐÃ SỞ HỮU (+ ' + it.diemThuong + ' Điểm)' : '🔒 Chưa thu thập'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            box.innerHTML = `
+                <div class="summary-dashboard">
+                    <div class="summary-hero-crest">👑</div>
+                    <h2 class="summary-title-top">ĐẠI THẮNG CHIẾN DỊCH SÔNG NHƯ NGUYỆT</h2>
+                    <p class="summary-subtitle">
+                        "Bài thơ Thần còn vang vọng non sông — Khói lửa tan biến — Trăm họ Đại Việt thái bình an lạc"
+                    </p>
+
+                    <div class="title-awarded-card">
+                        <div class="title-awarded-label">Sắc Phong Danh Hiệu Danh Tướng</div>
+                        <div class="title-awarded-name">${danhHieu}</div>
+                        <p style="font-size: 0.88rem; color: var(--chu-sang); margin-top: 6px; font-style: italic;">
+                            ${danhHieuDesc}
+                        </p>
+                    </div>
+
+                    <div class="summary-stats-grid">
+                        <div class="summary-stat-cell">
+                            <div class="stat-icon">🛡️</div>
+                            <div class="stat-name">Binh Lực Bảo Toàn</div>
+                            <div class="stat-val">${gameState.binhLuc.toLocaleString('vi-VN')} <small style="font-size: 0.75rem;">/ 50.000</small></div>
+                        </div>
+
+                        <div class="summary-stat-cell">
+                            <div class="stat-icon">🩸</div>
+                            <div class="stat-name">Thương Binh Còn Lại</div>
+                            <div class="stat-val ${gameState.thuongBinh === 0 ? 'green-val' : 'red-val'}">
+                                ${gameState.thuongBinh === 0 ? '0 (Đã Cứu Chữa Hết)' : gameState.thuongBinh.toLocaleString('vi-VN')}
+                            </div>
+                        </div>
+
+                        <div class="summary-stat-cell">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-name">Ngân Khố Còn Lại</div>
+                            <div class="stat-val gold-val">${gameState.nganKho.toLocaleString('vi-VN')} <small style="font-size: 0.75rem;">vàng</small></div>
+                        </div>
+
+                        <div class="summary-stat-cell">
+                            <div class="stat-icon">🎒</div>
+                            <div class="stat-name">Bảo Vật Thu Thập</div>
+                            <div class="stat-val" style="color: #2ecc71;">${gameState.danhSachVatPham.length} / 4 <small style="font-size: 0.75rem;">(${Math.round(gameState.danhSachVatPham.length / 4 * 100)}%)</small></div>
+                        </div>
+
+                        <div class="summary-stat-cell">
+                            <div class="stat-icon">✨</div>
+                            <div class="stat-name">Tổng Điểm Thưởng</div>
+                            <div class="stat-val gold-val">${gameState.diemThuong.toLocaleString('vi-VN')}</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-loot-shelf">
+                        <div class="loot-shelf-header">
+                            <span>🎒 KHO TÀNG BẢO VẬT THU THẬP TRONG CHIẾN DỊCH</span>
+                            <span style="font-size: 0.85rem; color: var(--chu-phu);">${gameState.danhSachVatPham.length}/4 Bảo vật</span>
+                        </div>
+                        <div class="loot-items-row">
+                            ${shelfHtml}
+                        </div>
+                    </div>
+
+                    <div class="next-campaign-preview">
+                        <span class="preview-badge-status">🔒 CHIẾN DỊCH TIẾP THEO — SẮP RA MẮT</span>
+                        <h3 class="preview-title">Ải 2: Bạch Đằng Giang Dậy Sóng (Năm 938 & 1288)</h3>
+                        <p class="preview-desc">
+                            "Sóng cuộn Bạch Đằng nghìn thu cọc nhọn chôn giặc dữ. Nối tiếp hào khí Như Nguyệt, bạn sẽ cùng Ngô Quyền và Tiết Chế Hưng Đạo Đại Vương bước vào trận địa thủy chiến vĩ đại nhất lịch sử nước nhà!"
+                        </p>
+                    </div>
+
+                    <div class="summary-actions-row">
+                        <button class="btn-summary-action btn-replay-stage" onclick="choiLaiAi1()">
+                            <span>🔄</span> Chơi Lại Ải Như Nguyệt
+                        </button>
+                        <button class="btn-summary-action btn-view-leaderboard" onclick="moModalBangXepHang()">
+                            <span>🏆</span> Bảng Xếp Hạng
+                        </button>
+                        <button class="btn-summary-action btn-view-leaderboard" onclick="quayVeLobby()">
+                            <span>🗺️</span> Về Bản Đồ Chọn Ải
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            localStorage.setItem('diemSaBan_' + gameState.tenDanhTuong, gameState.diemThuong);
+            capNhatLeaderboardRow(danhHieu);
+
+            if (giongDocBat) {
+                phatGiongDoc("Chúc mừng Tướng quân " + gameState.tenDanhTuong + " đã toàn thắng Ải sông Như Nguyệt và được phong tặng danh hiệu: " + danhHieu + "! Hãy chuẩn bị sẵn sàng cho chiến dịch Bạch Đằng Giang dậy sóng!");
+            }
+        }
+
+        function capNhatLeaderboardRow(danhHieu) {
+            var lbName = document.getElementById('lb-current-name');
+            var lbScore = document.getElementById('lb-current-score');
+            var lbTitle = document.getElementById('lb-current-title');
+            if (lbName) lbName.textContent = gameState.tenDanhTuong;
+            if (lbScore) lbScore.textContent = gameState.diemThuong.toLocaleString('vi-VN');
+            if (lbTitle) lbTitle.textContent = danhHieu;
+        }
+
+        function choiLaiAi1() {
+            gameState.binhLuc = 50000;
+            gameState.thuongBinh = 0;
+            gameState.nganKho = 10000;
+            gameState.diemThuong = 100;
+            gameState.soVatPham = 0;
+            gameState.danhSachVatPham = [];
+            gameState.giaiDoan = 'chien-tranh';
+            gameState.manHienTai = 1;
+            gameState.tongThuongBinhDaCuu = 0;
+
+            document.getElementById('bg-layer-el').classList.remove('peaceful');
+            capNhatHUD();
+            vaoAiNhuNguyet();
+        }
+
+        /* ========================================================================== */
+        /*  8. SVG MINH HỌA NGHỆ THUẬT ĐA DẠNG CHO TẤT CẢ KẾT QUẢ                     */
+        /* ========================================================================== */
+        function taoSvgNgheThuat(loai) {
+            if (loai === "medical-postwar") {
+                return `
+                    <svg width="100%" height="100%" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="800" height="220" fill="#1b120c"/>
+                        <circle cx="400" cy="90" r="70" fill="#2ecc71" opacity="0.15"/>
+                        <path d="M 250,180 L 400,60 L 550,180 Z" fill="#2d2018" stroke="#D4AF37" stroke-width="2"/>
+                        <circle cx="400" cy="115" r="24" fill="#27ae60" opacity="0.8"/>
+                        <text x="400" y="125" font-size="28" text-anchor="middle" fill="#fff" font-weight="bold">✚</text>
+                        <path d="M 120,200 Q 200,160 400,180 T 680,200" stroke="#2ecc71" stroke-width="2" fill="none" opacity="0.5"/>
+                    </svg>
+                `;
+            }
+            if (loai === "memorial-stone") {
+                return `
+                    <svg width="100%" height="100%" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="800" height="220" fill="#18110d"/>
+                        <ellipse cx="400" cy="190" rx="90" ry="20" fill="#2c201a" stroke="#D4AF37" stroke-width="2"/>
+                        <rect x="360" y="50" width="80" height="130" rx="8" fill="#3b2b22" stroke="#F5D77F" stroke-width="2.5"/>
+                        <circle cx="400" cy="40" r="50" fill="#D4AF37" opacity="0.2"/>
+                        <line x1="375" y1="75" x2="425" y2="75" stroke="#D4AF37" stroke-width="2"/>
+                        <line x1="375" y1="95" x2="425" y2="95" stroke="#D4AF37" stroke-width="2"/>
+                        <line x1="375" y1="115" x2="425" y2="115" stroke="#D4AF37" stroke-width="2"/>
+                        <line x1="375" y1="135" x2="425" y2="135" stroke="#D4AF37" stroke-width="2"/>
+                    </svg>
+                `;
+            }
+            if (loai === "golden-rice") {
+                return `
+                    <svg width="100%" height="100%" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="800" height="120" fill="#2a1e16"/>
+                        <rect y="120" width="800" height="100" fill="#382915"/>
+                        <circle cx="680" cy="50" r="35" fill="#f39c12" opacity="0.6"/>
+                        <g stroke="#f1c40f" stroke-width="2" stroke-linecap="round">
+                            <line x1="100" y1="200" x2="110" y2="130"/>
+                            <line x1="160" y1="200" x2="155" y2="125"/>
+                            <line x1="220" y1="200" x2="230" y2="128"/>
+                            <line x1="320" y1="200" x2="315" y2="120"/>
+                            <line x1="450" y1="200" x2="460" y2="132"/>
+                            <line x1="580" y1="200" x2="575" y2="126"/>
+                            <line x1="700" y1="200" x2="710" y2="130"/>
+                        </g>
+                    </svg>
+                `;
+            }
+            if (loai === "bridge-fire") {
+                return `
+                    <svg width="100%" height="100%" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="800" height="220" fill="#140a06"/>
+                        <!-- Cầu phao bốc cháy & ngọn lửa hỏa công -->
+                        <path d="M 150,150 L 350,150 L 380,180 L 120,180 Z" fill="#4a2211"/>
+                        <path d="M 450,150 L 650,150 L 680,180 L 420,180 Z" fill="#4a2211"/>
+                        <g fill="#e74c3c" opacity="0.85">
+                            <polygon points="350,150 400,60 450,150"/>
+                            <polygon points="200,160 250,80 300,160"/>
+                            <polygon points="500,160 550,85 600,160"/>
+                        </g>
+                        <g fill="#f39c12" opacity="0.9">
+                            <polygon points="370,150 400,85 430,150"/>
+                            <polygon points="220,160 250,105 280,160"/>
+                            <polygon points="520,160 550,110 580,160"/>
+                        </g>
+                        <circle cx="400" cy="90" r="15" fill="#f1c40f"/>
+                    </svg>
+                `;
+            }
+            return `
+                <svg width="100%" height="100%" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#1c120c"/>
+                            <stop offset="100%" stop-color="#3d2015"/>
+                        </linearGradient>
+                        <linearGradient id="riverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#2a1b14"/>
+                            <stop offset="100%" stop-color="#140d0a"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="800" height="130" fill="url(#skyGrad)"/>
+                    <rect y="130" width="800" height="90" fill="url(#riverGrad)"/>
+                    <circle cx="680" cy="50" r="26" fill="#F5D77F" opacity="0.8"/>
+                    <path d="M 0,130 Q 80,110 160,130 T 320,130 T 480,130 T 640,130 T 800,130 L 800,150 L 0,150 Z" fill="#2d4a22" opacity="0.7"/>
+                    <path d="M 180,165 C 240,165 290,175 310,160 C 270,185 220,185 170,175 Z" fill="#7B1E1E"/>
+                </svg>
+            `;
+        }
+
+        /* ========================================================================== */
+        /*  9. HỆ THỐNG AUDIO & TTS VOICEOVER                                        */
+        /* ========================================================================== */
+        var bgMusic = document.getElementById('bg-music');
+
+        function khoiTaoNhacNen() {
+            if (!bgMusic) return;
+
+            var savedTime = localStorage.getItem('audioTime');
+            if (savedTime && !isNaN(savedTime)) {
+                bgMusic.currentTime = parseFloat(savedTime);
+            }
+
+            var savedMusicState = localStorage.getItem('nhacDangPhat');
+            if (savedMusicState === 'false') {
+                dangPhatNhac = false;
+                capNhatUINhac(false);
+            } else {
+                dangPhatNhac = true;
+                capNhatUINhac(true);
+            }
+
+            bgMusic.volume = 0.6;
+
+            if (dangPhatNhac) {
+                var playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        capNhatUINhac(true);
+                    }).catch(function() {
+                        capNhatUINhac(false);
+                        var kichHoatKhiTuongTac = function() {
+                            if (dangPhatNhac) {
+                                bgMusic.play().then(function() {
+                                    capNhatUINhac(true);
+                                    localStorage.setItem('nhacDangPhat', 'true');
+                                }).catch(function() {});
+                            }
+                            ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+                                window.removeEventListener(evt, kichHoatKhiTuongTac);
+                            });
+                        };
+                        ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+                            window.addEventListener(evt, kichHoatKhiTuongTac, { once: true });
+                        });
+                    });
+                }
+            }
+        }
+
+        setInterval(function() {
+            if (bgMusic && !bgMusic.paused) {
+                localStorage.setItem('audioTime', bgMusic.currentTime);
+            }
+        }, 500);
+
+        function capNhatUINhac(isDangPhat) {
+            var btn = document.getElementById('btn-toggle-music');
+            var text = document.getElementById('music-btn-text');
+            if (!btn || !text) return;
+            if (isDangPhat) {
+                btn.classList.add('active');
+                text.textContent = 'Nhạc: Bật';
+            } else {
+                btn.classList.remove('active');
+                text.textContent = 'Nhạc: Tắt';
+            }
+        }
+
+        document.getElementById('btn-toggle-music').addEventListener('click', function() {
+            if (!bgMusic) return;
+            if (dangPhatNhac) {
+                bgMusic.pause();
+                dangPhatNhac = false;
+                localStorage.setItem('nhacDangPhat', 'false');
+                capNhatUINhac(false);
+            } else {
+                bgMusic.play().then(function() {
+                    dangPhatNhac = true;
+                    localStorage.setItem('nhacDangPhat', 'true');
+                    capNhatUINhac(true);
+                }).catch(function() {});
+            }
+        });
+
+        var duckInterval = null;
+        function giamAmLuongNhacNen(targetVol) {
+            if (!bgMusic) return;
+            if (duckInterval) clearInterval(duckInterval);
+            duckInterval = setInterval(function() {
+                if (bgMusic.volume > targetVol + 0.05) {
+                    bgMusic.volume = Math.max(targetVol, bgMusic.volume - 0.05);
+                } else {
+                    bgMusic.volume = targetVol;
+                    clearInterval(duckInterval);
+                }
+            }, 40);
+        }
+
+        function khoiPhucAmLuongNhacNen(targetVol) {
+            if (!bgMusic) return;
+            if (duckInterval) clearInterval(duckInterval);
+            duckInterval = setInterval(function() {
+                if (bgMusic.volume < targetVol - 0.05) {
+                    bgMusic.volume = Math.min(targetVol, bgMusic.volume + 0.05);
+                } else {
+                    bgMusic.volume = targetVol;
+                    clearInterval(duckInterval);
+                }
+            }, 40);
+        }
+
+        function setTrangThaiGiongDocUI(dangDoc) {
+            var indicator = document.getElementById('voice-indicator');
+            if (indicator) {
+                if (dangDoc) indicator.classList.add('speaking');
+                else indicator.classList.remove('speaking');
+            }
+        }
+
+        function loadVoices() {
+            if ('speechSynthesis' in window) {
+                cachedVoices = window.speechSynthesis.getVoices();
+            }
+        }
+        if ('speechSynthesis' in window) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function phatGiongDoc(text, audioFileUrl) {
+            if (!giongDocBat) return;
+            tatGiongDoc();
+            giamAmLuongNhacNen(0.15);
+            setTrangThaiGiongDocUI(true);
+
+            if (audioFileUrl && audioFileUrl.trim() !== '') {
+                try {
+                    currentVoiceAudio = new Audio(audioFileUrl);
+                    currentVoiceAudio.onended = function() {
+                        khoiPhucAmLuongNhacNen(0.6);
+                        setTrangThaiGiongDocUI(false);
+                        currentVoiceAudio = null;
+                    };
+                    currentVoiceAudio.onerror = function() {
+                        phatSpeechSynthesis(text);
+                    };
+                    currentVoiceAudio.play().catch(function() {
+                        phatSpeechSynthesis(text);
+                    });
+                    return;
+                } catch(e) {
+                    phatSpeechSynthesis(text);
+                    return;
+                }
+            }
+
+            phatSpeechSynthesis(text);
+        }
+
+        function phatSpeechSynthesis(text) {
+            if (!('speechSynthesis' in window)) {
+                khoiPhucAmLuongNhacNen(0.6);
+                setTrangThaiGiongDocUI(false);
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+            var cleanText = text.replace(/<[^>]*>/g, '').trim();
+            var utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = 'vi-VN';
+            utterance.rate = 0.95;
+            utterance.pitch = 0.9;
+
+            if (cachedVoices.length === 0) {
+                cachedVoices = window.speechSynthesis.getVoices();
+            }
+            var viVoice = cachedVoices.find(function(v) {
+                return v.lang === 'vi-VN' || v.lang === 'vi_VN' || (v.lang && v.lang.startsWith('vi'));
+            });
+            if (viVoice) {
+                utterance.voice = viVoice;
+            }
+
+            utterance.onstart = function() {
+                giamAmLuongNhacNen(0.15);
+                setTrangThaiGiongDocUI(true);
+            };
+
+            utterance.onend = function() {
+                khoiPhucAmLuongNhacNen(0.6);
+                setTrangThaiGiongDocUI(false);
+            };
+
+            utterance.onerror = function() {
+                khoiPhucAmLuongNhacNen(0.6);
+                setTrangThaiGiongDocUI(false);
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function tatGiongDoc() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            if (currentVoiceAudio) {
+                currentVoiceAudio.pause();
+                currentVoiceAudio.currentTime = 0;
+                currentVoiceAudio = null;
+            }
+            khoiPhucAmLuongNhacNen(0.6);
+            setTrangThaiGiongDocUI(false);
+        }
+
+        var btnToggleVoice = document.getElementById('btn-toggle-voice');
+        btnToggleVoice.addEventListener('click', function() {
+            giongDocBat = !giongDocBat;
+            localStorage.setItem('giongDocBat', giongDocBat ? 'true' : 'false');
+            var btnText = document.getElementById('voice-btn-text');
+
+            if (giongDocBat) {
+                btnToggleVoice.classList.add('active');
+                btnText.textContent = 'Giọng Đọc: Bật';
+                if (vanBanHienTai) {
+                    phatGiongDoc(vanBanHienTai);
+                }
+            } else {
+                btnToggleVoice.classList.remove('active');
+                btnText.textContent = 'Giọng Đọc: Tắt';
+                tatGiongDoc();
+            }
+        });
+
+        /* ========================================================================== */
+        /*  10. ĐIỀU HƯỚNG SẢNH CHỜ & CÁC MODAL HỆ THỐNG                               */
+        /* ========================================================================== */
+        var lobbyScreen = document.getElementById('lobby-screen');
+        var gameStageWrapper = document.getElementById('game-stage-wrapper');
+        var topHud = document.getElementById('top-hud');
+
+        function capNhatHUD() {
+            document.getElementById('hud-army').textContent = gameState.binhLuc.toLocaleString('vi-VN');
+            document.getElementById('hud-injured').textContent = gameState.thuongBinh.toLocaleString('vi-VN');
+            document.getElementById('hud-treasury').textContent = gameState.nganKho.toLocaleString('vi-VN');
+            document.getElementById('hud-points').textContent = gameState.diemThuong.toLocaleString('vi-VN');
+            document.getElementById('hud-items').textContent = gameState.soVatPham + ' / 4';
+
+            var lbScore = document.getElementById('lb-current-score');
+            if (lbScore) lbScore.textContent = gameState.diemThuong.toLocaleString('vi-VN');
+        }
+
+        function vaoAiNhuNguyet() {
+            lobbyScreen.style.display = 'none';
+            topHud.classList.add('active');
+            gameStageWrapper.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            capNhatHUD();
+            batDauMan(1);
+        }
+
+        function quayVeLobby() {
+            tatGiongDoc();
+            gameStageWrapper.classList.remove('active');
+            topHud.classList.remove('active');
+            lobbyScreen.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function baoAiDangPhatTrien(tenAi) {
+            document.getElementById('locked-stage-title').textContent = '⚔️ ' + tenAi;
+            document.getElementById('locked-stage-desc').innerHTML = 
+                '⚔️ Chiến dịch <strong>' + tenAi + '</strong> đang được hoàn thiện! Hãy vượt qua <strong>Ải Sông Như Nguyệt</strong> với Điểm Nhân Đạo cao nhất để sẵn sàng mở khóa khi bản cập nhật ra mắt.';
+            moModal('modal-stage-locked');
+        }
+
+        var playerNameInput = document.getElementById('player-name-input');
+        var savedName = localStorage.getItem('tenDanhTuong');
+        if (savedName && savedName.trim() !== '') {
+            gameState.tenDanhTuong = savedName;
+            playerNameInput.value = savedName;
+        }
+
+        playerNameInput.addEventListener('input', function() {
+            var val = playerNameInput.value.trim();
+            if (val) {
+                gameState.tenDanhTuong = val;
+                localStorage.setItem('tenDanhTuong', val);
+                var lbName = document.getElementById('lb-current-name');
+                if (lbName) lbName.textContent = val;
+            }
+        });
+
+        function moModal(id) {
+            var modal = document.getElementById(id);
+            if (modal) modal.classList.add('open');
+        }
+
+        function dongModal(id) {
+            var modal = document.getElementById(id);
+            if (modal) modal.classList.remove('open');
+        }
+
+        function dongModalNgoai(event, id) {
+            if (event.target.id === id) dongModal(id);
+        }
+
+        function moModalBangXepHang() {
+            var lbName = document.getElementById('lb-current-name');
+            if (lbName) lbName.textContent = gameState.tenDanhTuong;
+            moModal('modal-leaderboard');
+        }
+
+        function moModalKhoBaoVat() {
+            var grid = document.getElementById('vault-items-grid');
+            if (grid) {
+                grid.innerHTML = "";
+                khoVatPhamData.forEach(function(it) {
+                    var isGot = gameState.danhSachVatPham.includes(it.id);
+                    var card = document.createElement('div');
+                    card.className = 'vault-item-card ' + (isGot ? 'obtained' : '');
+                    card.innerHTML = `
+                        <div class="vault-item-icon">${it.icon}</div>
+                        <div class="vault-item-info">
+                            <h4>${it.ten} ${isGot ? '<span style="color: #2ecc71; font-size: 0.72rem;">[ĐÃ SỞ HỮU]</span>' : '<span style="color: #b0a090; font-size: 0.72rem;">[CHƯA MỞ KHÓA]</span>'}</h4>
+                            <p>${it.moTa}</p>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+            moModal('modal-vault');
+        }
+
+        /* ========================================================================== */
+        /*  11. CANVAS TÀN LỬA & ÁNH SÁNG VÀNG ẤM ÁP                                  */
+        /* ========================================================================== */
+        (function() {
+            var canvas = document.getElementById('bg-canvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var particleCount = 38;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function TaoHat() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 20;
+                this.size = Math.random() * 2.5 + 1;
+                this.speedY = (gameState.giaiDoan === 'hau-chien') ? (Math.random() * 0.5 + 0.25) : (Math.random() * 0.8 + 0.4);
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.hue = (gameState.giaiDoan === 'hau-chien') ? 48 : (Math.random() > 0.4 ? 40 : 15);
+            }
+
+            for (var i = 0; i < particleCount; i++) {
+                var p = new TaoHat();
+                p.y = Math.random() * canvas.height;
+                particles.push(p);
+            }
+
+            var isTabActive = true;
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    isTabActive = false;
+                } else if (!isTabActive) {
+                    isTabActive = true;
+                    requestAnimationFrame(animate);
+                }
+            });
+
+            function animate() {
+                if (!isTabActive) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (var i = 0; i < particles.length; i++) {
+                    var p = particles[i];
+                    p.y -= p.speedY;
+                    p.x += p.speedX;
+                    if (p.y < -10) particles[i] = new TaoHat();
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'hsla(' + p.hue + ', 85%, 60%, ' + p.opacity + ')';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = 'hsla(' + p.hue + ', 90%, 50%, 0.8)';
+                    ctx.fill();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        /* ========================================================================== */
+        /*  12. KHỞI CHẠY HỆ THỐNG KHI TẢI TRANG                                     */
+        /* ========================================================================== */
+        window.addEventListener('DOMContentLoaded', function() {
+            var savedVoice = localStorage.getItem('giongDocBat');
+            if (savedVoice === 'false') {
+                giongDocBat = false;
+                var btn = document.getElementById('btn-toggle-voice');
+                var text = document.getElementById('voice-btn-text');
+                if (btn) btn.classList.remove('active');
+                if (text) text.textContent = 'Giọng Đọc: Tắt';
+            }
+
+            khoiTaoNhacNen();
+            capNhatHUD();
+        });
+    </script>
+</body>
+</html>
