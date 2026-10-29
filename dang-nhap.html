@@ -1283,24 +1283,15 @@
          * @param {object} user - Đối tượng user từ Firebase Auth
          */
         function luuVaChuyenHuong(user) {
-            // Lấy tên hiển thị: ưu tiên displayName, nếu không có thì lấy phần đầu email
-            const tenHienThi = user.displayName || user.email.split('@')[0];
+            const tenHienThi = user.displayName || (user.email ? user.email.split('@')[0] : 'Người dùng');
 
-            // Lưu vào localStorage để các trang khác sử dụng
+            // Lưu thông tin trước khi chuyển để trang chính hiện tên ngay.
             localStorage.setItem('tenNguoiDung', tenHienThi);
-            localStorage.setItem('emailNguoiDung', user.email);
-            localStorage.setItem('uidNguoiDung', user.uid);
+            if (user.email) localStorage.setItem('emailNguoiDung', user.email);
+            if (user.uid) localStorage.setItem('uidNguoiDung', user.uid);
 
-            hienThongBao('✅ Báo danh thành công! Đang kích hoạt cổng thành...', 'success');
-
-            // Kích hoạt video chuyển cảnh điện ảnh vào Sảnh chính
-            setTimeout(function() {
-                if (typeof window.kichHoatChuyenCanhVideo === 'function') {
-                    window.kichHoatChuyenCanhVideo('trang-chinh.html');
-                } else {
-                    window.location.href = 'trang-chinh.html';
-                }
-            }, 600);
+            // Video chuyển cảnh đã bị gỡ, đi thẳng đến trang chính.
+            window.location.assign(new URL('trang-chinh.html', window.location.href).href);
         }
 
 
