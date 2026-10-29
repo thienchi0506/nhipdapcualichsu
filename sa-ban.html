@@ -2018,6 +2018,36 @@
             touch-action: none;
         }
 
+        /* Sa Bàn toàn cảnh: HUD mỏng, canvas ưu tiên không gian hiển thị. */
+        .game-stage-wrapper .top-hud,
+        .top-hud {
+            padding: 5px 10px !important;
+            min-height: 42px;
+            flex-wrap: nowrap !important;
+            gap: 6px !important;
+        }
+        .hud-left, .hud-stats-group, .hud-controls-group { gap: 6px !important; }
+        .game-title-badge { display: none !important; }
+        .hud-stat-item { gap: 3px !important; font-size: .72rem !important; }
+        .hud-stat-item .stat-label { display: none !important; }
+        .hud-stat-item .stat-icon { font-size: .95rem !important; }
+        .hud-stat-item .stat-value { font-size: .82rem !important; }
+        .btn-nav-back, .btn-hud-tool { padding: 4px 7px !important; font-size: .7rem !important; gap: 3px !important; }
+        .quest-banner-container { top: 4px !important; left: 6px !important; max-width: calc(100% - 12px) !important; opacity: .92; }
+        .dpad-box, .action-interact-btn, #touch-controls .dpad-box, #btn-interact-action { display: none !important; }
+        .game-wrapper { padding: 6px !important; }
+        .game-frame { width: 100% !important; max-width: 100% !important; background: #173B43 !important; }
+        #gameCanvas { width: 100% !important; max-width: none !important; height: auto !important; }
+        @media (max-width: 700px) {
+            .top-hud { overflow: hidden; }
+            .hud-left, .hud-controls-group { flex-shrink: 0; }
+            .hud-stats-group { flex: 1; justify-content: center; min-width: 0; }
+            .hud-stat-item:nth-child(n+5) { display: none; }
+            .btn-nav-back, .btn-hud-tool { white-space: nowrap; padding: 3px 5px !important; font-size: .62rem !important; }
+            .game-wrapper { padding: 2px !important; }
+            .game-frame { border-width: 2px !important; border-radius: 6px !important; }
+        }
+
         /* Khung chỉ dẫn nhiệm vụ góc trên bên trái */
         .quest-banner-container {
             position: absolute;
@@ -4208,6 +4238,14 @@
 
             .weapon-cooldown-overlay { display: none !important; }
         .btn-weapon-slot.on-cooldown { opacity: 1 !important; filter: none !important; cursor: pointer !important; }
+        /* Hồi 2 mobile-first: thẻ chiêu lớn, vùng chạm rộng và phản hồi tức thì. */
+        .tactical-bottom-weapon-bar { touch-action: manipulation; }
+        .btn-weapon-slot { min-width: 118px; min-height: 58px; touch-action: manipulation; }
+        @media (max-width: 700px) {
+            .tactical-bottom-weapon-bar { left: 4px; right: 4px; transform: none; max-width: none; overflow-x: auto; }
+            .btn-weapon-slot { min-width: 82px !important; min-height: 56px !important; padding: 7px 8px !important; }
+            .weapon-slot-name { font-size: .72rem !important; }
+        }
     </style>
 </head>
 <body>
@@ -6275,16 +6313,21 @@
         function xuLyClickCanvas(mouseX, mouseY) {
 
             if (gameState.hoiHienTai === 1) {
+                var activeList = currentStageId === 1 ? npcsNhuNguyet : npcs;
+                if (activeList.filter(function(x) { return x.visited; }).length >= 3 && mouseY >= canvas.height - 75) {
+                    chuyenSangTranDo();
+                    return;
+                }
+            }
+
+            if (gameState.hoiHienTai === 1) {
                 if (currentStageId === 1) {
                     // Kiểm tra nhấp vào NPC Như Nguyệt
                     for (let npc of npcsNhuNguyet) {
                         let distToClick = Math.hypot(npc.x - mouseX, npc.y - mouseY);
                         if (distToClick <= npc.radius + 20) {
-                            let distToPlayer = Math.hypot(npc.x - player.x, npc.y - player.y);
-                            if (distToPlayer <= 90) {
-                                moHoiThoaiNhuNguyet(npc);
-                                return;
-                            }
+                            moHoiThoaiNhuNguyet(npc);
+                            return;
                         }
                     }
                 } else {
@@ -6292,11 +6335,8 @@
                     for (let npc of npcs) {
                         let distToClick = Math.hypot(npc.x - mouseX, npc.y - mouseY);
                         if (distToClick <= npc.radius + 20) {
-                            let distToPlayer = Math.hypot(npc.x - player.x, npc.y - player.y);
-                            if (distToPlayer <= 90) {
-                                moHoiThoaiNPC(npc);
-                                return;
-                            }
+                            moHoiThoaiNPC(npc);
+                            return;
                         }
                     }
                 }
@@ -6310,7 +6350,7 @@
                 if (currentStageId === 1) {
                     // Ải 1 Như Nguyệt: Kiểm tra click bè địch
                     let clickedBe = null;
-                    let minEnemyDist = 48;
+                    let minEnemyDist = 72;
                     for (let be of danhSachBeGoSong) {
                         if (be.sunk) continue;
                         let distToBe = Math.hypot(be.x - mouseX, be.y - mouseY);
@@ -6347,7 +6387,7 @@
 
                 // Ải 2 Bạch Đằng: Kiểm tra nếu nhấp chuột trực tiếp vào bất kỳ chiếc Thuyền Địch nào trên sông để bắn hạ
                 let clickedEnemyShip = null;
-                let minEnemyDist = 48;
+                let minEnemyDist = 72;
 
                 for (let thuyen of danhSachThuyenDich) {
                     if (thuyen.sunk) continue;
@@ -6402,15 +6442,12 @@
                 for (let diem of currentDiemList) {
                     let distToClick = Math.hypot(diem.x - mouseX, diem.y - mouseY);
                     if (distToClick <= diem.radius + 25) {
-                        let distToPlayer = Math.hypot(diem.x - player.x, diem.y - player.y);
-                        if (distToPlayer <= 100) {
-                            if (currentStageId === 1) {
-                                moHoiThoaiHauChienNhuNguyet(diem);
-                            } else {
-                                moHoiThoaiHauChien(diem);
-                            }
-                            return;
+                        if (currentStageId === 1) {
+                            moHoiThoaiHauChienNhuNguyet(diem);
+                        } else {
+                            moHoiThoaiHauChien(diem);
                         }
+                        return;
                     }
                 }
 
@@ -6423,6 +6460,15 @@
         }
 
         canvas.addEventListener('click', function(e) {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+            var mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+            xuLyClickCanvas(mouseX, mouseY);
+        });
+
+        // Chạm đúp/click đúp vào mục tiêu sẽ khai hỏa ngay chiêu đang chọn.
+        canvas.addEventListener('dblclick', function(e) {
+            if (gameState.hoiHienTai !== 2) return;
             var rect = canvas.getBoundingClientRect();
             var mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
             var mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
@@ -12852,10 +12898,83 @@
             }
         });
 
+        // Nền toàn cảnh an toàn: luôn phủ kín canvas trước khi vẽ lớp chiến dịch.
+        // Các hàm vẽ chi tiết hiện có tiếp tục vẽ lên lớp nền này, nên canvas không bị đen
+        // khi chuyển ải hoặc chuyển hồi giữa Như Nguyệt và Bạch Đằng.
+        function veToanCanhSaBan2D() {
+            if (!canvas || !ctx) return;
+            var w = canvas.width, h = canvas.height;
+            var isNhuNguyet = currentStageId === 1;
+            var hoi = gameState && gameState.hoiHienTai || 1;
+            var sky = hoi === 1 ? ['#183A55', '#6D8FA1'] : hoi === 2 ? ['#293B4A', '#6F4A35'] : ['#F4B86A', '#F8E2B2'];
+            var gradient = ctx.createLinearGradient(0, 0, 0, h);
+            gradient.addColorStop(0, sky[0]);
+            gradient.addColorStop(1, sky[1]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, w, h);
+            var riverY = h * 0.48;
+            ctx.fillStyle = isNhuNguyet ? '#1D6675' : '#185A69';
+            ctx.fillRect(0, riverY, w, h - riverY);
+            ctx.fillStyle = hoi === 3 ? 'rgba(255,238,170,.65)' : 'rgba(255,255,255,.12)';
+            for (var i = 0; i < 12; i++) {
+                var x = (i * 97 + hoi * 19) % w;
+                ctx.fillRect(x, riverY + 12 + (i % 5) * 17, 58, 2);
+            }
+            ctx.fillStyle = isNhuNguyet ? '#274C35' : '#405B4A';
+            ctx.beginPath(); ctx.moveTo(0, riverY); ctx.lineTo(0, h * .2); ctx.lineTo(w * .28, h * .34); ctx.lineTo(w * .45, riverY); ctx.closePath(); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(w, riverY); ctx.lineTo(w, h * .24); ctx.lineTo(w * .72, h * .35); ctx.lineTo(w * .55, riverY); ctx.closePath(); ctx.fill();
+            if (hoi === 1) {
+                ctx.fillStyle = '#FFD98A'; ctx.beginPath(); ctx.arc(w * .78, h * .14, 24, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = '#F08A35'; for (var f = 0; f < 6; f++) ctx.fillRect(35 + f * 58, riverY - 28 - (f % 2) * 8, 4, 18);
+            } else if (hoi === 3) {
+                ctx.fillStyle = '#FFF0A8'; ctx.beginPath(); ctx.arc(w * .82, h * .17, 34, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = '#FFF'; for (var b = 0; b < 5; b++) { ctx.beginPath(); ctx.arc(80 + b * 190, 70 + (b % 2) * 30, 3, 0, Math.PI * 2); ctx.fill(); }
+            }
+        }
+
+        function veHotspotChamTrucTiep() {
+            if (!canvas || !ctx) return;
+            var list = gameState.hoiHienTai === 3
+                ? (currentStageId === 1 ? diemHauChienNhuNguyet : diemHauChien)
+                : (currentStageId === 1 ? npcsNhuNguyet : npcs);
+            if (!list) return;
+            ctx.save();
+            list.forEach(function(item, i) {
+                var done = !!item.visited;
+                var pulse = 1 + Math.sin(Date.now() / 260 + i) * 0.12;
+                var radius = (gameState.hoiHienTai === 3 ? 25 : 22) * pulse;
+                ctx.globalAlpha = done ? 0.72 : 0.95;
+                ctx.shadowColor = done ? '#48C9B0' : '#FFD700';
+                ctx.shadowBlur = done ? 10 : 20;
+                ctx.fillStyle = done ? '#2ECC71' : (item.color || '#FFD700');
+                ctx.beginPath(); ctx.arc(item.x, item.y, radius, 0, Math.PI * 2); ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = '#FFF3B0'; ctx.lineWidth = 2; ctx.stroke();
+                ctx.font = '20px sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#FFF';
+                ctx.fillText(done ? '✓' : (item.icon || '✦'), item.x, item.y + 7);
+                ctx.font = 'bold 13px Arial'; ctx.fillStyle = done ? '#A3E4D7' : '#FFF3B0';
+                ctx.fillText(done ? 'ĐÃ HOÀN TẤT' : item.name, item.x, item.y - 34);
+                if (!done) {
+                    ctx.fillStyle = '#FFD700'; ctx.beginPath();
+                    ctx.moveTo(item.x, item.y - 50 - Math.sin(Date.now() / 220 + i) * 4);
+                    ctx.lineTo(item.x - 7, item.y - 62 - Math.sin(Date.now() / 220 + i) * 4);
+                    ctx.lineTo(item.x + 7, item.y - 62 - Math.sin(Date.now() / 220 + i) * 4);
+                    ctx.closePath(); ctx.fill();
+                }
+            });
+            if (gameState.hoiHienTai === 1 && list.filter(function(x) { return x.visited; }).length >= 3) {
+                ctx.globalAlpha = 0.95; ctx.fillStyle = '#7B1E1E'; ctx.strokeStyle = '#FFD700'; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.roundRect(canvas.width / 2 - 190, canvas.height - 58, 380, 42, 20); ctx.fill(); ctx.stroke();
+                ctx.font = 'bold 16px Arial'; ctx.fillStyle = '#FFF3B0'; ctx.fillText('⚔️ KHỞI ĐỘNG ĐẠI CHIẾN TRÊN SÔNG ➔', canvas.width / 2, canvas.height - 31);
+            }
+            ctx.restore();
+        }
+
         function gameLoop() {
             if (!isSaBanActive) return;
             if (canvas && ctx) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                veToanCanhSaBan2D();
 
                 if (gameState.hoiHienTai === 1) {
                     // HỒI 1: KHÁM PHÁ DOANH TRẠI NHẬP VAI
@@ -12888,6 +13007,9 @@
                     capNhatViTriNguoiChoi();
                     veNguoiChoi();
                 }
+
+                // Điểm sáng chạm trực tiếp trên bản đồ cho Hồi 1 và Hồi 3.
+                veHotspotChamTrucTiep();
 
                 // Vẽ Bản đồ nhỏ (Minimap) & Hiệu ứng chữ bay trực tiếp trên Canvas
                 veMinimap();

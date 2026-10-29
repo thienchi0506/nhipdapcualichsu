@@ -77,8 +77,9 @@
             height: 100%;
             z-index: 2;
             pointer-events: none;
-            background: radial-gradient(circle at center, transparent 75%, rgba(10, 20, 30, 0.25) 100%);
-            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+            background: radial-gradient(circle at center, transparent 88%, rgba(10, 20, 30, 0.15) 100%);
+            box-shadow: none;
+            opacity: 0.15;
         }
 
         /* ========================================================================== */
@@ -106,8 +107,8 @@
         /* ========================================================================== */
         .top-hud {
             width: 100%;
-            height: 52px;
-            max-height: 52px;
+            height: 48px;
+            max-height: 48px;
             padding: 0 14px;
             display: flex;
             align-items: center;
@@ -2665,6 +2666,25 @@
         }
             .skill-cooldown-overlay { display: none !important; }
         .btn-hero-skill.on-cd { filter: none !important; cursor: pointer !important; }
+        /* Canvas toàn cảnh không bị radar/D-pad che khuất. */
+        #tactical-minimap-panel,
+        #virtual-controls-wrapper,
+        #btn-virtual-interact,
+        #btn-toggle-dpad,
+        .general-profile-badge { display: none !important; }
+        .top-hud { height: 48px !important; max-height: 48px !important; padding: 0 10px !important; }
+        .hud-stats-cluster { gap: 5px !important; flex: 1; justify-content: center; }
+        .stat-card-3d { padding: 3px 6px !important; min-width: 0 !important; }
+        .stat-card-3d .stat-bar-bg { display: none !important; }
+        .stat-card-3d .stat-label { font-size: .58rem !important; }
+        .stat-card-3d .stat-value { font-size: .75rem !important; }
+        .btn-hud-tool { padding: 4px 7px !important; font-size: .68rem !important; white-space: nowrap; }
+        @media (max-width: 760px) {
+            .top-hud { gap: 3px !important; }
+            .hud-stats-cluster .stat-card-3d:nth-child(n+5) { display: none !important; }
+            .hud-stats-cluster .stat-card-3d .stat-label { display: none !important; }
+            .hud-tools-right .btn-hud-tool span:last-child { display: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -3329,7 +3349,7 @@
             cheDoGiongDoc: true,
 
             // Camera Controller State
-            cheDoCamera: 'LOBBY',      // 'LOBBY', 'FIRST_PERSON', 'TACTICAL'
+            cheDoCamera: 'TACTICAL',      // 'LOBBY', 'FIRST_PERSON', 'TACTICAL'
             showVirtualControls: false,// Mặc định ẩn trên PC để tối ưu tầm nhìn 3D
             dangONgoaiSanh: true,
 
@@ -3351,7 +3371,7 @@
             // Tương tác chuột xoay camera
             isDragging: false,
             previousMousePosition: { x: 0, y: 0 },
-            sphericalCoords: { radius: 130, theta: 0.2, phi: 1.1 },
+            sphericalCoords: { radius: 102.9, theta: 0.0, phi: 0.97 },
 
             // ===================================================================
             //  PHẦN 2: THÔNG SỐ NHÂN VẬT NHẬP VAI & 4 CÔNG TRÌNH HẬU PHƯƠNG 3D
@@ -4531,9 +4551,9 @@
                 // 1. Scene
                 Game3D.scene = new THREE.Scene();
                 // Bầu trời màu xanh trầm sâu thẳm, triệt tiêu màn hình đen hoàn toàn
-                Game3D.scene.background = new THREE.Color(0x16293a);
+                Game3D.scene.background = new THREE.Color(0x1b334b);
                 // Sương mù thời gian thực tạo chiều sâu huyền bí, giảm độ dày xuống 0.0012 cho tầm nhìn xa rõ nét
-                Game3D.scene.fog = new THREE.FogExp2(0x16293a, 0.0012);
+                Game3D.scene.fog = new THREE.FogExp2(0x1b334b, 0.0012);
 
                 // 2. Camera
                 Game3D.camera = new THREE.PerspectiveCamera(
@@ -4542,7 +4562,8 @@
                     0.8,
                     1500
                 );
-                Game3D.camera.position.set(0, 35, 120);
+                Game3D.camera.position.set(0, 58, 85);
+                Game3D.camera.lookAt(0, 0, 0);
 
                 // 3. Renderer
                 Game3D.renderer = new THREE.WebGLRenderer({
@@ -4552,7 +4573,7 @@
                 });
                 Game3D.renderer.setSize(window.innerWidth, window.innerHeight);
                 Game3D.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                Game3D.renderer.setClearColor(0x16293a, 1);
+                Game3D.renderer.setClearColor(0x1b334b, 1);
                 Game3D.renderer.shadowMap.enabled = true;
                 Game3D.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
                 Game3D.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -4617,17 +4638,17 @@
         /* ========================================================================== */
         function thietLapAnhSang3D() {
             // Ánh sáng môi trường toàn cảnh AmbientLight (1.1) sáng rõ, không góc chết
-            const ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
             Game3D.scene.add(ambientLight);
             Game3D.ambientLight = ambientLight;
 
             // Ánh sáng bầu trời huyền ảo (HemisphereLight)
-            const hemiLight = new THREE.HemisphereLight(0x557799, 0x223344, 0.95);
+            const hemiLight = new THREE.HemisphereLight(0xfff5e1, 0x2c3e50, 1.1);
             Game3D.scene.add(hemiLight);
             Game3D.hemiLight = hemiLight;
 
             // Ánh sáng Mặt Trời Rạng Đông (DirectionalLight đổ bóng)
-            const sunLight = new THREE.DirectionalLight(0xFFE4A0, 1.4);
+            const sunLight = new THREE.DirectionalLight(0xffe4a0, 1.5);
             Game3D.sunLight = sunLight;
             sunLight.position.set(80, 110, 60);
             sunLight.castShadow = true;
