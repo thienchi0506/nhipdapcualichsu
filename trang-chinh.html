@@ -398,19 +398,14 @@
             gap: 28px;
             max-width: 1140px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px max(16px, var(--sar)) 40px max(16px, var(--sal));
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
         @media (min-width: 1025px) {
-            .cards-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 1140px;
-                gap: 28px;
-                padding: 40px 20px;
-            }
+            .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
         }
 
         /* ====== TỪNG THẺ CARD ====== */
@@ -3072,79 +3067,6 @@
             max-width: 900px;
         }
 
-        /* Nền chào mừng: chữ nổi trực tiếp trên ảnh, không dùng hộp mờ hay vòng SVG che ảnh. */
-        .welcome-banner,
-        .welcome-banner__content,
-        #banner-content {
-            background: transparent !important;
-            border: 0 !important;
-            box-shadow: none !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-        }
-
-        .welcome-banner__halo,
-        #banner-halo,
-        .welcome-banner__drum-wrap,
-        #banner-drum-wrap,
-        .welcome-banner__drum-wrap .dongson-drum-svg,
-        .welcome-banner__drum-wrap::after,
-        .banner-gold-dust-canvas,
-        #banner-gold-dust {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            background: transparent !important;
-            filter: none !important;
-        }
-
-        .welcome-banner__texture {
-            opacity: 0.08 !important;
-            background: linear-gradient(180deg, rgba(15,12,10,0.08), transparent 18%, transparent 82%, rgba(15,12,10,0.1)) !important;
-            mix-blend-mode: normal !important;
-        }
-
-        .welcome-banner::after {
-            background: linear-gradient(180deg, rgba(15,12,10,0.10) 0%, transparent 12%, transparent 88%, rgba(15,12,10,0.12) 100%) !important;
-        }
-
-        /* Ảnh Trống Đồng sắc nét tối đa sau khi bỏ lớp che trung tâm. */
-        .welcome-banner::before {
-            opacity: 1 !important;
-            background-size: cover !important;
-            background-position: center 42% !important;
-            filter: url(#sharp-filter) contrast(118%) saturate(112%) brightness(96%) !important;
-        }
-
-        /* Tiêu đề vàng kim nổi trực tiếp trên ảnh, không cần nền lót. */
-        .welcome-banner__title {
-            background: linear-gradient(180deg, #FFFDF5 0%, #F5D77F 55%, #D4AF37 100%) !important;
-            -webkit-background-clip: text !important;
-            background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.95)) drop-shadow(0 2px 4px rgba(0,0,0,0.9)) !important;
-        }
-
-        /* Thanh menu chính: một hàng gọn, không lặp nhóm và không tạo vùng cuộn ngang. */
-        .sub-navbar__inner {
-            overflow-x: hidden !important;
-        }
-
-        .sub-navbar__menu {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            justify-content: center !important;
-            gap: 2px !important;
-            overflow: hidden !important;
-            white-space: nowrap !important;
-        }
-
-        .sub-navbar__link {
-            padding: 9px 14px !important;
-            font-size: 0.82rem !important;
-            letter-spacing: 0.25px !important;
-            white-space: nowrap !important;
-        }
-
         /* Tiêu đề "Chọn Hành Trình Của Bạn" chữ mạ vàng đồng có viền đổ bóng sâu 4K */
         .welcome-banner__title {
             font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
@@ -4524,23 +4446,6 @@
             .card {
                 box-shadow: 0 4px 16px rgba(18, 9, 4, 0.25) !important;
             }
-        }
-
-        /* Giữ menu ngang một hàng ở mọi kích thước màn hình. */
-        .sub-navbar__inner { overflow-x: hidden !important; }
-        .sub-navbar__menu {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            justify-content: center !important;
-            gap: 2px !important;
-            overflow: hidden !important;
-            white-space: nowrap !important;
-        }
-        .sub-navbar__link {
-            padding: 9px 14px !important;
-            font-size: 0.82rem !important;
-            letter-spacing: 0.25px !important;
-            white-space: nowrap !important;
         }
     </style>
 </head>
@@ -10049,7 +9954,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     <span id="status-badge-1" style="font-size: 0.82rem; font-weight: 600; color: #2E7D32; background: rgba(46,125,50,0.14); padding: 4px 12px; border-radius: 16px; border: 1px solid rgba(46,125,50,0.3);">${window.__MODEL_TRONG_DONG_BLOB_URL ? '🟢 Đang hiển thị 360°' : '⏳ Đang nạp mô hình 3D...'}</span>
                                     <label class="btn-load-3d-local" title="Nạp file .glb từ máy nếu chạy file:// offline" style="padding: 4px 10px; font-size: 0.78rem; border-radius: 16px; cursor: pointer;">
                                         📁 Đổi file .glb
-                                        <input type="file" id="input-file-1" accept=".glb,.gltf,.obj" style="display:none;" onchange="napFileModel3DCucBo(event, 1)">
+                                        <input type="file" id="input-file-1" accept=".glb,.gltf" style="display:none;" onchange="napFileModel3DCucBo(event, 1)">
                                     </label>
                                 </div>
                             </div>
@@ -10058,7 +9963,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                             <div class="procedural-3d-wrapper" id="wrapper-viewer-1" style="position: relative; width: 100%; height: 420px; background: radial-gradient(circle at 50% 40%, #2A1F1A 0%, #120D0B 100%); border-radius: 12px; overflow: hidden; border: 2px solid var(--vang-dong); box-shadow: inset 0 0 50px rgba(0,0,0,0.85), 0 6px 22px rgba(0,0,0,0.35); touch-action: pan-y;">
                                 <model-viewer
                                     id="viewer-baovat-1"
-                                    src="${window.__MODEL_TRONG_DONG_BLOB_URL || 'models/baovat1.glb'}"
+                                    src="${window.__MODEL_TRONG_DONG_BLOB_URL || 'trong_ong_ong_son_-_viet_nam.glb'}"
                                     alt="Trống Đồng Đông Sơn - Việt Nam"
                                     auto-rotate
                                     rotation-per-second="20deg"
@@ -10092,8 +9997,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     <button type="button" class="btn-ctrl-circle" onclick="toggle3DAutoRotate(1)" id="btn-rot-1" title="Bật/Tắt xoay 360° tự động" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(229,193,88,0.5); background: rgba(255,255,255,0.08); color: #FFE082; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">🔄</button>
                                     <button type="button" class="btn-ctrl-circle" onclick="zoom3D(1, 0.85)" title="Phóng to mô hình" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(229,193,88,0.5); background: rgba(255,255,255,0.08); color: #FFE082; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">🔍+</button>
                                     <button type="button" class="btn-ctrl-circle" onclick="zoom3D(1, 1.18)" title="Thu nhỏ mô hình" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(229,193,88,0.5); background: rgba(255,255,255,0.08); color: #FFE082; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">🔍-</button>
-                                    <button type="button" class="btn-ctrl-circle" onclick="toggle3DLight(1)" title="Đổi ánh sáng studio/cổ điển">☼</button>
-                                    <button type="button" class="btn-ctrl-circle" onclick="fullscreen3D(1)" title="Xem toàn màn hình">⛶</button>
+                                    <button type="button" class="btn-ctrl-circle" onclick="reset3DView(1)" title="Đặt lại góc nhìn chuẩn" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(229,193,88,0.5); background: rgba(255,255,255,0.08); color: #FFE082; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">⟲</button>
                                     <button type="button" class="btn-ctrl-circle" onclick="toggle3DTouchMode(1)" id="btn-touch-1" title="Chuyển chế độ cảm ứng: 1 ngón cuộn hoặc xoay" style="padding: 0 10px; height: 34px; border-radius: 17px; border: 1px solid rgba(229,193,88,0.5); background: rgba(255,255,255,0.08); color: #FFE082; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">🖐️ 1 ngón: Cuộn</button>
                                 </div>
                             </div>
@@ -10118,7 +10022,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     <span id="status-badge-2" style="font-size: 0.82rem; font-weight: 600; color: #2E7D32; background: rgba(46,125,50,0.14); padding: 4px 12px; border-radius: 16px; border: 1px solid rgba(46,125,50,0.3);">${window.__MODEL_COC_BACH_DANG_BLOB_URL ? '🟢 Đang hiển thị 360°' : '⏳ Đang nạp mô hình 3D...'}</span>
                                     <label class="btn-load-3d-local" title="Nạp file .glb từ máy nếu chạy file:// offline" style="padding: 4px 10px; font-size: 0.78rem; border-radius: 16px; cursor: pointer; background: linear-gradient(135deg, #1B4F72, #2874A6); border-color: #5DADE2;">
                                         📁 Đổi file .glb
-                                        <input type="file" id="input-file-2" accept=".glb,.gltf,.obj" style="display:none;" onchange="napFileModel3DCucBo(event, 2)">
+                                        <input type="file" id="input-file-2" accept=".glb,.gltf" style="display:none;" onchange="napFileModel3DCucBo(event, 2)">
                                     </label>
                                 </div>
                             </div>
@@ -10127,7 +10031,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                             <div class="procedural-3d-wrapper" id="wrapper-viewer-2" style="position: relative; width: 100%; height: 420px; background: radial-gradient(circle at 50% 40%, #1C2730 0%, #0C1218 100%); border-radius: 12px; overflow: hidden; border: 2px solid #1B4F72; box-shadow: inset 0 0 50px rgba(0,0,0,0.85), 0 6px 22px rgba(0,0,0,0.35); touch-action: pan-y;">
                                 <model-viewer
                                     id="viewer-baovat-2"
-                                    src="${window.__MODEL_COC_BACH_DANG_BLOB_URL || 'models/baovat2.glb'}"
+                                    src="${window.__MODEL_COC_BACH_DANG_BLOB_URL || 'coc_bach_ang_nam_1288.glb'}"
                                     alt="Cọc Gỗ Bạch Đằng Năm 1288"
                                     auto-rotate
                                     rotation-per-second="20deg"
@@ -10161,8 +10065,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     <button type="button" class="btn-ctrl-circle" onclick="toggle3DAutoRotate(2)" id="btn-rot-2" title="Bật/Tắt xoay 360° tự động" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(127,179,213,0.5); background: rgba(255,255,255,0.08); color: #AED6F1; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">🔄</button>
                                     <button type="button" class="btn-ctrl-circle" onclick="zoom3D(2, 0.85)" title="Phóng to mô hình" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(127,179,213,0.5); background: rgba(255,255,255,0.08); color: #AED6F1; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">🔍+</button>
                                     <button type="button" class="btn-ctrl-circle" onclick="zoom3D(2, 1.18)" title="Thu nhỏ mô hình" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(127,179,213,0.5); background: rgba(255,255,255,0.08); color: #AED6F1; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">🔍-</button>
-                                    <button type="button" class="btn-ctrl-circle" onclick="toggle3DLight(2)" title="Đổi ánh sáng studio/cổ điển">☼</button>
-                                    <button type="button" class="btn-ctrl-circle" onclick="fullscreen3D(2)" title="Xem toàn màn hình">⛶</button>
+                                    <button type="button" class="btn-ctrl-circle" onclick="reset3DView(2)" title="Đặt lại góc nhìn chuẩn" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(127,179,213,0.5); background: rgba(255,255,255,0.08); color: #AED6F1; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">⟲</button>
                                     <button type="button" class="btn-ctrl-circle" onclick="toggle3DTouchMode(2)" id="btn-touch-2" title="Chuyển chế độ cảm ứng: 1 ngón cuộn hoặc xoay" style="padding: 0 10px; height: 34px; border-radius: 17px; border: 1px solid rgba(127,179,213,0.5); background: rgba(255,255,255,0.08); color: #AED6F1; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">🖐️ 1 ngón: Cuộn</button>
                                 </div>
                             </div>
@@ -10227,29 +10130,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             if (btn) btn.style.background = 'rgba(255,255,255,0.08)';
         };
 
-        // 4. Đổi ánh sáng studio/cổ điển cho từng mô hình.
-        window.toggle3DLight = function(id) {
-            var viewer = document.getElementById('viewer-baovat-' + id);
-            if (!viewer) return;
-            var classic = viewer.getAttribute('data-classic-light') !== 'true';
-            viewer.setAttribute('data-classic-light', classic ? 'true' : 'false');
-            viewer.setAttribute('environment-image', classic ? 'legacy' : 'neutral');
-            viewer.setAttribute('exposure', classic ? '0.8' : '1.15');
-            viewer.setAttribute('shadow-intensity', classic ? '2' : '1.5');
-        };
-
-        // 5. Xem toàn màn hình khung trưng bày.
-        window.fullscreen3D = function(id) {
-            var wrapper = document.getElementById('wrapper-viewer-' + id);
-            if (!wrapper) return;
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            } else if (wrapper.requestFullscreen) {
-                wrapper.requestFullscreen();
-            }
-        };
-
-        // 6. Chuyển đổi cử chỉ cảm ứng di động: 1 ngón cuộn trang an toàn vs 1 ngón xoay 3D
+        // 4. Chuyển đổi cử chỉ cảm ứng di động: 1 ngón cuộn trang an toàn vs 1 ngón xoay 3D
         window.toggle3DTouchMode = function(id) {
             var viewer = document.getElementById('viewer-baovat-' + id);
             var btn = document.getElementById('btn-touch-' + id);
@@ -10272,7 +10153,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             }
         };
 
-        // 7. Chuyển đổi tab bảo vật trên điện thoại và máy tính
+        // 5. Chuyển đổi tab bảo vật trên điện thoại và máy tính
         window.chuyenTab3DShowcase = function(target) {
             var c1 = document.getElementById('showcase-card-1');
             var c2 = document.getElementById('showcase-card-2');
@@ -10305,7 +10186,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             }
         };
 
-        // 8. Nạp / Đổi file 3D từ máy tính (Chống lỗi CORS trên file:// qua URL.createObjectURL)
+        // 6. Nạp / Đổi file 3D từ máy tính (Chống lỗi CORS trên file:// qua URL.createObjectURL)
         window.napFileModel3DCucBo = function(event, frameId) {
             var file = event.target.files && event.target.files[0];
             if (!file) return;
@@ -10330,7 +10211,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             }
         };
 
-        // 9. Khởi tạo và lắng nghe tiến trình nạp mô hình 3D thực tế
+        // 7. Khởi tạo và lắng nghe tiến trình nạp mô hình 3D thực tế
         window.khoiTaoViewerBaoVat3D = function() {
             [1, 2].forEach(function(frameId) {
                 var viewer = document.getElementById('viewer-baovat-' + frameId);
@@ -11272,7 +11153,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                 bodyHtml = renderDanhSachNhanVatHtml(preCat);
             } else if (loai.startsWith('bao-tang') || loai === 'bao-vat-3d') {
                 if (loai === 'bao-vat-3d' || loai === 'bao-tang-hien-vat') {
-                    titleText = "🏺 Bảo Vật 3D (Trưng bày Mô hình 3D Tương tác)";
+                    titleText = "🏺 Bảo Vật 3D: Phòng Trưng Bày Mô Hình Tương Tác 360°";
                 } else if (loai === 'bao-tang-3d') {
                     titleText = "🗺️ Sa Bàn Cổ Vật 3D Bạch Đằng Giang";
                 } else {
