@@ -4551,7 +4551,8 @@
                     powerPreference: 'high-performance'
                 });
                 Game3D.renderer.setSize(window.innerWidth, window.innerHeight);
-                Game3D.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                // Cap render resolution to prevent high-DPI displays from multiplying GPU work.
+                Game3D.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
                 Game3D.renderer.setClearColor(0x16293a, 1);
                 Game3D.renderer.shadowMap.enabled = true;
                 Game3D.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -4604,6 +4605,17 @@
 
             } catch (initErr) {
                 console.error("Lỗi khởi tạo ThreeJS Engine:", initErr);
+                const fallback = document.createElement('div');
+                fallback.id = 'webgl-load-error';
+                fallback.setAttribute('role', 'status');
+                fallback.textContent = 'Sa bàn 3D chưa thể khởi tạo trên trình duyệt này. Vui lòng tải lại trang hoặc mở bản 2D.';
+                Object.assign(fallback.style, {
+                    position: 'fixed', left: '50%', top: '16px', transform: 'translateX(-50%)',
+                    zIndex: '10000', maxWidth: 'min(90vw, 680px)', padding: '12px 18px',
+                    border: '1px solid #D4AF37', borderRadius: '8px', background: '#241813',
+                    color: '#FFF3D6', font: '600 14px sans-serif', textAlign: 'center'
+                });
+                document.body.appendChild(fallback);
             } finally {
                 // Khởi tạo hiển thị phím ảo theo thiết bị và góc nhìn ban đầu
                 try { capNhatHienThiPhimAo(); } catch (e) {}
@@ -4631,8 +4643,8 @@
             Game3D.sunLight = sunLight;
             sunLight.position.set(80, 110, 60);
             sunLight.castShadow = true;
-            sunLight.shadow.mapSize.width = 2048;
-            sunLight.shadow.mapSize.height = 2048;
+            sunLight.shadow.mapSize.width = 1024;
+            sunLight.shadow.mapSize.height = 1024;
             sunLight.shadow.camera.near = 10;
             sunLight.shadow.camera.far = 400;
             const d = 130;
@@ -4654,7 +4666,9 @@
             viTriLua.forEach((pos, idx) => {
                 const fireLight = new THREE.PointLight(0xFF7722, 1.8, 45, 1.8);
                 fireLight.position.set(pos.x, pos.y, pos.z);
-                fireLight.castShadow = true;
+                // Point-light shadows require six shadow maps per light; keep the camp glow
+                // but let the sun provide the scene's single shadow map.
+                fireLight.castShadow = false;
                 Game3D.scene.add(fireLight);
 
                 // Dựng mô hình đống lửa trại nhỏ
@@ -4783,7 +4797,7 @@
         /* ========================================================================== */
         function dungMatNuocSong3D() {
             // Lòng sông rộng 80m, dài 360m với lưới đỉnh 80x100 để tạo sóng mượt mà
-            const waterGeo = new THREE.PlaneGeometry(76, 360, 60, 90);
+            const waterGeo = new THREE.PlaneGeometry(76, 360, 36, 48);
             waterGeo.rotateX(-Math.PI / 2);
 
             // Lưu tọa độ đỉnh gốc ban đầu
@@ -7136,6 +7150,8 @@
         /* ========================================================================== */
         function renderLoop3D() {
             requestAnimationFrame(renderLoop3D);
+            // The CDN or WebGL context can fail; don't let a missing engine kill the page.
+            if (!Game3D.renderer || !Game3D.scene || !Game3D.camera) return;
 
             let delta = 0.016;
             let elapsed = 0;
@@ -8466,7 +8482,7 @@
 
             const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
             renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.35;
 

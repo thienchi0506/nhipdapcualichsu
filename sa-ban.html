@@ -12867,52 +12867,105 @@
             }
         });
 
-        function gameLoop() {
-            if (!isSaBanActive) return;
-            if (canvas && ctx) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function veBanDoDuPhong2D() {
+            if (!ctx || !canvas) return;
+            ctx.save();
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = '#1D2B24';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                if (gameState.hoiHienTai === 1) {
-                    // HỒI 1: KHÁM PHÁ DOANH TRẠI NHẬP VAI
-                    if (currentStageId === 1) {
-                        veBanDoDoanhTraiNhuNguyet();
-                        veNPCsNhuNguyet();
-                    } else {
-                        veBanDoDoanhTrai();
-                        veNPCs();
-                    }
-                    capNhatViTriNguoiChoi();
-                    veNguoiChoi();
-                } else if (gameState.hoiHienTai === 2) {
-                    // HỒI 2: SA BÀN TRẬN ĐỒ CHIẾN THUẬT
-                    capNhatHoiChieuVuKhi();
-                    if (currentStageId === 1) {
-                        veSaBanNhuNguyet();
-                    } else {
-                        veSaBanBachDang();
-                    }
-                } else if (gameState.hoiHienTai === 3) {
-                    // HỒI 3: BÌNH MINH HÒA BÌNH & XỬ TRÍ HẬU CHIẾN
-                    if (currentStageId === 1) {
-                        veBinhMinhNhuNguyet();
-                        veDiemHauChienNhuNguyet();
-                    } else {
-                        veBinhMinhHauChien();
-                        veDiemHauChien();
-                    }
-                    capNhatViTriNguoiChoi();
-                    veNguoiChoi();
+            if (gameState.hoiHienTai === 2) {
+                ctx.fillStyle = '#0D394D';
+                ctx.fillRect(0, 140, canvas.width, 280);
+                ctx.fillStyle = '#263820';
+                ctx.fillRect(0, 0, canvas.width, 140);
+                ctx.fillRect(0, 420, canvas.width, 140);
+                ctx.strokeStyle = 'rgba(150, 220, 240, 0.5)';
+                ctx.lineWidth = 2;
+                for (var y = 160; y < 410; y += 24) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
                 }
-
-                // Vẽ Bản đồ nhỏ (Minimap) & Hiệu ứng chữ bay trực tiếp trên Canvas
-                veMinimap();
-                veVaCapNhatChuBayCanvas();
-
-                // Cập nhật trạng thái phát sáng nút tương tác E
-                capNhatTrangThaiNutTuongTac();
+            } else if (gameState.hoiHienTai === 1) {
+                ctx.fillStyle = '#0E2433';
+                ctx.fillRect(820, 0, 180, canvas.height);
+                ctx.fillStyle = '#5A3D28';
+                ctx.fillRect(120, 100, 180, 90);
+                ctx.fillRect(390, 290, 180, 90);
+            } else {
+                ctx.fillStyle = '#1E6B7B';
+                ctx.fillRect(0, 160, canvas.width, 240);
+                ctx.fillStyle = '#47663B';
+                ctx.fillRect(0, 0, canvas.width, 160);
+                ctx.fillRect(0, 400, canvas.width, 160);
             }
 
-            requestAnimationFrame(gameLoop);
+            ctx.fillStyle = 'rgba(255, 243, 214, 0.8)';
+            ctx.font = 'bold 18px serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('BẢN ĐỒ ĐANG ĐƯỢC KHÔI PHỤC', canvas.width / 2, canvas.height / 2);
+            ctx.restore();
+        }
+
+        function gameLoop() {
+            if (!isSaBanActive) return;
+            try {
+                if (canvas && ctx) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    if (gameState.hoiHienTai === 1) {
+                    // HỒI 1: KHÁM PHÁ DOANH TRẠI NHẬP VAI
+                        if (currentStageId === 1) {
+                            veBanDoDoanhTraiNhuNguyet();
+                            veNPCsNhuNguyet();
+                        } else {
+                            veBanDoDoanhTrai();
+                            veNPCs();
+                        }
+                        capNhatViTriNguoiChoi();
+                        veNguoiChoi();
+                    } else if (gameState.hoiHienTai === 2) {
+                    // HỒI 2: SA BÀN TRẬN ĐỒ CHIẾN THUẬT
+                        try { capNhatHoiChieuVuKhi(); }
+                        catch (updateError) { console.error('Lỗi cập nhật HUD chiến thuật:', updateError); }
+                        if (currentStageId === 1) {
+                            veSaBanNhuNguyet();
+                        } else {
+                            veSaBanBachDang();
+                        }
+                    } else if (gameState.hoiHienTai === 3) {
+                    // HỒI 3: BÌNH MINH HÒA BÌNH & XỬ TRÍ HẬU CHIẾN
+                        if (currentStageId === 1) {
+                            veBinhMinhNhuNguyet();
+                            veDiemHauChienNhuNguyet();
+                        } else {
+                            veBinhMinhHauChien();
+                            veDiemHauChien();
+                        }
+                        capNhatViTriNguoiChoi();
+                        veNguoiChoi();
+                    }
+
+                    // Vẽ Bản đồ nhỏ (Minimap) & Hiệu ứng chữ bay trực tiếp trên Canvas
+                    veMinimap();
+                    veVaCapNhatChuBayCanvas();
+
+                    // Cập nhật trạng thái phát sáng nút tương tác E
+                    capNhatTrangThaiNutTuongTac();
+                }
+            } catch (renderError) {
+                // Một lỗi ở một khung hình không được phép dừng vĩnh viễn toàn bộ vòng vẽ.
+                try { veBanDoDuPhong2D(); } catch (fallbackError) {}
+                if (!gameLoop.lastError || gameLoop.lastError.message !== renderError.message) {
+                    console.error('Lỗi khi vẽ sa bàn 2D; vòng vẽ sẽ tiếp tục:', renderError);
+                    gameLoop.lastError = renderError;
+                }
+            } finally {
+                if (isSaBanActive) requestAnimationFrame(gameLoop);
+            }
         }
 
         /* ========================================================================== */
