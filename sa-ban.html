@@ -8076,7 +8076,21 @@
         }
 
         // Vào trực tiếp Sa Bàn Chiến Đấu từ Lobby
+        // Device gate: only mobile devices are blocked from entering the battle map.
+        function laThietBiDiDong() {
+            var uaData = navigator.userAgentData;
+            if (uaData && typeof uaData.mobile === 'boolean') return uaData.mobile;
+            return /Android|iPhone|iPod|Windows Phone|Mobile/i.test(navigator.userAgent || '');
+        }
+
+        function chanSaBanTrenMobile() {
+            if (!laThietBiDiDong()) return false;
+            alert('Sa b\u00e0n hi\u1ec7n ch\u1ec9 h\u1ed7 tr\u1ee3 laptop v\u00e0 PC. Vui l\u00f2ng m\u1edf tr\u00f2 ch\u01a1i tr\u00ean laptop ho\u1eb7c m\u00e1y t\u00ednh đ\u1ec3 b\u00e0n.');
+            return true;
+        }
+
         function vaoThangSaBanChienDau() {
+            if (chanSaBanTrenMobile()) return;
             var lobby = document.getElementById('lobby-screen');
             var gameWrapper = document.getElementById('game-stage-wrapper');
             var header = document.querySelector('.site-header');
@@ -11897,6 +11911,7 @@
 
         // Vào Thẳng Sa Bàn Thực Chiến Sông Như Nguyệt (Hồi 2)
         function vaoThangSaBanNhuNguyet() {
+            if (chanSaBanTrenMobile()) return;
             currentStageId = 1;
             khoiTaoAiNhuNguyet();
 
