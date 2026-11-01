@@ -4,7 +4,7 @@
     if (typeof Game3D === 'undefined' || typeof THREE === 'undefined') return;
     const active = HistoryGame.active;
     const initial = new Map(), arrowPool = [];
-    let arrowGeometry, arrowMaterial, commandPanel, wakeGeometry, wakeMaterial;
+    let arrowGeometry, arrowMaterial, fireArrowMaterial, commandPanel, wakeGeometry, wakeMaterial;
     let lastHud = -1, sceneEpoch = 0;
     const wakes = new Map();
     const staticUnits = new Set(['cungThuBac','cungThuNam','nnCungNo']);
@@ -51,20 +51,28 @@
         Game3D.thuyTrieu.phanTram=85;Game3D.thuyTrieu.dangTang=true;
         Game3D.lastHudUpdate=-1;
     }
-    function acquireArrow() {
-        if(!arrowGeometry){arrowGeometry=new THREE.CylinderGeometry(.06,.08,1.2,6);arrowMaterial=new THREE.MeshBasicMaterial({color:0xffba61});}
+    function acquireArrow(isFire=false) {
+        if(!arrowGeometry){arrowGeometry=new THREE.CylinderGeometry(.06,.08,1.2,6);arrowMaterial=new THREE.MeshBasicMaterial({color:0xffba61});fireArrowMaterial=new THREE.MeshBasicMaterial({color:0xff5b24});}
         const mesh=arrowPool.pop()||new THREE.Mesh(arrowGeometry,arrowMaterial);
+        mesh.material=isFire?fireArrowMaterial:arrowMaterial;
         mesh.userData.pooledArrow=true;mesh.visible=true;Game3D.scene.add(mesh);return mesh;
     }
     function releaseArrow(mesh) {
-        if(mesh.userData.pooledArrow){mesh.parent?.remove(mesh);mesh.visible=false;if(arrowPool.length<180)arrowPool.push(mesh);}
+        if(mesh.userData.pooledArrow){mesh.parent?.remove(mesh);mesh.visible=false;mesh.material=arrowMaterial;if(arrowPool.length<180)arrowPool.push(mesh);}
         else HistoryGame.dispose(mesh);
     }
-    function projectile(from, to, onHit) {
+    function projectile(from, to, onHit, options={}) {
         if(Game3D.arrows3D.length>=180)return false;
-        const mesh=acquireArrow(), start=new THREE.Vector3(from.x,from.y+3,from.z), end=new THREE.Vector3(to.x,to.y+2,to.z);
+        const hit=options.accuracy===undefined||Math.random()<=options.accuracy;
+        const spread=options.spread||0;
+        const mesh=acquireArrow(!!options.fire), start=new THREE.Vector3(from.x,from.y+3,from.z), end=new THREE.Vector3(to.x+(Math.random()-.5)*spread,to.y+2,to.z+(Math.random()-.5)*spread);
         mesh.position.copy(start);
-        Game3D.arrows3D.push({mesh,start,end,progress:0,speed:2.2,height:6,onHit});return true;
+        const resolveHit=hit&&onHit?()=>{
+            const target=options.target;
+            if(target?.pos?.distanceTo && target.pos.distanceTo(end)>(options.hitRadius||5))return;
+            onHit();
+        }:null;
+        Game3D.arrows3D.push({mesh,start,end,progress:0,speed:options.speed||2.2,height:options.height||6,onHit:resolveHit});return true;
     }
     function water(material) {
         Game3D.waterTime={value:0};
@@ -114,6 +122,7 @@
     function update(dt, elapsed) {
         remember();
         if(Game3D.isPostWar || ['CHUA_BAT_DAU','KET_THUC','THUA_TRAN','THANG_TRAN','THANG_TRAN_NHU_NGUYET'].includes(Game3D.combatPhase))return;
+        if(Game3D.currentCampaign===1 && Game3D.bachDang?.active)return;
         const units=campaignUnits(), allies=units.filter(u=>u.type==='ta'&&active(u)), enemies=units.filter(u=>u.type==='dich'&&active(u));
         for(const u of allies){
             u.attackCooldown=Math.max(0,(u.attackCooldown||0)-dt);

@@ -3409,6 +3409,7 @@
             <option value="g10-chu-de-04">Lớp 10 · Chủ đề 4: Cách mạng công nghiệp</option>
             <option value="g10-chu-de-05">Lớp 10 · Chủ đề 5: Văn minh Đông Nam Á</option>
             <option value="g10-chu-de-06">Lớp 10 · Chủ đề 6: Văn minh Việt Nam</option>
+            <option value="g10-tong-on">Lớp 10 · Tổng ôn (câu còn dư)</option>
             <option value="hsg">👑 Đề Học Sinh Giỏi (HSG Cấp Tỉnh / Quốc Gia)</option>
           </select>
 
@@ -48674,7 +48675,7 @@ function renderCatalog() {
 
     // 2. Lọc theo Chủ đề / Bài học (Dropdown 2)
     if (selectedTopicVal !== 'all') {
-      if (selectedTopicVal.startsWith('g11-bai-') || selectedTopicVal.startsWith('g10-chu-de-')) {
+      if (selectedTopicVal.startsWith('g11-bai-') || selectedTopicVal.startsWith('g10-chu-de-') || selectedTopicVal === 'g10-tong-on') {
         if (ex.category !== selectedTopicVal) return false;
       } else {
       if (selectedTopicVal === 'bai-01' && ex.id !== 'de-01') return false;
