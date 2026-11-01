@@ -4274,24 +4274,27 @@
             if (!bgMusic) return;
 
             // Khôi phục thời gian phát từ localStorage
-            const savedTime = localStorage.getItem('audioTime');
+            let savedTime = null;
+            let savedMusicState = null;
+            try {
+                savedTime = localStorage.getItem('audioTime');
+                savedMusicState = localStorage.getItem('nhacNenBat');
+            } catch (storageError) {
+                console.warn('Không đọc được tùy chọn âm thanh:', storageError);
+            }
             if (savedTime && !isNaN(savedTime)) {
                 bgMusic.currentTime = parseFloat(savedTime);
             }
 
-            // Đọc trạng thái đã lưu
-            const savedMusicState = localStorage.getItem('nhacNenBat');
-            if (savedMusicState === 'false') {
-                Game3D.cheDoNhac = false;
-                capNhatNutNhac(false);
-            } else {
-                batDauPhatNhac();
-            }
+            // Không tự phát nhạc khi tải trang; âm thanh chỉ bật sau thao tác người dùng.
+            Game3D.cheDoNhac = savedMusicState === 'true';
+            capNhatNutNhac(false);
 
             // Đồng bộ tiến độ nhạc mỗi 500ms
             setInterval(() => {
                 if (bgMusic && !bgMusic.paused) {
-                    localStorage.setItem('audioTime', bgMusic.currentTime);
+                    try { localStorage.setItem('audioTime', bgMusic.currentTime); }
+                    catch (storageError) { /* Storage có thể bị tắt; không chặn game loop. */ }
                 }
             }, 500);
 

@@ -13083,11 +13083,14 @@
         /*  12. KHỞI CHẠY HỆ THỐNG KHI TẢI TRANG                                     */
         /* ========================================================================== */
         function khoiTaoNhacNen() {
-            khoiDongNhacNen();
+            // Background music stays off until a user presses the music control.
+            capNhatNutNhac(false);
         }
 
         window.addEventListener('DOMContentLoaded', function() {
-            var savedVoice = localStorage.getItem('giongDocBat');
+            var savedVoice = null;
+            try { savedVoice = localStorage.getItem('giongDocBat'); }
+            catch (storageError) { console.warn('Không đọc được tùy chọn giọng đọc:', storageError); }
             if (savedVoice === 'false') {
                 gameState.cheDoGiongDoc = false;
                 var btn = document.getElementById('btn-voice');
@@ -13096,7 +13099,7 @@
                 if (text) text.textContent = 'Tắt';
             }
 
-            khoiDongNhacNen();
+            khoiTaoNhacNen();
             capNhatHUD();
             gameLoop();
 
