@@ -4208,6 +4208,136 @@
 
             .weapon-cooldown-overlay { display: none !important; }
         .btn-weapon-slot.on-cooldown { opacity: 1 !important; filter: none !important; cursor: pointer !important; }
+
+        /* Thông báo tương thích dành cho thiết bị di động */
+        .mobile-notice-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(5, 4, 3, 0.94);
+            backdrop-filter: blur(10px);
+        }
+        .mobile-notice-overlay.is-open { display: flex; animation: mobileNoticeFadeIn 0.22s ease-out; }
+        @keyframes mobileNoticeFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .mobile-notice-dialog {
+            position: relative;
+            width: min(100%, 620px);
+            max-height: min(88vh, 760px);
+            overflow-y: auto;
+            padding: 34px clamp(20px, 5vw, 42px) 30px;
+            color: #F5EADB;
+            text-align: center;
+            background: radial-gradient(ellipse at top, #382019, #17100d 58%, #120d0b 100%);
+            border: 2px solid #D4AF37;
+            border-radius: 20px;
+            box-shadow: 0 24px 90px rgba(0, 0, 0, 0.75), 0 0 42px rgba(212, 175, 55, 0.2), inset 0 0 30px rgba(212, 175, 55, 0.05);
+            animation: mobileNoticeRise 0.28s cubic-bezier(.2,.8,.2,1) both;
+        }
+        @keyframes mobileNoticeRise { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .mobile-notice-close {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            display: grid;
+            place-items: center;
+            width: 54px;
+            height: 54px;
+            border: 1px solid rgba(255, 243, 214, 0.42);
+            border-radius: 50%;
+            color: #FFF3D6;
+            background: rgba(255, 255, 255, 0.08);
+            font: 400 42px/1 Arial, sans-serif;
+            cursor: pointer;
+            transition: transform .18s ease, background .18s ease, border-color .18s ease;
+        }
+        .mobile-notice-close:hover, .mobile-notice-close:focus-visible {
+            transform: rotate(90deg) scale(1.06);
+            border-color: #FFD76A;
+            background: rgba(212, 175, 55, 0.2);
+            outline: 2px solid #FFD76A;
+            outline-offset: 2px;
+        }
+        .mobile-notice-crest {
+            display: grid;
+            place-items: center;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 14px;
+            border: 1px solid rgba(255, 215, 106, 0.7);
+            border-radius: 50%;
+            color: #FFD76A;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2), rgba(123, 30, 30, 0.25));
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.18);
+            font-size: 2.2rem;
+        }
+        .mobile-notice-eyebrow {
+            margin-bottom: 6px;
+            color: #E3C56D;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .mobile-notice-title {
+            margin: 0 46px 20px;
+            color: #FFF0C2;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.35rem, 5vw, 1.9rem);
+            line-height: 1.25;
+        }
+        .mobile-notice-section {
+            margin-top: 12px;
+            padding: 16px 18px;
+            border: 1px solid rgba(212, 175, 55, 0.34);
+            border-left: 4px solid #D4AF37;
+            border-radius: 12px;
+            background: #211914;
+            text-align: left;
+        }
+        .mobile-notice-section h3 {
+            margin: 0 0 7px;
+            color: #FFD76A;
+            font-size: .98rem;
+        }
+        .mobile-notice-section p {
+            margin: 0;
+            color: #E5D6BD;
+            font-size: .9rem;
+            line-height: 1.7;
+        }
+        .mobile-notice-recommendation {
+            margin: 17px 0 0;
+            color: #FFF0C2;
+            font-size: .92rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+        .mobile-notice-dismiss {
+            min-height: 46px;
+            margin-top: 18px;
+            padding: 10px 25px;
+            border: 1px solid #F4D36E;
+            border-radius: 999px;
+            color: #241812;
+            background: linear-gradient(135deg, #FFE38A, #D4AF37);
+            font: 800 .9rem 'Noto Serif', serif;
+            cursor: pointer;
+            box-shadow: 0 5px 18px rgba(212, 175, 55, .22);
+        }
+        .mobile-notice-dismiss:hover { filter: brightness(1.08); transform: translateY(-1px); }
+        body.mobile-notice-open { overflow: hidden; }
+        @media (max-width: 480px) {
+            .mobile-notice-overlay { padding: 12px; }
+            .mobile-notice-dialog { padding: 28px 16px 22px; border-radius: 16px; }
+            .mobile-notice-close { width: 50px; height: 50px; font-size: 40px; }
+            .mobile-notice-title { margin-right: 38px; margin-left: 38px; }
+            .mobile-notice-section { padding: 13px 14px; }
+            .mobile-notice-section p { font-size: .84rem; }
+        }
     </style>
 </head>
 <body>
@@ -4218,6 +4348,28 @@
 
     <!-- Thẻ âm thanh nhạc nền đồng bộ xuyên suốt các trang -->
     <audio id="bg-music" src="nhac-nen-1.mp3" preload="none"></audio>
+
+    <div class="mobile-notice-overlay" id="mobile-compat-notice" aria-hidden="true" onclick="if (event.target === this) dongThongBaoMobile();">
+        <section class="mobile-notice-dialog" role="dialog" aria-modal="true" aria-labelledby="mobile-notice-title" aria-describedby="mobile-notice-description">
+            <button type="button" class="mobile-notice-close" aria-label="Đóng thông báo" title="Đóng thông báo" onclick="dongThongBaoMobile()">×</button>
+            <div class="mobile-notice-crest" aria-hidden="true">⚔️</div>
+            <p class="mobile-notice-eyebrow">Thông báo từ nhóm phát triển</p>
+            <h2 class="mobile-notice-title" id="mobile-notice-title">Một lời nhắn gửi đến bạn</h2>
+
+            <div class="mobile-notice-section" id="mobile-notice-description">
+                <h3>📱 Về trải nghiệm trên điện thoại</h3>
+                <p>Chúng mình xin lỗi vì sa bàn hiện chưa tương thích tốt với thiết bị di động. Nhóm đang khắc phục các lỗi hiển thị và điều khiển; mong bạn thông cảm và tạm thời truy cập bằng laptop hoặc máy tính để bàn để trải nghiệm đầy đủ hơn. Chúng mình sẽ tiếp tục hoàn thiện phiên bản di động sớm nhất có thể.</p>
+            </div>
+
+            <div class="mobile-notice-section">
+                <h3>📜 Dự án vẫn đang được phát triển</h3>
+                <p>Sa bàn vẫn còn những phần chưa hoàn thiện. Với kinh nghiệm lập trình còn đang tích lũy ở bậc THPT, chúng mình biết dự án cần thêm thời gian và sự cố gắng. Tình yêu dành cho lịch sử là động lực để nhóm tiếp tục xây dựng mô hình này, giúp học sinh cảm nhận lịch sử gần gũi và rung động hơn. Cảm ơn bạn đã kiên nhẫn đồng hành!</p>
+            </div>
+
+            <p class="mobile-notice-recommendation">Hẹn gặp bạn trên laptop hoặc PC nhé!</p>
+            <button type="button" class="mobile-notice-dismiss" onclick="dongThongBaoMobile()">Đã hiểu, cảm ơn bạn</button>
+        </section>
+    </div>
 
     <!-- ========================================================================== -->
     <!--  HEADER NHỎ GỌN                                                            -->
@@ -4396,7 +4548,7 @@
                             <button class="btn-enter-stage btn-enter-stage--nhunguyet" onclick="vaoAiNhuNguyet()">
                                 <span>⛺ Khám Phá Doanh Trại & Lũy Tre ➔</span>
                             </button>
-                            <button class="btn-enter-stage" style="background: linear-gradient(135deg, #D4AF37, #AA771C) !important; color: #111 !important; font-weight: 800; border: 1.5px solid #FFE57F !important; box-shadow: 0 4px 18px rgba(212, 175, 55, 0.55); cursor: pointer;" onclick="event.stopPropagation(); window.location.href='sa-ban-3d.html?campaign=2';">
+                            <button class="btn-enter-stage" style="background: linear-gradient(135deg, #D4AF37, #AA771C) !important; color: #111 !important; font-weight: 800; border: 1.5px solid #FFE57F !important; box-shadow: 0 4px 18px rgba(212, 175, 55, 0.55); cursor: pointer;" onclick="event.stopPropagation(); vaoSaBan3D(2);">
                                 <span>🚀 Chơi Bản Sa Bàn 3D Toàn Cảnh ➔</span>
                             </button>
                         </div>
@@ -4427,7 +4579,7 @@
                             <button class="btn-enter-stage btn-enter-stage--bachdang" onclick="vaoAiBachDang()">
                                 <span>⛺ Khám Phá Doanh Trại Nhập Vai ➔</span>
                             </button>
-                            <button class="btn-enter-stage" style="background: linear-gradient(135deg, #D4AF37, #AA771C) !important; color: #111 !important; font-weight: 800; border: 1.5px solid #FFE57F !important; box-shadow: 0 4px 18px rgba(212, 175, 55, 0.55); cursor: pointer;" onclick="event.stopPropagation(); window.location.href='sa-ban-3d.html?campaign=1';">
+                            <button class="btn-enter-stage" style="background: linear-gradient(135deg, #D4AF37, #AA771C) !important; color: #111 !important; font-weight: 800; border: 1.5px solid #FFE57F !important; box-shadow: 0 4px 18px rgba(212, 175, 55, 0.55); cursor: pointer;" onclick="event.stopPropagation(); vaoSaBan3D(1);">
                                 <span>🚀 Chơi Bản Sa Bàn 3D Toàn Cảnh ➔</span>
                             </button>
                         </div>
@@ -8083,9 +8235,36 @@
             return /Android|iPhone|iPod|Windows Phone|Mobile/i.test(navigator.userAgent || '');
         }
 
+        function moThongBaoMobile() {
+            var overlay = document.getElementById('mobile-compat-notice');
+            if (!overlay) return;
+            overlay.classList.add('is-open');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('mobile-notice-open');
+            var closeButton = overlay.querySelector('.mobile-notice-close');
+            if (closeButton) closeButton.focus();
+        }
+
+        function dongThongBaoMobile() {
+            var overlay = document.getElementById('mobile-compat-notice');
+            if (!overlay) return;
+            overlay.classList.remove('is-open');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('mobile-notice-open');
+        }
+
+        function vaoSaBan3D(campaignId) {
+            if (chanSaBanTrenMobile()) return;
+            window.location.href = 'sa-ban-3d.html?campaign=' + campaignId;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') dongThongBaoMobile();
+        });
+
         function chanSaBanTrenMobile() {
             if (!laThietBiDiDong()) return false;
-            alert('Sa b\u00e0n hi\u1ec7n ch\u1ec9 h\u1ed7 tr\u1ee3 laptop v\u00e0 PC. Vui l\u00f2ng m\u1edf tr\u00f2 ch\u01a1i tr\u00ean laptop ho\u1eb7c m\u00e1y t\u00ednh đ\u1ec3 b\u00e0n.');
+            moThongBaoMobile();
             return true;
         }
 
@@ -8105,6 +8284,7 @@
 
         // Hàm chuyển sang Hồi 2: Mở Sa Bàn Trận Đồ
         function chuyenSangTranDo() {
+            if (chanSaBanTrenMobile()) return;
             if (currentStageId === 1) {
                 chuyenSangTranDoNhuNguyet();
                 return;
@@ -11888,6 +12068,7 @@
 
         // Vào Ải 1 từ Sảnh Chiến Dịch (Khám phá Doanh Trại & Lũy Tre Hồi 1)
         function vaoAiNhuNguyet() {
+            if (chanSaBanTrenMobile()) return;
             currentStageId = 1;
             khoiTaoAiNhuNguyet();
 
@@ -11967,6 +12148,7 @@
 
         // Chuyển sang Sa Bàn Thực Chiến Sông Như Nguyệt (Hồi 2)
         function chuyenSangTranDoNhuNguyet() {
+            if (chanSaBanTrenMobile()) return;
             gameState.hoiHienTai = 2;
             saBanStateNhuNguyet.soBeBiHa = 0;
             soThuyenDichBiHa = 0;
@@ -12806,6 +12988,7 @@
 
 
         function vaoAiBachDang() {
+            if (chanSaBanTrenMobile()) return;
             var lobby = document.getElementById('lobby-screen');
             var gameWrapper = document.getElementById('game-stage-wrapper');
             var header = document.querySelector('.site-header');
