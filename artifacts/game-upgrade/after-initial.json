@@ -1,0 +1,167 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "reports": [
+    {
+      "p50": 16.699999999999818,
+      "p95": 33.20000000000027,
+      "frames": 171,
+      "gpu": null,
+      "info": null,
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 2836195,
+      "runtime": {
+        "time": 3.4999999999999925,
+        "paused": false,
+        "reasons": [],
+        "quality": "low",
+        "requestedQuality": "auto",
+        "frames": 178,
+        "frameP50": 16.700000762939453,
+        "frameP95": 41.599998474121094,
+        "tasks": 1,
+        "loops": [
+          "ambient-2d",
+          "sparks-2d",
+          "battle-2d"
+        ],
+        "droppedSteps": 17
+      },
+      "phase": 2,
+      "name": "2d-bach-dang",
+      "errors": []
+    },
+    {
+      "p50": 16.599999999999454,
+      "p95": 24.900000000001455,
+      "frames": 274,
+      "gpu": null,
+      "info": null,
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 2960102,
+      "runtime": {
+        "time": 9.216666666666704,
+        "paused": false,
+        "reasons": [],
+        "quality": "low",
+        "requestedQuality": "auto",
+        "frames": 538,
+        "frameP50": 16.700000762939453,
+        "frameP95": 31.399999618530273,
+        "tasks": 1,
+        "loops": [
+          "ambient-2d",
+          "sparks-2d",
+          "battle-2d"
+        ],
+        "droppedSteps": 17
+      },
+      "phase": 2,
+      "name": "2d-nhu-nguyet",
+      "errors": []
+    },
+    {
+      "p50": 8.300000000000182,
+      "p95": 8.800000000000182,
+      "frames": 439,
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A721) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "info": {
+        "memory": {
+          "geometries": 0,
+          "textures": 0
+        },
+        "render": {
+          "frame": 0,
+          "calls": 0,
+          "triangles": 0,
+          "points": 0,
+          "lines": 0
+        },
+        "programs": [],
+        "autoReset": true
+      },
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 7964328,
+      "runtime": {
+        "time": 4.116666666666657,
+        "paused": false,
+        "reasons": [],
+        "quality": "low",
+        "requestedQuality": "auto",
+        "frames": 445,
+        "frameP50": 8.300000190734863,
+        "frameP95": 9,
+        "tasks": 0,
+        "loops": [
+          "battle-3d"
+        ],
+        "droppedSteps": 10
+      },
+      "phase": "NUOC_LON",
+      "name": "3d-bach-dang",
+      "errors": []
+    },
+    {
+      "p50": 8.300000000000182,
+      "p95": 8.900000000000091,
+      "frames": 440,
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A721) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "info": {
+        "memory": {
+          "geometries": 0,
+          "textures": 0
+        },
+        "render": {
+          "frame": 0,
+          "calls": 0,
+          "triangles": 0,
+          "points": 0,
+          "lines": 0
+        },
+        "programs": [],
+        "autoReset": true
+      },
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 12976569,
+      "runtime": {
+        "time": 4.716666666666655,
+        "paused": false,
+        "reasons": [],
+        "quality": "low",
+        "requestedQuality": "auto",
+        "frames": 516,
+        "frameP50": 8.300000190734863,
+        "frameP95": 9.399999618530273,
+        "tasks": 0,
+        "loops": [
+          "battle-3d"
+        ],
+        "droppedSteps": 13
+      },
+      "phase": "NHU_NGUYET_THUC_CHIEN",
+      "name": "3d-nhu-nguyet",
+      "errors": []
+    }
+  ]
+}

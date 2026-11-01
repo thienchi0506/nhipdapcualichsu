@@ -20,6 +20,9 @@
     <!-- ======================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://identitytoolkit.googleapis.com">
+    <link rel="preconnect" href="https://securetoken.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
@@ -1188,9 +1191,11 @@
         //  IMPORT FIREBASE MODULES (v9 Modular qua CDN)
         // ===================================================
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
         import {
-            getAuth,
+            initializeAuth,
+            indexedDBLocalPersistence,
+            browserLocalPersistence,
+            browserPopupRedirectResolver,
             signInWithPopup,
             GoogleAuthProvider,
             createUserWithEmailAndPassword,
@@ -1227,17 +1232,15 @@
         let auth = null;
         let googleProvider = null;
 
-        let analytics = null;
         if (hasRealFirebaseConfig) {
             app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
+            // Chỉ khởi tạo persistence cho email lúc mở trang; bộ xử lý popup
+            // Google được truyền riêng lúc bấm nút để giảm việc phải chuẩn bị sớm.
+            auth = initializeAuth(app, {
+                persistence: [indexedDBLocalPersistence, browserLocalPersistence]
+            });
             googleProvider = new GoogleAuthProvider();
-            try {
-                analytics = getAnalytics(app);
-                console.log('🔥 Firebase & Analytics (G-JMF58FGDRN) đã sẵn sàng!');
-            } catch (err) {
-                console.warn('Analytics không khả dụng trong môi trường hiện tại:', err);
-            }
+            console.log('🔥 Firebase Authentication đã sẵn sàng.');
         } else {
             console.warn('Firebase chưa được cấu hình với project thật. Hãy thay giá trị trong firebaseConfig hoặc window.__FIREBASE_CONFIG__.');
         }
@@ -1279,6 +1282,34 @@
             return bangLoi[errorCode] || ('⚠️ Có lỗi xảy ra: ' + errorCode);
         }
 
+        let authRequestInProgress = false;
+        function batDauChoFirebase(button, loadingText) {
+            if (authRequestInProgress || !button) return null;
+            authRequestInProgress = true;
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.setAttribute('aria-busy', 'true');
+            button.classList.add('loading');
+            button.textContent = loadingText;
+            hienThongBao('', 'success');
+
+            // Giữ yêu cầu đang chạy nhưng báo rõ khi máy chủ phản hồi chậm.
+            const slowTimer = window.setTimeout(function() {
+                if (authRequestInProgress) {
+                    hienThongBao('Firebase đang phản hồi chậm. Yêu cầu vẫn đang được xử lý; bạn không cần bấm lại.', 'success');
+                }
+            }, 7000);
+
+            return function ketThucChoFirebase() {
+                window.clearTimeout(slowTimer);
+                authRequestInProgress = false;
+                button.disabled = false;
+                button.removeAttribute('aria-busy');
+                button.classList.remove('loading');
+                button.textContent = originalText;
+            };
+        }
+
         /**
          * Lưu tên người dùng và chuyển hướng sang sảnh game.
          * @param {object} user - Đối tượng user từ Firebase Auth
@@ -1316,9 +1347,8 @@
             const password = document.getElementById('login-password').value;
             const btnDangNhap = document.getElementById('btn-dang-nhap');
 
-            // Hiển thị trạng thái loading
-            btnDangNhap.classList.add('loading');
-            btnDangNhap.textContent = 'Đang xác thực...';
+            const ketThucCho = batDauChoFirebase(btnDangNhap, 'Đang xác thực...');
+            if (!ketThucCho) return;
 
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -1327,8 +1357,7 @@
                 console.error('Lỗi đăng nhập:', error);
                 hienThongBao(dịchLỗi(error.code));
             } finally {
-                btnDangNhap.classList.remove('loading');
-                btnDangNhap.textContent = '⚔️ ĐĂNG NHẬP';
+                ketThucCho();
             }
         };
 
@@ -1366,9 +1395,8 @@
                 return;
             }
 
-            // Hiển thị trạng thái loading
-            btnDangKy.classList.add('loading');
-            btnDangKy.textContent = 'Đang ghi danh...';
+            const ketThucCho = batDauChoFirebase(btnDangKy, 'Đang ghi danh...');
+            if (!ketThucCho) return;
 
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -1377,8 +1405,7 @@
                 console.error('Lỗi đăng ký:', error);
                 hienThongBao(dịchLỗi(error.code));
             } finally {
-                btnDangKy.classList.remove('loading');
-                btnDangKy.textContent = '📜 GHI DANH';
+                ketThucCho();
             }
         };
 
@@ -1399,17 +1426,17 @@
                 return;
             }
 
-            // Hiển thị trạng thái loading
-            btnGoogle.classList.add('loading');
+            const ketThucCho = batDauChoFirebase(btnGoogle, 'Đang kết nối Google...');
+            if (!ketThucCho) return;
 
             try {
-                const result = await signInWithPopup(auth, googleProvider);
+                const result = await signInWithPopup(auth, googleProvider, browserPopupRedirectResolver);
                 luuVaChuyenHuong(result.user);
             } catch (error) {
                 console.error('Lỗi đăng nhập Google:', error);
                 hienThongBao(dịchLỗi(error.code));
             } finally {
-                btnGoogle.classList.remove('loading');
+                ketThucCho();
             }
         };
 

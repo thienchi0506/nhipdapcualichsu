@@ -1,0 +1,25 @@
+#hg-controls{position:fixed;right:14px;bottom:12px;z-index:2300;display:flex;gap:6px;align-items:center;font:600 12px 'Be Vietnam Pro',Arial,sans-serif}
+#hg-controls button,#hg-settings button,#hg-settings select{font:inherit;color:#fff0d2;background:#201811;border:1px solid #b99b57;border-radius:8px;padding:8px 11px;cursor:pointer}
+#hg-controls button:focus-visible,#hg-settings :focus-visible{outline:3px solid #70d6e9;outline-offset:3px}
+#hg-controls button[aria-pressed=true]{background:#62451c}
+#hg-meter{background:#151a1eee;color:#9ae6c9;padding:7px;border-radius:6px;max-width:220px}
+#hg-settings{color:#f7eddb;background:#191d22;border:1px solid #c6aa69;border-radius:16px;width:min(440px,90vw);margin:auto;padding:28px;font:15px/1.6 'Be Vietnam Pro',Arial,sans-serif;box-shadow:0 24px 80px #000a}
+#hg-settings::backdrop{background:#0009}
+#hg-settings h2{margin:0 32px 20px 0;font-size:22px}
+#hg-settings label{display:flex;align-items:center;gap:12px;margin:14px 0}
+#hg-settings select{margin-left:auto}
+#hg-settings input{width:18px;height:18px;accent-color:#c7a75b}
+#hg-settings p{font-size:13px;color:#bbc6ce;margin-top:20px}
+#hg-settings .hg-close{position:absolute;right:12px;top:9px;font-size:28px;line-height:1;padding:5px 10px}
+.hg-no-shake .screen-shake,.hg-no-shake body.screen-shake{animation:none!important;transform:none!important}
+.hg-reduced-motion .frame-act-1,.hg-reduced-motion .frame-act-2,.hg-reduced-motion .frame-act-3{animation:none!important}
+@media(max-width:600px){#hg-controls{display:none}}
+#hg-orders{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:2200;display:flex;gap:8px;align-items:center;max-width:calc(100vw - 520px);padding:8px 12px;background:#14242ded;border:1px solid #648f91;border-radius:10px;color:#e2f2e9;font:600 12px/1.4 'Be Vietnam Pro',Arial,sans-serif}
+#hg-orders[hidden]{display:none}
+#hg-orders output{max-width:240px}
+#hg-orders button,#hg-defeat button{border:1px solid #a38c56;background:#2b383d;color:#fff1d1;border-radius:6px;padding:8px;cursor:pointer;font:inherit;white-space:nowrap}
+#hg-defeat{margin:auto;background:#1a2329;color:#f1e8d3;max-width:420px;border:1px solid #c4a66c;border-radius:14px;padding:25px;font:16px/1.6 'Be Vietnam Pro',Arial,sans-serif}
+#hg-defeat::backdrop{background:#0009}
+.hg-game-3d #hg-controls{bottom:70px}
+.hg-game-3d #hg-orders{bottom:70px}
+@media(max-width:1000px){#hg-orders{left:10px;bottom:56px;transform:none;max-width:calc(100vw - 20px)}}

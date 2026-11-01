@@ -1,0 +1,450 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "reports": [
+    {
+      "p50": 25,
+      "p95": 41.70000000000027,
+      "frames": 100,
+      "gpu": null,
+      "info": null,
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 2963086,
+      "runtime": {
+        "time": 2.933333333333328,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 117,
+        "frameP50": 25,
+        "frameP95": 100.0999984741211,
+        "tasks": 1,
+        "loops": [
+          "ambient-2d",
+          "sparks-2d",
+          "battle-2d"
+        ],
+        "droppedSteps": 21,
+        "renderedFrames": 172,
+        "renderP50": 18,
+        "renderP95": 41
+      },
+      "phase": 2,
+      "name": "2d-bach-dang",
+      "errors": [
+        "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+      ]
+    },
+    {
+      "p50": 8.5,
+      "p95": 24.90000000000009,
+      "frames": 237,
+      "gpu": null,
+      "info": null,
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 2668409,
+      "runtime": {
+        "time": 3.3666666666666596,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 272,
+        "frameP50": 8.5,
+        "frameP95": 25.100000381469727,
+        "tasks": 1,
+        "loops": [
+          "ambient-2d",
+          "sparks-2d",
+          "battle-2d"
+        ],
+        "droppedSteps": 13,
+        "renderedFrames": 198,
+        "renderP50": 17.399999976158142,
+        "renderP95": 30.800000071525574
+      },
+      "phase": 2,
+      "name": "2d-nhu-nguyet",
+      "errors": [
+        "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+      ]
+    },
+    {
+      "p50": 8.399999999999636,
+      "p95": 16.699999999999818,
+      "frames": 287,
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A721) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "info": {
+        "memory": {
+          "geometries": 168,
+          "textures": 1
+        },
+        "render": {
+          "frame": 143,
+          "calls": 180,
+          "triangles": 23518,
+          "points": 930,
+          "lines": 0
+        },
+        "programs": [
+          {
+            "name": "MeshDepthMaterial",
+            "id": 0,
+            "cacheKey": "depth,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,false,false,,false,,false,false,0,true,false,,false,0,0,0,0,0,0,0,0,true,2,4,false,0,false,true,0,0,3201,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshDepthMaterial",
+            "id": 1,
+            "cacheKey": "depth,highp,true,true,3000,true,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,false,false,,false,,false,false,0,true,false,,false,0,0,0,0,0,0,0,0,true,2,4,false,0,false,true,0,0,3201,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 2,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 29,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 3,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 4,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,true,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 5,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 6,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,true,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 7,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 7,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 8,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 3,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 9,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,history-water-v1",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          }
+        ],
+        "autoReset": true
+      },
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 9225121,
+      "runtime": {
+        "time": 3.133333333333327,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 295,
+        "frameP50": 8.399999618530273,
+        "frameP95": 25.100000381469727,
+        "tasks": 2,
+        "loops": [
+          "battle-3d"
+        ],
+        "droppedSteps": 18,
+        "renderedFrames": 143,
+        "renderP50": 18.600000023841858,
+        "renderP95": 65.80000007152557
+      },
+      "phase": "NUOC_LON",
+      "name": "3d-bach-dang",
+      "errors": [
+        "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+      ]
+    },
+    {
+      "p50": 16.800000000000182,
+      "p95": 50.30000000000018,
+      "frames": 128,
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A721) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "info": {
+        "memory": {
+          "geometries": 448,
+          "textures": 1
+        },
+        "render": {
+          "frame": 104,
+          "calls": 1582,
+          "triangles": 33167,
+          "points": 930,
+          "lines": 0
+        },
+        "programs": [
+          {
+            "name": "MeshDepthMaterial",
+            "id": 0,
+            "cacheKey": "depth,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,false,false,,false,,false,false,0,true,false,,false,0,0,0,0,0,0,0,0,true,2,4,false,0,false,true,0,0,3201,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshDepthMaterial",
+            "id": 1,
+            "cacheKey": "depth,highp,true,true,3000,true,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,false,false,,false,,false,false,0,true,false,,false,0,0,0,0,0,0,0,0,true,2,4,false,0,false,true,0,0,3201,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 2,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 41,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 3,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 4,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,true,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 5,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 8,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 6,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,true,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 7,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 6,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 8,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 9,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,history-water-v1",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 10,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 25,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 11,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,true,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 12,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshLambertMaterial",
+            "id": 13,
+            "cacheKey": "lambert,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 20,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 14,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,6,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 4,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 15,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 16,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 17,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,history-water-v1",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshLambertMaterial",
+            "id": 18,
+            "cacheKey": "lambert,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 20,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          }
+        ],
+        "autoReset": true
+      },
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 13091781,
+      "runtime": {
+        "time": 2.883333333333328,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 135,
+        "frameP50": 16.799999237060547,
+        "frameP95": 58.20000076293945,
+        "tasks": 2,
+        "loops": [
+          "battle-3d"
+        ],
+        "droppedSteps": 23,
+        "renderedFrames": 104,
+        "renderP50": 25.800000071525574,
+        "renderP95": 97.29999995231628
+      },
+      "phase": "NHU_NGUYET_THUC_CHIEN",
+      "name": "3d-nhu-nguyet",
+      "errors": [
+        "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+      ]
+    }
+  ]
+}

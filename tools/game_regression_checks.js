@@ -1,0 +1,82 @@
+(async function () {
+    const checks=[];
+    const check=(name,passed,details)=>checks.push({name,passed:!!passed,...(details===undefined?{}:{details})});
+    const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+    const runtime=window.HistoryGame;
+    check('runtime-loaded',!!runtime);
+    if(!runtime)return checks;
+    const is3d=typeof Game3D!=='undefined';
+    const loops=runtime.snapshot().loops.length;
+    for(let i=0;i<4;i++)is3d?renderLoop3D():gameLoop();
+    check('start-is-idempotent',runtime.snapshot().loops.length===loops);
+    runtime.pause('regression');
+    const pausedTime=runtime.now();let fired=0;
+    runtime.delay(()=>fired++,80);
+    await sleep(220);
+    check('pause-freezes-clock-and-tasks',runtime.now()===pausedTime&&fired===0);
+    runtime.resume('regression');await sleep(300);
+    check('resume-runs-task-once',fired===1,{fired});
+    let canceled=0;const id=runtime.delay(()=>canceled++,80);runtime.cancel(id);await sleep(160);
+    check('task-cancellation',canceled===0);
+    const previous={...runtime.settings};
+    runtime.configure({quality:'low',shake:false,reducedMotion:true});
+    check('quality-and-accessibility',runtime.quality.dpr===1&&document.documentElement.classList.contains('hg-no-shake'));
+    runtime.configure(previous);
+    if(is3d){
+        const campaign=Game3D.currentCampaign;
+        check('renderer-drew-scene',Game3D.renderer.info.render.calls>0,Game3D.renderer.info.render);
+        check('shader-time-installed',!!Game3D.waterTime&&Game3D.waterTime.value>=0);
+        const units=Object.values(Game3D.units).filter(u=>u.campaign===campaign);
+        const ally=units.find(u=>u.type==='ta'&&!/quanY|cung/i.test(u.id));
+        const enemy=units.find(u=>u.type==='dich');
+        check('campaign-unit-registration',!!ally&&!!enemy,units.length);
+        enemy.hp=enemy.maxHp;enemy.morale=100;enemy.surrendered=false;enemy.sunk=false;enemy.trapped=false;
+        enemy.pos.set(5,2,55);ally.pos.set(-5,2,55);ally.targetX=-5;ally.targetZ=55;
+        Game3D.selectedUnit=ally;Game3D.thuyTrieu.phanTram=60;
+        GameTactics3D.setAttack(enemy);
+        const before=enemy.hp;await sleep(1000);
+        check('attack-hits-target',enemy.hp<before,{before,after:enemy.hp});
+        capNhatThanhMauDaoQuan3D();
+        const bar=document.getElementById('bar-hp-'+enemy.id);
+        const expected=enemy.hp/enemy.maxHp*100;
+        check('health-bar-normalized',bar&&Math.abs(parseFloat(bar.style.width)-expected)<.2,{width:bar?.style.width,expected});
+        const hp=enemy.hp;enemy.surrendered=true;apDungSatThuongDich(enemy,10);
+        check('surrendered-unit-ignores-damage',enemy.hp===hp);
+        enemy.surrendered=false;
+        if(campaign===2){
+            Game3D.nhuNguyetDilemmasTriggered={1:true,2:false,3:false};Game3D.trapCooldown=20.1;
+            kiemTraVongLapChienTranNhuNguyet(1/60,0);
+            check('second-dilemma-is-reachable',Game3D.trapCooldown>20.1&&Game3D.nhuNguyetDilemmasTriggered[2]);
+        }
+        // Drive the normal damage/victory functions, rather than changing the victory phase directly.
+        units.filter(u=>u.type==='dich').forEach(u=>{u.surrendered=false;u.sunk=false;apDungSatThuongDich(u,u.hp);});
+        GameTactics3D.update(1/60,0);kiemTraVongLapChienTran(1/60,0);
+        check('all-enemies-resolved-produces-victory',/^THANG_TRAN/.test(Game3D.combatPhase),Game3D.combatPhase);
+        chonDapAnTinhHuong(3,0);dongModalDaoLamTuong();await sleep(100);
+        check('victory-results-reachable',Game3D.victoryResultsShown===true,Game3D.victoryResultsShown);
+        runtime.delay(()=>{canceled++;},80);
+        campaign===1?chuyenSangChienDichNhuNguyet():chuyenSangChienDichBachDang();
+        await sleep(200);
+        check('old-scene-task-canceled',canceled===0);
+        const other=Object.values(Game3D.units).filter(u=>u.campaign!==Game3D.currentCampaign);
+        check('other-campaign-hidden',other.every(u=>!u.mesh.visible));
+    }else{
+        check('canvas-has-rendered',runtime.snapshot().renderedFrames>0);
+        const campaign=currentStageId;
+        const fleet=campaign===1?danhSachBeGoSong:danhSachThuyenDich;
+        const enemy=fleet.find(t=>HistoryGame.active(t));
+        const unit=selectedUnit;
+        check('battle-has-selectable-units',!!enemy&&!!unit,{campaign});
+        const weapon={id:'regression-weapon',damage:7,cooldown:.5,type:'ten',projSpeed:.06,icon:'',name:'Kiểm tra'};
+        const fire=campaign===1?banHaThuyenDichNhuNguyet:banHaThuyenDich;
+        const count=activeProjectiles.length;
+        for(let i=0;i<10;i++)fire(unit,enemy,weapon);
+        check('rapid-clicks-respect-cooldown',activeProjectiles.length===count+1,{before:count,after:activeProjectiles.length});
+        const before=enemy.hp;await sleep(650);
+        check('projectile-resolves-damage',enemy.hp<before,{before,after:enemy.hp});
+        const zero={weapon:{id:'zero-test',type:'none',damage:0},targetShip:enemy,sourceUnit:unit,isNhuNguyet:campaign===1};
+        const beforeZero=enemy.hp;xuLyDanTrungDich(zero);
+        check('zero-damage-is-not-replaced',enemy.hp===beforeZero,{before:beforeZero,after:enemy.hp});
+    }
+    return {checks,passed:checks.filter(c=>c.passed).length,total:checks.length};
+})();
