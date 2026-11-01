@@ -7008,7 +7008,12 @@
         /*  K. RENDER LOOP CHÍNH (60 FPS MƯỢT MÀ)                                     */
         /* ========================================================================== */
         function renderLoop3D() {
-            requestAnimationFrame(renderLoop3D);
+            if (document.hidden || Game3D.renderFramePending) return;
+            Game3D.renderFramePending = true;
+            requestAnimationFrame(() => {
+                Game3D.renderFramePending = false;
+                renderLoop3D();
+            });
             // The CDN or WebGL context can fail; don't let a missing engine kill the page.
             if (!Game3D.renderer || !Game3D.scene || !Game3D.camera) return;
 
@@ -7198,6 +7203,14 @@
                 console.error("Lỗi Game3D.renderer.render:", renderErr);
             }
         }
+
+        // Tạm ngừng vòng lặp đồ họa khi người chơi chuyển tab; khởi động lại
+        // một khung hình duy nhất khi quay lại để tránh tiêu thụ CPU/GPU nền.
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) return;
+            if (Game3D.clock) Game3D.clock.getDelta();
+            renderLoop3D();
+        });
 
         /* ========================================================================== */
         /*  L. CÁC HÀM TƯƠNG TÁC GIAO DIỆN & MODAL                                   */
@@ -7711,7 +7724,9 @@
                 // Toàn bộ 6 chiến hạm hăng máu đuổi theo vào đúng bãi cọc
                 if (Game3D.danhSachTauDich) {
                     Game3D.danhSachTauDich.forEach(s => {
-                        const targetChaseZ = 12 + (s.formationOffset ? s.formationOffset.z : 0);
+                        // Giữ đội hình nhưng không để tàu hộ vệ dừng ngoài bãi cọc
+                        // (đội sau có offset +24, nếu không sẽ đứng tại z=36 mãi).
+                        const targetChaseZ = Math.min(18, 12 + (s.formationOffset ? s.formationOffset.z : 0));
                         if (s.pos.z > targetChaseZ) {
                             s.pos.z -= 7.5 * delta;
                             s.mesh.position.z = s.pos.z;
@@ -7766,13 +7781,17 @@
                         if (ship.trapped) {
                             ship.mesh.rotation.z = Math.sin(elapsed * 4.0 + idx) * 0.12 + (idx % 2 === 0 ? 0.20 : -0.20);
                             apDungSatThuongDich(ship, delta * 3.2);
-                            if (ship.hp <= 0) {
+                            ship.morale = Math.max(0, ship.morale - delta * 4.8);
+                            if (ship.hp <= 0 || ship.morale <= 0) {
                                 ship.surrendered = true;
                                 ship.speed = 0;
-                                ship.mesh.position.y = Math.min(ship.mesh.position.y, -1.5);
+                                if (ship.hp <= 0) {
+                                    ship.mesh.position.y = Math.min(ship.mesh.position.y, -1.5);
+                                }
                             }
-                            ship.morale = Math.max(0, ship.morale - delta * 4.8);
-                            ship.mesh.position.y = Math.max(-1.5, ship.mesh.position.y - delta * 0.04);
+                            if (!ship.surrendered) {
+                                ship.mesh.position.y = Math.max(-1.5, ship.mesh.position.y - delta * 0.04);
+                            }
                         }
                     });
                 }
@@ -9755,7 +9774,7 @@
             // PHÍM [3]: 🔥 HỎA THIÊU CẦU PHAO
             // -------------------------------------------------------------
             else if (skillId === 3) {
-                AudioEngine.playFireExplosion();
+                AudioEngine.playBombExplosion();
                 hienThiThongBaoPopup("🔥 HỎA THIÊU CẦU PHAO", "Thuyền hỏa công và mưa tên lửa 3D bắn đứt đôi cầu phao quân Tống giữa sông Cầu!");
                 phatGiongDoc("Phóng bè lửa! Bắn mưa tên hỏa công thiêu rụi cầu phao giặc giữa dòng sông Như Nguyệt!");
 
@@ -10196,6 +10215,46 @@
                 nGain.connect(this.ctx.destination);
                 noise.start(t + 0.04);
             },
+            // Tiếng nổ trầm cho đạn đá lửa và bè hỏa công; trước đây các
+            // tuyệt kỹ gọi hàm này nhưng AudioEngine chưa khai báo nên dừng giữa chừng.
+            playBombExplosion: function() {
+                this.init();
+                if (!this.ctx) return;
+                const t = this.ctx.currentTime;
+                const duration = 0.48;
+                const bufferSize = Math.floor(this.ctx.sampleRate * duration);
+                const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    const envelope = 1 - i / bufferSize;
+                    data[i] = (Math.random() * 2 - 1) * envelope * envelope;
+                }
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(720, t);
+                filter.frequency.exponentialRampToValueAtTime(90, t + duration);
+                const noiseGain = this.ctx.createGain();
+                noiseGain.gain.setValueAtTime(0.48, t);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, t + duration);
+                noise.connect(filter);
+                filter.connect(noiseGain);
+                noiseGain.connect(this.ctx.destination);
+                noise.start(t);
+
+                const thump = this.ctx.createOscillator();
+                const thumpGain = this.ctx.createGain();
+                thump.type = 'sine';
+                thump.frequency.setValueAtTime(105, t);
+                thump.frequency.exponentialRampToValueAtTime(32, t + 0.34);
+                thumpGain.gain.setValueAtTime(0.62, t);
+                thumpGain.gain.exponentialRampToValueAtTime(0.001, t + 0.36);
+                thump.connect(thumpGain);
+                thumpGain.connect(this.ctx.destination);
+                thump.start(t);
+                thump.stop(t + 0.38);
+            },
             // c. Tiếng va chạm cọc gỗ vỡ & bọc sắt đâm thủng (Wood splinter & iron spike impact)
             playStakeImpact: function() {
                 this.init();
@@ -10576,6 +10635,15 @@
         /*  N. KHỞI CHẠY HỆ THỐNG KHI TẢI TRANG                                      */
         /* ========================================================================== */
         window.addEventListener('DOMContentLoaded', () => {
+            // Giữ chính sách khóa sa bàn trên điện thoại kể cả khi mở thẳng URL 3D.
+            const uaData = navigator.userAgentData;
+            const mobileDevice = !!(uaData && uaData.mobile === true)
+                || /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(navigator.userAgent || '');
+            if (mobileDevice) {
+                window.location.replace('sa-ban.html#mobile-block');
+                return;
+            }
+
             khoiDongAmThanh();
             khoiTaoThreeJSEngine();
             capNhatHUD();
