@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <script src="site-music.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trận Đồ Nhập Vai — Đại Thắng Bạch Đằng 938 [Đầy Đủ 3 Hồi: Doanh Trại - Sa Bàn - Bình Minh Hậu Chiến]</title>
@@ -2380,107 +2381,21 @@
         // ===================================================================
         //  2. ĐỒNG BỘ NHẠC NỀN & QUẢN LÝ VÒNG ĐỜI (LIFECYCLE)
         // ===================================================================
+        // Background music is coordinated across pages by site-music.js.
         var dangPhatNhac = false;
+        function toggleNhac() { window.SiteMusic.toggle(); }
+        function toggleNhacNen() { window.SiteMusic.toggle(); }
+        function xuLyClickNutNhac() { window.SiteMusic.toggle(); }
+        function chuyenBaiNhacNgauNhien() { window.SiteMusic.next(); }
+        function phatBaiNhacTheoIndex(index) { window.SiteMusic.choose(index); }
+        function capNhatNutNhac() { window.SiteMusic.updateUI(); }
+        function capNhatTrangThaiNutNhac() { window.SiteMusic.updateUI(); }
+        function khoiDongNhacNen() { window.SiteMusic.init(); }
 
-        function khoiDongNhacNen() {
-            var nhac = document.getElementById('bg-music');
-            if (!nhac) return;
 
-            nhac.volume = 0.45;
-            var savedTime = localStorage.getItem('audioTime');
-            if (savedTime && isFinite(savedTime)) {
-                nhac.currentTime = parseFloat(savedTime);
-            }
-
-            var trangThaiNhac = localStorage.getItem('nhacDangPhat');
-            if (trangThaiNhac !== 'false') {
-                nhac.play().then(function() {
-                    dangPhatNhac = true;
-                    capNhatNutNhac(true);
-                }).catch(function(e) {
-                    console.log('Chờ tương tác để phát nhạc:', e);
-                    capNhatNutNhac(false);
-                });
-            } else {
-                capNhatNutNhac(false);
-            }
-        }
-
-        function toggleNhac() {
-            var nhac = document.getElementById('bg-music');
-            if (!nhac) return;
-
-            if (!nhac.paused) {
-                nhac.pause();
-                dangPhatNhac = false;
-                localStorage.setItem('nhacDangPhat', 'false');
-                capNhatNutNhac(false);
-            } else {
-                nhac.play().then(function() {
-                    dangPhatNhac = true;
-                    localStorage.setItem('nhacDangPhat', 'true');
-                    capNhatNutNhac(true);
-                }).catch(function(e) { console.warn(e); });
-            }
-        }
-
-        function capNhatNutNhac(isPlay) {
-            var btn = document.getElementById('btn-music');
-            if (!btn) return;
-            if (isPlay) {
-                btn.classList.add('active');
-                btn.innerHTML = '🎵 Nhạc: Bật';
-            } else {
-                btn.classList.remove('active');
-                btn.innerHTML = '🔇 Nhạc: Tắt';
-            }
-        }
-
-        // Tự động ngắt nhạc khi rời tab hoặc ẩn trang
-        document.addEventListener('visibilitychange', function() {
-            var nhac = document.getElementById('bg-music');
-            if (!nhac) return;
-            if (document.hidden) {
-                if (!nhac.paused) {
-                    localStorage.setItem('audioTime', nhac.currentTime);
-                    nhac.pause();
-                }
-            } else {
-                if (localStorage.getItem('nhacDangPhat') !== 'false') {
-                    nhac.play().catch(function(){});
-                }
-            }
-        });
-
-        window.addEventListener('pagehide', function() {
-            var nhac = document.getElementById('bg-music');
-            if (nhac) {
-                localStorage.setItem('audioTime', nhac.currentTime);
-                nhac.pause();
-            }
-        });
-
-        window.addEventListener('beforeunload', function() {
-            var nhac = document.getElementById('bg-music');
-            if (nhac) {
-                localStorage.setItem('audioTime', nhac.currentTime);
-                nhac.pause();
-            }
-        });
-
-        // Lưu thời gian phát bài hát định kỳ mỗi 500ms
-        setInterval(function() {
-            var nhac = document.getElementById('bg-music');
-            if (nhac && !nhac.paused) {
-                localStorage.setItem('audioTime', nhac.currentTime);
-            }
-        }, 500);
-
-        // ===================================================================
-        //  3. HỆ THỐNG GIỌNG ĐỌC DẪN CHUYỆN (TEXT-TO-SPEECH)
-        // ===================================================================
         function toggleGiongDoc() {
             gameState.cheDoGiongDoc = !gameState.cheDoGiongDoc;
+            if (!gameState.cheDoGiongDoc) window.SiteMusic.releaseNarration();
             var txt = document.getElementById('txt-voice-status');
             var btn = document.getElementById('btn-voice');
             if (gameState.cheDoGiongDoc) {

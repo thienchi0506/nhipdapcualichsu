@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <script src="site-music.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>Tàng Thư Các - Kho Tàng Tri Thức Lịch Sử</title>
@@ -3810,64 +3811,9 @@ document.getElementById('mark-done').onclick = () => {
 // 4. ĐỒNG BỘ NHẠC NỀN XUYÊN SUỐT CÁC TRANG (KHÔNG BỊ NGẮT KHI CHUYỂN MỤC)
 // =========================================================================
 const bgMusic = document.getElementById('bg-music');
-const btnMusic = document.getElementById('btn-music');
+function toggleMusic() { window.SiteMusic.toggle(); }
+function updateMusicButton() { window.SiteMusic.updateUI(); }
 
-function updateMusicButton() {
-    if (bgMusic.paused) {
-        btnMusic.textContent = '🔇 Nhạc nền: Đang tắt';
-    } else {
-        btnMusic.textContent = '🎵 Nhạc nền: Đang bật';
-    }
-}
-
-function toggleMusic() {
-    if (bgMusic.paused) {
-        bgMusic.play().then(() => {
-            localStorage.setItem('nhacDangPhat', 'true');
-            updateMusicButton();
-        }).catch(() => {});
-    } else {
-        bgMusic.pause();
-        localStorage.setItem('nhacDangPhat', 'false');
-        updateMusicButton();
-    }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    const savedTime = localStorage.getItem('audioTime');
-    const isPlaying = localStorage.getItem('nhacDangPhat');
-    if (savedTime) {
-        bgMusic.currentTime = parseFloat(savedTime);
-    }
-    if (isPlaying !== 'false') {
-        bgMusic.play().then(() => {
-            localStorage.setItem('nhacDangPhat', 'true');
-            updateMusicButton();
-        }).catch(() => {
-            updateMusicButton();
-        });
-    } else {
-        updateMusicButton();
-    }
-});
-
-// Tự động phát nhạc ngay khi người dùng nhấp chuột lần đầu nếu trình duyệt chặn autoplay
-document.body.addEventListener('click', (e) => {
-    if (e.target.id === 'btn-music') return;
-    if (bgMusic.paused && localStorage.getItem('nhacDangPhat') !== 'false') {
-        bgMusic.play().then(() => {
-            localStorage.setItem('nhacDangPhat', 'true');
-            updateMusicButton();
-        }).catch(() => {});
-    }
-}, { once: true });
-
-// Lưu thời gian nhạc mỗi 500ms để chuyển trang mượt mà
-setInterval(() => {
-    if (!bgMusic.paused) {
-        localStorage.setItem('audioTime', bgMusic.currentTime);
-    }
-}, 500);
 
 updateProgress();
 render();

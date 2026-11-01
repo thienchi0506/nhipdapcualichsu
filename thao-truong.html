@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <script src="site-music.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Thao Trường Khảo Thí Lịch Sử 12 - Chuẩn Bộ GD&ĐT 2025</title>
@@ -253,7 +254,8 @@
     }
     .lobby-mode-title {
       display: block;
-      font-family: var(--font-serif);
+      /* Cinzel's Vietnamese combining marks can render detached on some systems. */
+      font-family: 'Be Vietnam Pro', Arial, sans-serif;
       font-size: 19px;
       font-weight: 800;
       color: #fff;
@@ -901,7 +903,7 @@
       border: 1px solid #fecaca;
     }
     .exam-card h3 {
-      font-family: var(--font-serif);
+      font-family: 'Be Vietnam Pro', Arial, sans-serif;
       font-size: 18px;
       font-weight: 800;
       color: var(--ink);
@@ -1071,6 +1073,7 @@
       padding-bottom: 8px;
     }
     .question-stem {
+      font-family: var(--font-sans), Arial, sans-serif;
       font-size: 15.5px;
       font-weight: 600;
       color: var(--ink);
@@ -1098,6 +1101,11 @@
       user-select: none;
       position: relative;
       box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+    .question-stem, .opt-text, .statement-text, .stmt-body {
+      font-family: var(--font-sans), Arial, sans-serif;
+      font-kerning: normal;
+      font-variant-ligatures: none;
     }
     .opt-card:hover:not(.locked) {
       transform: translateY(-2px);
@@ -3227,7 +3235,7 @@
           <div class="lobby-mode-icon">📚</div>
           <div class="lobby-mode-texts">
             <span class="lobby-mode-title">KHO ĐỀ TỰ CHỌN</span>
-            <span class="lobby-mode-sub">Chọn Đề Theo Ý Muốn (42 Bộ Đề)</span>
+            <span class="lobby-mode-sub">Chọn Đề Theo Ý Muốn (<span id="catalog-total-count">0</span> Bộ Đề)</span>
             <span class="lobby-mode-badge">🔍 Tìm Kiếm & Tự Chọn</span>
           </div>
         </button>
@@ -3382,6 +3390,25 @@
             <option value="bai-09">Bài 9: Đấu tranh bảo vệ Tổ quốc từ sau 1975</option>
             <option value="bai-10-11">Bài 10 - 11: Công cuộc Đổi mới ở Việt Nam</option>
             <option value="bai-12-14">Bài 12 - 14: Hoạt động đối ngoại của Việt Nam</option>
+            <option value="g11-bai-01">Lớp 11 · Bài 1: Cách mạng tư sản</option>
+            <option value="g11-bai-02">Lớp 11 · Bài 2: Chủ nghĩa tư bản</option>
+            <option value="g11-bai-03">Lớp 11 · Bài 3: Liên bang Xô viết</option>
+            <option value="g11-bai-04">Lớp 11 · Bài 4: Chủ nghĩa xã hội</option>
+            <option value="g11-bai-05">Lớp 11 · Bài 5: Thực dân ở Đông Nam Á</option>
+            <option value="g11-bai-06">Lớp 11 · Bài 6: Độc lập ở Đông Nam Á</option>
+            <option value="g11-bai-07">Lớp 11 · Bài 7: Chiến tranh bảo vệ Tổ quốc</option>
+            <option value="g11-bai-08">Lớp 11 · Bài 8: Khởi nghĩa và chiến tranh giải phóng</option>
+            <option value="g11-bai-09">Lớp 11 · Bài 9: Cải cách Hồ Quý Ly</option>
+            <option value="g11-bai-10">Lớp 11 · Bài 10: Cải cách Lê Thánh Tông</option>
+            <option value="g11-bai-11">Lớp 11 · Bài 11: Cải cách Minh Mạng</option>
+            <option value="g11-bai-12">Lớp 11 · Bài 12: Biển Đông</option>
+            <option value="g11-bai-13">Lớp 11 · Bài 13: Việt Nam và Biển Đông</option>
+            <option value="g10-chu-de-01">Lớp 10 · Chủ đề 1: Lịch sử và Sử học</option>
+            <option value="g10-chu-de-02">Lớp 10 · Chủ đề 2: Di sản</option>
+            <option value="g10-chu-de-03">Lớp 10 · Chủ đề 3: Văn minh thế giới</option>
+            <option value="g10-chu-de-04">Lớp 10 · Chủ đề 4: Cách mạng công nghiệp</option>
+            <option value="g10-chu-de-05">Lớp 10 · Chủ đề 5: Văn minh Đông Nam Á</option>
+            <option value="g10-chu-de-06">Lớp 10 · Chủ đề 6: Văn minh Việt Nam</option>
             <option value="hsg">👑 Đề Học Sinh Giỏi (HSG Cấp Tỉnh / Quốc Gia)</option>
           </select>
 
@@ -3397,7 +3424,7 @@
         <!-- THANH THỐNG KÊ & SỐ LƯỢNG ĐỀ HIỂN THỊ -->
         <div class="catalog-meta-bar">
           <div class="catalog-count-info" id="catalog-counter">
-            Hiển thị <strong>42 / 42</strong> bộ đề
+            Hiển thị <strong>0 / 0</strong> bộ đề
           </div>
           <div style="font-size: 13px; color: #c9b7a4;">
             💡 Bạn có thể nhấp chọn bất kỳ đề nào để khảo thí hoặc luyện lại nhằm nâng cao kỷ lục điểm số.
@@ -3464,7 +3491,7 @@
           
           <div class="result-stats-row">
             <div class="stat-pill" id="res-stat-p1">Phần I: 0.0 / 6.0đ (0/24 câu đúng)</div>
-            <div class="stat-pill" id="res-stat-p2">Phần II: 0.0 / 4.0đ (0/16 ý chính xác)</div>
+            <div class="stat-pill" id="res-stat-p2">Phần II: 0.0 / 4.0đ (0 ý chính xác)</div>
             <div class="stat-pill" id="res-stat-time">⏱️ Hoàn thành: 00 phút 00 giây</div>
             <div class="stat-pill" id="res-stat-bonus">🕊️ +0 Điểm Thái Bình</div>
           </div>
@@ -3613,11 +3640,13 @@
 </div>
 
 <footer class="footer">
-  <strong>⚔️ THAO TRƯỜNG KHẢO THÍ LỊCH SỬ 12 - DỰ ÁN NGHIÊN CỨU SỬ HỌC SỐ HÓA</strong><br>
-  Tích hợp 18 bộ đề khảo thí chuyên sâu theo Chương trình Giáo dục Phổ thông mới & Định dạng Đề thi Tốt nghiệp THPT 2025.<br>
+  <strong>⚔️ THAO TRƯỜNG KHẢO THÍ LỊCH SỬ 10–12 - DỰ ÁN NGHIÊN CỨU SỬ HỌC SỐ HÓA</strong><br>
+  Tích hợp đề ôn tập theo bài lớp 11 cùng các bộ đề khảo thí theo Chương trình Giáo dục Phổ thông mới và định dạng tốt nghiệp THPT 2025.<br>
   Rèn luyện tư duy phân tích cứ liệu, định hình tầm nhìn chiến lược và kết nối tri thức lịch sử với cuộc sống.
 </footer>
 
+<script src="grade11-exams.js"></script>
+<script src="grade10-exams.js"></script>
 <script>
 // =========================================================================
 // 1. DATA: 18 BỘ ĐỀ KHẢO THÍ CHUẨN HÓA BỘ GD&ĐT 2025
@@ -48013,6 +48042,136 @@ const EXAMS_DATA = [
   }
 ];
 
+EXAMS_DATA.push(...(window.GRADE11_ARCHIVE_EXAMS || []));
+EXAMS_DATA.push(...(window.GRADE10_ARCHIVE_EXAMS || []));
+
+// Gộp ngân hàng khối 12 để học sinh luyện toàn bộ câu hỏi, không chỉ mẫu 25 + 4.
+function normalizeQuestionForDedup(value) {
+  return String(value ?? '')
+    .normalize('NFKC')
+    .toLocaleLowerCase('vi')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
+function getQuestionOptions(question) {
+  return Array.isArray(question.opts) ? question.opts : (Array.isArray(question.options) ? question.options : []);
+}
+
+function getQuestionText(question) {
+  return question.q || question.question || '';
+}
+
+function buildGrade12ComprehensiveExam() {
+  const sources = EXAMS_DATA.filter(ex => /^de-\d+$/.test(ex.id));
+  const mcGroups = new Map();
+  const tfGroups = new Map();
+  sources.forEach(ex => {
+    (ex.part2 || []).forEach(group => {
+      (group.statements || []).forEach((statement, index) => {
+        if (!statement.letter) statement.letter = String.fromCharCode(97 + index);
+      });
+    });
+    (ex.part3 || []).forEach(essay => {
+      if (!essay.q && essay.question) essay.q = essay.question;
+    });
+  });
+  const mcKey = question => {
+    const options = getQuestionOptions(question).map(normalizeQuestionForDedup).sort();
+    return `${normalizeQuestionForDedup(getQuestionText(question))}||${options.join('|')}`;
+  };
+  const tfKey = group => `${normalizeQuestionForDedup(group.passage || group.text || group.source)}||${(group.statements || []).map(item => normalizeQuestionForDedup(item.text)).join('|')}`;
+
+  // Tìm đáp án đồng thuận giữa các bản trùng; giữ bản xuất hiện đầu tiên nếu hòa.
+  sources.forEach(ex => (ex.part1 || []).forEach(question => {
+    const key = mcKey(question);
+    if (!mcGroups.has(key)) mcGroups.set(key, []);
+    const options = getQuestionOptions(question);
+    const answerIndex = Number.isInteger(question.ans) ? question.ans : question.answer;
+    const correctText = Number.isInteger(answerIndex) ? normalizeQuestionForDedup(options[answerIndex]) : '';
+    mcGroups.get(key).push({ question, options, correctText, answerIndex, examId: ex.id });
+  }));
+  mcGroups.forEach(entries => {
+    const counts = new Map();
+    entries.forEach(entry => {
+      if (entry.correctText) counts.set(entry.correctText, (counts.get(entry.correctText) || 0) + 1);
+    });
+    if (!counts.size) return;
+    const winner = entries.find(entry => entry.correctText === [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0]);
+    entries.forEach(entry => {
+      const targetIndex = entry.options.findIndex(option => normalizeQuestionForDedup(option) === winner.correctText);
+      if (targetIndex < 0) return;
+      if (entry.question.ans !== undefined) entry.question.ans = targetIndex;
+      if (entry.question.answer !== undefined) entry.question.answer = targetIndex;
+      if (entry.correctText !== winner.correctText && winner.question.explain) entry.question.explain = winner.question.explain;
+    });
+  });
+
+  // Đồng bộ các đoạn đúng/sai trùng nguyên tư liệu và mệnh đề theo đa số đáp án.
+  sources.forEach(ex => (ex.part2 || []).forEach(group => {
+    const key = tfKey(group);
+    if (!tfGroups.has(key)) tfGroups.set(key, []);
+    tfGroups.get(key).push(group);
+  }));
+  tfGroups.forEach(groups => {
+    if (groups.length < 2) return;
+    const width = Math.min(...groups.map(group => (group.statements || []).length));
+    for (let i = 0; i < width; i++) {
+      const votes = groups.map(group => group.statements[i].isTrue).filter(value => typeof value === 'boolean');
+      const trueCount = votes.filter(Boolean).length;
+      const falseCount = votes.length - trueCount;
+      if (!votes.length) continue;
+      // Khi số bản trùng hòa phiếu, dùng bản xuất hiện đầu tiên trong ngân hàng.
+      const answer = trueCount === falseCount ? votes[0] : trueCount > falseCount;
+      groups.forEach(group => {
+        const statement = group.statements[i];
+        if (statement.isTrue === answer) return;
+        statement.isTrue = answer;
+        statement.explain = answer
+          ? 'Mệnh đề phù hợp với nội dung tư liệu và kiến thức lịch sử.'
+          : 'Mệnh đề chưa phù hợp với nội dung tư liệu hoặc kiến thức lịch sử.';
+      });
+    }
+  });
+
+  const uniqueQuestions = (items, keyOf) => {
+    const seen = new Set();
+    return items.filter(item => {
+      const key = keyOf(item);
+      if (!key.replace(/[|\s]/g, '') || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).map(item => structuredClone(item));
+  };
+  const part1 = uniqueQuestions(sources.flatMap(ex => ex.part1 || []), mcKey);
+  const part2 = uniqueQuestions(sources.flatMap(ex => ex.part2 || []), tfKey);
+  const part3 = uniqueQuestions(sources.flatMap(ex => ex.part3 || []), item => normalizeQuestionForDedup(item.q || item.question));
+  const sourceQuestionCount = sources.reduce((sum, ex) => sum + (ex.part1 || []).length + (ex.part2 || []).length + (ex.part3 || []).length, 0);
+  const uniqueQuestionCount = part1.length + part2.length + part3.length;
+
+  return {
+    id: 'de-12-tong-hop-day-du',
+    title: 'Đề Tổng Hợp Lịch Sử 12 · Ôn Tập Toàn Bộ Bài',
+    category: 'tong-hop-ls12-day-du',
+    badge: 'Ôn tập toàn bộ · Đã gộp câu trùng',
+    book: 'Tổng hợp các bộ đề Lịch sử 12',
+    level: 'Ngân hàng ôn tập đầy đủ',
+    time: 0,
+    topic: 'Kiến thức Lịch sử 12 tổng hợp tất cả các bài',
+    desc: `Tập hợp câu hỏi từ ${sources.length} bộ đề Lịch sử 12. Đã gộp câu trùng nguyên văn và rà lại các đáp án mâu thuẫn; giữ ${uniqueQuestionCount.toLocaleString('vi-VN')} câu/đoạn/câu tự luận không trùng để học sinh ôn tập toàn chương trình.`,
+    grade: 12,
+    difficulty: 'medium',
+    practiceOnly: true,
+    sourceQuestionCount,
+    part1,
+    part2,
+    part3
+  };
+}
+
+EXAMS_DATA.push(buildGrade12ComprehensiveExam());
+
 // MAPPING ĐỀ THI SANG BÀI HỌC TẠI TÀNG THƯ CÁC
 const EXAM_LESSON_MAPPING = {
   'de-01': { title: 'Liên hợp quốc', grade: 12, topic: 'Thế giới trong và sau Chiến tranh lạnh' },
@@ -48086,6 +48245,7 @@ $('peace-badge').textContent = '🕊️ Thái Bình: ' + peaceScore;
 
 // SCREEN SWITCHER
 function showScreen(screenId) {
+  window.SiteMusic.setExam(screenId === 'screen-exam');
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === screenId));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -48142,6 +48302,7 @@ function resetCompletedExams() {
 // TỰ ĐỘNG PHÂN LOẠI ĐỀ THI THEO KHỐI (10, 11, 12) & MỨC ĐỘ (DỄ, KHÓ, NÂNG CAO)
 // -------------------------------------------------------------------------
 function getExamDifficulty(ex) {
+  if (ex.difficulty) return ex.difficulty;
   const hardIds = ['de-03', 'de-11', 'de-30', 'de-33', 'de-34', 'de-35', 'de-38'];
   const easyIds = ['de-01', 'de-04', 'de-14', 'de-15', 'de-18', 'de-19', 'de-20', 'de-21', 'de-22', 'de-23', 'de-24', 'de-26', 'de-27', 'de-36', 'de-37'];
   if (hardIds.includes(ex.id) || (ex.level && ex.level.includes('Học Sinh Giỏi'))) return 'hard';
@@ -48150,6 +48311,7 @@ function getExamDifficulty(ex) {
 }
 
 function getExamGrades(ex) {
+  if (Number.isInteger(ex.grade)) return [ex.grade];
   const g10 = ['de-01', 'de-03', 'de-04', 'de-05', 'de-06', 'de-07', 'de-08', 'de-09', 'de-10', 'de-11', 'de-12', 'de-13', 'de-14', 'de-15', 'de-16', 'de-17', 'de-38'];
   const g11 = ['de-02', 'de-03', 'de-18', 'de-19', 'de-20', 'de-21', 'de-22', 'de-23', 'de-24', 'de-25', 'de-26', 'de-27', 'de-28', 'de-29', 'de-30', 'de-31', 'de-32', 'de-33', 'de-38', 'de-39', 'de-40', 'de-41', 'de-42'];
   const res = [12];
@@ -48160,6 +48322,20 @@ function getExamGrades(ex) {
 
 // Hỗ trợ tạo đề tổng hợp từ ngân hàng câu hỏi sẵn có nếu khối/mức độ đó ít đề
 let SYNTHETIC_EXAMS = null;
+function cleanImportedExamText(value) {
+  return String(value ?? '')
+    .normalize('NFC')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/^\s*(?:HƯỚNG DẪN CHẤM|ĐÁP ÁN(?: ĐÚNG)?|ANSWER KEY)\s*[:：-]?[^\r\n]*(?:\r?\n|$)/gim, '')
+    .trim();
+}
+
+function escapeExamHtml(value) {
+  return cleanImportedExamText(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[char]);
+}
+
 function getSyntheticExams() {
   if (SYNTHETIC_EXAMS) return SYNTHETIC_EXAMS;
   SYNTHETIC_EXAMS = [];
@@ -48174,7 +48350,7 @@ function getSyntheticExams() {
         if (ex.part2) qP2_g10.push(...ex.part2);
       }
     });
-    if (qP1_g10.length >= 24) {
+    if (qP1_g10.length >= 25 && qP2_g10.length >= 4) {
       SYNTHETIC_EXAMS.push({
         id: 'de-th-10-01',
         title: 'Đề Số 43: ĐỀ TỔNG HỢP KHỐI 10 (CƠ BẢN · VĂN MINH THẾ GIỚI & ASEAN)',
@@ -48184,10 +48360,10 @@ function getSyntheticExams() {
         level: 'Chuẩn Bộ GD&ĐT 2025',
         time: 3600,
         topic: 'Lịch sử Văn minh Thế giới, Khu vực Đông Nam Á & ASEAN',
-        desc: 'Bộ đề tổng hợp rèn luyện kiến thức nền tảng Lịch sử 10 (24 câu TN nhiều lựa chọn + 4 đoạn tư liệu Đúng/Sai).',
+        desc: 'Bộ đề tổng hợp rèn luyện kiến thức nền tảng Lịch sử 10 (25 câu TN nhiều lựa chọn + 4 đoạn tư liệu Đúng/Sai).',
         grade: 10,
         difficulty: 'easy',
-        part1: qP1_g10.slice(0, 24),
+        part1: qP1_g10.slice(0, 25),
         part2: qP2_g10.slice(0, 4)
       });
     }
@@ -48202,7 +48378,7 @@ function getSyntheticExams() {
         if (ex.part2) qP2_g10_hard.push(...ex.part2);
       }
     });
-    if (qP1_g10_hard.length >= 24) {
+    if (qP1_g10_hard.length >= 25 && qP2_g10_hard.length >= 4) {
       SYNTHETIC_EXAMS.push({
         id: 'de-th-10-02',
         title: 'Đề Số 44: ĐỀ TỔNG HỢP KHỐI 10 (NÂNG CAO · QUAN HỆ QUỐC TẾ & ASEAN CHUYÊN SÂU)',
@@ -48212,10 +48388,10 @@ function getSyntheticExams() {
         level: 'Chuẩn Ôn Thi Học Sinh Giỏi Quốc Gia / Cấp Tỉnh 2025',
         time: 3600,
         topic: 'Chuyên sâu Quan hệ Quốc tế, Cộng đồng ASEAN & Đánh giá Năng lực',
-        desc: 'Bộ đề chuyên sâu vận dụng cao kiến thức Lịch sử 10 (24 câu TN nhiều lựa chọn + 4 đoạn tư liệu chuyên khảo).',
+        desc: 'Bộ đề chuyên sâu vận dụng cao kiến thức Lịch sử 10 (25 câu TN nhiều lựa chọn + 4 đoạn tư liệu chuyên khảo).',
         grade: 10,
         difficulty: 'hard',
-        part1: qP1_g10_hard.slice(0, 24),
+        part1: qP1_g10_hard.slice(0, 25),
         part2: qP2_g10_hard.slice(0, 4)
       });
     }
@@ -48230,7 +48406,7 @@ function getSyntheticExams() {
         if (ex.part2) qP2_g11_hard.push(...ex.part2);
       }
     });
-    if (qP1_g11_hard.length >= 24) {
+    if (qP1_g11_hard.length >= 25 && qP2_g11_hard.length >= 4) {
       SYNTHETIC_EXAMS.push({
         id: 'de-th-11-01',
         title: 'Đề Số 45: ĐỀ TỔNG HỢP KHỐI 11 (NÂNG CAO · CHIẾN TRANH & KHÁNG CHIẾN BẢO VỆ TỔ QUỐC)',
@@ -48240,13 +48416,40 @@ function getSyntheticExams() {
         level: 'Chuẩn Ôn Thi Học Sinh Giỏi Quốc Gia / Cấp Tỉnh 2025',
         time: 3600,
         topic: 'Lịch sử Chiến tranh Thế giới & Các cuộc Kháng chiến Bảo vệ Tổ quốc',
-        desc: 'Bộ đề nâng cao vận dụng cao phân tích tư liệu lịch sử 11 (24 câu TN nhiều lựa chọn + 4 đoạn tư liệu Đúng/Sai).',
+        desc: 'Bộ đề nâng cao vận dụng cao phân tích tư liệu lịch sử 11 (25 câu TN nhiều lựa chọn + 4 đoạn tư liệu Đúng/Sai).',
         grade: 11,
         difficulty: 'hard',
-        part1: qP1_g11_hard.slice(0, 24),
+        part1: qP1_g11_hard.slice(0, 25),
         part2: qP2_g11_hard.slice(0, 4)
       });
     }
+
+    // Các khối/mức độ còn lại cũng có đề mô phỏng đúng cấu trúc nếu ngân hàng đủ câu.
+    [10, 11, 12].forEach(grade => {
+      ['easy', 'medium', 'hard'].forEach(difficulty => {
+        if (SYNTHETIC_EXAMS.some(ex => ex.grade === grade && ex.difficulty === difficulty)) return;
+        const matching = EXAMS_DATA.filter(ex => !ex.practiceOnly && !ex.id.startsWith('de-11-bai-') && getExamGrades(ex).includes(grade) && getExamDifficulty(ex) === difficulty);
+        const pooledP1 = matching.flatMap(ex => Array.isArray(ex.part1) ? ex.part1 : []);
+        const pooledP2 = matching.flatMap(ex => Array.isArray(ex.part2) ? ex.part2 : []);
+        if (pooledP1.length < 25 || pooledP2.length < 4) return;
+        const levelLabel = { easy: 'Cơ bản', medium: 'Vận dụng', hard: 'Nâng cao' }[difficulty];
+        SYNTHETIC_EXAMS.push({
+          id: `de-th-${grade}-${difficulty}`,
+          title: `Đề thi thử tổng hợp khối ${grade} (${levelLabel})`,
+          category: 'tong-hop',
+          badge: 'Đề mô phỏng chuẩn cấu trúc 25 + 4',
+          book: 'Tổng hợp ngân hàng câu hỏi hiện có',
+          level: 'Đề thi thử',
+          time: 3600,
+          topic: `Kiến thức Lịch sử ${grade} tổng hợp`,
+          desc: `Đề thi thử gồm 25 câu trắc nghiệm và 4 đoạn tư liệu đúng/sai, chọn từ các bộ đề cùng khối và mức độ.`,
+          grade,
+          difficulty,
+          part1: pooledP1.slice(0, 25),
+          part2: pooledP2.slice(0, 4)
+        });
+      });
+    });
   } catch (err) {
     console.warn('Lỗi khởi tạo đề tổng hợp:', err);
   }
@@ -48255,6 +48458,8 @@ function getSyntheticExams() {
 
 function getCandidateExams(grade, diff) {
   const baseList = EXAMS_DATA.filter(ex => {
+    if (ex.practiceOnly) return false;
+    if (ex.id.startsWith('de-11-bai-')) return false;
     const grades = getExamGrades(ex);
     const difficulty = getExamDifficulty(ex);
     return grades.includes(grade) && difficulty === diff;
@@ -48391,7 +48596,8 @@ function selectDifficulty(diff) {
 // THUẬT TOÁN RANDOM ĐỀ KHÔNG TRÙNG LẶP ĐỀ ĐÃ LÀM (LOCALSTORAGE)
 // -------------------------------------------------------------------------
 function launchRandomExam() {
-  const candidates = getCandidateExams(selectedGrade, selectedDifficulty);
+  const candidates = getCandidateExams(selectedGrade, selectedDifficulty)
+    .filter(ex => !ex.id.startsWith('de-11-bai-') && (ex.part1 || []).length >= 25 && (ex.part2 || []).length >= 4);
   const completedList = getCompletedExams();
   const uncompleted = candidates.filter(ex => !completedList.includes(ex.id));
 
@@ -48468,6 +48674,9 @@ function renderCatalog() {
 
     // 2. Lọc theo Chủ đề / Bài học (Dropdown 2)
     if (selectedTopicVal !== 'all') {
+      if (selectedTopicVal.startsWith('g11-bai-') || selectedTopicVal.startsWith('g10-chu-de-')) {
+        if (ex.category !== selectedTopicVal) return false;
+      } else {
       if (selectedTopicVal === 'bai-01' && ex.id !== 'de-01') return false;
       if (selectedTopicVal === 'bai-02' && !['de-02', 'de-03'].includes(ex.id)) return false;
       if (selectedTopicVal === 'bai-03' && ex.id !== 'de-04') return false;
@@ -48480,6 +48689,7 @@ function renderCatalog() {
       if (selectedTopicVal === 'bai-10-11' && !(ex.id >= 'de-34' && ex.id <= 'de-37')) return false;
       if (selectedTopicVal === 'bai-12-14' && !(ex.id >= 'de-39' && ex.id <= 'de-42')) return false;
       if (selectedTopicVal === 'hsg' && !(ex.id === 'de-38' || (ex.level && ex.level.includes('Học Sinh Giỏi')))) return false;
+      }
     }
 
     // 3. Lọc theo Trạng thái (Dropdown 3: Tất cả / Chưa làm / Đã hoàn thành)
@@ -48504,6 +48714,8 @@ function renderCatalog() {
   if (counterEl) {
     counterEl.innerHTML = `Hiển thị <strong>${filtered.length} / ${EXAMS_DATA.length}</strong> bộ đề`;
   }
+  const totalCountEl = $('catalog-total-count');
+  if (totalCountEl) totalCountEl.textContent = EXAMS_DATA.length;
 
   if (filtered.length === 0) {
     grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px 20px; color: #dfd0be; font-size: 15px;">🔍 Không tìm thấy bộ đề nào khớp với tiêu chí lọc đã chọn. Hãy thử nới lỏng bộ lọc hoặc tìm với từ khóa khác!</div>';
@@ -48525,28 +48737,41 @@ function renderCatalog() {
       ? `<span class="exam-status-badge exam-status-badge--done">✓ Đã hoàn thành ${bestScore !== null ? `(Điểm cao nhất: ${parseFloat(bestScore).toFixed(1)}đ)` : ''}</span>`
       : `<span class="exam-status-badge exam-status-badge--todo">🔥 Chưa thử sức</span>`;
 
+    const part1Questions = Array.isArray(ex.part1) ? ex.part1 : [];
+    const part2Groups = Array.isArray(ex.part2) ? ex.part2 : [];
+    const p1Count = part1Questions.length;
+    const p2Count = part2Groups.length;
+    const p2StatementCount = part2Groups.reduce((sum, item) => sum + (Array.isArray(item.statements) ? item.statements.length : 0), 0);
+    const preserveSourceQuestionCounts = ex.id.startsWith('de-11-bai-') || ex.id.startsWith('de-10-chu-de-');
     const p3Count = ex.essays ? ex.essays.length : (ex.part3 ? ex.part3.length : 0);
-    const btnText = isDone ? '⚔️ Luyện Lại Đề Này (Cuộn Liền Mạch) ➔' : '⚔️ Vào Khảo Thí (Cuộn Liền Mạch) ➔';
+    const isQuestionBank = !preserveSourceQuestionCounts && (p1Count > 25 || p2Count > 4);
+    const hasStandardSet = p1Count >= 25 && p2Count >= 4;
+    const isIncompleteStandard = !preserveSourceQuestionCounts && !isQuestionBank && p1Count > 0 && p2Count > 0 && (p1Count !== 25 || p2Count !== 4);
+    const btnText = isDone ? '⚔️ Thi thử / làm lại đề ➔' : '⚔️ Vào thi thử ➔';
 
     card.innerHTML = `
       <div class="exam-card-header">
         <span class="exam-badge" title="${ex.badge}">${ex.badge.length > 36 ? ex.badge.slice(0, 33) + '...' : ex.badge}</span>
-        <div class="exam-time">⏱️ 45 Phút</div>
+        <div class="exam-time">${ex.practiceOnly ? '📚 Tự luyện' : '⏱️ 45 Phút'}</div>
       </div>
       <h3>${ex.title}</h3>
       <div class="exam-topic">📌 ${ex.topic}</div>
       <p class="exam-desc">${ex.desc}</p>
       <div class="exam-specs">
-        ${ex.part1 && ex.part1.length > 0 ? `<div><span>Phần I (Trắc nghiệm nhiều lựa chọn):</span> <strong>${ex.part1.length} câu (${ex.part2 && ex.part2.length > 0 ? '6.0' : '10.0'} điểm)</strong></div>` : ''}
-        ${ex.part2 && ex.part2.length > 0 ? `<div><span>Phần II (Trắc nghiệm Đúng/Sai tư liệu):</span> <strong>${ex.part2.length} đoạn · ${ex.part2.length * 4} ý (4.0 điểm)</strong></div>` : ''}
+        ${p1Count > 0 ? `<div><span>Phần I (Trắc nghiệm nhiều lựa chọn):</span> <strong>${p1Count} câu (${p2Count > 0 ? '6.0' : '10.0'} điểm)</strong></div>` : ''}
+        ${p2Count > 0 ? `<div><span>Phần II (Trắc nghiệm Đúng/Sai tư liệu):</span> <strong>${p2Count} đoạn · ${p2StatementCount} ý (4.0 điểm)</strong></div>` : ''}
         ${p3Count > 0 ? `<div><span>Phần III (Tự luận & Gợi ý chấm):</span> <strong>${p3Count} câu chuyên sâu</strong></div>` : ''}
         <div><span>Bộ sách:</span> <strong>${ex.book || 'Dùng chung 3 bộ sách'}</strong></div>
       </div>
+      ${isQuestionBank ? `<div class="exam-bank-note" style="margin:-4px 0 14px;padding:9px 11px;border-left:3px solid var(--gold);background:var(--gold-bg);color:var(--ink-light);font-size:.78rem;line-height:1.55;">${ex.practiceOnly ? `Đã gom câu hỏi từ ${ex.sourceQuestionCount.toLocaleString('vi-VN')} mục trong các đề gốc và gộp những câu trùng. Có thể luyện toàn bộ, không giới hạn thời gian.` : `Ngân hàng này có ${p1Count} câu trắc nghiệm và ${p2Count} đoạn đúng/sai (${p2StatementCount} ý). ${hasStandardSet ? 'Thi thử lấy ngẫu nhiên đúng 25 + 4; chế độ luyện tập giữ toàn bộ ngân hàng.' : 'Nguồn chưa đủ 25 câu trắc nghiệm + 4 đoạn đúng/sai để tạo đề chuẩn; bạn có thể luyện toàn bộ dữ liệu gốc.'}`}</div>` : ''}
+      ${preserveSourceQuestionCounts ? `<div class="exam-bank-note" style="margin:-4px 0 14px;padding:9px 11px;border-left:3px solid var(--gold);background:var(--gold-bg);color:var(--ink-light);font-size:.78rem;line-height:1.55;">Đề ôn tập Lịch sử ${ex.grade || 11} theo ${ex.grade === 10 ? 'chủ đề' : 'từng bài'}. Giữ nguyên số câu trong tài liệu nguồn: ${p1Count} câu trắc nghiệm và ${p2StatementCount} ý đúng/sai.</div>` : ''}
+      ${isIncompleteStandard ? `<div class="exam-bank-note" style="margin:-4px 0 14px;padding:9px 11px;border-left:3px solid #d97706;background:#fff7ed;color:#7c2d12;font-size:.78rem;line-height:1.55;">Đề nguồn có ${p1Count} câu trắc nghiệm và ${p2Count} đoạn đúng/sai, chưa đủ cấu trúc 25 + 4. Nội dung được giữ nguyên; hệ thống không tự tạo thêm câu.</div>` : ''}
       <div style="margin-bottom: 14px;">
         ${statusBadge}
       </div>
       <div class="exam-card-actions">
-        <button class="start-btn" onclick="startExam('${ex.id}')">${btnText}</button>
+        ${(!isQuestionBank || hasStandardSet) && !ex.practiceOnly ? `<button class="start-btn" onclick="startExam('${ex.id}', 'standard')">${btnText}</button>` : ''}
+        ${isQuestionBank ? `<button class="start-btn practice-bank-btn" style="margin-top:8px;background:#f5efe3;color:var(--ink-light);border:1px solid var(--border-dark);" onclick="startExam('${ex.id}', 'practice')">📚 Luyện toàn bộ ngân hàng (${(p1Count + p2StatementCount + p3Count).toLocaleString('vi-VN')} câu/ý)</button>` : ''}
       </div>
     `;
     frag.appendChild(card);
@@ -48565,28 +48790,47 @@ if (searchInputEl) {
 // =========================================================================
 // 4. START EXAM (CONTINUOUS SCROLL LAYOUT & 45 MINUTE TIMER)
 // =========================================================================
-function startExam(examId) {
-  currentExam = EXAMS_DATA.find(e => e.id === examId);
-  if (!currentExam) return;
+function startExam(examId, mode = 'standard') {
+  const sourceExam = EXAMS_DATA.find(e => e.id === examId);
+  if (!sourceExam) return;
+  if (sourceExam.practiceOnly) mode = 'practice';
+
+  const sampleSection = (items, limit) => {
+    const copy = Array.isArray(items) ? items.slice() : [];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy.slice(0, limit);
+  };
+  const preserveSourceQuestionCounts = sourceExam.id.startsWith('de-11-bai-') || sourceExam.id.startsWith('de-10-chu-de-');
+  currentExam = mode === 'practice' || preserveSourceQuestionCounts ? sourceExam : {
+    ...sourceExam,
+    part1: sampleSection(sourceExam.part1, 25),
+    part2: sampleSection(sourceExam.part2, 4)
+  };
 
   isSubmitted = false;
   userAnswersP1 = new Array(currentExam.part1.length).fill(null);
-  userAnswersP2 = currentExam.part2.map(() => ({ a: null, b: null, c: null, d: null }));
+  userAnswersP2 = currentExam.part2.map(p => Object.fromEntries(p.statements.map(stmt => [stmt.letter.toLowerCase(), null])));
   const essaysList = currentExam.essays || currentExam.part3 || [];
   userAnswersP3 = new Array(essaysList.length).fill('');
 
-  timerSeconds = STANDARD_TIME; // 45 phút
+  timerSeconds = currentExam.practiceOnly ? 0 : STANDARD_TIME; // Bộ tổng hợp tự luyện không giới hạn thời gian
   elapsedSeconds = 0;
 
   // Header information
   $('active-exam-title').textContent = currentExam.title;
   $('active-exam-badge').textContent = currentExam.badge;
+  const timerLabel = document.querySelector('.timer-card-label');
+  if (timerLabel) timerLabel.textContent = currentExam.practiceOnly ? 'Thời Gian Tự Luyện' : 'Thời Gian Làm Bài';
   const p3Count = essaysList.length;
   const p1L = currentExam.part1 ? currentExam.part1.length : 0;
   const p2L = currentExam.part2 ? currentExam.part2.length : 0;
   let specsText = '';
   if (p1L > 0 && p2L > 0) {
-    specsText = `${p1L} Câu TN · ${p2L} Đoạn Tư Liệu (${p2L * 4} Ý)${p3Count > 0 ? ` · ${p3Count} Câu Tự Luận` : ''}`;
+    const trueFalseCount = currentExam.part2.reduce((sum, item) => sum + item.statements.length, 0);
+    specsText = `${p1L} Câu TN · ${p2L} Đoạn Tư Liệu (${trueFalseCount} Ý)${p3Count > 0 ? ` · ${p3Count} Câu Tự Luận` : ''}`;
   } else if (p1L > 0 && p2L === 0) {
     specsText = `${p1L} Câu TN Nhiều Lựa Chọn${p3Count > 0 ? ` · ${p3Count} Câu Tự Luận` : ''}`;
   } else if (p1L === 0 && p2L === 0 && p3Count > 0) {
@@ -48639,11 +48883,11 @@ function renderPart1Continuous() {
     card.id = `q-card-p1-${i}`;
 
     const ptsPerQ = (6.0 / currentExam.part1.length).toFixed(2);
-    const letters = ['A', 'B', 'C', 'D'];
+    const letters = q.options.map((_, optionIndex) => String.fromCharCode(65 + optionIndex));
 
     const optsHtml = q.options.map((optText, optIdx) => {
       // Clean option letter prefix if duplicated
-      const cleanText = optText.replace(/^[A-D]\s*[\.\:\)]\s*/i, '');
+      const cleanText = escapeExamHtml(cleanImportedExamText(optText).replace(/^[A-E]\s*[\.\:\)]\s*/i, ''));
       const letter = letters[optIdx];
       const isSelected = userAnswersP1[i] === optIdx;
 
@@ -48668,7 +48912,7 @@ function renderPart1Continuous() {
         <span>Câu ${i + 1} / ${currentExam.part1.length} (Trắc nghiệm nhiều lựa chọn)</span>
         <span>${ptsPerQ} điểm</span>
       </div>
-      <div class="question-stem">${q.q}</div>
+      <div class="question-stem">${escapeExamHtml(q.q)}</div>
       <div class="options-grid">
         ${optsHtml}
       </div>
@@ -48693,7 +48937,8 @@ function renderPart2Continuous() {
   }
   if (secP2) secP2.style.display = 'flex';
   container.style.display = 'block';
-  $('badge-p2-count').textContent = `${p2Len} Đoạn · ${p2Len * 4} Ý · 4.0 Điểm`;
+  const p2StatementTotal = currentExam.part2.reduce((sum, item) => sum + item.statements.length, 0);
+  $('badge-p2-count').textContent = `${p2Len} Đoạn · ${p2StatementTotal} Ý · 4.0 Điểm`;
 
   const frag = document.createDocumentFragment();
   currentExam.part2.forEach((p, i) => {
@@ -48717,7 +48962,7 @@ function renderPart2Continuous() {
         <div class="statement-row ${rowStatusClass}" id="stmt-row-${i}-${letKey}">
           <div class="statement-text">
             <span class="stmt-letter">${stmt.letter.toLowerCase()})</span>
-            <span class="stmt-body">${stmt.text}</span>
+            <span class="stmt-body">${escapeExamHtml(stmt.text)}</span>
           </div>
           <div class="statement-control-cluster">
             <div class="stmt-status-box" id="stmt-status-${i}-${letKey}">
@@ -48746,12 +48991,12 @@ function renderPart2Continuous() {
     card.innerHTML = `
       <div class="question-meta">
         <span>Đoạn ${i + 1} / ${currentExam.part2.length} (Đọc hiểu tư liệu Đúng / Sai)</span>
-        <span>4 ý · Tối đa 1.0 điểm</span>
+        <span>${p.statements.length} ý · Tối đa 1.0 điểm</span>
       </div>
       <div class="passage-box">
         <div class="passage-title">📜 ĐOẠN TƯ LIỆU LỊCH SỬ KHẢO CỨU:</div>
-        <div>${p.passage}</div>
-        <div class="passage-source">${p.source || 'Tư liệu Lịch sử 12 - GDPT mới'}</div>
+        <div>${escapeExamHtml(p.passage)}</div>
+        <div class="passage-source">${escapeExamHtml(p.source || 'Tư liệu Lịch sử 12 - GDPT mới')}</div>
       </div>
       <div class="question-stem" style="font-size: 14.5px; margin-bottom: 12px; color: var(--gold-dark); font-weight: 600;">
         Hãy xác định tính Đúng hoặc Sai cho từng phát biểu dưới đây:
@@ -48823,7 +49068,7 @@ function selectP1Option(qIdx, optIdx) {
   }
 
   // Update card styles, military stamp seal & selection tags
-  for (let o = 0; o < 4; o++) {
+  for (let o = 0; o < (currentExam.part1[qIdx]?.options || []).length; o++) {
     const optEl = $(`opt-card-${qIdx}-${o}`);
     const indicatorEl = $(`opt-indicator-${qIdx}-${o}`);
     if (optEl) {
@@ -48899,7 +49144,7 @@ function selectP2Statement(passageIdx, letter, boolVal) {
 
   // Update palette dot for this passage
   const ansObj = userAnswersP2[passageIdx];
-  const allAnswered = ['a', 'b', 'c', 'd'].every(k => ansObj[k] !== null);
+  const allAnswered = currentExam.part2[passageIdx].statements.every(stmt => ansObj[stmt.letter.toLowerCase()] !== null);
   const dot = $(`dot-p2-${passageIdx}`);
   if (dot) {
     dot.classList.toggle('answered', allAnswered);
@@ -49026,7 +49271,8 @@ function updateProgress() {
   const p2Len = currentExam.part2 ? currentExam.part2.length : 0;
   const essaysList = currentExam.essays || currentExam.part3 || [];
   const p3Len = essaysList.length;
-  const totalUnits = p1Len + p2Len * 4;
+  const p2StatementTotal = currentExam.part2.reduce((sum, item) => sum + item.statements.length, 0);
+  const totalUnits = p1Len + p2StatementTotal;
 
   if (totalUnits === 0 && p3Len > 0) {
     let answeredP3 = 0;
@@ -49047,9 +49293,9 @@ function updateProgress() {
   userAnswersP1.forEach(ans => {
     if (ans !== null) answeredUnits++;
   });
-  userAnswersP2.forEach(obj => {
-    ['a', 'b', 'c', 'd'].forEach(k => {
-      if (obj[k] !== null) answeredUnits++;
+  userAnswersP2.forEach((obj, idx) => {
+    currentExam.part2[idx].statements.forEach(stmt => {
+      if (obj[stmt.letter.toLowerCase()] !== null) answeredUnits++;
     });
   });
 
@@ -49071,6 +49317,15 @@ function startTimer45Min() {
   clearInterval(timerInterval);
   updateTimerDisplay();
 
+  if (currentExam && currentExam.practiceOnly) {
+    timerInterval = setInterval(() => {
+      elapsedSeconds++;
+      timerSeconds = elapsedSeconds;
+      updateTimerDisplay();
+    }, 1000);
+    return;
+  }
+
   timerInterval = setInterval(() => {
     timerSeconds--;
     elapsedSeconds++;
@@ -49089,7 +49344,12 @@ function startTimer45Min() {
 function updateTimerDisplay() {
   const mins = Math.floor(timerSeconds / 60);
   const secs = timerSeconds % 60;
-  const disp = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  const hours = Math.floor(mins / 60);
+  const disp = currentExam && currentExam.practiceOnly
+    ? (hours > 0
+      ? `${hours.toString().padStart(2, '0')}:${(mins % 60).toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+      : `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`)
+    : `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   
   const timerEl = $('timer-countdown');
   const timerCard = document.querySelector('.timer-card');
@@ -49099,20 +49359,22 @@ function updateTimerDisplay() {
   const mobTimer = $('mobile-timer-countdown');
   if (mobTimer) {
     mobTimer.textContent = disp;
-    if (timerSeconds <= 300) mobTimer.classList.add('urgent');
+    if (!currentExam?.practiceOnly && timerSeconds <= 300) mobTimer.classList.add('urgent');
     else mobTimer.classList.remove('urgent');
   }
 
   // Cập nhật dây cháy chậm lùi dần theo thời gian thực
   const fuseBurn = $('fuse-wire-burn');
   if (fuseBurn) {
+    const fuseContainer = fuseBurn.closest('.fuse-wire-container');
+    if (fuseContainer) fuseContainer.style.display = currentExam && currentExam.practiceOnly ? 'none' : '';
     const totalExamSec = (currentExam && currentExam.time) ? currentExam.time : 2700;
-    const pct = Math.max(0, Math.min(100, (timerSeconds / totalExamSec) * 100));
+    const pct = currentExam && currentExam.practiceOnly ? 0 : Math.max(0, Math.min(100, (timerSeconds / totalExamSec) * 100));
     fuseBurn.style.width = pct + '%';
   }
 
   // When under 5 minutes (<= 300 seconds): turn fiery red & pulse
-  if (timerSeconds <= 300) {
+  if (!currentExam?.practiceOnly && timerSeconds <= 300) {
     if (timerEl) timerEl.classList.add('urgent');
     if (timerCard) timerCard.classList.add('urgent');
   } else {
@@ -49131,7 +49393,17 @@ function openConfirmModal() {
   const mins = Math.floor(timerSeconds / 60);
   const secs = timerSeconds % 60;
   const secsFormatted = secs.toString().padStart(2, '0');
-  $('modal-time-left').innerHTML = `⏱️ <strong>Bạn vẫn còn ${mins} phút ${secsFormatted} giây làm bài!</strong>`;
+  if (currentExam && currentExam.practiceOnly) {
+    const elapsedHours = Math.floor(elapsedSeconds / 3600);
+    const elapsedMins = Math.floor((elapsedSeconds % 3600) / 60);
+    const elapsedSecs = (elapsedSeconds % 60).toString().padStart(2, '0');
+    const elapsedText = elapsedHours > 0
+      ? `${elapsedHours} giờ ${elapsedMins} phút ${elapsedSecs} giây`
+      : `${elapsedMins} phút ${elapsedSecs} giây`;
+    $('modal-time-left').innerHTML = `⏱️ <strong>Thời gian tự luyện: ${elapsedText} (không giới hạn)</strong>`;
+  } else {
+    $('modal-time-left').innerHTML = `⏱️ <strong>Bạn vẫn còn ${mins} phút ${secsFormatted} giây làm bài!</strong>`;
+  }
 
   // 2. Audit Part 1: MCQs
   const missingP1 = [];
@@ -49144,10 +49416,9 @@ function openConfirmModal() {
   // 3. Audit Part 2: True/False statements
   const missingP2 = [];
   userAnswersP2.forEach((obj, pIdx) => {
-    ['a', 'b', 'c', 'd'].forEach(k => {
-      if (obj[k] === null) {
-        missingP2.push(`Ý ${k.toLowerCase()} - Đoạn ${pIdx + 1} (Đúng/Sai)`);
-      }
+    currentExam.part2[pIdx].statements.forEach(stmt => {
+      const k = stmt.letter.toLowerCase();
+      if (obj[k] === null) missingP2.push(`Ý ${k} - Đoạn ${pIdx + 1} (Đúng/Sai)`);
     });
   });
 
@@ -49258,7 +49529,7 @@ $('btn-modal-continue').onclick = () => {
   // 2. Check first unanswered Part 2
   for (let i = 0; i < userAnswersP2.length; i++) {
     const obj = userAnswersP2[i];
-    if (['a', 'b', 'c', 'd'].some(k => obj[k] === null)) {
+    if (currentExam.part2[i].statements.some(stmt => obj[stmt.letter.toLowerCase()] === null)) {
       scrollToQuestion(`q-card-p2-${i}`);
       highlightQuestionCard(`q-card-p2-${i}`);
       return;
@@ -49334,22 +49605,27 @@ function executeSubmitExam() {
   const p2Scale = [0, 0.1, 0.25, 0.5, 1.0];
   let rawP2Score = 0;
   let p2StatementsCorrect = 0;
+  let p2StatementsTotal = 0;
   let p2FullCorrectCount = 0;
 
   if (p2Len > 0) {
     for (let i = 0; i < p2Len; i++) {
       const p = currentExam.part2[i];
       let correctInThisPassage = 0;
-      ['a', 'b', 'c', 'd'].forEach((key, sIdx) => {
+      p.statements.forEach(stmt => {
+        const key = stmt.letter.toLowerCase();
         const userVal = userAnswersP2[i][key];
-        const correctVal = p.statements[sIdx].isTrue;
+        const correctVal = stmt.isTrue;
         if (userVal === correctVal) {
           correctInThisPassage++;
           p2StatementsCorrect++;
         }
       });
-      rawP2Score += p2Scale[correctInThisPassage];
-      if (correctInThisPassage === 4) p2FullCorrectCount++;
+      p2StatementsTotal += p.statements.length;
+      rawP2Score += p.statements.length === 4
+        ? p2Scale[correctInThisPassage]
+        : correctInThisPassage / p.statements.length;
+      if (correctInThisPassage === p.statements.length) p2FullCorrectCount++;
     }
   }
   const scoreP2 = p2Len > 0 ? (rawP2Score / (p2Len * 1.0)) * 4.0 : 0;
@@ -49395,7 +49671,7 @@ function executeSubmitExam() {
   }
 
   if (p2Len > 0) {
-    $('res-stat-p2').innerHTML = `<strong>Phần II (Đúng/Sai):</strong> ${p2StatementsCorrect}/${p2Len * 4} ý chính xác · <strong>${scoreP2.toFixed(2)}/4.00đ</strong>`;
+    $('res-stat-p2').innerHTML = `<strong>Phần II (Đúng/Sai):</strong> ${p2StatementsCorrect}/${p2StatementsTotal} ý chính xác · <strong>${scoreP2.toFixed(2)}/4.00đ</strong>`;
     $('res-stat-p2').style.display = 'block';
   } else {
     $('res-stat-p2').style.display = 'none';
@@ -49449,7 +49725,7 @@ function executeSubmitExam() {
   applyReviewStylingToQuestions();
 
   // Generate Roadmap to Tang Thu Cac
-  generateRoadmapToTangThuCac(p1Correct < p1Len || p2StatementsCorrect < p2Len * 4);
+  generateRoadmapToTangThuCac(p1Correct < p1Len || p2StatementsCorrect < p2StatementsTotal);
 
   // Smooth scroll to top of exam paper
   $('result-summary-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -49459,12 +49735,14 @@ function executeSubmitExam() {
 function applyReviewStylingToQuestions() {
   const p1Len = currentExam.part1.length;
   const p2Len = currentExam.part2.length;
-  const letters = ['A', 'B', 'C', 'D'];
-  const lessonInfo = EXAM_LESSON_MAPPING[currentExam.id] || { title: currentExam.topic, grade: 12, topic: 'Lịch sử 12' };
+  const letters = currentExam.part1[0]?.options?.map((_, optionIndex) => String.fromCharCode(65 + optionIndex)) || ['A', 'B', 'C', 'D'];
+  const lessonGrade = currentExam.grade || getExamGrades(currentExam)[0] || 12;
+  const lessonInfo = EXAM_LESSON_MAPPING[currentExam.id] || { title: currentExam.topic, grade: lessonGrade, topic: `Lịch sử ${lessonGrade}` };
 
   // PART 1 REVIEW
   currentExam.part1.forEach((q, i) => {
     const userVal = userAnswersP1[i];
+    const questionLetters = (q.options || []).map((_, optionIndex) => String.fromCharCode(65 + optionIndex));
     const correctAns = q.ans !== undefined ? q.ans : q.answer;
     const isCorrect = userVal === correctAns;
 
@@ -49475,7 +49753,7 @@ function applyReviewStylingToQuestions() {
     }
 
     // Card options coloring & badges
-    for (let o = 0; o < 4; o++) {
+    for (let o = 0; o < (q.options || []).length; o++) {
       const optEl = $(`opt-card-${i}-${o}`);
       const indicatorEl = $(`opt-indicator-${i}-${o}`);
       if (optEl) {
@@ -49498,7 +49776,7 @@ function applyReviewStylingToQuestions() {
 
     // Clean text of correct option
     const correctRawText = q.options[correctAns] || '';
-    const cleanCorrectText = correctRawText.replace(/^[A-D]\s*[\.\:\)]\s*/i, '');
+    const cleanCorrectText = escapeExamHtml(cleanImportedExamText(correctRawText).replace(/^[A-D]\s*[\.\:\)]\s*/i, ''));
 
     // Explanation Box & Tang Thu Cac Widget
     const feedbackBox = $(`feedback-p1-${i}`);
@@ -49507,12 +49785,12 @@ function applyReviewStylingToQuestions() {
         <div class="explain-box">
           <div class="explain-title">💡 Giải Thích Chi Tiết & Dẫn Chứng Lịch Sử:</div>
           <div style="margin-bottom: 8px; font-size: 13.5px; font-weight: 700; color: #15803d; background: #eafaf1; padding: 7px 12px; border-radius: 8px; border: 1px solid #86efac;">
-            👉 Đáp án đúng của đề: <strong>${letters[correctAns]}. ${cleanCorrectText}</strong>
-            ${!isCorrect && userVal !== null ? `<div style="color: #b91c1c; font-weight: 600; font-size: 12.5px; margin-top: 3px;">(Lựa chọn của bạn là ${letters[userVal]} - chưa chính xác)</div>` : ''}
+            👉 Đáp án đúng của đề: <strong>${questionLetters[correctAns]}. ${cleanCorrectText}</strong>
+            ${!isCorrect && userVal !== null ? `<div style="color: #b91c1c; font-weight: 600; font-size: 12.5px; margin-top: 3px;">(Lựa chọn của bạn là ${questionLetters[userVal]} - chưa chính xác)</div>` : ''}
             ${userVal === null ? `<div style="color: #d97706; font-weight: 600; font-size: 12.5px; margin-top: 3px;">(Bạn chưa chọn đáp án cho câu hỏi này)</div>` : ''}
           </div>
           <div style="line-height: 1.6; color: var(--ink); font-size: 14px;">
-            ${q.explain || 'Căn cứ các sự kiện và bài học trong sách giáo khoa Lịch sử 12 chuẩn Bộ GD&ĐT.'}
+            ${escapeExamHtml(q.explain || 'Căn cứ các sự kiện và bài học trong sách giáo khoa Lịch sử 12 chuẩn Bộ GD&ĐT.')}
           </div>
         </div>
       `;
@@ -49582,7 +49860,7 @@ function applyReviewStylingToQuestions() {
         stmtFeedback.innerHTML = `
           <div class="explain-box" style="margin-top: 5px; margin-bottom: 8px; font-size: 13.5px; padding: 10px 14px; background: ${isStmtCorrect ? '#f0fdf4' : '#fef2f2'}; border-color: ${isStmtCorrect ? '#86efac' : '#fca5a5'};">
             <strong style="color: ${correctVal ? '#15803d' : '#b91c1c'}; font-weight: 800;">Mệnh đề ${stmt.letter.toLowerCase()}) là ${correctVal ? 'ĐÚNG' : 'SAI'}:</strong> 
-            <span style="color: var(--ink); line-height: 1.55;">${stmt.explain || 'Căn cứ các cứ liệu lịch sử trong sách giáo khoa Lịch sử 12.'}</span>
+            <span style="color: var(--ink); line-height: 1.55;">${escapeExamHtml(stmt.explain || 'Căn cứ các cứ liệu lịch sử trong sách giáo khoa Lịch sử 12.')}</span>
           </div>
         `;
       }
@@ -49639,7 +49917,7 @@ function applyReviewStylingToQuestions() {
           <div class="essay-matched-box">
             <span class="essay-matched-title">🎯 Các ý & từ khóa lịch sử bạn đã nêu đúng (${kwResult.matchedKeywords.length}):</span>
             <div class="essay-pills-list">
-              ${kwResult.matchedKeywords.map(k => `<span class="essay-pill">✓ ${k}</span>`).join('')}
+              ${kwResult.matchedKeywords.map(k => `<span class="essay-pill">✓ ${escapeExamHtml(k)}</span>`).join('')}
             </div>
           </div>
         `;
@@ -49660,7 +49938,7 @@ function applyReviewStylingToQuestions() {
           ${matchedPillsHtml}
           <div class="essay-guide-box" style="margin-top: 4px; background: #fdfaf3; border: 1.5px solid var(--gold); border-radius: 10px; padding: 16px 20px;">
             <strong style="display: block; margin-bottom: 8px; color: var(--gold-dark); font-size: 14px;">📖 HƯỚNG DẪN CHẤM & GỢI Ý CÁC Ý CHÍNH CẦN ĐẠT:</strong>
-            <div style="font-size: 14px; line-height: 1.6; color: var(--ink);">${guideText}</div>
+            <div style="font-size: 14px; line-height: 1.6; color: var(--ink);">${escapeExamHtml(guideText)}</div>
           </div>
         </div>
       `;
@@ -49674,7 +49952,8 @@ function generateRoadmapToTangThuCac(hasErrors) {
   const itemsList = $('roadmap-items-list');
   itemsList.innerHTML = '';
 
-  const lessonInfo = EXAM_LESSON_MAPPING[currentExam.id] || { title: currentExam.topic, grade: 12, topic: 'Lịch sử 12' };
+  const lessonGrade = currentExam.grade || getExamGrades(currentExam)[0] || 12;
+  const lessonInfo = EXAM_LESSON_MAPPING[currentExam.id] || { title: currentExam.topic, grade: lessonGrade, topic: `Lịch sử ${lessonGrade}` };
 
   if (!hasErrors) {
     roadmapBox.style.display = 'block';
@@ -49898,8 +50177,7 @@ function doiChieuTuKhoaTuLuan(userText, guideText) {
 
   // Trích xuất các danh từ, thuật ngữ lịch sử tiêu biểu
   const plainGuide = tempDiv.textContent;
-  const sentences = plainGuide.split(/[\.;
-]/);
+  const sentences = plainGuide.split(/[.;\n]/);
   sentences.forEach(s => {
     const matches = s.match(/(?:chiến dịch|cách mạng|thắng lợi|hiệp định|độc lập|thống nhất|kháng chiến|phong trào|chủ quyền|tư tưởng|đổi mới|mặt trận|chiến lược|nghị quyết|đại hội|tổng tuyển cử|giải phóng|thực dân|đế quốc|quân sự|chính trị|ngoại giao|hoà bình)[^,\.;:]{2,30}/gi);
     if (matches) matches.forEach(m => candidateKeywords.add(m.trim()));
@@ -49922,7 +50200,7 @@ function doiChieuTuKhoaTuLuan(userText, guideText) {
   matchedKeywords.sort((a, b) => b.length - a.length);
 
   matchedKeywords.forEach(kw => {
-    const escaped = kw.replace(/[.*+?^${}()|[\]\]/g, '\$&');
+    const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(`(${escaped})`, 'gi');
     highlightedHtml = highlightedHtml.replace(regex, '<mark class="essay-match-highlight">$1</mark>');
   });

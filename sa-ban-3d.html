@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <script src="site-music.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sa Bàn 3D Bạch Đằng Giang (938) • Dấu Chân Lịch Sử</title>
@@ -2665,6 +2666,26 @@
         }
             .skill-cooldown-overlay { display: none !important; }
         .btn-hero-skill.on-cd { filter: none !important; cursor: pointer !important; }
+        @media (max-width: 600px) {
+            .top-hud { flex-wrap: wrap; gap: 6px; padding: 6px 8px; }
+            .tactical-quest-overlay {
+                top: 8px; left: 8px; width: min(58vw, 250px); max-width: none;
+                max-height: 30vh; overflow: auto; padding: 8px 10px; font-size: .68rem;
+            }
+            .tactical-cluster-top-right { top: 8px; right: 8px; gap: 4px; max-width: 39vw; }
+            .tactical-actions-bar { max-width: 100%; gap: 3px; padding: 3px; }
+            .tactical-actions-bar .btn-tactical-order { padding: 5px; font-size: .62rem; }
+            .tide-compass-panel { gap: 5px; padding: 4px 6px; font-size: .65rem; }
+            .tide-circle-gauge { width: 34px; height: 34px; }
+            .tactical-minimap-panel { right: 8px; bottom: 118px; width: 116px; }
+            #minimap-canvas { height: 76px; }
+            .modal-3d-overlay { padding: 10px; }
+            .modal-3d-container { width: 100%; max-height: calc(100dvh - 20px); overflow-y: auto; padding: 14px; }
+            .player-card-header { flex-wrap: wrap; gap: 8px; }
+            .player-medals-row { flex-wrap: wrap; }
+            #modal-leaderboard-3d [style*="justify-content:space-between"] { gap: 8px; flex-wrap: wrap; }
+        }
+
     </style>
 </head>
 <body>
@@ -3172,6 +3193,14 @@
                     <span style="color:#38EF7D;">★ <b>Bạn (Thống Lĩnh Hiện Tại)</b></span>
                     <span style="color:#38EF7D;" id="lb-current-ranking-val">Đang Xếp Hạng...</span>
                 </div>
+            </div>
+            <div id="battle-victory-result" style="display:none; margin-top:14px; padding:12px 14px; border:1px solid rgba(255,215,0,.45); border-radius:10px; color:#FFF0C2; background:rgba(39,30,12,.72); line-height:1.55;">
+                🏆 <strong>Chiến thắng!</strong> Hồ sơ và thứ hạng của bạn đã được cập nhật.
+            </div>
+            <div id="battle-victory-actions" style="display:none; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
+                <button class="btn-enter-campaign" type="button" onclick="troVeBanDoChienDich3D()">🗺️ Về bản đồ chiến dịch</button>
+                <button class="btn-enter-campaign" type="button" onclick="choiLaiChienDich3D()">🔄 Chơi lại trận này</button>
+                <button class="btn-close-modal" type="button" onclick="dongModal('modal-leaderboard-3d')" style="padding:8px 14px; width:auto; height:auto;">Ở lại sa bàn</button>
             </div>
         </div>
     </div>
@@ -4268,213 +4297,22 @@
         /* ========================================================================== */
         /*  B. ĐỒNG BỘ ÂM THANH LOCALSTORAGE & GIỌNG ĐỌC AI (WEB SPEECH)              */
         /* ========================================================================== */
+        // Background music is coordinated across pages by site-music.js.
+        var dangPhatNhac = false;
+        function toggleNhac() { window.SiteMusic.toggle(); }
+        function toggleNhacNen() { window.SiteMusic.toggle(); }
+        function xuLyClickNutNhac() { window.SiteMusic.toggle(); }
+        function chuyenBaiNhacNgauNhien() { window.SiteMusic.next(); }
+        function phatBaiNhacTheoIndex(index) { window.SiteMusic.choose(index); }
+        function capNhatNutNhac() { window.SiteMusic.updateUI(); }
+        function capNhatTrangThaiNutNhac() { window.SiteMusic.updateUI(); }
         const bgMusic = document.getElementById('bg-music');
-
         function khoiDongAmThanh() {
-            if (!bgMusic) return;
-
-            // Khôi phục thời gian phát từ localStorage
-            let savedTime = null;
-            let savedMusicState = null;
-            try {
-                savedTime = localStorage.getItem('audioTime');
-                savedMusicState = localStorage.getItem('nhacNenBat');
-            } catch (storageError) {
-                console.warn('Không đọc được tùy chọn âm thanh:', storageError);
-            }
-            if (savedTime && !isNaN(savedTime)) {
-                bgMusic.currentTime = parseFloat(savedTime);
-            }
-
-            // Không tự phát nhạc khi tải trang; âm thanh chỉ bật sau thao tác người dùng.
-            Game3D.cheDoNhac = savedMusicState === 'true';
-            capNhatNutNhac(false);
-
-            // Đồng bộ tiến độ nhạc mỗi 500ms
-            setInterval(() => {
-                if (bgMusic && !bgMusic.paused) {
-                    try { localStorage.setItem('audioTime', bgMusic.currentTime); }
-                    catch (storageError) { /* Storage có thể bị tắt; không chặn game loop. */ }
-                }
-            }, 500);
-
-            // Tự động tạm dừng khi chuyển tab trình duyệt
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    if (bgMusic && !bgMusic.paused) bgMusic.pause();
-                } else {
-                    if (Game3D.cheDoNhac && bgMusic && bgMusic.paused) {
-                        bgMusic.play().catch(() => {});
-                    }
-                }
-            });
-
-            // Unlock AudioContext trên cử chỉ đầu tiên của người dùng
-            window.addEventListener('pointerdown', function moKhoaAudio() {
-                AudioEngine.init();
-                if (Game3D.cheDoNhac && bgMusic.paused) {
-                    bgMusic.play().catch(() => {});
-                }
-                window.removeEventListener('pointerdown', moKhoaAudio);
-            }, { once: true });
+            window.SiteMusic.init();
+            window.addEventListener('pointerdown', () => AudioEngine.init(), { once: true });
         }
 
-        // ===================================================================
-        //  HỆ THỐNG NHẠC NỀN 4 BÀI 3D: SHUFFLE & CLICK ĐÚP CHUYỂN BÀI (KHÔNG TỰ Ý BẬT)
-        // ===================================================================
-        var DANH_SACH_NHAC_NEN = [
-            { id: 1, src: 'nhac-nen-1.mp3', ten: 'Tự Hào Người Việt Nam' },
-            { id: 2, src: 'nhac-nen-2.mp3', ten: 'Việt Nam Sáng Ngời' },
-            { id: 3, src: 'nhac-nen-3.mp3', ten: 'Khát Vọng Hòa Bình' },
-            { id: 4, src: 'nhac-nen-4.mp3', ten: 'Vang Vọng Quốc Ca Việt Nam' }
-        ];
 
-        var chiSoBaiHienTai = 0;
-        var soLanClickNhac = 0;
-        var clickTimerNhac = null;
-
-        function hienThiToastNhac(noiDung) {
-            var toast = document.getElementById('music-toast-notify');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'music-toast-notify';
-                toast.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:99999;background:rgba(26,17,13,0.95);border:1.5px solid #D4AF37;border-left:4px solid #D4AF37;border-radius:8px;padding:10px 16px;color:#FCE09B;font-family:"Playfair Display",serif;font-size:0.88rem;box-shadow:0 6px 20px rgba(0,0,0,0.6);backdrop-filter:blur(6px);pointer-events:none;transition:opacity 0.3s ease, transform 0.3s ease;transform:translateY(10px);opacity:0;';
-                document.body.appendChild(toast);
-            }
-            toast.innerHTML = noiDung;
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateY(0)';
-            if (window._musicToastTimeout) clearTimeout(window._musicToastTimeout);
-            window._musicToastTimeout = setTimeout(function() {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(10px)';
-            }, 2500);
-        }
-
-        function chonBaiNhacNgauNhien(loaiTruHienTai) {
-            var ds = DANH_SACH_NHAC_NEN;
-            if (ds.length <= 1) return 0;
-            var indexMoi;
-            var loopCount = 0;
-            do {
-                indexMoi = Math.floor(Math.random() * ds.length);
-                loopCount++;
-            } while (loaiTruHienTai && indexMoi === chiSoBaiHienTai && loopCount < 10);
-            return indexMoi;
-        }
-
-        function capNhatNutNhac(bat, tenBai) {
-            const btn = document.getElementById('btn-toggle-music');
-            const lbl = document.getElementById('lbl-music-status');
-            if (btn && lbl) {
-                if (bat) {
-                    btn.classList.add('active');
-                    lbl.textContent = 'Nhạc: Bật';
-                } else {
-                    btn.classList.remove('active');
-                    lbl.textContent = 'Nhạc: Tắt';
-                }
-                btn.title = 'Click 1 lần: ' + (bat ? 'Tắt' : 'Bật') + ' nhạc | Click 2 lần: Đổi bài ngẫu nhiên';
-            }
-        }
-
-        function phatBaiNhacTheoIndex(idx) {
-            const bgMusic = document.getElementById('bg-music');
-            if (!bgMusic) return;
-            if (idx < 0 || idx >= DANH_SACH_NHAC_NEN.length) idx = 0;
-            chiSoBaiHienTai = idx;
-            var baiHat = DANH_SACH_NHAC_NEN[idx];
-            bgMusic.src = baiHat.src;
-            bgMusic.loop = false;
-            bgMusic.muted = false;
-            bgMusic.play().then(() => {
-                Game3D.cheDoNhac = true;
-                capNhatNutNhac(true, baiHat.ten);
-                hienThiToastNhac('🎵 Đang phát: <b>' + baiHat.ten + '</b> <i>(Trộn ngẫu nhiên)</i>');
-            }).catch(err => {
-                console.warn("Cần tương tác người dùng để phát nhạc:", err);
-            });
-        }
-
-        function chuyenBaiNhacNgauNhien(event) {
-            if (event) {
-                if (event.preventDefault) event.preventDefault();
-                if (event.stopPropagation) event.stopPropagation();
-            }
-            var indexMoi = chonBaiNhacNgauNhien(true);
-            phatBaiNhacTheoIndex(indexMoi);
-        }
-
-        function toggleNhacNen(event) {
-            if (event) {
-                if (event.preventDefault) event.preventDefault();
-                if (event.stopPropagation) event.stopPropagation();
-            }
-            const bgMusic = document.getElementById('bg-music');
-            if (!bgMusic) return;
-
-            if (!bgMusic.paused) {
-                bgMusic.pause();
-                Game3D.cheDoNhac = false;
-                capNhatNutNhac(false);
-                hienThiToastNhac('🔇 Đã tạm dừng nhạc nền');
-            } else {
-                if (!bgMusic.src || bgMusic.src === '' || bgMusic.src.endsWith('/')) {
-                    var idx = chonBaiNhacNgauNhien(false);
-                    phatBaiNhacTheoIndex(idx);
-                } else {
-                    bgMusic.muted = false;
-                    bgMusic.play().then(() => {
-                        Game3D.cheDoNhac = true;
-                        var baiHat = DANH_SACH_NHAC_NEN[chiSoBaiHienTai] || { ten: 'Giai Điệu Hào Hùng' };
-                        capNhatNutNhac(true, baiHat.ten);
-                        hienThiToastNhac('🎵 Đang phát: <b>' + baiHat.ten + '</b>');
-                    }).catch(err => {
-                        console.warn("Không thể phát nhạc:", err);
-                    });
-                }
-            }
-        }
-
-        function xuLyClickNutNhac(event) {
-            if (event) {
-                if (event.preventDefault) event.preventDefault();
-                if (event.stopPropagation) event.stopPropagation();
-            }
-            soLanClickNhac++;
-            if (soLanClickNhac === 1) {
-                clickTimerNhac = setTimeout(function() {
-                    soLanClickNhac = 0;
-                    toggleNhacNen();
-                }, 300);
-            } else if (soLanClickNhac >= 2) {
-                clearTimeout(clickTimerNhac);
-                soLanClickNhac = 0;
-                chuyenBaiNhacNgauNhien();
-            }
-        }
-
-        // KHÔNG TỰ Ý BẬT NHẠC
-        document.addEventListener('DOMContentLoaded', function() {
-            const bgMusic = document.getElementById('bg-music');
-            if (bgMusic) {
-                bgMusic.autoplay = false;
-                bgMusic.preload = 'none';
-                bgMusic.loop = false;
-                capNhatNutNhac(false);
-
-                bgMusic.onended = function() {
-                    chuyenBaiNhacNgauNhien();
-                };
-
-                bgMusic.onerror = function() {
-                    console.warn('Lỗi tệp nhạc, thử chuyển bài tiếp theo...');
-                    chuyenBaiNhacNgauNhien();
-                };
-            }
-        });
-
-        // Hệ thống Giọng đọc AI Tiếng Việt tự động Ducking âm lượng nhạc
         function phatGiongDoc(cauThoai) {
             if (!Game3D.cheDoGiongDoc || !('speechSynthesis' in window)) return;
 
@@ -4508,6 +4346,7 @@
 
         function toggleGiongDoc() {
             Game3D.cheDoGiongDoc = !Game3D.cheDoGiongDoc;
+            if (!Game3D.cheDoGiongDoc) window.SiteMusic.releaseNarration();
             const btn = document.getElementById('btn-toggle-voice');
             const lbl = document.getElementById('lbl-voice-status');
             if (btn && lbl) {
@@ -5766,6 +5605,20 @@
             if (barHumanity) barHumanity.style.width = `${Math.min(100, (Game3D.nhanDao / 350) * 100)}%`;
         }
 
+        function apDungSatThuongDich(unit, damage) {
+            if (!unit || unit.surrendered || !Number.isFinite(Number(unit.hp))) return;
+            unit.hp = Math.max(0, Number(unit.hp) - Math.max(0, Number(damage) || 0));
+            if (unit.hp === 0) {
+                unit.morale = 0;
+                unit.surrendered = true;
+                unit.speed = 0;
+                if (unit.mesh) {
+                    unit.mesh.rotation.z = unit.mesh.rotation.z || 0.18;
+                    unit.mesh.position.y = Math.min(unit.mesh.position.y, -1.2);
+                }
+            }
+        }
+
         /* ========================================================================== */
         /*  PHẦN 3: HỆ THỐNG ĐỘI HÌNH BINH CHỦNG 3D & BỘ TUYỆT KỸ DANH TƯỚNG          */
         /* ========================================================================== */
@@ -6247,8 +6100,11 @@
                 if (barHp) barHp.style.width = `${Math.max(0, u.hp)}%`;
                 if (barMorale) barMorale.style.width = `${Math.max(0, u.morale)}%`;
                 if (hpTxt) {
-                    if (u.surrendered) {
-                        hpTxt.textContent = `HÀNG 🏳️`;
+                    if (u.hp <= 0) {
+                        hpTxt.textContent = 'ĐÃ BỊ HẠ';
+                        hpTxt.style.color = '#FF6B6B';
+                    } else if (u.surrendered) {
+                        hpTxt.textContent = `ĐẦU HÀNG 🏳️`;
                         hpTxt.style.color = '#F1C40F';
                     } else if (u.trapped) {
                         hpTxt.textContent = `MẮC CỌC ⚠️`;
@@ -7383,6 +7239,30 @@
             if (m) m.classList.add('open');
         }
 
+        function moBangVangSauChienThang() {
+            if (Game3D.victoryResultsShown) return;
+            Game3D.victoryResultsShown = true;
+            const result = document.getElementById('battle-victory-result');
+            const actions = document.getElementById('battle-victory-actions');
+            if (result) result.style.display = 'block';
+            if (actions) actions.style.display = 'flex';
+            moModalBangVang();
+        }
+
+        function troVeBanDoChienDich3D() {
+            dongModal('modal-leaderboard-3d');
+            const lobby = document.getElementById('lobby-3d-modal');
+            if (lobby) lobby.classList.remove('hidden');
+            Game3D.combatPhase = 'CHUA_BAT_DAU';
+            datGocNhinCamera('TACTICAL');
+        }
+
+        function choiLaiChienDich3D() {
+            const url = new URL(window.location.href);
+            url.searchParams.set('campaign', Game3D.currentCampaign === 2 ? '2' : '1');
+            window.location.assign(url.toString());
+        }
+
         function dongModal(id) {
             const m = document.getElementById(id);
             if (m) m.classList.remove('open');
@@ -7868,7 +7748,7 @@
                         if (ship.pos.z <= 24 && !ship.trapped) {
                             ship.trapped = true;
                             ship.speed = 0.5;
-                            ship.hp = Math.max(15, ship.hp - 35);
+                            apDungSatThuongDich(ship, 35);
                             ship.morale = Math.max(0, ship.morale - 45);
                             AudioEngine.playStakeImpact();
                             phatNoManhVoVaCotNuoc(ship.pos.x, ship.pos.y, ship.pos.z);
@@ -7885,7 +7765,12 @@
                         // Khi đã mắc cọc, tàu chao đảo và sụt máu / sĩ khí
                         if (ship.trapped) {
                             ship.mesh.rotation.z = Math.sin(elapsed * 4.0 + idx) * 0.12 + (idx % 2 === 0 ? 0.20 : -0.20);
-                            ship.hp = Math.max(10, ship.hp - delta * 3.2);
+                            apDungSatThuongDich(ship, delta * 3.2);
+                            if (ship.hp <= 0) {
+                                ship.surrendered = true;
+                                ship.speed = 0;
+                                ship.mesh.position.y = Math.min(ship.mesh.position.y, -1.5);
+                            }
                             ship.morale = Math.max(0, ship.morale - delta * 4.8);
                             ship.mesh.position.y = Math.max(-1.5, ship.mesh.position.y - delta * 0.04);
                         }
@@ -7910,9 +7795,10 @@
                 }
 
                 // Khi tất cả các tàu máu cạn kiệt hoặc đã đầu hàng -> Giai đoạn 4
-                const allDefeated = Game3D.danhSachTauDich.every(s => (s.hp <= 22 || s.surrendered));
+                const allDefeated = Game3D.danhSachTauDich.every(s => (s.hp <= 0 || s.surrendered));
                 if (allDefeated) {
                     Game3D.combatPhase = 'THANG_TRAN';
+                    Game3D.victoryResultsShown = false;
                     hienThiThongBaoPopup("🕊️ ĐẠI THẮNG BẠCH ĐẰNG", "Hạm đội Lưu Hoằng Tháo tan rã hoàn toàn! Giặc quỳ rạp xin hàng!");
                     phatGiongDoc("Đại thắng Bạch Đằng! Hạm đội Lưu Hoằng Tháo đã hoàn toàn tan rã! Tướng giặc đền tội, tàn quân quỳ rạp xin tha mạng!");
                 }
@@ -8062,8 +7948,10 @@
             // Nếu đã kết trận đại thắng, tự động chuyển sang Hồi 3: Bình Minh Hòa Bình
             if (Game3D.combatPhase === 'THANG_TRAN_NHU_NGUYET' && !Game3D.isPostWar) {
                 chuyenSangBinhMinhNhuNguyet();
+                moBangVangSauChienThang();
             } else if (Game3D.combatPhase === 'THANG_TRAN' && !Game3D.isPostWar) {
                 chuyenSangBinhMinhHoaBinh();
+                moBangVangSauChienThang();
             } else {
                 datGocNhinCamera('TACTICAL');
             }
@@ -9299,6 +9187,9 @@
         function chuyenSangChienDichNhuNguyet() {
             try {
                 Game3D.currentCampaign = 2;
+                Game3D.isPostWar = false;
+                Game3D.combatPhase = 'CHUA_BAT_DAU';
+                Game3D.victoryResultsShown = false;
                 const modal = document.getElementById('lobby-3d-modal');
                 if (modal) modal.classList.add('hidden');
                 
@@ -9374,6 +9265,9 @@
         function chuyenSangChienDichBachDang() {
             try {
                 Game3D.currentCampaign = 1;
+                Game3D.isPostWar = false;
+                Game3D.combatPhase = 'CHUA_BAT_DAU';
+                Game3D.victoryResultsShown = false;
                 const modal = document.getElementById('lobby-3d-modal');
                 if (modal) modal.classList.add('hidden');
 
@@ -9789,7 +9683,7 @@
                     setTimeout(() => {
                         soaiBe.trapped = true;
                         soaiBe.speed = 0;
-                        soaiBe.hp = Math.max(10, soaiBe.hp - 2200);
+                        apDungSatThuongDich(soaiBe, 2200);
                         soaiBe.morale = Math.max(10, soaiBe.morale - 40);
                         soaiBe.mesh.rotation.z = 0.35; // Nghiêng mạn vỡ bè
                         AudioEngine.playStakeImpact();
@@ -9841,7 +9735,7 @@
                         u.hp = Math.min(100, u.hp + 30);
                     } else if (u.type === 'dich') {
                         u.morale = Math.max(10, u.morale - 50);
-                        u.hp = Math.max(10, u.hp - 600);
+                        apDungSatThuongDich(u, 600);
                         // Rung lắc hoảng loạn
                         if (u.mesh) {
                             u.mesh.rotation.z += (Math.random() - 0.5) * 0.25;
@@ -9879,6 +9773,7 @@
                             p.hp = 0;
                             p.morale = 0;
                             p.surrendered = true;
+                            p.speed = 0;
                             p.mesh.rotation.y += 0.45 * (idx === 0 ? 1 : -1);
                             p.mesh.position.y -= 0.6;
                             AudioEngine.playBombExplosion();
@@ -9897,11 +9792,13 @@
                     });
                 }
                 Game3D.combatPhase = 'THANG_TRAN_NHU_NGUYET';
+                Game3D.victoryResultsShown = false;
                 AudioEngine.playFanfare();
                 setTimeout(() => {
                     hienThiThongBaoPopup("🕊️ ĐẠI THẮNG NHƯ NGUYỆT", "Cầu phao bị thiêu rụi hoàn toàn! Đạo quân Quách Quỳ tan rã — Toàn thắng phòng tuyến Như Nguyệt!");
                     phatGiongDoc("Cầu phao gãy đôi bốc cháy dữ dội! Giặc Tống kinh hoàng tháo chạy! Phòng tuyến Như Nguyệt toàn thắng khải hoàn!");
                     chuyenSangBinhMinhNhuNguyet();
+                    moBangVangSauChienThang();
                 }, 2200);
 
                 kichHoatCinematicActionCam({ x: 18, y: 3, z: 0 }, 3.0, 0.35);
@@ -9929,16 +9826,19 @@
                 }
 
                 Game3D.combatPhase = 'THANG_TRAN_NHU_NGUYET';
+                Game3D.victoryResultsShown = false;
                 kichHoatCinematicActionCam({ x: 26, y: 6, z: 0 }, 3.5, 0.4);
 
                 setTimeout(() => {
                     chuyenSangBinhMinhNhuNguyet();
+                    moBangVangSauChienThang();
                 }, 4000);
             }
         }
 
         // 5. Vòng lặp Thực Chiến Như Nguyệt
         function kiemTraVongLapChienTranNhuNguyet(delta, elapsed) {
+            if (Game3D.isPostWar || Game3D.combatPhase === 'CHUA_BAT_DAU' || Game3D.combatPhase === 'KET_THUC') return;
             // Định kỳ ném đạn đá lửa từ bờ Bắc
             if (Math.random() < delta * 0.4) {
                 phongDanDaLuaNhuNguyet3D();

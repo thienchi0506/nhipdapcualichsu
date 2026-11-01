@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <script src="site-music.js"></script>
     <!-- Google tag (gtag.js) - Firebase Google Analytics 4 (nhipdapcualichsu) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"></script>
     <script>
@@ -4972,7 +4973,7 @@
                 <div class="card__body">
                     <h3 class="card__title">Tàng Thư Các</h3>
                     <p class="card__desc">
-                        Kho tàng kiến thức lịch sử trọng tâm lớp 10, 11, 12. Bài học sinh động, hình ảnh minh hoạ trực quan, dễ hiểu và nhớ lâu.
+                        Ôn tập Lịch sử 10–12 qua bài học sinh động, hình ảnh trực quan, dễ nhớ.
                     </p>
                     <a href="tang-thu-cac.html" class="card__btn">
                         📖 Vào Tàng Thư Các →
@@ -4992,7 +4993,7 @@
                 <div class="card__body">
                     <h3 class="card__title">Thao Trường</h3>
                     <p class="card__desc">
-                        Hệ thống 34 đề thi thử 60 phút chuẩn Bộ GD&ĐT 2025, gồm trắc nghiệm 4 lựa chọn và Đúng/Sai tư liệu có chấm điểm tự động.
+                        Luyện đề Lịch sử 10–12 với trắc nghiệm, đúng/sai và chấm điểm tự động.
                     </p>
                     <a href="thao-truong.html" class="card__btn">
                         🎯 Vào Thao Trường →
@@ -5012,7 +5013,7 @@
                 <div class="card__body">
                     <h3 class="card__title">Sa Bàn Chiến Thuật</h3>
                     <p class="card__desc">
-                        Tái hiện đại thắng Bạch Đằng 938 qua 3 Hồi nhập vai 2D chiến thuật kết hợp không gian sa bàn 3D tương tác đa góc nhìn sống động.
+                        Trải nghiệm trận Bạch Đằng 938 qua game chiến thuật 2D và sa bàn 3D tương tác.
                     </p>
                     <div style="display: flex; gap: 8px; width: 100%;">
                         <a href="sa-ban.html" class="card__btn" style="flex: 1; padding: 10px 8px; font-size: 0.82rem; border-radius: 22px;" title="Nhập vai Sa bàn 2D">
@@ -5185,166 +5186,16 @@
         // ===================================================
         //  2. HỆ THỐNG NHẠC NỀN 4 BÀI: SHUFFLE & CLICK ĐÚP CHUYỂN BÀI (KHÔNG TỰ Ý BẬT)
         // ===================================================
-        var DANH_SACH_NHAC_NEN = [
-            { id: 1, src: 'nhac-nen-1.mp3', ten: 'Tự Hào Người Việt Nam' },
-            { id: 2, src: 'nhac-nen-2.mp3', ten: 'Việt Nam Sáng Ngời' },
-            { id: 3, src: 'nhac-nen-3.mp3', ten: 'Khát Vọng Hòa Bình' },
-            { id: 4, src: 'nhac-nen-4.mp3', ten: 'Vang Vọng Quốc Ca Việt Nam' }
-        ];
-
-        var chiSoBaiHienTai = 0;
+        // Background music is coordinated across pages by site-music.js.
         var dangPhatNhac = false;
-        var soLanClickNhac = 0;
-        var clickTimerNhac = null;
+        function toggleNhac() { window.SiteMusic.toggle(); }
+        function toggleNhacNen() { window.SiteMusic.toggle(); }
+        function xuLyClickNutNhac() { window.SiteMusic.toggle(); }
+        function chuyenBaiNhacNgauNhien() { window.SiteMusic.next(); }
+        function phatBaiNhacTheoIndex(index) { window.SiteMusic.choose(index); }
+        function capNhatNutNhac() { window.SiteMusic.updateUI(); }
+        function capNhatTrangThaiNutNhac() { window.SiteMusic.updateUI(); }
 
-        function hienThiToastNhac(noiDung) {
-            var toast = document.getElementById('music-toast-notify');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'music-toast-notify';
-                toast.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:99999;background:rgba(26,17,13,0.95);border:1.5px solid #D4AF37;border-left:4px solid #D4AF37;border-radius:8px;padding:10px 16px;color:#FCE09B;font-family:"Playfair Display",serif;font-size:0.88rem;box-shadow:0 6px 20px rgba(0,0,0,0.6);backdrop-filter:blur(6px);pointer-events:none;transition:opacity 0.3s ease, transform 0.3s ease;transform:translateY(10px);opacity:0;';
-                document.body.appendChild(toast);
-            }
-            toast.innerHTML = noiDung;
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateY(0)';
-            if (window._musicToastTimeout) clearTimeout(window._musicToastTimeout);
-            window._musicToastTimeout = setTimeout(function() {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(10px)';
-            }, 2500);
-        }
-
-        function chonBaiNhacNgauNhien(loaiTruHienTai) {
-            var ds = DANH_SACH_NHAC_NEN;
-            if (ds.length <= 1) return 0;
-            var indexMoi;
-            var loopCount = 0;
-            do {
-                indexMoi = Math.floor(Math.random() * ds.length);
-                loopCount++;
-            } while (loaiTruHienTai && indexMoi === chiSoBaiHienTai && loopCount < 10);
-            return indexMoi;
-        }
-
-        function capNhatTrangThaiNutNhac(dangPhat, tenBai) {
-            var trangThaiEl = document.getElementById('trang-thai-nhac');
-            if (trangThaiEl) {
-                trangThaiEl.textContent = dangPhat ? 'Tắt Nhạc' : 'Nhạc Nền';
-            }
-            var btnNhac = document.getElementById('btn-toggle-music');
-            if (btnNhac) {
-                if (dangPhat) btnNhac.classList.add('active');
-                else btnNhac.classList.remove('active');
-                btnNhac.title = 'Click 1 lần: ' + (dangPhat ? 'Tắt' : 'Bật') + ' nhạc | Click 2 lần: Đổi bài ngẫu nhiên';
-            }
-        }
-
-        function phatBaiNhacTheoIndex(idx) {
-            var nhac = document.getElementById('bg-music');
-            if (!nhac) return;
-            if (idx < 0 || idx >= DANH_SACH_NHAC_NEN.length) idx = 0;
-            chiSoBaiHienTai = idx;
-            var baiHat = DANH_SACH_NHAC_NEN[idx];
-            nhac.src = baiHat.src;
-            nhac.loop = false; // Tắt loop bài đơn để tự chuyển sang bài ngẫu nhiên tiếp theo
-            nhac.muted = false;
-            nhac.play().then(function() {
-                dangPhatNhac = true;
-                capNhatTrangThaiNutNhac(true, baiHat.ten);
-                hienThiToastNhac('🎵 Đang phát: <b>' + baiHat.ten + '</b> <i>(Trộn ngẫu nhiên)</i>');
-            }).catch(function(err) {
-                console.warn('Cần tương tác người dùng để phát nhạc:', err);
-            });
-        }
-
-        function chuyenBaiNhacNgauNhien(event) {
-            if (event) {
-                if (event.preventDefault) event.preventDefault();
-                if (event.stopPropagation) event.stopPropagation();
-            }
-            var indexMoi = chonBaiNhacNgauNhien(true);
-            phatBaiNhacTheoIndex(indexMoi);
-        }
-
-        function toggleNhac(event) {
-            if (event) {
-                if (event.preventDefault) event.preventDefault();
-                if (event.stopPropagation) event.stopPropagation();
-            }
-            var nhac = document.getElementById('bg-music');
-            if (!nhac) return;
-
-            if (!nhac.paused) {
-                nhac.pause();
-                dangPhatNhac = false;
-                capNhatTrangThaiNutNhac(false);
-                hienThiToastNhac('🔇 Đã tạm dừng nhạc nền');
-            } else {
-                if (!nhac.src || nhac.src === '' || nhac.src.endsWith('/')) {
-                    var idx = chonBaiNhacNgauNhien(false);
-                    phatBaiNhacTheoIndex(idx);
-                } else {
-                    nhac.muted = false;
-                    nhac.play().then(function() {
-                        dangPhatNhac = true;
-                        var baiHat = DANH_SACH_NHAC_NEN[chiSoBaiHienTai] || { ten: 'Giai Điệu Hào Hùng' };
-                        capNhatTrangThaiNutNhac(true, baiHat.ten);
-                        hienThiToastNhac('🎵 Đang phát: <b>' + baiHat.ten + '</b>');
-                    }).catch(function(err) {
-                        console.warn('Không thể phát nhạc:', err);
-                    });
-                }
-            }
-        }
-
-        // Xử lý Click 1 lần (Bật/Tắt) vs Click 2 lần liên tiếp (Chuyển bài ngẫu nhiên)
-        function xuLyClickNutNhac(event) {
-            if (event) {
-                if (event.preventDefault) event.preventDefault();
-                if (event.stopPropagation) event.stopPropagation();
-            }
-            soLanClickNhac++;
-            if (soLanClickNhac === 1) {
-                clickTimerNhac = setTimeout(function() {
-                    soLanClickNhac = 0;
-                    toggleNhac();
-                }, 300);
-            } else if (soLanClickNhac >= 2) {
-                clearTimeout(clickTimerNhac);
-                soLanClickNhac = 0;
-                chuyenBaiNhacNgauNhien();
-            }
-        }
-
-        // KHÔNG TỰ Ý BẬT NHẠC KHI MỞ TRANG
-        document.addEventListener('DOMContentLoaded', function() {
-            var nhac = document.getElementById('bg-music');
-            if (nhac) {
-                nhac.autoplay = false;
-                nhac.preload = 'none';
-                nhac.loop = false;
-                capNhatTrangThaiNutNhac(false);
-
-                nhac.onended = function() {
-                    chuyenBaiNhacNgauNhien();
-                };
-
-                nhac.onerror = function() {
-                    console.warn('Lỗi tệp nhạc, thử chuyển bài tiếp theo...');
-                    chuyenBaiNhacNgauNhien();
-                };
-            }
-        });
-
-        // Tự động ngắt nhạc khi rời tab
-        document.addEventListener('visibilitychange', function() {
-            var nhac = document.getElementById('bg-music');
-            if (!nhac) return;
-            if (document.hidden) {
-                if (!nhac.paused) nhac.pause();
-            }
-        });
 
         // ===================================================
         //  4. HIỆU ỨNG XUẤT HIỆN KHI CUỘN (Scroll Reveal)
@@ -6334,11 +6185,6 @@
         // Điều hướng quay về trang giới thiệu index.html và bảo toàn nhạc nền
         function veTrangChu(event) {
             if (event) event.preventDefault();
-            var nhac = document.getElementById('bg-music');
-            if (nhac && !nhac.paused) {
-                localStorage.setItem('audioTime', nhac.currentTime);
-                localStorage.setItem('nhacDangPhat', 'true');
-            }
             window.location.href = 'index.html';
         }
 
