@@ -1,0 +1,27 @@
+{
+  "projectId": "demo-bd938-save",
+  "checks": [
+    "owner can create their own slot",
+    "owner can get their own slot",
+    "other account cannot read the slot",
+    "other account cannot update the slot",
+    "anonymous account cannot read the slot",
+    "owner cannot forge a different owner",
+    "unexpected fields are rejected",
+    "bad version and hash are rejected",
+    "owner may advance exactly one revision",
+    "revision rollback is denied",
+    "revision skipping is denied",
+    "deletion is denied",
+    "existing public posts read still works",
+    "existing post creation still uses the original author rule",
+    "existing comments creation still works",
+    "existing post impersonation is still denied",
+    "bridge makes a real emulator transaction",
+    "bridge transaction returns same receipt on duplicate",
+    "bridge detects concurrent device revision",
+    "bridge refuses a different local UID"
+  ],
+  "passed": 20,
+  "total": 20
+}

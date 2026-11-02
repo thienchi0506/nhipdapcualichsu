@@ -1,0 +1,245 @@
+{
+  "scenario": "local deterministic simulation stress; no rendering or persistence",
+  "results": [
+    {
+      "friendly": 50,
+      "enemy": 50,
+      "total": 100,
+      "uniqueIds": 100,
+      "resurrected": 0,
+      "ticks": 240,
+      "warmupTicks": 60,
+      "sampledTicks": 180,
+      "pathsQueued": 0,
+      "shots": 308,
+      "damages": 264,
+      "downed": 50,
+      "metrics": {
+        "path": {
+          "samples": 180,
+          "meanMs": 0.004999997880723741,
+          "p95Ms": 0,
+          "maxMs": 0.19999992847442627
+        },
+        "pathActive": {
+          "samples": 15,
+          "meanMs": 0.046666646003723146,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 0.19999992847442627
+        },
+        "ai": {
+          "samples": 180,
+          "meanMs": 0.18444444868299698,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 0.7000000476837158
+        },
+        "combat": {
+          "samples": 180,
+          "meanMs": 0.014444444576899211,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.30000007152557373
+        },
+        "logistics": {
+          "samples": 180,
+          "meanMs": 0.0011111107137468125,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        }
+      }
+    },
+    {
+      "friendly": 100,
+      "enemy": 100,
+      "total": 200,
+      "uniqueIds": 200,
+      "resurrected": 0,
+      "ticks": 240,
+      "warmupTicks": 60,
+      "sampledTicks": 180,
+      "pathsQueued": 0,
+      "shots": 616,
+      "damages": 461,
+      "downed": 89,
+      "metrics": {
+        "path": {
+          "samples": 180,
+          "meanMs": 0.009999999735090468,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.30000007152557373
+        },
+        "pathActive": {
+          "samples": 20,
+          "meanMs": 0.0899999976158142,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.30000007152557373
+        },
+        "ai": {
+          "samples": 180,
+          "meanMs": 0.4077777769830492,
+          "p95Ms": 0.6999999284744263,
+          "maxMs": 1
+        },
+        "combat": {
+          "samples": 180,
+          "meanMs": 0.03444444404708014,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.3999999761581421
+        },
+        "logistics": {
+          "samples": 180,
+          "meanMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0
+        }
+      }
+    },
+    {
+      "friendly": 200,
+      "enemy": 200,
+      "total": 400,
+      "uniqueIds": 400,
+      "resurrected": 0,
+      "ticks": 240,
+      "warmupTicks": 60,
+      "sampledTicks": 180,
+      "pathsQueued": 0,
+      "shots": 1262,
+      "damages": 1020,
+      "downed": 184,
+      "metrics": {
+        "path": {
+          "samples": 180,
+          "meanMs": 0.014444445239173041,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.7999999523162842
+        },
+        "pathActive": {
+          "samples": 18,
+          "meanMs": 0.1388888955116272,
+          "p95Ms": 0.7999999523162842,
+          "maxMs": 0.7999999523162842
+        },
+        "ai": {
+          "samples": 180,
+          "meanMs": 1.2599999997350904,
+          "p95Ms": 2.299999952316284,
+          "maxMs": 3.200000047683716
+        },
+        "combat": {
+          "samples": 180,
+          "meanMs": 0.11499999894036186,
+          "p95Ms": 0.7999999523162842,
+          "maxMs": 1.6999999284744263
+        },
+        "logistics": {
+          "samples": 180,
+          "meanMs": 0.0033333334657880995,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        }
+      }
+    },
+    {
+      "friendly": 400,
+      "enemy": 400,
+      "total": 800,
+      "uniqueIds": 800,
+      "resurrected": 0,
+      "ticks": 240,
+      "warmupTicks": 60,
+      "sampledTicks": 180,
+      "pathsQueued": 0,
+      "shots": 2327,
+      "damages": 1758,
+      "downed": 334,
+      "metrics": {
+        "path": {
+          "samples": 180,
+          "meanMs": 0.020555554495917425,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "pathActive": {
+          "samples": 19,
+          "meanMs": 0.18947367291701467,
+          "p95Ms": 0.5,
+          "maxMs": 0.5
+        },
+        "ai": {
+          "samples": 180,
+          "meanMs": 5.199444446298811,
+          "p95Ms": 9.199999928474426,
+          "maxMs": 19.699999928474426
+        },
+        "combat": {
+          "samples": 180,
+          "meanMs": 1.0105555534362793,
+          "p95Ms": 2.8000000715255737,
+          "maxMs": 5.199999928474426
+        },
+        "logistics": {
+          "samples": 180,
+          "meanMs": 0.004999999867545234,
+          "p95Ms": 0.09999990463256836,
+          "maxMs": 0.10000002384185791
+        }
+      }
+    },
+    {
+      "friendly": 480,
+      "enemy": 480,
+      "total": 960,
+      "uniqueIds": 960,
+      "resurrected": 0,
+      "ticks": 240,
+      "warmupTicks": 60,
+      "sampledTicks": 180,
+      "pathsQueued": 0,
+      "shots": 2631,
+      "damages": 1889,
+      "downed": 357,
+      "metrics": {
+        "path": {
+          "samples": 180,
+          "meanMs": 0.011111111773384943,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "pathActive": {
+          "samples": 18,
+          "meanMs": 0.1055555608537462,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.20000004768371582
+        },
+        "ai": {
+          "samples": 180,
+          "meanMs": 4.508888886372248,
+          "p95Ms": 8.5,
+          "maxMs": 14
+        },
+        "combat": {
+          "samples": 180,
+          "meanMs": 1.5894444478882683,
+          "p95Ms": 3.299999952316284,
+          "maxMs": 4.399999976158142
+        },
+        "logistics": {
+          "samples": 180,
+          "meanMs": 0.002777777777777778,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        }
+      }
+    }
+  ],
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+  "physicalDeviceTested": false
+}

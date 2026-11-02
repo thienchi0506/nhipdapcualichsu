@@ -1,0 +1,140 @@
+{
+  "checks": [
+    {
+      "name": "Previously existing website sources unchanged since baseline",
+      "passed": true,
+      "evidence": {
+        "count": 235,
+        "changed": []
+      }
+    },
+    {
+      "name": "Three.js files match pinned license/version/hashes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Simulation has no DOM, network, random or wall-clock dependencies",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "No legacy game runtime or Firebase is imported",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "All local runtime module imports resolve",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "Home retains two previous game links and one new game link",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "army-core.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 36,
+        "total": 36
+      }
+    },
+    {
+      "name": "army-ui.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 12,
+        "total": 12
+      }
+    },
+    {
+      "name": "character-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 45,
+        "total": 45
+      }
+    },
+    {
+      "name": "combat-ui-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 17,
+        "total": 17
+      }
+    },
+    {
+      "name": "edge-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 21,
+        "total": 21
+      }
+    },
+    {
+      "name": "browser-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 62,
+        "total": 62
+      }
+    },
+    {
+      "name": "3D instanced soldier picking returns the simulated ID",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Every stress scale has real soldiers, shots, distinct IDs and no resurrection",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Tracked diff whitespace check",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "name": "Project dossier links resolve",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "passed": 16,
+  "total": 16,
+  "protectedCompared": 235,
+  "changedProtected": [],
+  "newGameHashes": {
+    "game-bach-dang-938/index.html": "dd58ec24b2eb636b5c2185540d450c36ab0ad0b753c2871892b14f8dd2689966",
+    "game-bach-dang-938/README.md": "7768d52ff12279767cbb449dd3294a36a6813f63f91a18d6667f54964ae01b30",
+    "game-bach-dang-938/data/character-config.json": "59d498a6abda7aecb43ea9eb354a80a7a10c1f503935149baf21c97bfeecf5cc",
+    "game-bach-dang-938/data/river-config.json": "e05e496ba21e5fe565f7f94e987dda80c3d0d4568878f1330dd57b0276f36182",
+    "game-bach-dang-938/data/shell-scene.json": "742045b9b4075c45161aeb96ce9e0563a8d66f8448868b4373c3f8b62a1b75e9",
+    "game-bach-dang-938/styles/game.css": "b7ad1d6f885c326ecf23544652bc23a363121c052c5c0b394c13d0179f499c14",
+    "game-bach-dang-938/tests/army-scene-tests.js": "2f1be439c10dd6d90cc3fe40ef3a23dcf612a64878eb750387ac94b19264e67c",
+    "game-bach-dang-938/tests/army-tests.js": "e5d09fcdadf33443a5f922e4b0612967d355dff952016e4e4b6e80a5321bc3f0",
+    "game-bach-dang-938/tests/character-tests.js": "e8a0c1780be2700adb40f8b312585a98385e3b8a72569474b3114d5deccf308d",
+    "game-bach-dang-938/tests/index.html": "a0ebfa3e257dcefc45c091fdfe4c193e99cebb3f7935fa3bfecb97b5e25ecc34",
+    "game-bach-dang-938/tests/river-tests.js": "06024bf71c6b389312cc94bb93d5efa02d79d921676c848ee5f73723c380e1e8",
+    "game-bach-dang-938/src/app/bootstrap.js": "feda488acfde5ccbf7915a475df0f01012e32caa145576dba5e1a79412cd4e4f",
+    "game-bach-dang-938/src/app/diagnostics.js": "ab94c3ced23868230840106fdcbc1715abbd18841d16371d166b644a0e4d1e46",
+    "game-bach-dang-938/src/app/input.js": "92e1bd46caf3ddd63a7d0289c1fbd95abe08f723dd01b76a0dc71471a9b3b28d",
+    "game-bach-dang-938/src/app/loader.js": "03b91af3b7c0463fe811292873295de8bcf82cc8e31714a602c1a53293fe9b17",
+    "game-bach-dang-938/src/app/preferences.js": "58cc806c04fce036824cbdd4d3d4a705b5c456ddf9690e5fae26f62ab5893d11",
+    "game-bach-dang-938/src/app/session.js": "2e55f167ded1da44cc3230b7c867ba13b0067bec9d85d9ff9d9cb63d02c977de",
+    "game-bach-dang-938/src/core/clock.js": "a2817103386bea064fa9654d2cbb81c67ba829b2aab741a50b9f38366918f744",
+    "game-bach-dang-938/src/presentation/scene.js": "58c7488ab80fd0dde51f68f399384f9c65d2cfa260f211be12932ef4d0959c3e",
+    "game-bach-dang-938/src/sim/actor-space.js": "32ac41548604318adc97f9718056f06ca30f08ddd374a7ecffc28063f9e99adc",
+    "game-bach-dang-938/src/sim/army-config.js": "7d89e02cc5594304d6232eec2a4f844ee6cb78326804aedb836b9bfaec96e310",
+    "game-bach-dang-938/src/sim/army.js": "0e91bf1bbb43e59e1a58d7554d3fac3775677bd1e4ef40964779215a9475f24f",
+    "game-bach-dang-938/src/sim/collision.js": "17886b45bec34bf4078914a0678776ee6e23a8a5ad5c99f60c33e08db224f046",
+    "game-bach-dang-938/src/sim/encounter.js": "5cc5479233d4d66f0ff3c3c0fa2eb66b7b3c8510dae8452fab0ecbc0ae352efd",
+    "game-bach-dang-938/src/sim/river.js": "4781c7c8eeb6567691194da4d8a78de17a49a6b182a5d0e2ffb4989884ca1740",
+    "game-bach-dang-938/src/sim/vessel.js": "419b3c0dbc9b3b438dd3a21c71d4076e367f0e849f13293349b7fe0c6459079d",
+    "game-bach-dang-938/vendor/three-r128/LICENSE": "7dddf7c5b8fd10ee654db8857d75d104b5557889aa5a91fc4ca545ea7c07062f",
+    "game-bach-dang-938/vendor/three-r128/manifest.json": "8d434a7f6e80264c8c8681ec984f1d41d3149b03bdde4045bef3ba964006e579",
+    "game-bach-dang-938/vendor/three-r128/three.module.js": "af527c374b56b8688737a42d7fcea7cb8aaeb57a4e3c6da98b4dffd55bcc3514"
+  }
+}

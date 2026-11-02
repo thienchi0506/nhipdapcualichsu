@@ -1,0 +1,721 @@
+{
+  "version": "bd938-characters-1",
+  "checks": [
+    {
+      "name": "Deck passenger is carried once by moving boat pose",
+      "passed": true,
+      "evidence": {
+        "actorZ": 16.60076197598049,
+        "boatZ": 14.800761975980489
+      }
+    },
+    {
+      "name": "Walking on moving deck changes local position without losing support",
+      "passed": true
+    },
+    {
+      "name": "Walking on pier keeps feet on its collision surface",
+      "passed": true,
+      "evidence": {
+        "id": "H01",
+        "name": "Người dẫn thuyền",
+        "kind": "mainHero",
+        "team": "friendly",
+        "mode": "foot",
+        "health": 100,
+        "stamina": 100,
+        "ammo": 40,
+        "x": -16.899999999999988,
+        "y": 2.025,
+        "z": 22,
+        "yaw": -1.5707963267948966,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "attachment": {
+          "kind": "pier",
+          "boatId": null
+        },
+        "weapon": "melee",
+        "action": null,
+        "readyTick": 0,
+        "guard": false,
+        "guardSince": -1000000000,
+        "counterUntil": 0,
+        "stunUntil": 0,
+        "lastExertion": -1000000000,
+        "distressS": 0,
+        "downTick": null,
+        "rescue": null,
+        "lastHitTick": -1000000000,
+        "follows": false,
+        "followBoard": null,
+        "nextAI": 0
+      }
+    },
+    {
+      "name": "Leaving and retaking helm preserves actor identity",
+      "passed": true
+    },
+    {
+      "name": "Boarding starts a real ballistic jump",
+      "passed": true
+    },
+    {
+      "name": "Landing attaches to moving enemy deck, not through it",
+      "passed": true,
+      "evidence": {
+        "tick": 36,
+        "controlledId": "H01",
+        "controlEpoch": 1,
+        "helm": false,
+        "mapOpen": false,
+        "phase": "active",
+        "selectedId": null,
+        "takeoverAt": null,
+        "enemyBoat": {
+          "id": "enemy-boat",
+          "x": -7,
+          "z": 11.052841134991263,
+          "yaw": 0,
+          "widthM": 3,
+          "lengthM": 8,
+          "draftM": 0.8,
+          "driftAmplitudeM": 0.15,
+          "driftFrequency": 0.3,
+          "width": 2.571428571428571,
+          "length": 7.542857142857143,
+          "vx": 0,
+          "vz": 0.04211535706550706
+        },
+        "actors": [
+          {
+            "id": "H01",
+            "name": "Người dẫn thuyền",
+            "kind": "mainHero",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 80,
+            "ammo": 40,
+            "x": -7,
+            "y": 1.6249999999999998,
+            "z": 14.419377731708986,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0,
+              "localZ": 3.3665365967177223
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": 0,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "R01",
+            "name": "Sĩ quan dự bị An",
+            "kind": "reserve",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -7.65,
+            "y": 1.924,
+            "z": 20,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": -0.65,
+              "localZ": 1
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "R02",
+            "name": "Sĩ quan dự bị Bình",
+            "kind": "reserve",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.35,
+            "y": 1.924,
+            "z": 20,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": 0.65,
+              "localZ": 1
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "A01",
+            "name": "Đồng đội Lâm",
+            "kind": "companion",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.2,
+            "y": 1.924,
+            "z": 17.5,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": 0.8,
+              "localZ": -1.5
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "E01",
+            "name": "Lính giữ boong",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -7,
+            "y": 1.6249999999999998,
+            "z": 11.902841134991275,
+            "yaw": -3.141592653589793,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0,
+              "localZ": 0.8500000000000121
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 1000000000
+          },
+          {
+            "id": "E02",
+            "name": "Lính hộ vệ",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -7.495990206000039,
+            "y": 1.6249999999999998,
+            "z": 10.39645358318777,
+            "yaw": -3.0189207522617867,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": -0.4959902060000392,
+              "localZ": -0.6563875518034941
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 1000000000
+          },
+          {
+            "id": "E03",
+            "name": "Cung thủ địch",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.35,
+            "y": 1.6249999999999998,
+            "z": 12.652841134991263,
+            "yaw": 2.7890156596699804,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.65,
+              "localZ": 1.6
+            },
+            "weapon": "bow",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 1000000000
+          }
+        ],
+        "projectiles": [],
+        "eventCounts": {
+          "Jumped": 1,
+          "Landed": 1
+        },
+        "events": [
+          {
+            "id": "actor:0:1",
+            "tick": 0,
+            "type": "Jumped",
+            "actorId": "H01",
+            "targetBoatId": "enemy-boat"
+          },
+          {
+            "id": "actor:20:2",
+            "tick": 20,
+            "type": "Landed",
+            "actorId": "H01",
+            "boatId": "enemy-boat"
+          }
+        ],
+        "message": ""
+      }
+    },
+    {
+      "name": "Moving enemy deck carries landed actor",
+      "passed": true
+    },
+    {
+      "name": "Unsafe relative boat speed refuses boarding without charging stamina",
+      "passed": true
+    },
+    {
+      "name": "Distant boat cannot be reached by an unconditional teleport",
+      "passed": true
+    },
+    {
+      "name": "Jump missing a moved-away boat falls into water",
+      "passed": true,
+      "evidence": {
+        "id": "H01",
+        "name": "Người dẫn thuyền",
+        "kind": "mainHero",
+        "team": "friendly",
+        "mode": "swim",
+        "health": 100,
+        "stamina": 57.5999999999998,
+        "ammo": 40,
+        "x": -7,
+        "y": 0.7,
+        "z": 13.945421245421226,
+        "yaw": 0,
+        "vx": 0,
+        "vy": -5.446749999999999,
+        "vz": -2.705494505494506,
+        "attachment": null,
+        "weapon": "melee",
+        "action": null,
+        "readyTick": 0,
+        "guard": false,
+        "guardSince": -1000000000,
+        "counterUntil": 0,
+        "stunUntil": 0,
+        "lastExertion": 81,
+        "distressS": 0,
+        "downTick": null,
+        "rescue": null,
+        "lastHitTick": -1000000000,
+        "follows": false,
+        "followBoard": null,
+        "nextAI": 0
+      }
+    },
+    {
+      "name": "Falling into water does not recover position for free",
+      "passed": true
+    },
+    {
+      "name": "Companion follows by walking and performing a validated jump",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "actor:0:1",
+          "tick": 0,
+          "type": "Jumped",
+          "actorId": "H01",
+          "targetBoatId": "enemy-boat"
+        },
+        {
+          "id": "actor:19:4",
+          "tick": 19,
+          "type": "Jumped",
+          "actorId": "A01",
+          "targetBoatId": "enemy-boat"
+        }
+      ]
+    },
+    {
+      "name": "Deck gap uses actual side edges as well as fore/aft edges",
+      "passed": true
+    },
+    {
+      "name": "Repeated melee command damages one target only once",
+      "passed": true,
+      "evidence": {
+        "hp": 79,
+        "count": 1
+      }
+    },
+    {
+      "name": "Held attack repeats by action recovery, not every tick",
+      "passed": true,
+      "evidence": {
+        "AttackStarted": 4,
+        "Damage": 4,
+        "MeleeResolved": 4
+      }
+    },
+    {
+      "name": "Insufficient stamina cannot start a melee hit",
+      "passed": true
+    },
+    {
+      "name": "Timed frontal parry prevents damage and stuns attacker",
+      "passed": true
+    },
+    {
+      "name": "Counter attack uses finite window and increased damage",
+      "passed": true,
+      "evidence": 72.7
+    },
+    {
+      "name": "Held block reduces damage and costs stamina",
+      "passed": true
+    },
+    {
+      "name": "Exhausted guard can break and stun the defender",
+      "passed": true
+    },
+    {
+      "name": "Dodge has bounded stamina cost and evade window",
+      "passed": true
+    },
+    {
+      "name": "Dodge does not provide permanent immunity",
+      "passed": true
+    },
+    {
+      "name": "Bow consumes exactly one arrow and resolves one swept hit",
+      "passed": true,
+      "evidence": {
+        "ammo": 39,
+        "events": {
+          "AttackStarted": 1,
+          "ArrowFired": 1,
+          "Damage": 1,
+          "ArrowHit": 1
+        }
+      }
+    },
+    {
+      "name": "Spent arrow cannot cause a second hit later",
+      "passed": true
+    },
+    {
+      "name": "Empty quiver cannot spawn a projectile",
+      "passed": true
+    },
+    {
+      "name": "Damage cause ledger prevents repeated resolution",
+      "passed": true
+    },
+    {
+      "name": "Nearby conscious crew performs timed rope rescue to real deck",
+      "passed": true,
+      "evidence": {
+        "id": "H01",
+        "name": "Người dẫn thuyền",
+        "kind": "mainHero",
+        "team": "friendly",
+        "mode": "foot",
+        "health": 100,
+        "stamina": 100,
+        "ammo": 40,
+        "x": 0.8699999999999999,
+        "y": 1.924,
+        "z": 30,
+        "yaw": 0,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "attachment": {
+          "kind": "deck",
+          "boatId": "player-boat",
+          "localX": 0.8699999999999999,
+          "localZ": 0
+        },
+        "weapon": "melee",
+        "action": null,
+        "readyTick": 0,
+        "guard": false,
+        "guardSince": -1000000000,
+        "counterUntil": 0,
+        "stunUntil": 0,
+        "lastExertion": -1000000000,
+        "distressS": 0,
+        "downTick": null,
+        "rescue": null,
+        "lastHitTick": -1000000000,
+        "follows": false,
+        "followBoard": null,
+        "nextAI": 0
+      }
+    },
+    {
+      "name": "Distant rescue is refused instead of warping to shore",
+      "passed": true
+    },
+    {
+      "name": "Exhausted swimmer has a rescue deadline and can be downed",
+      "passed": true
+    },
+    {
+      "name": "Tactical map keeps simulation and held helm course running",
+      "passed": true
+    },
+    {
+      "name": "Map opened after UI blur retains applied throttle rather than neutral input",
+      "passed": true,
+      "evidence": {
+        "throttle": 1,
+        "speed": 3.4631135419816883
+      }
+    },
+    {
+      "name": "Map can return without changing control identity",
+      "passed": true
+    },
+    {
+      "name": "Hero is wounded and a real reserve takes control after delay",
+      "passed": true
+    },
+    {
+      "name": "Takeover does not teleport reserve to wounded hero",
+      "passed": true
+    },
+    {
+      "name": "Stale controller commands are rejected after takeover",
+      "passed": true
+    },
+    {
+      "name": "Second reserve takes over without reviving first reserve",
+      "passed": true
+    },
+    {
+      "name": "No eligible reserve ends the encounter exactly once",
+      "passed": true
+    },
+    {
+      "name": "Ended encounter does not keep changing combat state",
+      "passed": true
+    },
+    {
+      "name": "Friendly crew cannot trap player in narrow deck corridor",
+      "passed": true,
+      "evidence": {
+        "kind": "deck",
+        "boatId": "player-boat",
+        "localX": 0,
+        "localZ": -1.5000000000000355
+      }
+    },
+    {
+      "name": "Walking on dry shore retains actual ground support",
+      "passed": true,
+      "evidence": {
+        "id": "H01",
+        "name": "Người dẫn thuyền",
+        "kind": "mainHero",
+        "team": "friendly",
+        "mode": "foot",
+        "health": 100,
+        "stamina": 100,
+        "ammo": 40,
+        "x": -30,
+        "y": 1.7000000000000002,
+        "z": 20.73333333333334,
+        "yaw": -3.141592653589793,
+        "vx": 0,
+        "vy": 0,
+        "vz": 0,
+        "attachment": {
+          "kind": "ground",
+          "boatId": null
+        },
+        "weapon": "melee",
+        "action": null,
+        "readyTick": 0,
+        "guard": false,
+        "guardSince": -1000000000,
+        "counterUntil": 0,
+        "stunUntil": 0,
+        "lastExertion": -1000000000,
+        "distressS": 0,
+        "downTick": null,
+        "rescue": null,
+        "lastHitTick": -1000000000,
+        "follows": false,
+        "followBoard": null,
+        "nextAI": 0
+      }
+    },
+    {
+      "name": "Rescue cancels if assigned crew is downed, without snapping to deck",
+      "passed": true
+    },
+    {
+      "name": "High-speed swept arrow hits once instead of tunnelling through deck actor",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "actor:1:1",
+          "tick": 1,
+          "type": "Damage",
+          "actorId": "E01",
+          "sourceId": "H01",
+          "damage": 16.5,
+          "causeId": "fast-arrow"
+        },
+        {
+          "id": "actor:1:2",
+          "tick": 1,
+          "type": "ArrowHit",
+          "arrowId": "fast-arrow",
+          "actorId": "E01"
+        }
+      ]
+    },
+    {
+      "name": "Friendly fire is physical and respects one projectile hit",
+      "passed": true,
+      "evidence": 83.5
+    },
+    {
+      "name": "Boat hull blocks a low arrow before it can hit crew",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "actor:1:1",
+          "tick": 1,
+          "type": "ArrowBlocked",
+          "arrowId": "hull-arrow"
+        }
+      ]
+    },
+    {
+      "name": "Melee cannot damage someone on a different vertical level",
+      "passed": true
+    }
+  ],
+  "passed": 45,
+  "total": 45
+}

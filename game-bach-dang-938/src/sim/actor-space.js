@@ -15,6 +15,17 @@ export function boatList(world, river, config) {
 }
 export function insideDeck(boat, x, z, inset = 0) { const p = worldToLocal(boat, x, z); return Math.abs(p.x) <= boat.width / 2 - inset && Math.abs(p.z) <= boat.length / 2 - inset; }
 export function closestDeckPoint(boat, x, z, inset = 0.3) { const p = worldToLocal(boat, x, z); return localToWorld(boat, clamp(p.x, -boat.width / 2 + inset, boat.width / 2 - inset), clamp(p.z, -boat.length / 2 + inset, boat.length / 2 - inset)); }
+export function deckGap(a,b){
+  const corners=boat=>[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,z])=>localToWorld(boat,x*boat.width/2,z*boat.length/2));
+  const ca=corners(a),cb=corners(b);
+  if(insideDeck(a,b.x,b.z)||insideDeck(b,a.x,a.z))return 0;
+  for(let i=0;i<4;i++)for(let j=0;j<4;j++){
+    const p=ca[i],q=cb[j],r={x:ca[(i+1)%4].x-p.x,z:ca[(i+1)%4].z-p.z},s={x:cb[(j+1)%4].x-q.x,z:cb[(j+1)%4].z-q.z};
+    const cross=(u,v)=>u.x*v.z-u.z*v.x,den=cross(r,s),d={x:q.x-p.x,z:q.z-p.z};
+    if(Math.abs(den)>1e-9){const t=cross(d,s)/den,u=cross(d,r)/den;if(t>=0&&t<=1&&u>=0&&u<=1)return 0;}
+  }
+  return Math.min(...ca.map(p=>{const q=closestDeckPoint(b,p.x,p.z,0);return Math.hypot(p.x-q.x,p.z-q.z);}),...cb.map(p=>{const q=closestDeckPoint(a,p.x,p.z,0);return Math.hypot(p.x-q.x,p.z-q.z);}));
+}
 export function supportAt(world, river, config, x, z) {
   const surfaces = [];
   for (const boat of boatList(world, river, config)) if (insideDeck(boat, x, z)) surfaces.push({ kind: 'deck', boatId: boat.id, y: boat.deckY });

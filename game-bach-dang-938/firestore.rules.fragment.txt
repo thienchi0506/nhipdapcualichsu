@@ -1,0 +1,38 @@
+// DỰ THẢO: đặt bên trong match /databases/{database}/documents của Rules
+// hiện có. Chưa triển khai; phải chạy Firestore Rules Emulator trước.
+match /gameBachDang938/{uid}/versions/v1/slots/{slotId} {
+  function isOwner() { return request.auth != null && request.auth.uid == uid; }
+  function validShape() {
+    return slotId.matches('^[A-Za-z0-9_-]{1,64}$')
+      && request.resource.data.keys().hasAll(['ownerUid','schemaVersion','revision','syncId','payloadHash'])
+      && request.resource.data.ownerUid == uid
+      && request.resource.data.schemaVersion == 1
+      && request.resource.data.revision is int
+      && request.resource.data.syncId is string && request.resource.data.syncId.matches('^[A-Za-z0-9_-]{1,150}$')
+      && ((request.resource.data.keys().hasOnly(['ownerUid','schemaVersion','revision','syncId','payload','payloadHash'])
+        && request.resource.data.payload is string && request.resource.data.payload.size() > 0 && request.resource.data.payload.size() <= 850000)
+        || (request.resource.data.keys().hasOnly(['ownerUid','schemaVersion','revision','syncId','payloadHash','transportVersion','chunkCount','payloadBytes'])
+          && request.resource.data.transportVersion == 2
+          && request.resource.data.chunkCount is int && request.resource.data.chunkCount >= 1 && request.resource.data.chunkCount <= 320
+          && request.resource.data.payloadBytes is int && request.resource.data.payloadBytes >= 1 && request.resource.data.payloadBytes <= 16000000))
+      && request.resource.data.payloadHash is string && request.resource.data.payloadHash.matches('^[0-9a-f]{64}$');
+  }
+  allow get: if isOwner();
+  allow list, delete: if false;
+  allow create: if isOwner() && validShape() && request.resource.data.revision == 1;
+  allow update: if isOwner() && validShape() && resource.data.ownerUid == uid
+    && request.resource.data.revision == resource.data.revision + 1;
+  match /snapshots/{chunkId} {
+    allow get: if isOwner();
+    allow list, update, delete: if false;
+    allow create: if isOwner()
+      && slotId.matches('^[A-Za-z0-9_-]{1,64}$') && chunkId.matches('^[A-Za-z0-9_-]{1,160}$')
+      && request.resource.data.keys().hasOnly(['ownerUid','uploadId','index','payload','payloadHash'])
+      && request.resource.data.keys().hasAll(['ownerUid','uploadId','index','payload','payloadHash'])
+      && request.resource.data.ownerUid == uid
+      && request.resource.data.uploadId is string && request.resource.data.uploadId.matches('^[A-Za-z0-9_-]{1,150}$')
+      && request.resource.data.index is int && request.resource.data.index >= 0 && request.resource.data.index < 320
+      && request.resource.data.payload is string && request.resource.data.payload.size() > 0 && request.resource.data.payload.size() <= 200000
+      && request.resource.data.payloadHash is string && request.resource.data.payloadHash.matches('^[0-9a-f]{64}$');
+  }
+}

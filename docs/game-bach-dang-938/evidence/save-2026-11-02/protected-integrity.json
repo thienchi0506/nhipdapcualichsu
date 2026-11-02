@@ -1,0 +1,78 @@
+﻿{
+    "total":  12,
+    "checks":  [
+                   {
+                       "before":  "5ACB7A3E2CB4D25E2B64851F6D9DE2D9D69BA8C50A39E06CCBC698E8186D1948",
+                       "path":  "trang-chinh.html",
+                       "unchanged":  true,
+                       "after":  "5ACB7A3E2CB4D25E2B64851F6D9DE2D9D69BA8C50A39E06CCBC698E8186D1948"
+                   },
+                   {
+                       "before":  "7383881FFAE5E8F4282FB6C9BD3FB58C7BCA827C0C1F83A6FE9648018CBAFEEF",
+                       "path":  "sa-ban.html",
+                       "unchanged":  true,
+                       "after":  "7383881FFAE5E8F4282FB6C9BD3FB58C7BCA827C0C1F83A6FE9648018CBAFEEF"
+                   },
+                   {
+                       "before":  "CBBEB4ED8D23A1619EEB5B6BB4FE9DF56B9AF82C5EB72AD2D705CB8D86AEA635",
+                       "path":  "sa-ban-3d.html",
+                       "unchanged":  true,
+                       "after":  "CBBEB4ED8D23A1619EEB5B6BB4FE9DF56B9AF82C5EB72AD2D705CB8D86AEA635"
+                   },
+                   {
+                       "before":  "99490825BA6C1F2B16FE20B0DDDB246047E6C88BC5A7518BE42782C8FA407719",
+                       "path":  "sa-ban-nhu-nguyet.html",
+                       "unchanged":  true,
+                       "after":  "99490825BA6C1F2B16FE20B0DDDB246047E6C88BC5A7518BE42782C8FA407719"
+                   },
+                   {
+                       "before":  "6D57319CA40468510EA3C3C065923A72AB6D99CFB005F76EFB3C4CBAA1EF1642",
+                       "path":  "thao-truong.html",
+                       "unchanged":  true,
+                       "after":  "6D57319CA40468510EA3C3C065923A72AB6D99CFB005F76EFB3C4CBAA1EF1642"
+                   },
+                   {
+                       "before":  "5950F826EFBA5A6418137DFDD57DB82939936BC106E85DE96AB66E41AAEAA50A",
+                       "path":  "tang-thu-cac.html",
+                       "unchanged":  true,
+                       "after":  "5950F826EFBA5A6418137DFDD57DB82939936BC106E85DE96AB66E41AAEAA50A"
+                   },
+                   {
+                       "before":  "F811DDCE8982FC1435AEA70C0814C181900CE93DBFF800E2CB52307B484B310B",
+                       "path":  "dang-nhap.html",
+                       "unchanged":  true,
+                       "after":  "F811DDCE8982FC1435AEA70C0814C181900CE93DBFF800E2CB52307B484B310B"
+                   },
+                   {
+                       "before":  "8ED26E18A860043A282F964F34D5479D09D70F3684EAEA47E1C68BD5AD2AB4FD",
+                       "path":  "firebase-config.js",
+                       "unchanged":  true,
+                       "after":  "8ED26E18A860043A282F964F34D5479D09D70F3684EAEA47E1C68BD5AD2AB4FD"
+                   },
+                   {
+                       "before":  "11423CC238EA8FA06FEC80A349267B9AFF41B4AF7656B4B0F434404B6745F961",
+                       "path":  "firestore.rules",
+                       "unchanged":  true,
+                       "after":  "11423CC238EA8FA06FEC80A349267B9AFF41B4AF7656B4B0F434404B6745F961"
+                   },
+                   {
+                       "before":  "EB96FA68F841CE20A3E95EB35B572BEA0C35D4D339311FD38F76267FCD1791C1",
+                       "path":  "storage.rules",
+                       "unchanged":  true,
+                       "after":  "EB96FA68F841CE20A3E95EB35B572BEA0C35D4D339311FD38F76267FCD1791C1"
+                   },
+                   {
+                       "before":  "F28CA1CD322D9C59C4C254D0F1F7266614604F4B08CF26F7F8CD84BE28150E9A",
+                       "path":  "game-runtime.js",
+                       "unchanged":  true,
+                       "after":  "F28CA1CD322D9C59C4C254D0F1F7266614604F4B08CF26F7F8CD84BE28150E9A"
+                   },
+                   {
+                       "before":  "B4CA932C94CBA96A2883F6235F1C7EFE76F4F97A5353664B60CCF959E29DC9F3",
+                       "path":  "game-runtime.css",
+                       "unchanged":  true,
+                       "after":  "B4CA932C94CBA96A2883F6235F1C7EFE76F4F97A5353664B60CCF959E29DC9F3"
+                   }
+               ],
+    "passed":  12
+}

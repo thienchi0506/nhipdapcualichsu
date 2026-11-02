@@ -1,0 +1,185 @@
+{
+  "checks": [
+    {
+      "name": "Every simulated soldier has a unique stable ID and history",
+      "passed": true
+    },
+    {
+      "name": "Each soldier belongs to exactly one squad",
+      "passed": true
+    },
+    {
+      "name": "Cannot command the opposing team",
+      "passed": true
+    },
+    {
+      "name": "Cannot issue order into deep river",
+      "passed": true
+    },
+    {
+      "name": "Valid ground objective is accepted",
+      "passed": true
+    },
+    {
+      "name": "Duplicate command returns its original receipt",
+      "passed": true
+    },
+    {
+      "name": "Two independent squads advance without micro-management",
+      "passed": true
+    },
+    {
+      "name": "Cancel stops order at the current position",
+      "passed": true
+    },
+    {
+      "name": "Changing an order invalidates pending old paths",
+      "passed": true
+    },
+    {
+      "name": "Unreachable opposite bank produces a blocked report, not teleportation",
+      "passed": true,
+      "evidence": {
+        "report": "Không có đường bộ an toàn tới mục tiêu."
+      }
+    },
+    {
+      "name": "Unknown enemy is absent from fog snapshot",
+      "passed": true
+    },
+    {
+      "name": "Sight records an enemy position and observation tick",
+      "passed": true,
+      "evidence": {
+        "id": "D-00011",
+        "squadId": "E-001",
+        "x": -31.009934788953984,
+        "z": 44.160058752073425,
+        "tick": 15
+      }
+    },
+    {
+      "name": "Hidden enemy retains old observed position, not current position",
+      "passed": true
+    },
+    {
+      "name": "Cannot issue attack using an unobserved enemy ID",
+      "passed": true
+    },
+    {
+      "name": "Each archer fires one finite shot and simultaneous damage is resolved",
+      "passed": true
+    },
+    {
+      "name": "Out-of-ammo soldiers do not create repeated hits",
+      "passed": true
+    },
+    {
+      "name": "Nearby medic stabilizes casualty once and consumes medical supply",
+      "passed": true
+    },
+    {
+      "name": "Wounded identity and injury persist without double-counting during rescue",
+      "passed": true
+    },
+    {
+      "name": "Medic moves towards a nearby casualty before stabilizing them",
+      "passed": true
+    },
+    {
+      "name": "Untreated casualty becomes dead once and is never removed",
+      "passed": true
+    },
+    {
+      "name": "Loss threshold uses initial deployed denominator and triggers retreat",
+      "passed": true
+    },
+    {
+      "name": "Supply is debited exactly once at departure",
+      "passed": true
+    },
+    {
+      "name": "Supply movement does not mutate the simulation configuration",
+      "passed": true
+    },
+    {
+      "name": "Physical convoy delivers its reserved cargo exactly once",
+      "passed": true
+    },
+    {
+      "name": "Enemy near route stops convoy without duplicating or delivering cargo",
+      "passed": true
+    },
+    {
+      "name": "Insufficient capacity does not create cargo or debit stock",
+      "passed": true
+    },
+    {
+      "name": "Nearby supply transfers finite ammunition from depot",
+      "passed": true
+    },
+    {
+      "name": "Repair reserves finite timber",
+      "passed": true
+    },
+    {
+      "name": "Repair completes once and restores depot health",
+      "passed": true
+    },
+    {
+      "name": "Recruitment is possible only with missing active soldier and available stock",
+      "passed": true
+    },
+    {
+      "name": "Recruit has a new ID and cannot resurrect the old soldier",
+      "passed": true
+    },
+    {
+      "name": "Interrupted work refunds the reserved timber once",
+      "passed": true
+    },
+    {
+      "name": "A real character melee action can damage an army soldier exactly once",
+      "passed": true,
+      "evidence": {
+        "health": 79,
+        "events": {
+          "ArmyDamage": 1,
+          "ArmyShot": 2
+        }
+      }
+    },
+    {
+      "name": "An army archer can damage the controlled character without duplicate shots",
+      "passed": true,
+      "evidence": {
+        "health": 85
+      }
+    },
+    {
+      "name": "Character guard uses the real army archer position",
+      "passed": true,
+      "evidence": {
+        "health": 96.25,
+        "stamina": 92
+      }
+    },
+    {
+      "name": "Player can select and shoot a real army soldier once",
+      "passed": true,
+      "evidence": {
+        "ammo": 39,
+        "health": 83.5,
+        "events": {
+          "ArmyDamage": 1
+        }
+      }
+    },
+    {
+      "name": "Same scenario and commands produce the same snapshot",
+      "passed": true
+    }
+  ],
+  "passed": 37,
+  "total": 37
+}

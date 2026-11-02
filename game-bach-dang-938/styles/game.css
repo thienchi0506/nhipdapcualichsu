@@ -46,6 +46,7 @@ body.bd938-page { margin:0; background:#102725; color:#f0e7d4; font-family:syste
 #bd938-root .bd938-play { height:100vh; height:100dvh; min-height:360px; display:grid; grid-template-rows:auto minmax(130px,1fr) auto; }
 #bd938-root .bd938-toolbar { padding:max(10px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left)); display:flex; justify-content:space-between; align-items:center; gap:12px; border-bottom:1px solid var(--bd938-line); }
 #bd938-root .bd938-toolbar h1 { font:650 22px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif; }
+#bd938-root #bd938-save-status { color:#d5e5ce;font-size:11px;overflow-wrap:anywhere; }
 #bd938-root .bd938-toolbar nav { display:flex; flex-wrap:wrap; gap:8px; }
 #bd938-root .bd938-viewport { position:relative; overflow:hidden; background:#325c5c; min-width:0; min-height:0; }
 #bd938-root canvas { display:block; width:100%; height:100%; touch-action:none; }
@@ -56,6 +57,31 @@ body.bd938-page { margin:0; background:#102725; color:#f0e7d4; font-family:syste
 #bd938-root .bd938-river-hud output { display:block; font-size:14px; color:#fff1d1; font-weight:600; }
 #bd938-root .bd938-river-alert { position:absolute; left:12px; bottom:12px; max-width:min(560px,calc(100% - 24px)); padding:8px 12px; border-left:3px solid #dfbd65; border-radius:4px; background:#122a26ed; color:#fff0b7; font-size:13px; pointer-events:none; }
 #bd938-root .bd938-river-alert:empty { display:none; }
+#bd938-root .bd938-character-hud { position:absolute;top:104px;left:16px;right:16px;z-index:2;display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;max-width:940px;padding:6px 10px;background:#102b2be8;border:1px solid #83977a;border-radius:6px;font-size:12px;pointer-events:none; }
+#bd938-root .bd938-character-hud meter { width:70px;height:12px;vertical-align:middle; }
+#bd938-root .bd938-character-hud output { min-width:22px;display:inline-block; }
+#bd938-root .bd938-actor-label { position:absolute;top:0;left:0;pointer-events:none;z-index:1;background:#152e29cc;color:#fff0ce;border:1px solid #8b9c75;border-radius:4px;padding:2px 5px;font-size:10px;white-space:nowrap; }
+#bd938-root .bd938-actor-tools { display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;flex:1 1 100%;width:100%; }
+#bd938-root .bd938-actor-tools button { padding:8px 5px;font-size:12px; }
+#bd938-root .bd938-combat-pad { display:grid;grid-template-columns:repeat(2,58px);gap:4px; }
+#bd938-root .bd938-combat-pad button { min-width:44px;min-height:44px;height:44px;border:1px solid #c0a166;border-radius:12px;background:#4c352a;font-size:11px;touch-action:none;padding:4px; }
+#bd938-root .bd938-combat-pad button[data-held="true"] { background:#dcb86d;color:#172c25; }
+#bd938-root .bd938-map { position:absolute;inset:0;z-index:5;padding:12px;background:#112c29f5;display:flex;flex-direction:column;gap:8px;overflow:auto; }
+#bd938-root .bd938-map header { position:sticky;top:-12px;z-index:2;background:#112c29;display:flex;align-items:center;justify-content:space-between;gap:10px; }
+#bd938-root .bd938-map h2 { font-size:20px; }
+#bd938-root .bd938-map-warning { font-size:12px;color:#ffda8c; }
+#bd938-root #bd938-map-view { min-height:80px;flex:1;width:100%;background:#233c32;border:1px solid #819e7a;border-radius:6px; }
+#bd938-root .bd938-map-targets { display:flex;flex-wrap:wrap;gap:6px;max-height:106px;overflow:auto; }
+#bd938-root .bd938-map-targets button { flex:1;min-width:100px; }
+#bd938-root .bd938-army-panel { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:8px;background:#1b3934;border:1px solid #6c8273;border-radius:6px; }
+#bd938-root .bd938-army-panel label { display:flex;flex-direction:column;gap:3px;font-size:12px;color:#ead9ad;min-width:0; }
+#bd938-root .bd938-army-panel input { width:100%;min-width:0;min-height:44px;padding:6px;color:#f0e7d4;background:#102b29;border:1px solid #829981;border-radius:6px;font:inherit; }
+#bd938-root .bd938-army-panel select { min-height:44px;padding:6px;font-size:12px; }
+#bd938-root .bd938-army-actions { display:flex;flex-wrap:wrap;gap:5px;grid-column:1/-1; }
+#bd938-root .bd938-army-actions button { flex:1 1 105px;padding:6px;font-size:12px; }
+#bd938-root .bd938-army-panel p { grid-column:1/-1;font-size:12px; }
+#bd938-root #bd938-play:not([data-control="helm"]) .bd938-river-hud { display:none; }
+#bd938-root #bd938-play:not([data-control="helm"]) .bd938-character-hud { top:46px; }
 #bd938-root .bd938-systems { flex:1 1 100%; min-width:0; width:100%; font-size:12px; }
 #bd938-root .bd938-systems summary { min-height:44px; cursor:pointer; padding:8px 12px; background:#244039; border:1px solid #638277; border-radius:6px; color:#ead9ad; }
 #bd938-root .bd938-systems summary span { margin-left:12px; color:#d1e2cc; }
@@ -92,10 +118,20 @@ body.bd938-page { margin:0; background:#102725; color:#f0e7d4; font-family:syste
   #bd938-root .bd938-river-hud > span { padding:4px 6px; font-size:10px; }
   #bd938-root .bd938-river-hud output { font-size:12px; }
   #bd938-root .bd938-river-alert { font-size:11px; padding:6px 8px; }
+  #bd938-root .bd938-character-hud { top:144px;left:10px;right:10px;font-size:10px;gap:3px 8px;padding:5px 6px; }
+  #bd938-root .bd938-character-hud meter { width:48px; }
+  #bd938-root .bd938-character-hud strong { flex-basis:100%; }
+  #bd938-root .bd938-character-hud #bd938-target-name { max-width:100%; }
+  #bd938-root .bd938-actor-tools { gap:3px; }
+  #bd938-root .bd938-actor-tools button { font-size:10px;padding:6px 3px;min-height:46px; }
+  #bd938-root .bd938-controls { gap:8px 12px; }
+  #bd938-root .bd938-help { display:none; }
+  #bd938-root .bd938-combat-pad { margin-left:auto; }
+  #bd938-root .bd938-map h2 { font-size:16px; }
   #bd938-root .bd938-system-actions { grid-template-columns:repeat(2,minmax(0,1fr)); }
   #bd938-root .bd938-systems summary span { display:block; margin-left:0; font-size:10px; }
   #bd938-root .bd938-actions { flex-wrap:wrap; gap:12px; } #bd938-root .bd938-actions > .bd938-primary { flex:1; }
-  #bd938-root .bd938-toolbar { flex-wrap:wrap; gap:6px; padding-left:12px; padding-right:12px; } #bd938-root .bd938-toolbar > div { display:flex; align-items:center; gap:12px; } #bd938-root .bd938-toolbar h1 { font-size:17px; }
+  #bd938-root .bd938-toolbar { flex-wrap:wrap; gap:6px; padding-left:12px; padding-right:12px; } #bd938-root .bd938-toolbar > div { display:flex; flex-wrap:wrap; min-width:0; align-items:center; gap:6px 12px; } #bd938-root .bd938-toolbar h1 { font-size:17px; }
   #bd938-root .bd938-toolbar nav { width:100%; display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:5px; } #bd938-root .bd938-toolbar .bd938-button { font-size:12px; padding:8px 6px; }
   #bd938-root .bd938-controls { gap:12px; flex-wrap:wrap; padding:8px 12px max(8px,env(safe-area-inset-bottom)); }
   #bd938-root .bd938-help { min-width:100px; } #bd938-root .bd938-help > p:nth-child(2) { display:none; }
@@ -106,10 +142,13 @@ body.bd938-page { margin:0; background:#102725; color:#f0e7d4; font-family:syste
 @media(max-width:359px) { #bd938-root .bd938-character { padding:12px; } #bd938-root .bd938-character > strong { font-size:18px; } #bd938-root .bd938-role { font-size:9px; letter-spacing:.5px; } #bd938-root .bd938-edition { font-size:9px; } }
 @media(max-height:500px) and (orientation:landscape) { #bd938-root .bd938-toolbar > div, #bd938-root .bd938-help { display:none; } #bd938-root .bd938-controls { flex-wrap:nowrap; padding-top:4px; } #bd938-root #bd938-finish { width:auto; margin-left:auto; } }
 @media(max-height:500px) and (orientation:landscape) {
-  #bd938-root .bd938-controls { display:grid; grid-template-columns:146px minmax(160px,1fr) auto; gap:12px; }
+  #bd938-root .bd938-controls { display:grid; grid-template-columns:146px 120px minmax(160px,1fr) auto; gap:8px; }
   #bd938-root .bd938-move { grid-column:1; grid-row:1; }
-  #bd938-root .bd938-systems { grid-column:2; grid-row:1; }
-  #bd938-root #bd938-finish { grid-column:3; grid-row:1; }
+  #bd938-root .bd938-systems { grid-column:3; grid-row:1; }
+  #bd938-root .bd938-combat-pad { grid-column:2;grid-row:1; }
+  #bd938-root #bd938-finish { grid-column:4; grid-row:1; }
+  #bd938-root .bd938-actor-tools { grid-column:1 / -1;grid-row:2; }
+  #bd938-root .bd938-character-hud { top:85px; }
   #bd938-root .bd938-system-panel { position:absolute; left:160px; right:12px; bottom:105px; max-height:170px; z-index:3; }
   #bd938-root .bd938-river-hud { grid-template-columns:repeat(6,minmax(0,1fr)); top:36px; }
 }

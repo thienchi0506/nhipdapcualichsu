@@ -1,0 +1,1104 @@
+{
+  "date": "2026-11-02",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "checks": [
+    {
+      "name": "Homepage has both old hrefs and one new href",
+      "passed": true,
+      "evidence": [
+        {
+          "href": "sa-ban.html",
+          "text": "🗺️ Sa Bàn 2D"
+        },
+        {
+          "href": "sa-ban-3d.html",
+          "text": "🚀 Sa Bàn 3D"
+        },
+        {
+          "href": "game-bach-dang-938/index.html",
+          "text": "Bạch Đằng 938 — Chiến dịch nhập vai"
+        }
+      ]
+    },
+    {
+      "name": "Homepage does not request new game code/assets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "Actual new entry opens dedicated game",
+      "passed": true
+    },
+    {
+      "name": "Shell has no canvas/renderer/loop",
+      "passed": true
+    },
+    {
+      "name": "Shell has not fetched Three.js",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Selected hero and quality used",
+      "passed": true
+    },
+    {
+      "name": "Exactly one running loop",
+      "passed": true
+    },
+    {
+      "name": "Focused canvas WASD moves boat",
+      "passed": true,
+      "evidence": {
+        "before": 26.10136961496478,
+        "after": 25.984539888217824
+      }
+    },
+    {
+      "name": "Camera toggle switches to follow",
+      "passed": true
+    },
+    {
+      "name": "Pause stops tick and RAF",
+      "passed": true
+    },
+    {
+      "name": "Resume starts one loop",
+      "passed": true
+    },
+    {
+      "name": "Finish shows result with stopped scene",
+      "passed": true
+    },
+    {
+      "name": "Replay creates one fresh scene at tick zero",
+      "passed": true
+    },
+    {
+      "name": "Back to choices frees all session resources",
+      "passed": true,
+      "evidence": {
+        "sessionsCreated": 2,
+        "sessionsDisposed": 2,
+        "activeLoops": 0,
+        "activeLoads": 0,
+        "sessionListeners": 0,
+        "observers": 0,
+        "renderers": 0,
+        "geometries": 0,
+        "materials": 0,
+        "state": "SHELL",
+        "preferences": {
+          "hero": "H03",
+          "quality": "balanced"
+        },
+        "pauseReasons": [],
+        "session": null,
+        "lastDisposed": {
+          "running": false,
+          "disposed": true,
+          "saving": false,
+          "tick": 0,
+          "seconds": 0,
+          "heroId": "H03",
+          "frames": 42,
+          "backlogMs": 16.766666666666097,
+          "river": null,
+          "combat": null,
+          "army": null,
+          "scene": null
+        },
+        "lastFault": null,
+        "canvases": 0,
+        "dialogOpen": false
+      }
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Open/close cycle 1 has zero residual resources",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Open/close cycle 2 has zero residual resources",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Open/close cycle 3 has zero residual resources",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Open/close cycle 4 has zero residual resources",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Open/close cycle 5 has zero residual resources",
+      "passed": true
+    },
+    {
+      "name": "Choices fit 320px",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Play fits 320px and buttons are touchable",
+      "passed": true,
+      "evidence": {
+        "width": 320,
+        "viewport": 320,
+        "buttons": [
+          {
+            "id": "bd938-camera",
+            "label": "Góc nhìn: Toàn cảnh",
+            "w": 110,
+            "h": 54,
+            "bottom": 93.796875
+          },
+          {
+            "id": "bd938-pause",
+            "label": "Ⅱ Tạm dừng",
+            "w": 88,
+            "h": 54,
+            "bottom": 93.796875
+          },
+          {
+            "id": "",
+            "label": "Về Sa Bàn",
+            "w": 88,
+            "h": 54,
+            "bottom": 93.796875
+          },
+          {
+            "id": "",
+            "label": "E · Rời lái",
+            "w": 56.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "G · Sang thuyền",
+            "w": 56.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Cung / Kiếm",
+            "w": 56.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "L · Khóa",
+            "w": 56.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "M · Bản đồ",
+            "w": 56.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Tiến hoặc đi tới",
+            "w": 46,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Lái trái hoặc đi trái",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lùi hoặc đi lui",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lái phải hoặc đi phải",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Giữ để đánh hoặc bắn",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Giữ để đỡ",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Né (V)",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Nhảy",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "bd938-finish",
+            "label": "Kết thúc lượt thử",
+            "w": 296,
+            "h": 44,
+            "bottom": 836
+          }
+        ],
+        "canvas": {
+          "w": 320,
+          "h": 452,
+          "rect": {
+            "x": 0,
+            "y": 104.796875,
+            "width": 320,
+            "height": 452.015625,
+            "top": 104.796875,
+            "right": 320,
+            "bottom": 556.8125,
+            "left": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Touch steers boat at 320px",
+      "passed": true
+    },
+    {
+      "name": "Pause dialog fits 320px",
+      "passed": true,
+      "evidence": {
+        "x": 19,
+        "y": 127.03125,
+        "width": 282,
+        "height": 589.9375,
+        "top": 127.03125,
+        "right": 301,
+        "bottom": 716.96875,
+        "left": 19
+      }
+    },
+    {
+      "name": "Quality preference survives reload 320px",
+      "passed": true
+    },
+    {
+      "name": "Choices fit 360px",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Play fits 360px and buttons are touchable",
+      "passed": true,
+      "evidence": {
+        "width": 360,
+        "viewport": 360,
+        "buttons": [
+          {
+            "id": "bd938-camera",
+            "label": "Góc nhìn: Toàn cảnh",
+            "w": 125.375,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "bd938-pause",
+            "label": "Ⅱ Tạm dừng",
+            "w": 100.3125,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "Về Sa Bàn",
+            "w": 100.3125,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "E · Rời lái",
+            "w": 64.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "G · Sang thuyền",
+            "w": 64.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Cung / Kiếm",
+            "w": 64.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "L · Khóa",
+            "w": 64.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "M · Bản đồ",
+            "w": 64.8125,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Tiến hoặc đi tới",
+            "w": 46,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Lái trái hoặc đi trái",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lùi hoặc đi lui",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lái phải hoặc đi phải",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Giữ để đánh hoặc bắn",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Giữ để đỡ",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Né (V)",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Nhảy",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "bd938-finish",
+            "label": "Kết thúc lượt thử",
+            "w": 336,
+            "h": 44,
+            "bottom": 836
+          }
+        ],
+        "canvas": {
+          "w": 360,
+          "h": 460,
+          "rect": {
+            "x": 0,
+            "y": 96.796875,
+            "width": 360,
+            "height": 460.015625,
+            "top": 96.796875,
+            "right": 360,
+            "bottom": 556.8125,
+            "left": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Touch steers boat at 360px",
+      "passed": true
+    },
+    {
+      "name": "Pause dialog fits 360px",
+      "passed": true,
+      "evidence": {
+        "x": 19,
+        "y": 168.71875,
+        "width": 322,
+        "height": 506.5625,
+        "top": 168.71875,
+        "right": 341,
+        "bottom": 675.28125,
+        "left": 19
+      }
+    },
+    {
+      "name": "Quality preference survives reload 360px",
+      "passed": true
+    },
+    {
+      "name": "Choices fit 375px",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Play fits 375px and buttons are touchable",
+      "passed": true,
+      "evidence": {
+        "width": 375,
+        "viewport": 375,
+        "buttons": [
+          {
+            "id": "bd938-camera",
+            "label": "Góc nhìn: Toàn cảnh",
+            "w": 131.140625,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "bd938-pause",
+            "label": "Ⅱ Tạm dừng",
+            "w": 104.921875,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "Về Sa Bàn",
+            "w": 104.9375,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "E · Rời lái",
+            "w": 67.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "G · Sang thuyền",
+            "w": 67.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Cung / Kiếm",
+            "w": 67.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "L · Khóa",
+            "w": 67.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "M · Bản đồ",
+            "w": 67.8125,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Tiến hoặc đi tới",
+            "w": 46,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Lái trái hoặc đi trái",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lùi hoặc đi lui",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lái phải hoặc đi phải",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Giữ để đánh hoặc bắn",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Giữ để đỡ",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Né (V)",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Nhảy",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "bd938-finish",
+            "label": "Kết thúc lượt thử",
+            "w": 351,
+            "h": 44,
+            "bottom": 836
+          }
+        ],
+        "canvas": {
+          "w": 375,
+          "h": 460,
+          "rect": {
+            "x": 0,
+            "y": 96.796875,
+            "width": 375,
+            "height": 460.015625,
+            "top": 96.796875,
+            "right": 375,
+            "bottom": 556.8125,
+            "left": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Touch steers boat at 375px",
+      "passed": true
+    },
+    {
+      "name": "Pause dialog fits 375px",
+      "passed": true,
+      "evidence": {
+        "x": 19,
+        "y": 168.71875,
+        "width": 337,
+        "height": 506.5625,
+        "top": 168.71875,
+        "right": 356,
+        "bottom": 675.28125,
+        "left": 19
+      }
+    },
+    {
+      "name": "Quality preference survives reload 375px",
+      "passed": true
+    },
+    {
+      "name": "Choices fit 390px",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Play fits 390px and buttons are touchable",
+      "passed": true,
+      "evidence": {
+        "width": 390,
+        "viewport": 390,
+        "buttons": [
+          {
+            "id": "bd938-camera",
+            "label": "Góc nhìn: Toàn cảnh",
+            "w": 136.921875,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "bd938-pause",
+            "label": "Ⅱ Tạm dừng",
+            "w": 109.53125,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "Về Sa Bàn",
+            "w": 109.546875,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "E · Rời lái",
+            "w": 70.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "G · Sang thuyền",
+            "w": 70.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Cung / Kiếm",
+            "w": 70.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "L · Khóa",
+            "w": 70.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "M · Bản đồ",
+            "w": 70.8125,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Tiến hoặc đi tới",
+            "w": 46,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Lái trái hoặc đi trái",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lùi hoặc đi lui",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lái phải hoặc đi phải",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Giữ để đánh hoặc bắn",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Giữ để đỡ",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Né (V)",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Nhảy",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "bd938-finish",
+            "label": "Kết thúc lượt thử",
+            "w": 366,
+            "h": 44,
+            "bottom": 836
+          }
+        ],
+        "canvas": {
+          "w": 390,
+          "h": 460,
+          "rect": {
+            "x": 0,
+            "y": 96.796875,
+            "width": 390,
+            "height": 460.015625,
+            "top": 96.796875,
+            "right": 390,
+            "bottom": 556.8125,
+            "left": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Touch steers boat at 390px",
+      "passed": true
+    },
+    {
+      "name": "Pause dialog fits 390px",
+      "passed": true,
+      "evidence": {
+        "x": 19,
+        "y": 168.71875,
+        "width": 352,
+        "height": 506.5625,
+        "top": 168.71875,
+        "right": 371,
+        "bottom": 675.28125,
+        "left": 19
+      }
+    },
+    {
+      "name": "Quality preference survives reload 390px",
+      "passed": true
+    },
+    {
+      "name": "Choices fit 430px",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Play fits 430px and buttons are touchable",
+      "passed": true,
+      "evidence": {
+        "width": 430,
+        "viewport": 430,
+        "buttons": [
+          {
+            "id": "bd938-camera",
+            "label": "Góc nhìn: Toàn cảnh",
+            "w": 152.296875,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "bd938-pause",
+            "label": "Ⅱ Tạm dừng",
+            "w": 121.84375,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "Về Sa Bàn",
+            "w": 121.859375,
+            "h": 46,
+            "bottom": 85.796875
+          },
+          {
+            "id": "",
+            "label": "E · Rời lái",
+            "w": 78.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "G · Sang thuyền",
+            "w": 78.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Cung / Kiếm",
+            "w": 78.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "L · Khóa",
+            "w": 78.796875,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "M · Bản đồ",
+            "w": 78.8125,
+            "h": 46,
+            "bottom": 610.8125
+          },
+          {
+            "id": "",
+            "label": "Tiến hoặc đi tới",
+            "w": 46,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Lái trái hoặc đi trái",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lùi hoặc đi lui",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Lái phải hoặc đi phải",
+            "w": 46,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Giữ để đánh hoặc bắn",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Giữ để đỡ",
+            "w": 58,
+            "h": 44,
+            "bottom": 732
+          },
+          {
+            "id": "",
+            "label": "Né (V)",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "",
+            "label": "Nhảy",
+            "w": 58,
+            "h": 44,
+            "bottom": 780
+          },
+          {
+            "id": "bd938-finish",
+            "label": "Kết thúc lượt thử",
+            "w": 406,
+            "h": 44,
+            "bottom": 836
+          }
+        ],
+        "canvas": {
+          "w": 430,
+          "h": 460,
+          "rect": {
+            "x": 0,
+            "y": 96.796875,
+            "width": 430,
+            "height": 460.015625,
+            "top": 96.796875,
+            "right": 430,
+            "bottom": 556.8125,
+            "left": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Touch steers boat at 430px",
+      "passed": true
+    },
+    {
+      "name": "Pause dialog fits 430px",
+      "passed": true,
+      "evidence": {
+        "x": 19,
+        "y": 224.71875,
+        "width": 392,
+        "height": 394.5625,
+        "top": 224.71875,
+        "right": 411,
+        "bottom": 619.28125,
+        "left": 19
+      }
+    },
+    {
+      "name": "Quality preference survives reload 430px",
+      "passed": true
+    },
+    {
+      "name": "Briefing has scene and no simulation loop",
+      "passed": true
+    },
+    {
+      "name": "Window blur pauses without auto-resume",
+      "passed": true
+    },
+    {
+      "name": "Exit returns to actual Sa Ban card",
+      "passed": true
+    },
+    {
+      "name": "Old 2D entry remains its own document",
+      "passed": true
+    },
+    {
+      "name": "Old 3D entry remains its own document",
+      "passed": true
+    },
+    {
+      "name": "Library navigation loads without new game payload",
+      "passed": true
+    },
+    {
+      "name": "Exam navigation loads without new game payload",
+      "passed": true
+    }
+  ],
+  "passed": 62,
+  "total": 62,
+  "failure": null,
+  "observations": [
+    {
+      "cycles": {
+        "sessionsCreated": 7,
+        "sessionsDisposed": 7,
+        "activeLoops": 0,
+        "activeLoads": 0,
+        "sessionListeners": 0,
+        "observers": 0,
+        "renderers": 0,
+        "geometries": 0,
+        "materials": 0,
+        "state": "SHELL",
+        "preferences": {
+          "hero": "H01",
+          "quality": "economy"
+        },
+        "pauseReasons": [],
+        "session": null,
+        "lastDisposed": {
+          "running": false,
+          "disposed": true,
+          "saving": false,
+          "tick": 0,
+          "seconds": 0,
+          "heroId": "H01",
+          "frames": 44,
+          "backlogMs": 25.166666666666643,
+          "river": null,
+          "combat": null,
+          "army": null,
+          "scene": null
+        },
+        "lastFault": null,
+        "canvases": 0,
+        "dialogOpen": false
+      }
+    }
+  ],
+  "backendBlocked": true,
+  "physicalDeviceTested": false,
+  "fpsBenchmark": false
+}

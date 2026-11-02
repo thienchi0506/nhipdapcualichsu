@@ -7,6 +7,7 @@ const partNames = { hull: 'thân thuyền', rudder: 'bánh lái', oars: 'mái ch
 function emit(state, type, payload = {}) {
   const event = { id: `river:${state.tick}:${++state.eventSequence}`, tick: state.tick, type, ...payload };
   state.events.push(event);
+  if(state.journalPending)state.journalPending.push(event);
   if (state.events.length > 128) state.events.shift();
   state.eventCounts[type] = (state.eventCounts[type] || 0) + 1;
   return event;
@@ -38,7 +39,7 @@ function environment(state, pose = state) {
   return { waterY: tide.level, tideRate: tide.rate, draft, bedY, depth, clearance: depth - draft, current: currentAt(c, pose.x, pose.z, tide.rate) };
 }
 
-function updateReadings(state) {
+export function updateReadings(state) {
   const e = environment(state), c = state.config, vessel = c.vessels[state.vesselType];
   state.readings = { ...e, speedMps: Math.hypot(state.vx, state.vz), inRepairZone: Math.hypot(state.x - c.repair.zoneX, state.z - c.repair.zoneZ) <= c.repair.zoneRadiusM, massKg: vessel.emptyMassKg + vessel.crewMassKg + state.cargoKg + state.floodKg };
   const warnings = [];

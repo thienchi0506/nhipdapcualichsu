@@ -1,8 +1,10 @@
 # Bạch Đằng 938 — Chiến dịch nhập vai
 
-**Hồ sơ dự án · phiên bản 0.4 · 02/11/2026**
+**Hồ sơ dự án · phiên bản 0.6 · 02/11/2026**
 
-**Trạng thái:** Đã có khung riêng và lớp sông nước: quán tính/dòng/triều/mớn, va cọc, mắc/gỡ/sửa và HUD. Đã kiểm tra core và chạy tình huống thật cục bộ; chưa có chương chiến đấu, journal/lưu chiến dịch hoặc benchmark quân số. Chưa sửa Firebase production/phát hành. Xem [bàn giao sông nước](river-handoff.md), [mô hình xấp xỉ](river-model.md) và [chặng khung trước](shell-handoff.md).
+**Trạng thái:** Đã có khung riêng, mô phỏng sông và lớp nhân vật/chiến đấu trực tiếp: đi trên boong chuyển động, áp mạn, cung/cận chiến, sức bền, bơi/cứu và tiếp quản. Đã chạy chuỗi lái → bản đồ → áp mạn → nhảy → đánh → gục/tiếp quản bằng input thật cục bộ. Chưa có chương chiến dịch hoàn chỉnh, journal/lưu chiến dịch hoặc benchmark dài. Chưa sửa Firebase production/phát hành. Xem [bàn giao chiến đấu](combat-handoff.md), [luật nhân vật](character-model.md), [bàn giao sông nước](river-handoff.md) và [chặng khung trước](shell-handoff.md).
+
+**Bổ sung 0.6:** Có bản thử tổ quân, fog, hậu cần và đo quy mô ngắn tới 480 quân mỗi bên. Xem [bàn giao quân đội](army-handoff.md); chưa có journal, di tản thương binh hoặc benchmark dài/thiết bị thật, nên chưa qua gate chiến dịch/400+.
 
 Thư mục này là hồ sơ chuẩn cho game mới. Quy định trong hồ sơ người dùng gửi ngày 01/11/2026 có ưu tiên cao hơn các ý tưởng game Bạch Đằng cũ.
 
@@ -96,12 +98,12 @@ Game mới **không dùng lại** bộ luật của ý tưởng trước: HP c�
 | 1. Khảo sát và hồ sơ | Đọc phạm vi, kiểm kê trang/tài nguyên/Firebase, xác lập ranh giới, kiến trúc sơ bộ và quy tắc nguồn. | **Hoàn tất** |
 | 1A. Thiết kế kiến trúc | So sánh tích hợp, định nghĩa hệ thống/hợp đồng/lưu, chương mẫu, tham số, hiệu năng/mỹ thuật. | **Hoàn tất tài liệu** |
 | 2. Vỏ game cô lập | Tạo route riêng, màn hình tải/chọn chất lượng, tích hợp một liên kết mới; kiểm tra trang chủ không tải mã/tài nguyên game mới. | **Hoàn tất khung và kiểm tra cục bộ** |
-| 3. Chương mẫu — nền tảng và lưu | Vòng đời, core deterministic/journal, camera, điều khiển PC/mobile, thuyền/sông; test replay/retry trước combat có mất mát. | **Đã có lớp sông và fixture deterministic; journal/campaign save chưa làm** |
-| 4. Chương mẫu — chiến đấu | Mệnh lệnh, AI đồng đội, va chạm, hư hại thuyền, bắn cung, đổ bộ và cận chiến. | Chưa làm |
-| 5. Chương mẫu — chỉ huy/hậu cần | Sương mù, tuyến tiếp tế, sửa chữa/cứu thương, ngưỡng tổn thất, nhân sự và hậu quả. | Chưa làm |
+| 3. Chương mẫu — nền tảng và lưu | Vòng đời, core deterministic/journal, camera, điều khiển PC/mobile, thuyền/sông; test replay/retry trước combat có mất mát. | **Đã bàn giao lưu cho sandbox:** checkpoint, journal, kết toán/retry và đồng bộ chia phần đã kiểm thử. Rules production chưa áp dụng. Xem [bàn giao lưu](save-handoff.md). |
+| 4. Chương mẫu — chiến đấu | Mệnh lệnh, AI đồng đội, va chạm, hư hại thuyền, bắn cung, đổ bộ và cận chiến. | **Đã bàn giao sandbox điều khiển/chiến đấu/tiếp quản; chưa phải chương hoàn chỉnh.** |
+| 5. Chương mẫu — chỉ huy/hậu cần | Sương mù, tuyến tiếp tế, sửa chữa/cứu thương, ngưỡng tổn thất, nhân sự và hậu quả. | **Đã bàn giao sandbox tổ quân, fog và hậu cần; di tản, kết toán và gate hiệu năng chưa hoàn tất.** |
 | 6. Hoàn thiện và kiểm chứng | Soak/hồi quy/hiệu năng/mỹ thuật/độ chính xác; cloud chỉ xét bật ở chặng riêng sau Rules emulator, không chặn local save. | Chưa làm |
 
-Không bắt đầu chặng tiếp theo trong lần bàn giao này.
+Chặng lưu đã bàn giao trong phạm vi engine hiện có. Chặng tiếp theo là dữ liệu nội dung game mới; việc chủ dự án áp dụng Rules production được hướng dẫn riêng trong [bàn giao lưu](save-handoff.md).
 
 ## 6. Kiểm tra chặng 1
 

@@ -9,7 +9,7 @@ export function createFixedClock(hz, maxTicks) {
       if (!Number.isFinite(elapsedMs) || elapsedMs < 0) throw new Error('Invalid frame time');
       debtMs += elapsedMs;
       let count = 0;
-      while (debtMs + 1e-7 >= stepMs && count < maxTicks) { step(); debtMs -= stepMs; count++; }
+      while (debtMs + 1e-7 >= stepMs && count < maxTicks) { const more=step(); debtMs -= stepMs; count++; if(more===false)break; }
       debtMs = Math.max(0, debtMs);
       return { ticks: count, alpha: Math.min(1, debtMs / stepMs), backlogMs: debtMs };
     },

@@ -1,0 +1,1490 @@
+{
+  "date": "2026-11-02",
+  "checks": [
+    {
+      "name": "Character, boarding, combat and takeover core fixtures",
+      "passed": true,
+      "evidence": {
+        "passed": 45,
+        "total": 45
+      }
+    },
+    {
+      "name": "Camera toggle preserves selected target and controlled actor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Real bow input creates one arrow and one hit",
+      "passed": true,
+      "evidence": {
+        "AttackStarted": 2,
+        "ArrowFired": 1,
+        "Damage": 1,
+        "ArrowHit": 1
+      }
+    },
+    {
+      "name": "Opening map keeps course, simulation and boat moving",
+      "passed": true,
+      "evidence": {
+        "before": 22.828972222611526,
+        "after": 21.34728618328635
+      }
+    },
+    {
+      "name": "Actual pilot-map-approach-jump chain lands on enemy deck",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Mouse ray selects an actual enemy model",
+      "passed": true,
+      "evidence": "E03"
+    },
+    {
+      "name": "Real melee input resolves a bounded swing",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Enemy combat naturally downs hero and reserve takes over",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Takeover does not teleport reserve onto enemy deck",
+      "passed": true,
+      "evidence": {
+        "heroZ": 14.454861948676324,
+        "reserveZ": 20.08233468651891
+      }
+    },
+    {
+      "name": "Live damage log has no duplicate attack-target pair",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Two touch pointers independently move and guard",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Releasing guard does not release movement pointer",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Pointercancel clears held movement and guard",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Mobile combat controls fit and remain touchable",
+      "passed": true,
+      "evidence": {
+        "width": 390,
+        "viewport": 390,
+        "buttons": [
+          {
+            "w": 136.921875,
+            "h": 46,
+            "b": 85.796875
+          },
+          {
+            "w": 109.53125,
+            "h": 46,
+            "b": 85.796875
+          },
+          {
+            "w": 109.546875,
+            "h": 46,
+            "b": 85.796875
+          },
+          {
+            "w": 70.796875,
+            "h": 46,
+            "b": 610.8125
+          },
+          {
+            "w": 70.796875,
+            "h": 46,
+            "b": 610.8125
+          },
+          {
+            "w": 70.796875,
+            "h": 46,
+            "b": 610.8125
+          },
+          {
+            "w": 70.796875,
+            "h": 46,
+            "b": 610.8125
+          },
+          {
+            "w": 70.8125,
+            "h": 46,
+            "b": 610.8125
+          },
+          {
+            "w": 46,
+            "h": 44,
+            "b": 732
+          },
+          {
+            "w": 46,
+            "h": 44,
+            "b": 780
+          },
+          {
+            "w": 46,
+            "h": 44,
+            "b": 780
+          },
+          {
+            "w": 46,
+            "h": 44,
+            "b": 780
+          },
+          {
+            "w": 58,
+            "h": 44,
+            "b": 732
+          },
+          {
+            "w": 58,
+            "h": 44,
+            "b": 732
+          },
+          {
+            "w": 58,
+            "h": 44,
+            "b": 780
+          },
+          {
+            "w": 58,
+            "h": 44,
+            "b": 780
+          },
+          {
+            "w": 366,
+            "h": 44,
+            "b": 836
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pause freezes actor actions, arrows and handoff timers",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Actor layer disposes loops, listeners, avatars and labels",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "No uncaught JS exception or hidden simulation fault",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "passed": 17,
+  "total": 17,
+  "failure": null,
+  "observations": [
+    {
+      "landed": {
+        "tick": 263,
+        "controlledId": "H01",
+        "controlEpoch": 1,
+        "helm": false,
+        "mapOpen": false,
+        "phase": "active",
+        "selectedId": null,
+        "takeoverAt": null,
+        "enemyBoat": {
+          "id": "enemy-boat",
+          "x": -7,
+          "z": 11.07343499102399,
+          "yaw": 0,
+          "widthM": 3,
+          "lengthM": 8,
+          "draftM": 0.8,
+          "driftAmplitudeM": 0.15,
+          "driftFrequency": 0.3,
+          "width": 2.571428571428571,
+          "length": 7.542857142857143,
+          "vx": 0,
+          "vz": -0.039238465673336255
+        },
+        "actors": [
+          {
+            "id": "H01",
+            "name": "Người dẫn thuyền",
+            "kind": "mainHero",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 83.5,
+            "stamina": 80,
+            "ammo": 40,
+            "x": -6.251482728621606,
+            "y": 1.6225648148148146,
+            "z": 14.470606454018748,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.7485172713783941,
+              "localZ": 3.3971714629947574
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": 243,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": 244,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "R01",
+            "name": "Sĩ quan dự bị An",
+            "kind": "reserve",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.901482728621606,
+            "y": 1.9215648148148148,
+            "z": 20.08233468651891,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": -0.65,
+              "localZ": 1
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "R02",
+            "name": "Sĩ quan dự bị Bình",
+            "kind": "reserve",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -5.601482728621606,
+            "y": 1.9215648148148148,
+            "z": 20.08233468651891,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": 0.65,
+              "localZ": 1
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "A01",
+            "name": "Đồng đội Lâm",
+            "kind": "companion",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.118809710729124,
+            "y": 1.9215648148148148,
+            "z": 17.466847157826134,
+            "yaw": 0.11675394422712565,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": 0.13267301789248176,
+              "localZ": -1.6154875286927748
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": true,
+            "followBoard": {
+              "from": {
+                "kind": "deck",
+                "boatId": "player-boat",
+                "localX": 0,
+                "localZ": -2.746666666666716
+              },
+              "targetBoatId": "enemy-boat"
+            },
+            "nextAI": 0,
+            "yieldLocal": {
+              "x": 0.8799999999999999,
+              "z": 0.4955322170141443
+            },
+            "yieldUntil": 235
+          },
+          {
+            "id": "E01",
+            "name": "Lính giữ boong",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.989241288408968,
+            "y": 1.6225648148148146,
+            "z": 11.122263774798533,
+            "yaw": -2.9247224162762153,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.010758711591032366,
+              "localZ": 0.04882878377454247
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "E02",
+            "name": "Lính hộ vệ",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -7.586725748573232,
+            "y": 1.6225648148148146,
+            "z": 9.621640740152689,
+            "yaw": -2.872885684462044,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": -0.5867257485732322,
+              "localZ": -1.451794250871302
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "E03",
+            "name": "Cung thủ địch",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 39,
+            "x": -6.35,
+            "y": 1.6225648148148146,
+            "z": 12.67343499102399,
+            "yaw": -3.0868295053884074,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.65,
+              "localZ": 1.6
+            },
+            "weapon": "bow",
+            "action": {
+              "id": "attack:4",
+              "kind": "bow",
+              "start": 211,
+              "fired": true,
+              "targetId": "H01",
+              "counter": false
+            },
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 277
+          }
+        ],
+        "projectiles": [],
+        "eventCounts": {
+          "MapChanged": 2,
+          "HelmReleased": 1,
+          "AttackStarted": 1,
+          "ArrowFired": 1,
+          "Jumped": 1,
+          "Damage": 1,
+          "ArrowHit": 1,
+          "Landed": 1
+        },
+        "events": [
+          {
+            "id": "actor:88:1",
+            "tick": 88,
+            "type": "MapChanged",
+            "open": true
+          },
+          {
+            "id": "actor:111:2",
+            "tick": 111,
+            "type": "MapChanged",
+            "open": false
+          },
+          {
+            "id": "actor:160:3",
+            "tick": 160,
+            "type": "HelmReleased",
+            "actorId": "H01"
+          },
+          {
+            "id": "actor:211:5",
+            "tick": 211,
+            "type": "AttackStarted",
+            "actorId": "E03",
+            "attackId": "attack:4",
+            "weapon": "bow"
+          },
+          {
+            "id": "actor:241:7",
+            "tick": 241,
+            "type": "ArrowFired",
+            "actorId": "E03",
+            "attackId": "attack:4"
+          },
+          {
+            "id": "actor:243:8",
+            "tick": 243,
+            "type": "Jumped",
+            "actorId": "H01",
+            "targetBoatId": "enemy-boat"
+          },
+          {
+            "id": "actor:244:9",
+            "tick": 244,
+            "type": "Damage",
+            "actorId": "H01",
+            "sourceId": "E03",
+            "damage": 16.5,
+            "causeId": "arrow:6"
+          },
+          {
+            "id": "actor:244:10",
+            "tick": 244,
+            "type": "ArrowHit",
+            "arrowId": "arrow:6",
+            "actorId": "H01"
+          },
+          {
+            "id": "actor:263:11",
+            "tick": 263,
+            "type": "Landed",
+            "actorId": "H01",
+            "boatId": "enemy-boat"
+          }
+        ],
+        "message": "Đã rời tay lái. Phó thuyền giữ hướng khi bạn còn trên boong, neo khi bạn rời thuyền."
+      }
+    },
+    {
+      "takeover": {
+        "tick": 903,
+        "controlledId": "R01",
+        "controlEpoch": 2,
+        "helm": false,
+        "mapOpen": false,
+        "phase": "active",
+        "selectedId": null,
+        "takeoverAt": null,
+        "enemyBoat": {
+          "id": "enemy-boat",
+          "x": -7,
+          "z": 11.057690485681567,
+          "yaw": 0,
+          "widthM": 3,
+          "lengthM": 8,
+          "draftM": 0.8,
+          "driftAmplitudeM": 0.15,
+          "driftFrequency": 0.3,
+          "width": 2.571428571428571,
+          "length": 7.542857142857143,
+          "vx": 0,
+          "vz": -0.04153868928558332
+        },
+        "actors": [
+          {
+            "id": "H01",
+            "name": "Người dẫn thuyền",
+            "kind": "mainHero",
+            "team": "friendly",
+            "mode": "wounded",
+            "health": 0,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.251482728621606,
+            "y": 1.6166388888888887,
+            "z": 14.454861948676324,
+            "yaw": 0.05476314820138596,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.7485172713783941,
+              "localZ": 3.3971714629947574
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 318,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": 291,
+            "distressS": 0,
+            "downTick": 813,
+            "rescue": null,
+            "lastHitTick": 813,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "R01",
+            "name": "Sĩ quan dự bị An",
+            "kind": "reserve",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.901482728621606,
+            "y": 1.9156388888888887,
+            "z": 20.08233468651891,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": -0.65,
+              "localZ": 1
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "R02",
+            "name": "Sĩ quan dự bị Bình",
+            "kind": "reserve",
+            "team": "friendly",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -5.601482728621606,
+            "y": 1.9156388888888887,
+            "z": 20.08233468651891,
+            "yaw": 0,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "player-boat",
+              "localX": 0.65,
+              "localZ": 1
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "A01",
+            "name": "Đồng đội Lâm",
+            "kind": "companion",
+            "team": "friendly",
+            "mode": "downed",
+            "health": 0,
+            "stamina": 3.197442310920451e-14,
+            "ammo": 40,
+            "x": -6.229862433508964,
+            "y": 1.6166388888888887,
+            "z": 14.448118481711044,
+            "yaw": 0.2267810315329105,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.7701375664910364,
+              "localZ": 3.3904279960294765
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 541,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": 583,
+            "distressS": 0,
+            "downTick": 595,
+            "rescue": null,
+            "lastHitTick": 595,
+            "follows": true,
+            "followBoard": null,
+            "nextAI": 637,
+            "yieldLocal": {
+              "x": 0.8799999999999999,
+              "z": 0.4955322170141443
+            },
+            "yieldUntil": 235
+          },
+          {
+            "id": "E01",
+            "name": "Lính giữ boong",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 58,
+            "stamina": 25.80000000000001,
+            "ammo": 40,
+            "x": -6.573159312013808,
+            "y": 1.6166388888888887,
+            "z": 12.96037769758616,
+            "yaw": 3.095525101350134,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.4268406879861919,
+              "localZ": 1.9026872119045937
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 831,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": 804,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": 592,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 858
+          },
+          {
+            "id": "E02",
+            "name": "Lính hộ vệ",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "foot",
+            "health": 100,
+            "stamina": 100,
+            "ammo": 40,
+            "x": -6.808753206562481,
+            "y": 1.6166388888888887,
+            "z": 12.399579495570894,
+            "yaw": 3.129523413170112,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.19124679343751882,
+              "localZ": 1.3418890098893268
+            },
+            "weapon": "melee",
+            "action": null,
+            "readyTick": 0,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": null,
+            "rescue": null,
+            "lastHitTick": -1000000000,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 0
+          },
+          {
+            "id": "E03",
+            "name": "Cung thủ địch",
+            "kind": "soldier",
+            "team": "enemy",
+            "mode": "downed",
+            "health": 0,
+            "stamina": 100,
+            "ammo": 36,
+            "x": -6.35,
+            "y": 1.6166388888888887,
+            "z": 12.657690485681567,
+            "yaw": -3.074593170858186,
+            "vx": 0,
+            "vy": 0,
+            "vz": 0,
+            "attachment": {
+              "kind": "deck",
+              "boatId": "enemy-boat",
+              "localX": 0.65,
+              "localZ": 1.6
+            },
+            "weapon": "bow",
+            "action": null,
+            "readyTick": 463,
+            "guard": false,
+            "guardSince": -1000000000,
+            "counterUntil": 0,
+            "stunUntil": 0,
+            "lastExertion": -1000000000,
+            "distressS": 0,
+            "downTick": 469,
+            "rescue": null,
+            "lastHitTick": 469,
+            "follows": false,
+            "followBoard": null,
+            "nextAI": 475
+          }
+        ],
+        "projectiles": [],
+        "eventCounts": {
+          "MapChanged": 2,
+          "HelmReleased": 1,
+          "AttackStarted": 18,
+          "ArrowFired": 4,
+          "Jumped": 2,
+          "Damage": 18,
+          "ArrowHit": 4,
+          "Landed": 2,
+          "TargetSelected": 2,
+          "MeleeResolved": 14,
+          "ActorDowned": 2,
+          "HeroWounded": 1,
+          "ReserveTookOver": 1
+        },
+        "events": [
+          {
+            "id": "actor:88:1",
+            "tick": 88,
+            "type": "MapChanged",
+            "open": true
+          },
+          {
+            "id": "actor:111:2",
+            "tick": 111,
+            "type": "MapChanged",
+            "open": false
+          },
+          {
+            "id": "actor:160:3",
+            "tick": 160,
+            "type": "HelmReleased",
+            "actorId": "H01"
+          },
+          {
+            "id": "actor:211:5",
+            "tick": 211,
+            "type": "AttackStarted",
+            "actorId": "E03",
+            "attackId": "attack:4",
+            "weapon": "bow"
+          },
+          {
+            "id": "actor:241:7",
+            "tick": 241,
+            "type": "ArrowFired",
+            "actorId": "E03",
+            "attackId": "attack:4"
+          },
+          {
+            "id": "actor:243:8",
+            "tick": 243,
+            "type": "Jumped",
+            "actorId": "H01",
+            "targetBoatId": "enemy-boat"
+          },
+          {
+            "id": "actor:244:9",
+            "tick": 244,
+            "type": "Damage",
+            "actorId": "H01",
+            "sourceId": "E03",
+            "damage": 16.5,
+            "causeId": "arrow:6"
+          },
+          {
+            "id": "actor:244:10",
+            "tick": 244,
+            "type": "ArrowHit",
+            "arrowId": "arrow:6",
+            "actorId": "H01"
+          },
+          {
+            "id": "actor:263:11",
+            "tick": 263,
+            "type": "Landed",
+            "actorId": "H01",
+            "boatId": "enemy-boat"
+          },
+          {
+            "id": "actor:263:12",
+            "tick": 263,
+            "type": "TargetSelected",
+            "actorId": "E03"
+          },
+          {
+            "id": "actor:277:13",
+            "tick": 277,
+            "type": "Jumped",
+            "actorId": "A01",
+            "targetBoatId": "enemy-boat"
+          },
+          {
+            "id": "actor:277:15",
+            "tick": 277,
+            "type": "AttackStarted",
+            "actorId": "E03",
+            "attackId": "attack:14",
+            "weapon": "bow"
+          },
+          {
+            "id": "actor:279:16",
+            "tick": 279,
+            "type": "TargetSelected",
+            "actorId": "E03"
+          },
+          {
+            "id": "actor:291:18",
+            "tick": 291,
+            "type": "AttackStarted",
+            "actorId": "H01",
+            "attackId": "attack:17",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:297:19",
+            "tick": 297,
+            "type": "Landed",
+            "actorId": "A01",
+            "boatId": "enemy-boat"
+          },
+          {
+            "id": "actor:298:21",
+            "tick": 298,
+            "type": "AttackStarted",
+            "actorId": "A01",
+            "attackId": "attack:20",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:300:22",
+            "tick": 300,
+            "type": "Damage",
+            "actorId": "E03",
+            "sourceId": "H01",
+            "damage": 21,
+            "causeId": "attack:17"
+          },
+          {
+            "id": "actor:300:23",
+            "tick": 300,
+            "type": "MeleeResolved",
+            "actorId": "H01",
+            "attackId": "attack:17",
+            "targetId": "E03",
+            "counter": false
+          },
+          {
+            "id": "actor:307:24",
+            "tick": 307,
+            "type": "Damage",
+            "actorId": "E03",
+            "sourceId": "A01",
+            "damage": 21,
+            "causeId": "attack:20"
+          },
+          {
+            "id": "actor:307:25",
+            "tick": 307,
+            "type": "MeleeResolved",
+            "actorId": "A01",
+            "attackId": "attack:20",
+            "targetId": "E03",
+            "counter": false
+          },
+          {
+            "id": "actor:307:27",
+            "tick": 307,
+            "type": "ArrowFired",
+            "actorId": "E03",
+            "attackId": "attack:14"
+          },
+          {
+            "id": "actor:308:28",
+            "tick": 308,
+            "type": "Damage",
+            "actorId": "A01",
+            "sourceId": "E03",
+            "damage": 16.5,
+            "causeId": "arrow:26"
+          },
+          {
+            "id": "actor:308:29",
+            "tick": 308,
+            "type": "ArrowHit",
+            "arrowId": "arrow:26",
+            "actorId": "A01"
+          },
+          {
+            "id": "actor:343:31",
+            "tick": 343,
+            "type": "AttackStarted",
+            "actorId": "E03",
+            "attackId": "attack:30",
+            "weapon": "bow"
+          },
+          {
+            "id": "actor:352:33",
+            "tick": 352,
+            "type": "AttackStarted",
+            "actorId": "A01",
+            "attackId": "attack:32",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:361:34",
+            "tick": 361,
+            "type": "Damage",
+            "actorId": "E03",
+            "sourceId": "A01",
+            "damage": 21,
+            "causeId": "attack:32"
+          },
+          {
+            "id": "actor:361:35",
+            "tick": 361,
+            "type": "MeleeResolved",
+            "actorId": "A01",
+            "attackId": "attack:32",
+            "targetId": "E03",
+            "counter": false
+          },
+          {
+            "id": "actor:373:37",
+            "tick": 373,
+            "type": "ArrowFired",
+            "actorId": "E03",
+            "attackId": "attack:30"
+          },
+          {
+            "id": "actor:374:38",
+            "tick": 374,
+            "type": "Damage",
+            "actorId": "A01",
+            "sourceId": "E03",
+            "damage": 16.5,
+            "causeId": "arrow:36"
+          },
+          {
+            "id": "actor:374:39",
+            "tick": 374,
+            "type": "ArrowHit",
+            "arrowId": "arrow:36",
+            "actorId": "A01"
+          },
+          {
+            "id": "actor:406:41",
+            "tick": 406,
+            "type": "AttackStarted",
+            "actorId": "A01",
+            "attackId": "attack:40",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:409:43",
+            "tick": 409,
+            "type": "AttackStarted",
+            "actorId": "E03",
+            "attackId": "attack:42",
+            "weapon": "bow"
+          },
+          {
+            "id": "actor:415:44",
+            "tick": 415,
+            "type": "Damage",
+            "actorId": "E03",
+            "sourceId": "A01",
+            "damage": 21,
+            "causeId": "attack:40"
+          },
+          {
+            "id": "actor:415:45",
+            "tick": 415,
+            "type": "MeleeResolved",
+            "actorId": "A01",
+            "attackId": "attack:40",
+            "targetId": "E03",
+            "counter": false
+          },
+          {
+            "id": "actor:439:47",
+            "tick": 439,
+            "type": "ArrowFired",
+            "actorId": "E03",
+            "attackId": "attack:42"
+          },
+          {
+            "id": "actor:440:48",
+            "tick": 440,
+            "type": "Damage",
+            "actorId": "A01",
+            "sourceId": "E03",
+            "damage": 16.5,
+            "causeId": "arrow:46"
+          },
+          {
+            "id": "actor:440:49",
+            "tick": 440,
+            "type": "ArrowHit",
+            "arrowId": "arrow:46",
+            "actorId": "A01"
+          },
+          {
+            "id": "actor:460:51",
+            "tick": 460,
+            "type": "AttackStarted",
+            "actorId": "A01",
+            "attackId": "attack:50",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:469:52",
+            "tick": 469,
+            "type": "Damage",
+            "actorId": "E03",
+            "sourceId": "A01",
+            "damage": 21,
+            "causeId": "attack:50"
+          },
+          {
+            "id": "actor:469:53",
+            "tick": 469,
+            "type": "ActorDowned",
+            "actorId": "E03"
+          },
+          {
+            "id": "actor:469:54",
+            "tick": 469,
+            "type": "MeleeResolved",
+            "actorId": "A01",
+            "attackId": "attack:50",
+            "targetId": "E03",
+            "counter": false
+          },
+          {
+            "id": "actor:478:56",
+            "tick": 478,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:55",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:487:57",
+            "tick": 487,
+            "type": "Damage",
+            "actorId": "A01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:55"
+          },
+          {
+            "id": "actor:487:58",
+            "tick": 487,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:55",
+            "targetId": "A01",
+            "counter": false
+          },
+          {
+            "id": "actor:514:60",
+            "tick": 514,
+            "type": "AttackStarted",
+            "actorId": "A01",
+            "attackId": "attack:59",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:523:61",
+            "tick": 523,
+            "type": "Damage",
+            "actorId": "E01",
+            "sourceId": "A01",
+            "damage": 21,
+            "causeId": "attack:59"
+          },
+          {
+            "id": "actor:523:62",
+            "tick": 523,
+            "type": "MeleeResolved",
+            "actorId": "A01",
+            "attackId": "attack:59",
+            "targetId": "E01",
+            "counter": false
+          },
+          {
+            "id": "actor:532:64",
+            "tick": 532,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:63",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:541:65",
+            "tick": 541,
+            "type": "Damage",
+            "actorId": "A01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:63"
+          },
+          {
+            "id": "actor:541:66",
+            "tick": 541,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:63",
+            "targetId": "A01",
+            "counter": false
+          },
+          {
+            "id": "actor:583:68",
+            "tick": 583,
+            "type": "AttackStarted",
+            "actorId": "A01",
+            "attackId": "attack:67",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:586:70",
+            "tick": 586,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:69",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:592:71",
+            "tick": 592,
+            "type": "Damage",
+            "actorId": "E01",
+            "sourceId": "A01",
+            "damage": 21,
+            "causeId": "attack:67"
+          },
+          {
+            "id": "actor:592:72",
+            "tick": 592,
+            "type": "MeleeResolved",
+            "actorId": "A01",
+            "attackId": "attack:67",
+            "targetId": "E01",
+            "counter": false
+          },
+          {
+            "id": "actor:595:73",
+            "tick": 595,
+            "type": "Damage",
+            "actorId": "A01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:69"
+          },
+          {
+            "id": "actor:595:74",
+            "tick": 595,
+            "type": "ActorDowned",
+            "actorId": "A01"
+          },
+          {
+            "id": "actor:595:75",
+            "tick": 595,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:69",
+            "targetId": "A01",
+            "counter": false
+          },
+          {
+            "id": "actor:640:77",
+            "tick": 640,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:76",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:649:78",
+            "tick": 649,
+            "type": "Damage",
+            "actorId": "H01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:76"
+          },
+          {
+            "id": "actor:649:79",
+            "tick": 649,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:76",
+            "targetId": "H01",
+            "counter": false
+          },
+          {
+            "id": "actor:694:81",
+            "tick": 694,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:80",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:703:82",
+            "tick": 703,
+            "type": "Damage",
+            "actorId": "H01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:80"
+          },
+          {
+            "id": "actor:703:83",
+            "tick": 703,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:80",
+            "targetId": "H01",
+            "counter": false
+          },
+          {
+            "id": "actor:748:85",
+            "tick": 748,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:84",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:757:86",
+            "tick": 757,
+            "type": "Damage",
+            "actorId": "H01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:84"
+          },
+          {
+            "id": "actor:757:87",
+            "tick": 757,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:84",
+            "targetId": "H01",
+            "counter": false
+          },
+          {
+            "id": "actor:804:89",
+            "tick": 804,
+            "type": "AttackStarted",
+            "actorId": "E01",
+            "attackId": "attack:88",
+            "weapon": "melee"
+          },
+          {
+            "id": "actor:813:90",
+            "tick": 813,
+            "type": "Damage",
+            "actorId": "H01",
+            "sourceId": "E01",
+            "damage": 21,
+            "causeId": "attack:88"
+          },
+          {
+            "id": "actor:813:91",
+            "tick": 813,
+            "type": "HeroWounded",
+            "actorId": "H01"
+          },
+          {
+            "id": "actor:813:92",
+            "tick": 813,
+            "type": "MeleeResolved",
+            "actorId": "E01",
+            "attackId": "attack:88",
+            "targetId": "H01",
+            "counter": false
+          },
+          {
+            "id": "actor:903:93",
+            "tick": 903,
+            "type": "ReserveTookOver",
+            "actorId": "R01"
+          }
+        ],
+        "message": "Sĩ quan dự bị An tiếp quản tại vị trí hiện tại. Nhân vật trước vẫn bị thương."
+      }
+    }
+  ],
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "actualPlaythrough": true,
+  "physicalDeviceTested": false,
+  "remoteBackendBlocked": true
+}

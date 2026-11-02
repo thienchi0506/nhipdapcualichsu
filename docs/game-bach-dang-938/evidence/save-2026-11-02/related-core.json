@@ -1,0 +1,2235 @@
+{
+  "river": {
+    "configVersion": "bd938-river-lab-1",
+    "checks": [
+      {
+        "name": "First RAF cannot create a negative elapsed time after start or resume",
+        "passed": true
+      },
+      {
+        "name": "Malformed tide timeline is rejected before loading a scene",
+        "passed": true
+      },
+      {
+        "name": "Acceleration is gradual, not instant max speed",
+        "passed": true,
+        "evidence": -0.06549707602339182
+      },
+      {
+        "name": "Reverse command first brakes forward motion",
+        "passed": true,
+        "evidence": {
+          "beforeBrake": 3.3854180553881363,
+          "after": 1.501036350801873
+        }
+      },
+      {
+        "name": "Boat can reverse",
+        "passed": true
+      },
+      {
+        "name": "Unpowered boat drifts with current",
+        "passed": true,
+        "evidence": {
+          "x": 3.8483333333342675,
+          "z": 12.776472959362119,
+          "vz": 0.6999916323077277
+        }
+      },
+      {
+        "name": "Anchor holds even if forward is held",
+        "passed": true,
+        "evidence": 0
+      },
+      {
+        "name": "Cargo and hull class increase draft",
+        "passed": true,
+        "evidence": {
+          "light": 0.501,
+          "heavy": 1.1186666666666667
+        }
+      },
+      {
+        "name": "Light vessel crosses the shallow region",
+        "passed": true,
+        "evidence": {
+          "tick": 600,
+          "x": 10,
+          "z": -45.88236479681058,
+          "yaw": 0,
+          "vx": 0,
+          "vz": -3.4999581615386393,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 100,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 100
+          },
+          "readings": {
+            "waterY": 1.4,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 4.4,
+            "clearance": 3.8990000000000005,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 3.4999581615386393,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [],
+          "eventCounts": {},
+          "events": []
+        }
+      },
+      {
+        "name": "Loaded transport grounds before crossing same shoal",
+        "passed": true,
+        "evidence": {
+          "tick": 600,
+          "x": 10,
+          "z": 15.11352788842019,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "transport",
+          "scenarioId": "harbor",
+          "cargoKg": 9000,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 100,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 100
+          },
+          "readings": {
+            "waterY": 1.4,
+            "tideRate": 0,
+            "draft": 1.1186666666666667,
+            "bedY": 0.281317330738883,
+            "depth": 1.118682669261117,
+            "clearance": 1.6002594450226226e-05,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 18840
+          },
+          "stuck": {
+            "kind": "ground",
+            "nx": 0,
+            "nz": 1,
+            "workS": 0,
+            "distanceM": 0
+          },
+          "repairJob": null,
+          "warnings": [
+            "MẮC CẠN — lùi về nước sâu, gỡ mắc hoặc giảm tải."
+          ],
+          "eventCounts": {
+            "Grounded": 1
+          },
+          "events": [
+            {
+              "id": "river:98:1",
+              "tick": 98,
+              "type": "Grounded"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Ground contact is resolved at keel clearance zero, not a frame early",
+        "passed": true,
+        "evidence": 1.6002594450226226e-05
+      },
+      {
+        "name": "Grounded transport can be worked backwards into deeper water",
+        "passed": true,
+        "evidence": {
+          "tick": 3001,
+          "x": 10,
+          "z": 16.22019441146912,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 4.156139569770587e-08,
+          "yawRate": 0,
+          "vesselType": "transport",
+          "scenarioId": "harbor",
+          "cargoKg": 9000,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 100,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 100
+          },
+          "readings": {
+            "waterY": 1.4,
+            "tideRate": 0,
+            "draft": 1.1186666666666667,
+            "bedY": -2.337793440476916,
+            "depth": 3.7377934404769158,
+            "clearance": 2.6191267738102493,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 4.156139569770587e-08,
+            "inRepairZone": false,
+            "massKg": 18840
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [
+            "Vùng cạn theo hướng đang đi — giảm tốc và vòng ra luồng sâu."
+          ],
+          "eventCounts": {
+            "Grounded": 1,
+            "RecoveryChanged": 1,
+            "Freed": 1
+          },
+          "events": [
+            {
+              "id": "river:98:1",
+              "tick": 98,
+              "type": "Grounded"
+            },
+            {
+              "id": "river:601:2",
+              "tick": 601,
+              "type": "RecoveryChanged",
+              "active": true
+            },
+            {
+              "id": "river:1356:3",
+              "tick": 1356,
+              "type": "Freed",
+              "kind": "ground",
+              "reason": "crew-work"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Falling tide catches a stationary hull",
+        "passed": true,
+        "evidence": {
+          "tick": 600,
+          "x": 0,
+          "z": 0,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 98.10265,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 98.97835
+          },
+          "readings": {
+            "waterY": 0.32,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 3.32,
+            "clearance": 2.819,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": {
+            "kind": "stake",
+            "obstacleId": "test-stake",
+            "nx": 0,
+            "nz": 1,
+            "workS": 0,
+            "distanceM": 0
+          },
+          "repairJob": null,
+          "warnings": [
+            "MẮC CỌC — dừng máy, gỡ mắc hoặc chờ nước lên; giảm tải giúp nổi cao hơn.",
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước."
+          ],
+          "eventCounts": {
+            "StakeImpact": 1,
+            "Stuck": 1
+          },
+          "events": [
+            {
+              "id": "river:259:1",
+              "tick": 259,
+              "type": "StakeImpact",
+              "obstacleId": "test-stake",
+              "damage": 2.9189999999999956,
+              "approachSpeed": 0,
+              "penetration": 0.08339999999999988,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:259:2",
+              "tick": 259,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "test-stake"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Stake still submerged when it first impacts the hull",
+        "passed": true
+      },
+      {
+        "name": "Same contact does not subtract hull damage each frame",
+        "passed": true,
+        "evidence": {
+          "hullAfter": 98.10265,
+          "hullNow": 98.10265,
+          "impacts": 1
+        }
+      },
+      {
+        "name": "Contact boundary epsilon does not repeatedly free and retrap hull",
+        "passed": true,
+        "evidence": {
+          "StakeImpact": 1,
+          "Stuck": 1
+        }
+      },
+      {
+        "name": "High water permits safe passage over covered stakes",
+        "passed": true,
+        "evidence": {
+          "tick": 360,
+          "x": 0,
+          "z": -25.889100823918948,
+          "yaw": 0,
+          "vx": 0,
+          "vz": -3.4961044153979786,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 100,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 100
+          },
+          "readings": {
+            "waterY": 1.4,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 4.4,
+            "clearance": 3.8990000000000005,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 3.4961044153979786,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [],
+          "eventCounts": {},
+          "events": []
+        }
+      },
+      {
+        "name": "Glancing strike has less normal-energy damage than head-on",
+        "passed": true,
+        "evidence": {
+          "straightDamage": 17.236267328709033,
+          "glancingDamage": 1.0139797117935898
+        }
+      },
+      {
+        "name": "High speed sweep cannot tunnel through thin stake in one tick",
+        "passed": true,
+        "evidence": {
+          "tick": 1,
+          "x": 0,
+          "z": 3.6503112570695846,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 70.75,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 84.25
+          },
+          "readings": {
+            "waterY": 0.32,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 3.32,
+            "clearance": 2.819,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": {
+            "kind": "stake",
+            "obstacleId": "test-stake",
+            "nx": 0,
+            "nz": 1,
+            "workS": 0,
+            "distanceM": 0
+          },
+          "repairJob": null,
+          "warnings": [
+            "MẮC CỌC — dừng máy, gỡ mắc hoặc chờ nước lên; giảm tải giúp nổi cao hơn.",
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước."
+          ],
+          "eventCounts": {
+            "StakeImpact": 1,
+            "Stuck": 1
+          },
+          "events": [
+            {
+              "id": "river:1:1",
+              "tick": 1,
+              "type": "StakeImpact",
+              "obstacleId": "test-stake",
+              "damage": 45,
+              "approachSpeed": 299.93333333333334,
+              "penetration": 0.23099999999999998,
+              "secondary": "rigging",
+              "settling": false
+            },
+            {
+              "id": "river:1:2",
+              "tick": 1,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "test-stake"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Rotating hull sweeps into a stake without translating",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": 0,
+          "z": 0,
+          "yaw": 0.6871482006912996,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 100,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 100
+          },
+          "readings": {
+            "waterY": 0.32,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 3.32,
+            "clearance": 2.819,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": {
+            "kind": "stake",
+            "obstacleId": "test-stake",
+            "nx": -0.8131448854654755,
+            "nz": 0.5820613328862678,
+            "workS": 0,
+            "distanceM": 0
+          },
+          "repairJob": null,
+          "warnings": [
+            "MẮC CỌC — dừng máy, gỡ mắc hoặc chờ nước lên; giảm tải giúp nổi cao hơn.",
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước."
+          ],
+          "eventCounts": {
+            "StakeImpact": 1,
+            "Stuck": 1
+          },
+          "events": [
+            {
+              "id": "river:195:1",
+              "tick": 195,
+              "type": "StakeImpact",
+              "obstacleId": "test-stake",
+              "damage": 0,
+              "approachSpeed": 0.1309652147798806,
+              "penetration": 0.23099999999999998,
+              "secondary": "oars",
+              "settling": false
+            },
+            {
+              "id": "river:195:2",
+              "tick": 195,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "test-stake"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Solid pier contact blocks boat and does not become a stake trap",
+        "passed": true,
+        "evidence": {
+          "tick": 600,
+          "x": 0,
+          "z": 6.519793843791675,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0.003944181502115851,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 96.43901981350484,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 98.08254913034875
+          },
+          "readings": {
+            "waterY": 1.4,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 4.4,
+            "clearance": 3.8990000000000005,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0.003944181502115851,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [],
+          "eventCounts": {
+            "SolidImpact": 1
+          },
+          "events": [
+            {
+              "id": "river:68:1",
+              "tick": 68,
+              "type": "SolidImpact",
+              "obstacleId": "test-pier",
+              "damage": 5.478431056146405,
+              "approachSpeed": 2.531308298705476,
+              "penetration": 0,
+              "secondary": "rigging",
+              "settling": false
+            }
+          ]
+        }
+      },
+      {
+        "name": "Broken rudder removes steering authority",
+        "passed": true,
+        "evidence": {
+          "intactYaw": 3.431773327253178,
+          "damagedYaw": 0
+        }
+      },
+      {
+        "name": "Broken oars remove propulsion in still water",
+        "passed": true
+      },
+      {
+        "name": "Repair requires work then restores one component",
+        "passed": true,
+        "evidence": {
+          "tick": 601,
+          "x": 0,
+          "z": 26,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 38,
+          "anchor": true,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 100,
+            "rudder": 5,
+            "oars": 100,
+            "rigging": 100
+          },
+          "readings": {
+            "waterY": 1.4,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 4.4,
+            "clearance": 3.8990000000000005,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": true,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [
+            "Bánh lái hỏng — tốc độ quay đã giảm.",
+            "Đang neo — nhả neo trước khi di chuyển."
+          ],
+          "eventCounts": {
+            "RepairStarted": 1,
+            "RepairCompleted": 1
+          },
+          "events": [
+            {
+              "id": "river:1:1",
+              "tick": 1,
+              "type": "RepairStarted",
+              "jobId": "repair:same-repair",
+              "component": "rudder"
+            },
+            {
+              "id": "river:300:2",
+              "tick": 300,
+              "type": "RepairCompleted",
+              "jobId": "repair:same-repair",
+              "component": "rudder",
+              "timberUsed": 2
+            }
+          ]
+        }
+      },
+      {
+        "name": "Duplicate repair command does not repeat timber debit",
+        "passed": true,
+        "evidence": 38
+      },
+      {
+        "name": "Repaired rudder restores some turning ability",
+        "passed": true,
+        "evidence": 0.18677273320466387
+      },
+      {
+        "name": "Repair outside a service zone is refused with no cost",
+        "passed": true
+      },
+      {
+        "name": "Hull leak increases draft; pumping removes water",
+        "passed": true,
+        "evidence": {
+          "leak": 109.23076923077133,
+          "pumped": 69.23076923076934
+        }
+      },
+      {
+        "name": "Unloading reduces draft exactly once and never removes crew mass",
+        "passed": true
+      },
+      {
+        "name": "Shallow stake entrapment can be prepared and pulled clear",
+        "passed": true,
+        "evidence": {
+          "tick": 1802,
+          "x": 0,
+          "z": 4.412544185383686,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 8.352674204141862e-07,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 94.74475,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 97.17025
+          },
+          "readings": {
+            "waterY": 0.32,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 3.32,
+            "clearance": 2.819,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 8.352674204141862e-07,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước."
+          ],
+          "eventCounts": {
+            "StakeImpact": 1,
+            "Stuck": 1,
+            "RecoveryChanged": 1,
+            "Freed": 1
+          },
+          "events": [
+            {
+              "id": "river:1:1",
+              "tick": 1,
+              "type": "StakeImpact",
+              "obstacleId": "test-stake",
+              "damage": 8.084999999999999,
+              "approachSpeed": 0,
+              "penetration": 0.23099999999999998,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:1:2",
+              "tick": 1,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "test-stake"
+            },
+            {
+              "id": "river:2:3",
+              "tick": 2,
+              "type": "RecoveryChanged",
+              "active": true
+            },
+            {
+              "id": "river:1140:4",
+              "tick": 1140,
+              "type": "Freed",
+              "kind": "stake",
+              "reason": "crew-work"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Deep entrapment cannot be escaped by a free instant button",
+        "passed": true,
+        "evidence": {
+          "tick": 1802,
+          "x": 0,
+          "z": 0,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": true,
+          "liftM": 0,
+          "components": {
+            "hull": 76.08975000000001,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 87.12525
+          },
+          "readings": {
+            "waterY": -0.5,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 2.5,
+            "clearance": 1.999,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": {
+            "kind": "stake",
+            "obstacleId": "test-stake",
+            "nx": 0,
+            "nz": 1,
+            "workS": 0,
+            "distanceM": 0
+          },
+          "repairJob": null,
+          "warnings": [
+            "Kẹt quá sâu để gỡ. Giảm tải, bơm nước hoặc chờ triều lên.",
+            "MẮC CỌC — dừng máy, gỡ mắc hoặc chờ nước lên; giảm tải giúp nổi cao hơn.",
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước."
+          ],
+          "eventCounts": {
+            "StakeImpact": 1,
+            "Stuck": 1,
+            "RecoveryChanged": 1
+          },
+          "events": [
+            {
+              "id": "river:1:1",
+              "tick": 1,
+              "type": "StakeImpact",
+              "obstacleId": "test-stake",
+              "damage": 36.785,
+              "approachSpeed": 0,
+              "penetration": 1.051,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:1:2",
+              "tick": 1,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "test-stake"
+            },
+            {
+              "id": "river:2:3",
+              "tick": 2,
+              "type": "RecoveryChanged",
+              "active": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Rising tide can naturally refloat a trapped boat",
+        "passed": true,
+        "evidence": {
+          "tick": 901,
+          "x": 0,
+          "z": 0,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "harbor",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": false,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 92.06783333333334,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 95.72883333333334
+          },
+          "readings": {
+            "waterY": 1.6,
+            "tideRate": 0,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 4.6,
+            "clearance": 4.098999999999999,
+            "current": {
+              "x": 0,
+              "z": 0
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [
+            "Bãi cọc đã biết ở gần — hiện còn đủ nước, chú ý triều rút."
+          ],
+          "eventCounts": {
+            "StakeImpact": 1,
+            "Stuck": 1,
+            "Freed": 1
+          },
+          "events": [
+            {
+              "id": "river:1:1",
+              "tick": 1,
+              "type": "StakeImpact",
+              "obstacleId": "test-stake",
+              "damage": 12.203333333333331,
+              "approachSpeed": 0,
+              "penetration": 0.3486666666666666,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:1:2",
+              "tick": 1,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "test-stake"
+            },
+            {
+              "id": "river:172:3",
+              "tick": 172,
+              "type": "Freed",
+              "kind": "stake",
+              "reason": "float"
+            }
+          ]
+        }
+      },
+      {
+        "name": "A genuinely new contact after refloating can cause a new impact",
+        "passed": true,
+        "evidence": {
+          "StakeImpact": 2,
+          "Stuck": 2,
+          "Freed": 1
+        }
+      },
+      {
+        "name": "A stern strike damages the rudder component",
+        "passed": true,
+        "evidence": {
+          "hull": 93.80525021803689,
+          "rudder": 96.66436550201986,
+          "oars": 100,
+          "rigging": 100
+        }
+      },
+      {
+        "name": "Fixed simulation matches at 5 render FPS",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": -5.455067178293173,
+          "z": -59.59179260937795
+        }
+      },
+      {
+        "name": "Fixed simulation matches at 10 render FPS",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": -5.455067178293173,
+          "z": -59.59179260937795
+        }
+      },
+      {
+        "name": "Fixed simulation matches at 15 render FPS",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": -5.455067178293173,
+          "z": -59.59179260937795
+        }
+      },
+      {
+        "name": "Fixed simulation matches at 30 render FPS",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": -5.455067178293173,
+          "z": -59.59179260937795
+        }
+      },
+      {
+        "name": "Fixed simulation matches at 60 render FPS",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": -5.455067178293173,
+          "z": -59.59179260937795
+        }
+      },
+      {
+        "name": "Fixed simulation matches at 144 render FPS",
+        "passed": true,
+        "evidence": {
+          "tick": 900,
+          "x": -5.455067178293173,
+          "z": -59.59179260937795
+        }
+      },
+      {
+        "name": "A 500ms frame stall retains and drains simulation debt",
+        "passed": true,
+        "evidence": {
+          "tick": 915,
+          "x": -5.434980396266982,
+          "referenceX": -5.434980396266982
+        }
+      },
+      {
+        "name": "Stake outcomes remain identical at 5 render FPS",
+        "passed": true,
+        "evidence": {
+          "hull": 99.81410060978605,
+          "impacts": 1
+        }
+      },
+      {
+        "name": "Stake outcomes remain identical at 15 render FPS",
+        "passed": true,
+        "evidence": {
+          "hull": 99.81410060978605,
+          "impacts": 1
+        }
+      },
+      {
+        "name": "Stake outcomes remain identical at 60 render FPS",
+        "passed": true,
+        "evidence": {
+          "hull": 99.81410060978605,
+          "impacts": 1
+        }
+      },
+      {
+        "name": "Stake outcomes remain identical at 144 render FPS",
+        "passed": true,
+        "evidence": {
+          "hull": 99.81410060978605,
+          "impacts": 1
+        }
+      },
+      {
+        "name": "Built-in falling-tide scenario actually pins the anchored vessel",
+        "passed": true,
+        "evidence": {
+          "tick": 1000,
+          "x": 10.5,
+          "z": -21,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "ebb",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": true,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 94.53999999999998,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 97.05999999999999
+          },
+          "readings": {
+            "waterY": 0.4370370370370371,
+            "tideRate": -0.003888888888888889,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 3.437037037037037,
+            "clearance": 2.9360370370370372,
+            "current": {
+              "x": -0.024090787071282024,
+              "z": 0.45409078707128203
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": {
+            "kind": "stake",
+            "obstacleId": "stake-02",
+            "nx": 0,
+            "nz": 1,
+            "workS": 0,
+            "distanceM": 0
+          },
+          "repairJob": null,
+          "warnings": [
+            "MẮC CỌC — dừng máy, gỡ mắc hoặc chờ nước lên; giảm tải giúp nổi cao hơn.",
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước.",
+            "Đang neo — nhả neo trước khi di chuyển."
+          ],
+          "eventCounts": {
+            "StakeImpact": 3,
+            "Stuck": 1
+          },
+          "events": [
+            {
+              "id": "river:738:1",
+              "tick": 738,
+              "type": "StakeImpact",
+              "obstacleId": "stake-02",
+              "damage": 2.800000000000003,
+              "approachSpeed": 0,
+              "penetration": 0.08000000000000008,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:738:2",
+              "tick": 738,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "stake-02"
+            },
+            {
+              "id": "river:738:3",
+              "tick": 738,
+              "type": "StakeImpact",
+              "obstacleId": "stake-06",
+              "damage": 2.800000000000003,
+              "approachSpeed": 0,
+              "penetration": 0.08000000000000008,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:738:4",
+              "tick": 738,
+              "type": "StakeImpact",
+              "obstacleId": "stake-10",
+              "damage": 2.800000000000003,
+              "approachSpeed": 0,
+              "penetration": 0.08000000000000008,
+              "secondary": "rigging",
+              "settling": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "Built-in falling-tide scenario can be pulled clear then anchored safely",
+        "passed": true,
+        "evidence": {
+          "tick": 2740,
+          "x": 10.5,
+          "z": -14.039377424422693,
+          "yaw": 0,
+          "vx": 0,
+          "vz": 0,
+          "yawRate": 0,
+          "vesselType": "light",
+          "scenarioId": "ebb",
+          "cargoKg": 600,
+          "floodKg": 0,
+          "timber": 40,
+          "anchor": true,
+          "pumping": false,
+          "recovering": false,
+          "liftM": 0,
+          "components": {
+            "hull": 94.53999999999998,
+            "rudder": 100,
+            "oars": 100,
+            "rigging": 97.05999999999999
+          },
+          "readings": {
+            "waterY": 0.2114814814814815,
+            "tideRate": -0.003888888888888889,
+            "draft": 0.501,
+            "bedY": -3,
+            "depth": 3.2114814814814814,
+            "clearance": 2.7104814814814815,
+            "current": {
+              "x": 0.0025133223924367065,
+              "z": 0.45409078707128203
+            },
+            "speedMps": 0,
+            "inRepairZone": false,
+            "massKg": 3420
+          },
+          "stuck": null,
+          "repairJob": null,
+          "warnings": [
+            "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước.",
+            "Đang neo — nhả neo trước khi di chuyển."
+          ],
+          "eventCounts": {
+            "StakeImpact": 3,
+            "Stuck": 1,
+            "RecoveryChanged": 1,
+            "Freed": 1,
+            "AnchorChanged": 1
+          },
+          "events": [
+            {
+              "id": "river:738:1",
+              "tick": 738,
+              "type": "StakeImpact",
+              "obstacleId": "stake-02",
+              "damage": 2.800000000000003,
+              "approachSpeed": 0,
+              "penetration": 0.08000000000000008,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:738:2",
+              "tick": 738,
+              "type": "Stuck",
+              "kind": "stake",
+              "obstacleId": "stake-02"
+            },
+            {
+              "id": "river:738:3",
+              "tick": 738,
+              "type": "StakeImpact",
+              "obstacleId": "stake-06",
+              "damage": 2.800000000000003,
+              "approachSpeed": 0,
+              "penetration": 0.08000000000000008,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:738:4",
+              "tick": 738,
+              "type": "StakeImpact",
+              "obstacleId": "stake-10",
+              "damage": 2.800000000000003,
+              "approachSpeed": 0,
+              "penetration": 0.08000000000000008,
+              "secondary": "rigging",
+              "settling": true
+            },
+            {
+              "id": "river:1001:5",
+              "tick": 1001,
+              "type": "RecoveryChanged",
+              "active": true
+            },
+            {
+              "id": "river:2439:6",
+              "tick": 2439,
+              "type": "Freed",
+              "kind": "stake",
+              "reason": "crew-work"
+            },
+            {
+              "id": "river:2440:7",
+              "tick": 2440,
+              "type": "AnchorChanged",
+              "anchored": true
+            }
+          ]
+        }
+      }
+    ],
+    "passed": 47,
+    "total": 47,
+    "observations": {
+      "lightDraft": 0.501,
+      "heavyDraft": 1.1186666666666667
+    },
+    "benchmarkFPS": false
+  },
+  "characters": {
+    "version": "bd938-characters-1",
+    "checks": [
+      {
+        "name": "Deck passenger is carried once by moving boat pose",
+        "passed": true,
+        "evidence": {
+          "actorZ": 16.60076197598049,
+          "boatZ": 14.800761975980489
+        }
+      },
+      {
+        "name": "Walking on moving deck changes local position without losing support",
+        "passed": true
+      },
+      {
+        "name": "Walking on pier keeps feet on its collision surface",
+        "passed": true,
+        "evidence": {
+          "id": "H01",
+          "name": "Người dẫn thuyền",
+          "kind": "mainHero",
+          "team": "friendly",
+          "mode": "foot",
+          "health": 100,
+          "stamina": 100,
+          "ammo": 40,
+          "x": -16.899999999999988,
+          "y": 2.025,
+          "z": 22,
+          "yaw": -1.5707963267948966,
+          "vx": 0,
+          "vy": 0,
+          "vz": 0,
+          "attachment": {
+            "kind": "pier",
+            "boatId": null
+          },
+          "weapon": "melee",
+          "action": null,
+          "readyTick": 0,
+          "guard": false,
+          "guardSince": -1000000000,
+          "counterUntil": 0,
+          "stunUntil": 0,
+          "lastExertion": -1000000000,
+          "distressS": 0,
+          "downTick": null,
+          "rescue": null,
+          "lastHitTick": -1000000000,
+          "follows": false,
+          "followBoard": null,
+          "nextAI": 0
+        }
+      },
+      {
+        "name": "Leaving and retaking helm preserves actor identity",
+        "passed": true
+      },
+      {
+        "name": "Boarding starts a real ballistic jump",
+        "passed": true
+      },
+      {
+        "name": "Landing attaches to moving enemy deck, not through it",
+        "passed": true,
+        "evidence": {
+          "tick": 36,
+          "controlledId": "H01",
+          "controlEpoch": 1,
+          "helm": false,
+          "mapOpen": false,
+          "phase": "active",
+          "selectedId": null,
+          "takeoverAt": null,
+          "enemyBoat": {
+            "id": "enemy-boat",
+            "x": -7,
+            "z": 11.052841134991263,
+            "yaw": 0,
+            "widthM": 3,
+            "lengthM": 8,
+            "draftM": 0.8,
+            "driftAmplitudeM": 0.15,
+            "driftFrequency": 0.3,
+            "width": 2.571428571428571,
+            "length": 7.542857142857143,
+            "vx": 0,
+            "vz": 0.04211535706550706
+          },
+          "actors": [
+            {
+              "id": "H01",
+              "name": "Người dẫn thuyền",
+              "kind": "mainHero",
+              "team": "friendly",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 80,
+              "ammo": 40,
+              "x": -7,
+              "y": 1.6249999999999998,
+              "z": 14.419377731708986,
+              "yaw": 0,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "enemy-boat",
+                "localX": 0,
+                "localZ": 3.3665365967177223
+              },
+              "weapon": "melee",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": 0,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 0
+            },
+            {
+              "id": "R01",
+              "name": "Sĩ quan dự bị An",
+              "kind": "reserve",
+              "team": "friendly",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 100,
+              "ammo": 40,
+              "x": -7.65,
+              "y": 1.924,
+              "z": 20,
+              "yaw": 0,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "player-boat",
+                "localX": -0.65,
+                "localZ": 1
+              },
+              "weapon": "melee",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": -1000000000,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 0
+            },
+            {
+              "id": "R02",
+              "name": "Sĩ quan dự bị Bình",
+              "kind": "reserve",
+              "team": "friendly",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 100,
+              "ammo": 40,
+              "x": -6.35,
+              "y": 1.924,
+              "z": 20,
+              "yaw": 0,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "player-boat",
+                "localX": 0.65,
+                "localZ": 1
+              },
+              "weapon": "melee",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": -1000000000,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 0
+            },
+            {
+              "id": "A01",
+              "name": "Đồng đội Lâm",
+              "kind": "companion",
+              "team": "friendly",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 100,
+              "ammo": 40,
+              "x": -6.2,
+              "y": 1.924,
+              "z": 17.5,
+              "yaw": 0,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "player-boat",
+                "localX": 0.8,
+                "localZ": -1.5
+              },
+              "weapon": "melee",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": -1000000000,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 0
+            },
+            {
+              "id": "E01",
+              "name": "Lính giữ boong",
+              "kind": "soldier",
+              "team": "enemy",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 100,
+              "ammo": 40,
+              "x": -7,
+              "y": 1.6249999999999998,
+              "z": 11.902841134991275,
+              "yaw": -3.141592653589793,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "enemy-boat",
+                "localX": 0,
+                "localZ": 0.8500000000000121
+              },
+              "weapon": "melee",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": -1000000000,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 1000000000
+            },
+            {
+              "id": "E02",
+              "name": "Lính hộ vệ",
+              "kind": "soldier",
+              "team": "enemy",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 100,
+              "ammo": 40,
+              "x": -7.495990206000039,
+              "y": 1.6249999999999998,
+              "z": 10.39645358318777,
+              "yaw": -3.0189207522617867,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "enemy-boat",
+                "localX": -0.4959902060000392,
+                "localZ": -0.6563875518034941
+              },
+              "weapon": "melee",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": -1000000000,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 1000000000
+            },
+            {
+              "id": "E03",
+              "name": "Cung thủ địch",
+              "kind": "soldier",
+              "team": "enemy",
+              "mode": "foot",
+              "health": 100,
+              "stamina": 100,
+              "ammo": 40,
+              "x": -6.35,
+              "y": 1.6249999999999998,
+              "z": 12.652841134991263,
+              "yaw": 2.7890156596699804,
+              "vx": 0,
+              "vy": 0,
+              "vz": 0,
+              "attachment": {
+                "kind": "deck",
+                "boatId": "enemy-boat",
+                "localX": 0.65,
+                "localZ": 1.6
+              },
+              "weapon": "bow",
+              "action": null,
+              "readyTick": 0,
+              "guard": false,
+              "guardSince": -1000000000,
+              "counterUntil": 0,
+              "stunUntil": 0,
+              "lastExertion": -1000000000,
+              "distressS": 0,
+              "downTick": null,
+              "rescue": null,
+              "lastHitTick": -1000000000,
+              "follows": false,
+              "followBoard": null,
+              "nextAI": 1000000000
+            }
+          ],
+          "projectiles": [],
+          "eventCounts": {
+            "Jumped": 1,
+            "Landed": 1
+          },
+          "events": [
+            {
+              "id": "actor:0:1",
+              "tick": 0,
+              "type": "Jumped",
+              "actorId": "H01",
+              "targetBoatId": "enemy-boat"
+            },
+            {
+              "id": "actor:20:2",
+              "tick": 20,
+              "type": "Landed",
+              "actorId": "H01",
+              "boatId": "enemy-boat"
+            }
+          ],
+          "message": ""
+        }
+      },
+      {
+        "name": "Moving enemy deck carries landed actor",
+        "passed": true
+      },
+      {
+        "name": "Unsafe relative boat speed refuses boarding without charging stamina",
+        "passed": true
+      },
+      {
+        "name": "Distant boat cannot be reached by an unconditional teleport",
+        "passed": true
+      },
+      {
+        "name": "Jump missing a moved-away boat falls into water",
+        "passed": true,
+        "evidence": {
+          "id": "H01",
+          "name": "Người dẫn thuyền",
+          "kind": "mainHero",
+          "team": "friendly",
+          "mode": "swim",
+          "health": 100,
+          "stamina": 57.5999999999998,
+          "ammo": 40,
+          "x": -7,
+          "y": 0.7,
+          "z": 13.945421245421226,
+          "yaw": 0,
+          "vx": 0,
+          "vy": -5.446749999999999,
+          "vz": -2.705494505494506,
+          "attachment": null,
+          "weapon": "melee",
+          "action": null,
+          "readyTick": 0,
+          "guard": false,
+          "guardSince": -1000000000,
+          "counterUntil": 0,
+          "stunUntil": 0,
+          "lastExertion": 81,
+          "distressS": 0,
+          "downTick": null,
+          "rescue": null,
+          "lastHitTick": -1000000000,
+          "follows": false,
+          "followBoard": null,
+          "nextAI": 0
+        }
+      },
+      {
+        "name": "Falling into water does not recover position for free",
+        "passed": true
+      },
+      {
+        "name": "Companion follows by walking and performing a validated jump",
+        "passed": true,
+        "evidence": [
+          {
+            "id": "actor:0:1",
+            "tick": 0,
+            "type": "Jumped",
+            "actorId": "H01",
+            "targetBoatId": "enemy-boat"
+          },
+          {
+            "id": "actor:19:4",
+            "tick": 19,
+            "type": "Jumped",
+            "actorId": "A01",
+            "targetBoatId": "enemy-boat"
+          }
+        ]
+      },
+      {
+        "name": "Deck gap uses actual side edges as well as fore/aft edges",
+        "passed": true
+      },
+      {
+        "name": "Repeated melee command damages one target only once",
+        "passed": true,
+        "evidence": {
+          "hp": 79,
+          "count": 1
+        }
+      },
+      {
+        "name": "Held attack repeats by action recovery, not every tick",
+        "passed": true,
+        "evidence": {
+          "AttackStarted": 4,
+          "Damage": 4,
+          "MeleeResolved": 4
+        }
+      },
+      {
+        "name": "Insufficient stamina cannot start a melee hit",
+        "passed": true
+      },
+      {
+        "name": "Timed frontal parry prevents damage and stuns attacker",
+        "passed": true
+      },
+      {
+        "name": "Counter attack uses finite window and increased damage",
+        "passed": true,
+        "evidence": 72.7
+      },
+      {
+        "name": "Held block reduces damage and costs stamina",
+        "passed": true
+      },
+      {
+        "name": "Exhausted guard can break and stun the defender",
+        "passed": true
+      },
+      {
+        "name": "Dodge has bounded stamina cost and evade window",
+        "passed": true
+      },
+      {
+        "name": "Dodge does not provide permanent immunity",
+        "passed": true
+      },
+      {
+        "name": "Bow consumes exactly one arrow and resolves one swept hit",
+        "passed": true,
+        "evidence": {
+          "ammo": 39,
+          "events": {
+            "AttackStarted": 1,
+            "ArrowFired": 1,
+            "Damage": 1,
+            "ArrowHit": 1
+          }
+        }
+      },
+      {
+        "name": "Spent arrow cannot cause a second hit later",
+        "passed": true
+      },
+      {
+        "name": "Empty quiver cannot spawn a projectile",
+        "passed": true
+      },
+      {
+        "name": "Damage cause ledger prevents repeated resolution",
+        "passed": true
+      },
+      {
+        "name": "Nearby conscious crew performs timed rope rescue to real deck",
+        "passed": true,
+        "evidence": {
+          "id": "H01",
+          "name": "Người dẫn thuyền",
+          "kind": "mainHero",
+          "team": "friendly",
+          "mode": "foot",
+          "health": 100,
+          "stamina": 100,
+          "ammo": 40,
+          "x": 0.8699999999999999,
+          "y": 1.924,
+          "z": 30,
+          "yaw": 0,
+          "vx": 0,
+          "vy": 0,
+          "vz": 0,
+          "attachment": {
+            "kind": "deck",
+            "boatId": "player-boat",
+            "localX": 0.8699999999999999,
+            "localZ": 0
+          },
+          "weapon": "melee",
+          "action": null,
+          "readyTick": 0,
+          "guard": false,
+          "guardSince": -1000000000,
+          "counterUntil": 0,
+          "stunUntil": 0,
+          "lastExertion": -1000000000,
+          "distressS": 0,
+          "downTick": null,
+          "rescue": null,
+          "lastHitTick": -1000000000,
+          "follows": false,
+          "followBoard": null,
+          "nextAI": 0
+        }
+      },
+      {
+        "name": "Distant rescue is refused instead of warping to shore",
+        "passed": true
+      },
+      {
+        "name": "Exhausted swimmer has a rescue deadline and can be downed",
+        "passed": true
+      },
+      {
+        "name": "Tactical map keeps simulation and held helm course running",
+        "passed": true
+      },
+      {
+        "name": "Map opened after UI blur retains applied throttle rather than neutral input",
+        "passed": true,
+        "evidence": {
+          "throttle": 1,
+          "speed": 3.4631135419816883
+        }
+      },
+      {
+        "name": "Map can return without changing control identity",
+        "passed": true
+      },
+      {
+        "name": "Hero is wounded and a real reserve takes control after delay",
+        "passed": true
+      },
+      {
+        "name": "Takeover does not teleport reserve to wounded hero",
+        "passed": true
+      },
+      {
+        "name": "Stale controller commands are rejected after takeover",
+        "passed": true
+      },
+      {
+        "name": "Second reserve takes over without reviving first reserve",
+        "passed": true
+      },
+      {
+        "name": "No eligible reserve ends the encounter exactly once",
+        "passed": true
+      },
+      {
+        "name": "Ended encounter does not keep changing combat state",
+        "passed": true
+      },
+      {
+        "name": "Friendly crew cannot trap player in narrow deck corridor",
+        "passed": true,
+        "evidence": {
+          "kind": "deck",
+          "boatId": "player-boat",
+          "localX": 0,
+          "localZ": -1.5000000000000355
+        }
+      },
+      {
+        "name": "Walking on dry shore retains actual ground support",
+        "passed": true,
+        "evidence": {
+          "id": "H01",
+          "name": "Người dẫn thuyền",
+          "kind": "mainHero",
+          "team": "friendly",
+          "mode": "foot",
+          "health": 100,
+          "stamina": 100,
+          "ammo": 40,
+          "x": -30,
+          "y": 1.7000000000000002,
+          "z": 20.73333333333334,
+          "yaw": -3.141592653589793,
+          "vx": 0,
+          "vy": 0,
+          "vz": 0,
+          "attachment": {
+            "kind": "ground",
+            "boatId": null
+          },
+          "weapon": "melee",
+          "action": null,
+          "readyTick": 0,
+          "guard": false,
+          "guardSince": -1000000000,
+          "counterUntil": 0,
+          "stunUntil": 0,
+          "lastExertion": -1000000000,
+          "distressS": 0,
+          "downTick": null,
+          "rescue": null,
+          "lastHitTick": -1000000000,
+          "follows": false,
+          "followBoard": null,
+          "nextAI": 0
+        }
+      },
+      {
+        "name": "Rescue cancels if assigned crew is downed, without snapping to deck",
+        "passed": true
+      },
+      {
+        "name": "High-speed swept arrow hits once instead of tunnelling through deck actor",
+        "passed": true,
+        "evidence": [
+          {
+            "id": "actor:1:1",
+            "tick": 1,
+            "type": "Damage",
+            "actorId": "E01",
+            "sourceId": "H01",
+            "damage": 16.5,
+            "causeId": "fast-arrow"
+          },
+          {
+            "id": "actor:1:2",
+            "tick": 1,
+            "type": "ArrowHit",
+            "arrowId": "fast-arrow",
+            "actorId": "E01"
+          }
+        ]
+      },
+      {
+        "name": "Friendly fire is physical and respects one projectile hit",
+        "passed": true,
+        "evidence": 83.5
+      },
+      {
+        "name": "Boat hull blocks a low arrow before it can hit crew",
+        "passed": true,
+        "evidence": [
+          {
+            "id": "actor:1:1",
+            "tick": 1,
+            "type": "ArrowBlocked",
+            "arrowId": "hull-arrow"
+          }
+        ]
+      },
+      {
+        "name": "Melee cannot damage someone on a different vertical level",
+        "passed": true
+      }
+    ],
+    "passed": 45,
+    "total": 45
+  },
+  "army": {
+    "checks": [
+      {
+        "name": "Every simulated soldier has a unique stable ID and history",
+        "passed": true
+      },
+      {
+        "name": "Each soldier belongs to exactly one squad",
+        "passed": true
+      },
+      {
+        "name": "Cannot command the opposing team",
+        "passed": true
+      },
+      {
+        "name": "Cannot issue order into deep river",
+        "passed": true
+      },
+      {
+        "name": "Valid ground objective is accepted",
+        "passed": true
+      },
+      {
+        "name": "Duplicate command returns its original receipt",
+        "passed": true
+      },
+      {
+        "name": "Two independent squads advance without micro-management",
+        "passed": true
+      },
+      {
+        "name": "Cancel stops order at the current position",
+        "passed": true
+      },
+      {
+        "name": "Changing an order invalidates pending old paths",
+        "passed": true
+      },
+      {
+        "name": "Unreachable opposite bank produces a blocked report, not teleportation",
+        "passed": true,
+        "evidence": {
+          "report": "Không có đường bộ an toàn tới mục tiêu."
+        }
+      },
+      {
+        "name": "Unknown enemy is absent from fog snapshot",
+        "passed": true
+      },
+      {
+        "name": "Sight records an enemy position and observation tick",
+        "passed": true,
+        "evidence": {
+          "id": "D-00011",
+          "squadId": "E-001",
+          "x": -31.009934788953984,
+          "z": 44.160058752073425,
+          "tick": 15
+        }
+      },
+      {
+        "name": "Hidden enemy retains old observed position, not current position",
+        "passed": true
+      },
+      {
+        "name": "Cannot issue attack using an unobserved enemy ID",
+        "passed": true
+      },
+      {
+        "name": "Each archer fires one finite shot and simultaneous damage is resolved",
+        "passed": true
+      },
+      {
+        "name": "Out-of-ammo soldiers do not create repeated hits",
+        "passed": true
+      },
+      {
+        "name": "Nearby medic stabilizes casualty once and consumes medical supply",
+        "passed": true
+      },
+      {
+        "name": "Wounded identity and injury persist without double-counting during rescue",
+        "passed": true
+      },
+      {
+        "name": "Medic moves towards a nearby casualty before stabilizing them",
+        "passed": true
+      },
+      {
+        "name": "Untreated casualty becomes dead once and is never removed",
+        "passed": true
+      },
+      {
+        "name": "Loss threshold uses initial deployed denominator and triggers retreat",
+        "passed": true
+      },
+      {
+        "name": "Supply is debited exactly once at departure",
+        "passed": true
+      },
+      {
+        "name": "Supply movement does not mutate the simulation configuration",
+        "passed": true
+      },
+      {
+        "name": "Physical convoy delivers its reserved cargo exactly once",
+        "passed": true
+      },
+      {
+        "name": "Enemy near route stops convoy without duplicating or delivering cargo",
+        "passed": true
+      },
+      {
+        "name": "Insufficient capacity does not create cargo or debit stock",
+        "passed": true
+      },
+      {
+        "name": "Nearby supply transfers finite ammunition from depot",
+        "passed": true
+      },
+      {
+        "name": "Repair reserves finite timber",
+        "passed": true
+      },
+      {
+        "name": "Repair completes once and restores depot health",
+        "passed": true
+      },
+      {
+        "name": "Recruitment is possible only with missing active soldier and available stock",
+        "passed": true
+      },
+      {
+        "name": "Recruit has a new ID and cannot resurrect the old soldier",
+        "passed": true
+      },
+      {
+        "name": "Interrupted work refunds the reserved timber once",
+        "passed": true
+      },
+      {
+        "name": "A real character melee action can damage an army soldier exactly once",
+        "passed": true,
+        "evidence": {
+          "health": 79,
+          "events": {
+            "ArmyDamage": 1,
+            "ArmyShot": 2
+          }
+        }
+      },
+      {
+        "name": "An army archer can damage the controlled character without duplicate shots",
+        "passed": true,
+        "evidence": {
+          "health": 85
+        }
+      },
+      {
+        "name": "Character guard uses the real army archer position",
+        "passed": true,
+        "evidence": {
+          "health": 96.25,
+          "stamina": 92
+        }
+      },
+      {
+        "name": "Player can select and shoot a real army soldier once",
+        "passed": true,
+        "evidence": {
+          "ammo": 39,
+          "health": 83.5,
+          "events": {
+            "ArmyDamage": 1
+          }
+        }
+      },
+      {
+        "name": "Same scenario and commands produce the same snapshot",
+        "passed": true
+      }
+    ],
+    "passed": 37,
+    "total": 37
+  },
+  "passed": 129,
+  "total": 129
+}

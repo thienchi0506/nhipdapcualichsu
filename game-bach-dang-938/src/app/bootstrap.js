@@ -2,15 +2,22 @@ import { readPreferences, writePreferences } from './preferences.js';
 import { loadScene } from './loader.js';
 import { metrics } from './diagnostics.js';
 import { createSession } from './session.js';
+import { lineOfSight } from '../sim/encounter.js';
+import { armyDefaults } from '../sim/army-config.js';
+import { openSaveRepository,encodeSave } from '../save/repository.js';
+import { preparePersistedSession } from '../save/prepare-session.js';
+import { connectFirebaseSave } from '../save/firebase-bridge.js';
 
 const root = document.getElementById('bd938-root');
 const byId = id => document.getElementById(`bd938-${id}`);
 const dialog = byId('dialog');
 const preferences = readPreferences();
-const labOptions = { vesselType: 'light', scenarioId: 'harbor' };
+const labOptions = { vesselType: 'light', scenarioId: 'combat' };
 const names = { H01: 'Người dẫn thuyền', H02: 'Người giữ trận', H03: 'Người dựng lũy', H04: 'Người giữ bến' };
 let session = null, loadController = null, generation = 0, dialogMode = '', dialogActions = {};
 let lastDisposed = null;
+let lastMapOpen=false,activeMapConfig=null,lastFault=null;
+let saveHandle=null,saveRepository=null,closingSave=Promise.resolve();
 const pauseReasons = new Set();
 
 function setState(state) { root.dataset.state = state; }
@@ -48,12 +55,15 @@ function openDialog(mode, title, paragraphs, actions) {
   byId('dialog-actions').querySelector('button')?.focus();
 }
 function disposeSession() {
+  session?.pause();
+  const waiting=session?.whenSaved();
   if (session) { session.dispose(); lastDisposed = session.snapshot(); session = null; }
+  if(saveHandle){const handle=saveHandle,repository=saveRepository;saveHandle=null;saveRepository=null;closingSave=closingSave.catch(()=>{}).then(async()=>{try{await waiting;}catch{}await handle.close();}).finally(()=>repository.close());}
   pauseReasons.clear();
 }
 function cancelLoad() { generation++; loadController?.abort(); loadController = null; }
-function returnToSetup({ focus = true } = {}) {
-  cancelLoad(); disposeSession(); closeDialog(); showScreen('setup'); setState('SHELL');
+async function returnToSetup({ focus = true } = {}) {
+  cancelLoad();if(session){session.pause();try{await session.whenSaved();}catch{}}disposeSession();try{await closingSave;}catch{}closeDialog();showScreen('setup');setState('SHELL');
   byId('characters').hidden = false; byId('quality').hidden = true;
   byId('camera').textContent = 'Góc nhìn: Toàn cảnh';
   syncChoices(); if (focus) byId('next').focus({ preventScroll: true });
@@ -69,23 +79,25 @@ function pause(reason = 'user') {
   pauseReasons.add(reason); session.pause(); setState('PAUSED');
   openDialog('pause', 'Tạm dừng tại bến sông', [
     reason === 'user' ? 'Cảnh và đồng hồ lượt thử đã dừng.' : 'Lượt thử đã tự dừng khi bạn rời cửa sổ hoặc chuyển ứng dụng.',
-    'Bạn có thể tiếp tục, bắt đầu lượt thử mới hoặc chọn lại nhân vật và đồ họa. Lượt thử này chưa lưu tiến độ chiến dịch.',
+    saveHandle?'Bạn có thể tiếp tục hoặc tải mốc đã lưu. Khi thất bại, việc trở lại chặng sẽ kết toán thương vong và vật tư trước.':'Bạn có thể tiếp tục, bắt đầu lượt thử mới hoặc chọn lại nhân vật và đồ họa. Lượt thử này không lưu tiến độ.',
   ], [
     { label: 'Tiếp tục', run: resume },
-    { label: 'Chơi lại', run: beginLoad },
+    { label: saveHandle?'Tải mốc đã lưu':'Chơi lại', run: beginLoad },
     { label: 'Chọn lại', run: () => returnToSetup() },
     { label: 'Về Sa Bàn', run: navigateHome },
+    ...(saveHandle?[{label:'Xuất bản lưu cục bộ',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())}]:[]),
   ]);
 }
-function navigateHome() { exit(); location.assign('../trang-chinh.html#khu-vuc'); }
+async function navigateHome() { if(session){session.pause();try{await session.whenSaved();}catch{}}exit();try{await closingSave;}catch{}location.assign('../trang-chinh.html#khu-vuc'); }
 function toggleCamera() {
   if (!session || root.dataset.state !== 'RUNNING') return;
   const mode = session.toggleCamera();
-  byId('camera').textContent = `Góc nhìn: ${mode === 'tactical' ? 'Toàn cảnh' : 'Theo thuyền'}`;
+  byId('camera').textContent = `Góc nhìn: ${mode === 'tactical' ? 'Toàn cảnh' : 'Theo nhân vật'}`;
 }
 function formatTime(second) { return `${Math.floor(second / 60).toString().padStart(2, '0')}:${(second % 60).toString().padStart(2, '0')}`; }
 function setText(id, text) { const element = byId(id); if (element.textContent !== text) element.textContent = text; }
-function updateRiverHUD(state, backlogMs) {
+function downloadSaveBackup(payload){const url=URL.createObjectURL(new Blob([payload],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='bach-dang-938-ban-luu-cuc-bo.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function updateRiverHUD(state, backlogMs, combat, army = null) {
   const f = value => (Math.abs(value) < 0.005 ? 0 : value).toFixed(2).replace('.', ',');
   const r = state.readings;
   setText('tide', `${r.waterY >= 0 ? '+' : ''}${f(r.waterY)} m ${r.tideRate < 0 ? '↓' : r.tideRate > 0 ? '↑' : '—'}`);
@@ -106,19 +118,92 @@ function updateRiverHUD(state, backlogMs) {
     const button = root.querySelector(`[data-river-action="${type}"]`);
     button.setAttribute('aria-pressed', String(active)); if (button.textContent !== label) button.textContent = label;
   }
+  if(combat){
+    const actor=combat.actors.find(a=>a.id===combat.controlledId),target=combat.actors.find(a=>a.id===combat.selectedId);
+    byId('play').dataset.control=combat.helm?'helm':actor.mode;
+    setText('character-name',actor.name);
+    const modes={foot:'Trên bờ / boong',air:'Đang nhảy / rơi',swim:'Đang bơi',wounded:'Bị thương',downed:'Đã gục',dead:'Tử trận'};
+    const stance=actor.stunUntil>combat.tick?'CHOÁNG':actor.rescue?'Đang được cứu':actor.guard?'Đang đỡ':actor.action?.kind==='bow'?'Giương cung':actor.action?.kind==='melee'?'Ra đòn':actor.action?.kind==='dodge'?'Đang né':'';
+    setText('character-state',`${combat.helm?'Đang lái':modes[actor.mode]} · ${actor.weapon==='bow'?'Cung':'Cận chiến'} · Tên ${actor.ammo}${stance?' · '+stance:''}`);
+    byId('health').value=actor.health;byId('stamina').value=actor.stamina;
+    setText('health-text',String(Math.ceil(actor.health)));setText('stamina-text',String(Math.floor(actor.stamina)));
+    setText('target-name',target?`Khóa: ${target.name} (${Math.ceil(target.health)})`:combat.selectedId?`Khóa quân địch ${combat.selectedId}`:'L · Khóa hoặc chạm chọn địch');
+    const interact=root.querySelector('[data-combat-action="interact"]');interact.textContent=combat.helm?'E · Rời lái':actor.mode==='swim'?'E · Cứu tôi':'E · Tương tác';
+    const follow=root.querySelector('[data-combat-action="follow"]'),companion=combat.actors.find(a=>a.kind==='companion');
+    follow.setAttribute('aria-pressed',String(!!companion?.follows));follow.textContent=companion?.follows?'Đồng đội: Đang theo':'Đồng đội: Giữ vị trí';
+    if(combat.message)setText('river-alert',combat.message);
+    else if(actor.mode==='swim')setText('river-alert',`Đang bơi, sức bền ${Math.floor(actor.stamina)}. Đến cạnh thuyền ta đủ chậm, bấm E để đồng đội kéo lên. Không có hồi vị trí miễn phí.`);
+    else if(!combat.helm)setText('river-alert','Đi theo hướng camera · G áp mạn khi đủ gần/chậm · E ở đuôi thuyền ta để nhận lái.');
+    if(combat.mapOpen!==lastMapOpen){byId('map').hidden=!combat.mapOpen;lastMapOpen=combat.mapOpen;if(combat.mapOpen)byId('map').querySelector('button').focus();else session?.focus();}
+    for(const button of root.querySelectorAll('[data-combat-action],[data-combat-held]'))button.disabled=(actor.health<=0||combat.mapOpen)&&!['map','lock'].includes(button.dataset.combatAction);
+    if(combat.mapOpen)updateMap(combat,state,army);
+  }
 }
-function finish() {
+function updateMap(combat,riverState,army){
+  const svg=byId('map-view'),ns='http://www.w3.org/2000/svg',map=activeMapConfig.map;
+  svg.setAttribute('viewBox',`${-map.halfWidthM-14} ${-map.halfLengthM} ${map.halfWidthM*2+28} ${map.halfLengthM*2}`);
+  if(!svg.firstChild){const background=document.createElementNS(ns,'rect');for(const [k,v]of Object.entries({x:-map.halfWidthM,y:-map.halfLengthM,width:map.halfWidthM*2,height:map.halfLengthM*2,fill:'#367575'}))background.setAttribute(k,String(v));svg.append(background);}
+  const commander=combat.actors.find(a=>a.id===combat.controlledId),knownActors=combat.actors.filter(a=>a.team!=='enemy'||(Math.hypot(a.x-commander.x,a.z-commander.z)<=armyDefaults.sight&&lineOfSight(combat,{config:activeMapConfig},commander,a)));
+  const knownIds=new Set(knownActors.map(a=>a.id));
+  for(const marker of svg.querySelectorAll('[data-id]'))if(!knownIds.has(marker.dataset.id))marker.remove();
+  for(const actor of knownActors){
+    let marker=svg.querySelector(`[data-id="${actor.id}"]`);
+    if(!marker){marker=document.createElementNS(ns,'circle');marker.dataset.id=actor.id;marker.setAttribute('r',actor.id===combat.controlledId?'1.5':'1');svg.append(marker);}
+    marker.setAttribute('cx',String(actor.x));marker.setAttribute('cy',String(actor.z));marker.setAttribute('fill',actor.id===combat.controlledId?'#ffe78d':actor.team==='enemy'?'#ef8d7a':'#8fe4bb');
+  }
+  const targets=byId('map-targets');
+  for(const button of targets.querySelectorAll('[data-target-id]'))if(!knownIds.has(button.dataset.targetId))button.remove();
+  for(const actor of knownActors.filter(a=>a.team==='enemy')){
+    let button=targets.querySelector(`[data-target-id="${actor.id}"]`);
+    if(!button){button=document.createElement('button');button.className='bd938-button';button.dataset.combatAction='select';button.dataset.targetId=actor.id;targets.append(button);}
+    button.textContent=`${actor.name} · ${Math.ceil(actor.health)}`;button.disabled=actor.health<=0;
+  }
+  byId('army-panel').hidden=!army;
+  if(!army)return;
+  const select=byId('army-squad');
+  for(const squad of army.squads){let option=Array.from(select.options).find(o=>o.value===squad.id);if(!option){option=document.createElement('option');option.value=squad.id;select.append(option);}option.textContent=`${squad.name} · ${squad.counts.active||0}/${squad.deployedAtStart} còn chiến đấu`;}
+  const chosen=army.squads.find(s=>s.id===select.value)||army.squads[0];
+  if(chosen)setText('army-report',`${army.feedback?army.feedback+' · ':''}${chosen.name}: ${chosen.report} · Tên ${chosen.ammo} · Thuốc cứu ${chosen.medicine}.`);
+  setText('army-stores',army.depots.map(d=>`${d.name} (${d.health}%): ${d.stock.ammo} tên, ${d.stock.timber} gỗ, ${d.stock.medicine} thuốc, ${d.stock.recruits} quân bổ sung`).join(' · ') + (army.convoys.some(c=>c.amount)?` · Tuyến hàng: ${army.convoys.filter(c=>c.amount).map(c=>c.status).join(', ')}`:''));
+  setText('army-intel',army.intel.length?`Trinh sát: ${army.intel.slice(0,3).map(i=>`${i.id} (${Math.round(i.x)}, ${Math.round(i.z)}) · ${Math.floor(i.ageTicks/30)} giây trước`).join(' | ')}${army.intel.length>3?` · và ${army.intel.length-3} tin khác`:''}`:'Trinh sát: chưa thấy quân địch.');
+  const markers=[...army.squads.map(s=>({id:s.id,x:s.x,z:s.z,color:'#a5edb6',radius:1.4})),...army.intel.map(i=>({id:i.id,x:i.x,z:i.z,color:i.visible?'#ff907b':'#b8a0a0',radius:.7})),...army.depots.map(d=>({id:d.id,x:d.x,z:d.z,color:'#f5d772',radius:1.5}))];
+  const wanted=new Set(markers.map(m=>m.id));
+  for(const el of svg.querySelectorAll('[data-army-id]'))if(!wanted.has(el.dataset.armyId))el.remove();
+  for(const m of markers){let el=svg.querySelector(`[data-army-id="${m.id}"]`);if(!el){el=document.createElementNS(ns,'circle');el.dataset.armyId=m.id;svg.append(el);}el.setAttribute('cx',m.x);el.setAttribute('cy',m.z);el.setAttribute('r',m.radius);el.setAttribute('fill',m.color);}
+}
+function combatOutcome(combat){
+  setState('RESULTS');
+  openDialog('results','Không còn sĩ quan dự bị',[ 'Nhân vật trung tâm và các sĩ quan dự bị đã mất khả năng tiếp tục. Lượt thử kết thúc.',saveHandle?'Kết quả đã được ghi. Về trại để xem người và vật tư có thể thu hồi trước khi trở lại chặng.':'Chế độ này không lưu; chơi lại tạo lượt thử mới.' ],saveHandle?[{label:'Về trại / Chơi lại',run:showRetryConfirmation},{label:'Xuất bản lưu',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]:[{label:'Chơi lại lượt thử',run:beginLoad},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);
+}
+function showRetryConfirmation(){
+  try{
+    const receipt=saveHandle.previewRetry();
+    openDialog('retry','Kết toán tại trại',[
+      `Nhân vật chính dưỡng thương ${receipt.campHours} giờ chiến dịch, dùng ${receipt.medicineCost} thuốc; trở lại với thể lực giảm và giữ dấu thương tích. Thời gian này được tính trong chiến dịch, không cần chờ ngoài đời.`,
+      `${receipt.missingIds.length} người ngoài vùng thu hồi sẽ được ghi mất tích. Quân tử trận và người chưa đủ sức chiến đấu không trở lại đội hình.`,
+      `${receipt.returnedCargo.length} chuyến hàng thu hồi, ${receipt.lostCargo.length} chuyến hàng bị mất. Máu, tên, vật tư và hư hại thuyền còn lại được giữ; không cấp lại bộ khởi đầu.`,
+      'Chỉ thuyền chưa bị phá hủy, không mắc cọc và ở vùng bến sửa mới có thể thu hồi. Quân tại kho hậu phương còn hoạt động hoặc trên thuyền thu hồi được mới được đưa về. Đây là quy tắc thử nghiệm của chương mẫu.',
+    ],[{label:'Xác nhận và trở lại chặng',run:retrySavedAttempt},{label:'Quay lại kết quả',run:()=>combatOutcome(session.snapshot().combat)},{label:'Về Sa Bàn',run:navigateHome}]);
+  }catch(error){const messages={BOAT_NOT_RECOVERABLE:'Thuyền đã mất hoặc đang ngoài vùng thu hồi / mắc cọc. Chưa có phương tiện để trở lại chặng; thương vong và bản lưu vẫn được giữ.',HERO_NOT_RECOVERABLE:'Nhân vật chính nằm ngoài vùng có thể ứng cứu trong tình huống này. Bản lưu được giữ để đối chiếu hậu quả.',HERO_UNAVAILABLE:'Nhân vật chính không đủ điều kiện phục hồi.'};openDialog('error','Không thể tái triển khai',[messages[error.message]||error.message],[{label:'Xuất bản lưu',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Về lựa chọn',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);}
+}
+async function retrySavedAttempt(){
+  if(!session||root.dataset.state!=='RESULTS')return;
+  const current=session;closeDialog();setState('RETRYING');
+  try{await current.retryFailedAttempt();if(session===current&&root.dataset.state==='RETRYING')await beginLoad();}
+  catch(error){if(session!==current)return;setState('ERROR');openDialog('error','Chưa thể tạo lại chặng',['Bản lưu đã xác nhận được giữ nguyên. Không có quân hay vật tư được cấp thêm.',error.message],[{label:'Mở lại bản lưu',run:beginLoad},{label:'Về Sa Bàn',run:navigateHome}]);}
+}
+async function finish() {
   if (!session || root.dataset.state !== 'RUNNING') return;
-  session.pause(); setState('RESULTS');
+  session.pause();setState('FINISHING');try{await session.whenSaved();}catch{return;}if(!session||root.dataset.state==='ERROR')return;setState('RESULTS');
   const seconds = session.snapshot().seconds;
   openDialog('results', 'Hoàn tất lượt thử khung', [
     `${names[preferences.hero]} · Thời gian khám phá: ${formatTime(seconds)}.`,
     'Bạn đã trải nghiệm cảnh và điều khiển ban đầu. Đây chưa phải chiến thắng hoặc kết quả của chương chiến đấu.',
-  ], [ { label: 'Chơi lại', run: beginLoad }, { label: 'Chọn lại nhân vật', run: () => returnToSetup() }, { label: 'Về Sa Bàn', run: navigateHome } ]);
+  ], [ { label: saveHandle?'Tải mốc đã lưu':'Chơi lại', run: beginLoad }, { label: 'Chọn lại nhân vật', run: () => returnToSetup() }, { label: 'Về Sa Bàn', run: navigateHome } ]);
 }
 async function beginLoad() {
   if (root.dataset.state === 'LOAD') return;
-  cancelLoad(); disposeSession(); closeDialog();
+  cancelLoad();closeDialog();
   savePreference();
   const current = generation; const controller = new AbortController(); loadController = controller;
   showScreen('loading'); setState('LOAD');
@@ -130,9 +215,37 @@ async function beginLoad() {
     byId('loading-count').textContent = `${done} / 3 bước hoàn tất`;
   };
   let scene = null;
+  let openedRepository=null,openedHandle=null,openedScope=null,conflictBackup=null;
   try {
+    if(session){session.pause();try{await session.whenSaved();}catch{}}disposeSession();
+    await closingSave;
+    if(generation!==current)return;
+    const mode=byId('save-mode').value;
+    if(mode!=='none'){
+      let bridge=null,scope={kind:'guest',id:'device'};
+      if(mode==='account'){
+        bridge=await connectFirebaseSave(window.__FIREBASE_CONFIG__);
+        const uid=bridge.currentUid();if(!uid)throw new Error('Cần đăng nhập tài khoản Firebase trước khi mở bản lưu tài khoản.');
+        scope={kind:'firebase',id:uid};
+      }
+      openedScope=scope;
+      openedRepository=await openSaveRepository();
+      openedHandle=await preparePersistedSession({repository:openedRepository,scope,slot:'main',owner:crypto.randomUUID(),bridge,
+        onStatus({status,detail}){const labels={saving:'Đang lưu…',local:'Đã lưu cục bộ',synced:'Đã đồng bộ',failed:'Lưu thất bại',conflict:'Xung đột bản lưu'};setText('save-status',`${labels[status]||status}${detail?' · '+detail:''}`);
+          if(status==='conflict'&&session&&root.dataset.state!=='ERROR'){session.pause();setState('ERROR');openDialog('error','Xung đột bản lưu',['Hai thiết bị có thay đổi khác nhau. Phiên chơi đã dừng; bản cục bộ và bản cloud đều được giữ lại.'],[{label:'Xuất bản cục bộ',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Về lựa chọn',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);}},
+        onAccountChange(){if(session){session.pause();setState('ERROR');openDialog('error','Tài khoản đã thay đổi',['Phiên chơi đã dừng. Bản lưu cục bộ và dữ liệu chưa đồng bộ vẫn được giữ theo tài khoản cũ.'],[{label:'Về lựa chọn',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);}}
+      });
+      if(generation!==current){await openedHandle.close();openedRepository.close();return;}
+      saveRepository=openedRepository;saveHandle=openedHandle;openedRepository=null;openedHandle=null;
+      setText('save-status',scope.kind==='guest'?'Lưu trên thiết bị':'Lưu tài khoản · kiểm tra đồng bộ');
+    }else setText('save-status','Không lưu');
     const loaded = await loadScene({ signal: controller.signal, onProgress: progress });
     if (generation !== current) return;
+    if(saveHandle?.checkpoint){
+      const saved=saveHandle.checkpoint.world;
+      if(encodeSave(saved.config)!==encodeSave(loaded.data.riverConfig)||encodeSave(saved.combat.config)!==encodeSave({...loaded.data.characterConfig,tickHz:loaded.data.riverConfig.tickHz})||(saved.army&&encodeSave(saved.army.config)!==encodeSave(armyDefaults)))throw new Error('Bản lưu dùng cấu hình khác; chưa thể mở an toàn.');
+      preferences.hero=saved.heroId;labOptions.vesselType=saved.vesselType;labOptions.scenarioId=saved.scenarioId;
+    }
     // The scene owns a fresh controller, independently of the cancellable load.
     const sceneScope = new AbortController();
     scene = loaded.createScene({
@@ -144,31 +257,48 @@ async function beginLoad() {
       },
     });
     if (generation !== current) { scene.dispose(); return; }
-    session = createSession({ root, scene, data: loaded.data, heroId: preferences.hero, ...labOptions, onPause: pause, onCamera: toggleCamera, onStatus: updateRiverHUD, onClock: second => { byId('clock').textContent = formatTime(second); } });
+    activeMapConfig=loaded.data.riverConfig;lastMapOpen=false;byId('map').hidden=true;byId('map-view').replaceChildren();byId('map-targets').replaceChildren();
+    session = createSession({ root, scene, data: loaded.data, heroId: preferences.hero, ...labOptions,persistence:saveHandle, onPause: pause, onCamera: toggleCamera, onStatus: updateRiverHUD,onOutcome:combatOutcome,onFault(error){lastFault=String(error.stack||error);setState('ERROR');openDialog('error','Mô phỏng đã dừng',['Lượt chơi đã dừng. Nếu lỗi xảy ra khi lưu, mốc đã xác nhận trước đó được giữ lại.',error.message], [{label:'Tải mốc trước',run:beginLoad},{label:'Về lựa chọn',run:()=>returnToSetup()}]);}, onClock: second => { byId('clock').textContent = formatTime(second); } });
     progress(3, 'Cảnh đã dựng xong. Sẵn sàng khám phá.');
     showScreen('play'); scene.resize();
     const role = loaded.data.roles.find(item => item.id === preferences.hero);
     byId('actor').textContent = `${role.name} · ${loaded.data.riverConfig.vessels[labOptions.vesselType].name}`;
     setState('BRIEFING'); loadController = null;
     openDialog('briefing', 'Sẵn sàng khám phá bến sông?', [
-      'Thuyền mang vòng sáng là thuyền bạn điều khiển. Bốn màu cờ và trang bị phân biệt thủy quân, cung thủ, công binh và quân nhu.',
-      'W/S tăng hoặc giảm tốc, A/D lái; thuyền có quán tính và trôi theo dòng. Dùng các nút mũi tên khi chơi cảm ứng. C đổi camera, Esc tạm dừng.',
+      'Bạn bắt đầu ở tay lái. W/S tăng giảm tốc, A/D lái, Space neo. E rời lái để đi trên boong; E ở đuôi thuyền nhận lại tay lái. C đổi camera.',
+      'Đi tới mép boong rồi G để nhảy sang thuyền địch khi áp mạn đủ chậm. Space nhảy tự do khi đi bộ. J / nút Đánh để đánh hoặc bắn, Q giữ đỡ, V né, L khóa, nút Cung/Kiếm đổi vũ khí. M mở bản đồ: trận vẫn chạy; Esc mới tạm dừng.',
       `Tình huống: ${loaded.data.riverConfig.scenarios[labOptions.scenarioId].name}. Vòng vàng đánh dấu bãi cọc, vòng xanh là bến sửa. Tình huống nước rút bắt đầu từ phút thứ 7 của con nước, không phải tua nhanh thời gian.`,
-      'Mở “Thuyền & xử lý nguy hiểm” để neo, gỡ, sửa, bơm hoặc bỏ hàng. Thủy triều dùng thời gian mô phỏng; pause dừng cả nước và công việc. Hư hại/vật tư chỉ thuộc lượt thử, chơi lại sẽ tạo lượt mới; chưa lưu chiến dịch.',
+      `Rơi nước phải bơi tới bờ hoặc thuyền ta đủ chậm; E gọi đồng đội tỉnh táo kéo lên. Khi gục, sĩ quan dự bị tiếp quản. ${saveHandle?'Tải lại mở mốc đã ghi. Sau thất bại, về trại để kết toán trước khi trở lại; thương vong và hàng đã mất không được hoàn lại.':'Chế độ này không lưu chiến dịch.'}`,
     ], [ { label: 'Bắt đầu lượt thử', run: resume }, { label: 'Chọn lại', run: () => returnToSetup() } ]);
   } catch (error) {
     scene?.dispose();
+    if(openedRepository&&openedScope){try{const record=await openedRepository.read(openedScope,'main');if(record)conflictBackup=encodeSave({schemaVersion:1,scope:openedScope,slot:'main',record,outbox:await openedRepository.pending(openedScope,'main'),journal:await openedRepository.events(openedScope,'main')});}catch{}}
+    if(openedHandle)await openedHandle.close();if(openedRepository)openedRepository.close();
     if (controller.signal.aborted || generation !== current) return;
     disposeSession(); showScreen('setup'); setState('ERROR');
-    const message = error instanceof TypeError ? 'Không tải được tài nguyên. Hãy kiểm tra kết nối và thử lại.' : error.message || 'Đã có lỗi khi tải cảnh.';
-    openDialog('error', 'Chưa mở được cảnh 3D', [message, 'Bạn có thể thử lại hoặc chọn mức đồ họa thấp hơn.'], [ { label: 'Thử lại', run: beginLoad }, { label: 'Về lựa chọn', run: () => returnToSetup() }, { label: 'Về Sa Bàn', run: navigateHome } ]);
+    let message = error instanceof TypeError ? 'Không tải được tài nguyên. Hãy kiểm tra kết nối và thử lại.' : error.message || 'Đã có lỗi khi tải cảnh.';
+    if(message.startsWith('REMOTE_STATE_UNAVAILABLE'))message='Không thể xác minh bản lưu tài khoản. Kiểm tra kết nối và quyền Firestore; bản lưu cũ không bị ghi đè.';
+    else if(message==='CLOUD_CONFLICT')message='Hai thiết bị có thay đổi khác nhau. Bản cục bộ được giữ lại; cần xử lý xung đột trước khi tiếp tục.';
+    else if(message==='SLOT_IN_USE')message='Bản lưu đang được dùng ở tab khác hoặc tab cũ vừa đóng. Hãy đóng tab kia và thử lại sau ít giây.';
+    else if(message==='UNSUPPORTED_CHECKPOINT')message='Bản lưu dùng phiên bản mô phỏng chưa được hỗ trợ. Bản cũ được giữ nguyên; hãy xuất bản lưu để bảo quản trước khi nâng cấp.';
+    const actions=[{label:'Thử lại',run:beginLoad},{label:'Về lựa chọn',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}];
+    if(conflictBackup)actions.unshift({label:'Xuất bản cục bộ',run:()=>downloadSaveBackup(conflictBackup)});
+    openDialog('error','Chưa mở được cảnh 3D',[message,'Bạn có thể thử lại hoặc chọn lại cách lưu.'],actions);
   }
 }
 
 root.addEventListener('click', event => {
   const target = event.target.closest('button, a');
   if (!target) return;
-  if (target.matches('[data-exit]')) { exit(); return; }
+  if (target.matches('[data-exit]')) { event.preventDefault();void navigateHome();return; }
+  if(target.dataset.combatAction){session?.action(target.dataset.combatAction,{targetId:target.dataset.targetId});return;}
+  if(target.dataset.armyAction){const kind=target.dataset.armyAction,squadId=byId('army-squad').value;
+    if(kind==='order')session?.action('army-order',{squadId,orderType:byId('army-order').value,x:Number(byId('army-x').value),z:Number(byId('army-z').value),lossThreshold:Number(byId('army-loss').value)/100,retreatPolicy:byId('army-policy').value});
+    else if(kind==='cancel')session?.action('army-cancel',{squadId});
+    else if(kind==='convoy')session?.action('army-convoy',{resource:byId('army-resource').value,amount:Number(byId('army-amount').value)});
+    else session?.action('army-job',{squadId,jobType:kind});
+    return;
+  }
   if (target.dataset.riverAction) { session?.action(target.dataset.riverAction); return; }
   if (target.dataset.dialogAction !== undefined) { dialogActions[target.dataset.dialogAction]?.(); return; }
   if (target.dataset.hero) { preferences.hero = target.dataset.hero; syncChoices(); savePreference(); return; }
@@ -178,10 +308,12 @@ root.addEventListener('click', event => {
     'bd938-previous': () => { byId('characters').hidden = false; byId('quality').hidden = true; byId('next').focus({ preventScroll: true }); },
     'bd938-load': beginLoad, 'bd938-cancel-load': () => returnToSetup(),
     'bd938-camera': toggleCamera, 'bd938-pause': () => pause(), 'bd938-finish': finish,
-    'bd938-dialog-close': () => { if (dialogMode === 'pause') resume(); else if (dialogMode === 'briefing' || dialogMode === 'results') returnToSetup(); },
+    'bd938-dialog-close': () => { if (dialogMode === 'pause') resume(); else if(dialogMode==='retry')combatOutcome(session.snapshot().combat);else if (dialogMode === 'briefing' || dialogMode === 'results') returnToSetup(); },
   };
   actions[target.id]?.();
 });
+root.addEventListener('keydown',event=>{if(event.target.closest('input,select,textarea,[contenteditable="true"]'))return;if(!byId('map').hidden&&!event.ctrlKey&&!event.metaKey&&!event.altKey){if(event.code==='KeyM'){event.preventDefault();session?.action('map');}if(event.code==='Escape'){event.preventDefault();pause();}}});
+byId('map-view').addEventListener('pointerup',event=>{if(byId('army-panel').hidden)return;const svg=byId('map-view'),matrix=svg.getScreenCTM();if(!matrix)return;const p=svg.createSVGPoint();p.x=event.clientX;p.y=event.clientY;const v=p.matrixTransform(matrix.inverse());byId('army-x').value=String(Math.round(v.x));byId('army-z').value=String(Math.round(v.y));});
 root.addEventListener('change', event => {
   if (event.target.id === 'bd938-vessel') labOptions.vesselType = event.target.value;
   if (event.target.id === 'bd938-scenario') labOptions.scenarioId = event.target.value;
@@ -189,6 +321,7 @@ root.addEventListener('change', event => {
 dialog.addEventListener('cancel', event => {
   event.preventDefault();
   if (dialogMode === 'pause') resume();
+  else if(dialogMode==='retry')combatOutcome(session.snapshot().combat);
   else if (dialogMode === 'briefing' || dialogMode === 'results') returnToSetup();
 });
 window.addEventListener('pagehide', exit);
@@ -197,5 +330,5 @@ syncChoices();
 
 // Test/inspection API stays in module scope; no global gameplay handlers or keys.
 export function getDiagnostics() {
-  return { ...metrics, state: root.dataset.state, preferences: { ...preferences }, pauseReasons: [...pauseReasons], session: session?.snapshot() ?? null, lastDisposed, canvases: root.querySelectorAll('canvas').length, dialogOpen: dialog.open };
+  return { ...metrics, state: root.dataset.state, preferences: { ...preferences }, pauseReasons: [...pauseReasons], session: session?.snapshot() ?? null, lastDisposed,lastFault,canvases: root.querySelectorAll('canvas').length, dialogOpen: dialog.open };
 }

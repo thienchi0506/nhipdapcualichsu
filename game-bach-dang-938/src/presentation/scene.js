@@ -1,6 +1,9 @@
 import * as THREE from '../../vendor/three-r128/three.module.js';
 import { metrics, listen } from '../app/diagnostics.js';
 import { bedAt } from '../sim/river.js';
+import { localToWorld } from '../sim/actor-space.js';
+import { lineOfSight } from '../sim/encounter.js';
+import { armyDefaults } from '../sim/army-config.js';
 
 export function createScene({ host, data, quality, heroId, vesselType = 'light', scope, onContextLost }) {
   const preset = data.quality[quality];
@@ -29,6 +32,9 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
   function box(parent, mat, x, y, z, w, h, d) { return mesh(new THREE.BoxGeometry(w, h, d), mat, parent, x, y, z); }
   const world = new THREE.Group(); scene.add(world);
   const boats = [];
+  const actorVisuals=new Map(),arrowVisuals=new Map(),arrowPool=[],occluders=[];
+  const raycaster=new THREE.Raycaster();
+  let cameraTargetId=null,cameraClearance=0,screenTargets=[];
   function dispose() {
     if (disposed) return;
     disposed = true;
@@ -44,6 +50,8 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
       renderer.domElement.remove(); metrics.renderers--;
     }
     scene.clear();
+    for(const visual of actorVisuals.values())visual.label.remove();
+    actorVisuals.clear();arrowVisuals.clear();arrowPool.length=0;
     lastState = null; boats.length = 0;
   }
   try {
@@ -69,6 +77,10 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     const earth = material('#86845b'), sand = material('#c4b58a'), wood = material('#49382a'), deck = material('#aa8551');
     const green = material('#4f7152'), darkGreen = material('#35594a'), stone = material('#819186');
     const skin = material('#d7ae81'), metal = material('#c6bfa3'), dark = material('#283d37');
+    const armyGeometry=new THREE.BoxGeometry(.42,1.25,.42);geometries.add(armyGeometry);metrics.geometries++;
+    const armyFriendly=new THREE.InstancedMesh(armyGeometry,material('#a4d6a3'),1000),armyEnemy=new THREE.InstancedMesh(armyGeometry,material('#c76c5d'),1000);
+    armyFriendly.count=0;armyEnemy.count=0;armyFriendly.frustumCulled=false;armyEnemy.frustumCulled=false;world.add(armyFriendly,armyEnemy);
+    const armyMatrix=new THREE.Matrix4(),armyPosition=new THREE.Vector3(),armyScale=new THREE.Vector3(),armyRotation=new THREE.Quaternion();let armyEnemyIds=[];
     water.transparent = true; water.opacity = 0.76; water.depthWrite = false;
     const waterMesh = mesh(new THREE.PlaneGeometry(110, 180, preset.waterDetail, preset.waterDetail), water, world);
     waterMesh.rotation.x = -Math.PI / 2;
@@ -76,13 +88,13 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     terrain.rotateX(-Math.PI / 2);
     const positions = terrain.attributes.position;
     for (let i = 0; i < positions.count; i++) positions.setY(i, bedAt(river, positions.getX(i), positions.getZ(i)));
-    terrain.computeVertexNormals(); mesh(terrain, earth, world);
+    terrain.computeVertexNormals(); occluders.push(mesh(terrain, earth, world));
     for (const shoal of river.map.shoals) box(world, sand, (shoal.xMin + shoal.xMax) / 2, shoal.bedY - 0.05, (shoal.zMin + shoal.zMax) / 2, shoal.xMax - shoal.xMin, 0.1, shoal.zMax - shoal.zMin);
     // Distant hills, reed patches and trees are code-generated placeholders.
     const hillGeo = new THREE.ConeGeometry(11, 23, 5);
     for (let i = 0; i < 12; i++) {
       const side = i % 2 ? 1 : -1;
-      mesh(hillGeo, i % 3 ? green : stone, world, side * (42 + i % 3 * 7), 7, -65 + i * 12);
+      occluders.push(mesh(hillGeo, i % 3 ? green : stone, world, side * (42 + i % 3 * 7), 7, -65 + i * 12));
     }
     const trunkGeo = new THREE.CylinderGeometry(0.25, 0.35, 3, 5), leafGeo = new THREE.ConeGeometry(2.2, 5, 6);
     for (let i = 0; i < 24; i++) {
@@ -90,7 +102,7 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
       mesh(trunkGeo, wood, world, x, 2, z); mesh(leafGeo, i % 3 ? green : darkGreen, world, x, 5, z);
     }
     // A small jetty and stores mark the point of departure.
-    box(world, deck, -17, 1.7, 22, 13, 0.65, 4);
+    occluders.push(box(world, deck, -17, 1.7, 22, 13, 0.65, 4));
     for (let i = 0; i < 6; i++) {
       box(world, wood, -23 + i * 2.4, 0.2, 20.7, 0.3, 3, 0.3);
       box(world, deck, -26 + i % 3 * 1.4, 2.2, 17 + Math.floor(i / 3) * 1.5, 1.1, 1.2, 1.1);
@@ -125,11 +137,11 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     let mooredIndex = 0;
     data.roles.forEach((role, index) => {
       const boat = new THREE.Group(); world.add(boat);
-      box(boat, wood, 0, 0.4, 0, 2.8, 0.8, 7);
+      occluders.push(box(boat, wood, 0, 0.4, 0, 2.8, 0.8, 7));
       box(boat, deck, 0, 0.9, 0, 2.4, 0.25, 6.6);
       mesh(new THREE.ConeGeometry(1.4, 2, 4), wood, boat, 0, 0.4, -4).rotation.x = -Math.PI / 2;
       box(boat, wood, -1.3, 1.3, 0, 0.15, 0.45, 5.8); box(boat, wood, 1.3, 1.3, 0, 0.15, 0.45, 5.8);
-      const banner = figure(boat, role);
+      const banner = role.id===heroId?material(role.color):figure(boat, role);
       box(boat, wood, 0, 3.7, 2, 0.09, 4.8, 0.09); box(boat, banner, 0.75, 5.25, 2, 1.5, 0.9, 0.06);
       for (const side of [-1, 1]) {
         const oar = box(boat, deck, side * 2, 0.9, 1.6, 2.5, 0.09, 0.2); oar.rotation.z = -side * 0.12;
@@ -148,6 +160,23 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     });
     const selection = mesh(new THREE.RingGeometry(2.2, 2.35, 32), material('#ffe7a0', { side: THREE.DoubleSide }), controlled, 0, 0.05, 0);
     selection.rotation.x = -Math.PI / 2;
+    const enemyBoat=new THREE.Group();world.add(enemyBoat);enemyBoat.visible=false;
+    occluders.push(box(enemyBoat,wood,0,.4,0,3,.8,8));box(enemyBoat,deck,0,.9,0,3,.25,8);
+    box(enemyBoat,material('#b94d3f'),0,3.2,0,.1,4.4,.1);box(enemyBoat,material('#b94d3f'),.65,4.8,0,1.3,.8,.07);
+    const arrowGeo=new THREE.BoxGeometry(.07,.07,1),arrowMat=material('#ffe6a1');
+    const bodyMarker=material('#ffdd79',{side:THREE.DoubleSide}),targetMarker=material('#f1755c',{side:THREE.DoubleSide});
+    function visualFor(actor){
+      if(actorVisuals.has(actor.id))return actorVisuals.get(actor.id);
+      const group=new THREE.Group(),body=new THREE.Group();world.add(group);group.add(body);body.position.y=-1.3;
+      const role={color:actor.team==='enemy'?'#d76e59':actor.kind==='reserve'?'#b7c792':data.roles.find(r=>r.id===actor.id)?.color||'#7dc1aa'};
+      const uniform=figure(body,role);
+      const sword=box(group,metal,.5,1.05,-.15,.09,.9,.08);
+      const bow=mesh(new THREE.TorusGeometry(.55,.04,5,12,Math.PI),wood,group,.5,1.1,-.1);bow.rotation.z=-Math.PI/2;
+      const marker=mesh(new THREE.RingGeometry(.45,.52,24),bodyMarker,group,0,.03,0);marker.rotation.x=-Math.PI/2;
+      const label=document.createElement('div');label.className='bd938-actor-label';label.dataset.actorId=actor.id;host.append(label);
+      group.traverse(object=>{object.userData.actorId=actor.id;});
+      const visual={group,body,uniform,sword,bow,marker,label};actorVisuals.set(actor.id,visual);return visual;
+    }
     function render(state, previous = state, alpha = 1) {
       if (disposed) return;
       lastState = state;
@@ -163,15 +192,63 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
       waterMesh.position.y = readings.waterY;
       dangerMark.position.y = readings.waterY + 0.03; repairMark.position.y = readings.waterY + 0.04;
       for (const wave of waves) { wave.mesh.position.y = readings.waterY + 0.02; wave.mesh.position.z = wave.z + (reducedMotion ? 0 : (state.tick / river.tickHz * river.current.zMps) % 6); }
+      const combat=state.combat,active=combat?.actors.find(a=>a.id===combat.controlledId);
+      if(state.army){let friendly=0,enemy=0;const army=state.army;armyEnemyIds=[];
+        for(const soldier of army.people){if(soldier.retired||['dead','missing','captured'].includes(soldier.status))continue;
+          if(soldier.team==='enemy'){const seen=army.intel.friendly.get(soldier.id);if(!seen||army.tick-seen.tick>army.config.sightIntervalTicks)continue;}
+          const fallen=soldier.status!=='active';armyPosition.set(soldier.x,bedAt(river,soldier.x,soldier.z)+(fallen ? 0.2 : 0.625),soldier.z);armyScale.set(1,fallen ? 0.3 : 1,fallen ? 1.8 : 1);armyMatrix.compose(armyPosition,armyRotation,armyScale);
+          if(soldier.team==='friendly'&&friendly<1000)armyFriendly.setMatrixAt(friendly++,armyMatrix);else if(soldier.team==='enemy'&&enemy<1000){armyEnemyIds.push(soldier.id);armyEnemy.setMatrixAt(enemy++,armyMatrix);}
+        }
+        armyFriendly.count=friendly;armyEnemy.count=enemy;armyFriendly.instanceMatrix.needsUpdate=true;armyEnemy.instanceMatrix.needsUpdate=true;
+      }else{armyFriendly.count=0;armyEnemy.count=0;}
+      if(combat){
+        if(combat.enemyBoat){enemyBoat.visible=true;enemyBoat.position.set(combat.enemyBoat.x,readings.waterY-data.characterConfig.enemyBoat.draftM,combat.enemyBoat.z);enemyBoat.rotation.y=combat.enemyBoat.yaw;}
+        for(const actor of combat.actors){
+          const visual=visualFor(actor);let px=actor.x,pz=actor.z;
+          visual.group.visible=!actor.retired&&(actor.team!=='enemy'||!active||(Math.hypot(actor.x-active.x,actor.z-active.z)<=armyDefaults.sight&&lineOfSight(combat,state,active,actor)));
+          if(actor.attachment?.boatId==='player-boat'){const p=localToWorld({x,z,yaw:controlled.rotation.y},actor.attachment.localX,actor.attachment.localZ);px=p.x;pz=p.z;}
+          visual.group.position.set(px,actor.y,pz);visual.group.rotation.y=actor.yaw;
+          const down=['wounded','downed','dead'].includes(actor.mode);visual.body.rotation.z=down?Math.PI/2:0;visual.body.position.y=down?0.3:-1.3;
+          visual.sword.visible=actor.weapon==='melee'&&!down;visual.bow.visible=actor.weapon==='bow'&&!down;
+          visual.sword.rotation.z=actor.action?.kind==='melee'?Math.sin((combat.tick-actor.action.start)/5)*1.2:0;
+          visual.uniform.emissive.set(actor.lastHitTick+5>=combat.tick?'#6e1c12':actor.stunUntil>combat.tick?'#5d4a10':'#000000');
+          visual.marker.visible=actor.id===combat.controlledId||actor.id===combat.selectedId;
+          visual.marker.material=actor.id===combat.controlledId?bodyMarker:targetMarker;
+          const text=`${actor.id===combat.controlledId?'▶ ':''}${actor.name} · ${Math.ceil(actor.health)}${down?' · Gục':actor.stunUntil>combat.tick?' · Choáng':actor.action?.kind==='melee'?' · Ra đòn':''}`;
+          if(visual.label.textContent!==text)visual.label.textContent=text;
+        }
+        const live=new Set();
+        for(const arrow of combat.projectiles){
+          live.add(arrow.id);let object=arrowVisuals.get(arrow.id);
+          if(!object){object=arrowPool.pop()||mesh(arrowGeo,arrowMat,world);object.visible=true;arrowVisuals.set(arrow.id,object);}
+          object.position.set(arrow.x,arrow.y,arrow.z);object.lookAt(arrow.x+arrow.vx,arrow.y+arrow.vy,arrow.z+arrow.vz);
+        }
+        for(const [id,object] of arrowVisuals)if(!live.has(id)){object.visible=false;arrowVisuals.delete(id);arrowPool.push(object);}
+      }
       const aspectScale = camera.aspect < 1 ? 1.35 : 1;
+      const focus=new THREE.Vector3(active?.x??x,(active?.y??boatY)+1.1,active?.z??z);
+      cameraTargetId=active?.id||null;
       if (mode === 'tactical') {
         const radius = 62 * zoom * aspectScale;
-        camera.position.set(Math.sin(orbit + 0.65) * radius, 62 * zoom * aspectScale, Math.cos(orbit + 0.65) * radius);
-        camera.lookAt(0, readings.waterY, 0);
+        camera.position.set(focus.x+Math.sin(orbit+0.65)*radius,focus.y+62*zoom*aspectScale,focus.z+Math.cos(orbit+0.65)*radius);
       } else {
-        const angle = state.yaw + orbit;
-        camera.position.set(x + Math.sin(angle) * 16 * zoom, readings.waterY + 10 * zoom, z + Math.cos(angle) * 16 * zoom);
-        camera.lookAt(x, boatY + 1, z - 3);
+        const c=data.characterConfig.camera;
+        camera.position.set(focus.x+Math.sin(orbit)*c.followDistanceM*zoom,focus.y+c.followHeightM*zoom,focus.z+Math.cos(orbit)*c.followDistanceM*zoom);
+      }
+      scene.updateMatrixWorld(true);
+      const delta=camera.position.clone().sub(focus),length=delta.length();raycaster.set(focus,delta.normalize());raycaster.far=length;
+      const hit=raycaster.intersectObjects(occluders.filter(o=>o.visible&&o.parent?.visible),false).find(h=>h.distance>data.characterConfig.camera.minimumDistanceM);
+      if(hit)camera.position.copy(focus).addScaledVector(delta,Math.max(data.characterConfig.camera.minimumDistanceM,hit.distance-data.characterConfig.camera.clearanceM));
+      camera.position.y=Math.max(camera.position.y,bedAt(river,camera.position.x,camera.position.z)+data.characterConfig.camera.clearanceM,readings.waterY+data.characterConfig.camera.clearanceM);
+      cameraClearance=camera.position.y-bedAt(river,camera.position.x,camera.position.z);
+      camera.lookAt(focus);camera.updateMatrixWorld();
+      screenTargets=[];
+      for(const actor of combat?.actors||[]){
+        const visual=actorVisuals.get(actor.id),p=visual.group.position.clone();p.y+=2.05;p.project(camera);
+        visual.label.hidden=!visual.group.visible||(actor.id!==combat.controlledId&&actor.id!==combat.selectedId&&mode!=='follow')||p.z<-1||p.z>1||Math.abs(p.x)>1.1||Math.abs(p.y)>1.1;
+        visual.label.style.transform=`translate(${(p.x+1)*host.clientWidth/2}px,${(1-p.y)*host.clientHeight/2}px) translate(-50%,-100%)`;
+        const q=visual.group.position.clone();q.y+=1;q.project(camera);const rect=canvas.getBoundingClientRect();
+        if(actor.team==='enemy'&&actor.health>0)screenTargets.push({id:actor.id,x:rect.left+(q.x+1)*rect.width/2,y:rect.top+(1-q.y)*rect.height/2,visible:visual.group.visible&&q.z>=-1&&q.z<=1&&Math.abs(q.x)<=1&&Math.abs(q.y)<=1});
       }
       renderer.render(scene, camera);
     }
@@ -183,18 +260,20 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
       if (lastState) render(lastState);
     }
     observer = new ResizeObserver(resize); observer.observe(host); metrics.observers++;
-    listen(scope, canvas, 'pointerdown', event => { canvas.focus({ preventScroll: true }); drag = { id: event.pointerId, x: event.clientX }; canvas.setPointerCapture(event.pointerId); });
-    listen(scope, canvas, 'pointermove', event => { if (drag?.id === event.pointerId) { orbit -= (event.clientX - drag.x) * 0.008; drag.x = event.clientX; } });
-    const releaseDrag = event => { if (drag?.id === event.pointerId) drag = null; if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId); };
-    listen(scope, canvas, 'pointerup', releaseDrag); listen(scope, canvas, 'pointercancel', releaseDrag);
-    listen(scope, canvas, 'wheel', event => { if (event.ctrlKey || event.metaKey) return; event.preventDefault(); zoom = Math.max(0.6, Math.min(1.5, zoom + event.deltaY * 0.001)); }, { passive: false });
     listen(scope, canvas, 'webglcontextlost', event => { event.preventDefault(); if (!disposed) onContextLost(); });
     resize(); renderer.compile(scene, camera);
     return {
       canvas, render, resize, dispose,
+      orbitBy(delta){orbit+=delta;},zoomBy(delta){zoom=clampZoom(zoom+delta*.001);},movementYaw(){return mode==='follow'?orbit:orbit+.65;},
+      pick(clientX,clientY){const r=canvas.getBoundingClientRect();raycaster.setFromCamera(new THREE.Vector2((clientX-r.left)/r.width*2-1,-(clientY-r.top)/r.height*2+1),camera);raycaster.far=300;const groups=[...actorVisuals.entries()].filter(([id,v])=>v.group.visible&&lastState?.combat?.actors.find(a=>a.id===id)?.team==='enemy').map(([,v])=>v.group);const hit=raycaster.intersectObjects([...groups,armyEnemy],true)[0];return hit?.object===armyEnemy?armyEnemyIds[hit.instanceId]||null:hit?.object.userData.actorId||null;},
       releaseControls() { if (drag && canvas.hasPointerCapture(drag.id)) canvas.releasePointerCapture(drag.id); drag = null; },
-      toggleCamera() { mode = mode === 'tactical' ? 'follow' : 'tactical'; orbit = 0; zoom = 1; if (lastState) render(lastState); return mode; },
-      stats() { return { drawCalls: renderer.info.render.calls, triangles: renderer.info.render.triangles, gpuGeometries: renderer.info.memory.geometries, mode, width: canvas.width, height: canvas.height }; },
+      toggleCamera() { mode = mode === 'tactical' ? 'follow' : 'tactical'; orbit = mode==='follow'?(lastState?.combat?.actors.find(a=>a.id===lastState.combat.controlledId)?.yaw||0):0; zoom = 1; if (lastState) render(lastState); return mode; },
+      stats() {
+        const rect=canvas.getBoundingClientRect(),armyTargets=armyEnemyIds.map(id=>{const p=lastState?.army?.byId.get(id);if(!p)return null;const projected=new THREE.Vector3(p.x,bedAt(river,p.x,p.z)+.625,p.z).project(camera);return {id,x:rect.left+(projected.x+1)*rect.width/2,y:rect.top+(1-projected.y)*rect.height/2,visible:projected.z>=-1&&projected.z<=1&&Math.abs(projected.x)<=1&&Math.abs(projected.y)<=1};}).filter(Boolean);
+        return { drawCalls: renderer.info.render.calls, triangles: renderer.info.render.triangles, gpuGeometries: renderer.info.memory.geometries, mode,cameraTargetId,cameraClearance,screenTargets:screenTargets.map(p=>({...p})),armyTargets,width: canvas.width, height: canvas.height };
+      },
     };
   } catch (error) { dispose(); throw error; }
 }
+
+function clampZoom(value){return Math.max(.6,Math.min(1.5,value));}

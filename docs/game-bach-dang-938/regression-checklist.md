@@ -53,3 +53,15 @@ V01/V02 đã bổ sung kích thước 320/360/375/390/430px và landscape 844×3
 ## Lớp sông — 02/11/2026
 
 [Bàn giao và kết quả](river-handoff.md): thêm bộ core/scheduler 47/47 và UI sông 17/17; bộ hồi quy khung 62/62, lỗi/cleanup 21/21. P01 giữ nguyên mã mọi trang cũ/trang chính so với đầu chặng; chỉ route mới/docs thay đổi. I01–I04 được chạy lại với mô phỏng: không payload trên trang chính, 5 lần mở/đóng, kiểm chứng listener/context/RAF và phím sau thoát. V02 có cả panel hệ thống 320px và landscape trong emulation; máy thật vẫn chưa xác minh. Journal A03/campaign save chưa triển khai, không suy ra từ việc state trong RAM đúng.
+
+## Lớp nhân vật/chiến đấu — 02/11/2026
+
+[Bàn giao](combat-handoff.md): core nhân vật 45/45, UI/input thật 17/17, sông 47/47, vòng đời/mobile/liên kết 62/62 và biên/lỗi 21/21. Chuỗi lái → map vẫn chạy → áp mạn → nhảy → chọn bằng chuột → cận chiến → hero gục/An tiếp quản đạt; không ép state trong chuỗi này. Đủ hai dự bị rồi hết người kiểm tra riêng bằng fixture core. Đa chạm nhả riêng/cancel, pause và đổi quyền xóa held input; mọi avatar/label/input/RAF được dọn khi thoát. 235 tệp website cũ giữ nguyên so đầu chặng, hash trong báo cáo nguồn. Các lỗi nền B01–B06, backend tài khoản và các giới hạn thiết bị của khảo sát vẫn giữ nguyên ghi nhận; chưa có journal/cloud mới.
+
+## Lớp quân đội — 02/11/2026
+
+[Bàn giao](army-handoff.md): 36/36 core quân đội, giao hai lệnh/tuyến hàng qua giao diện rồi cận chiến trong khi hai tổ tiếp tục nhiệm vụ; đo ngắn 50/100/200/400/480 quân mỗi bên, duy trì ID và trạng thái. Bộ UI/vòng đời và lỗi được chạy lại, kết quả tách trong thư mục evidence của chặng. 400/480 chưa qua gate hiệu năng dài, chưa có lưu thương vong qua retry; không nhầm benchmark core ngắn với chứng nhận FPS hoặc chương đã hoàn chỉnh.
+
+## Cập nhật chặng lưu, 02-11-2026
+
+[Bàn giao lưu](save-handoff.md): 71/71 core/lưu/retry; 7/7 UI lưu thiết bị; 9/9 UI trại/retry, 62/62 hồi quy vỏ game và các lối vào. Rules emulator 20/20, Firestore trình duyệt 15/15, Auth emulator 7/7; dữ liệu thử duy nhất thuộc project demo. Có thử phục hồi 400 quân mỗi bên, bản 1.487.033 byte chia 22 phần và upload bị ngắt. Đây là kết quả kiểm thử lưu, không phải benchmark FPS. Xem JSON trong evidence/save-2026-11-02 để phân biệt fixture và tương tác thật. Các ghi nhận ở những chặng trước là lịch sử tại thời điểm bàn giao; cloud production và thiết bị thật vẫn chưa được kiểm tra.

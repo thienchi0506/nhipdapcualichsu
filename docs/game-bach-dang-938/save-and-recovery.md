@@ -1,6 +1,6 @@
 # Lưu, mất mát và tiếp quản — hợp đồng v0.2
 
-**Thiết kế, chưa triển khai.** Mục tiêu là giữ hậu quả đã ghi qua reload/retry, không trừ lặp tài nguyên hoặc nhân đôi phần thưởng. Không hứa chống người dùng sửa bộ nhớ/save trong game chơi đơn chạy hoàn toàn ở client.
+**Thiết kế mục tiêu cho chiến dịch đầy đủ.** Lưu cho sandbox hiện có đã bàn giao; trạng thái thực thi, quyết định dùng full checkpoint và các giới hạn nằm trong [bàn giao lưu](save-handoff.md). Các mục bên dưới không mặc nhiên mô tả tính năng chiến dịch đã chạy. Mục tiêu là giữ hậu quả đã ghi qua reload/retry, không trừ lặp tài nguyên hoặc nhân đôi phần thưởng. Không hứa chống người dùng sửa bộ nhớ/save trong game chơi đơn chạy hoàn toàn ở client.
 
 ## 1. Phạm vi dữ liệu
 

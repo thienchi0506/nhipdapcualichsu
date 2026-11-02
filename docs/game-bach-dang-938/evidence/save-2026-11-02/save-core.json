@@ -1,0 +1,333 @@
+{
+  "core": {
+    "checks": [
+      {
+        "name": "Map and Set checkpoint round-trip without losing type",
+        "passed": true
+      },
+      {
+        "name": "Second tab cannot acquire an unexpired lease",
+        "passed": true
+      },
+      {
+        "name": "Duplicate batch returns the same committed revision",
+        "passed": true
+      },
+      {
+        "name": "Reusing a batch ID for different state is rejected",
+        "passed": true
+      },
+      {
+        "name": "Death and consumed inventory survive a repository reopen",
+        "passed": true
+      },
+      {
+        "name": "A later checkpoint cannot resurrect the same soldier",
+        "passed": true
+      },
+      {
+        "name": "Five retry attempts cannot revive the committed casualty",
+        "passed": true
+      },
+      {
+        "name": "A checkpoint cannot erase a soldier from the roster",
+        "passed": true
+      },
+      {
+        "name": "missing personnel cannot silently return to active duty",
+        "passed": true
+      },
+      {
+        "name": "captured personnel cannot silently return to active duty",
+        "passed": true
+      },
+      {
+        "name": "A checkpoint cannot silently erase a recorded wound",
+        "passed": true
+      },
+      {
+        "name": "A repeated identical loss event is stored only once",
+        "passed": true
+      },
+      {
+        "name": "Same event ID with different payload is rejected",
+        "passed": true
+      },
+      {
+        "name": "Failed event batch rolls back earlier event writes",
+        "passed": true
+      },
+      {
+        "name": "Another user has a distinct local namespace",
+        "passed": true
+      },
+      {
+        "name": "Mismatched user cannot invoke cloud sync",
+        "passed": true
+      },
+      {
+        "name": "Sign-out does not remove the queued local changes",
+        "passed": true
+      },
+      {
+        "name": "Cloud packet includes the committed journal and checkpoint",
+        "passed": true
+      },
+      {
+        "name": "Acknowledged outbox is cleared without deleting local state",
+        "passed": true
+      },
+      {
+        "name": "Another device restores the committed death and journal",
+        "passed": true
+      },
+      {
+        "name": "Cloud payload hash is checked before import",
+        "passed": true
+      },
+      {
+        "name": "Cloud document owner must match the selected user",
+        "passed": true
+      },
+      {
+        "name": "Independent offline device conflicts without overwriting cloud",
+        "passed": true
+      },
+      {
+        "name": "A conflict cannot overwrite an unsynced local branch",
+        "passed": true
+      },
+      {
+        "name": "Offline failure retains the pending outbox",
+        "passed": true
+      },
+      {
+        "name": "A newer local commit is retained when an older upload finishes",
+        "passed": true
+      },
+      {
+        "name": "Next upload includes newer journal entries without double debit",
+        "passed": true
+      },
+      {
+        "name": "Account switching during upload keeps the local outbox",
+        "passed": true
+      },
+      {
+        "name": "Retry after uncertain acknowledgement is idempotent",
+        "passed": true
+      },
+      {
+        "name": "Oversized checkpoint is rejected without changing the saved head",
+        "passed": true
+      },
+      {
+        "name": "Expired lease can be acquired with a newer epoch",
+        "passed": true
+      },
+      {
+        "name": "Old tab cannot commit after lease takeover",
+        "passed": true
+      },
+      {
+        "name": "Invalid schema does not overwrite the last good save",
+        "passed": true
+      },
+      {
+        "name": "Controller reports saving then local and does not upload each commit",
+        "passed": true
+      },
+      {
+        "name": "Controller distinguishes an acknowledged cloud save",
+        "passed": true
+      },
+      {
+        "name": "Account change preserves pending data and prevents further writes",
+        "passed": true
+      },
+      {
+        "name": "Controller close removes the Auth listener and keeps pending data",
+        "passed": true
+      },
+      {
+        "name": "Permanent cloud permission errors stop automatic retries and keep local data",
+        "passed": true
+      },
+      {
+        "name": "Explicit retry after permission repair acknowledges the retained outbox",
+        "passed": true
+      },
+      {
+        "name": "Full checkpoint restores real army IDs, deaths and object references",
+        "passed": true
+      },
+      {
+        "name": "Pending path queue is restored with live squad references",
+        "passed": true
+      },
+      {
+        "name": "Journal collects tick events with attempt-scoped IDs",
+        "passed": true
+      },
+      {
+        "name": "Failure resolution is idempotent and does not replenish cargo",
+        "passed": true
+      },
+      {
+        "name": "Failure outcome and journal survive a committed checkpoint",
+        "passed": true
+      },
+      {
+        "name": "A later checkpoint cannot erase a resolved outcome",
+        "passed": true
+      },
+      {
+        "name": "Duplicate outcome for the same attempt is rejected",
+        "passed": true
+      },
+      {
+        "name": "A mismatched world cannot replace the local projection",
+        "passed": true
+      },
+      {
+        "name": "Cloud semantic validation runs before overwriting the last valid save",
+        "passed": true
+      },
+      {
+        "name": "Unsupported checkpoint versions fail closed",
+        "passed": true
+      }
+    ],
+    "passed": 49,
+    "total": 49
+  },
+  "barrier": {
+    "checks": [
+      {
+        "name": "Initial game state commits before the first simulation tick",
+        "passed": true
+      },
+      {
+        "name": "Resume during a pending pause checkpoint restarts the simulation",
+        "passed": true
+      },
+      {
+        "name": "Candidate with lost cargo is not rendered or committed while storage is pending",
+        "passed": true
+      },
+      {
+        "name": "Committed cargo loss remains saved when user pauses during the write",
+        "passed": true
+      },
+      {
+        "name": "Storage failure stops the loop and restores the previous committed state",
+        "passed": true
+      },
+      {
+        "name": "A reconstructed session resumes the saved checkpoint, without restoring cargo",
+        "passed": true
+      },
+      {
+        "name": "Prepared session validates checkpoint against the saved projection",
+        "passed": true
+      },
+      {
+        "name": "The game reports failure only after committing its outcome and journal",
+        "passed": true,
+        "evidence": {
+          "results": [
+            {
+              "chapterInstanceId": "failure-campaign:harbor",
+              "attemptId": "failure-attempt",
+              "outcome": "failed_command",
+              "tick": 4
+            }
+          ],
+          "eventTypes": [
+            "AttemptResolved"
+          ],
+          "running": false
+        }
+      }
+    ],
+    "passed": 8,
+    "total": 8
+  },
+  "tabs": {
+    "checks": [
+      {
+        "name": "Two real windows share one exclusive IndexedDB lease",
+        "passed": true
+      },
+      {
+        "name": "Second window reads the same committed casualty",
+        "passed": true
+      },
+      {
+        "name": "A stale window cannot write after lease takeover",
+        "passed": true
+      }
+    ],
+    "passed": 3,
+    "total": 3
+  },
+  "retry": {
+    "checks": [
+      {
+        "name": "Retry transaction rejects free cargo even with a retry event",
+        "passed": true
+      },
+      {
+        "name": "Five real retry transactions preserve dead and missing soldier IDs",
+        "passed": true
+      },
+      {
+        "name": "Five retries do not refill arrows, cargo or boat condition",
+        "passed": true
+      },
+      {
+        "name": "Medicine, returned cargo and unused job reserve settle exactly once",
+        "passed": true
+      },
+      {
+        "name": "Main character treatment preserves wounds and campaign time",
+        "passed": true
+      },
+      {
+        "name": "Retry cannot run again on an already active attempt",
+        "passed": true
+      },
+      {
+        "name": "Reopening reconstructs the fifth retry with the same casualties",
+        "passed": true
+      },
+      {
+        "name": "Without medicine treatment costs campaign time without negative stock",
+        "passed": true
+      },
+      {
+        "name": "A trapped boat cannot be teleported to safety by retry",
+        "passed": true
+      },
+      {
+        "name": "An unrecovered hero cannot teleport to camp",
+        "passed": true
+      },
+      {
+        "name": "Rejected retry plans leave the committed save unchanged",
+        "passed": true
+      }
+    ],
+    "passed": 11,
+    "total": 11
+  },
+  "passed": 71,
+  "total": 71,
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  }
+}
