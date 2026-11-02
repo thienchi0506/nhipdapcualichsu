@@ -1,0 +1,19 @@
+{
+  "version": "0.128.0",
+  "license": "MIT",
+  "retrieved": "2026-11-02",
+  "files": [
+    {
+      "file": "three.module.js",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r128/build/three.module.js",
+      "sha256": "af527c374b56b8688737a42d7fcea7cb8aaeb57a4e3c6da98b4dffd55bcc3514",
+      "bytes": 1140878
+    },
+    {
+      "file": "LICENSE",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r128/LICENSE",
+      "sha256": "7dddf7c5b8fd10ee654db8857d75d104b5557889aa5a91fc4ca545ea7c07062f",
+      "bytes": 1081
+    }
+  ]
+}

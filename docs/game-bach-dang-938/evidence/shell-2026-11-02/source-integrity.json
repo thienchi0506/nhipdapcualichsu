@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-02",
+  "trackedFilesCompared": 235,
+  "changedTrackedFiles": [
+    "trang-chinh.html"
+  ],
+  "unchangedTrackedFiles": 234,
+  "allowedChangeOnly": true,
+  "legacyRegression": [
+    {
+      "case": "2d-bach-dang",
+      "passed": 11,
+      "total": 11,
+      "errors": []
+    },
+    {
+      "case": "2d-nhu-nguyet",
+      "passed": 11,
+      "total": 11,
+      "errors": []
+    },
+    {
+      "case": "3d-bach-dang",
+      "passed": 17,
+      "total": 17,
+      "errors": []
+    },
+    {
+      "case": "3d-nhu-nguyet",
+      "passed": 17,
+      "total": 17,
+      "errors": []
+    }
+  ],
+  "legacyPassed": 56,
+  "legacyTotal": 56
+}

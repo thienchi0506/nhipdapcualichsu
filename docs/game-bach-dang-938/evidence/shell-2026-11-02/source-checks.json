@@ -1,0 +1,109 @@
+{
+  "date": "2026-11-02",
+  "checks": [
+    {
+      "name": "Only existing runtime file changed is homepage",
+      "passed": true,
+      "evidence": [
+        "trang-chinh.html"
+      ]
+    },
+    {
+      "name": "Homepage content equals original plus exactly one anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Homepage has no new game script or preload",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Local ES module imports resolve",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "New code does not import legacy runtime or Firebase",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "No gameplay API is assigned on window",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Only independent preference key used",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Pinned Three version and license",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Vendored files match provenance hashes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Four roles and three quality presets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Dossier local links resolve",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "All shell reports pass",
+      "passed": true,
+      "evidence": {
+        "browser-checks.json": [
+          62,
+          62
+        ],
+        "edge-checks.json": [
+          21,
+          21
+        ],
+        "visual-checks.json": [
+          8,
+          8
+        ]
+      }
+    },
+    {
+      "name": "All existing game assertions pass without JS errors",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "git diff --check",
+      "passed": true,
+      "evidence": ""
+    }
+  ],
+  "passed": 14,
+  "total": 14,
+  "gameRuntimeHashes": {
+    "game-bach-dang-938\\index.html": "460bf20d5b701141b25d173c2414f4eb3bb62571a10b1654f30c1dcf4278819f",
+    "game-bach-dang-938\\README.md": "32f3fc62a6e6525af17f4f8e3555811ada60a7be669e0dee81c0d413df6e1eae",
+    "game-bach-dang-938\\data\\shell-scene.json": "6ad0ff8929090ab2d1050d8ca049a23564a078f6d6eceabcf37fca49e597b0ee",
+    "game-bach-dang-938\\styles\\game.css": "7f5beae24f41f50c602223d312f1b789ce17d0098dc93eaae88d72a9dcb3d5be",
+    "game-bach-dang-938\\src\\app\\bootstrap.js": "8a0ddd4c6e6bf17020f17720643b7f28da1f5e2d48816da6197c4d131980b3b2",
+    "game-bach-dang-938\\src\\app\\diagnostics.js": "ab94c3ced23868230840106fdcbc1715abbd18841d16371d166b644a0e4d1e46",
+    "game-bach-dang-938\\src\\app\\input.js": "e4232b087e4a5cf12e4b62116802e0ab306fc2679cca0d0e6cbf591a9783f6c1",
+    "game-bach-dang-938\\src\\app\\loader.js": "71b87251dc57075ab7f3da10f60393c1a17d7f365d03f35fbd2d5c11d59c1113",
+    "game-bach-dang-938\\src\\app\\preferences.js": "58cc806c04fce036824cbdd4d3d4a705b5c456ddf9690e5fae26f62ab5893d11",
+    "game-bach-dang-938\\src\\app\\session.js": "0a63acabbbc9e2ecc522436f3b54388d8be6c6b6d297039b338a82a6b0f0e309",
+    "game-bach-dang-938\\src\\core\\demo.js": "91795b674220b7f2556276495484b749813cc663a591a1226811a77db60c3190",
+    "game-bach-dang-938\\src\\presentation\\scene.js": "2fc1d8eadb487cd029378bf4cc051a3b4712c47d635067d966dad891a5db4c2b",
+    "game-bach-dang-938\\vendor\\three-r128\\LICENSE": "7dddf7c5b8fd10ee654db8857d75d104b5557889aa5a91fc4ca545ea7c07062f",
+    "game-bach-dang-938\\vendor\\three-r128\\manifest.json": "8d434a7f6e80264c8c8681ec984f1d41d3149b03bdde4045bef3ba964006e579",
+    "game-bach-dang-938\\vendor\\three-r128\\three.module.js": "af527c374b56b8688737a42d7fcea7cb8aaeb57a4e3c6da98b4dffd55bcc3514"
+  }
+}

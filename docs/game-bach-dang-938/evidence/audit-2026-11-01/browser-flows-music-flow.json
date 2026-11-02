@@ -1,0 +1,1259 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "remoteServicesBlocked": true,
+  "reports": [
+    {
+      "name": "music-flow-1365",
+      "data": {
+        "beforeInteraction": {
+          "preference": false,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": true,
+              "time": 0,
+              "ready": 0,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "afterEnableClick": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": false,
+              "time": 0,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "afterNavigationTo2d": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": false,
+              "time": 0.5,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "insideExam": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": true,
+              "time": 1.2,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "afterLeavingExam": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": false,
+              "time": 2.4,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        }
+      },
+      "events": [
+        {
+          "method": "Network.loadingFailed",
+          "params": {
+            "requestId": "28056.10",
+            "timestamp": 655046.155058,
+            "type": "Script",
+            "errorText": "",
+            "canceled": false,
+            "blockedReason": "inspector"
+          }
+        },
+        {
+          "method": "Runtime.consoleAPICalled",
+          "params": {
+            "type": "warning",
+            "args": [
+              {
+                "type": "string",
+                "value": "WARNING: Multiple instances of Three.js being imported."
+              }
+            ],
+            "executionContextId": 3,
+            "timestamp": 1793547945798.711,
+            "stackTrace": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "10",
+                  "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+                  "lineNumber": 16,
+                  "columnNumber": 528751
+                }
+              ]
+            }
+          }
+        },
+        {
+          "method": "Network.loadingFailed",
+          "params": {
+            "requestId": "28056.137",
+            "timestamp": 655052.514547,
+            "type": "Script",
+            "errorText": "",
+            "canceled": false,
+            "blockedReason": "inspector"
+          }
+        },
+        {
+          "method": "Runtime.consoleAPICalled",
+          "params": {
+            "type": "warning",
+            "args": [
+              {
+                "type": "string",
+                "value": "WARNING: Multiple instances of Three.js being imported."
+              }
+            ],
+            "executionContextId": 5,
+            "timestamp": 1793547951624.379,
+            "stackTrace": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "10",
+                  "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+                  "lineNumber": 16,
+                  "columnNumber": 528751
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/trang-chinh.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-5.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-6.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 200,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/sa-ban.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-2d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/trang-chinh.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-5.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-6.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/thao-truong.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/grade11-exams.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/grade10-exams.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSQI287Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSQI281Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSQI286Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c59b27' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVNSTAyLFyeg_IDWvOJmVES_HwyNXYSYIAi.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVNSTAyLFyeg_IDWvOJmVES_HwyNXcSYIAi.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVNSTAyLFyeg_IDWvOJmVES_HwyNXgSYA.woff2",
+          "status": 200,
+          "type": "Font"
+        }
+      ]
+    },
+    {
+      "name": "music-flow-390",
+      "data": {
+        "beforeInteraction": {
+          "preference": false,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": true,
+              "time": 0,
+              "ready": 0,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "afterEnableClick": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": false,
+              "time": 4.2,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "afterNavigationTo2d": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": false,
+              "time": 4.9,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "insideExam": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": true,
+              "time": 5.6,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        },
+        "afterLeavingExam": {
+          "preference": true,
+          "audio": [
+            {
+              "id": "bg-music",
+              "paused": false,
+              "time": 6.8,
+              "ready": 4,
+              "src": "nhac-nen-1.mp3"
+            }
+          ]
+        }
+      },
+      "events": [
+        {
+          "method": "Network.loadingFailed",
+          "params": {
+            "requestId": "27172.10",
+            "timestamp": 655059.029597,
+            "type": "Script",
+            "errorText": "",
+            "canceled": false,
+            "blockedReason": "inspector"
+          }
+        },
+        {
+          "method": "Runtime.consoleAPICalled",
+          "params": {
+            "type": "warning",
+            "args": [
+              {
+                "type": "string",
+                "value": "WARNING: Multiple instances of Three.js being imported."
+              }
+            ],
+            "executionContextId": 2,
+            "timestamp": 1793547958548.658,
+            "stackTrace": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "5",
+                  "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+                  "lineNumber": 16,
+                  "columnNumber": 528751
+                }
+              ]
+            }
+          }
+        },
+        {
+          "method": "Network.loadingFailed",
+          "params": {
+            "requestId": "27172.136",
+            "timestamp": 655064.2247,
+            "type": "Script",
+            "errorText": "",
+            "canceled": false,
+            "blockedReason": "inspector"
+          }
+        },
+        {
+          "method": "Runtime.consoleAPICalled",
+          "params": {
+            "type": "warning",
+            "args": [
+              {
+                "type": "string",
+                "value": "WARNING: Multiple instances of Three.js being imported."
+              }
+            ],
+            "executionContextId": 4,
+            "timestamp": 1793547963284.949,
+            "stackTrace": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "5",
+                  "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+                  "lineNumber": 16,
+                  "columnNumber": 528751
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/trang-chinh.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-5.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-6.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/sa-ban.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-2d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/trang-chinh.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-5.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-6.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/thao-truong.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/grade10-exams.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/grade11-exams.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSQI281Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSQI286Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSQI287Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/nhac-nen-1.mp3",
+          "status": 206,
+          "type": "Media"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c59b27' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVNSTAyLFyeg_IDWvOJmVES_HwyNXYSYIAi.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVNSTAyLFyeg_IDWvOJmVES_HwyNXgSYA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVNSTAyLFyeg_IDWvOJmVES_HwyNXcSYIAi.woff2",
+          "status": 200,
+          "type": "Font"
+        }
+      ]
+    }
+  ]
+}

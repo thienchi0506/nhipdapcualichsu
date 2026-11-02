@@ -1,0 +1,43 @@
+{
+  "version": "bd938-river-lab-1",
+  "tickHz": 30,
+  "maxCatchUpTicks": 8,
+  "hudHz": 10,
+  "componentMax": 100,
+  "warningIntegrity": 50,
+  "messageDurationS": 5,
+  "groundSolveIterations": 12,
+  "densityKgM3": 1000,
+  "safeClearanceM": 0.15,
+  "tideKeys": [[0, 1.4], [180, 1.35], [360, 0.8], [540, 0.1], [720, -0.8], [1080, -0.9], [1500, -0.9]],
+  "current": {"xMps": 0.08, "zMps": 0.35, "eddyStrengthMps": 0.12, "maxMps": 1.2},
+  "vessels": {
+    "light": {"name": "Thuyền nhẹ", "emptyMassKg": 2400, "crewMassKg": 420, "cargoKg": 600, "baseDraftM": 0.45, "waterplaneAreaM2": 20, "lengthM": 7, "widthM": 2.8, "maxForwardMps": 3.5, "maxReverseMps": 1.2, "responsePerS": 0.8, "sideDragPerS": 1.8, "yawResponsePerS": 2.5, "maxYawRadps": 0.45, "maxAccelerationMps2": 2.0},
+    "transport": {"name": "Thuyền vận tải", "emptyMassKg": 9000, "crewMassKg": 840, "cargoKg": 9000, "baseDraftM": 0.9, "waterplaneAreaM2": 45, "lengthM": 10, "widthM": 4.2, "maxForwardMps": 2.5, "maxReverseMps": 0.7, "responsePerS": 0.6, "sideDragPerS": 1.5, "yawResponsePerS": 1.8, "maxYawRadps": 0.22, "maxAccelerationMps2": 1.2}
+  },
+  "collision": {"epsilonM": 0.001, "maxPointTravelM": 0.2, "maxSubsteps": 128, "contactReleaseMarginM": 0.25, "verticalReleaseM": 0.05, "stakePenetrationMinM": 0.08, "damagePerKJ": 0.5, "maxImpactDamage": 45, "hullDamageFraction": 0.65, "sideHitDotThreshold": 0.7, "minimumDamagingSpeedMps": 0.35, "settlingDamagePerM": 35, "embedMinSpeedMps": 1.4, "embedMinPenetrationM": 0.16, "restitution": 0.08, "tangentRetention": 0.8, "collisionSampleSpacingM": 0.5},
+  "recovery": {"workS": 25, "pullMps": 0.3, "maxPullPenetrationM": 0.25, "minimumOars": 15, "liftM": 0.5, "maxPullDistanceM": 12},
+  "repair": {"workS": 10, "integrityPerJob": 5, "timberPerJob": 2, "initialTimber": 40, "maxSpeedMps": 0.25, "zoneRadiusM": 17, "zoneX": -13, "zoneZ": 24},
+  "flood": {"leakBelowIntegrity": 65, "maxLeakKgps": 12, "pumpKgps": 4},
+  "controls": {"anchorDragPerS": 4, "anchorStopMps": 0.04, "unloadKg": 1000, "warningLookaheadS": 3, "stakeWarningRadiusM": 12, "pumpPropulsionFactor": 0.85, "riggingDragFactor": 0.8, "minimumTurnFraction": 0.25},
+  "map": {
+    "halfWidthM": 22, "halfLengthM": 72, "deepBedY": -3,
+    "bankStartX": 16, "bankTopY": 1.7,
+    "shoals": [{"id": "shoal-east", "xMin": 5, "xMax": 17, "zMin": -6, "zMax": 10, "bedY": 0.55, "slopeM": 1.5}],
+    "stakes": [
+      {"id":"stake-01","x":8,"z":-18,"tipY":0.05,"radiusM":0.13}, {"id":"stake-02","x":10.5,"z":-18,"tipY":0.05,"radiusM":0.13}, {"id":"stake-03","x":13,"z":-18,"tipY":0.05,"radiusM":0.13}, {"id":"stake-04","x":15.5,"z":-18,"tipY":0.05,"radiusM":0.13},
+      {"id":"stake-05","x":8,"z":-21,"tipY":0.05,"radiusM":0.13}, {"id":"stake-06","x":10.5,"z":-21,"tipY":0.05,"radiusM":0.13}, {"id":"stake-07","x":13,"z":-21,"tipY":0.05,"radiusM":0.13}, {"id":"stake-08","x":15.5,"z":-21,"tipY":0.05,"radiusM":0.13},
+      {"id":"stake-09","x":8,"z":-24,"tipY":0.05,"radiusM":0.13}, {"id":"stake-10","x":10.5,"z":-24,"tipY":0.05,"radiusM":0.13}, {"id":"stake-11","x":13,"z":-24,"tipY":0.05,"radiusM":0.13}, {"id":"stake-12","x":15.5,"z":-24,"tipY":0.05,"radiusM":0.13}
+    ],
+    "mooredBoats": [{"id":"moored-1","x":-15,"z":26},{"id":"moored-2","x":15,"z":28},{"id":"moored-3","x":-15,"z":-6}],
+    "obstacles": [{"id":"pier","x":-17,"z":22,"radiusM":3}]
+  },
+  "scenarios": {
+    "combat": {"name":"Lái thuyền, đổ bộ và giao chiến","x":-7,"z":26,"yaw":0,"timeOffsetS":0},
+    "harbor": {"name":"Bến sông — tự khám phá","x":0,"z":30,"yaw":0,"timeOffsetS":0},
+    "shoal": {"name":"Thuyền nhẹ/nặng qua lạch cạn","x":10,"z":18,"yaw":0,"timeOffsetS":0},
+    "ebb": {"name":"Nước rút tại bãi cọc","x":10.5,"z":-21,"yaw":0,"timeOffsetS":420,"anchor":true},
+    "impact": {"name":"Tiếp cận cọc khi nước thấp","x":10.5,"z":-9,"yaw":0,"timeOffsetS":540},
+    "rudder": {"name":"Mất lái cạnh bến sửa","x":0,"z":26,"yaw":0,"timeOffsetS":0,"components":{"rudder":0}}
+  }
+}

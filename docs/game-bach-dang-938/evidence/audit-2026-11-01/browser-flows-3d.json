@@ -1,0 +1,1057 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "remoteServicesBlocked": true,
+  "reports": [
+    {
+      "name": "3d-roundtrip-1365",
+      "data": {
+        "guideOpened": true,
+        "bachDang": {
+          "active": true,
+          "campaign": 1,
+          "phase": "NUOC_LON",
+          "camera": "TACTICAL",
+          "fleet": 6,
+          "enemies": 7,
+          "renderCalls": 234,
+          "width": 1365,
+          "abilityLabels": [
+            {
+              "text": "Cung lớn",
+              "x": 1027.359375,
+              "y": 882,
+              "w": 49.28125,
+              "h": 15,
+              "outsideViewport": false
+            },
+            {
+              "text": "Hỏa tiễn",
+              "x": 1109.7109375,
+              "y": 882,
+              "w": 44.578125,
+              "h": 15,
+              "outsideViewport": false
+            },
+            {
+              "text": "Hòa bình",
+              "x": 1182.46875,
+              "y": 882,
+              "w": 51.0625,
+              "h": 15,
+              "outsideViewport": false
+            },
+            {
+              "text": "Đánh thường",
+              "x": 1263.5625,
+              "y": 881,
+              "w": 70.875,
+              "h": 15,
+              "outsideViewport": false
+            }
+          ]
+        },
+        "pauseWorks": true,
+        "syntheticWinResultOpened": true,
+        "nhuNguyetEntryCallsPerClick": 2,
+        "nhuNguyet": {
+          "active": true,
+          "campaign": 2,
+          "phase": "NHU_NGUYET_THUC_CHIEN",
+          "rafts": 6,
+          "renderCalls": 343,
+          "width": 1365
+        }
+      },
+      "events": [
+        {
+          "method": "Network.loadingFailed",
+          "params": {
+            "requestId": "29668.10",
+            "timestamp": 655101.538301,
+            "type": "Script",
+            "errorText": "",
+            "canceled": false,
+            "blockedReason": "inspector"
+          }
+        },
+        {
+          "method": "Runtime.consoleAPICalled",
+          "params": {
+            "type": "warning",
+            "args": [
+              {
+                "type": "string",
+                "value": "WARNING: Multiple instances of Three.js being imported."
+              }
+            ],
+            "executionContextId": 3,
+            "timestamp": 1793548001058.949,
+            "stackTrace": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "10",
+                  "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+                  "lineNumber": 16,
+                  "columnNumber": 528751
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/trang-chinh.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-5.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-6.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        }
+      ]
+    },
+    {
+      "name": "3d-replay-1365",
+      "data": {
+        "fixture": "Victory injected through existing result function; replay clicked with mouse hit-test",
+        "button": {
+          "x": 514.7578125,
+          "y": 495.6875,
+          "w": 107.828125,
+          "h": 43,
+          "hit": true,
+          "text": "🔄 Chơi lại"
+        },
+        "afterReload": {
+          "search": "?campaign=1",
+          "campaign": 1,
+          "phase": "CHUA_BAT_DAU",
+          "bodyClass": "campaign-bach-dang gameplay-ui-active",
+          "renderCalls": 184
+        }
+      },
+      "events": [],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        }
+      ]
+    },
+    {
+      "name": "3d-roundtrip-390",
+      "data": {
+        "guideOpened": true,
+        "bachDang": {
+          "active": true,
+          "campaign": 1,
+          "phase": "NUOC_LON",
+          "camera": "TACTICAL",
+          "fleet": 6,
+          "enemies": 7,
+          "renderCalls": 145,
+          "width": 390,
+          "abilityLabels": [
+            {
+              "text": "Cung lớn",
+              "x": 120.359375,
+              "y": 838,
+              "w": 49.28125,
+              "h": 15,
+              "outsideViewport": true
+            },
+            {
+              "text": "Hỏa tiễn",
+              "x": 187.7109375,
+              "y": 838,
+              "w": 44.578125,
+              "h": 15,
+              "outsideViewport": true
+            },
+            {
+              "text": "Hòa bình",
+              "x": 249.46875,
+              "y": 838,
+              "w": 51.0625,
+              "h": 15,
+              "outsideViewport": true
+            },
+            {
+              "text": "Đánh thường",
+              "x": 312.5625,
+              "y": 837,
+              "w": 70.875,
+              "h": 15,
+              "outsideViewport": true
+            }
+          ]
+        },
+        "pauseWorks": true,
+        "syntheticWinResultOpened": true,
+        "nhuNguyetEntryCallsPerClick": 2,
+        "nhuNguyet": {
+          "active": true,
+          "campaign": 2,
+          "phase": "NHU_NGUYET_THUC_CHIEN",
+          "rafts": 6,
+          "renderCalls": 283,
+          "width": 390
+        }
+      },
+      "events": [
+        {
+          "method": "Network.loadingFailed",
+          "params": {
+            "requestId": "22604.10",
+            "timestamp": 655124.808797,
+            "type": "Script",
+            "errorText": "",
+            "canceled": false,
+            "blockedReason": "inspector"
+          }
+        },
+        {
+          "method": "Runtime.consoleAPICalled",
+          "params": {
+            "type": "warning",
+            "args": [
+              {
+                "type": "string",
+                "value": "WARNING: Multiple instances of Three.js being imported."
+              }
+            ],
+            "executionContextId": 2,
+            "timestamp": 1793548024447.279,
+            "stackTrace": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "5",
+                  "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+                  "lineNumber": 16,
+                  "columnNumber": 528751
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/trang-chinh.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-5.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-6.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        }
+      ]
+    },
+    {
+      "name": "3d-replay-390",
+      "data": {
+        "fixture": "Victory injected through existing result function; replay clicked with mouse hit-test",
+        "button": {
+          "x": 128.1796875,
+          "y": 441.6875,
+          "w": 107.828125,
+          "h": 44,
+          "hit": true,
+          "text": "🔄 Chơi lại"
+        },
+        "afterReload": {
+          "search": "?campaign=1",
+          "campaign": 1,
+          "phase": "CHUA_BAT_DAU",
+          "bodyClass": "campaign-bach-dang gameplay-ui-active",
+          "renderCalls": 121
+        }
+      },
+      "events": [],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        },
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-runtime.css",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw4BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw5BXoKZA.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVPSTAyLFyeg_IDWvOJmVES_Hw3BXo.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HToIW81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG86Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG87Rb0bcw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/bevietnampro/v12/QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        }
+      ]
+    }
+  ]
+}

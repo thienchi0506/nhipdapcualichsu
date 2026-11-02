@@ -3,7 +3,7 @@
 <head>
   <script src="site-music.js"></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sa Bàn Chiến Thuật — Phòng Tuyến Như Nguyệt | Dấu Chân Lịch Sử</title>
 
     <!-- Google Fonts: Noto Serif & Be Vietnam Pro -->
@@ -1470,6 +1470,41 @@
             .postwar-grid { grid-template-columns: 1fr; }
             .postwar-summary-bar { grid-template-columns: repeat(2, 1fr); }
         }
+        html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+        .game-header, .game-screen, .game-stage, .game-stage > *, .modal-box { min-width: 0; max-width: 100%; }
+        .game-header { padding-top: max(8px, env(safe-area-inset-top, 0px)); }
+        .game-screen { min-height: 100svh; min-height: 100dvh; }
+        .game-stage { padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); }
+        .modal-overlay { padding: max(12px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px)); overflow-y: auto; overscroll-behavior: contain; }
+        .modal-box { max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px); overflow-y: auto; overscroll-behavior: contain; }
+        button, a, [role="button"] { touch-action: manipulation; }
+        #site-music-toggle { min-width: 44px; min-height: 44px; }
+        @media (max-width: 640px) {
+            .game-header { flex-wrap: wrap; gap: 8px; padding-left: 10px; padding-right: 10px; }
+            .game-header__actions { width: 100%; flex-wrap: wrap; gap: 8px; }
+            .game-header__actions > *, .game-stage button, .modal-box button,
+            .btn-pause-back, .btn-lobby, .btn-header, .vn-choice-btn, .postwar-card__btn,
+            .btn-modal-close { min-height: 44px; }
+            .btn-modal-close { min-width: 44px; }
+            .game-screen { padding-top: 0; }
+            .hud-bar { top: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .game-stage { width: 100%; padding-top: 14px; padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px)); gap: 14px; }
+            .vn-scene { min-height: min(520px, 72dvh); }
+            .vn-choice-btn, .postwar-card__btn { width: 100%; text-align: left; }
+            .modal-box { width: min(100%, 560px); }
+            button:active, a:active { filter: brightness(1.12); }
+        }
+        @media (max-width: 360px) {
+            .game-header { padding-left: 6px; padding-right: 6px; }
+            .game-stage { padding-left: 6px; padding-right: 6px; }
+            .hud-bar { gap: 6px; padding: 8px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .screen-shake, .game-screen *, .modal-overlay, .modal-box {
+                animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important; scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1841,13 +1876,18 @@
         var ctx = canvas.getContext('2d');
         var particles = [];
         var particleMode = 'war'; // 'war' hoặc 'peace'
-        var particleCount = 42;
+        var coarsePointer = matchMedia('(pointer: coarse)').matches;
+        var reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var particleCount = coarsePointer ? 16 : 42;
+        var particleFrameId = 0;
+        var particlesActive = !document.hidden;
+        var particlesDisposed = false;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas, { passive: true });
         resizeCanvas();
 
         function createParticle() {
@@ -1885,12 +1925,15 @@
         }
 
         function updateParticles() {
+            if (particlesDisposed || !particlesActive) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (var i = 0; i < particles.length; i++) {
                 var p = particles[i];
-                p.opacity -= p.decay;
-                p.x += p.speedX;
-                p.y += p.speedY;
+                if (!reducedMotion) {
+                    p.opacity -= p.decay;
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                }
 
                 if (p.opacity <= 0 || p.y < -20 || p.y > canvas.height + 30 || p.x < -20 || p.x > canvas.width + 20) {
                     particles[i] = createParticle();
@@ -1901,18 +1944,18 @@
                 ctx.globalAlpha = Math.max(0, p.opacity);
                 if (particleMode === 'war') {
                     ctx.fillStyle = 'hsl(' + p.hue + ', 95%, 60%)';
-                    ctx.shadowBlur = p.size * 3;
+                    ctx.shadowBlur = coarsePointer ? Math.min(p.size * 1.5, 4) : p.size * 3;
                     ctx.shadowColor = 'hsl(' + p.hue + ', 100%, 50%)';
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fill();
                 } else {
                     ctx.fillStyle = 'hsla(' + p.hue + ', 90%, 65%, ' + p.opacity + ')';
-                    ctx.shadowBlur = 9;
+                    ctx.shadowBlur = coarsePointer ? 3 : 9;
                     ctx.shadowColor = '#D4AF37';
                     ctx.translate(p.x, p.y);
                     if (p.rotation !== undefined) {
-                        p.rotation += p.rotationSpeed;
+                        if (!reducedMotion) p.rotation += p.rotationSpeed;
                         ctx.rotate(p.rotation);
                         ctx.beginPath();
                         ctx.ellipse(0, 0, p.size * 1.5, p.size * 0.7, 0, 0, Math.PI * 2);
@@ -1925,9 +1968,36 @@
                 }
                 ctx.restore();
             }
-            requestAnimationFrame(updateParticles);
+            if (!reducedMotion) particleFrameId = requestAnimationFrame(updateParticles);
         }
-        requestAnimationFrame(updateParticles);
+        function pauseParticleCanvas() {
+            particlesActive = false;
+            if (particleFrameId) cancelAnimationFrame(particleFrameId);
+            particleFrameId = 0;
+        }
+        function resumeParticleCanvas() {
+            if (particlesDisposed) return;
+            particlesActive = true;
+            if (reducedMotion) updateParticles();
+            else if (!particleFrameId) particleFrameId = requestAnimationFrame(updateParticles);
+        }
+        function handleParticleVisibility() {
+            if (document.hidden) pauseParticleCanvas();
+            else resumeParticleCanvas();
+        }
+        function disposeParticleCanvas(event) {
+            pauseParticleCanvas();
+            if (event && event.persisted) return;
+            particlesDisposed = true;
+            window.removeEventListener('resize', resizeCanvas);
+            document.removeEventListener('visibilitychange', handleParticleVisibility);
+            window.removeEventListener('pageshow', resumeParticleCanvas);
+            window.removeEventListener('pagehide', disposeParticleCanvas);
+        }
+        document.addEventListener('visibilitychange', handleParticleVisibility);
+        window.addEventListener('pageshow', resumeParticleCanvas);
+        window.addEventListener('pagehide', disposeParticleCanvas);
+        updateParticles();
 
         function setParticleMode(mode) {
             particleMode = mode;

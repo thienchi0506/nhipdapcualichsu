@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "name": "Homepage three entries fit 1365",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 913.328125,
+          "w": 136.328125,
+          "h": 44.3125,
+          "overflow": false
+        },
+        {
+          "x": 1057.65625,
+          "w": 136.328125,
+          "h": 44.3125,
+          "overflow": false
+        },
+        {
+          "x": 913.328125,
+          "w": 280.65625,
+          "h": 62.78125,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "Final scene renders after color correction 1365",
+      "passed": true,
+      "evidence": {
+        "drawCalls": 163,
+        "triangles": 3180,
+        "gpuGeometries": 114,
+        "mode": "tactical",
+        "width": 1365,
+        "height": 707
+      }
+    },
+    {
+      "name": "No uncaught new game error 1365",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Final scene disposes all owned resources 1365",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Homepage three entries fit 390",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 55,
+          "w": 136,
+          "h": 49.109375,
+          "overflow": false
+        },
+        {
+          "x": 199,
+          "w": 136,
+          "h": 49.109375,
+          "overflow": false
+        },
+        {
+          "x": 55,
+          "w": 280,
+          "h": 66.78125,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "Final scene renders after color correction 390",
+      "passed": true,
+      "evidence": {
+        "drawCalls": 150,
+        "triangles": 2945,
+        "gpuGeometries": 114,
+        "mode": "tactical",
+        "width": 390,
+        "height": 583
+      }
+    },
+    {
+      "name": "No uncaught new game error 390",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Final scene disposes all owned resources 390",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "passed": 8,
+  "total": 8,
+  "fpsBenchmark": false
+}

@@ -16,7 +16,22 @@
         shake: typeof stored.shake === 'boolean' ? stored.shake : !reduced,
         grid: !!stored.grid, stats: !!stored.stats
     };
-    let effectiveQuality = settings.quality === 'auto' ? 'medium' : settings.quality;
+    function resolveQuality(requested) {
+        const chosen = requested === 'auto' ? (isMobile() ? 'low' : 'medium') : requested;
+        return isMobile() && chosen === 'high' ? 'medium' : chosen;
+    }
+    function qualityProfile() {
+        const base = presets[effectiveQuality] || presets.medium;
+        if (!isMobile()) return base;
+        return {
+            ...base,
+            dpr: Math.min(base.dpr, 1.25),
+            particles: Math.min(base.particles, 0.55),
+            shadows: false,
+            fps: Math.min(base.fps, 45)
+        };
+    }
+    let effectiveQuality = resolveQuality(settings.quality);
     const loops = new Map(), tasks = new Map(), reasons = new Set(), listeners = new Set();
     let frame = 0, last = null, accumulator = 0, time = 0, taskId = 0, sampleIndex = 0;
     let sampleCount = 0, frameCount = 0, droppedSteps = 0, nextQualityCheck = 10, healthyWindows = 0;
@@ -34,7 +49,9 @@
     function emit() {
         document.documentElement.classList.toggle('hg-reduced-motion', settings.reducedMotion);
         document.documentElement.classList.toggle('hg-no-shake', !settings.shake);
-        for (const listener of listeners) listener(presets[effectiveQuality], settings);
+        const quality = qualityProfile();
+        for (const listener of listeners) listener(quality, settings);
+        global.dispatchEvent(new CustomEvent('history-game-settings', {detail: {quality, settings}}));
     }
     function percentile(q) {
         if (!sampleCount) return 0;
@@ -50,7 +67,7 @@
             renderP95: renderSamples.length ? [...renderSamples].sort((a,b)=>a-b)[Math.floor(renderSamples.length*.95)] : 0};
     }
     function schedule() {
-        if (!frame && !document.hidden && !reasons.size && loops.size && !isMobile()) frame = requestAnimationFrame(tick);
+        if (!frame && !document.hidden && !reasons.size && loops.size) frame = requestAnimationFrame(tick);
     }
     function resetClock() { last = null; lastPaint=null; accumulator = 0; }
     function pause(reason = 'player') {
@@ -63,7 +80,7 @@
     }
     function tick(now) {
         frame = 0;
-        if (document.hidden || reasons.size || isMobile()) { resetClock(); return; }
+        if (document.hidden || reasons.size) { resetClock(); return; }
         const raw = last === null ? STEP : Math.max(0, (now-last)/1000);
         last = now;
         if (raw > 0 && raw < .5) { samples[sampleIndex++ % samples.length] = raw*1000; sampleCount=Math.min(samples.length,sampleCount+1); }
@@ -84,7 +101,8 @@
         if (accumulator >= STEP) { droppedSteps += Math.floor(accumulator/STEP); accumulator %= STEP; }
         for (const loop of loops.values()) {
             if (!loop.render) continue;
-            const interval = 1 / (loop.fps || presets[effectiveQuality].fps);
+            const requestedFps = typeof loop.fps === 'function' ? loop.fps(settings, qualityProfile()) : loop.fps;
+            const interval = 1 / Math.max(1, requestedFps || qualityProfile().fps);
             if (now - loop.lastRender + .1 < interval*1000) continue;
             const delta = loop.lastRender ? Math.min(.1, (now-loop.lastRender)/1000) : STEP;
             loop.lastRender = now;
@@ -97,7 +115,7 @@
             const p95 = percentile(.95);
             if (p95 > 38 && effectiveQuality !== 'low') {
                 effectiveQuality = effectiveQuality === 'high' ? 'medium' : 'low'; healthyWindows = 0; emit();
-            } else if (p95 < 20 && effectiveQuality !== 'high') {
+            } else if (p95 < 20 && effectiveQuality !== (isMobile() ? 'medium' : 'high')) {
                 if (++healthyWindows >= 3) { effectiveQuality = effectiveQuality === 'low' ? 'medium' : 'high'; healthyWindows=0; emit(); }
             } else healthyWindows=0;
         }
@@ -114,7 +132,7 @@
     function configure(change) {
         if (change.quality && ['auto','low','medium','high'].includes(change.quality)) {
             settings.quality=change.quality;
-            effectiveQuality=change.quality === 'auto' ? 'medium' : change.quality;
+            effectiveQuality=resolveQuality(change.quality);
             nextQualityCheck=time+10; healthyWindows=0;
         }
         ['reducedMotion','shake','grid','stats'].forEach(k=> { if (typeof change[k]==='boolean') settings[k]=change[k]; });
@@ -122,7 +140,7 @@
         emit();
     }
     function mountControls() {
-        if (isMobile() || document.getElementById('hg-settings')) return;
+        if (document.getElementById('hg-settings')) return;
         const panel=document.createElement('dialog'); panel.id='hg-settings'; panel.className='interactive';
         panel.innerHTML='<form method="dialog"><button class="hg-close" aria-label="Đóng tùy chỉnh">×</button></form><h2>Tùy chỉnh sa bàn</h2>'+
             '<label>Đồ họa <select id="hg-quality"><option value="auto">Tự động</option><option value="low">Tiết kiệm</option><option value="medium">Cân bằng</option><option value="high">Chi tiết</option></select></label>'+
@@ -151,22 +169,33 @@
             if (e.repeat || e.ctrlKey || e.altKey || e.metaKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || panel.open) return;
             if(e.code==='KeyP'){e.preventDefault();togglePause();}
         });
-        // This UI-only timer must also work while the simulation is paused.
-        global.setInterval(()=>{
+        let meterTimer = 0;
+        function clearMeterTimer() {
+            if (meterTimer) global.clearTimeout(meterTimer);
+            meterTimer = 0;
+        }
+        function refreshMeter() {
             const meter=dock.querySelector('#hg-meter'); meter.hidden=!settings.stats;
-            if(settings.stats){const s=snapshot(); meter.textContent=`${s.paused?'Tạm dừng':Math.round(1000/(s.renderP50||16.67))+' FPS'} · p95 ${s.renderP95.toFixed(1)} ms`;}
-        },1000);
+            if (!settings.stats || document.hidden || !dock.isConnected) { clearMeterTimer(); return; }
+            const s=snapshot(); meter.textContent=`${s.paused?'Tạm dừng':Math.round(1000/(s.renderP50||16.67))+' FPS'} · p95 ${s.renderP95.toFixed(1)} ms`;
+            clearMeterTimer(); meterTimer=global.setTimeout(refreshMeter,1000);
+        }
+        global.addEventListener('history-game-settings', refreshMeter);
+        document.addEventListener('visibilitychange', refreshMeter);
+        global.addEventListener('pagehide', clearMeterTimer);
+        global.addEventListener('pageshow', refreshMeter);
+        refreshMeter();
     }
     global.HistoryGame = {
         settings, presets, snapshot, isMobile, pause, resume, configure, recordRender,
         get paused(){return reasons.size>0||document.hidden;},
-        get quality(){return presets[effectiveQuality];},
+        get quality(){return qualityProfile();},
         now:()=>time*1000,
         addLoop(name, options) { if(loops.has(name)) return; loops.set(name,{...options,lastRender:0}); schedule(); },
         removeLoop(name) { loops.delete(name); if(!loops.size){cancelAnimationFrame(frame);frame=0;resetClock();} },
         delay:(fn,ms)=>delay(fn,ms,false), every:(fn,ms)=>delay(fn,ms,true), cancel,
         resetScene(){tasks.clear();resetClock();global.dispatchEvent(new Event('history-game-scene-reset'));},
-        onSettings(fn){listeners.add(fn);fn(presets[effectiveQuality],settings);return ()=>listeners.delete(fn);},
+        onSettings(fn){listeners.add(fn);fn(qualityProfile(),settings);return ()=>listeners.delete(fn);},
         mountControls,
         active(unit){return !!unit && Number.isFinite(unit.hp) && unit.hp>0 && !unit.sunk && !unit.surrendered;},
         healthPercent(unit){return Math.max(0,Math.min(100,(Number(unit?.hp)||0)/(Number(unit?.maxHp)||100)*100));},
@@ -185,7 +214,7 @@
     global.addEventListener('pageshow',()=>resume('pagehide'));
     // Pausing must block combat input as well as movement and timers.
     ['pointerdown','pointerup','click','contextmenu','keydown','keyup'].forEach(type=>document.addEventListener(type,e=>{
-        if(!reasons.size || e.target.closest('#hg-controls,#hg-settings') || e.code==='KeyP')return;
+        if(!reasons.size || e.target.closest('#hg-controls,#hg-settings,#hg-defeat,dialog,[role="dialog"],[data-allow-when-paused],a[href]') || e.code==='KeyP')return;
         e.preventDefault();e.stopImmediatePropagation();
     },true));
     emit();

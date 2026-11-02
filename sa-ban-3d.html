@@ -5,7 +5,7 @@
   <script src="game-runtime.js"></script>
   <link rel="stylesheet" href="game-runtime.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sa Bàn 3D Bạch Đằng Giang (938) • Dấu Chân Lịch Sử</title>
     
     <!-- Google Fonts: Noto Serif & Be Vietnam Pro Cổ Trang Huyền Thoại -->
@@ -93,7 +93,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 10;
+            z-index: 20;
             pointer-events: none; /* Chỉ kích hoạt trên các nút và thẻ */
             display: flex;
             flex-direction: column;
@@ -102,6 +102,13 @@
 
         .interactive {
             pointer-events: auto;
+        }
+
+        .ui-layer button,
+        .ui-layer a,
+        .ui-layer [role="button"] {
+            pointer-events: auto;
+            touch-action: manipulation;
         }
 
         /* ========================================================================== */
@@ -1517,6 +1524,30 @@
             pointer-events: auto;
         }
 
+        #btn-call-battle {
+            position: fixed;
+            left: 50%;
+            top: 58%;
+            z-index: 48;
+            min-width: min(440px, 90vw);
+            padding: 20px 30px;
+            transform: translate(-50%, -50%);
+            border: 2px solid #f2d15f;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #8d2b1f, #bf7723);
+            color: #fff2c9;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, .58), 0 0 24px rgba(242, 209, 95, .38);
+            font-size: 1.22rem;
+            font-weight: 900;
+            white-space: normal;
+            text-align: center;
+        }
+
+        #btn-call-battle:hover {
+            transform: translate(-50%, -50%) scale(1.04);
+            filter: brightness(1.12);
+        }
+
         .battle-ability-dock.active { display: flex; }
 
         .battle-ability-button {
@@ -1567,8 +1598,9 @@
         }
 
         .battle-guide-overlay, .battle-outcome-overlay {
-            position: fixed; inset: 0; z-index: 90; display: none; place-items: center;
+            position: fixed; inset: 0; z-index: 1000; display: none; place-items: center;
             padding: 20px; background: rgba(8, 7, 5, .82); backdrop-filter: blur(7px);
+            pointer-events: auto;
         }
         .battle-guide-overlay.open, .battle-outcome-overlay.open { display: grid; }
         .battle-guide-card, .battle-outcome-card {
@@ -1582,7 +1614,7 @@
         .battle-guide-card kbd { padding: 2px 7px; border: 1px solid #9a7a36; border-radius: 5px; background: #211a12; color: #ffe17e; }
         .battle-guide-continue { margin-top: 20px; width: 100%; padding: 13px 18px; border: 1px solid #f4d46c; border-radius: 12px; background: linear-gradient(135deg,#76251d,#b46d20); color: #fff1c9; font-weight: 900; font-size: 1rem; cursor: pointer; }
         .battle-outcome-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
-        .battle-outcome-actions button { padding: 11px 16px; border: 1px solid #d4af37; border-radius: 10px; background: #24170e; color: #ffe7a5; font-weight: 800; cursor: pointer; }
+        .battle-outcome-actions button { position: relative; z-index: 1; pointer-events: auto; touch-action: manipulation; padding: 11px 16px; border: 1px solid #d4af37; border-radius: 10px; background: #24170e; color: #ffe7a5; font-weight: 800; cursor: pointer; }
         .battle-outcome-actions button:hover { background: #55321c; }
         .battle-boat-selection { position: fixed; left: 50%; bottom: max(22px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 39; display: none; gap: 5px; padding: 6px; border: 1px solid rgba(212,175,55,.65); border-radius: 14px; background: rgba(13,12,10,.8); }
         .battle-boat-selection.active { display: flex; }
@@ -1590,6 +1622,7 @@
         .battle-boat-selection button.selected { border-color: #ffe27a; background: #71431e; box-shadow: 0 0 10px rgba(255,226,122,.45); }
 
         @media (max-width: 760px) {
+            #btn-call-battle { top: 60%; min-width: min(360px, 88vw); padding: 16px 20px; font-size: 1.08rem; }
             .battle-ability-dock { right: 10px; bottom: max(14px, env(safe-area-inset-bottom)); gap: 7px; }
             .battle-ability-button { width: 50px; height: 50px; }
             .battle-ability-button.special-shot { width: 58px; height: 58px; }
@@ -2781,9 +2814,225 @@
             #modal-leaderboard-3d [style*="justify-content:space-between"] { gap: 8px; flex-wrap: wrap; }
         }
 
+        /* Bạch Đằng: giữ khung cảnh rộng và chỉ để lại HUD phục vụ trận thủy chiến. */
+        body.campaign-bach-dang .hud-stats-cluster,
+        body.campaign-bach-dang .general-profile-badge,
+        body.campaign-bach-dang #btn-toggle-dpad,
+        body.campaign-bach-dang .hud-tools-right > button[onclick="moSanhCho3D()"],
+        body.campaign-bach-dang .hud-tools-right > a[href="trang-chinh.html"],
+        body.campaign-bach-dang .tactical-minimap-panel,
+        body.campaign-bach-dang .wind-compass-box,
+        body.campaign-bach-dang #hero-skills-dock,
+        body.campaign-bach-dang #selected-unit-panel,
+        body.campaign-bach-dang #interaction-prompt-pill {
+            display: none !important;
+        }
+
+        body.campaign-bach-dang #quest-overlay-box { top: 62px; left: 12px; }
+        body.campaign-bach-dang #tactical-actions-bar { display: contents; }
+        body.campaign-bach-dang #tactical-actions-bar > .btn-tactical-order:not(#btn-call-battle) { display: none; }
+        body.campaign-bach-dang .camera-modes-bar {
+            padding: 0;
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        body.campaign-bach-dang .camera-modes-bar > .btn-cam-mode:not(#cam-btn-tactical) { display: none; }
+        body.campaign-bach-dang #cam-btn-tactical {
+            padding: 6px 10px;
+            border: 1px solid var(--border-bronze);
+            background: var(--bg-panel);
+        }
+
+        @media (max-width: 760px) {
+            body.campaign-bach-dang #quest-overlay-box { top: 58px; left: 8px; }
+            body.campaign-bach-dang #cam-btn-tactical { font-size: .65rem; }
+        }
+
+        /* Như Nguyệt: giữ góc nhìn toàn trận, ưu tiên nhiệm vụ và các chiêu phục kích. */
+        body.campaign-nhu-nguyet .hud-stats-cluster,
+        body.campaign-nhu-nguyet .general-profile-badge,
+        body.campaign-nhu-nguyet #btn-toggle-dpad,
+        body.campaign-nhu-nguyet .hud-tools-right > button[onclick="moSanhCho3D()"],
+        body.campaign-nhu-nguyet .tactical-minimap-panel,
+        body.campaign-nhu-nguyet .tide-compass-panel,
+        body.campaign-nhu-nguyet #selected-unit-panel {
+            display: none !important;
+        }
+
+        body.campaign-nhu-nguyet #quest-overlay-box { top: 62px; left: 12px; max-width: min(420px, calc(100vw - 24px)); }
+        body.campaign-nhu-nguyet #tactical-actions-bar { display: contents; }
+        body.campaign-nhu-nguyet #tactical-actions-bar > .btn-tactical-order:not(#btn-call-battle) { display: none; }
+        body.campaign-nhu-nguyet .camera-modes-bar {
+            padding: 0;
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        body.campaign-nhu-nguyet .camera-modes-bar > .btn-cam-mode:not(#cam-btn-tactical) { display: none; }
+        body.campaign-nhu-nguyet #cam-btn-tactical { padding: 6px 10px; border: 1px solid var(--border-bronze); background: var(--bg-panel); }
+        body.campaign-nhu-nguyet #btn-call-battle { top: 62%; min-width: min(500px, 92vw); padding: 24px 34px; font-size: 1.3rem; }
+        body.campaign-nhu-nguyet:not(.nhu-nguyet-battle) #hero-skills-dock { display: none !important; }
+        body.campaign-nhu-nguyet.nhu-nguyet-battle #btn-call-battle { display: none !important; }
+        body.campaign-nhu-nguyet.nhu-nguyet-battle #interaction-prompt-pill,
+        body.campaign-nhu-nguyet.nhu-nguyet-battle .building-label-3d { display: none !important; }
+        body.campaign-nhu-nguyet.nhu-nguyet-battle #hero-skills-dock { display: flex !important; }
+
+        @media (max-width: 760px) {
+            body.campaign-nhu-nguyet #quest-overlay-box { top: 58px; left: 8px; }
+            body.campaign-nhu-nguyet #cam-btn-tactical { font-size: .65rem; }
+            body.campaign-nhu-nguyet #btn-call-battle { top: 62%; padding: 18px 20px; font-size: 1.05rem; }
+        }
+
+        html, body { width: 100%; min-height: 100%; }
+        #webgl-canvas-container, .ui-layer { height: 100vh; height: 100dvh; }
+        #webgl-canvas { touch-action: none; }
+        .interactive button, .interactive a, .ui-layer button, .ui-layer a { touch-action: manipulation; }
+        .modal-3d-container {
+            max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px);
+            overflow: auto;
+            overscroll-behavior: contain;
+        }
+        #lobby-3d-modal { height: 100vh; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; }
+        #quest-overlay-box { max-width: min(420px, calc(100vw - 16px)); max-height: 28dvh; overflow: auto; overscroll-behavior: contain; }
+        @media (max-width: 760px) {
+            #webgl-canvas-container { position: fixed; inset: 0; width: 100vw; height: 100dvh; }
+            .ui-layer { position: fixed; inset: 0; width: 100vw; height: 100dvh; }
+            .skill-banner-popup {
+                position: fixed; top: calc(env(safe-area-inset-top, 0px) + 160px); left: 50%;
+                width: min(420px, calc(100vw - 24px)); max-height: min(32dvh, 220px);
+                box-sizing: border-box; overflow: auto; overscroll-behavior: contain;
+                padding: 12px 16px; transform: translateX(-50%) scale(.96);
+                pointer-events: none; overflow-wrap: anywhere;
+            }
+            .skill-banner-popup.active { transform: translateX(-50%) scale(1); }
+            .skill-banner-title { font-size: clamp(.95rem, 5vw, 1.25rem); line-height: 1.2; letter-spacing: .35px; }
+            .skill-banner-sub { font-size: .78rem; line-height: 1.4; }
+            .battle-guide-overlay, .battle-outcome-overlay {
+                box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain;
+                padding: calc(env(safe-area-inset-top, 0px) + 12px) max(12px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 12px) max(12px, env(safe-area-inset-left, 0px));
+            }
+            .battle-guide-card, .battle-outcome-card {
+                box-sizing: border-box; width: min(660px, 100%);
+                max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px);
+                overflow-y: auto; overscroll-behavior: contain; padding: clamp(16px, 5vw, 24px);
+            }
+            .battle-guide-continue, .battle-outcome-actions button { min-height: 44px; min-width: 44px; touch-action: manipulation; }
+            .battle-outcome-actions { gap: 8px; }
+            #lobby-3d-modal {
+                align-items: center; justify-content: flex-start;
+                padding: calc(env(safe-area-inset-top, 0px) + 12px) max(12px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 16px) max(12px, env(safe-area-inset-left, 0px));
+            }
+            .lobby-hero-card { width: 100%; max-width: 860px; flex: 0 0 auto; margin: 0 auto 14px; padding: 20px 14px; }
+            .lobby-sub-badge { font-size: .68rem; letter-spacing: 1px; padding: 4px 10px; }
+            .lobby-main-title { font-size: clamp(1.45rem, 7vw, 1.85rem); line-height: 1.15; letter-spacing: 1px; }
+            .lobby-quote { font-size: .84rem; margin-bottom: 18px; }
+            .campaign-cards-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 18px; }
+            .campaign-card { min-width: 0; padding: 14px; }
+            .card-title { font-size: 1rem; overflow-wrap: anywhere; }
+            .card-desc { font-size: .78rem; margin-bottom: 12px; overflow-wrap: anywhere; }
+            .lobby-aux-actions { max-width: 100%; flex-wrap: wrap; gap: 8px; padding-top: 14px; }
+            .btn-lobby-aux { flex: 1 1 calc(50% - 4px); justify-content: center; padding: 8px; min-height: 44px; }
+            .top-hud {
+                height: auto; max-height: 28dvh; min-height: 48px;
+                padding: calc(env(safe-area-inset-top, 0px) + 5px) 8px 6px;
+                overflow-x: hidden; overflow-y: auto; flex-wrap: wrap; align-content: flex-start;
+                scrollbar-width: thin;
+            }
+            .top-hud > * { max-width: 100%; min-width: 0; }
+            .hud-tools-right { max-width: 100%; flex-wrap: wrap; justify-content: flex-end; }
+            .top-hud button, .top-hud a, .btn-cam-mode, .btn-tactical-order,
+            .battle-ability-button, #btn-call-battle, .btn-hud-tool, #site-music-toggle, .modal-3d-container button,
+            .btn-quest-toggle, .btn-enter-campaign, .btn-lobby-aux {
+                min-height: 44px; touch-action: manipulation;
+            }
+            .btn-quest-toggle { min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+            .btn-enter-campaign { height: auto; }
+            .battle-boat-selection button { width: 44px; height: 44px; min-width: 44px; touch-action: manipulation; }
+            .btn-hero-skill { min-height: 44px; }
+            .dpad-container { width: 152px; height: 152px; }
+            .dpad-btn { min-width: 44px; min-height: 44px; touch-action: manipulation; }
+            .btn-hud-tool { min-width: 44px; }
+            .battle-ability-button { width: 58px; height: 58px; }
+            .battle-ability-dock {
+                right: max(8px, env(safe-area-inset-right, 0px));
+                bottom: max(10px, env(safe-area-inset-bottom, 0px));
+                gap: 7px;
+            }
+            .virtual-controls-wrapper {
+                left: max(8px, env(safe-area-inset-left, 0px));
+                bottom: calc(230px + env(safe-area-inset-bottom, 0px));
+                gap: 8px;
+            }
+            .hero-skills-dock {
+                bottom: max(8px, env(safe-area-inset-bottom, 0px));
+                max-width: calc(100vw - 12px);
+            }
+            .skills-buttons-grid {
+                max-width: calc(100vw - 12px); overflow-x: auto; justify-content: flex-start;
+                padding: 3px 2px; scrollbar-width: none;
+            }
+            .skills-buttons-grid::-webkit-scrollbar { display: none; }
+            #btn-call-battle {
+                top: 62%; width: min(500px, calc(100vw - 24px)); min-width: 0;
+                min-height: 56px; padding: 14px 18px; font-size: clamp(.95rem, 4vw, 1.15rem);
+            }
+            body.campaign-nhu-nguyet #btn-call-battle { width: calc(100vw - 24px); min-width: 0; }
+            #hg-controls { top: calc(env(safe-area-inset-top, 0px) + 26dvh + 8px); }
+            #hg-orders { bottom: calc(env(safe-area-inset-bottom, 0px) + 88px); }
+            body:not(.gameplay-ui-active) #hg-controls { display: none !important; }
+
+            body.campaign-bach-dang.bachdang-battle-active .top-hud,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle .top-hud {
+                height: 54px; max-height: 54px; min-height: 54px; flex-wrap: nowrap;
+                align-items: center; justify-content: space-between; gap: 4px; overflow: visible;
+                padding: calc(env(safe-area-inset-top, 0px) + 4px) max(8px, env(safe-area-inset-right, 0px)) 4px max(8px, env(safe-area-inset-left, 0px));
+            }
+            body.campaign-bach-dang.bachdang-battle-active .hud-tools-right,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle .hud-tools-right {
+                width: auto; max-width: none; flex-wrap: nowrap; justify-content: flex-end; gap: 4px; overflow: visible;
+            }
+            body.campaign-bach-dang.bachdang-battle-active .hud-tools-right > *,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle .hud-tools-right > * {
+                width: 44px; min-width: 44px; max-width: 44px; height: 44px; min-height: 44px;
+                flex: 0 0 44px; justify-content: center; gap: 0; padding: 0 !important; font-size: 0;
+            }
+            body.campaign-bach-dang.bachdang-battle-active .hud-tools-right > * span:first-child,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle .hud-tools-right > * span:first-child { font-size: 1.05rem; line-height: 1; }
+            body.campaign-bach-dang.bachdang-battle-active #quest-overlay-box,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle #quest-overlay-box,
+            body.campaign-bach-dang.bachdang-battle-active .tide-compass-panel,
+            body.campaign-bach-dang.bachdang-battle-active .camera-modes-bar,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle .camera-modes-bar { display: none !important; }
+            body.campaign-bach-dang.bachdang-battle-active #battle-stage-banner,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle #battle-stage-banner {
+                top: calc(env(safe-area-inset-top, 0px) + 58px); left: 8px; right: 8px; width: auto; max-width: none;
+                min-height: 38px; padding: 5px 9px; transform: none; border-radius: 12px;
+                justify-content: center; text-align: center; white-space: normal; overflow: visible;
+                text-overflow: clip; font-size: clamp(.62rem, 2.7vw, .78rem); line-height: 1.25;
+            }
+            body.campaign-bach-dang.bachdang-battle-active #stage-banner-text,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle #stage-banner-text { white-space: normal; overflow-wrap: anywhere; }
+            body.campaign-bach-dang.bachdang-battle-active #hg-controls,
+            body.campaign-nhu-nguyet.nhu-nguyet-battle #hg-controls {
+                top: calc(env(safe-area-inset-top, 0px) + 105px) !important;
+                right: max(8px, env(safe-area-inset-right, 0px)) !important;
+                bottom: auto !important; left: auto !important;
+            }
+        }
+        @media (max-width: 380px) {
+            .top-hud { gap: 4px; padding-left: 6px; padding-right: 6px; }
+            .top-hud button, .top-hud a { padding-left: 7px; padding-right: 7px; font-size: .68rem; }
+            .tactical-quest-overlay { max-width: calc(100vw - 16px); }
+            .battle-ability-button { width: 54px; height: 54px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .top-hud *, .interactive, .modal-3d-container { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
+
     </style>
 </head>
-<body>
+<body class="campaign-bach-dang">
 
     <!-- 1. THẺ NHẠC NỀN ĐỒNG BỘ LOCAL STORAGE -->
     <audio id="bg-music" src="nhac-nen-1.mp3" preload="none"></audio>
@@ -2805,7 +3054,7 @@
         <header class="top-hud interactive">
             <div class="hud-left">
                 <!-- Nút Rút Về Trang Chủ -->
-                <a href="trang-chinh.html" class="btn-hud-tool" title="Trở về Trang Chủ Dấu Chân Lịch Sử">
+                <a href="trang-chinh.html" class="btn-hud-tool" data-allow-when-paused title="Trở về Trang Chủ Dấu Chân Lịch Sử">
                     <span>⬅</span> <span>Trang Chính</span>
                 </a>
 
@@ -2943,13 +3192,13 @@
 
             <!-- Cụm 3 Nút Chuyển Góc Nhìn Camera 3D -->
             <div class="camera-modes-bar">
-                <button class="btn-cam-mode active" id="cam-btn-lobby" onclick="datGocNhinCamera('LOBBY')">
+                <button class="btn-cam-mode" id="cam-btn-lobby" onclick="datGocNhinCamera('LOBBY')">
                     <span>🎬</span> <span>Góc Điện Ảnh</span>
                 </button>
                 <button class="btn-cam-mode" id="cam-btn-fps" onclick="datGocNhinCamera('FIRST_PERSON')">
                     <span>🎥</span> <span>Góc Nhập Vai</span>
                 </button>
-                <button class="btn-cam-mode" id="cam-btn-tactical" onclick="datGocNhinCamera('TACTICAL')">
+                <button class="btn-cam-mode active" id="cam-btn-tactical" onclick="datGocNhinCamera('TACTICAL')">
                     <span>🗺️</span> <span>Sa Bàn Toàn Cảnh</span>
                 </button>
                 <button class="btn-cam-mode active" id="btn-toggle-action-cam" onclick="toggleActionCam()" title="Bật/Tắt Camera Điện Ảnh Hành Động khi ra đòn & va chạm cọc gỗ">
@@ -2959,8 +3208,8 @@
 
             <!-- Thanh Thao Tác Chiến Thuật Nhanh (Di dời từ đáy màn hình lên góc trên phải) -->
             <div class="tactical-actions-bar" id="tactical-actions-bar">
-                <button class="btn-tactical-order active" onclick="khoiDongChienTranHoi2()" id="btn-call-battle" title="Khởi động diễn biến Trận Đồ (Hồi 2)">
-                    <span>⚔️</span> <span>Sẵn Sàng Tác Chiến</span>
+                <button class="btn-tactical-order active interactive" data-allow-when-paused onclick="khoiDongChienTranHoi2()" id="btn-call-battle" title="Bắt đầu trận Bạch Đằng · điều khiển sáu thuyền">
+                    <span>🚤</span> <span>SẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN</span>
                 </button>
                 <button class="btn-tactical-order" onclick="thayDoiThuyTrieuThuCong()" title="Chuyển nhanh chu kỳ Thủy Triều để thử nghiệm cọc ngầm">
                     <span>🌊</span> <span id="lbl-tide-toggle">Chu Kỳ Triều: Tự Động</span>
@@ -2993,7 +3242,7 @@
         <!-- ================================================================== -->
         <!--  KHUNG NHIỆM VỤ & CHỈ DẪN TRẬN ĐÁNH (GÓC TRÊN TRÁI - COLLAPSIBLE)   -->
         <!-- ================================================================== -->
-        <aside class="tactical-quest-overlay interactive" id="quest-overlay-box">
+        <aside class="tactical-quest-overlay interactive collapsed" id="quest-overlay-box">
             <div class="quest-header-row" onclick="toggleQuestOverlay(event)" title="Nhấn để Thu nhỏ / Mở rộng Nhiệm VỤ QUÂN CƠ">
                 <div class="quest-tag"><span>📜</span> <span id="quest-header-title">NHIỆM VỤ QUÂN CƠ</span></div>
                 <div class="quest-header-actions">
@@ -3114,25 +3363,25 @@
             <span id="interaction-prompt-text">⚔️ Tiếp Cận Xưởng Đẽo Cọc</span>
         </div>
 
-        <div class="battle-guide-overlay" id="bachdang-guide-overlay" role="dialog" aria-modal="true" aria-labelledby="bachdang-guide-title" onclick="tiepTucTranBachDangNeuClickVungTrong(event)">
+        <div class="battle-guide-overlay interactive" id="bachdang-guide-overlay" role="dialog" aria-modal="true" aria-labelledby="bachdang-guide-title" onclick="tiepTucTranBachDangNeuClickVungTrong(event)">
             <div class="battle-guide-card">
                 <h2 id="bachdang-guide-title">⚓ HƯỚNG DẪN TRẬN BẠCH ĐẰNG</h2>
                 <p><kbd>W</kbd>/<kbd>S</kbd> tiến hoặc lùi; <kbd>A</kbd>/<kbd>D</kbd> xoay. Trong 15 giây đầu, điều khiển cả 6 thuyền (mỗi thuyền 4.000 HP) theo đội hình; sau đó nhấp thuyền để chọn từng chiếc.</p>
                 <p>Nhấp vào tàu địch để chọn mục tiêu. Nút tròn hoặc giữ <kbd>C</kbd> cho cả sáu thuyền và hai bờ bắn thường (200 sát thương/mũi); cung lớn <kbd>1</kbd> gây 500 sát thương, hồi 3 giây.</p>
                 <p>Sau 15 giây, giữ nút hỏa tiễn hoặc <kbd>2</kbd> để cung thủ hai bờ tự bắn (700 sát thương mỗi mũi, hồi 5 giây). Gọi hòa bình <kbd>3</kbd> hồi 200 HP cho mỗi thuyền ta, hồi chiêu 10 giây; cần cả 7 tàu địch trúng cọc và gây ít nhất 4.000 sát thương trong 5 giây. Tàu thường có 20.000 HP, soái hạm 25.000 HP; trúng cọc mất 14.000 HP. Nếu thuyền nhử chủ lực bị hạ hoặc thuyền ta trúng cọc khi triều rút, trận thua ngay.</p>
-                <button class="battle-guide-continue" type="button" onclick="batDauTranBachDangSauHuongDan()">Bắt đầu · Enter</button>
+                <button class="battle-guide-continue" type="button" data-allow-when-paused onclick="batDauTranBachDangSauHuongDan()">Bắt đầu · Enter</button>
                 <p style="text-align:center; opacity:.78; font-size:.88rem">Nhấn Enter hoặc bấm vùng trống để tiếp tục</p>
             </div>
         </div>
 
-        <div class="battle-outcome-overlay" id="bachdang-outcome-overlay" role="dialog" aria-modal="true" aria-labelledby="bachdang-outcome-title">
+        <div class="battle-outcome-overlay interactive" id="bachdang-outcome-overlay" role="dialog" aria-modal="true" aria-labelledby="bachdang-outcome-title">
             <div class="battle-outcome-card">
                 <h2 id="bachdang-outcome-title">Kết quả trận đánh</h2>
                 <p id="bachdang-outcome-text"></p>
                 <div class="battle-outcome-actions">
-                    <button type="button" onclick="choiLaiChienDich3D()">🔄 Chơi lại</button>
-                    <button type="button" onclick="ketThucTranBachDangVeSaBan()">🗺️ Về sa bàn</button>
-                    <button type="button" id="bachdang-postwar-button" onclick="ketThucTranBachDangMoHauChien()" hidden>🌅 Khảo sát hậu chiến</button>
+                    <button type="button" data-allow-when-paused onclick="choiLaiChienDich3D()">🔄 Chơi lại</button>
+                    <button type="button" data-allow-when-paused onclick="ketThucTranBachDangVeSaBan()">🗺️ Về sa bàn</button>
+                    <button type="button" id="bachdang-postwar-button" data-allow-when-paused onclick="ketThucTranBachDangMoHauChien()" hidden>🌅 Khảo sát hậu chiến</button>
                 </div>
             </div>
         </div>
@@ -3333,9 +3582,9 @@
                 🏆 <strong>Chiến thắng!</strong> Hồ sơ và thứ hạng của bạn đã được cập nhật.
             </div>
             <div id="battle-victory-actions" style="display:none; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
-                <button class="btn-enter-campaign" type="button" onclick="troVeBanDoChienDich3D()">🗺️ Về bản đồ chiến dịch</button>
-                <button class="btn-enter-campaign" type="button" onclick="choiLaiChienDich3D()">🔄 Chơi lại trận này</button>
-                <button class="btn-close-modal" type="button" onclick="dongModal('modal-leaderboard-3d')" style="padding:8px 14px; width:auto; height:auto;">Ở lại sa bàn</button>
+                <button class="btn-enter-campaign" type="button" data-allow-when-paused onclick="troVeBanDoChienDich3D()">🗺️ Về bản đồ chiến dịch</button>
+                <button class="btn-enter-campaign" type="button" data-allow-when-paused onclick="choiLaiChienDich3D()">🔄 Chơi lại trận này</button>
+                <button class="btn-close-modal" type="button" data-allow-when-paused onclick="dongModal('modal-leaderboard-3d')" style="padding:8px 14px; width:auto; height:auto;">Ở lại sa bàn</button>
             </div>
         </div>
     </div>
@@ -3493,7 +3742,7 @@
             cheDoGiongDoc: true,
 
             // Camera Controller State
-            cheDoCamera: 'LOBBY',      // 'LOBBY', 'FIRST_PERSON', 'TACTICAL'
+            cheDoCamera: 'TACTICAL',   // Default wide tactical view
             showVirtualControls: false,// Mặc định ẩn trên PC để tối ưu tầm nhìn 3D
             dangONgoaiSanh: true,
 
@@ -3508,9 +3757,9 @@
 
             // Animation & Timing
             clock: new THREE.Clock(),
-            targetCamPos: new THREE.Vector3(0, 35, 120),
-            targetCamLook: new THREE.Vector3(0, 5, 0),
-            currentCamLook: new THREE.Vector3(0, 5, 0),
+            targetCamPos: new THREE.Vector3(0, 65, 115),
+            targetCamLook: new THREE.Vector3(0, -2, -15),
+            currentCamLook: new THREE.Vector3(0, -2, -15),
 
             // Tương tác chuột xoay camera
             isDragging: false,
@@ -3718,13 +3967,13 @@
             congTrinhNhuNguyet: {
                 chienLuyTreGia: {
                     id: 'chienLuyTreGia',
-                    name: 'Chiến Lũy Tre Già & Hào Chông',
+                    name: 'Chiến Lũy Tre & Vọng Lâu',
                     subtitle: 'Gia cố lũy tre nhiều tầng chống đạn đá & Nấu cháo nóng bồi dưỡng dân binh',
                     icon: '🎋',
                     avatar: '🛡️',
                     npcName: 'Đô Thống Quân Doanh (Bờ Nam Sông Cầu)',
-                    dialogue: '"Bẩm Thái úy! Lũy tre xanh bờ Nam sông Như Nguyệt được trồng dày đặc nhiều tầng, thân tre ken chặt nhau như tường thành thép. Dưới chân lũy là hào sâu cắm chông tre ngầm vót nhọn tẩm nhựa độc. Chỉ cần tăng cường đá tảng gia cố và nấu cháo nóng cho dân binh chống rét cắt da cắt thịt, quân Tống dù có vạn máy bắn đá cũng không thể xuyên thủng phòng tuyến bờ Nam!"',
-                    voiceText: 'Bẩm Thái úy! Lũy tre nhiều tầng và hào chông ngầm đã vững vàng. Dân binh đang ngày đêm đan phên chắn đạn đá của quân Tống!',
+                    dialogue: '"Bẩm Thái úy! Lũy tre xanh bờ Nam sông Như Nguyệt ken dày nhiều tầng, che chắn dân binh trước hỏa lực quân Tống. Vọng lâu giúp quan sát bè địch từ xa; cung thủ đã ém sẵn ở hai bờ, chờ đúng tầm sẽ đồng loạt phục kích!"',
+                    voiceText: 'Bẩm Thái úy! Lũy tre và vọng lâu đã sẵn sàng. Cung thủ hai bờ đang ém quân chờ bè Tống vào tầm!',
                     pos: { x: -36, y: 2.8, z: 35 },
                     color: 0x27AE60,
                     ringMesh: null,
@@ -3741,8 +3990,8 @@
                         },
                         {
                             level: 2,
-                            title: 'Hào Sâu Cắm Chông Tre Vạt Nhọn & Bố Trí Vọng Lâu Bờ Sông',
-                            desc: 'Đào thêm hào nước sâu 2 trượng cắm chông tre nhọn ngầm, dựng tháp canh gỗ quan sát động tĩnh.',
+                            title: 'Dựng Vọng Lâu Quan Sát Bờ Sông',
+                            desc: 'Dựng tháp canh gỗ cao để phát hiện bè Tống sớm và báo hiệu cho cung thủ hai bờ.',
                             benefit: '+30% Khả năng cản phá bè mảng đổ bộ • Cảnh báo sớm vượt sông',
                             cost: 800,
                             unlocked: false
@@ -3898,10 +4147,10 @@
             },
             // BỘ 4 TUYỆT KỸ 3D CHO CHIẾN DỊCH 2: PHÒNG TUYẾN SÔNG NHƯ NGUYỆT 1077 (THÁI ÚY LÝ THƯỜNG KIỆT)
             skillsNhuNguyet: {
-                1: { id: 1, name: "Dụ Địch Bãi Lầy & Chông Ngầm", icon: "🎋", cost: 25, cd: 10, currentCd: 0, desc: "Nhử đạo Miêu Cảo vào bãi lầy sập chông tre" },
+                1: { id: 1, name: "Lệnh Phục Kích Hai Bờ", icon: "🏹", cost: 25, cd: 10, currentCd: 0, desc: "Ra hiệu cung thủ hai bờ đồng loạt bắn thêm một loạt tên" },
                 2: { id: 2, name: "Thần Thi 'Nam Quốc Sơn Hà'", icon: "⚡", cost: 30, cd: 18, currentCd: 0, desc: "Cột hào quang đền thiêng, sấm sét 3D, hồi 100% Sĩ khí, giặc tụt 50%" },
-                3: { id: 3, name: "Hỏa Thiêu Cầu Phao", icon: "🔥", cost: 35, cd: 15, currentCd: 0, desc: "Phóng bè lửa & tên lửa 3D đốt cháy đứt đôi cầu phao Tống" },
-                4: { id: 4, name: "Đêm Tập Kích & Giảng Hòa", icon: "📜", cost: 20, cd: 20, currentCd: 0, desc: "Tập kích đêm tan rã nhuệ khí Quách Quỳ & mở đường hòa đàm rút quân" }
+                3: { id: 3, name: "Hỏa Tiễn Phục Kích", icon: "🔥", cost: 35, cd: 15, currentCd: 0, desc: "Bắn loạt tên lửa lớn vào các bè địch đang vượt sông" },
+                4: { id: 4, name: "Kêu Gọi Đầu Hàng", icon: "🕊️", cost: 20, cd: 20, currentCd: 0, desc: "Chỉ dùng được khi toàn bộ bè địch đã suy yếu nghiêm trọng" }
             },
             danhSachBeMangTong: [],
             danDaLuaList: [],
@@ -3940,6 +4189,17 @@
                 result: null,
                 resultShown: false
             },
+            nhuNguyetBattle: {
+                active: false,
+                elapsed: 0,
+                ambushLineX: 24,
+                crossingLineX: -24,
+                volleyInterval: 0.85,
+                damagePerArrow: 150,
+                result: null,
+                nextStatusAt: 0,
+                lastShotSoundAt: -1
+            },
             dilemmasTriggered: { 1: false, 2: false, 3: false },
             trapCooldown: 0,
             activeDilemmaId: null,
@@ -3950,17 +4210,17 @@
                     id: 1,
                     icon: '🎋',
                     badge: 'TÌNH HUỐNG 1: ĐẬP TAN CẦU PHAO MIÊU CẢO',
-                    title: 'ĐẠO TIÊN PHONG MIÊU CẢO ÁP SÁT BÃI LẦY BỜ NAM',
-                    context: '"Bẩm Thái úy! Soái bè tiên phong của tướng Tống Miêu Cảo đang áp sát bãi lầy bờ Nam. Quân giặc dùng khiên sắt che chắn tên bắn từ lũy tre, chuẩn bị đổ bộ bắc thang công phá chiến lũy tre!"',
+                    title: 'BÈ TIÊN PHONG MIÊU CẢO VÀO TẦM PHỤC KÍCH',
+                    context: '"Bẩm Thái úy! Soái bè tiên phong Miêu Cảo đang tiến vào tầm bắn. Quân Tống dùng khiên che chắn, còn cung thủ hai bờ đã sẵn sàng khai hỏa!"',
                     choices: [
                         {
                             key: 'A',
                             type: 'TỐI ƯU • ĐẠO LÀM TƯỚNG',
-                            title: 'Giật sập cọc chông tre ngầm & nỏ liên châu bắn rát',
-                            desc: 'Kéo dây tời bẫy chông tre ngầm làm vỡ toác đáy bè mảng Miêu Cảo, đồng thời dàn nỏ liên châu bắn dồn dập.',
+                            title: 'Ra hiệu cung thủ hai bờ đồng loạt khai hỏa',
+                            desc: 'Tập trung loạt tên vào bè tiên phong để làm chậm mũi vượt sông và hỗ trợ toàn trận địa.',
                             impact: { nhanDao: 200, siKhi: 30, quanLuc: 0, thuongBinh: 0 },
-                            resultTitle: 'BẺ GÃY TIÊN PHONG • CHÔNG TRE ĐẬP TAN BÈ GIẶC',
-                            resultQuote: '"Chông tre ngầm kết hợp nỏ liên châu Đại Việt đã đánh chìm đạo bè tiên phong của Miêu Cảo! Quân giặc khiếp đảm rơi xuống bùn lầy!"'
+                            resultTitle: 'BẺ GÃY TIÊN PHONG • TÊN BẮN TỪ HAI BỜ',
+                            resultQuote: '"Cung thủ hai bờ đồng loạt khai hỏa, đánh bật bè tiên phong khỏi mũi vượt sông! Quân Tống rối loạn đội hình!"'
                         },
                         {
                             key: 'B',
@@ -4539,15 +4799,16 @@
                     0.8,
                     1500
                 );
-                Game3D.camera.position.set(0, 35, 120);
+                Game3D.camera.position.set(0, 65, 115);
 
                 // 3. Renderer
                 Game3D.renderer = new THREE.WebGLRenderer({
                     canvas: canvas,
-                    antialias: true,
-                    powerPreference: 'high-performance'
+                    antialias: !HistoryGame.isMobile(),
+                    powerPreference: HistoryGame.isMobile() ? 'low-power' : 'high-performance'
                 });
-                Game3D.renderer.setSize(window.innerWidth, window.innerHeight);
+                const initialViewport = window.visualViewport;
+                Game3D.renderer.setSize(initialViewport?.width || window.innerWidth, initialViewport?.height || window.innerHeight);
                 // Cap render resolution to prevent high-DPI displays from multiplying GPU work.
                 Game3D.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, HistoryGame.quality.dpr));
                 Game3D.renderer.setClearColor(0x16293a, 1);
@@ -5329,6 +5590,10 @@
 
             Object.values(targetStructures).forEach(fac => {
                 if (!fac.labelEl) return;
+                if (Game3D.currentCampaign === 1 && !Game3D.isPostWar) {
+                    fac.labelEl.style.display = 'none';
+                    return;
+                }
 
                 tempV.set(fac.pos.x, fac.pos.y + 5.2, fac.pos.z);
                 tempV.project(Game3D.camera);
@@ -5355,6 +5620,14 @@
                 if (e.key === 'Enter' && Game3D.bachDang?.tutorialOpen) {
                     e.preventDefault();
                     batDauTranBachDangSauHuongDan();
+                    return;
+                }
+                if (Game3D.bachDang?.tutorialOpen) {
+                    e.preventDefault();
+                    return;
+                }
+                if (isBachDangFleetScreen() && !isBachDangCombatActive()) {
+                    e.preventDefault();
                     return;
                 }
                 if (isBachDangCombatActive()) {
@@ -6294,6 +6567,20 @@
 
             Object.values(Game3D.units).forEach(u => {
                 if (!u.labelEl) return;
+                if (Game3D.currentCampaign === 2 && !Game3D.isPostWar) {
+                    const showEnemyHealth = !!Game3D.nhuNguyetBattle?.active && u.type === 'dich' && HistoryGame.active(u);
+                    if (!showEnemyHealth) {
+                        u.labelEl.style.display = 'none';
+                        return;
+                    }
+                }
+                if (Game3D.currentCampaign === 1 && !Game3D.isPostWar) {
+                    const showLabel = isBachDangCombatActive() && (u === Game3D.bachDang?.target || u === Game3D.selectedUnit);
+                    if (!showLabel) {
+                        u.labelEl.style.display = 'none';
+                        return;
+                    }
+                }
 
                 // Chiều cao nhô lên tùy theo kích cỡ đạo quân (Soái hạm 16m, tàu hộ vệ 10.5m, thuyền nhẹ 4.5m)
                 const heightOffset = (u.id === 'dichLauThuyen') ? 16 : (u.type === 'dich' ? 10.5 : 4.5);
@@ -6904,6 +7191,12 @@
         function capNhatThanhTuyetKyTheoChienDich() {
             const isNhuNguyet = (Game3D.currentCampaign === 2);
             const skillsMap = isNhuNguyet ? Game3D.skillsNhuNguyet : Game3D.skills;
+            const bannerTitle = document.getElementById('skill-banner-title');
+            const bannerSub = document.getElementById('skill-banner-sub');
+            if (bannerTitle) bannerTitle.textContent = isNhuNguyet ? '🏹 PHỤC KÍCH HAI BỜ' : '🌊 THỦY TRIỀU DẪN DỤ';
+            if (bannerSub) bannerSub.textContent = isNhuNguyet
+                ? 'Cung thủ hai bờ khai hỏa khi bè địch vào tầm; chặn chúng trước bờ Nam.'
+                : 'Kế giả thua nhử toàn bộ hạm đội giặc vào bãi cọc ngầm!';
 
             for (let i = 1; i <= 4; i++) {
                 const s = skillsMap[i];
@@ -6958,6 +7251,15 @@
             // 1. Cập nhật di chuyển các mũi tên lửa 3D theo đường cong Parabol
             for (let i = Game3D.arrows3D.length - 1; i >= 0; i--) {
                 const a = Game3D.arrows3D[i];
+                if (a.isFire && a.mesh.userData.flameParts) {
+                    a.mesh.userData.flameParts.forEach((part) => {
+                        const base = part.userData.baseScale;
+                        const pulse = 0.78 + 0.34 * (0.5 + 0.5 * Math.sin(elapsed * 25 + part.userData.phase));
+                        if (typeof base === 'number') part.scale.setScalar(base * pulse);
+                        else part.scale.set(base.x * pulse, base.y * pulse, base.z * pulse);
+                        part.rotation.x = Math.sin(elapsed * 17 + part.userData.phase) * 0.1;
+                    });
+                }
                 a.progress += a.speed * delta;
 
                 if (a.progress >= 1.0) {
@@ -7048,6 +7350,7 @@
         /*  I. ĐIỀU KHIỂN CAMERA & CÁC CHẾ ĐỘ GÓC NHÌN 3D                            */
         /* ========================================================================== */
         function datGocNhinCamera(cheDo) {
+            if (Game3D.currentCampaign === 1 && !Game3D.isPostWar && cheDo === 'FIRST_PERSON') cheDo = 'TACTICAL';
             Game3D.cheDoCamera = cheDo;
 
             // Đảm bảo đối tượng tọa độ cầu và vector camera luôn hợp lệ
@@ -7091,9 +7394,15 @@
             } else if (cheDo === 'TACTICAL') {
                 const btn = document.getElementById('cam-btn-tactical');
                 if (btn) btn.classList.add('active');
-                Game3D.targetCamPos.set(0, 85, 75);
-                Game3D.targetCamLook.set(0, -2, -15);
-                phatGiongDoc("Mở góc nhìn Sa Bàn Toàn Cảnh bao quát trận địa sông Bạch Đằng!");
+                if (Game3D.currentCampaign === 2) {
+                    Game3D.targetCamPos.set(0, 132, 118);
+                    Game3D.targetCamLook.set(0, 0, 0);
+                    phatGiongDoc("Mở góc nhìn toàn cảnh phòng tuyến sông Như Nguyệt!");
+                } else {
+                    Game3D.targetCamPos.set(0, 85, 75);
+                    Game3D.targetCamLook.set(0, -2, -15);
+                    phatGiongDoc("Mở góc nhìn Sa Bàn Toàn Cảnh bao quát trận địa sông Bạch Đằng!");
+                }
             }
 
             // Kiểm tra và tự động fallback về toàn cảnh sông (0, 65, 95) nếu phát hiện NaN hoặc undefined
@@ -7112,17 +7421,21 @@
         function dangKySuKienChuotVaManHinh() {
             const container = document.getElementById('webgl-canvas-container');
 
-            window.addEventListener('resize', () => {
+            const resizeGameViewport = () => {
                 if (!Game3D.camera || !Game3D.renderer) return;
-                Game3D.camera.aspect = window.innerWidth / window.innerHeight;
+                const width = Math.max(1, window.visualViewport?.width || window.innerWidth);
+                const height = Math.max(1, window.visualViewport?.height || window.innerHeight);
+                Game3D.camera.aspect = width / height;
                 Game3D.camera.updateProjectionMatrix();
-                Game3D.renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+                Game3D.renderer.setSize(width, height);
+            };
+            window.addEventListener('resize', resizeGameViewport, { passive: true });
+            window.visualViewport?.addEventListener('resize', resizeGameViewport, { passive: true });
 
             // Kéo chuột để xoay quanh cảnh vật
             window.addEventListener('pointerdown', (e) => {
                 // Chỉ nhận khi không click trúng các nút UI
-                if (e.target.closest('.interactive') || e.target.closest('.modal-3d-container')) return;
+                if (e.target.closest('.interactive, button, a, [role="button"]') || e.target.closest('.modal-3d-container')) return;
                 Game3D.isDragging = true;
                 Game3D.previousMousePosition = { x: e.clientX, y: e.clientY };
             });
@@ -7170,6 +7483,11 @@
                     t.phanTram = 100;
                     t.dangTang = true;
                 }
+                t.cheDoTuDong = false;
+            } else if (Game3D.currentCampaign === 2) {
+                // Như Nguyệt không dùng con nước làm cơ chế chiến đấu; giữ mặt sông ổn định.
+                t.phanTram = 85;
+                t.dangTang = false;
                 t.cheDoTuDong = false;
             } else if (t.cheDoTuDong) {
                 if (t.dangTang) {
@@ -7220,6 +7538,12 @@
 
         function thayDoiThuyTrieuThuCong() {
             const t = Game3D.thuyTrieu;
+            if (Game3D.currentCampaign === 2) {
+                t.phanTram = 85;
+                t.dangTang = false;
+                t.cheDoTuDong = false;
+                return;
+            }
             t.cheDoTuDong = false;
             // Chuyển nhanh giữa 2 trạng thái: Triều Rút Cực Kiệt <-> Đỉnh Triều
             if (t.phanTram > 40) {
@@ -7239,7 +7563,7 @@
         /*  K. RENDER LOOP CHÍNH (60 FPS MƯỢT MÀ)                                     */
         /* ========================================================================== */
         function renderLoop3D() {
-            if (!Game3D.renderer || HistoryGame.isMobile()) return;
+            if (!Game3D.renderer) return;
             HistoryGame.addLoop('battle-3d', { update: updateSimulation3D, render: renderFrame3D });
             HistoryGame.mountControls();
         }
@@ -7248,7 +7572,7 @@
             const delta = step * (Game3D.timeScale || 1);
             Game3D.simulationElapsed = (Game3D.simulationElapsed || 0) + delta;
             capNhatThuyTrieu3D(delta);
-            if (!isBachDangCombatActive()) xuLyDieuKhienNhanVat(delta, Game3D.simulationElapsed);
+            if (!isBachDangFleetScreen()) xuLyDieuKhienNhanVat(delta, Game3D.simulationElapsed);
             capNhatTuyetKyCooldown(delta);
             capNhatHieuUngChienThuat3D(delta, Game3D.simulationElapsed);
             kiemTraVongLapChienTran(delta, Game3D.simulationElapsed);
@@ -7416,15 +7740,41 @@
         /*  L. CÁC HÀM TƯƠNG TÁC GIAO DIỆN & MODAL                                   */
         /* ========================================================================== */
         function moSanhCho3D() {
+            document.body.classList.remove('gameplay-ui-active');
             const modal = document.getElementById('lobby-3d-modal');
             if (modal) modal.classList.remove('hidden');
-            datGocNhinCamera('LOBBY');
+            datGocNhinCamera('TACTICAL');
         }
 
         function chuyenVaoThucChien(e) {
             if (e) e.stopPropagation();
+            document.body.classList.add('gameplay-ui-active');
             const modal = document.getElementById('lobby-3d-modal');
             if (modal) modal.classList.add('hidden');
+            if (Game3D.currentCampaign === 1) {
+                document.body.classList.add('campaign-bach-dang');
+                document.getElementById('quest-overlay-box')?.classList.add('collapsed');
+                datGocNhinCamera('TACTICAL');
+                const questInst = document.getElementById('hud-quest-instruction');
+                if (questInst) questInst.innerHTML = '<b>Trận Bạch Đằng 938:</b> Nhấn nút lớn ở giữa màn hình để xem hướng dẫn và vào trận điều khiển sáu thuyền nhử.';
+                const startButton = document.getElementById('btn-call-battle');
+                if (startButton) startButton.style.display = '';
+                const oldSkills = document.getElementById('hero-skills-dock');
+                const oldPanel = document.getElementById('selected-unit-panel');
+                if (oldSkills) oldSkills.style.display = 'none';
+                if (oldPanel) oldPanel.style.display = 'none';
+                Game3D.keys.up = Game3D.keys.down = Game3D.keys.left = Game3D.keys.right = false;
+                return;
+            }
+            if (Game3D.currentCampaign === 2) {
+                document.body.classList.add('campaign-nhu-nguyet');
+                document.getElementById('quest-overlay-box')?.classList.add('collapsed');
+                datGocNhinCamera('TACTICAL');
+                const startButton = document.getElementById('btn-call-battle');
+                if (startButton) startButton.style.display = '';
+                Game3D.keys.up = Game3D.keys.down = Game3D.keys.left = Game3D.keys.right = false;
+                return;
+            }
             datGocNhinCamera('FIRST_PERSON');
             const questInst = document.getElementById('hud-quest-instruction');
             if (questInst) {
@@ -7464,6 +7814,8 @@
 
         function troVeBanDoChienDich3D() {
             dongModal('modal-leaderboard-3d');
+            document.body.classList.remove('gameplay-ui-active');
+            document.body.classList.remove('bachdang-battle-active');
             const lobby = document.getElementById('lobby-3d-modal');
             if (lobby) lobby.classList.remove('hidden');
             if (Game3D.currentCampaign === 1) {
@@ -7483,8 +7835,29 @@
                 document.getElementById('bachdang-boat-selection')?.classList.remove('active');
                 document.getElementById('bachdang-guide-overlay')?.classList.remove('open');
                 document.getElementById('bachdang-outcome-overlay')?.classList.remove('open');
+                const battleButton = document.getElementById('btn-call-battle');
+                if (battleButton) {
+                    battleButton.innerHTML = '<span>🚤</span> <span>SẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN</span>';
+                    battleButton.title = 'Bắt đầu trận Bạch Đằng · điều khiển sáu thuyền';
+                    battleButton.setAttribute('onclick', 'khoiDongChienTranHoi2()');
+                    battleButton.style.display = '';
+                    battleButton.style.borderColor = '';
+                }
                 const oldSkills = document.getElementById('hero-skills-dock');
                 if (oldSkills) oldSkills.style.display = '';
+            } else if (Game3D.currentCampaign === 2) {
+                Game3D.nhuNguyetBattle.active = false;
+                Game3D.nhuNguyetBattle.result = null;
+                Game3D.isPostWar = false;
+                document.body.classList.remove('nhu-nguyet-battle', 'nhu-nguyet-postwar');
+                document.body.classList.add('campaign-nhu-nguyet');
+                const battleButton = document.getElementById('btn-call-battle');
+                if (battleButton) {
+                    battleButton.innerHTML = '<span>⚔️</span> <span>SẴN SÀNG PHỤC KÍCH</span>';
+                    battleButton.title = 'Bắt đầu trận Như Nguyệt · mai phục hai bờ';
+                    battleButton.setAttribute('onclick', 'khoiDongChienTranNhuNguyetHoi2()');
+                    battleButton.style.display = '';
+                }
             }
             Game3D.combatPhase = 'CHUA_BAT_DAU';
             datGocNhinCamera('TACTICAL');
@@ -7545,7 +7918,7 @@
             // Xử lý Click Chuột Trái: Chọn đơn vị hoặc di chuyển
             window.addEventListener('pointerup', (e) => {
                 // Bỏ qua nếu click vào UI
-                if (e.target.closest('.interactive') || e.target.closest('.modal-3d-container') || e.target.closest('.modal-base-upgrade') || e.target.closest('.modal-tactical-dilemma') || e.target.closest('.modal-general-philosophy')) {
+                if (e.target.closest('.interactive, button, a, [role="button"]') || e.target.closest('.modal-3d-container') || e.target.closest('.modal-base-upgrade') || e.target.closest('.modal-tactical-dilemma') || e.target.closest('.modal-general-philosophy')) {
                     return;
                 }
 
@@ -7611,7 +7984,7 @@
             // Xử lý Click Chuột Phải: Ra lệnh tác chiến nhanh & vẽ vệt đường đi 3D
             window.addEventListener('contextmenu', (e) => {
                 if (isBachDangCombatActive()) { e.preventDefault(); return; }
-                if (e.target.closest('.interactive') || e.target.closest('.modal-3d-container') || e.target.closest('.modal-base-upgrade') || e.target.closest('.modal-tactical-dilemma') || e.target.closest('.modal-general-philosophy')) {
+                if (e.target.closest('.interactive, button, a, [role="button"]') || e.target.closest('.modal-3d-container') || e.target.closest('.modal-base-upgrade') || e.target.closest('.modal-tactical-dilemma') || e.target.closest('.modal-general-philosophy')) {
                     return;
                 }
 
@@ -7795,6 +8168,10 @@
             return Game3D.currentCampaign === 1 && !!Game3D.bachDang?.active && !Game3D.bachDang.result;
         }
 
+        function isBachDangFleetScreen() {
+            return Game3D.currentCampaign === 1 && !Game3D.isPostWar;
+        }
+
         function tiepTucTranBachDangNeuClickVungTrong(event) {
             if (event && event.target.id !== 'bachdang-guide-overlay') return;
             batDauTranBachDangSauHuongDan();
@@ -7804,12 +8181,19 @@
             if (Game3D.currentCampaign !== 1 || isBachDangCombatActive() || Game3D.bachDang?.tutorialOpen) return;
             const guide = document.getElementById('bachdang-guide-overlay');
             if (guide) guide.classList.add('open');
+            const startButton = document.getElementById('btn-call-battle');
+            if (startButton) startButton.style.display = 'none';
+            const oldSkills = document.getElementById('hero-skills-dock');
+            const oldPanel = document.getElementById('selected-unit-panel');
+            if (oldSkills) oldSkills.style.display = 'none';
+            if (oldPanel) oldPanel.style.display = 'none';
             Game3D.bachDang.tutorialOpen = true;
         }
 
         function batDauTranBachDangSauHuongDan() {
             const state = Game3D.bachDang;
             if (Game3D.currentCampaign !== 1 || !state || state.active) return;
+            document.body.classList.add('gameplay-ui-active');
             state.tutorialOpen = false;
             const guide = document.getElementById('bachdang-guide-overlay');
             if (guide) guide.classList.remove('open');
@@ -7822,6 +8206,7 @@
                 fireCooldown: 0, peaceCooldown: 0, peaceWindowStart: null,
                 damageInPeaceWindow: 0, peaceReady: false, result: null, resultShown: false
             };
+            document.body.classList.add('bachdang-battle-active');
             Game3D.combatPhase = 'NUOC_LON';
             Game3D.victoryResultsShown = false;
             Game3D.thuyTrieu.phanTram = 100;
@@ -7833,6 +8218,8 @@
             (Game3D.baitFleet || []).forEach((boat, index) => {
                 boat.hp = boat.maxHp = 4000;
                 boat.sunk = boat.surrendered = boat.trapped = false;
+                boat.burningUntil = 0;
+                if (boat.fireEffect) boat.fireEffect.visible = false;
                 boat.normalShotCooldown = 0;
                 boat.pos.y = 1.3;
                 boat.targetX = boat.pos.x;
@@ -7842,6 +8229,8 @@
             (Game3D.danhSachTauDich || []).forEach(ship => {
                 ship.hp = ship.maxHp = ship.id === 'dichLauThuyen' ? 25000 : 20000;
                 ship.sunk = ship.surrendered = ship.trapped = false;
+                ship.burningUntil = 0;
+                if (ship.fireEffect) ship.fireEffect.visible = false;
                 ship.stakeDamageApplied = false;
                 ship.morale = 100;
                 ship.speed = 5.2;
@@ -7853,6 +8242,8 @@
                     ship.whiteFlagMesh = null;
                 }
             });
+            const openingTarget = (Game3D.danhSachTauDich || []).find(HistoryGame.active);
+            if (openingTarget) chonMucTieuBachDang(openingTarget);
 
             if (Game3D.stakeField) {
                 Game3D.stakeField.visible = false;
@@ -7870,8 +8261,9 @@
             if (questInst) questInst.innerHTML = '<b>Nhử địch:</b> Điều khiển 6 thuyền cùng lúc bằng <b>W/S</b> tiến lùi, <b>A/D</b> xoay. Sau 15 giây triều rút; nhấp thuyền để chuyển sang lái riêng từng chiếc. Chọn tàu địch rồi giữ <b>C</b> hoặc nút Đánh thường để cả đội bắn cùng mục tiêu.';
             const btnCall = document.getElementById('btn-call-battle');
             if (btnCall) {
-                btnCall.innerHTML = '<span>⚔️</span> <span>Trận Đồ Đang Diễn Ra</span>';
+                btnCall.innerHTML = '<span>⚓</span> <span>Đang Giao Chiến · 6 Thuyền</span>';
                 btnCall.style.borderColor = '#E74C3C';
+                btnCall.style.display = 'none';
             }
             const oldSkills = document.getElementById('hero-skills-dock');
             if (oldSkills) oldSkills.style.display = 'none';
@@ -8000,12 +8392,66 @@
             if (Game3D.bachDang) Game3D.bachDang.fireHeld = false;
         }
 
-        function phatTenBachDang(source, target, damage, isFire = false, accuracy = 0.9) {
+        function taoHieuUngTauChayBachDang(unit) {
+            if (!unit?.mesh) return;
+            let assets = Game3D.bachDangFireAssets;
+            if (!assets) {
+                assets = {
+                    outerGeometry: new THREE.ConeGeometry(.62, 2.5, 7),
+                    innerGeometry: new THREE.ConeGeometry(.34, 1.75, 7),
+                    outerMaterial: new THREE.MeshBasicMaterial({ color: 0xff3a0a, transparent: true, opacity: .88, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false }),
+                    innerMaterial: new THREE.MeshBasicMaterial({ color: 0xffd34d, transparent: true, opacity: .96, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false })
+                };
+                Game3D.bachDangFireAssets = assets;
+            }
+            if (!unit.fireEffect) {
+                const effect = new THREE.Group();
+                const baseY = unit.type === 'ta' ? 2.2 : 4.2;
+                const positions = [[-1.8, -.9], [-.9, .8], [0, -1.1], [.95, .85], [1.8, -.45]];
+                positions.forEach(([x, z], index) => {
+                    const flame = new THREE.Mesh(assets.outerGeometry, assets.outerMaterial);
+                    flame.position.set(x, baseY + (index % 2) * .35, z);
+                    flame.userData.baseScale = { x: .72 + (index % 3) * .12, y: .82 + (index % 2) * .14, z: .72 + (index % 2) * .08 };
+                    flame.userData.phase = index * 1.7;
+                    effect.add(flame);
+                    if (index < 3) {
+                        const core = new THREE.Mesh(assets.innerGeometry, assets.innerMaterial);
+                        core.position.set(x + .12, baseY - .08, z);
+                        core.userData.baseScale = { x: .7, y: .78, z: .7 };
+                        core.userData.phase = index * 2.2 + .7;
+                        effect.add(core);
+                    }
+                });
+                effect.visible = false;
+                unit.mesh.add(effect);
+                unit.fireEffect = effect;
+            }
+            unit.burningUntil = (Game3D.bachDang?.elapsed || 0) + 3.8;
+            unit.fireEffect.visible = true;
+        }
+
+        function capNhatLuaChayTauBachDang() {
+            const now = Game3D.bachDang?.elapsed || 0;
+            [...(Game3D.baitFleet || []), ...(Game3D.danhSachTauDich || [])].forEach(unit => {
+                if (!unit.fireEffect) return;
+                unit.fireEffect.visible = (unit.burningUntil || 0) > now;
+                if (!unit.fireEffect.visible) return;
+                unit.fireEffect.children.forEach(flame => {
+                    const base = flame.userData.baseScale;
+                    const pulse = .78 + .26 * (0.5 + 0.5 * Math.sin(now * 18 + flame.userData.phase));
+                    flame.scale.set(base.x, base.y * pulse, base.z);
+                    flame.rotation.y = Math.sin(now * 9 + flame.userData.phase) * .14;
+                });
+            });
+        }
+
+        function phatTenBachDang(source, target, damage, isFire = false, accuracy = 0.9, arrowScale = isFire || damage >= 500 ? 7.5 : 1.5) {
             if (!source || !target || !HistoryGame.active(target)) return false;
-            return GameTactics3D.projectile(source.pos, target.pos, () => {
+            const fired = GameTactics3D.projectile(source.pos, target.pos, () => {
                 if (!isBachDangCombatActive() || !HistoryGame.active(target)) return;
                 apDungSatThuongDich(target, damage);
                 target.hitFlash = 0.22;
+                if (isFire) taoHieuUngTauChayBachDang(target);
                 if (Game3D.bachDang.peaceWindowStart !== null && !Game3D.bachDang.peaceReady && Game3D.bachDang.elapsed - Game3D.bachDang.peaceWindowStart <= 5) {
                     Game3D.bachDang.damageInPeaceWindow += damage;
                     if (Game3D.bachDang.damageInPeaceWindow >= 4000) {
@@ -8021,7 +8467,16 @@
                 }
                 capNhatHUDTranBachDang();
                 kiemTraKetQuaTranBachDang();
-            }, { fire: isFire, accuracy, spread: accuracy < 0.85 ? 8 : 2, speed: isFire ? 2.6 : 2.2, target, hitRadius: 5 });
+            }, { fire: isFire, accuracy, spread: accuracy < 0.85 ? 10 : 3, speed: isFire ? 2.6 : 2.2, target, hitRadius: 5, size: arrowScale });
+            if (!fired) return false;
+            for (let i = 0; i < 5; i++) {
+                GameTactics3D.projectile(source.pos, target.pos, null, {
+                    fire: isFire, accuracy: 0, spread: isFire ? 38 : 30,
+                    speed: 1.25 + Math.random() * .85, height: 4 + Math.random() * 5,
+                    size: arrowScale
+                });
+            }
+            return true;
         }
 
         function banLoatTenThuongBachDang() {
@@ -8035,7 +8490,7 @@
             });
             if (!sources.length) return;
             sources.forEach(source => phatTenBachDang(source, target, 200, false, 0.92));
-            state.normalFireCooldown = 0.8;
+            state.normalFireCooldown = 0.55;
             AudioEngine.playArrow();
         }
 
@@ -8085,6 +8540,8 @@
             if (!state || state.result) return;
             state.result = result;
             state.active = false;
+            document.body.classList.remove('gameplay-ui-active');
+            document.body.classList.remove('bachdang-battle-active');
             state.normalFireHeld = false;
             state.fireHeld = false;
             Game3D.keys.up = Game3D.keys.down = Game3D.keys.left = Game3D.keys.right = false;
@@ -8101,8 +8558,6 @@
             const tray = document.getElementById('bachdang-boat-selection');
             if (dock) dock.classList.remove('active');
             if (tray) tray.classList.remove('active');
-            const skills = document.getElementById('hero-skills-dock');
-            if (skills) skills.style.display = '';
             capNhatHienThiPhimAo();
             if (result === 'win') AudioEngine.playFanfare();
             else AudioEngine.playStakeImpact();
@@ -8221,6 +8676,7 @@
             const state = Game3D.bachDang;
             if (!isBachDangCombatActive()) return;
             state.elapsed += delta;
+            capNhatLuaChayTauBachDang();
             state.normalFireCooldown = Math.max(0, state.normalFireCooldown - delta);
             state.specialCooldown = Math.max(0, state.specialCooldown - delta);
             state.fireCooldown = Math.max(0, state.fireCooldown - delta);
@@ -8624,6 +9080,10 @@
 
         // 1. Chuyển Đổi Môi Trường 3D Sang Bình Minh Hòa Bình
         function chuyenSangBinhMinhHoaBinh() {
+            document.body.classList.add('gameplay-ui-active');
+            document.body.classList.remove('bachdang-battle-active');
+            document.body.classList.remove('campaign-bach-dang');
+            document.getElementById('quest-overlay-box')?.classList.remove('collapsed');
             Game3D.isPostWar = true;
             Game3D.cheDoCamera = 'FIRST_PERSON';
             chuyenDoiThoiTiet3Hoi(3); // Chuyển sang Hồi 3: Bình minh rạng đông, God-rays & nước xanh biếc
@@ -9466,7 +9926,7 @@
             // Vật liệu dùng chung
             const bambooPoleMat = new THREE.MeshLambertMaterial({ color: 0x27AE60 }); // Thân tre xanh ngọc
             const bambooLeafMat = new THREE.MeshLambertMaterial({ color: 0x1E8449 }); // Tán lá tre xanh rậm
-            const earthMat = new THREE.MeshLambertMaterial({ color: 0x5D4037 });      // Đất hào chông bờ hào
+            const earthMat = new THREE.MeshLambertMaterial({ color: 0x5D4037 });      // Đất đắp phòng tuyến bờ Nam
             const darkWoodMat = new THREE.MeshLambertMaterial({ color: 0x4E342E });   // Gỗ tháp canh lim
             const templeWallMat = new THREE.MeshLambertMaterial({ color: 0x8D6E63 }); // Tường đền cổ
             const templeRoofMat = new THREE.MeshLambertMaterial({ color: 0xB71C1C }); // Mái ngói đỏ son cong
@@ -9475,35 +9935,16 @@
             const ironMat = new THREE.MeshStandardMaterial({ color: 0x37474F, roughness: 0.6 }); // Khung sắt máy bắn đá
 
             // -------------------------------------------------------------
-            // BỜ NAM (ĐẠI VIỆT): LŨY TRE XANH NHIỀU TẦNG & HÀO CHÔNG NGẦM
+            // BỜ NAM (ĐẠI VIỆT): LŨY TRE XANH NHIỀU TẦNG
             // -------------------------------------------------------------
             const rampartGroup = new THREE.Group();
-            rampartGroup.name = 'luyTreVaHaoChong';
+            rampartGroup.name = 'luyTrePhongNgu';
 
             // Bờ đất đắp cao phòng ngự dọc mép sông bờ Nam (X = -23.5)
             const embankmentGeo = new THREE.BoxGeometry(3.5, 2.2, 300);
             const embankmentMesh = new THREE.Mesh(embankmentGeo, earthMat);
             embankmentMesh.position.set(-24, 1.1, 0);
             rampartGroup.add(embankmentMesh);
-
-            // Hào sâu cắm chông tre ngầm (X = -21.5, Z từ -145 đến 145)
-            const trenchGeo = new THREE.BoxGeometry(2.5, 1.4, 300);
-            const trenchMat = new THREE.MeshLambertMaterial({ color: 0x3E2723 });
-            const trenchMesh = new THREE.Mesh(trenchGeo, trenchMat);
-            trenchMesh.position.set(-21.5, 0.4, 0);
-            rampartGroup.add(trenchMesh);
-
-            // Bãi chông tre vạt nhọn ngầm trong hào
-            const spikeGeo = new THREE.ConeGeometry(0.08, 1.6, 5);
-            const spikeMat = new THREE.MeshLambertMaterial({ color: 0xD7CCC8 });
-            for (let z = -145; z <= 145; z += 2.2) {
-                for (let r = -0.7; r <= 0.7; r += 0.7) {
-                    const spike = new THREE.Mesh(spikeGeo, spikeMat);
-                    spike.position.set(-21.5 + r + (Math.random() - 0.5) * 0.2, 0.8, z + (Math.random() - 0.5) * 0.4);
-                    spike.rotation.z = (Math.random() - 0.5) * 0.25;
-                    rampartGroup.add(spike);
-                }
-            }
 
             // Lũy tre xanh nhiều tầng kiên cố (3 lớp tre so le dày đặc)
             const bambooPoleGeo = new THREE.CylinderGeometry(0.12, 0.16, 7.5, 6);
@@ -9836,14 +10277,27 @@
         function chuyenSangChienDichNhuNguyet() {
             HistoryGame.resetScene();
             try {
+                document.body.classList.add('gameplay-ui-active');
+                document.body.classList.remove('campaign-bach-dang', 'nhu-nguyet-battle', 'nhu-nguyet-postwar');
+                document.body.classList.add('campaign-nhu-nguyet');
+                document.getElementById('quest-overlay-box')?.classList.add('collapsed');
                 Game3D.currentCampaign = 2;
                 Game3D.isPostWar = false;
+                Game3D.nhuNguyetBattle.active = false;
+                Game3D.nhuNguyetBattle.result = null;
                 Game3D.combatPhase = 'CHUA_BAT_DAU';
                 Game3D.victoryResultsShown = false;
                 Game3D.bachDang.active = false;
                 Game3D.bachDang.result = null;
                 Game3D.bachDang.normalFireHeld = false;
                 Game3D.bachDang.fireHeld = false;
+                const battleButton = document.getElementById('btn-call-battle');
+                if (battleButton) {
+                    battleButton.innerHTML = '<span>⚔️</span> <span>Sẵn Sàng Tác Chiến</span>';
+                    battleButton.title = 'Sẵn sàng vào trận';
+                    battleButton.setAttribute('onclick', 'khoiDongChienTranNhuNguyetHoi2()');
+                    battleButton.style.display = '';
+                }
                 document.getElementById('bachdang-ability-dock')?.classList.remove('active');
                 document.getElementById('bachdang-boat-selection')?.classList.remove('active');
                 document.getElementById('bachdang-guide-overlay')?.classList.remove('open');
@@ -9872,7 +10326,7 @@
                 if (rankEl) rankEl.textContent = '⚔️ Thái Úy • Tiết Độ Sứ (1077)';
                 if (badgeEl) badgeEl.textContent = 'Như Nguyệt 1077';
                 if (questEl) {
-                    questEl.innerHTML = '<b>Tuần Tra Phòng Tuyến Như Nguyệt:</b> Dùng <b>W, A, S, D</b> (hoặc D-Pad) điều khiển Thái úy tuần tra bờ Nam & nhấn <b>[Phím E]</b> tại 4 công trình (Chiến Lũy Tre, Xưởng Nỏ, Y Quán, Đền Thiêng)!';
+                    questEl.innerHTML = '<b>Chuẩn bị:</b> Dùng <b>W/A/S/D</b> và <b>E</b> tại 4 công trình. Trong trận, cung thủ hai bờ tự bắn; chặn cả 6 bè trước bờ Nam. Không có cọc hay thủy triều.';
                 }
 
                 // Ẩn các đối tượng Bạch Đằng (Bãi cọc, tàu địch, công trình Bạch Đằng)
@@ -9916,9 +10370,14 @@
                 // Cập nhật thanh Tuyệt Kỹ HUD sang Như Nguyệt
                 capNhatThanhTuyetKyTheoChienDich();
 
-                // Chuyển sang góc nhìn nhập vai FIRST_PERSON để tuần tra chiến lũy
+                // Mở màn bằng góc toàn cảnh; người chơi vẫn có thể di chuyển tới các công trình.
                 GameTactics3D.prepareCampaign();
-                datGocNhinCamera('FIRST_PERSON');
+                Game3D.thuyTrieu.phanTram = 85;
+                Game3D.thuyTrieu.dangTang = false;
+                Game3D.thuyTrieu.cheDoTuDong = false;
+                Game3D.thuyTrieu.mucNuocY = -3.2 + 0.85 * 4.5;
+                if (Game3D.waterMesh) Game3D.waterMesh.position.y = Game3D.thuyTrieu.mucNuocY;
+                datGocNhinCamera('TACTICAL');
             } catch (errNN) {
                 console.warn("Lỗi chuyển sang chiến dịch Như Nguyệt:", errNN);
             }
@@ -9927,6 +10386,10 @@
         function chuyenSangChienDichBachDang() {
             HistoryGame.resetScene();
             try {
+                document.body.classList.add('gameplay-ui-active');
+                document.body.classList.remove('campaign-nhu-nguyet', 'nhu-nguyet-battle', 'nhu-nguyet-postwar');
+                document.body.classList.add('campaign-bach-dang');
+                document.getElementById('quest-overlay-box')?.classList.add('collapsed');
                 Game3D.currentCampaign = 1;
                 Game3D.isPostWar = false;
                 Game3D.combatPhase = 'CHUA_BAT_DAU';
@@ -9936,17 +10399,23 @@
                 Game3D.bachDang.normalFireHeld = false;
                 Game3D.bachDang.fireHeld = false;
                 Game3D.bachDang.tutorialOpen = false;
+                const battleButton = document.getElementById('btn-call-battle');
+                if (battleButton) {
+                    battleButton.innerHTML = '<span>🚤</span> <span>SẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN</span>';
+                    battleButton.title = 'Bắt đầu trận Bạch Đằng · điều khiển sáu thuyền';
+                    battleButton.style.display = '';
+                    battleButton.style.borderColor = '';
+                }
                 document.getElementById('bachdang-ability-dock')?.classList.remove('active');
                 document.getElementById('bachdang-boat-selection')?.classList.remove('active');
                 document.getElementById('bachdang-guide-overlay')?.classList.remove('open');
                 document.getElementById('bachdang-outcome-overlay')?.classList.remove('open');
                 const oldBattleSkills = document.getElementById('hero-skills-dock');
-                if (oldBattleSkills) oldBattleSkills.style.display = '';
+                const oldSelectedPanel = document.getElementById('selected-unit-panel');
+                if (oldBattleSkills) oldBattleSkills.style.display = 'none';
+                if (oldSelectedPanel) oldSelectedPanel.style.display = 'none';
                 const modal = document.getElementById('lobby-3d-modal');
                 if (modal) modal.classList.add('hidden');
-
-                hienThiThongBaoPopup("🌊 BẠCH ĐẰNG GIANG (938)", "Chào mừng Đô úy tiền quân trở lại đại chiến sông Bạch Đằng!");
-                phatGiongDoc("Chào mừng Đô úy đến Chiến Dịch Bạch Đằng Giang! Hãy chỉ đạo 4 công trình hậu phương chuẩn bị bãi cọc!");
 
                 const titleEl = document.querySelector('.campaign-badge');
                 if (titleEl) titleEl.innerText = "ẢI 1: BẠCH ĐẰNG GIANG 938";
@@ -9962,7 +10431,7 @@
                 if (rankEl) rankEl.textContent = '⚔️ Tiết Độ Sứ • Đô Úy (938)';
                 if (badgeEl) badgeEl.textContent = 'Bạch Đằng 938';
                 if (questEl) {
-                    questEl.innerHTML = '<b>Chuẩn Bị Hậu Cần:</b> Dùng phím <b>W, A, S, D</b> (hoặc D-Pad) điều khiển Tướng quân chạy đến 4 công trình bên bờ sông & nhấn <b>[Phím E]</b> để ra quyết sách nâng cấp!';
+                    questEl.innerHTML = '<b>Bạch Đằng 938:</b> Nhấn nút lớn giữa màn hình để mở hướng dẫn và bắt đầu trận nhử địch bằng sáu thuyền.';
                 }
 
                 // Hiện lại đối tượng Bạch Đằng
@@ -9976,8 +10445,8 @@
                 if (Game3D.congTrinhHauPhuong) {
                     Object.values(Game3D.congTrinhHauPhuong).forEach(fac => {
                         if (fac.meshGroup) fac.meshGroup.visible = true;
-                        if (fac.ringMesh) fac.ringMesh.visible = true;
-                        if (fac.labelEl) fac.labelEl.style.display = 'flex';
+                        if (fac.ringMesh) fac.ringMesh.visible = false;
+                        if (fac.labelEl) fac.labelEl.style.display = 'none';
                     });
                 }
 
@@ -10003,7 +10472,7 @@
                 capNhatThanhTuyetKyTheoChienDich();
 
                 GameTactics3D.prepareCampaign();
-                datGocNhinCamera('FIRST_PERSON');
+                datGocNhinCamera('TACTICAL');
             } catch (errBD) {
                 console.warn("Lỗi chuyển sang chiến dịch Bạch Đằng:", errBD);
             }
@@ -10027,6 +10496,8 @@
             const bronzeMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.8, roughness: 0.3 });
             const flagRedMat = new THREE.MeshStandardMaterial({ color: 0xB71C1C, roughness: 0.5, side: THREE.DoubleSide });
             const flagGreenMat = new THREE.MeshStandardMaterial({ color: 0x1B5E20, roughness: 0.5, side: THREE.DoubleSide });
+            const archerArmorMat = new THREE.MeshStandardMaterial({ color: 0x356B3F, roughness: 0.85 });
+            const archerSkinMat = new THREE.MeshStandardMaterial({ color: 0xD8A878, roughness: 0.9 });
 
             // a. Đội Thuyền Nhẹ Tuần Tiễu (thuyenNhe)
             const scoutGroup = new THREE.Group();
@@ -10097,30 +10568,60 @@
                 targetZ: -15
             };
 
-            // c. Cung Nỏ Thủ Lũy Tre Bờ Nam (cungNoLuyTre)
-            const archerGroup = new THREE.Group();
-            for (let z = -60; z <= 60; z += 30) {
-                const fort = new THREE.Group();
-                fort.position.set(-25.5, 1.8, z);
-                const shieldWall = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.4, 6.0), woodMat);
-                fort.add(shieldWall);
-                const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 1.2), flagGreenMat);
-                flag.position.set(0, 3.2, 0);
-                fort.add(flag);
-                archerGroup.add(fort);
+            // c. Hai tuyến cung thủ mai phục ở bờ Nam và bờ Bắc.
+            function taoTuyenCungThu(x) {
+                const group = new THREE.Group();
+                group.position.set(x, 0, 0);
+                for (let z = -60; z <= 60; z += 30) {
+                    const fort = new THREE.Group();
+                    fort.position.set(0, 1.8, z);
+                    const shieldWall = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.4, 6.0), woodMat);
+                    fort.add(shieldWall);
+                    const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 1.2), flagGreenMat);
+                    flag.position.set(0, 3.2, 0);
+                    fort.add(flag);
+
+                    const archer = new THREE.Group();
+                    const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.32, 0.95, 7), archerArmorMat);
+                    torso.position.set(x < 0 ? 1.1 : -1.1, 0.8, 0);
+                    const head = new THREE.Mesh(new THREE.SphereGeometry(0.24, 8, 6), archerSkinMat);
+                    head.position.set(x < 0 ? 1.1 : -1.1, 1.42, 0);
+                    const bow = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.035, 5, 10, Math.PI), bronzeMat);
+                    bow.position.set(x < 0 ? 1.38 : -1.38, 1.05, -0.18);
+                    bow.rotation.y = Math.PI / 2;
+                    archer.add(torso, head, bow);
+                    fort.add(archer);
+                    group.add(fort);
+                }
+                return group;
             }
-            mainAllied.add(archerGroup);
+
+            const archerGroup = taoTuyenCungThu(-25.5);
+            const northernArcherGroup = taoTuyenCungThu(25.5);
+            mainAllied.add(archerGroup, northernArcherGroup);
 
             Game3D.units.nnCungNo = {
                 id: 'nnCungNo',
-                name: 'Cung Nỏ Thủ Lũy Tre',
+                    name: 'Cung thủ phục kích bờ Nam',
                 icon: '🏹',
                 type: 'ta',
-                hp: 100,
-                maxHp: 100,
+                hp: 3000,
+                maxHp: 3000,
                 morale: 100,
                 pos: archerGroup.position,
                 mesh: archerGroup,
+                speed: 0
+            };
+            Game3D.units.nnCungNoBac = {
+                id: 'nnCungNoBac',
+                name: 'Cung thủ phục kích bờ Bắc',
+                icon: '🏹',
+                type: 'ta',
+                hp: 3000,
+                maxHp: 3000,
+                morale: 100,
+                pos: northernArcherGroup.position,
+                mesh: northernArcherGroup,
                 speed: 0
             };
 
@@ -10320,12 +10821,113 @@
             }
         }
 
+        function phongTenMaiPhucNhuNguyet(target, options = {}) {
+            const battle = Game3D.nhuNguyetBattle;
+            if (!battle?.active || !HistoryGame.active(target)) return 0;
+
+            const rows = [-60, -30, 0, 30, 60];
+            const nearestRows = rows.slice().sort((a, b) => Math.abs(a - target.pos.z) - Math.abs(b - target.pos.z)).slice(0, 2);
+            const shooters = [];
+            if (HistoryGame.active(Game3D.units.nnCungNo)) nearestRows.forEach(z => shooters.push({ x: -25.5, y: 4.4, z }));
+            if (HistoryGame.active(Game3D.units.nnCungNoBac)) nearestRows.forEach(z => shooters.push({ x: 25.5, y: 4.4, z }));
+            const damage = Number(options.damage) || battle.damagePerArrow;
+            const tactics = window.GameTactics3D;
+            let launched = 0;
+
+            shooters.forEach(from => {
+                const onHit = () => {
+                    if (!battle.active || !HistoryGame.active(target)) return;
+                    apDungSatThuongDich(target, damage);
+                    target.morale = Math.max(0, (target.morale || 100) - damage / Math.max(1, target.maxHp || 1) * 12);
+                    target.hitFlash = 0.2;
+                };
+                if (tactics?.projectile) {
+                    if (tactics.projectile(from, target.pos, onHit, {
+                        accuracy: options.accuracy ?? 0.94,
+                        spread: 1.2,
+                        speed: options.speed || 4,
+                        fire: !!options.fire,
+                        size: options.size || (options.fire ? 2.8 : 1.4),
+                        target,
+                        hitRadius: 5
+                    })) launched++;
+                } else {
+                    onHit();
+                    launched++;
+                }
+            });
+
+            if (launched && battle.elapsed - battle.lastShotSoundAt >= 0.4) {
+                AudioEngine.playArrow();
+                battle.lastShotSoundAt = battle.elapsed;
+            }
+            return launched;
+        }
+
+        function ketThucTranNhuNguyet(result, raft = null) {
+            const battle = Game3D.nhuNguyetBattle;
+            if (!battle?.active || battle.result) return;
+            battle.active = false;
+            battle.result = result;
+            document.body.classList.remove('gameplay-ui-active');
+            Game3D.combatPhase = result === 'win' ? 'THANG_TRAN_NHU_NGUYET' : 'THUA_TRAN';
+            Game3D.keys.up = Game3D.keys.down = Game3D.keys.left = Game3D.keys.right = false;
+
+            if (result === 'win') {
+                Game3D.victoryResultsShown = false;
+                AudioEngine.playFanfare();
+                hienThiThongBaoPopup('🏆 PHỤC KÍCH NHƯ NGUYỆT THÀNH CÔNG', 'Cả 6 bè địch đã bị đánh chìm hoặc đầu hàng trước khi vượt qua bờ Nam.');
+                phatGiongDoc('Quân phục kích hai bờ đã chặn đứng toàn bộ bè quân Tống trước phòng tuyến Như Nguyệt!');
+                HistoryGame.delay(() => {
+                    if (Game3D.currentCampaign !== 2 || battle.result !== 'win') return;
+                    chuyenSangBinhMinhNhuNguyet();
+                    moBangVangSauChienThang();
+                }, 1500);
+                return;
+            }
+
+            const dialog = document.getElementById('hg-defeat');
+            if (dialog) {
+                const title = dialog.querySelector('h2');
+                const description = dialog.querySelector('p');
+                if (title) title.textContent = 'Bè Tống đã vượt qua bờ Nam';
+                if (description) description.textContent = `${raft?.name || 'Một bè địch còn sống'} đã vượt qua tuyến phòng thủ. Hãy chơi lại và tiêu diệt toàn bộ 6 bè trước vạch bờ Nam.`;
+                let returnButton = dialog.querySelector('[data-nhu-nguyet-return]');
+                if (!returnButton) {
+                    returnButton = document.createElement('button');
+                    returnButton.type = 'button';
+                    returnButton.dataset.nhuNguyetReturn = 'true';
+                    returnButton.textContent = 'Về sa bàn';
+                    dialog.appendChild(returnButton);
+                }
+                returnButton.onclick = () => {
+                    dialog.close();
+                    troVeBanDoChienDich3D();
+                };
+                if (!dialog.open) dialog.showModal();
+            } else {
+                hienThiThongBaoPopup('⚠️ THẤT THỦ PHÒNG TUYẾN', `${raft?.name || 'Một bè địch còn sống'} đã vượt qua bờ Nam. Hãy chơi lại để chặn cả 6 bè.`);
+            }
+        }
+
         // 4. BỘ 4 TUYỆT KỸ 3D CỦA THÁI ÚY LÝ THƯỜNG KIỆT
         function thiTrienTuyetKyNhuNguyet(skillId) {
             const skill = Game3D.skillsNhuNguyet[skillId];
-            if (!skill) return;
+            const battle = Game3D.nhuNguyetBattle;
+            if (!skill || Game3D.currentCampaign !== 2 || !battle?.active || Game3D.combatPhase !== 'NHU_NGUYET_THUC_CHIEN') return;
 
-            // Cooldown đã xóa bỏ (Zero Cooldown)
+            if (skill.currentCd > 0) {
+                hienThiThongBaoPopup('⏳ CHIÊU ĐANG HỒI', `Cần chờ ${Math.ceil(skill.currentCd)} giây để dùng lại.`);
+                return;
+            }
+            if (skillId === 4) {
+                const survivors = (Game3D.danhSachBeMangTong || []).filter(HistoryGame.active);
+                const weakened = survivors.every(raft => raft.hp <= raft.maxHp * 0.4 || raft.morale <= 40);
+                if (!survivors.length || !weakened) {
+                    hienThiThongBaoPopup('🕊️ CHƯA THỂ KÊU GỌI ĐẦU HÀNG', 'Hãy dùng phục kích làm suy yếu tất cả bè còn lại xuống dưới 40% máu hoặc sĩ khí trước.');
+                    return;
+                }
+            }
 
             if (Game3D.muuLuoc < skill.cost) {
                 hienThiThongBaoPopup(`⚡ Thiếu Mưu Lược`, `Cần ${skill.cost} Mưu Lược để thi triển!`);
@@ -10333,43 +10935,20 @@
             }
 
             Game3D.muuLuoc -= skill.cost;
-            // Zero Cooldown: Không kích hoạt đếm ngược
+            skill.currentCd = skill.cd;
 
             const valMuuLuoc = document.getElementById('val-muu-luoc');
             if (valMuuLuoc) valMuuLuoc.textContent = `${Math.round(Game3D.muuLuoc)} / 100`;
 
             // -------------------------------------------------------------
-            // PHÍM [1]: 🎋 DỤ ĐỊCH BÃI LẦY & CHÔNG NGẦM
+            // PHÍM [1]: 🏹 RA HIỆU PHỤC KÍCH HAI BỜ
             // -------------------------------------------------------------
             if (skillId === 1) {
                 AudioEngine.playWarDrum();
-                hienThiThongBaoPopup("🎋 DỤ ĐỊCH BÃI LẦY & CHÔNG NGẦM", "Thuyền nhẹ rút lui nhử đạo tiên phong Miêu Cảo vào bãi chông tre ngầm bờ Nam!");
-                phatGiongDoc("Thuyền nhẹ giả thua rẽ nước rút lui! Bè mảng Miêu Cảo đang đâm sầm vào bãi lầy hào chông!");
-
-                const tn = Game3D.units.nnThuyenNhe;
-                const soaiBe = Game3D.units.soaiBeMieuCao;
-
-                if (tn) {
-                    tn.targetX = -20;
-                    tn.speed = 18;
-                }
-
-                if (soaiBe && !soaiBe.surrendered) {
-                    soaiBe.targetX = -21;
-                    soaiBe.speed = 9;
-
-                    HistoryGame.delay(() => {
-                        soaiBe.trapped = true;
-                        soaiBe.speed = 0;
-                        apDungSatThuongDich(soaiBe, 2200);
-                        soaiBe.morale = Math.max(10, soaiBe.morale - 40);
-                        soaiBe.mesh.rotation.z = 0.35; // Nghiêng mạn vỡ bè
-                        AudioEngine.playStakeImpact();
-                        phatNoManhVoVaCotNuoc(soaiBe.pos.x, 1.2, soaiBe.pos.z);
-                        kichHoatCinematicActionCam(soaiBe.pos, 3.0, 0.35);
-                        hienThiThongBaoPopup("💥 CHÔNG TRE XUYÊN THỦNG BÈ MIÊU CẢO", "Soái bè vỡ toác đáy, kỵ binh Tống ngã nhào xuống bùn lầy sông Cầu!");
-                    }, 1200);
-                }
+                hienThiThongBaoPopup('🏹 MAI PHỤC HAI BỜ', 'Cung thủ hai bờ đồng loạt bắn thêm một loạt tên vào mọi bè Tống còn trong trận.');
+                (Game3D.danhSachBeMangTong || []).filter(HistoryGame.active).forEach(raft => {
+                    phongTenMaiPhucNhuNguyet(raft, { damage: 300 });
+                });
             }
 
             // -------------------------------------------------------------
@@ -10405,12 +10984,12 @@
                     HistoryGame.delay(() => { Game3D.scene.fog.color.setHex(oldFog); }, 520);
                 }
 
-                // Cơ chế: Hồi 100% Sĩ Khí Đại Việt, Toàn bộ Quân Tống tụt 50% Sĩ Khí
+                // Cơ chế: hồi sĩ khí quân ta và làm suy giảm sĩ khí sáu bè trong trận này.
                 Game3D.siKhi = 100;
-                Object.values(Game3D.units).forEach(u => {
+                Object.values(Game3D.units).filter(u => u.campaign === 2 || /^nn/.test(u.id)).forEach(u => {
                     if (u.type === 'ta') {
                         u.morale = 100;
-                        u.hp = Math.min(100, u.hp + 30);
+                        u.hp = Math.min(u.maxHp || 100, u.hp + 30);
                     } else if (u.type === 'dich') {
                         u.morale = Math.max(10, u.morale - 50);
                         apDungSatThuongDich(u, 600);
@@ -10422,7 +11001,6 @@
                 });
 
                 capNhatHUD();
-                kichHoatCinematicActionCam({ x: -30, y: 15, z: -50 }, 3.5, 0.4);
 
                 HistoryGame.delay(() => {
                     if (Game3D.goldenPillarMesh) Game3D.goldenPillarMesh.visible = false;
@@ -10430,98 +11008,32 @@
             }
 
             // -------------------------------------------------------------
-            // PHÍM [3]: 🔥 HỎA THIÊU CẦU PHAO
+            // PHÍM [3]: 🔥 HỎA TIỄN PHỤC KÍCH
             // -------------------------------------------------------------
             else if (skillId === 3) {
                 AudioEngine.playBombExplosion();
-                hienThiThongBaoPopup("🔥 HỎA THIÊU CẦU PHAO", "Thuyền hỏa công và mưa tên lửa 3D bắn đứt đôi cầu phao quân Tống giữa sông Cầu!");
-                phatGiongDoc("Phóng bè lửa! Bắn mưa tên hỏa công thiêu rụi cầu phao giặc giữa dòng sông Như Nguyệt!");
-
-                const hc = Game3D.units.nnHoaCong;
-                if (hc) {
-                    hc.targetX = 14;
-                    hc.speed = 16;
-                }
-
-                // Phóng mưa tên lửa và hỏa công vào 2 khối cầu phao
-                ['cauPhaoTienTuyen1', 'cauPhaoTienTuyen2'].forEach((cid, idx) => {
-                    const p = Game3D.units[cid];
-                    if (p && !p.surrendered) {
-                        HistoryGame.delay(() => {
-                            p.hp = 0;
-                            p.morale = 0;
-                            p.surrendered = true;
-                            p.speed = 0;
-                            p.mesh.rotation.y += 0.45 * (idx === 0 ? 1 : -1);
-                            p.mesh.position.y -= 0.6;
-                            AudioEngine.playBombExplosion();
-                            phatNoManhVoVaCotNuoc(p.pos.x, 1.2, p.pos.z);
-                        }, 1000 + idx * 400);
-                    }
+                hienThiThongBaoPopup('🔥 HỎA TIỄN PHỤC KÍCH', 'Hai bờ đồng loạt bắn tên lửa vào các bè địch còn sống; đòn đánh gây sát thương lớn nhưng không kết thúc trận ngay.');
+                (Game3D.danhSachBeMangTong || []).filter(HistoryGame.active).forEach(raft => {
+                    phongTenMaiPhucNhuNguyet(raft, { damage: 500, fire: true, size: 3.2, speed: 4.5 });
                 });
-
-                // CƠ CHẾ CHIẾN THẮNG TỨC THÌ NHƯ NGUYỆT: Bắn lửa thiêu cầu phao là toàn thắng
-                if (Game3D.danhSachBeMangTong) {
-                    Game3D.danhSachBeMangTong.forEach(b => {
-                        b.hp = 0;
-                        b.morale = 0;
-                        b.surrendered = true;
-                        b.speed = 0;
-                    });
-                }
-                Game3D.combatPhase = 'THANG_TRAN_NHU_NGUYET';
-                Game3D.victoryResultsShown = false;
-                AudioEngine.playFanfare();
-                HistoryGame.delay(() => {
-                    hienThiThongBaoPopup("🕊️ ĐẠI THẮNG NHƯ NGUYỆT", "Cầu phao bị thiêu rụi hoàn toàn! Đạo quân Quách Quỳ tan rã — Toàn thắng phòng tuyến Như Nguyệt!");
-                    phatGiongDoc("Cầu phao gãy đôi bốc cháy dữ dội! Giặc Tống kinh hoàng tháo chạy! Phòng tuyến Như Nguyệt toàn thắng khải hoàn!");
-                    chuyenSangBinhMinhNhuNguyet();
-                    moBangVangSauChienThang();
-                }, 2200);
-
-                kichHoatCinematicActionCam({ x: 18, y: 3, z: 0 }, 3.0, 0.35);
             }
 
             // -------------------------------------------------------------
-            // PHÍM [4]: 📜 ĐÊM TẬP KÍCH & ĐƯA THƯ GIẢNG HÒA
+            // PHÍM [4]: 🕊️ KÊU GỌI ĐẦU HÀNG KHI ĐỊCH ĐÃ SUY YẾU
             // -------------------------------------------------------------
             else if (skillId === 4) {
                 AudioEngine.playFanfare();
-                hienThiThongBaoPopup("📜 ĐÊM TẬP KÍCH & ĐƯA THƯ GIẢNG HÒA", "Tập kích đêm tan rã nhuệ khí Quách Quỳ! Cử sứ giả mang quốc thư mở đường nghị hòa!");
-                phatGiongDoc("Đêm nay phản công thần tốc! Quân Tống kinh hoàng tan rã, Quách Quỳ cúi đầu chấp thuận hòa đàm rút quân!");
-
-                // Đổi toàn bộ cờ Tống sang cờ trắng đầu hàng
-                if (Game3D.danhSachBeMangTong) {
-                    Game3D.danhSachBeMangTong.forEach(b => {
-                        b.morale = 0;
-                        b.surrendered = true;
-                        b.speed = 0;
-                        // Thêm cờ trắng
-                        const whiteFlag = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.5), new THREE.MeshBasicMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide }));
-                        whiteFlag.position.set(0.9, 5.2, 0);
-                        b.mesh.add(whiteFlag);
-                    });
-                }
-
-                Game3D.combatPhase = 'THANG_TRAN_NHU_NGUYET';
-                Game3D.victoryResultsShown = false;
-                kichHoatCinematicActionCam({ x: 26, y: 6, z: 0 }, 3.5, 0.4);
-
-                HistoryGame.delay(() => {
-                    chuyenSangBinhMinhNhuNguyet();
-                    moBangVangSauChienThang();
-                }, 4000);
+                hienThiThongBaoPopup('🕊️ KÊU GỌI ĐẦU HÀNG', 'Các bè còn lại đã suy yếu và chấp nhận hạ cờ.');
+                (Game3D.danhSachBeMangTong || []).filter(HistoryGame.active).forEach(keoCoTrangDauHang);
+                ketThucTranNhuNguyet('win');
             }
         }
 
         // 5. Vòng lặp Thực Chiến Như Nguyệt
         function kiemTraVongLapChienTranNhuNguyet(delta, elapsed) {
-            if (Game3D.isPostWar || Game3D.combatPhase === 'CHUA_BAT_DAU' || Game3D.combatPhase === 'KET_THUC') return;
-            // Định kỳ ném đạn đá lửa từ bờ Bắc
-            if (Math.random() < delta * 0.4) {
-                phongDanDaLuaNhuNguyet3D();
-            }
-            capNhatPhaoDaNhuNguyet3D(delta);
+            const battle = Game3D.nhuNguyetBattle;
+            if (!battle?.active || Game3D.currentCampaign !== 2 || Game3D.combatPhase !== 'NHU_NGUYET_THUC_CHIEN') return;
+            battle.elapsed += delta;
 
             // Cập nhật di chuyển các đạo quân ta
             ['nnThuyenNhe', 'nnHoaCong', 'nnQuanY'].forEach(k => {
@@ -10539,37 +11051,41 @@
                 }
             });
 
-            // Cập nhật các đạo bè mảng Tống tiến sang bờ Nam
-            if (Game3D.danhSachBeMangTong) {
-                Game3D.danhSachBeMangTong.forEach(b => {
-                    if (!b.trapped && !b.surrendered && b.pos.x > -14) {
-                        b.pos.x -= b.speed * delta;
-                        b.mesh.position.x = b.pos.x;
+            const fleet = Game3D.danhSachBeMangTong || [];
+            for (const raft of fleet) {
+                if (!HistoryGame.active(raft)) continue;
+                if (raft.pos.x <= battle.crossingLineX) {
+                    ketThucTranNhuNguyet('loss', raft);
+                    return;
+                }
+
+                if (raft.pos.x <= battle.ambushLineX) {
+                    raft.ambushStarted = true;
+                    raft.ambushCooldown = Math.max(0, (raft.ambushCooldown || 0) - delta);
+                    if (raft.ambushCooldown <= 0) {
+                        phongTenMaiPhucNhuNguyet(raft);
+                        raft.ambushCooldown = battle.volleyInterval;
                     }
-                });
-            }
+                }
 
-            Game3D.trapCooldown = (Game3D.trapCooldown || 0) + delta;
-            // Tự động kích hoạt Tình huống 1 sau 7s thực chiến
-            if (!Game3D.nhuNguyetDilemmasTriggered[1]) {
-                if (Game3D.trapCooldown > 7.0) {
-                    kichHoatTinhHuong(1);
+                raft.pos.x -= (raft.speed || 3.8) * delta;
+                raft.mesh.position.x = raft.pos.x;
+                if (raft.pos.x <= battle.crossingLineX && HistoryGame.active(raft)) {
+                    ketThucTranNhuNguyet('loss', raft);
+                    return;
                 }
             }
 
-            // Tự động kích hoạt Tình huống 2 khi cầu phao bị tấn công hoặc sau 20s
-            if (!Game3D.nhuNguyetDilemmasTriggered[2] && Game3D.nhuNguyetDilemmasTriggered[1]) {
-                if (Game3D.trapCooldown > 20.0) {
-                    kichHoatTinhHuong(2);
-                }
+            if (fleet.length && fleet.every(raft => !HistoryGame.active(raft))) {
+                ketThucTranNhuNguyet('win');
+                return;
             }
 
-            // Tự động kích hoạt Tình huống 3 khi địch kiệt quệ sĩ khí hoặc sau 35s
-            if (!Game3D.nhuNguyetDilemmasTriggered[3] && Game3D.nhuNguyetDilemmasTriggered[2]) {
-                const soaiBe = Game3D.units.soaiBeMieuCao;
-                if (Game3D.trapCooldown > 35.0 || (soaiBe && soaiBe.morale < 35)) {
-                    kichHoatTinhHuong(3);
-                }
+            if (battle.elapsed >= battle.nextStatusAt) {
+                battle.nextStatusAt = battle.elapsed + 0.35;
+                const remaining = fleet.filter(HistoryGame.active).length;
+                const bannerText = document.getElementById('stage-banner-text');
+                if (bannerText) bannerText.textContent = `NHƯ NGUYỆT · PHỤC KÍCH HAI BỜ · CÒN ${remaining}/6 BÈ · VƯỢT VẠCH −24 LÀ THUA`;
             }
         }
 
@@ -10666,6 +11182,13 @@
         // 7. Chuyển sang Bình Minh Hòa Bình Sông Như Nguyệt (1077)
         function chuyenSangBinhMinhNhuNguyet() {
             Game3D.isPostWar = true;
+            document.body.classList.add('gameplay-ui-active');
+            document.body.classList.remove('nhu-nguyet-battle');
+            document.body.classList.add('campaign-nhu-nguyet', 'nhu-nguyet-postwar');
+            const battleButton = document.getElementById('btn-call-battle');
+            if (battleButton) battleButton.style.display = 'none';
+            const battleBanner = document.getElementById('battle-stage-banner');
+            if (battleBanner) battleBanner.style.display = 'none';
             Game3D.cheDoCamera = 'FIRST_PERSON';
             chuyenDoiThoiTiet3Hoi(3);
 
@@ -10747,7 +11270,8 @@
 
         // Khởi động Hồi 2 Chiến Dịch Như Nguyệt
         function khoiDongChienTranNhuNguyetHoi2() {
-            if (Game3D.combatPhase === 'NHU_NGUYET_THUC_CHIEN') return;
+            if (Game3D.currentCampaign !== 2 || Game3D.combatPhase === 'NHU_NGUYET_THUC_CHIEN') return;
+            document.body.classList.add('gameplay-ui-active');
             AudioEngine.playWarDrum();
             chuyenDoiThoiTiet3Hoi(2);
 
@@ -10755,9 +11279,33 @@
             if (modal) modal.classList.add('hidden');
 
             Game3D.currentCampaign = 2;
+            Game3D.isPostWar = false;
             Game3D.combatPhase = 'NHU_NGUYET_THUC_CHIEN';
             Game3D.trapCooldown = 0;
             Game3D.nhuNguyetDilemmasTriggered = { 1: false, 2: false, 3: false };
+            Object.assign(Game3D.nhuNguyetBattle, {
+                active: true,
+                elapsed: 0,
+                ambushLineX: 24,
+                crossingLineX: -24,
+                volleyInterval: 0.85,
+                damagePerArrow: 150,
+                result: null,
+                nextStatusAt: 0,
+                lastShotSoundAt: -1
+            });
+            document.body.classList.add('campaign-nhu-nguyet', 'nhu-nguyet-battle');
+            document.body.classList.remove('nhu-nguyet-postwar');
+            document.getElementById('quest-overlay-box')?.classList.add('collapsed');
+            const battleButton = document.getElementById('btn-call-battle');
+            if (battleButton) battleButton.style.display = 'none';
+            Game3D.thuyTrieu.phanTram = 85;
+            Game3D.thuyTrieu.dangTang = false;
+            Game3D.thuyTrieu.cheDoTuDong = false;
+            Game3D.thuyTrieu.mucNuocY = -3.2 + 0.85 * 4.5;
+            if (Game3D.waterMesh) Game3D.waterMesh.position.y = Game3D.thuyTrieu.mucNuocY;
+            Game3D.danDaLuaList?.forEach(projectile => Game3D.scene.remove(projectile.mesh));
+            Game3D.danDaLuaList = [];
 
             // Cập nhật thanh Tuyệt kỹ HUD sang bộ kỹ năng Lý Thường Kiệt
             capNhatThanhTuyetKyTheoChienDich();
@@ -10766,6 +11314,18 @@
             tao4DaoQuanNhuNguyet3D();
             tao6BeMangQuanTong3D();
             GameTactics3D.prepareCampaign();
+            (Game3D.danhSachBeMangTong || []).forEach(raft => {
+                raft.ambushStarted = false;
+                raft.ambushCooldown = 0;
+                raft.targetX = -30;
+                raft.surrendered = false;
+                raft.trapped = false;
+            });
+            Object.values(Game3D.skillsNhuNguyet).forEach(skill => { skill.currentCd = 0; });
+            Object.values(Game3D.congTrinhNhuNguyet || {}).forEach(site => {
+                if (site.ringMesh) site.ringMesh.visible = false;
+                if (site.labelEl) site.labelEl.style.display = 'none';
+            });
             taoThanhMauDaoQuan();
 
             // Cập nhật Banner Trận Đấu
@@ -10773,16 +11333,15 @@
             const bannerText = document.getElementById('stage-banner-text');
             if (banner) banner.style.display = 'flex';
             if (bannerText) {
-                bannerText.textContent = "⚔️ HỒI 2: ĐẠI CHIẾN BÈ MẢNG & PHÒNG TUYẾN LŨY TRE SÔNG NHƯ NGUYỆT (1077)";
+                bannerText.textContent = 'NHƯ NGUYỆT · PHỤC KÍCH HAI BỜ · CÒN 6/6 BÈ · VƯỢT VẠCH −24 LÀ THUA';
             }
 
             const questInst = document.getElementById('hud-quest-instruction');
             if (questInst) {
-                questInst.innerHTML = '<b>Hồi 2 - Thực Chiến Sa Bàn Như Nguyệt:</b> 6 đạo bè mảng giặc đang vượt sông! Dùng <b>[1]</b> Dụ Địch Bãi Lầy, <b>[2]</b> Thần Thi Nam Quốc Sơn Hà, <b>[3]</b> Hỏa Thiêu Cầu Phao, <b>[4]</b> Đêm Tập Kích & Giảng Hòa để chiến thắng!';
+                questInst.innerHTML = '<b>Phục kích Như Nguyệt:</b> Cung thủ hai bờ tự bắn khi bè vào tầm. Dùng <b>[1]–[4]</b> hỗ trợ, tiêu diệt cả 6 bè trước khi chúng vượt vạch bờ Nam <b>(X = −24)</b>.';
             }
 
-            hienThiThongBaoPopup("⚔️ HỒI 2: THỰC CHIẾN NHƯ NGUYỆT", "6 đạo bè mảng quân Tống đang tiến sang bờ Nam! Hãy dùng mưu lược bẻ gãy ý chí xâm lăng!");
-            phatGiongDoc("Quân Tống đang đẩy hàng loạt bè mảng và cầu phao vượt sông Như Nguyệt! Toàn quân Đại Việt dựa vào chiến lũy tre xanh chuẩn bị giáng trả đích đáng!");
+            hienThiThongBaoPopup('⚔️ PHỤC KÍCH SÔNG NHƯ NGUYỆT', 'Quân nỏ hai bờ tự khai hỏa khi bè vào tầm. Hãy đánh chìm hoặc buộc cả 6 bè đầu hàng trước khi chúng vượt qua bờ Nam.');
 
             datGocNhinCamera('TACTICAL');
         }
@@ -11297,15 +11856,6 @@
         /*  N. KHỞI CHẠY HỆ THỐNG KHI TẢI TRANG                                      */
         /* ========================================================================== */
         window.addEventListener('DOMContentLoaded', () => {
-            // Giữ chính sách khóa sa bàn trên điện thoại kể cả khi mở thẳng URL 3D.
-            const uaData = navigator.userAgentData;
-            const mobileDevice = !!(uaData && uaData.mobile === true)
-                || /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(navigator.userAgent || '');
-            if (mobileDevice) {
-                window.location.replace('sa-ban.html#mobile-block');
-                return;
-            }
-
             khoiDongAmThanh();
             khoiTaoThreeJSEngine();
             capNhatHUD();

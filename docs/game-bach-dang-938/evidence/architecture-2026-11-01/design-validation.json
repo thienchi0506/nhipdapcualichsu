@@ -1,0 +1,141 @@
+{
+  "kind": "documentation-and-configuration-consistency-only",
+  "newGameImplemented": false,
+  "newGamePlaytested": false,
+  "newGameBenchmarked": false,
+  "trackedFilesCompared": 235,
+  "changedTrackedFilesOutsideDocs": [],
+  "passed": 31,
+  "total": 31,
+  "checks": [
+    {
+      "name": "Marked as design, not runtime",
+      "passed": true
+    },
+    {
+      "name": "Cloud is off by default",
+      "passed": true
+    },
+    {
+      "name": "Version present",
+      "passed": true
+    },
+    {
+      "name": "Scheduled rates divide tick rate",
+      "passed": true
+    },
+    {
+      "name": "Positive catch-up bound",
+      "passed": true
+    },
+    {
+      "name": "Collision epsilon below replay tolerance",
+      "passed": true
+    },
+    {
+      "name": "Chapter goal lies within 15 to 25 minutes",
+      "passed": true
+    },
+    {
+      "name": "Guide phases sum to target",
+      "passed": true
+    },
+    {
+      "name": "Deadline covers target",
+      "passed": true
+    },
+    {
+      "name": "Four main heroes",
+      "passed": true
+    },
+    {
+      "name": "Reserve officers exist",
+      "passed": true
+    },
+    {
+      "name": "Friendly roster totals 50",
+      "passed": true
+    },
+    {
+      "name": "Boat capacity covers roster",
+      "passed": true
+    },
+    {
+      "name": "Two objective transports in sample",
+      "passed": true
+    },
+    {
+      "name": "Required crates can be obtained",
+      "passed": true
+    },
+    {
+      "name": "Loss thresholds ordered",
+      "passed": true
+    },
+    {
+      "name": "Tide keys strictly ordered",
+      "passed": true
+    },
+    {
+      "name": "Tide covers complete chapter",
+      "passed": true
+    },
+    {
+      "name": "Tide is falling in sample",
+      "passed": true
+    },
+    {
+      "name": "Lease renews before expiry",
+      "passed": true
+    },
+    {
+      "name": "Benchmark covers required force scales",
+      "passed": true
+    },
+    {
+      "name": "Benchmark includes enemies",
+      "passed": true
+    },
+    {
+      "name": "All quality presets have positive budgets",
+      "passed": true
+    },
+    {
+      "name": "Camp convalescence without kit costs more time",
+      "passed": true
+    },
+    {
+      "name": "All handoff documents exist",
+      "passed": true
+    },
+    {
+      "name": "Local markdown links resolve",
+      "passed": true
+    },
+    {
+      "name": "No trailing whitespace in top-level dossier",
+      "passed": true
+    },
+    {
+      "name": "No Unicode replacement characters",
+      "passed": true
+    },
+    {
+      "name": "All tracked files outside docs unchanged",
+      "passed": true
+    },
+    {
+      "name": "No game runtime route created",
+      "passed": true
+    },
+    {
+      "name": "git diff --check",
+      "passed": true
+    }
+  ],
+  "brokenLinks": [],
+  "trailingWhitespace": [],
+  "encodingErrors": [],
+  "gitDiffCheckExitCode": 0,
+  "gitDiffCheckStderr": "warning: in the working copy of 'game-runtime.css', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'game-runtime.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'sa-ban-nhu-nguyet.html', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'sanh-game.html', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'thao-truong.html', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tools/game_browser_check.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tools/game_regression_checks.js', LF will be replaced by CRLF the next time Git touches it\n"
+}

@@ -5,7 +5,7 @@
   <script src="game-runtime.js"></script>
   <link rel="stylesheet" href="game-runtime.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử</title>
 
     <!-- Google Fonts: Noto Serif & Be Vietnam Pro -->
@@ -4349,6 +4349,48 @@
             .mobile-notice-section { padding: 13px 14px; }
             .mobile-notice-section p { font-size: .84rem; }
         }
+        html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+        .game-frame, .game-wrapper, .game-stage-wrapper, .game-stage { min-width: 0; max-width: 100%; }
+        #gameCanvas { max-width: 100%; }
+        .modal-overlay, .outcome-modal-overlay {
+            padding: max(12px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px));
+            overflow-y: auto; overscroll-behavior: contain;
+        }
+        .modal-box, .ancient-modal {
+            max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px);
+            overflow-y: auto; overscroll-behavior: contain;
+        }
+        .game-frame button, .game-wrapper button, .site-header button, .site-header a,
+        .modal-box button, .ancient-modal button, .outcome-modal-overlay button,
+        .mobile-notice-dialog button, .btn-hud-tool, .header-btn, #site-music-toggle { min-height: 44px; touch-action: manipulation; }
+        @media (max-width: 768px) {
+            .site-header { padding-top: max(8px, env(safe-area-inset-top, 0px)); }
+            .top-hud { padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); }
+            .game-stage-wrapper { padding: 8px max(6px, env(safe-area-inset-left, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)); }
+            .game-wrapper { padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+            .game-frame { width: 100%; margin-inline: auto; }
+            #gameCanvas { width: 100%; height: auto; aspect-ratio: 1000 / 560; touch-action: manipulation; }
+            .tactical-bottom-weapon-bar {
+                bottom: max(4px, env(safe-area-inset-bottom, 0px));
+                max-width: calc(100vw - 12px); overflow-x: auto; overflow-y: hidden;
+                scrollbar-width: none; -webkit-overflow-scrolling: touch;
+            }
+            .tactical-bottom-weapon-bar::-webkit-scrollbar { display: none; }
+            .btn-weapon-slot, .btn-tactical-cmd, .dpad-btn, .action-interact-btn,
+            .btn-hud-action, .btn-lobby-feat, .btn-enter-stage, .choice-btn,
+            .btn-modal-action, .btn-ready-battle { min-height: 44px; }
+        }
+        @media (max-width: 360px) {
+            .top-hud { gap: 6px; }
+            .hud-stats-group { gap: 5px; }
+            .game-stage-wrapper { padding-left: 4px; padding-right: 4px; }
+            .game-frame { border-radius: 6px; }
+            .weapon-bar-counter { min-width: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .mobile-notice-overlay, .modal-overlay, .outcome-modal-overlay,
+            .game-frame, .game-frame * { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
     </style>
 </head>
 <body>
@@ -6433,16 +6475,6 @@
             xuLyClickCanvas(mouseX, mouseY);
         });
 
-        canvas.addEventListener('touchstart', function(e) {
-            if (e.touches && e.touches.length > 0) {
-                var touch = e.touches[0];
-                var rect = canvas.getBoundingClientRect();
-                var mouseX = (touch.clientX - rect.left) * (canvas.width / rect.width);
-                var mouseY = (touch.clientY - rect.top) * (canvas.height / rect.height);
-                xuLyClickCanvas(mouseX, mouseY);
-            }
-        }, { passive: true });
-
         // Di chuột trên Canvas: Theo dõi tâm ngắm bắn thuyền địch trong Hồi 2
         canvas.addEventListener('mousemove', function(e) {
             if (gameState.hoiHienTai === 2) {
@@ -8117,9 +8149,7 @@
         });
 
         function chanSaBanTrenMobile() {
-            if (!laThietBiDiDong()) return false;
-            moThongBaoMobile();
-            return true;
+            return false;
         }
 
         function vaoThangSaBanChienDau() {
@@ -12829,7 +12859,6 @@
         // ===================================================================
         var isSaBanActive = true;
         function gameLoop() {
-            if (HistoryGame.isMobile()) return;
             HistoryGame.addLoop('battle-2d', {update: drawGameFrame2D});
             HistoryGame.mountControls();
         }
@@ -12943,7 +12972,7 @@
             if (!canvas) return;
             var ctx = canvas.getContext('2d');
             var particles = [];
-            var particleCount = 45;
+            var particleCount = HistoryGame.isMobile() ? Math.max(12, Math.round(45 * HistoryGame.quality.particles)) : 45;
             var waveOffset = 0;
 
             function resize() {
@@ -12997,7 +13026,7 @@
 
                 // Nếu đang ở Ải 2 (Bạch Đằng), vẽ 2 lớp sóng triều dập dềnh mờ ảo ở đáy màn hình
                 if (currentStageId === 2 && gameState.giaiDoan === 'chien-tranh') {
-                    waveOffset += 0.02;
+                    if (!HistoryGame.settings.reducedMotion) waveOffset += 0.02;
                     var waveHeight = canvas.height - 35;
                     
                     // Lớp sóng 1 (Xanh bích thủy sâu)
@@ -13028,8 +13057,10 @@
                 // Vẽ các hạt ánh sáng / sương mù / tàn lửa
                 for (var i = 0; i < particles.length; i++) {
                     var p = particles[i];
-                    p.y -= p.speedY;
-                    p.x += p.speedX;
+                    if (!HistoryGame.settings.reducedMotion) {
+                        p.y -= p.speedY;
+                        p.x += p.speedX;
+                    }
                     if (p.y < -15 || p.x < -20 || p.x > canvas.width + 20) {
                         particles[i] = new TaoHat();
                     }
@@ -13037,11 +13068,11 @@
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fillStyle = 'hsla(' + p.hue + ', 80%, 60%, ' + p.opacity + ')';
-                    ctx.shadowBlur = p.blur || 8;
+                    ctx.shadowBlur = HistoryGame.isMobile() ? Math.min(p.blur || 8, 4) : (p.blur || 8);
                     ctx.shadowColor = 'hsla(' + p.hue + ', 85%, 55%, 0.7)';
                     ctx.fill();
                 }
-                HistoryGame.addLoop('ambient-2d', {render: animate, fps: 30});
+                HistoryGame.addLoop('ambient-2d', {render: animate, fps: settings => settings.reducedMotion ? 1 : 30});
             }
             animate();
         })();
@@ -13055,13 +13086,6 @@
         }
 
         window.addEventListener('DOMContentLoaded', function() {
-            // Sa bàn đang khóa trên điện thoại: báo ngay khi mở trang và không
-            // khởi chạy vòng lặp trận/âm thanh nền cho thiết bị không được hỗ trợ.
-            if (laThietBiDiDong() || window.location.hash === '#mobile-block') {
-                moThongBaoMobile();
-                return;
-            }
-
             var savedVoice = null;
             try { savedVoice = localStorage.getItem('giongDocBat'); }
             catch (storageError) { console.warn('Không đọc được tùy chọn giọng đọc:', storageError); }
@@ -13292,7 +13316,6 @@ function khoiTaoTiaLuaNutVaoTran() {
 
 // Khởi chạy các hiệu ứng khi trang tải xong
 window.addEventListener('DOMContentLoaded', function() {
-    if (laThietBiDiDong()) return;
     khoiTaoTiaLuaNutVaoTran();
     capNhatVienChienTruong();
 });

@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-02",
+  "checks": [
+    {
+      "name": "All pre-existing website code and user changes are preserved",
+      "passed": true,
+      "evidence": {
+        "protectedFiles": 235,
+        "changed": []
+      }
+    },
+    {
+      "name": "Vendored engine is unchanged",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Shell no longer contains a duplicate movement configuration",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Physics configuration has distinct types and stable stake IDs",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Old instantaneous movement module is retired",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Simulation does not depend on DOM, renderer or wall clock",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "No legacy runtime, Firebase import or gameplay global is introduced",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "All local runtime module imports resolve",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "New application source has no trailing whitespace",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "physics-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 47,
+        "total": 47
+      }
+    },
+    {
+      "name": "river-ui-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 17,
+        "total": 17
+      }
+    },
+    {
+      "name": "browser-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 62,
+        "total": 62
+      }
+    },
+    {
+      "name": "edge-checks.json passed",
+      "passed": true,
+      "evidence": {
+        "passed": 21,
+        "total": 21
+      }
+    },
+    {
+      "name": "git diff --check",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "name": "Dossier links resolve",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "protectedFilesCompared": 235,
+  "changedProtectedFiles": [],
+  "modifiedNewGameFiles": [
+    "game-bach-dang-938/README.md",
+    "game-bach-dang-938/data/shell-scene.json",
+    "game-bach-dang-938/index.html",
+    "game-bach-dang-938/src/app/bootstrap.js",
+    "game-bach-dang-938/src/app/input.js",
+    "game-bach-dang-938/src/app/loader.js",
+    "game-bach-dang-938/src/app/session.js",
+    "game-bach-dang-938/src/core/demo.js",
+    "game-bach-dang-938/src/presentation/scene.js",
+    "game-bach-dang-938/styles/game.css"
+  ],
+  "newGameHashes": {
+    "game-bach-dang-938\\index.html": "da0e6ded330cdc2dcaab3c0ce44226652904713bbd5b1a9e78002deddcc4da5e",
+    "game-bach-dang-938\\README.md": "549652b42421d5c489b8218db18e78799422e3227ba4159f915a505b61092f13",
+    "game-bach-dang-938\\data\\river-config.json": "2c912726f219ea4bfb93e4002bdc4b5464f649c10e224e513c9eca0ab6204f55",
+    "game-bach-dang-938\\data\\shell-scene.json": "742045b9b4075c45161aeb96ce9e0563a8d66f8448868b4373c3f8b62a1b75e9",
+    "game-bach-dang-938\\styles\\game.css": "fdf28ce685f31e0721ffcc6c8a0b6ca82f6e9a3a73663683303aa08cb3a39adf",
+    "game-bach-dang-938\\tests\\index.html": "6af5fe3a07e18e0561ed48ce06626f9bd72df683f28b3c066c81ad3652e9ec65",
+    "game-bach-dang-938\\tests\\river-tests.js": "06024bf71c6b389312cc94bb93d5efa02d79d921676c848ee5f73723c380e1e8",
+    "game-bach-dang-938\\src\\app\\bootstrap.js": "2764b9fc473ea4fe66c15b126a3f384e03289c99034a0f01cde11a555d20d496",
+    "game-bach-dang-938\\src\\app\\diagnostics.js": "ab94c3ced23868230840106fdcbc1715abbd18841d16371d166b644a0e4d1e46",
+    "game-bach-dang-938\\src\\app\\input.js": "ec9ae17770d3ad90b158fe8d31d9830c86c4d76365bb76cf01ae26dd338a7a10",
+    "game-bach-dang-938\\src\\app\\loader.js": "c963941df115584fc75d60b3558d44e585a62586d18efef558c3673026660fce",
+    "game-bach-dang-938\\src\\app\\preferences.js": "58cc806c04fce036824cbdd4d3d4a705b5c456ddf9690e5fae26f62ab5893d11",
+    "game-bach-dang-938\\src\\app\\session.js": "503072fcca0ef92983baf5d1469191b1d22b250889322e36e0b323e0a3e083ab",
+    "game-bach-dang-938\\src\\core\\clock.js": "a2817103386bea064fa9654d2cbb81c67ba829b2aab741a50b9f38366918f744",
+    "game-bach-dang-938\\src\\presentation\\scene.js": "b065bd8d8fd55da184d63b9a35c10ee47d7f7ef081ba30df0f899f0533859427",
+    "game-bach-dang-938\\src\\sim\\collision.js": "17886b45bec34bf4078914a0678776ee6e23a8a5ad5c99f60c33e08db224f046",
+    "game-bach-dang-938\\src\\sim\\river.js": "4781c7c8eeb6567691194da4d8a78de17a49a6b182a5d0e2ffb4989884ca1740",
+    "game-bach-dang-938\\src\\sim\\vessel.js": "1dec3eb913bcb7f050ef4d96ecbc09a2799d3793bec352b0b4aceb80faae3061",
+    "game-bach-dang-938\\vendor\\three-r128\\LICENSE": "7dddf7c5b8fd10ee654db8857d75d104b5557889aa5a91fc4ca545ea7c07062f",
+    "game-bach-dang-938\\vendor\\three-r128\\manifest.json": "8d434a7f6e80264c8c8681ec984f1d41d3149b03bdde4045bef3ba964006e579",
+    "game-bach-dang-938\\vendor\\three-r128\\three.module.js": "af527c374b56b8688737a42d7fcea7cb8aaeb57a4e3c6da98b4dffd55bcc3514"
+  }
+}

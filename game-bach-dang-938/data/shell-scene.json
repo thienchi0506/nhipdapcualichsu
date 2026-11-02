@@ -1,0 +1,15 @@
+{
+  "version": "bd938-shell-2",
+  "description": "Bến thử hư cấu; hình ảnh tạm. Toàn bộ tham số sông và thuyền nằm trong river-config.json.",
+  "roles": [
+    {"id": "H01", "name": "Người dẫn thuyền", "role": "Thủy quân", "color": "#63c6a4", "prop": "oar"},
+    {"id": "H02", "name": "Người giữ trận", "role": "Cung thủ", "color": "#d97560", "prop": "bow"},
+    {"id": "H03", "name": "Người dựng lũy", "role": "Công binh", "color": "#d7b354", "prop": "hammer"},
+    {"id": "H04", "name": "Người giữ bến", "role": "Quân nhu", "color": "#7babdb", "prop": "crate"}
+  ],
+  "quality": {
+    "economy": {"maxDpr": 1, "shadows": false, "shadowMapSize": 512, "waterDetail": 12},
+    "balanced": {"maxDpr": 1.5, "shadows": true, "shadowMapSize": 1024, "waterDetail": 24},
+    "detailed": {"maxDpr": 2, "shadows": true, "shadowMapSize": 2048, "waterDetail": 40}
+  }
+}

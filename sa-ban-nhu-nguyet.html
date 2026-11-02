@@ -3,7 +3,7 @@
 <head>
   <script src="site-music.js"></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử</title>
 
     <!-- Google Fonts: Noto Serif & Be Vietnam Pro -->
@@ -1767,6 +1767,51 @@
             .outcome-visual-box { height: 180px; }
             .loot-card { padding: 24px 18px; }
             .summary-stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+        html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+        .site-header, .lobby-card, .game-stage-wrapper, #game-stage, .vn-scene,
+        .outcome-card, .ancient-modal { min-width: 0; max-width: 100%; }
+        .modal-overlay, .outcome-modal-overlay {
+            padding: max(12px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px));
+            overflow-y: auto; overscroll-behavior: contain;
+        }
+        .ancient-modal, .outcome-card {
+            max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px);
+            overflow-y: auto; overscroll-behavior: contain;
+        }
+        button, a, [role="button"] { touch-action: manipulation; }
+        #site-music-toggle { min-width: 44px; min-height: 44px; }
+        @media (max-width: 768px) {
+            .site-header { flex-wrap: wrap; padding-top: max(8px, env(safe-area-inset-top, 0px)); }
+            .site-header__left { flex: 1 1 100%; min-width: 0; flex-wrap: wrap; }
+            .site-header__right { width: 100%; min-width: 0; gap: 8px; flex-wrap: wrap; justify-content: flex-start; }
+            .site-header__right .header-btn, .profile-quick-nav a,
+            .choices-grid button, .vn-choices button, .btn-summary-action,
+            .btn-modal-action, .modal-close-btn, .btn-lobby-feat, #site-music-toggle { min-height: 44px; }
+            .site-header__right .header-btn { flex: 1 1 calc(50% - 8px); min-width: 0; white-space: normal; justify-content: center; }
+            .btn-modal-close { min-width: 44px; }
+            .lobby-screen { width: 100%; padding: 24px max(8px, env(safe-area-inset-left, 0px)) calc(48px + env(safe-area-inset-bottom, 0px)); }
+            .campaign-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+            .stage-card { width: 100%; min-width: 0; }
+            .stage-card__title, .stage-card__desc, .stage-card__content { min-width: 0; overflow-wrap: anywhere; }
+            .game-stage-wrapper { padding: 8px max(8px, env(safe-area-inset-left, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)); }
+            #game-stage { width: 100%; padding: clamp(12px, 4vw, 20px) clamp(8px, 3vw, 16px); gap: 14px; }
+            .vn-scene { min-height: min(520px, 70dvh); }
+            .choices-grid, .vn-choices { grid-template-columns: minmax(0, 1fr); }
+            .vn-choice-btn, .choices-grid button { width: 100%; min-height: 48px; text-align: left; }
+            .vn-text-content, .choice-text, .outcome-card, .modal-notice-text { overflow-wrap: anywhere; }
+        }
+        @media (max-width: 360px) {
+            .site-header { padding-left: 8px; padding-right: 8px; }
+            .site-header__right .header-btn { padding: 7px 8px; font-size: .78rem; }
+            .game-stage-wrapper { padding-left: 4px; padding-right: 4px; }
+            .vn-scene { min-height: 400px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .screen-shake, .vn-scene *, .modal-overlay, .outcome-modal-overlay {
+                animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important; scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
@@ -3758,13 +3803,17 @@
             if (!canvas) return;
             var ctx = canvas.getContext('2d');
             var particles = [];
-            var particleCount = 38;
+            var coarsePointer = matchMedia('(pointer: coarse)').matches;
+            var reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var particleCount = coarsePointer ? 14 : 38;
+            var particleFrameId = 0;
+            var particlesDisposed = false;
 
             function resize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
-            window.addEventListener('resize', resize);
+            window.addEventListener('resize', resize, { passive: true });
             resize();
 
             function TaoHat() {
@@ -3783,33 +3832,54 @@
                 particles.push(p);
             }
 
-            var isTabActive = true;
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    isTabActive = false;
-                } else if (!isTabActive) {
-                    isTabActive = true;
-                    requestAnimationFrame(animate);
-                }
-            });
+            var isTabActive = !document.hidden;
+            function pauseAmbient() {
+                isTabActive = false;
+                if (particleFrameId) cancelAnimationFrame(particleFrameId);
+                particleFrameId = 0;
+            }
+            function resumeAmbient() {
+                if (particlesDisposed) return;
+                isTabActive = true;
+                if (reducedMotion) animate();
+                else if (!particleFrameId) particleFrameId = requestAnimationFrame(animate);
+            }
+            function onAmbientVisibility() {
+                if (document.hidden) pauseAmbient();
+                else resumeAmbient();
+            }
+            function disposeAmbient(event) {
+                pauseAmbient();
+                if (event && event.persisted) return;
+                particlesDisposed = true;
+                window.removeEventListener('resize', resize);
+                document.removeEventListener('visibilitychange', onAmbientVisibility);
+                window.removeEventListener('pageshow', resumeAmbient);
+                window.removeEventListener('pagehide', disposeAmbient);
+            }
+            document.addEventListener('visibilitychange', onAmbientVisibility);
+            window.addEventListener('pageshow', resumeAmbient);
+            window.addEventListener('pagehide', disposeAmbient);
 
             function animate() {
                 if (!isTabActive) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (var i = 0; i < particles.length; i++) {
                     var p = particles[i];
-                    p.y -= p.speedY;
-                    p.x += p.speedX;
+                    if (!reducedMotion) {
+                        p.y -= p.speedY;
+                        p.x += p.speedX;
+                    }
                     if (p.y < -10) particles[i] = new TaoHat();
 
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fillStyle = 'hsla(' + p.hue + ', 85%, 60%, ' + p.opacity + ')';
-                    ctx.shadowBlur = 8;
+                    ctx.shadowBlur = coarsePointer ? 3 : 8;
                     ctx.shadowColor = 'hsla(' + p.hue + ', 90%, 50%, 0.8)';
                     ctx.fill();
                 }
-                requestAnimationFrame(animate);
+                if (!reducedMotion) particleFrameId = requestAnimationFrame(animate);
             }
             animate();
         })();

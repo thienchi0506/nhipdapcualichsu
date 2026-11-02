@@ -1,0 +1,477 @@
+{
+  "date": "2026-11-02",
+  "checks": [
+    {
+      "name": "Deterministic physics and frame-cadence matrix",
+      "passed": true,
+      "evidence": {
+        "passed": 45,
+        "total": 45
+      }
+    },
+    {
+      "name": "Heavy vessel choice reaches simulation with increased draft",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Real UI voyage grounds the loaded transport",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Pause freezes tide, drift and recovery clock",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Broken rudder cannot turn via actual keyboard input",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "UI repair restores rudder and debits timber once",
+      "passed": true,
+      "evidence": {
+        "tick": 369,
+        "x": 0.33444420025557464,
+        "z": 26.394358612252756,
+        "yaw": 0,
+        "vx": 0,
+        "vz": 0,
+        "yawRate": 0,
+        "vesselType": "light",
+        "scenarioId": "rudder",
+        "cargoKg": 600,
+        "floodKg": 0,
+        "timber": 38,
+        "anchor": true,
+        "pumping": false,
+        "recovering": false,
+        "liftM": 0,
+        "components": {
+          "hull": 100,
+          "rudder": 5,
+          "oars": 100,
+          "rigging": 100
+        },
+        "readings": {
+          "waterY": 1.3965833333333333,
+          "tideRate": -0.0002777777777777768,
+          "draft": 0.501,
+          "bedY": -3,
+          "depth": 4.396583333333333,
+          "clearance": 3.895583333333333,
+          "current": {
+            "x": 0.19623740706614967,
+            "z": 0.3540125822736802
+          },
+          "speedMps": 0,
+          "inRepairZone": true,
+          "massKg": 3420
+        },
+        "stuck": null,
+        "repairJob": null,
+        "warnings": [
+          "Đã sửa bánh lái, dùng 2 gỗ. Nhả neo để đi tiếp.",
+          "Bánh lái hỏng — tốc độ quay đã giảm.",
+          "Đang neo — nhả neo trước khi di chuyển."
+        ],
+        "eventCounts": {
+          "RepairStarted": 1,
+          "RepairCompleted": 1
+        },
+        "events": [
+          {
+            "id": "river:68:1",
+            "tick": 68,
+            "type": "RepairStarted",
+            "jobId": "repair:action:1",
+            "component": "rudder"
+          },
+          {
+            "id": "river:368:2",
+            "tick": 368,
+            "type": "RepairCompleted",
+            "jobId": "repair:action:1",
+            "component": "rudder",
+            "timberUsed": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "Completed repair does not keep spending timber per frame",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Repair visibly restores steering response",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Touch panel unload reduces draft with visible readouts",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Open systems panel fits mobile and leaves a visible game area",
+      "passed": true,
+      "evidence": {
+        "w": 320,
+        "vw": 320,
+        "canvasH": 290.015625,
+        "finishBottom": 836
+      }
+    },
+    {
+      "name": "Real tide creates one contact episode, not per-frame damage",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "StakeImpact": 3,
+          "Stuck": 1
+        },
+        "after": {
+          "StakeImpact": 3,
+          "Stuck": 1
+        }
+      }
+    },
+    {
+      "name": "Hidden-stake warning and draft data are visible",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Real-time crew work pulls vessel out without teleporting",
+      "passed": true,
+      "evidence": {
+        "tick": 2238,
+        "x": 10.500068270843402,
+        "z": -14.013918697632343,
+        "yaw": 0,
+        "vx": 6.378143913746981e-05,
+        "vz": 0.07121167964108273,
+        "yawRate": 0,
+        "vesselType": "light",
+        "scenarioId": "ebb",
+        "cargoKg": 600,
+        "floodKg": 0,
+        "timber": 40,
+        "anchor": true,
+        "pumping": false,
+        "recovering": false,
+        "liftM": 0,
+        "components": {
+          "hull": 94.53999999999998,
+          "rudder": 100,
+          "oars": 100,
+          "rigging": 97.05999999999999
+        },
+        "readings": {
+          "waterY": 0.27655555555555544,
+          "tideRate": -0.003888888888888889,
+          "draft": 0.501,
+          "bedY": -3,
+          "depth": 3.2765555555555554,
+          "clearance": 2.7755555555555556,
+          "current": {
+            "x": 0.0026300226144423955,
+            "z": 0.4540911947039973
+          },
+          "speedMps": 0.07121170820431269,
+          "inRepairZone": false,
+          "massKg": 3420
+        },
+        "stuck": null,
+        "repairJob": null,
+        "warnings": [
+          "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước.",
+          "Đang neo — nhả neo trước khi di chuyển."
+        ],
+        "eventCounts": {
+          "StakeImpact": 3,
+          "Stuck": 1,
+          "RecoveryChanged": 1,
+          "Freed": 1,
+          "AnchorChanged": 1
+        },
+        "events": [
+          {
+            "id": "river:738:1",
+            "tick": 738,
+            "type": "StakeImpact",
+            "obstacleId": "stake-02",
+            "damage": 2.800000000000003,
+            "approachSpeed": 0,
+            "penetration": 0.08000000000000008,
+            "secondary": "rigging",
+            "settling": true
+          },
+          {
+            "id": "river:738:2",
+            "tick": 738,
+            "type": "Stuck",
+            "kind": "stake",
+            "obstacleId": "stake-02"
+          },
+          {
+            "id": "river:738:3",
+            "tick": 738,
+            "type": "StakeImpact",
+            "obstacleId": "stake-06",
+            "damage": 2.800000000000003,
+            "approachSpeed": 0,
+            "penetration": 0.08000000000000008,
+            "secondary": "rigging",
+            "settling": true
+          },
+          {
+            "id": "river:738:4",
+            "tick": 738,
+            "type": "StakeImpact",
+            "obstacleId": "stake-10",
+            "damage": 2.800000000000003,
+            "approachSpeed": 0,
+            "penetration": 0.08000000000000008,
+            "secondary": "rigging",
+            "settling": true
+          },
+          {
+            "id": "river:786:5",
+            "tick": 786,
+            "type": "RecoveryChanged",
+            "active": true
+          },
+          {
+            "id": "river:2224:6",
+            "tick": 2224,
+            "type": "Freed",
+            "kind": "stake",
+            "reason": "crew-work"
+          },
+          {
+            "id": "river:2228:7",
+            "tick": 2228,
+            "type": "AnchorChanged",
+            "anchored": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Water simulation finishes through existing results UI",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Sandbox replay resets damage, cargo and tide clock explicitly",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "Water layer has no surviving loop/listener/GPU resource after exit",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "No uncaught JavaScript exception in river UI scenarios",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "passed": 17,
+  "total": 17,
+  "failure": null,
+  "observations": [
+    {
+      "heavy_ground": {
+        "tick": 141,
+        "x": 10.554520924720602,
+        "z": 15.157358189440354,
+        "yaw": 0,
+        "vx": 0,
+        "vz": 0,
+        "yawRate": 0,
+        "vesselType": "transport",
+        "scenarioId": "shoal",
+        "cargoKg": 9000,
+        "floodKg": 0,
+        "timber": 40,
+        "anchor": false,
+        "pumping": false,
+        "recovering": false,
+        "liftM": 0,
+        "components": {
+          "hull": 100,
+          "rudder": 100,
+          "oars": 100,
+          "rigging": 100
+        },
+        "readings": {
+          "waterY": 1.3986944444444445,
+          "tideRate": -0.0002777777777777768,
+          "draft": 1.1186666666666667,
+          "bedY": 0.1775856183244966,
+          "depth": 1.2211088261199479,
+          "clearance": 0.10244215945328117,
+          "current": {
+            "x": 0.16248493573233924,
+            "z": 0.4544147748005033
+          },
+          "speedMps": 0,
+          "inRepairZone": false,
+          "massKg": 18840
+        },
+        "stuck": {
+          "kind": "ground",
+          "nx": 0,
+          "nz": 1,
+          "workS": 0,
+          "distanceM": 0
+        },
+        "repairJob": null,
+        "warnings": [
+          "MẮC CẠN — lùi về nước sâu, gỡ mắc hoặc giảm tải."
+        ],
+        "eventCounts": {
+          "Grounded": 1
+        },
+        "events": [
+          {
+            "id": "river:137:1",
+            "tick": 137,
+            "type": "Grounded"
+          }
+        ]
+      }
+    },
+    {
+      "live_ebb_recovered": {
+        "tick": 2238,
+        "x": 10.500068270843402,
+        "z": -14.013918697632343,
+        "yaw": 0,
+        "vx": 6.378143913746981e-05,
+        "vz": 0.07121167964108273,
+        "yawRate": 0,
+        "vesselType": "light",
+        "scenarioId": "ebb",
+        "cargoKg": 600,
+        "floodKg": 0,
+        "timber": 40,
+        "anchor": true,
+        "pumping": false,
+        "recovering": false,
+        "liftM": 0,
+        "components": {
+          "hull": 94.53999999999998,
+          "rudder": 100,
+          "oars": 100,
+          "rigging": 97.05999999999999
+        },
+        "readings": {
+          "waterY": 0.27655555555555544,
+          "tideRate": -0.003888888888888889,
+          "draft": 0.501,
+          "bedY": -3,
+          "depth": 3.2765555555555554,
+          "clearance": 2.7755555555555556,
+          "current": {
+            "x": 0.0026300226144423955,
+            "z": 0.4540911947039973
+          },
+          "speedMps": 0.07121170820431269,
+          "inRepairZone": false,
+          "massKg": 3420
+        },
+        "stuck": null,
+        "repairJob": null,
+        "warnings": [
+          "NGUY HIỂM: cọc tới đáy thuyền, kể cả khi chưa nhô khỏi mặt nước.",
+          "Đang neo — nhả neo trước khi di chuyển."
+        ],
+        "eventCounts": {
+          "StakeImpact": 3,
+          "Stuck": 1,
+          "RecoveryChanged": 1,
+          "Freed": 1,
+          "AnchorChanged": 1
+        },
+        "events": [
+          {
+            "id": "river:738:1",
+            "tick": 738,
+            "type": "StakeImpact",
+            "obstacleId": "stake-02",
+            "damage": 2.800000000000003,
+            "approachSpeed": 0,
+            "penetration": 0.08000000000000008,
+            "secondary": "rigging",
+            "settling": true
+          },
+          {
+            "id": "river:738:2",
+            "tick": 738,
+            "type": "Stuck",
+            "kind": "stake",
+            "obstacleId": "stake-02"
+          },
+          {
+            "id": "river:738:3",
+            "tick": 738,
+            "type": "StakeImpact",
+            "obstacleId": "stake-06",
+            "damage": 2.800000000000003,
+            "approachSpeed": 0,
+            "penetration": 0.08000000000000008,
+            "secondary": "rigging",
+            "settling": true
+          },
+          {
+            "id": "river:738:4",
+            "tick": 738,
+            "type": "StakeImpact",
+            "obstacleId": "stake-10",
+            "damage": 2.800000000000003,
+            "approachSpeed": 0,
+            "penetration": 0.08000000000000008,
+            "secondary": "rigging",
+            "settling": true
+          },
+          {
+            "id": "river:786:5",
+            "tick": 786,
+            "type": "RecoveryChanged",
+            "active": true
+          },
+          {
+            "id": "river:2224:6",
+            "tick": 2224,
+            "type": "Freed",
+            "kind": "stake",
+            "reason": "crew-work"
+          },
+          {
+            "id": "river:2228:7",
+            "tick": 2228,
+            "type": "AnchorChanged",
+            "anchored": true
+          }
+        ]
+      }
+    }
+  ],
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "physicalDeviceTested": false,
+  "newGameFPSBenchmarked": false,
+  "remoteBackendBlocked": true
+}

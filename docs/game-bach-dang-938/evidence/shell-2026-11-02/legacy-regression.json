@@ -1,0 +1,736 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "reports": [
+    {
+      "p50": 25,
+      "p95": 50,
+      "frames": 78,
+      "gpu": null,
+      "info": null,
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 2995657,
+      "runtime": {
+        "time": 2.0999999999999974,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 84,
+        "frameP50": 25,
+        "frameP95": 91.80000305175781,
+        "tasks": 4,
+        "loops": [
+          "ambient-2d",
+          "sparks-2d",
+          "battle-2d"
+        ],
+        "droppedSteps": 18,
+        "renderedFrames": 122,
+        "renderP50": 17.799999952316284,
+        "renderP95": 48.39999997615814
+      },
+      "phase": 2,
+      "name": "2d-bach-dang",
+      "errors": [],
+      "checks": {
+        "checks": [
+          {
+            "name": "runtime-loaded",
+            "passed": true
+          },
+          {
+            "name": "start-is-idempotent",
+            "passed": true
+          },
+          {
+            "name": "pause-freezes-clock-and-tasks",
+            "passed": true
+          },
+          {
+            "name": "resume-runs-task-once",
+            "passed": true,
+            "details": {
+              "fired": 1
+            }
+          },
+          {
+            "name": "task-cancellation",
+            "passed": true
+          },
+          {
+            "name": "quality-and-accessibility",
+            "passed": true
+          },
+          {
+            "name": "canvas-has-rendered",
+            "passed": true
+          },
+          {
+            "name": "battle-has-selectable-units",
+            "passed": true,
+            "details": {
+              "campaign": 2
+            }
+          },
+          {
+            "name": "rapid-clicks-respect-cooldown",
+            "passed": true,
+            "details": {
+              "before": 0,
+              "after": 1
+            }
+          },
+          {
+            "name": "projectile-resolves-damage",
+            "passed": true,
+            "details": {
+              "before": 100,
+              "after": 93
+            }
+          },
+          {
+            "name": "zero-damage-is-not-replaced",
+            "passed": true,
+            "details": {
+              "before": 93,
+              "after": 93
+            }
+          }
+        ],
+        "passed": 11,
+        "total": 11
+      }
+    },
+    {
+      "p50": 8.5,
+      "p95": 33.299999999999955,
+      "frames": 236,
+      "gpu": null,
+      "info": null,
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 2315368,
+      "runtime": {
+        "time": 3.6333333333333253,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 273,
+        "frameP50": 8.5,
+        "frameP95": 33.5,
+        "tasks": 1,
+        "loops": [
+          "ambient-2d",
+          "sparks-2d",
+          "battle-2d"
+        ],
+        "droppedSteps": 10,
+        "renderedFrames": 214,
+        "renderP50": 16.300000071525574,
+        "renderP95": 34.299999952316284
+      },
+      "phase": 2,
+      "name": "2d-nhu-nguyet",
+      "errors": [],
+      "checks": {
+        "checks": [
+          {
+            "name": "runtime-loaded",
+            "passed": true
+          },
+          {
+            "name": "start-is-idempotent",
+            "passed": true
+          },
+          {
+            "name": "pause-freezes-clock-and-tasks",
+            "passed": true
+          },
+          {
+            "name": "resume-runs-task-once",
+            "passed": true,
+            "details": {
+              "fired": 1
+            }
+          },
+          {
+            "name": "task-cancellation",
+            "passed": true
+          },
+          {
+            "name": "quality-and-accessibility",
+            "passed": true
+          },
+          {
+            "name": "canvas-has-rendered",
+            "passed": true
+          },
+          {
+            "name": "battle-has-selectable-units",
+            "passed": true,
+            "details": {
+              "campaign": 1
+            }
+          },
+          {
+            "name": "rapid-clicks-respect-cooldown",
+            "passed": true,
+            "details": {
+              "before": 0,
+              "after": 1
+            }
+          },
+          {
+            "name": "projectile-resolves-damage",
+            "passed": true,
+            "details": {
+              "before": 120,
+              "after": 113
+            }
+          },
+          {
+            "name": "zero-damage-is-not-replaced",
+            "passed": true,
+            "details": {
+              "before": 113,
+              "after": 113
+            }
+          }
+        ],
+        "passed": 11,
+        "total": 11
+      }
+    },
+    {
+      "p50": 8.300000000000182,
+      "p95": 16.59999999999991,
+      "frames": 325,
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A721) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "info": {
+        "memory": {
+          "geometries": 193,
+          "textures": 1
+        },
+        "render": {
+          "frame": 154,
+          "calls": 290,
+          "triangles": 10410,
+          "points": 930,
+          "lines": 0
+        },
+        "programs": [
+          {
+            "name": "MeshDepthMaterial",
+            "id": 0,
+            "cacheKey": "depth,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,false,false,,false,,false,false,0,true,false,,false,0,0,0,0,0,0,0,0,true,2,4,false,0,false,true,0,0,3201,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 1,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 29,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 2,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 7,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 3,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,true,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 4,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 5,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 7,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 6,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 3,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 7,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,history-water-v1",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          }
+        ],
+        "autoReset": true
+      },
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 9780263,
+      "runtime": {
+        "time": 3.183333333333327,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 330,
+        "frameP50": 8.300000190734863,
+        "frameP95": 16.66666603088379,
+        "tasks": 0,
+        "loops": [
+          "battle-3d"
+        ],
+        "droppedSteps": 7,
+        "renderedFrames": 154,
+        "renderP50": 18.100000023841858,
+        "renderP95": 30.600000023841858
+      },
+      "phase": "NUOC_LON",
+      "name": "3d-bach-dang",
+      "errors": [],
+      "checks": {
+        "checks": [
+          {
+            "name": "runtime-loaded",
+            "passed": true
+          },
+          {
+            "name": "start-is-idempotent",
+            "passed": true
+          },
+          {
+            "name": "pause-freezes-clock-and-tasks",
+            "passed": true
+          },
+          {
+            "name": "resume-runs-task-once",
+            "passed": true,
+            "details": {
+              "fired": 1
+            }
+          },
+          {
+            "name": "task-cancellation",
+            "passed": true
+          },
+          {
+            "name": "quality-and-accessibility",
+            "passed": true
+          },
+          {
+            "name": "renderer-drew-scene",
+            "passed": true,
+            "details": {
+              "frame": 232,
+              "calls": 136,
+              "triangles": 31010,
+              "points": 800,
+              "lines": 0
+            }
+          },
+          {
+            "name": "shader-time-installed",
+            "passed": true
+          },
+          {
+            "name": "campaign-unit-registration",
+            "passed": true,
+            "details": 17
+          },
+          {
+            "name": "bait-fleet-is-ready",
+            "passed": true
+          },
+          {
+            "name": "campaign-attack-hits-target",
+            "passed": true,
+            "details": {
+              "before": 25000,
+              "after": 24800
+            }
+          },
+          {
+            "name": "health-bar-normalized",
+            "passed": true,
+            "details": {
+              "width": "99.2%",
+              "expected": 99.2
+            }
+          },
+          {
+            "name": "surrendered-unit-ignores-damage",
+            "passed": true
+          },
+          {
+            "name": "all-enemies-resolved-produces-victory",
+            "passed": true,
+            "details": "THANG_TRAN"
+          },
+          {
+            "name": "victory-results-reachable",
+            "passed": true,
+            "details": true
+          },
+          {
+            "name": "old-scene-task-canceled",
+            "passed": true
+          },
+          {
+            "name": "other-campaign-hidden",
+            "passed": true
+          }
+        ],
+        "passed": 17,
+        "total": 17
+      }
+    },
+    {
+      "p50": 8.399999999999636,
+      "p95": 16.800000000000182,
+      "frames": 314,
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A721) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "info": {
+        "memory": {
+          "geometries": 422,
+          "textures": 1
+        },
+        "render": {
+          "frame": 164,
+          "calls": 303,
+          "triangles": 34914,
+          "points": 1280,
+          "lines": 0
+        },
+        "programs": [
+          {
+            "name": "MeshDepthMaterial",
+            "id": 0,
+            "cacheKey": "depth,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,false,false,,false,,false,false,0,true,false,,false,0,0,0,0,0,0,0,0,true,2,4,false,0,false,true,0,0,3201,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 1,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 29,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 2,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 3,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,true,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 4,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 4,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 5,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 6,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 6,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 7,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,7,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,history-water-v1",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 8,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 26,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 9,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,true,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 10,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,true,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 5,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshLambertMaterial",
+            "id": 11,
+            "cacheKey": "lambert,highp,true,true,3000,true,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 8,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshLambertMaterial",
+            "id": 12,
+            "cacheKey": "lambert,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 14,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshBasicMaterial",
+            "id": 13,
+            "cacheKey": "basic,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,0,false,false,,false,false,true,true,true,false,,false,false,0,true,false,,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 14,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 2,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "MeshStandardMaterial",
+            "id": 15,
+            "cacheKey": "physical,STANDARD,,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,true,false,false,false,false,false,false,false,false,false,,false,false,,false,false,true,true,true,false,,false,false,0,true,false,false,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,history-water-v1",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          },
+          {
+            "name": "PointsMaterial",
+            "id": 16,
+            "cacheKey": "points,highp,true,true,3000,false,false,false,3000,false,3000,false,,3000,false,false,3000,false,false,3000,false,false,false,false,false,false,false,false,false,false,false,false,false,,true,false,,false,false,true,true,true,false,true,false,,0,true,false,,false,1,6,0,1,0,1,0,0,true,2,4,false,0,false,false,0,0,false,false,false,false,3000,2,function(){}",
+            "usedTimes": 1,
+            "program": {},
+            "vertexShader": {},
+            "fragmentShader": {}
+          }
+        ],
+        "autoReset": true
+      },
+      "viewport": [
+        1347,
+        804,
+        1
+      ],
+      "heap": 11306478,
+      "runtime": {
+        "time": 3.299999999999993,
+        "paused": false,
+        "reasons": [],
+        "quality": "medium",
+        "requestedQuality": "auto",
+        "frames": 326,
+        "frameP50": 8.399999618530273,
+        "frameP95": 17,
+        "tasks": 2,
+        "loops": [
+          "battle-3d"
+        ],
+        "droppedSteps": 6,
+        "renderedFrames": 164,
+        "renderP50": 17.5,
+        "renderP95": 29.100000023841858
+      },
+      "phase": "NHU_NGUYET_THUC_CHIEN",
+      "name": "3d-nhu-nguyet",
+      "errors": [],
+      "checks": {
+        "checks": [
+          {
+            "name": "runtime-loaded",
+            "passed": true
+          },
+          {
+            "name": "start-is-idempotent",
+            "passed": true
+          },
+          {
+            "name": "pause-freezes-clock-and-tasks",
+            "passed": true
+          },
+          {
+            "name": "resume-runs-task-once",
+            "passed": true,
+            "details": {
+              "fired": 1
+            }
+          },
+          {
+            "name": "task-cancellation",
+            "passed": true
+          },
+          {
+            "name": "quality-and-accessibility",
+            "passed": true
+          },
+          {
+            "name": "renderer-drew-scene",
+            "passed": true,
+            "details": {
+              "frame": 252,
+              "calls": 198,
+              "triangles": 8196,
+              "points": 450,
+              "lines": 0
+            }
+          },
+          {
+            "name": "shader-time-installed",
+            "passed": true
+          },
+          {
+            "name": "campaign-unit-registration",
+            "passed": true,
+            "details": 11
+          },
+          {
+            "name": "campaign-attack-hits-target",
+            "passed": true,
+            "details": {
+              "before": 5000,
+              "after": 4050
+            }
+          },
+          {
+            "name": "health-bar-normalized",
+            "passed": true,
+            "details": {
+              "width": "81%",
+              "expected": 81
+            }
+          },
+          {
+            "name": "surrendered-unit-ignores-damage",
+            "passed": true
+          },
+          {
+            "name": "ambush-triggers-at-the-river-line",
+            "passed": true,
+            "details": {
+              "x": 23.925,
+              "ambushStarted": true
+            }
+          },
+          {
+            "name": "all-enemies-resolved-produces-victory",
+            "passed": true,
+            "details": "THANG_TRAN_NHU_NGUYET"
+          },
+          {
+            "name": "victory-results-reachable",
+            "passed": true,
+            "details": true
+          },
+          {
+            "name": "old-scene-task-canceled",
+            "passed": true
+          },
+          {
+            "name": "other-campaign-hidden",
+            "passed": true
+          }
+        ],
+        "passed": 17,
+        "total": 17
+      }
+    }
+  ]
+}

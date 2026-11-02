@@ -1,0 +1,132 @@
+{
+  "pagesConfig": {
+    "url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/pages",
+    "error": "HTTP Error 404: Not Found",
+    "status": 404
+  },
+  "workflows": {
+    "url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/actions/workflows",
+    "status": 200,
+    "finalUrl": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/actions/workflows",
+    "data": {
+      "total_count": 1,
+      "workflows": [
+        {
+          "name": "pages-build-deployment",
+          "path": "dynamic/pages/pages-build-deployment",
+          "state": "active"
+        }
+      ]
+    }
+  },
+  "deployments": {
+    "url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments?per_page=3",
+    "status": 200,
+    "finalUrl": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments?per_page=3",
+    "data": [
+      {
+        "sha": "0393e604ef85c44615a0bfa859dd6865c7c9df45",
+        "ref": "main",
+        "environment": "github-pages",
+        "created_at": "2026-11-01T12:00:31Z",
+        "statuses_url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments/7472681981/statuses"
+      },
+      {
+        "sha": "530bce1c420188433577353935d6caf35832efcd",
+        "ref": "main",
+        "environment": "github-pages",
+        "created_at": "2026-11-01T10:17:27Z",
+        "statuses_url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments/7471640958/statuses"
+      },
+      {
+        "sha": "f671e3b33485901d8ac20ec2acb69c4d3f6c8920",
+        "ref": "main",
+        "environment": "github-pages",
+        "created_at": "2026-11-01T07:03:45Z",
+        "statuses_url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments/7469839772/statuses"
+      }
+    ]
+  },
+  "workflowRuns": {
+    "url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/actions/runs?per_page=3",
+    "status": 200,
+    "finalUrl": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/actions/runs?per_page=3",
+    "data": [
+      {
+        "name": "pages build and deployment",
+        "path": "dynamic/pages/pages-build-deployment",
+        "head_branch": "main",
+        "head_sha": "0393e604ef85c44615a0bfa859dd6865c7c9df45",
+        "event": "dynamic",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-01T11:59:37Z"
+      },
+      {
+        "name": "pages build and deployment",
+        "path": "dynamic/pages/pages-build-deployment",
+        "head_branch": "main",
+        "head_sha": "530bce1c420188433577353935d6caf35832efcd",
+        "event": "dynamic",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-01T10:16:31Z"
+      },
+      {
+        "name": "pages build and deployment",
+        "path": "dynamic/pages/pages-build-deployment",
+        "head_branch": "main",
+        "head_sha": "f671e3b33485901d8ac20ec2acb69c4d3f6c8920",
+        "event": "dynamic",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-01T07:02:47Z"
+      }
+    ]
+  },
+  "deploymentStatus": {
+    "url": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments/7472681981/statuses",
+    "status": 200,
+    "finalUrl": "https://api.github.com/repos/thienchi0506/nhipdapcualichsu/deployments/7472681981/statuses",
+    "data": [
+      {
+        "state": "success",
+        "environment": "github-pages",
+        "environment_url": "https://thienchi0506.github.io/nhipdapcualichsu/",
+        "created_at": "2026-11-01T12:01:03Z"
+      },
+      {
+        "state": "in_progress",
+        "environment": "github-pages",
+        "environment_url": "",
+        "created_at": "2026-11-01T12:00:35Z"
+      },
+      {
+        "state": "queued",
+        "environment": "github-pages",
+        "environment_url": "",
+        "created_at": "2026-11-01T12:00:33Z"
+      },
+      {
+        "state": "waiting",
+        "environment": "github-pages",
+        "environment_url": "",
+        "created_at": "2026-11-01T12:00:32Z"
+      }
+    ]
+  },
+  "liveRoot": {
+    "url": "https://thienchi0506.github.io/nhipdapcualichsu/",
+    "status": 200,
+    "finalUrl": "https://thienchi0506.github.io/nhipdapcualichsu/",
+    "title": "Dấu Chân Lịch Sử — Hành Trình Bốn Ngàn Năm",
+    "sha256": "f043d75787f55982815fb2a90f916ed1bb289a0ecba32fcdeadfed50d8dc7fbb"
+  },
+  "liveLegacy3d": {
+    "url": "https://thienchi0506.github.io/nhipdapcualichsu/sa-ban-3d.html",
+    "status": 200,
+    "finalUrl": "https://thienchi0506.github.io/nhipdapcualichsu/sa-ban-3d.html",
+    "title": "Sa Bàn 3D Bạch Đằng Giang (938) • Dấu Chân Lịch Sử",
+    "sha256": "9bfbbfcad6d496c3a1c67715cd6daf5894e7e4077ad55c312225071ecc142446"
+  }
+}

@@ -1,0 +1,3882 @@
+{
+  "utc": "2026-11-01T15:34:55Z",
+  "git": {
+    "head": "0393e604ef85c44615a0bfa859dd6865c7c9df45",
+    "branch": "main",
+    "status": "M game-runtime.css\n M game-runtime.js\n M game-upgrades-3d.js\n M sa-ban-3d.html\n M sa-ban-nhu-nguyet.html\n M sa-ban.html\n M sanh-game.html\n M thao-truong.html\n M tools/game_browser_check.py\n M tools/game_regression_checks.js\n?? docs/",
+    "remote": "https://github.com/thienchi0506/nhipdapcualichsu.git",
+    "recentCommits": "0393e60 5\n530bce1 3\nf671e3b 2\n52643f2 update lần 1\n401ec1d bản thông báo chặn mb"
+  },
+  "pages": {
+    "dang-nhap.html": {
+      "bytes": 65989,
+      "title": "Đại Việt Hùng Ca - Báo Danh Nhập Ngũ",
+      "scripts": [
+        "site-music.js",
+        "https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "script",
+          "url": "https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://www.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://identitytoolkit.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://securetoken.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap"
+        }
+      ],
+      "links": [
+        {
+          "href": "index.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [],
+      "storage": [
+        {
+          "line": 1321,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1322,
+          "keys": [
+            "emailNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1323,
+          "keys": [
+            "uidNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1571,
+          "keys": [
+            "lichSuVideoIndex"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1583,
+          "keys": [
+            "lichSuVideoIndex"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "gtag",
+          "line": 9
+        },
+        {
+          "name": "hienThongBao",
+          "line": 1258
+        },
+        {
+          "name": "dịchLỗi",
+          "line": 1269
+        },
+        {
+          "name": "batDauChoFirebase",
+          "line": 1286
+        },
+        {
+          "name": "ketThucChoFirebase",
+          "line": 1303
+        },
+        {
+          "name": "luuVaChuyenHuong",
+          "line": 1317
+        },
+        {
+          "name": "chuyenTab",
+          "line": 1461
+        },
+        {
+          "name": "layVideoTiepTheo",
+          "line": 1567
+        },
+        {
+          "name": "hienFallbackVaChuyenTrang",
+          "line": 1648
+        }
+      ],
+      "duplicateIds": []
+    },
+    "index.html": {
+      "bytes": 358540,
+      "title": "Dấu Chân Lịch Sử — Hành Trình Bốn Ngàn Năm",
+      "scripts": [
+        "site-music.js",
+        "https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "script",
+          "url": "https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap"
+        },
+        {
+          "tag": "source",
+          "url": "hero-loop.mp4"
+        },
+        {
+          "tag": "source",
+          "url": "nhac-nen-1.mp3"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": "batDauChuyenCanh(event)"
+        }
+      ],
+      "canvases": [
+        {
+          "id": "hero-animated-canvas",
+          "class": "splash__animated-canvas"
+        }
+      ],
+      "storage": [],
+      "missingLiteralPaths": [
+        {
+          "tag": "source",
+          "url": "hero-loop.mp4"
+        }
+      ],
+      "functions": [
+        {
+          "name": "gtag",
+          "line": 9
+        },
+        {
+          "name": "khoiTaoHoatHoaNhanVat",
+          "line": 1374
+        },
+        {
+          "name": "khoiTaoFallbackCanvas2D",
+          "line": 1386
+        },
+        {
+          "name": "batDauLoop2D",
+          "line": 1394
+        },
+        {
+          "name": "render2D",
+          "line": 1407
+        },
+        {
+          "name": "compileShader",
+          "line": 1698
+        },
+        {
+          "name": "capNhatKichThuoc",
+          "line": 1774
+        },
+        {
+          "name": "lapAnimation",
+          "line": 1789
+        },
+        {
+          "name": "quanLyHeroBackgroundVideo",
+          "line": 1835
+        },
+        {
+          "name": "kichHoatFallbackWebGL",
+          "line": 1842
+        },
+        {
+          "name": "taoHatLua",
+          "line": 1887
+        },
+        {
+          "name": "toggleNhac",
+          "line": 1925
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 1926
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 1927
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 1928
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 1929
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 1930
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 1931
+        },
+        {
+          "name": "batDauChuyenCanh",
+          "line": 1936
+        },
+        {
+          "name": "batDauHanhTrinh",
+          "line": 1944
+        },
+        {
+          "name": "ketThucChuyenCanh",
+          "line": 1948
+        },
+        {
+          "name": "khoiTaoDomLuaLichSu",
+          "line": 1962
+        },
+        {
+          "name": "taoHatDomLua",
+          "line": 1995
+        },
+        {
+          "name": "animate",
+          "line": 2035
+        },
+        {
+          "name": "initSacredFireAnimation",
+          "line": 2092
+        },
+        {
+          "name": "updateFire",
+          "line": 2096
+        },
+        {
+          "name": "initTailSinusoidalWave",
+          "line": 2112
+        },
+        {
+          "name": "updateTailWaves",
+          "line": 2119
+        }
+      ],
+      "duplicateIds": []
+    },
+    "quan-anh-hoi.html": {
+      "bytes": 82282,
+      "title": "Quần Anh Hội — Diễn Đàn Đàm Luận Lịch Sử Đại Việt",
+      "scripts": [
+        "site-music.js",
+        "firebase-config.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "script",
+          "url": "firebase-config.js"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "dang-nhap.html",
+          "onclick": null
+        },
+        {
+          "href": "index.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "tang-thu-cac.html",
+          "onclick": null
+        },
+        {
+          "href": "thao-truong.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban-3d.html",
+          "onclick": null
+        },
+        {
+          "href": "quan-anh-hoi.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "dang-nhap.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [],
+      "storage": [
+        {
+          "line": 1137,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1228,
+          "keys": [
+            "quanAnhHoi_theme"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1234,
+          "keys": [
+            "quanAnhHoi_theme"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1310,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1322,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1385,
+          "keys": [
+            "quanAnhHoi_posts"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1394,
+          "keys": [
+            "quanAnhHoi_posts"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1457,
+          "keys": [
+            "quanAnhHoi_posts"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1507,
+          "keys": [
+            "quanAnhHoi_posts"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1577,
+          "keys": [
+            "quanAnhHoi_comments"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1615,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1651,
+          "keys": [
+            "quanAnhHoi_comments"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1662,
+          "keys": [
+            "quanAnhHoi_comments"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 1667,
+          "keys": [
+            "quanAnhHoi_posts"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "capNhatNutGiaoDien",
+          "line": 1237
+        },
+        {
+          "name": "hienThiXemTruocMedia",
+          "line": 1261
+        },
+        {
+          "name": "taiMediaLenFirebase",
+          "line": 1273
+        },
+        {
+          "name": "capNhatTrangThaiKetNoi",
+          "line": 1328
+        },
+        {
+          "name": "khoiTaoBangTin",
+          "line": 1351
+        },
+        {
+          "name": "taiTuLocalStorage",
+          "line": 1384
+        },
+        {
+          "name": "taiBinhLuan",
+          "line": 1535
+        },
+        {
+          "name": "renderDanhSachBinhLuan",
+          "line": 1587
+        },
+        {
+          "name": "renderBangTin",
+          "line": 1689
+        },
+        {
+          "name": "capNhatThongSo",
+          "line": 1813
+        },
+        {
+          "name": "layBieuTuongAuthor",
+          "line": 1848
+        },
+        {
+          "name": "dinhDangThoiGian",
+          "line": 1857
+        },
+        {
+          "name": "escapeHtml",
+          "line": 1882
+        }
+      ],
+      "duplicateIds": []
+    },
+    "sa-ban-3d.html": {
+      "bytes": 620539,
+      "title": "Sa Bàn 3D Bạch Đằng Giang (938) • Dấu Chân Lịch Sử",
+      "scripts": [
+        "site-music.js",
+        "game-runtime.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+        "game-upgrades-3d.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "script",
+          "url": "game-runtime.js"
+        },
+        {
+          "tag": "link",
+          "url": "game-runtime.css"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+        },
+        {
+          "tag": "script",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        },
+        {
+          "tag": "audio",
+          "url": "nhac-nen-1.mp3"
+        },
+        {
+          "tag": "script",
+          "url": "game-upgrades-3d.js"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [
+        {
+          "id": "webgl-canvas"
+        },
+        {
+          "id": "minimap-canvas",
+          "width": "172",
+          "height": "125"
+        },
+        {
+          "id": "relic-3d-canvas"
+        }
+      ],
+      "storage": [
+        {
+          "line": 11627,
+          "keys": [
+            "danhTuongProfile3D"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 11635,
+          "keys": [
+            "danhTuongProfile3D"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 11657,
+          "keys": [
+            "danhTuongProfile3D"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "toggleNhac",
+          "line": 4717
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 4718
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 4719
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 4720
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 4721
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 4722
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 4723
+        },
+        {
+          "name": "khoiDongAmThanh",
+          "line": 4725
+        },
+        {
+          "name": "phatGiongDoc",
+          "line": 4731
+        },
+        {
+          "name": "toggleGiongDoc",
+          "line": 4762
+        },
+        {
+          "name": "khoiTaoThreeJSEngine",
+          "line": 4783
+        },
+        {
+          "name": "thietLapAnhSang3D",
+          "line": 4888
+        },
+        {
+          "name": "dungDiaHinhSongNui",
+          "line": 4958
+        },
+        {
+          "name": "dungMatNuocSong3D",
+          "line": 5056
+        },
+        {
+          "name": "dungBaiCocNgam3D",
+          "line": 5098
+        },
+        {
+          "name": "dungHeThongHatTanLua",
+          "line": 5172
+        },
+        {
+          "name": "taoNhanVatTuongLinh3D",
+          "line": 5209
+        },
+        {
+          "name": "tao4CongTrinhHauPhuong3D",
+          "line": 5353
+        },
+        {
+          "name": "taoBienTenNoiCongTrinh",
+          "line": 5549
+        },
+        {
+          "name": "capNhatBienTenNoi3D",
+          "line": 5578
+        },
+        {
+          "name": "dangKySuKienBanPhimRPG",
+          "line": 5617
+        },
+        {
+          "name": "capNhatHienThiPhimAo",
+          "line": 5682
+        },
+        {
+          "name": "toggleVirtualControls",
+          "line": 5717
+        },
+        {
+          "name": "toggleQuestOverlay",
+          "line": 5725
+        },
+        {
+          "name": "batDauDiChuyenTouch",
+          "line": 5739
+        },
+        {
+          "name": "dungDiChuyenTouch",
+          "line": 5743
+        },
+        {
+          "name": "xuLyDieuKhienNhanVat",
+          "line": 5751
+        },
+        {
+          "name": "kichHoatTuongTacGanNhat",
+          "line": 5880
+        },
+        {
+          "name": "moBangNangCapCongTrinh",
+          "line": 5896
+        },
+        {
+          "name": "dongModalNangCap",
+          "line": 5962
+        },
+        {
+          "name": "dongModalNangCapKhiClickNgoai",
+          "line": 5967
+        },
+        {
+          "name": "thucHienNangCap",
+          "line": 5973
+        },
+        {
+          "name": "capNhatHUD",
+          "line": 6046
+        },
+        {
+          "name": "apDungSatThuongDich",
+          "line": 6072
+        },
+        {
+          "name": "taoCacDaoQuan3D",
+          "line": 6090
+        },
+        {
+          "name": "taoMotThuyenNhe",
+          "line": 6102
+        },
+        {
+          "name": "taoDoanPhucBinh",
+          "line": 6191
+        },
+        {
+          "name": "taoMotLauThuyenHoVe",
+          "line": 6425
+        },
+        {
+          "name": "taoThanhMauDaoQuan",
+          "line": 6521
+        },
+        {
+          "name": "capNhatThanhMauDaoQuan3D",
+          "line": 6563
+        },
+        {
+          "name": "keoCoTrangDauHang",
+          "line": 6630
+        },
+        {
+          "name": "toggleActionCam",
+          "line": 6670
+        },
+        {
+          "name": "kichHoatCinematicActionCam",
+          "line": 6687
+        },
+        {
+          "name": "doiDoiHinhChienThuat",
+          "line": 6731
+        },
+        {
+          "name": "veDuongDi3DUonLuon",
+          "line": 6782
+        },
+        {
+          "name": "xoaDuongDi3D",
+          "line": 6876
+        },
+        {
+          "name": "capNhatVatLyDuongDi3D",
+          "line": 6889
+        },
+        {
+          "name": "dangKyPhimTuyetKy",
+          "line": 6926
+        },
+        {
+          "name": "thiTrienTuyetKy",
+          "line": 6966
+        },
+        {
+          "name": "banMuaTenLua3D",
+          "line": 7179
+        },
+        {
+          "name": "capNhatThanhTuyetKyTheoChienDich",
+          "line": 7191
+        },
+        {
+          "name": "capNhatTuyetKyCooldown",
+          "line": 7217
+        },
+        {
+          "name": "capNhatHieuUngChienThuat3D",
+          "line": 7250
+        },
+        {
+          "name": "hienThiThongBaoPopup",
+          "line": 7333
+        },
+        {
+          "name": "datGocNhinCamera",
+          "line": 7352
+        },
+        {
+          "name": "dangKySuKienChuotVaManHinh",
+          "line": 7421
+        },
+        {
+          "name": "capNhatThuyTrieu3D",
+          "line": 7473
+        },
+        {
+          "name": "thayDoiThuyTrieuThuCong",
+          "line": 7539
+        },
+        {
+          "name": "renderLoop3D",
+          "line": 7565
+        },
+        {
+          "name": "updateSimulation3D",
+          "line": 7571
+        },
+        {
+          "name": "renderFrame3D",
+          "line": 7584
+        },
+        {
+          "name": "moSanhCho3D",
+          "line": 7742
+        },
+        {
+          "name": "chuyenVaoThucChien",
+          "line": 7749
+        },
+        {
+          "name": "moModalBaoTang",
+          "line": 7786
+        },
+        {
+          "name": "moModalBangVang",
+          "line": 7798
+        },
+        {
+          "name": "moBangVangSauChienThang",
+          "line": 7805
+        },
+        {
+          "name": "troVeBanDoChienDich3D",
+          "line": 7815
+        },
+        {
+          "name": "choiLaiChienDich3D",
+          "line": 7866
+        },
+        {
+          "name": "dongModal",
+          "line": 7872
+        },
+        {
+          "name": "dongModalKhiClickNgoai",
+          "line": 7880
+        },
+        {
+          "name": "taoVongSangChonQuan3D",
+          "line": 7891
+        },
+        {
+          "name": "khoiTaoRaycastingChonQuan",
+          "line": 7907
+        },
+        {
+          "name": "chonDaoQuan3D",
+          "line": 8032
+        },
+        {
+          "name": "boChonDaoQuan",
+          "line": 8057
+        },
+        {
+          "name": "raLenhDiChuyenToaDo",
+          "line": 8067
+        },
+        {
+          "name": "raLenhTanCongMucTieu",
+          "line": 8082
+        },
+        {
+          "name": "raLenhDiChuyenDoiHinh",
+          "line": 8087
+        },
+        {
+          "name": "taoMarkerDiemDen3D",
+          "line": 8110
+        },
+        {
+          "name": "capNhatMarkerDiemDen3D",
+          "line": 8143
+        },
+        {
+          "name": "isBachDangCombatActive",
+          "line": 8167
+        },
+        {
+          "name": "isBachDangFleetScreen",
+          "line": 8171
+        },
+        {
+          "name": "tiepTucTranBachDangNeuClickVungTrong",
+          "line": 8175
+        },
+        {
+          "name": "khoiDongChienTranHoi2",
+          "line": 8180
+        },
+        {
+          "name": "batDauTranBachDangSauHuongDan",
+          "line": 8193
+        },
+        {
+          "name": "taoNutChonThuyenBachDang",
+          "line": 8287
+        },
+        {
+          "name": "chonThuyenBachDang",
+          "line": 8302
+        },
+        {
+          "name": "chonMucTieuBachDang",
+          "line": 8314
+        },
+        {
+          "name": "capNhatNhomNutBachDang",
+          "line": 8321
+        },
+        {
+          "name": "capNhatHUDTranBachDang",
+          "line": 8332
+        },
+        {
+          "name": "batDauDanhThuongBachDang",
+          "line": 8365
+        },
+        {
+          "name": "dungDanhThuongBachDang",
+          "line": 8372
+        },
+        {
+          "name": "batDauTenLuaPhucKichBachDang",
+          "line": 8377
+        },
+        {
+          "name": "dungTenLuaPhucKichBachDang",
+          "line": 8390
+        },
+        {
+          "name": "taoHieuUngTauChayBachDang",
+          "line": 8395
+        },
+        {
+          "name": "capNhatLuaChayTauBachDang",
+          "line": 8433
+        },
+        {
+          "name": "phatTenBachDang",
+          "line": 8448
+        },
+        {
+          "name": "banLoatTenThuongBachDang",
+          "line": 8482
+        },
+        {
+          "name": "kichHoatCungLonBachDang",
+          "line": 8497
+        },
+        {
+          "name": "kichHoatTenLuaPhucKichBachDang",
+          "line": 8510
+        },
+        {
+          "name": "kichHoatGoiHoaBinhBachDang",
+          "line": 8523
+        },
+        {
+          "name": "ketThucTranBachDang",
+          "line": 8538
+        },
+        {
+          "name": "ketThucTranBachDangVeSaBan",
+          "line": 8566
+        },
+        {
+          "name": "ketThucTranBachDangMoHauChien",
+          "line": 8571
+        },
+        {
+          "name": "dieuKhienThuyenBachDang",
+          "line": 8577
+        },
+        {
+          "name": "namTrongBaiCocBachDang",
+          "line": 8601
+        },
+        {
+          "name": "timMucTieuChoTauDich",
+          "line": 8605
+        },
+        {
+          "name": "capNhatTauDichBachDang",
+          "line": 8612
+        },
+        {
+          "name": "kiemTraKetQuaTranBachDang",
+          "line": 8661
+        },
+        {
+          "name": "capNhatTranBachDang",
+          "line": 8675
+        },
+        {
+          "name": "kiemTraVongLapChienTran",
+          "line": 8727
+        },
+        {
+          "name": "kichHoatTinhHuong",
+          "line": 8925
+        },
+        {
+          "name": "chonDapAnTinhHuong",
+          "line": 8974
+        },
+        {
+          "name": "dongModalDaoLamTuong",
+          "line": 9049
+        },
+        {
+          "name": "khoiTaoThuyenBeChienThuat3D",
+          "line": 9065
+        },
+        {
+          "name": "thiHanhLenhChienThuat3D",
+          "line": 9069
+        },
+        {
+          "name": "capNhatPhaoTenVaHoaCong3D",
+          "line": 9073
+        },
+        {
+          "name": "chuyenSangBinhMinhHoaBinh",
+          "line": 9082
+        },
+        {
+          "name": "tao4CongTrinhHauChien3D",
+          "line": 9183
+        },
+        {
+          "name": "moBangQuyetSachHauChien",
+          "line": 9299
+        },
+        {
+          "name": "thucThiQuyetSachHauChien",
+          "line": 9341
+        },
+        {
+          "name": "khoiTaoRelicViewer",
+          "line": 9467
+        },
+        {
+          "name": "relicRenderLoop",
+          "line": 9554
+        },
+        {
+          "name": "taoMoHinhBaoVat3D",
+          "line": 9575
+        },
+        {
+          "name": "chonBaoVatShowcase",
+          "line": 9831
+        },
+        {
+          "name": "capNhatDanhSachRelicThumbnails",
+          "line": 9872
+        },
+        {
+          "name": "tuDongXoayBaoVatToggle",
+          "line": 9892
+        },
+        {
+          "name": "datLaiGocNhinBaoVat",
+          "line": 9901
+        },
+        {
+          "name": "ngheThuyetMinhBaoVat",
+          "line": 9907
+        },
+        {
+          "name": "taoMoiTruongNhuNguyet3D",
+          "line": 9917
+        },
+        {
+          "name": "chuyenSangChienDichNhuNguyet",
+          "line": 10277
+        },
+        {
+          "name": "chuyenSangChienDichBachDang",
+          "line": 10386
+        },
+        {
+          "name": "tao4DaoQuanNhuNguyet3D",
+          "line": 10486
+        },
+        {
+          "name": "taoTuyenCungThu",
+          "line": 10572
+        },
+        {
+          "name": "tao6BeMangQuanTong3D",
+          "line": 10661
+        },
+        {
+          "name": "taoMotBeMang",
+          "line": 10675
+        },
+        {
+          "name": "phongDanDaLuaNhuNguyet3D",
+          "line": 10757
+        },
+        {
+          "name": "capNhatPhaoDaNhuNguyet3D",
+          "line": 10800
+        },
+        {
+          "name": "phongTenMaiPhucNhuNguyet",
+          "line": 10824
+        },
+        {
+          "name": "ketThucTranNhuNguyet",
+          "line": 10867
+        },
+        {
+          "name": "thiTrienTuyetKyNhuNguyet",
+          "line": 10914
+        },
+        {
+          "name": "kiemTraVongLapChienTranNhuNguyet",
+          "line": 11033
+        },
+        {
+          "name": "tao4CongTrinhHauChienNhuNguyet3D",
+          "line": 11097
+        },
+        {
+          "name": "chuyenSangBinhMinhNhuNguyet",
+          "line": 11183
+        },
+        {
+          "name": "khoiDongChienTranNhuNguyetHoi2",
+          "line": 11272
+        },
+        {
+          "name": "chonAiChienDich",
+          "line": 11350
+        },
+        {
+          "name": "moKhoaHuanChuong",
+          "line": 11558
+        },
+        {
+          "name": "luuProfileDanhTuong",
+          "line": 11592
+        },
+        {
+          "name": "taiProfileDanhTuong",
+          "line": 11633
+        },
+        {
+          "name": "capNhatBangVangDanhTuong",
+          "line": 11655
+        },
+        {
+          "name": "khoiTaoMinimap2D",
+          "line": 11705
+        },
+        {
+          "name": "capNhatMinimap2D",
+          "line": 11737
+        },
+        {
+          "name": "toMapX",
+          "line": 11749
+        },
+        {
+          "name": "toMapY",
+          "line": 11750
+        },
+        {
+          "name": "chuyenDoiThoiTiet3Hoi",
+          "line": 11897
+        },
+        {
+          "name": "capNhatGiongBaoHoi2",
+          "line": 11990
+        },
+        {
+          "name": "khoiTaoDomDomHauPhuong",
+          "line": 12008
+        },
+        {
+          "name": "capNhatDomDomHauPhuong",
+          "line": 12059
+        },
+        {
+          "name": "khoiTaoBotSongBaiCoc",
+          "line": 12080
+        },
+        {
+          "name": "capNhatBotSongBaiCoc",
+          "line": 12114
+        },
+        {
+          "name": "khoiTaoVatLyVoTauVaChay",
+          "line": 12136
+        },
+        {
+          "name": "phatNoManhVoVaCotNuoc",
+          "line": 12244
+        },
+        {
+          "name": "capNhatVatLyVoTauVaChay",
+          "line": 12292
+        },
+        {
+          "name": "khoiTaoGodRays",
+          "line": 12383
+        },
+        {
+          "name": "capNhatGodRays",
+          "line": 12410
+        }
+      ],
+      "duplicateIds": []
+    },
+    "sa-ban-nhu-nguyet.html": {
+      "bytes": 183632,
+      "title": "Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử",
+      "scripts": [
+        "site-music.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+        },
+        {
+          "tag": "audio",
+          "url": "nhac-nen-1.mp3"
+        },
+        {
+          "tag": "img",
+          "url": "anh-nen.jpg"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html#nhu-nguyet",
+          "onclick": null
+        }
+      ],
+      "canvases": [
+        {
+          "id": "bg-canvas"
+        }
+      ],
+      "storage": [
+        {
+          "line": 3407,
+          "keys": [
+            "diemSaBan_"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 3681,
+          "keys": [
+            "giongDocBat"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 3741,
+          "keys": [
+            "tenDanhTuong"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 3751,
+          "keys": [
+            "tenDanhTuong"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 3891,
+          "keys": [
+            "giongDocBat"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "batDauMan",
+          "line": 2887
+        },
+        {
+          "name": "hienThiCauThoai",
+          "line": 2931
+        },
+        {
+          "name": "goKyTu",
+          "line": 2954
+        },
+        {
+          "name": "xuLyTapHopThoai",
+          "line": 2970
+        },
+        {
+          "name": "ngheLaiGiongDocThoai",
+          "line": 2982
+        },
+        {
+          "name": "hienThiBangLuaChon",
+          "line": 2992
+        },
+        {
+          "name": "chonPhuongAn",
+          "line": 3037
+        },
+        {
+          "name": "hienThiSvgThayThe",
+          "line": 3143
+        },
+        {
+          "name": "taoFloatingHUD",
+          "line": 3152
+        },
+        {
+          "name": "tiepTucHanhTrinh",
+          "line": 3205
+        },
+        {
+          "name": "chuyenManTiepTheo",
+          "line": 3220
+        },
+        {
+          "name": "batDauGiaiDoanHauChien",
+          "line": 3239
+        },
+        {
+          "name": "nhanVatPham",
+          "line": 3251
+        },
+        {
+          "name": "dongPopupVatPhamVaTiepTuc",
+          "line": 3273
+        },
+        {
+          "name": "hienThiBangTongKetToanDien",
+          "line": 3292
+        },
+        {
+          "name": "capNhatLeaderboardRow",
+          "line": 3415
+        },
+        {
+          "name": "choiLaiAi1",
+          "line": 3424
+        },
+        {
+          "name": "taoSvgNgheThuat",
+          "line": 3443
+        },
+        {
+          "name": "toggleNhac",
+          "line": 3535
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 3536
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 3537
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 3538
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 3539
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 3540
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 3541
+        },
+        {
+          "name": "khoiTaoNhacNen",
+          "line": 3543
+        },
+        {
+          "name": "capNhatUINhac",
+          "line": 3544
+        },
+        {
+          "name": "giamAmLuongNhacNen",
+          "line": 3548
+        },
+        {
+          "name": "khoiPhucAmLuongNhacNen",
+          "line": 3561
+        },
+        {
+          "name": "setTrangThaiGiongDocUI",
+          "line": 3574
+        },
+        {
+          "name": "loadVoices",
+          "line": 3582
+        },
+        {
+          "name": "phatGiongDoc",
+          "line": 3592
+        },
+        {
+          "name": "phatSpeechSynthesis",
+          "line": 3622
+        },
+        {
+          "name": "tatGiongDoc",
+          "line": 3664
+        },
+        {
+          "name": "capNhatHUD",
+          "line": 3704
+        },
+        {
+          "name": "vaoAiNhuNguyet",
+          "line": 3715
+        },
+        {
+          "name": "quayVeLobby",
+          "line": 3725
+        },
+        {
+          "name": "baoAiDangPhatTrien",
+          "line": 3733
+        },
+        {
+          "name": "moModal",
+          "line": 3757
+        },
+        {
+          "name": "dongModal",
+          "line": 3762
+        },
+        {
+          "name": "dongModalNgoai",
+          "line": 3767
+        },
+        {
+          "name": "moModalBangXepHang",
+          "line": 3771
+        },
+        {
+          "name": "moModalKhoBaoVat",
+          "line": 3777
+        },
+        {
+          "name": "resize",
+          "line": 3812
+        },
+        {
+          "name": "TaoHat",
+          "line": 3819
+        },
+        {
+          "name": "pauseAmbient",
+          "line": 3836
+        },
+        {
+          "name": "resumeAmbient",
+          "line": 3841
+        },
+        {
+          "name": "onAmbientVisibility",
+          "line": 3847
+        },
+        {
+          "name": "disposeAmbient",
+          "line": 3851
+        },
+        {
+          "name": "animate",
+          "line": 3864
+        }
+      ],
+      "duplicateIds": []
+    },
+    "sa-ban.html": {
+      "bytes": 604490,
+      "title": "Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử",
+      "scripts": [
+        "site-music.js",
+        "game-runtime.js",
+        "game-upgrades-2d.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "script",
+          "url": "game-runtime.js"
+        },
+        {
+          "tag": "link",
+          "url": "game-runtime.css"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+        },
+        {
+          "tag": "audio",
+          "url": "nhac-nen-1.mp3"
+        },
+        {
+          "tag": "script",
+          "url": "game-upgrades-2d.js"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [
+        {
+          "id": "bg-canvas"
+        },
+        {
+          "id": "gameCanvas",
+          "width": "1000",
+          "height": "560"
+        },
+        {
+          "id": "avatarCanvas",
+          "width": "90",
+          "height": "90"
+        }
+      ],
+      "storage": [
+        {
+          "line": 10150,
+          "keys": [
+            "bangVang_BachDang_938"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 10189,
+          "keys": [
+            "bangVang_BachDang_938"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 10205,
+          "keys": [
+            "bangVang_BachDang_938"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 13090,
+          "keys": [
+            "giongDocBat"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "getAudioContext",
+          "line": 5322
+        },
+        {
+          "name": "phatAmThanh",
+          "line": 5333
+        },
+        {
+          "name": "themChuBayCanvas",
+          "line": 5534
+        },
+        {
+          "name": "veVaCapNhatChuBayCanvas",
+          "line": 5549
+        },
+        {
+          "name": "capNhatHUD",
+          "line": 5580
+        },
+        {
+          "name": "hienThiThongBaoBay",
+          "line": 5632
+        },
+        {
+          "name": "capNhatNhiemVuHienTai",
+          "line": 5661
+        },
+        {
+          "name": "capNhatTrangThaiNutTuongTac",
+          "line": 5762
+        },
+        {
+          "name": "veMinimap",
+          "line": 5804
+        },
+        {
+          "name": "toggleNhac",
+          "line": 6070
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 6071
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 6072
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 6073
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 6074
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 6075
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 6076
+        },
+        {
+          "name": "toggleGiongDoc",
+          "line": 6079
+        },
+        {
+          "name": "phatGiongDoc",
+          "line": 6094
+        },
+        {
+          "name": "xuLyClickCanvas",
+          "line": 6321
+        },
+        {
+          "name": "batDauDiChuyenTouch",
+          "line": 6501
+        },
+        {
+          "name": "dungDiChuyenTouch",
+          "line": 6508
+        },
+        {
+          "name": "tuongTacPhimE",
+          "line": 6512
+        },
+        {
+          "name": "veBanDoDoanhTrai",
+          "line": 6534
+        },
+        {
+          "name": "veCocHangRao",
+          "line": 6647
+        },
+        {
+          "name": "veLeuTrungQuan",
+          "line": 6658
+        },
+        {
+          "name": "veLoRen",
+          "line": 6692
+        },
+        {
+          "name": "veLeuQuanY",
+          "line": 6713
+        },
+        {
+          "name": "veNPCs",
+          "line": 6731
+        },
+        {
+          "name": "capNhatViTriNguoiChoi",
+          "line": 6792
+        },
+        {
+          "name": "veNguoiChoi",
+          "line": 6835
+        },
+        {
+          "name": "moHoiThoaiNPC",
+          "line": 7015
+        },
+        {
+          "name": "veAvatarNPC",
+          "line": 7062
+        },
+        {
+          "name": "ketThucHoiThoai",
+          "line": 7082
+        },
+        {
+          "name": "dongHoiThoai",
+          "line": 7104
+        },
+        {
+          "name": "themBaoVat",
+          "line": 7110
+        },
+        {
+          "name": "moTuiDo",
+          "line": 7117
+        },
+        {
+          "name": "dongTuiDo",
+          "line": 7147
+        },
+        {
+          "name": "kiemTraMoKhoaChieuHang",
+          "line": 7252
+        },
+        {
+          "name": "capNhatTrangThaiChieuHang",
+          "line": 7261
+        },
+        {
+          "name": "chonQuanTa",
+          "line": 7399
+        },
+        {
+          "name": "capNhatThanhVuKhi",
+          "line": 7433
+        },
+        {
+          "name": "chonVuKhi",
+          "line": 7491
+        },
+        {
+          "name": "chonVuKhiTheoChiSo",
+          "line": 7544
+        },
+        {
+          "name": "chuyenDoiDonViTiepTheo",
+          "line": 7552
+        },
+        {
+          "name": "tanCongThuyenDich",
+          "line": 7560
+        },
+        {
+          "name": "banHaThuyenDich",
+          "line": 7583
+        },
+        {
+          "name": "xuLyDanTrungDich",
+          "line": 7640
+        },
+        {
+          "name": "toanBoThuyenDichBiTieuDiet",
+          "line": 7867
+        },
+        {
+          "name": "buocVaoGiaiDoanHauChien",
+          "line": 7900
+        },
+        {
+          "name": "capNhatHoiChieuVuKhi",
+          "line": 7931
+        },
+        {
+          "name": "batDauDemNguocThuyTrieu",
+          "line": 7954
+        },
+        {
+          "name": "capNhatGiaoDienDemNguoc",
+          "line": 7996
+        },
+        {
+          "name": "kichHoatThuyTrieuRut",
+          "line": 8026
+        },
+        {
+          "name": "dongThongBaoTrieuRut",
+          "line": 8108
+        },
+        {
+          "name": "laThietBiDiDong",
+          "line": 8118
+        },
+        {
+          "name": "moThongBaoMobile",
+          "line": 8124
+        },
+        {
+          "name": "dongThongBaoMobile",
+          "line": 8134
+        },
+        {
+          "name": "vaoSaBan3D",
+          "line": 8142
+        },
+        {
+          "name": "chanSaBanTrenMobile",
+          "line": 8151
+        },
+        {
+          "name": "vaoThangSaBanChienDau",
+          "line": 8155
+        },
+        {
+          "name": "chuyenSangTranDo",
+          "line": 8170
+        },
+        {
+          "name": "veSaBanBachDang",
+          "line": 8247
+        },
+        {
+          "name": "veBaiCocNgam",
+          "line": 8306
+        },
+        {
+          "name": "veVongTamBanQuanTa",
+          "line": 8368
+        },
+        {
+          "name": "vePhucBinhHaiBo",
+          "line": 8415
+        },
+        {
+          "name": "veBeLuaHoaCong",
+          "line": 8454
+        },
+        {
+          "name": "veHamDoiThuyenDich",
+          "line": 8504
+        },
+        {
+          "name": "veCacDanVuKhiTienDich",
+          "line": 8798
+        },
+        {
+          "name": "veDoiThuyenNheTa",
+          "line": 8983
+        },
+        {
+          "name": "veDanTenVaKhoiLua",
+          "line": 9042
+        },
+        {
+          "name": "capNhatDongHoThuyTrieu",
+          "line": 9084
+        },
+        {
+          "name": "banChumTen",
+          "line": 9116
+        },
+        {
+          "name": "thiHanhLenh",
+          "line": 9138
+        },
+        {
+          "name": "chonQuyetDinhDaoLamTuong",
+          "line": 9303
+        },
+        {
+          "name": "hoanThanhHoi2",
+          "line": 9346
+        },
+        {
+          "name": "chuyenSangHauChien",
+          "line": 9531
+        },
+        {
+          "name": "veBinhMinhHauChien",
+          "line": 9590
+        },
+        {
+          "name": "veDiemHauChien",
+          "line": 9797
+        },
+        {
+          "name": "tuongTacPhimEHauChien",
+          "line": 9941
+        },
+        {
+          "name": "moHoiThoaiHauChien",
+          "line": 9955
+        },
+        {
+          "name": "ketThucHoiThoaiHauChien",
+          "line": 10002
+        },
+        {
+          "name": "dongHoiThoaiHauChien",
+          "line": 10026
+        },
+        {
+          "name": "tinhTongDiem",
+          "line": 10047
+        },
+        {
+          "name": "layDanhHieu",
+          "line": 10055
+        },
+        {
+          "name": "hienThiBangXepHangTongKet",
+          "line": 10077
+        },
+        {
+          "name": "taiBangVang",
+          "line": 10149
+        },
+        {
+          "name": "luuBangVang",
+          "line": 10181
+        },
+        {
+          "name": "dongBangXepHang",
+          "line": 10221
+        },
+        {
+          "name": "resetSaBan",
+          "line": 10226
+        },
+        {
+          "name": "choiLaiTuDau",
+          "line": 10303
+        },
+        {
+          "name": "veBanDoDoanhTraiNhuNguyet",
+          "line": 10891
+        },
+        {
+          "name": "veLuyTreKenDay",
+          "line": 11004
+        },
+        {
+          "name": "veVongLauTrungQuan",
+          "line": 11025
+        },
+        {
+          "name": "veXuongNoThan",
+          "line": 11073
+        },
+        {
+          "name": "veTraiLuyTre",
+          "line": 11102
+        },
+        {
+          "name": "veDenThanXaDoanhTrai",
+          "line": 11121
+        },
+        {
+          "name": "veNPCsNhuNguyet",
+          "line": 11157
+        },
+        {
+          "name": "veSaBanNhuNguyet",
+          "line": 11221
+        },
+        {
+          "name": "veVongTamBanNhuNguyet",
+          "line": 11358
+        },
+        {
+          "name": "veQuanTaNhuNguyet",
+          "line": 11378
+        },
+        {
+          "name": "veBeGoSong",
+          "line": 11457
+        },
+        {
+          "name": "veHieuUngThanThiNamQuoc",
+          "line": 11603
+        },
+        {
+          "name": "capNhatDongHoNhuNguyet",
+          "line": 11676
+        },
+        {
+          "name": "veBinhMinhNhuNguyet",
+          "line": 11693
+        },
+        {
+          "name": "veDiemHauChienNhuNguyet",
+          "line": 11802
+        },
+        {
+          "name": "vaoAiNhuNguyet",
+          "line": 11885
+        },
+        {
+          "name": "vaoThangSaBanNhuNguyet",
+          "line": 11909
+        },
+        {
+          "name": "khoiTaoAiNhuNguyet",
+          "line": 11927
+        },
+        {
+          "name": "chuyenSangTranDoNhuNguyet",
+          "line": 11965
+        },
+        {
+          "name": "batDauDemNguocNhuNguyet",
+          "line": 12044
+        },
+        {
+          "name": "kichHoatPhanCongDemNhuNguyet",
+          "line": 12062
+        },
+        {
+          "name": "dongThongBaoPhanCongNhuNguyet",
+          "line": 12111
+        },
+        {
+          "name": "kichHoatThanThiNamQuoc",
+          "line": 12120
+        },
+        {
+          "name": "chonQuanTaNhuNguyet",
+          "line": 12177
+        },
+        {
+          "name": "capNhatThanhVuKhiNhuNguyet",
+          "line": 12188
+        },
+        {
+          "name": "chonVuKhiNhuNguyet",
+          "line": 12273
+        },
+        {
+          "name": "tanCongThuyenDichNhuNguyet",
+          "line": 12307
+        },
+        {
+          "name": "banHaThuyenDichNhuNguyet",
+          "line": 12322
+        },
+        {
+          "name": "xuLyDanTrungDichNhuNguyet",
+          "line": 12368
+        },
+        {
+          "name": "toanBoThuyenDichBiTieuDietNhuNguyet",
+          "line": 12463
+        },
+        {
+          "name": "chuyenSangHauChienNhuNguyet",
+          "line": 12499
+        },
+        {
+          "name": "tuongTacPhimENhuNguyet",
+          "line": 12528
+        },
+        {
+          "name": "moHoiThoaiNhuNguyet",
+          "line": 12548
+        },
+        {
+          "name": "hienThiLuaChonNhuNguyet",
+          "line": 12586
+        },
+        {
+          "name": "ketThucHoiThoaiNhuNguyet",
+          "line": 12606
+        },
+        {
+          "name": "tuongTacPhimEHauChienNhuNguyet",
+          "line": 12638
+        },
+        {
+          "name": "moHoiThoaiHauChienNhuNguyet",
+          "line": 12658
+        },
+        {
+          "name": "ketThucHoiThoaiHauChienNhuNguyet",
+          "line": 12696
+        },
+        {
+          "name": "hienThiBangXepHangTongKetNhuNguyet",
+          "line": 12726
+        },
+        {
+          "name": "chonVuKhiTheoChiSoNhuNguyet",
+          "line": 12792
+        },
+        {
+          "name": "chuyenDoiDonViTiepTheoNhuNguyet",
+          "line": 12799
+        },
+        {
+          "name": "vaoAiBachDang",
+          "line": 12807
+        },
+        {
+          "name": "quayVeLobby",
+          "line": 12824
+        },
+        {
+          "name": "baoAiDangPhatTrien",
+          "line": 12840
+        },
+        {
+          "name": "moModalBangXepHang",
+          "line": 12844
+        },
+        {
+          "name": "moModalKhoBaoVat",
+          "line": 12848
+        },
+        {
+          "name": "dongModal",
+          "line": 12852
+        },
+        {
+          "name": "gameLoop",
+          "line": 12861
+        },
+        {
+          "name": "veBanDoDuPhong2D",
+          "line": 12866
+        },
+        {
+          "name": "drawGameFrame2D",
+          "line": 12909
+        },
+        {
+          "name": "resize",
+          "line": 12978
+        },
+        {
+          "name": "TaoHat",
+          "line": 12985
+        },
+        {
+          "name": "animate",
+          "line": 13024
+        },
+        {
+          "name": "khoiTaoNhacNen",
+          "line": 13083
+        },
+        {
+          "name": "capNhatVienChienTruong",
+          "line": 13121
+        },
+        {
+          "name": "kichHoatSongXungKichChienTruong",
+          "line": 13143
+        },
+        {
+          "name": "khoiTaoTiaLuaNutVaoTran",
+          "line": 13155
+        },
+        {
+          "name": "khoiTaoDomLuaLichSu",
+          "line": 13186
+        },
+        {
+          "name": "taoHatDomLua",
+          "line": 13219
+        },
+        {
+          "name": "scheduleBackgroundFrame",
+          "line": 13260
+        },
+        {
+          "name": "animate",
+          "line": 13264
+        }
+      ],
+      "duplicateIds": []
+    },
+    "sanh-game.html": {
+      "bytes": 137767,
+      "title": "Sa Bàn Chiến Thuật — Phòng Tuyến Như Nguyệt | Dấu Chân Lịch Sử",
+      "scripts": [
+        "site-music.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+        },
+        {
+          "tag": "audio",
+          "url": "nhac-nen-1.mp3"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [
+        {
+          "id": "particle-canvas",
+          "aria-hidden": "true"
+        }
+      ],
+      "storage": [
+        {
+          "line": 2838,
+          "keys": [
+            "bxh_danh_tuong"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 2875,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 2877,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 2945,
+          "keys": [
+            "bxh_danh_tuong"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 2947,
+          "keys": [
+            "bxh_danh_tuong"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 3045,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "resizeCanvas",
+          "line": 1886
+        },
+        {
+          "name": "createParticle",
+          "line": 1893
+        },
+        {
+          "name": "updateParticles",
+          "line": 1927
+        },
+        {
+          "name": "pauseParticleCanvas",
+          "line": 1973
+        },
+        {
+          "name": "resumeParticleCanvas",
+          "line": 1978
+        },
+        {
+          "name": "handleParticleVisibility",
+          "line": 1984
+        },
+        {
+          "name": "disposeParticleCanvas",
+          "line": 1988
+        },
+        {
+          "name": "setParticleMode",
+          "line": 2002
+        },
+        {
+          "name": "kichHoatRungManHinh",
+          "line": 2017
+        },
+        {
+          "name": "hienThiFloatingHUD",
+          "line": 2028
+        },
+        {
+          "name": "hienThiHieuUngChiSo",
+          "line": 2049
+        },
+        {
+          "name": "batDauCotTruyen",
+          "line": 2380
+        },
+        {
+          "name": "chuyenMan",
+          "line": 2388
+        },
+        {
+          "name": "hienThiDoiThoaiHienTai",
+          "line": 2415
+        },
+        {
+          "name": "hoanTatGoChu",
+          "line": 2463
+        },
+        {
+          "name": "tiepTucDoiThoai",
+          "line": 2479
+        },
+        {
+          "name": "hienThiLuaChon",
+          "line": 2510
+        },
+        {
+          "name": "chonQuyetDinh",
+          "line": 2537
+        },
+        {
+          "name": "chuyenSangGiaiDoanHauChien",
+          "line": 2595
+        },
+        {
+          "name": "hienThiManHinhHauChien",
+          "line": 2641
+        },
+        {
+          "name": "capNhatPostwarUI",
+          "line": 2648
+        },
+        {
+          "name": "thucHienHauChien",
+          "line": 2688
+        },
+        {
+          "name": "moModalItemReward",
+          "line": 2724
+        },
+        {
+          "name": "dongModalReward",
+          "line": 2735
+        },
+        {
+          "name": "hoanTatHauChien",
+          "line": 2740
+        },
+        {
+          "name": "ketThucGame",
+          "line": 2748
+        },
+        {
+          "name": "choiLai",
+          "line": 2844
+        },
+        {
+          "name": "batDauChienDich",
+          "line": 2869
+        },
+        {
+          "name": "veSanhCho",
+          "line": 2904
+        },
+        {
+          "name": "capNhatToanBoHUD",
+          "line": 2912
+        },
+        {
+          "name": "toggleNhac",
+          "line": 2934
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 2935
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 2936
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 2937
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 2938
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 2939
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 2940
+        },
+        {
+          "name": "khoiDongNhacDongBo",
+          "line": 2941
+        },
+        {
+          "name": "layDuLieuBXH",
+          "line": 2944
+        },
+        {
+          "name": "hienThiBXH",
+          "line": 2957
+        },
+        {
+          "name": "hienThiTuiDo",
+          "line": 2978
+        },
+        {
+          "name": "moModal",
+          "line": 3018
+        },
+        {
+          "name": "dongModal",
+          "line": 3028
+        },
+        {
+          "name": "dongModalKhitapNgoai",
+          "line": 3033
+        }
+      ],
+      "duplicateIds": []
+    },
+    "tang-thu-cac.html": {
+      "bytes": 382769,
+      "title": "Tàng Thư Các - Kho Tàng Tri Thức Lịch Sử",
+      "scripts": [
+        "site-music.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+        },
+        {
+          "tag": "source",
+          "url": "nhac-nen-1.mp3"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [],
+      "storage": [
+        {
+          "line": 3341,
+          "keys": [],
+          "dynamicKey": true
+        },
+        {
+          "line": 3804,
+          "keys": [],
+          "dynamicKey": true
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "getCompleted",
+          "line": 3340
+        },
+        {
+          "name": "updateProgress",
+          "line": 3345
+        },
+        {
+          "name": "setGrade",
+          "line": 3355
+        },
+        {
+          "name": "render",
+          "line": 3362
+        },
+        {
+          "name": "openLesson",
+          "line": 3411
+        },
+        {
+          "name": "closeModal",
+          "line": 3451
+        },
+        {
+          "name": "taoTheLatGhiNho",
+          "line": 3462
+        },
+        {
+          "name": "capNhatBoDemFlashcard",
+          "line": 3611
+        },
+        {
+          "name": "chuyenTheFlashcard",
+          "line": 3636
+        },
+        {
+          "name": "batTatDenSoi",
+          "line": 3654
+        },
+        {
+          "name": "tatDenSoi",
+          "line": 3672
+        },
+        {
+          "name": "toggleGiongDocSuGia",
+          "line": 3702
+        },
+        {
+          "name": "dungDocBai",
+          "line": 3763
+        },
+        {
+          "name": "toggleMusic",
+          "line": 3814
+        },
+        {
+          "name": "updateMusicButton",
+          "line": 3815
+        },
+        {
+          "name": "khoiTaoDomLuaLichSu",
+          "line": 3860
+        },
+        {
+          "name": "taoHatDomLua",
+          "line": 3893
+        },
+        {
+          "name": "animate",
+          "line": 3933
+        }
+      ],
+      "duplicateIds": []
+    },
+    "thao-truong.html": {
+      "bytes": 3297899,
+      "title": "Thao Trường Khảo Thí Lịch Sử 12 - Chuẩn Bộ GD&ĐT 2025",
+      "scripts": [
+        "site-music.js",
+        "grade11-exams.js",
+        "grade10-exams.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap"
+        },
+        {
+          "tag": "script",
+          "url": "grade11-exams.js"
+        },
+        {
+          "tag": "script",
+          "url": "grade10-exams.js"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [],
+      "storage": [
+        {
+          "line": 48276,
+          "keys": [
+            "dcls_playerName",
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 48280,
+          "keys": [
+            "dcls_peaceScore"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 48303,
+          "keys": [],
+          "dynamicKey": true
+        },
+        {
+          "line": 48316,
+          "keys": [],
+          "dynamicKey": true
+        },
+        {
+          "line": 48329,
+          "keys": [],
+          "dynamicKey": true
+        },
+        {
+          "line": 48733,
+          "keys": [
+            "thao_truong_best_"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 48767,
+          "keys": [
+            "thao_truong_best_"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 49682,
+          "keys": [
+            "thao_truong_best_"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 49684,
+          "keys": [
+            "thao_truong_best_"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 49689,
+          "keys": [
+            "dcls_peaceScore"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 49691,
+          "keys": [
+            "dcls_peaceScore"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "normalizeQuestionForDedup",
+          "line": 48086
+        },
+        {
+          "name": "getQuestionOptions",
+          "line": 48095
+        },
+        {
+          "name": "getQuestionText",
+          "line": 48099
+        },
+        {
+          "name": "buildGrade12ComprehensiveExam",
+          "line": 48103
+        },
+        {
+          "name": "showScreen",
+          "line": 48284
+        },
+        {
+          "name": "getCompletedExams",
+          "line": 48301
+        },
+        {
+          "name": "markExamCompleted",
+          "line": 48310
+        },
+        {
+          "name": "resetCompletedExams",
+          "line": 48322
+        },
+        {
+          "name": "getExamDifficulty",
+          "line": 48341
+        },
+        {
+          "name": "getExamGrades",
+          "line": 48350
+        },
+        {
+          "name": "cleanImportedExamText",
+          "line": 48362
+        },
+        {
+          "name": "escapeExamHtml",
+          "line": 48370
+        },
+        {
+          "name": "getSyntheticExams",
+          "line": 48376
+        },
+        {
+          "name": "getCandidateExams",
+          "line": 48496
+        },
+        {
+          "name": "updateRandomLobbyProgress",
+          "line": 48512
+        },
+        {
+          "name": "switchLobbyMode",
+          "line": 48572
+        },
+        {
+          "name": "selectGrade",
+          "line": 48596
+        },
+        {
+          "name": "selectDifficulty",
+          "line": 48612
+        },
+        {
+          "name": "launchRandomExam",
+          "line": 48635
+        },
+        {
+          "name": "onCatalogFilterChange",
+          "line": 48673
+        },
+        {
+          "name": "clearCatalogSearch",
+          "line": 48677
+        },
+        {
+          "name": "renderCatalog",
+          "line": 48683
+        },
+        {
+          "name": "startExam",
+          "line": 48830
+        },
+        {
+          "name": "renderPart1Continuous",
+          "line": 48900
+        },
+        {
+          "name": "renderPart2Continuous",
+          "line": 48964
+        },
+        {
+          "name": "renderPart3Continuous",
+          "line": 49052
+        },
+        {
+          "name": "selectP1Option",
+          "line": 49094
+        },
+        {
+          "name": "selectP2Statement",
+          "line": 49141
+        },
+        {
+          "name": "onEssayInput",
+          "line": 49194
+        },
+        {
+          "name": "setupPaletteAndProgress",
+          "line": 49205
+        },
+        {
+          "name": "scrollToQuestion",
+          "line": 49264
+        },
+        {
+          "name": "toggleMobilePalette",
+          "line": 49288
+        },
+        {
+          "name": "closeMobilePalette",
+          "line": 49300
+        },
+        {
+          "name": "updateProgress",
+          "line": 49304
+        },
+        {
+          "name": "startTimer45Min",
+          "line": 49353
+        },
+        {
+          "name": "updateTimerDisplay",
+          "line": 49381
+        },
+        {
+          "name": "openConfirmModal",
+          "line": 49426
+        },
+        {
+          "name": "closeConfirmModal",
+          "line": 49541
+        },
+        {
+          "name": "highlightQuestionCard",
+          "line": 49546
+        },
+        {
+          "name": "executeSubmitExam",
+          "line": 49619
+        },
+        {
+          "name": "applyReviewStylingToQuestions",
+          "line": 49772
+        },
+        {
+          "name": "generateRoadmapToTangThuCac",
+          "line": 49987
+        },
+        {
+          "name": "getContext",
+          "line": 50053
+        },
+        {
+          "name": "playStampSound",
+          "line": 50067
+        },
+        {
+          "name": "playSegmentClick",
+          "line": 50097
+        },
+        {
+          "name": "playTriumphCelebration",
+          "line": 50127
+        },
+        {
+          "name": "playDrum",
+          "line": 50132
+        },
+        {
+          "name": "playGong",
+          "line": 50156
+        },
+        {
+          "name": "doiChieuTuKhoaTuLuan",
+          "line": 50197
+        },
+        {
+          "name": "escapeHtml",
+          "line": 50251
+        },
+        {
+          "name": "banPhaoHoaKhaiHoan",
+          "line": 50261
+        },
+        {
+          "name": "createFireworkBurst",
+          "line": 50290
+        },
+        {
+          "name": "render",
+          "line": 50327
+        },
+        {
+          "name": "khoiTaoDomLuaLichSu",
+          "line": 50370
+        },
+        {
+          "name": "taoHatDomLua",
+          "line": 50403
+        },
+        {
+          "name": "animate",
+          "line": 50443
+        }
+      ],
+      "duplicateIds": []
+    },
+    "tran-do-nhap-vai.html": {
+      "bytes": 218558,
+      "title": "Trận Đồ Nhập Vai — Đại Thắng Bạch Đằng 938 [Đầy Đủ 3 Hồi: Doanh Trại - Sa Bàn - Bình Minh Hậu Chiến]",
+      "scripts": [
+        "site-music.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+        },
+        {
+          "tag": "audio",
+          "url": "nhac-nen-1.mp3"
+        }
+      ],
+      "links": [
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html",
+          "onclick": null
+        },
+        {
+          "href": "trang-chinh.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [
+        {
+          "id": "gameCanvas",
+          "width": "1000",
+          "height": "560"
+        },
+        {
+          "id": "avatarCanvas",
+          "width": "90",
+          "height": "90"
+        }
+      ],
+      "storage": [
+        {
+          "line": 4730,
+          "keys": [
+            "bangVang_BachDang_938"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 4771,
+          "keys": [
+            "bangVang_BachDang_938"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 4787,
+          "keys": [
+            "bangVang_BachDang_938"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "getAudioContext",
+          "line": 1873
+        },
+        {
+          "name": "phatAmThanh",
+          "line": 1884
+        },
+        {
+          "name": "themChuBayCanvas",
+          "line": 1979
+        },
+        {
+          "name": "veVaCapNhatChuBayCanvas",
+          "line": 1994
+        },
+        {
+          "name": "capNhatHUD",
+          "line": 2025
+        },
+        {
+          "name": "hienThiThongBaoBay",
+          "line": 2055
+        },
+        {
+          "name": "capNhatNhiemVuHienTai",
+          "line": 2084
+        },
+        {
+          "name": "capNhatTrangThaiNutTuongTac",
+          "line": 2157
+        },
+        {
+          "name": "veMinimap",
+          "line": 2199
+        },
+        {
+          "name": "toggleNhac",
+          "line": 2388
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 2389
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 2390
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 2391
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 2392
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 2393
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 2394
+        },
+        {
+          "name": "khoiDongNhacNen",
+          "line": 2395
+        },
+        {
+          "name": "toggleGiongDoc",
+          "line": 2398
+        },
+        {
+          "name": "phatGiongDoc",
+          "line": 2413
+        },
+        {
+          "name": "batDauDiChuyenTouch",
+          "line": 2622
+        },
+        {
+          "name": "dungDiChuyenTouch",
+          "line": 2629
+        },
+        {
+          "name": "tuongTacPhimE",
+          "line": 2633
+        },
+        {
+          "name": "veBanDoDoanhTrai",
+          "line": 2652
+        },
+        {
+          "name": "veCocHangRao",
+          "line": 2765
+        },
+        {
+          "name": "veLeuTrungQuan",
+          "line": 2776
+        },
+        {
+          "name": "veLoRen",
+          "line": 2810
+        },
+        {
+          "name": "veLeuQuanY",
+          "line": 2831
+        },
+        {
+          "name": "veNPCs",
+          "line": 2849
+        },
+        {
+          "name": "capNhatViTriNguoiChoi",
+          "line": 2910
+        },
+        {
+          "name": "veNguoiChoi",
+          "line": 2953
+        },
+        {
+          "name": "moHoiThoaiNPC",
+          "line": 3132
+        },
+        {
+          "name": "veAvatarNPC",
+          "line": 3175
+        },
+        {
+          "name": "ketThucHoiThoai",
+          "line": 3194
+        },
+        {
+          "name": "dongHoiThoai",
+          "line": 3214
+        },
+        {
+          "name": "themBaoVat",
+          "line": 3219
+        },
+        {
+          "name": "moTuiDo",
+          "line": 3226
+        },
+        {
+          "name": "dongTuiDo",
+          "line": 3255
+        },
+        {
+          "name": "chuyenSangTranDo",
+          "line": 3294
+        },
+        {
+          "name": "veSaBanBachDang",
+          "line": 3316
+        },
+        {
+          "name": "veBaiCocNgam",
+          "line": 3387
+        },
+        {
+          "name": "vePhucBinhHaiBo",
+          "line": 3442
+        },
+        {
+          "name": "veBeLuaHoaCong",
+          "line": 3480
+        },
+        {
+          "name": "veHamDoiThuyenDich",
+          "line": 3534
+        },
+        {
+          "name": "veDoiThuyenNheTa",
+          "line": 3611
+        },
+        {
+          "name": "veDanTenVaKhoiLua",
+          "line": 3664
+        },
+        {
+          "name": "capNhatDongHoThuyTrieu",
+          "line": 3706
+        },
+        {
+          "name": "banChumTen",
+          "line": 3738
+        },
+        {
+          "name": "thiHanhLenh",
+          "line": 3760
+        },
+        {
+          "name": "chonQuyetDinhDaoLamTuong",
+          "line": 3914
+        },
+        {
+          "name": "hoanThanhHoi2",
+          "line": 3953
+        },
+        {
+          "name": "chuyenSangHauChien",
+          "line": 4133
+        },
+        {
+          "name": "veBinhMinhHauChien",
+          "line": 4168
+        },
+        {
+          "name": "veDiemHauChien",
+          "line": 4375
+        },
+        {
+          "name": "tuongTacPhimEHauChien",
+          "line": 4536
+        },
+        {
+          "name": "moHoiThoaiHauChien",
+          "line": 4547
+        },
+        {
+          "name": "ketThucHoiThoaiHauChien",
+          "line": 4591
+        },
+        {
+          "name": "dongHoiThoaiHauChien",
+          "line": 4614
+        },
+        {
+          "name": "tinhTongDiem",
+          "line": 4638
+        },
+        {
+          "name": "layDanhHieu",
+          "line": 4647
+        },
+        {
+          "name": "hienThiBangXepHangTongKet",
+          "line": 4670
+        },
+        {
+          "name": "taiBangVang",
+          "line": 4729
+        },
+        {
+          "name": "luuBangVang",
+          "line": 4763
+        },
+        {
+          "name": "dongBangXepHang",
+          "line": 4804
+        },
+        {
+          "name": "resetSaBan",
+          "line": 4809
+        },
+        {
+          "name": "choiLaiTuDau",
+          "line": 4840
+        },
+        {
+          "name": "gameLoop",
+          "line": 4898
+        }
+      ],
+      "duplicateIds": []
+    },
+    "trang-chinh.html": {
+      "bytes": 1472940,
+      "title": "Dấu Chân Lịch Sử — Sảnh Chính",
+      "scripts": [
+        "site-music.js",
+        "https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN",
+        "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+        "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js",
+        "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"
+      ],
+      "assets": [
+        {
+          "tag": "script",
+          "url": "site-music.js"
+        },
+        {
+          "tag": "script",
+          "url": "https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.gstatic.com"
+        },
+        {
+          "tag": "link",
+          "url": "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap"
+        },
+        {
+          "tag": "script",
+          "url": "https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
+        },
+        {
+          "tag": "script",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        },
+        {
+          "tag": "script",
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"
+        },
+        {
+          "tag": "script",
+          "url": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"
+        },
+        {
+          "tag": "source",
+          "url": "nhac-nen-1.mp3"
+        }
+      ],
+      "links": [
+        {
+          "href": "index.html",
+          "onclick": null
+        },
+        {
+          "href": "dang-nhap.html",
+          "onclick": null
+        },
+        {
+          "href": "index.html",
+          "onclick": "veTrangChu(event)"
+        },
+        {
+          "href": "#interactive-timeline",
+          "onclick": "chonTabMenu(event, 'Dòng lịch sử', 'interactive-timeline')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('bao-tang', 'Bảo tàng Cổ vật')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('bao-vat-3d', 'Bảo tàng > Bảo Vật 3D')"
+        },
+        {
+          "href": "sa-ban-3d.html",
+          "onclick": null
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('tu-lieu-chieu-hich', 'Bảo tàng > Bình Ngô Đại Cáo')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('tu-lieu-namquoc', 'Bảo tàng > Nam Quốc Sơn Hà')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('tu-lieu-chau-ban', 'Bảo tàng > Châu bản Triều Nguyễn')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('tu-lieu-ban-do', 'Bảo tàng > Bản đồ cổ Đại Việt')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('tu-lieu-hien-vat', 'Bảo tàng > Trống Đồng Ngọc Lũ')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('nhan-vat', 'Nhân vật')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('nhan-vat-de-vuong', 'Nhân vật > Đế Vương Đại Việt')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('nhan-vat-danh-tuong', 'Nhân vật > Danh Tướng Lẫy Lừng')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('nhan-vat-danh-nhan', 'Nhân vật > Danh Nhân Văn Hóa')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('nhan-vat-nu-kiet', 'Nhân vật > Nữ Kiệt Anh Hùng')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('ngo-quyen')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('dinh-bo-linh')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('ly-thai-to')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('ly-thuong-kiet')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('tran-hung-dao')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('le-loi')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('nguyen-trai')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('quang-trung')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('ho-chi-minh')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('hai-ba-trung')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('ba-trieu')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "xemChiTietNhanVat('vo-nguyen-giap')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich', 'Di tích')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich-thanglong', 'Di tích > Hoàng Thành Thăng Long')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich-coloa', 'Di tích > Cổ Loa')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich-bachdang', 'Di tích > Bạch Đằng Giang')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich-nhunguyet', 'Di tích > Phòng Tuyến Sông Như Nguyệt')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich-hue', 'Di tích > Cố Đô Huế')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('di-tich-dienbienphu', 'Di tích > Chiến Trường Điện Biên Phủ')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('ngay-nay', 'Ngày nay')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('sach', 'Sách')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('video', 'Video')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('qa', 'Q&A')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('qa-hoi-dap', 'Q&A > Hỏi đáp Lịch sử')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('qa-nghi-an', 'Q&A > Giải mã Nghi án Sử Việt')"
+        },
+        {
+          "href": "javascript:void(0)",
+          "onclick": "moModalDuLieu('qa-dong-gop', 'Q&A > Đóng góp Tư liệu')"
+        },
+        {
+          "href": "tang-thu-cac.html",
+          "onclick": null
+        },
+        {
+          "href": "thao-truong.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban-3d.html",
+          "onclick": null
+        },
+        {
+          "href": "tang-thu-cac.html",
+          "onclick": null
+        },
+        {
+          "href": "thao-truong.html",
+          "onclick": null
+        },
+        {
+          "href": "sa-ban.html",
+          "onclick": null
+        },
+        {
+          "href": "dang-nhap.html",
+          "onclick": null
+        },
+        {
+          "href": "quan-anh-hoi.html",
+          "onclick": null
+        }
+      ],
+      "canvases": [
+        {
+          "id": "banner-gold-dust",
+          "class": "banner-gold-dust-canvas"
+        }
+      ],
+      "storage": [
+        {
+          "line": 4454,
+          "keys": [
+            "vuaXemChimLac"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 4456,
+          "keys": [
+            "vuaXemChimLac"
+          ],
+          "dynamicKey": false
+        },
+        {
+          "line": 5169,
+          "keys": [
+            "tenNguoiDung"
+          ],
+          "dynamicKey": false
+        }
+      ],
+      "missingLiteralPaths": [],
+      "functions": [
+        {
+          "name": "gtag",
+          "line": 9
+        },
+        {
+          "name": "toggleNhac",
+          "line": 5189
+        },
+        {
+          "name": "toggleNhacNen",
+          "line": 5190
+        },
+        {
+          "name": "xuLyClickNutNhac",
+          "line": 5191
+        },
+        {
+          "name": "chuyenBaiNhacNgauNhien",
+          "line": 5192
+        },
+        {
+          "name": "phatBaiNhacTheoIndex",
+          "line": 5193
+        },
+        {
+          "name": "capNhatNutNhac",
+          "line": 5194
+        },
+        {
+          "name": "capNhatTrangThaiNutNhac",
+          "line": 5195
+        },
+        {
+          "name": "renderDocMoRongHtml",
+          "line": 5808
+        },
+        {
+          "name": "moDocMoRongMoc",
+          "line": 5985
+        },
+        {
+          "name": "chuyenTabDocMoRong",
+          "line": 6016
+        },
+        {
+          "name": "saoChepBaiDocMoRong",
+          "line": 6050
+        },
+        {
+          "name": "moPhongToHinh",
+          "line": 6091
+        },
+        {
+          "name": "dongPhongToHinh",
+          "line": 6102
+        },
+        {
+          "name": "chonMocLichSu",
+          "line": 6125
+        },
+        {
+          "name": "chuyenMocTruoc",
+          "line": 6164
+        },
+        {
+          "name": "chuyenMocSau",
+          "line": 6169
+        },
+        {
+          "name": "capNhatBreadcrumb",
+          "line": 6178
+        },
+        {
+          "name": "veTrangChu",
+          "line": 6184
+        },
+        {
+          "name": "chonTabMenu",
+          "line": 6189
+        },
+        {
+          "name": "layChanDungSVG",
+          "line": 8242
+        },
+        {
+          "name": "layHinhAnhNhanVat",
+          "line": 8251
+        },
+        {
+          "name": "taoChanDungCoPhongSVG",
+          "line": 8265
+        },
+        {
+          "name": "xuLyLoiAnhNhanVat",
+          "line": 8313
+        },
+        {
+          "name": "renderDanhSachNhanVatHtml",
+          "line": 8322
+        },
+        {
+          "name": "locNhanVat",
+          "line": 8371
+        },
+        {
+          "name": "xemChiTietNhanVat",
+          "line": 8387
+        },
+        {
+          "name": "renderDanhSachDiTichHtml",
+          "line": 8939
+        },
+        {
+          "name": "renderBaoTangModalHtml",
+          "line": 9634
+        },
+        {
+          "name": "chuyenTabBaoTang",
+          "line": 10187
+        },
+        {
+          "name": "renderSachModalHtml",
+          "line": 10212
+        },
+        {
+          "name": "moModalDuLieu",
+          "line": 11005
+        },
+        {
+          "name": "dongModalDuLieu",
+          "line": 12140
+        },
+        {
+          "name": "chuyenVideoModal",
+          "line": 12165
+        },
+        {
+          "name": "guiDongGopTuLieu",
+          "line": 12181
+        },
+        {
+          "name": "initGoldDustCanvas",
+          "line": 12284
+        },
+        {
+          "name": "getTargetParticleCount",
+          "line": 12292
+        },
+        {
+          "name": "createParticle",
+          "line": 12296
+        },
+        {
+          "name": "resize",
+          "line": 12309
+        },
+        {
+          "name": "animate",
+          "line": 12336
+        }
+      ],
+      "duplicateIds": []
+    }
+  },
+  "assets": [
+    {
+      "path": "models\\baovat1.glb",
+      "bytes": 16529444
+    },
+    {
+      "path": "models\\baovat2.glb",
+      "bytes": 76391016
+    },
+    {
+      "path": "models\\coc_bach_ang_nam_1288.glb",
+      "bytes": 76391016
+    },
+    {
+      "path": "models\\coc_bach_dang_1288.glb",
+      "bytes": 76391016
+    },
+    {
+      "path": "models\\model_coc_bach_dang_data.js",
+      "bytes": 101855959
+    },
+    {
+      "path": "models\\model_trong_dong_data.js",
+      "bytes": 22040529
+    },
+    {
+      "path": "models\\trong_dong_dong_son.glb",
+      "bytes": 16529444
+    },
+    {
+      "path": "models\\trong_ong_ong_son_-_viet_nam.glb",
+      "bytes": 16529444
+    }
+  ]
+}

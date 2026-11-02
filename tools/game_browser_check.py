@@ -69,7 +69,7 @@ def main():
         cases = [
             ('2d-bach-dang', 'sa-ban.html#saban', ''),
             ('2d-nhu-nguyet', 'sa-ban.html#nhu-nguyet', ''),
-            ('3d-bach-dang', 'sa-ban-3d.html', 'Game3D.cheDoGiongDoc=false; khoiDongChienTranHoi2();'),
+            ('3d-bach-dang', 'sa-ban-3d.html', 'Game3D.cheDoGiongDoc=false; chuyenVaoThucChien(); khoiDongChienTranHoi2(); batDauTranBachDangSauHuongDan();'),
             ('3d-nhu-nguyet', 'sa-ban-3d.html', 'Game3D.cheDoGiongDoc=false; chuyenSangChienDichNhuNguyet(); khoiDongChienTranNhuNguyetHoi2();')
         ]
         for name, page, setup in cases:

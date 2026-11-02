@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "name": "Final heavy-ground contact agrees with displayed keel clearance",
+      "passed": true,
+      "evidence": {
+        "waterY": 1.3986851851851851,
+        "tideRate": -0.0002777777777777768,
+        "draft": 1.1186666666666667,
+        "bedY": 0.2800540637542248,
+        "depth": 1.1186311214309603,
+        "clearance": -3.554523570636903e-05,
+        "current": {
+          "x": 0.16229606416343662,
+          "z": 0.454404314809625
+        },
+        "speedMps": 0,
+        "inRepairZone": false,
+        "massKg": 18840
+      }
+    },
+    {
+      "name": "Final smoke disposes all session resources",
+      "passed": true
+    },
+    {
+      "name": "Final smoke has no uncaught exception",
+      "passed": true
+    }
+  ],
+  "passed": 3,
+  "total": 3
+}

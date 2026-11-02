@@ -1,0 +1,13 @@
+{
+  "command": [
+    "tools/game_browser_check.py",
+    "--output",
+    "docs\\game-bach-dang-938\\evidence\\audit-2026-11-01\\legacy-game-checks.json",
+    "--seconds",
+    "3",
+    "--checks",
+    "--shot"
+  ],
+  "returnCode": 0,
+  "log": "legacy-game-checks.log"
+}

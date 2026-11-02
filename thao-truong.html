@@ -3191,6 +3191,42 @@
       }
     }
 
+    html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+    .header-inner, main, .catalog-container, .exam-scroll-layout,
+    .question-card, .options-grid, .opt-card, .result-modal-box { min-width: 0; max-width: 100%; }
+    .options-grid { grid-template-columns: minmax(0, 1fr); }
+    .opt-text, .question-stem, .statement-text { overflow-wrap: anywhere; }
+    .modal-overlay { padding: max(12px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px)); overflow-y: auto; overscroll-behavior: contain; }
+    .exam-modal-box, .result-modal-box, .confirmation-box { max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px); overflow-y: auto; overscroll-behavior: contain; }
+    button, a, [role="button"] { touch-action: manipulation; }
+    #site-music-toggle { min-width: 44px; min-height: 44px; }
+    @media (max-width: 768px) {
+      .header-inner { padding-top: max(8px, env(safe-area-inset-top, 0px)); }
+      #site-music-toggle { top: calc(env(safe-area-inset-top, 0px) + 8px) !important; right: max(8px, env(safe-area-inset-right, 0px)) !important; bottom: auto !important; left: auto !important; }
+      .mobile-exam-header { top: env(safe-area-inset-top, 0px) !important; }
+      .exam-scroll-layout { padding-left: max(8px, env(safe-area-inset-left, 0px)) !important; padding-right: max(8px, env(safe-area-inset-right, 0px)) !important; padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important; }
+      .question-card, .essay-card { overflow-wrap: anywhere; }
+      .opt-card, .segmented-btn, .mobile-header-btn, .start-btn, .submit-exam-btn,
+      .sidebar-back-btn, .btn-modal-continue, .btn-modal-confirm, .home-btn,
+      .result-actions-row button, .result-actions-row a { min-height: 44px !important; }
+      .opt-card { align-items: flex-start !important; }
+      .opt-text { min-width: 0; }
+      .mobile-exam-header { padding-left: max(8px, env(safe-area-inset-left, 0px)) !important; padding-right: max(8px, env(safe-area-inset-right, 0px)) !important; }
+      .mobile-drawer-backdrop { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .confirmation-box { width: min(94vw, 440px) !important; }
+    }
+    @media (max-width: 360px) {
+      .exam-scroll-layout { padding-left: 6px !important; padding-right: 6px !important; }
+      .question-card { padding: 13px 10px !important; }
+      .opt-card { padding: 10px !important; gap: 9px !important; }
+      .mobile-header-btn { padding-left: 6px !important; padding-right: 6px !important; }
+      .paper-meta-row { flex-wrap: wrap !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .exam-hud-sticky, .mobile-exam-header, .question-card, .opt-card,
+      .exam-modal-box, .result-modal-box { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+
 </style>
 </head>
 <body>

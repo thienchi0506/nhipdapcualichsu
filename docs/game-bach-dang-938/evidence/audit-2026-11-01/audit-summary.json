@@ -1,0 +1,66 @@
+{
+  "scope": "Documentation and evidence only; no website runtime edits",
+  "localViewports": [
+    [
+      1365,
+      900
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "routesProbed": 11,
+  "legacyAssertions": {
+    "2d-bach-dang": {
+      "passed": 11,
+      "total": 11,
+      "javascriptErrors": 0
+    },
+    "2d-nhu-nguyet": {
+      "passed": 11,
+      "total": 11,
+      "javascriptErrors": 0
+    },
+    "3d-bach-dang": {
+      "passed": 17,
+      "total": 17,
+      "javascriptErrors": 0
+    },
+    "3d-nhu-nguyet": {
+      "passed": 17,
+      "total": 17,
+      "javascriptErrors": 0
+    }
+  },
+  "integrity": {
+    "trackedRuntimeFilesChecked": 49,
+    "changed": [],
+    "unchanged": true,
+    "gitHead": "0393e604ef85c44615a0bfa859dd6865c7c9df45"
+  },
+  "existingIssues": [
+    "B01 missing hero-loop.mp4",
+    "B02 2D campaign selection after Nhu Nguyet",
+    "B03 duplicate Nhu Nguyet 3D entry handler",
+    "B04 first standard exam has 22+2",
+    "B05 auxiliary 2D page width 443 at viewport 390",
+    "B06 mobile 3D ability labels extend below viewport"
+  ],
+  "unverified": [
+    "real Firebase sign-in/Google/account switching",
+    "deployed Firebase Rules and emulator authorization",
+    "full natural-play campaigns",
+    "physical phones/Safari/Firefox",
+    "exact GitHub Pages settings"
+  ],
+  "correctedEvidence": [
+    "browser-pages-targeted.json",
+    "browser-flows-2d-roundtrip.json",
+    "browser-flows-3d.json",
+    "browser-flows-exam-flow.json",
+    "browser-flows-library-flow.json",
+    "browser-flows-music-flow.json",
+    "browser-flows-landing-navigation.json"
+  ]
+}

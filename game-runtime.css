@@ -1,9 +1,10 @@
 #hg-controls{position:fixed;right:14px;bottom:12px;z-index:2300;display:flex;gap:6px;align-items:center;font:600 12px 'Be Vietnam Pro',Arial,sans-serif}
-#hg-controls button,#hg-settings button,#hg-settings select{font:inherit;color:#fff0d2;background:#201811;border:1px solid #b99b57;border-radius:8px;padding:8px 11px;cursor:pointer}
+#hg-controls button,#hg-settings button,#hg-settings select{font:inherit;color:#fff0d2;background:#201811;border:1px solid #b99b57;border-radius:8px;padding:8px 11px;min-height:44px;cursor:pointer;touch-action:manipulation}
 #hg-controls button:focus-visible,#hg-settings :focus-visible{outline:3px solid #70d6e9;outline-offset:3px}
 #hg-controls button[aria-pressed=true]{background:#62451c}
 #hg-meter{background:#151a1eee;color:#9ae6c9;padding:7px;border-radius:6px;max-width:220px}
-#hg-settings{color:#f7eddb;background:#191d22;border:1px solid #c6aa69;border-radius:16px;width:min(440px,90vw);margin:auto;padding:28px;font:15px/1.6 'Be Vietnam Pro',Arial,sans-serif;box-shadow:0 24px 80px #000a}
+#site-music-toggle{min-width:44px;min-height:44px;touch-action:manipulation}
+#hg-settings{color:#f7eddb;background:#191d22;border:1px solid #c6aa69;border-radius:16px;width:min(440px,90vw);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;margin:auto;padding:28px;font:15px/1.6 'Be Vietnam Pro',Arial,sans-serif;box-shadow:0 24px 80px #000a}
 #hg-settings::backdrop{background:#0009}
 #hg-settings h2{margin:0 32px 20px 0;font-size:22px}
 #hg-settings label{display:flex;align-items:center;gap:12px;margin:14px 0}
@@ -13,13 +14,24 @@
 #hg-settings .hg-close{position:absolute;right:12px;top:9px;font-size:28px;line-height:1;padding:5px 10px}
 .hg-no-shake .screen-shake,.hg-no-shake body.screen-shake{animation:none!important;transform:none!important}
 .hg-reduced-motion .frame-act-1,.hg-reduced-motion .frame-act-2,.hg-reduced-motion .frame-act-3{animation:none!important}
-@media(max-width:600px){#hg-controls{display:none}}
+@media(max-width:600px){
+  #hg-controls{display:flex;top:calc(env(safe-area-inset-top,0px) + 8px);right:max(8px,env(safe-area-inset-right,0px));bottom:auto;gap:4px;padding:3px;background:#101820dc;border:1px solid #b99b57;border-radius:12px;}
+  #hg-controls button{min-width:44px;min-height:44px;padding:8px;font-size:11px;}
+  #hg-settings{width:calc(100vw - 24px);max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 24px);padding:22px 16px;}
+  #hg-settings .hg-close{min-width:44px;min-height:44px;}
+}
 #hg-orders{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:2200;display:flex;gap:8px;align-items:center;max-width:calc(100vw - 520px);padding:8px 12px;background:#14242ded;border:1px solid #648f91;border-radius:10px;color:#e2f2e9;font:600 12px/1.4 'Be Vietnam Pro',Arial,sans-serif}
 #hg-orders[hidden]{display:none}
 #hg-orders output{max-width:240px}
-#hg-orders button,#hg-defeat button{border:1px solid #a38c56;background:#2b383d;color:#fff1d1;border-radius:6px;padding:8px;cursor:pointer;font:inherit;white-space:nowrap}
-#hg-defeat{margin:auto;background:#1a2329;color:#f1e8d3;max-width:420px;border:1px solid #c4a66c;border-radius:14px;padding:25px;font:16px/1.6 'Be Vietnam Pro',Arial,sans-serif}
+#hg-orders button,#hg-defeat button{border:1px solid #a38c56;background:#2b383d;color:#fff1d1;border-radius:6px;padding:8px;min-height:44px;cursor:pointer;font:inherit;white-space:nowrap;touch-action:manipulation}
+#hg-defeat{margin:auto;background:#1a2329;color:#f1e8d3;max-width:420px;max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;border:1px solid #c4a66c;border-radius:14px;padding:25px;font:16px/1.6 'Be Vietnam Pro',Arial,sans-serif}
 #hg-defeat::backdrop{background:#0009}
 .hg-game-3d #hg-controls{bottom:70px}
 .hg-game-3d #hg-orders{bottom:70px}
-@media(max-width:1000px){#hg-orders{left:10px;bottom:56px;transform:none;max-width:calc(100vw - 20px)}}
+@media(max-width:1000px){#hg-orders{left:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);transform:none;max-width:calc(100vw - 20px)}}
+@media(max-width:600px){
+  #hg-orders{left:8px;right:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);max-width:none;flex-wrap:wrap;gap:6px;padding:7px;}
+  #hg-orders output{flex:1 1 100%;max-width:none;white-space:normal;}
+  #hg-orders button{flex:1 1 calc(50% - 6px);white-space:normal;}
+  #hg-defeat{width:calc(100vw - 24px);padding:20px 16px;}
+}

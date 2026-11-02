@@ -4,10 +4,12 @@
     if (typeof Game3D === 'undefined' || typeof THREE === 'undefined') return;
     const active = HistoryGame.active;
     const initial = new Map(), arrowPool = [];
-    let arrowGeometry, arrowMaterial, fireArrowMaterial, commandPanel, wakeGeometry, wakeMaterial;
+    let arrowGeometry, arrowHeadGeometry, flameGeometry, flameCoreGeometry;
+    let arrowMaterial, arrowHeadMaterial, fireArrowMaterial, fireHeadMaterial, flameMaterial, flameCoreMaterial;
+    let commandPanel, wakeGeometry, wakeMaterial;
     let lastHud = -1, sceneEpoch = 0;
     const wakes = new Map();
-    const staticUnits = new Set(['cungThuBac','cungThuNam','nnCungNo']);
+    const staticUnits = new Set(['cungThuBac','cungThuNam','nnCungNo','nnCungNoBac']);
     const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
     function campaignUnits() {
         return Object.values(Game3D.units).filter(u => u.campaign === Game3D.currentCampaign);
@@ -51,28 +53,61 @@
         Game3D.thuyTrieu.phanTram=85;Game3D.thuyTrieu.dangTang=true;
         Game3D.lastHudUpdate=-1;
     }
-    function acquireArrow(isFire=false) {
-        if(!arrowGeometry){arrowGeometry=new THREE.CylinderGeometry(.06,.08,1.2,6);arrowMaterial=new THREE.MeshBasicMaterial({color:0xffba61});fireArrowMaterial=new THREE.MeshBasicMaterial({color:0xff5b24});}
-        const mesh=arrowPool.pop()||new THREE.Mesh(arrowGeometry,arrowMaterial);
-        mesh.material=isFire?fireArrowMaterial:arrowMaterial;
-        mesh.userData.pooledArrow=true;mesh.visible=true;Game3D.scene.add(mesh);return mesh;
+    function prepareArrowAssets() {
+        if(arrowGeometry)return;
+        arrowGeometry=new THREE.CylinderGeometry(.055,.08,1.25,7);arrowGeometry.rotateX(Math.PI/2);
+        arrowHeadGeometry=new THREE.ConeGeometry(.15,.42,7);arrowHeadGeometry.rotateX(Math.PI/2);
+        flameGeometry=new THREE.ConeGeometry(.2,.72,7);flameGeometry.rotateX(-Math.PI/2);
+        flameCoreGeometry=new THREE.SphereGeometry(.16,8,8);
+        arrowMaterial=new THREE.MeshBasicMaterial({color:0xffdb83});
+        arrowHeadMaterial=new THREE.MeshBasicMaterial({color:0xfff1c2});
+        fireArrowMaterial=new THREE.MeshBasicMaterial({color:0xff5722});
+        fireHeadMaterial=new THREE.MeshBasicMaterial({color:0xffff91});
+        flameMaterial=new THREE.MeshBasicMaterial({color:0xff3b08,transparent:true,opacity:.86,blending:THREE.AdditiveBlending,depthWrite:false});
+        flameCoreMaterial=new THREE.MeshBasicMaterial({color:0xffdb45,transparent:true,opacity:.96,blending:THREE.AdditiveBlending,depthWrite:false});
+    }
+    function createArrowMesh() {
+        const root=new THREE.Group();
+        const shaft=new THREE.Mesh(arrowGeometry,arrowMaterial);
+        const head=new THREE.Mesh(arrowHeadGeometry,arrowHeadMaterial);head.position.z=.72;
+        const fireTail=new THREE.Group(), flameParts=[];
+        for(let i=0;i<3;i++){
+            const flame=new THREE.Mesh(flameGeometry,flameMaterial);
+            const base=i===1 ? .95 : .68;
+            flame.position.set((i-1)*.13,0,-.58-i*.12);flame.scale.set(base,base,base);
+            flame.userData.baseScale=base;flame.userData.phase=i*2.1;fireTail.add(flame);flameParts.push(flame);
+        }
+        const core=new THREE.Mesh(flameCoreGeometry,flameCoreMaterial);core.position.z=-.48;core.scale.set(.55,.55,.8);core.userData.baseScale={x:.55,y:.55,z:.8};core.userData.phase=1.3;
+        fireTail.add(core);flameParts.push(core);
+        fireTail.visible=false;root.add(shaft,head,fireTail);
+        root.userData={pooledArrow:true,arrowShaft:shaft,arrowHead:head,fireTail,flameParts,isFire:false};
+        return root;
+    }
+    function acquireArrow(isFire=false,size=1) {
+        prepareArrowAssets();
+        const mesh=arrowPool.pop()||createArrowMesh();
+        mesh.userData.arrowShaft.material=isFire?fireArrowMaterial:arrowMaterial;
+        mesh.userData.arrowHead.material=isFire?fireHeadMaterial:arrowHeadMaterial;
+        mesh.userData.fireTail.visible=isFire;mesh.userData.isFire=isFire;
+        mesh.scale.setScalar(size);mesh.userData.pooledArrow=true;mesh.visible=true;Game3D.scene.add(mesh);return mesh;
     }
     function releaseArrow(mesh) {
-        if(mesh.userData.pooledArrow){mesh.parent?.remove(mesh);mesh.visible=false;mesh.material=arrowMaterial;if(arrowPool.length<180)arrowPool.push(mesh);}
+        if(mesh.userData.pooledArrow){mesh.parent?.remove(mesh);mesh.visible=false;mesh.scale.setScalar(1);mesh.rotation.set(0,0,0);mesh.userData.fireTail.visible=false;mesh.userData.isFire=false;if(arrowPool.length<180)arrowPool.push(mesh);}
         else HistoryGame.dispose(mesh);
     }
     function projectile(from, to, onHit, options={}) {
         if(Game3D.arrows3D.length>=180)return false;
         const hit=options.accuracy===undefined||Math.random()<=options.accuracy;
         const spread=options.spread||0;
-        const mesh=acquireArrow(!!options.fire), start=new THREE.Vector3(from.x,from.y+3,from.z), end=new THREE.Vector3(to.x+(Math.random()-.5)*spread,to.y+2,to.z+(Math.random()-.5)*spread);
+        const isFire=!!options.fire,size=options.size||(isFire?7.5:1.5);
+        const mesh=acquireArrow(isFire,size), start=new THREE.Vector3(from.x,from.y+3,from.z), end=new THREE.Vector3(to.x+(Math.random()-.5)*spread,to.y+2,to.z+(Math.random()-.5)*spread);
         mesh.position.copy(start);
         const resolveHit=hit&&onHit?()=>{
             const target=options.target;
             if(target?.pos?.distanceTo && target.pos.distanceTo(end)>(options.hitRadius||5))return;
             onHit();
         }:null;
-        Game3D.arrows3D.push({mesh,start,end,progress:0,speed:options.speed||2.2,height:options.height||6,onHit:resolveHit});return true;
+        Game3D.arrows3D.push({mesh,start,end,progress:0,speed:options.speed||2.2,height:options.height||6,isFire,onHit:resolveHit});return true;
     }
     function water(material) {
         Game3D.waterTime={value:0};
@@ -170,18 +205,18 @@
                 });e.attackCooldown=2;
             }
         }
-        // Count both sunk and surrendered ships; hidden ships from another campaign are irrelevant.
-        const fleet=units.filter(u=>u.type==='dich');
-        if(fleet.length && fleet.every(u=>!active(u))){
-            Game3D.combatPhase=Game3D.currentCampaign===2?'THANG_TRAN_NHU_NGUYET':'THANG_TRAN';
-            if(Game3D.currentCampaign===2&&!Game3D.nhuNguyetDilemmasTriggered[3])kichHoatTinhHuong(3);
-        }
-        const fighters=units.filter(u=>u.type==='ta'&&!/quanY/i.test(u.id));
-        if(fighters.length&&fighters.every(u=>!active(u))){
-            Game3D.combatPhase='THUA_TRAN';
-            hienThiThongBaoPopup('TRẬN ĐÁNH KẾT THÚC','Lực lượng chiến đấu đã mất khả năng tác chiến. Chọn Chơi lại trong bảng kết quả để thử cách bố trí khác.');
-            const result=document.getElementById('hg-defeat');
-            if(result)result.showModal();
+        // Như Nguyệt kiểm tra thắng/thua theo vạch vượt sông trong vòng lặp riêng.
+        if(Game3D.currentCampaign!==2){
+            // Count both sunk and surrendered ships; hidden ships from another campaign are irrelevant.
+            const fleet=units.filter(u=>u.type==='dich');
+            if(fleet.length && fleet.every(u=>!active(u))){Game3D.combatPhase='THANG_TRAN';}
+            const fighters=units.filter(u=>u.type==='ta'&&!/quanY/i.test(u.id));
+            if(fighters.length&&fighters.every(u=>!active(u))){
+                Game3D.combatPhase='THUA_TRAN';
+                hienThiThongBaoPopup('TRẬN ĐÁNH KẾT THÚC','Lực lượng chiến đấu đã mất khả năng tác chiến. Chọn Chơi lại trong bảng kết quả để thử cách bố trí khác.');
+                const result=document.getElementById('hg-defeat');
+                if(result)result.showModal();
+            }
         }
     }
     function holdUnit(u){u.order=null;u.targetX=u.pos.x;u.targetZ=u.pos.z;u.isMoving=false;}
@@ -213,7 +248,7 @@
         }
     }
     function setup(){
-        if(!Game3D.renderer||HistoryGame.isMobile())return;
+        if(!Game3D.renderer)return;
         document.body.classList.add('hg-game-3d');
         remember();
         HistoryGame.onSettings((quality,settings)=>{

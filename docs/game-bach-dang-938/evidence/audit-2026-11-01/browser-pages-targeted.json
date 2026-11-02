@@ -1,0 +1,430 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "remoteServicesBlocked": true,
+  "reports": [
+    {
+      "url": "http://127.0.0.1:8765/sa-ban-nhu-nguyet.html",
+      "title": "Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử",
+      "viewport": [
+        1365,
+        900
+      ],
+      "width": 1350,
+      "bodyClass": "",
+      "canvas": [
+        {
+          "id": "bg-canvas",
+          "w": 1365,
+          "h": 900,
+          "visible": true
+        }
+      ],
+      "actions": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "←\nVề Trang Chính",
+          "href": "trang-chinh.html",
+          "onclick": null,
+          "type": ""
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "⚔️\nChế Độ Sa Bàn 2D RPG",
+          "href": "sa-ban.html#nhu-nguyet",
+          "onclick": null,
+          "type": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btn-toggle-voice",
+          "text": "🔊\nGiọng Đọc: Tắt",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btn-toggle-music",
+          "text": "🎵\nNhạc: Tắt",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "INPUT",
+          "id": "player-name-input",
+          "text": "Lý Tướng Quân",
+          "href": null,
+          "onclick": null,
+          "type": "text"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🏆\nBảng Xếp Hạng",
+          "href": null,
+          "onclick": "moModalBangXepHang()",
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🎒\nKho Bảo Vật",
+          "href": null,
+          "onclick": "moModalKhoBaoVat()",
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "⚔️ VÀO TRẬN NGAY",
+          "href": null,
+          "onclick": "vaoAiNhuNguyet()",
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🔒 Nhấn Để Xem Chi Tiết",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🔒 Nhấn Để Xem Chi Tiết",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        }
+      ],
+      "localStorageKeys": [
+        "giongDocBat"
+      ],
+      "sessionStorageKeys": [
+        "dcls.music.session.v1"
+      ],
+      "runtime": null,
+      "text": "←\nVề Trang Chính\n⚔️\nChế Độ Sa Bàn 2D RPG\nSA BÀN CHIẾN THUẬT\nẢI NHƯ NGUYỆT\n🔊\nGiọng Đọc: Tắt\n🎵\nNhạc: Tắt\nBẢN ĐỒ CHIẾN DỊCH LỊCH SỬ\nSA BÀN CHIẾN DỊCH ĐẠI VIỆT\n\n\"Cầm gươm giữ vững non sông — Dùng mưu phạt tâm công — Giữ gìn sinh mạng tướng sĩ để kiến tạo thái bình muôn thuở.\"\n\n⚔️\nTÊN DANH TƯỚNG:\n🏆\nBảng Xếp Hạng\n🎒\nKho Bảo Vật\nCHỌN ẢI TIẾN VÀO SA BÀN\n🔥 ĐÃ MỞ KHÓA\nNăm 1077\nẢi 1: Phòng Tuyến Sông Như Nguyệt\n\nCùng Thái úy Lý Thường Kiệt dựng lũy tre bên dòng sông lịch sử, dùng mưu phạt tâm công để giữ gìn sinh mạng tướng sĩ và kiến tạo hòa bình.\n\n⚔️ Kháng Tống\n🛡️ Binh lực: 50.000\n✨ Điểm khởi đầu: 100\n⚔️ VÀO TRẬN NGAY\n🔒 ĐANG PHÁT TRIỂN\nNăm 938 & 1288\nẢi 2: Bạch Đằng Giang Dậy Sóng\n\nTrận địa cọc ngầm lịch sử đánh tan quân Nam Hán của Ngô Quyền và ba lần đại thắng Nguyên Mông dưới sự lãnh đạo của Quốc Công Tiết Chế Trần Hưng Đạo.\n\n🌊 Thủy chiến\n🪵 Cọc ngầm hiểm địa\n⏳ Sắp ra mắt\n🔒 Nhấn Để Xem Chi Tiết\n🔒 ĐANG PHÁT TRIỂN\nNăm 1427\nẢi 3: Chi Lăng — Xương Giang\n\nKhởi nghĩa Lam Sơn chém Liễu Thăng tại gò Mã Yên, giải phóng giang sơn và kết thúc 20 năm đô hộ tàn bạo của nhà Minh, mở ra triều đại Hậu Lê rực rỡ.\n\n🏹 Khởi nghĩa Lam Sơn\n📜 Bình Ngô Đại Cáo\n⏳ Đang điêu khắc sa bàn\n🔒 Nhấn Để Xem Chi Tiết",
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "duration": 15,
+          "bytes": 11469
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "duration": 22,
+          "bytes": 202853
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "duration": 442,
+          "bytes": 1675
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "duration": 4,
+          "bytes": 35078
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "duration": 18,
+          "bytes": 927758
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "duration": 12,
+          "bytes": 635
+        }
+      ],
+      "page": "sa-ban-nhu-nguyet.html",
+      "events": [],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-nhu-nguyet.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "http://127.0.0.1:8765/favicon.ico",
+          "status": 404,
+          "type": "Other"
+        }
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:8765/sa-ban-nhu-nguyet.html",
+      "title": "Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử",
+      "viewport": [
+        390,
+        844
+      ],
+      "width": 390,
+      "bodyClass": "",
+      "canvas": [
+        {
+          "id": "bg-canvas",
+          "w": 390,
+          "h": 844,
+          "visible": true
+        }
+      ],
+      "actions": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "←\nVề Trang Chính",
+          "href": "trang-chinh.html",
+          "onclick": null,
+          "type": ""
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "⚔️\nChế Độ Sa Bàn 2D RPG",
+          "href": "sa-ban.html#nhu-nguyet",
+          "onclick": null,
+          "type": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btn-toggle-voice",
+          "text": "🔊\nGiọng Đọc: Tắt",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btn-toggle-music",
+          "text": "🎵\nNhạc: Tắt",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "INPUT",
+          "id": "player-name-input",
+          "text": "Lý Tướng Quân",
+          "href": null,
+          "onclick": null,
+          "type": "text"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🏆\nBảng Xếp Hạng",
+          "href": null,
+          "onclick": "moModalBangXepHang()",
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🎒\nKho Bảo Vật",
+          "href": null,
+          "onclick": "moModalKhoBaoVat()",
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "⚔️ VÀO TRẬN NGAY",
+          "href": null,
+          "onclick": "vaoAiNhuNguyet()",
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🔒 Nhấn Để Xem Chi Tiết",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "🔒 Nhấn Để Xem Chi Tiết",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        }
+      ],
+      "localStorageKeys": [
+        "giongDocBat"
+      ],
+      "sessionStorageKeys": [
+        "dcls.music.session.v1"
+      ],
+      "runtime": null,
+      "text": "←\nVề Trang Chính\n⚔️\nChế Độ Sa Bàn 2D RPG\nSA BÀN CHIẾN THUẬT\n🔊\nGiọng Đọc: Tắt\n🎵\nNhạc: Tắt\nBẢN ĐỒ CHIẾN DỊCH LỊCH SỬ\nSA BÀN CHIẾN DỊCH ĐẠI VIỆT\n\n\"Cầm gươm giữ vững non sông — Dùng mưu phạt tâm công — Giữ gìn sinh mạng tướng sĩ để kiến tạo thái bình muôn thuở.\"\n\n⚔️\nTÊN DANH TƯỚNG:\n🏆\nBảng Xếp Hạng\n🎒\nKho Bảo Vật\nCHỌN ẢI TIẾN VÀO SA BÀN\n🔥 ĐÃ MỞ KHÓA\nNăm 1077\nẢi 1: Phòng Tuyến Sông Như Nguyệt\n\nCùng Thái úy Lý Thường Kiệt dựng lũy tre bên dòng sông lịch sử, dùng mưu phạt tâm công để giữ gìn sinh mạng tướng sĩ và kiến tạo hòa bình.\n\n⚔️ Kháng Tống\n🛡️ Binh lực: 50.000\n✨ Điểm khởi đầu: 100\n⚔️ VÀO TRẬN NGAY\n🔒 ĐANG PHÁT TRIỂN\nNăm 938 & 1288\nẢi 2: Bạch Đằng Giang Dậy Sóng\n\nTrận địa cọc ngầm lịch sử đánh tan quân Nam Hán của Ngô Quyền và ba lần đại thắng Nguyên Mông dưới sự lãnh đạo của Quốc Công Tiết Chế Trần Hưng Đạo.\n\n🌊 Thủy chiến\n🪵 Cọc ngầm hiểm địa\n⏳ Sắp ra mắt\n🔒 Nhấn Để Xem Chi Tiết\n🔒 ĐANG PHÁT TRIỂN\nNăm 1427\nẢi 3: Chi Lăng — Xương Giang\n\nKhởi nghĩa Lam Sơn chém Liễu Thăng tại gò Mã Yên, giải phóng giang sơn và kết thúc 20 năm đô hộ tàn bạo của nhà Minh, mở ra triều đại Hậu Lê rực rỡ.\n\n🏹 Khởi nghĩa Lam Sơn\n📜 Bình Ngô Đại Cáo\n⏳ Đang điêu khắc sa bàn\n🔒 Nhấn Để Xem Chi Tiết",
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "duration": 3,
+          "bytes": 0
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "duration": 3,
+          "bytes": 0
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "duration": 4,
+          "bytes": 0
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "duration": 3,
+          "bytes": 0
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "duration": 5,
+          "bytes": 0
+        }
+      ],
+      "page": "sa-ban-nhu-nguyet.html",
+      "events": [],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:8765/sa-ban-nhu-nguyet.html",
+          "status": 200,
+          "type": "Document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2",
+          "status": 200,
+          "type": "Stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/site-music.js",
+          "status": 200,
+          "type": "Script"
+        },
+        {
+          "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "http://127.0.0.1:8765/hinh-4.jpg",
+          "status": 200,
+          "type": "Image"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+          "status": 200,
+          "type": "Font"
+        }
+      ]
+    }
+  ]
+}

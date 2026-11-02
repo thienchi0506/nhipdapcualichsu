@@ -31,11 +31,23 @@
         const enemy=units.find(u=>u.type==='dich');
         check('campaign-unit-registration',!!ally&&!!enemy,units.length);
         enemy.hp=enemy.maxHp;enemy.morale=100;enemy.surrendered=false;enemy.sunk=false;enemy.trapped=false;
-        enemy.pos.set(5,2,55);ally.pos.set(-5,2,55);ally.targetX=-5;ally.targetZ=55;
+        enemy.pos.set(5,2,55);enemy.mesh.position.copy(enemy.pos);
+        ally.pos.set(-5,2,55);ally.mesh.position.copy(ally.pos);ally.targetX=-5;ally.targetZ=55;
         Game3D.selectedUnit=ally;Game3D.thuyTrieu.phanTram=60;
-        GameTactics3D.setAttack(enemy);
+        let attackSource=ally;
+        if(campaign===1&&Game3D.bachDang?.active){
+            attackSource=(Game3D.baitFleet||[]).find(HistoryGame.active);
+            check('bait-fleet-is-ready',!!attackSource);
+            if(attackSource){
+                attackSource.pos.set(4,2,55);attackSource.mesh.position.copy(attackSource.pos);
+                Game3D.bachDang.target=enemy;
+                phatTenBachDang(attackSource,enemy,200,false,1,1.5);
+            }
+        }else{
+            GameTactics3D.setAttack(enemy);
+        }
         const before=enemy.hp;await sleep(1000);
-        check('attack-hits-target',enemy.hp<before,{before,after:enemy.hp});
+        check('campaign-attack-hits-target',enemy.hp<before,{before,after:enemy.hp});
         capNhatThanhMauDaoQuan3D();
         const bar=document.getElementById('bar-hp-'+enemy.id);
         const expected=enemy.hp/enemy.maxHp*100;
@@ -44,9 +56,13 @@
         check('surrendered-unit-ignores-damage',enemy.hp===hp);
         enemy.surrendered=false;
         if(campaign===2){
-            Game3D.nhuNguyetDilemmasTriggered={1:true,2:false,3:false};Game3D.trapCooldown=20.1;
+            const raft=(Game3D.danhSachBeMangTong||[]).find(HistoryGame.active);
+            if(raft){
+                raft.pos.x=Game3D.nhuNguyetBattle.ambushLineX;
+                raft.mesh.position.copy(raft.pos);raft.ambushStarted=false;raft.ambushCooldown=0;
+            }
             kiemTraVongLapChienTranNhuNguyet(1/60,0);
-            check('second-dilemma-is-reachable',Game3D.trapCooldown>20.1&&Game3D.nhuNguyetDilemmasTriggered[2]);
+            check('ambush-triggers-at-the-river-line',!!raft&&raft.ambushStarted,raft&&{x:raft.pos.x,ambushStarted:raft.ambushStarted});
         }
         // Drive the normal damage/victory functions, rather than changing the victory phase directly.
         units.filter(u=>u.type==='dich').forEach(u=>{u.surrendered=false;u.sunk=false;apDungSatThuongDich(u,u.hp);});

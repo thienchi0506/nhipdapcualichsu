@@ -1,0 +1,52 @@
+{
+  "files": {
+    "game-runtime.js": {
+      "bytes": 13600
+    },
+    "game-runtime.css": {
+      "bytes": 3665
+    },
+    "game-upgrades-2d.js": {
+      "bytes": 4787
+    },
+    "game-upgrades-3d.js": {
+      "bytes": 20299
+    },
+    "grade10-exams.js": {
+      "bytes": 396118
+    },
+    "grade11-exams.js": {
+      "bytes": 394308
+    },
+    "site-music.js": {
+      "bytes": 11169
+    },
+    "firebase-config.js": {
+      "bytes": 938
+    },
+    "firestore.rules": {
+      "bytes": 1933
+    },
+    "storage.rules": {
+      "bytes": 472
+    }
+  },
+  "secretMarkerPaths": [],
+  "unconfigured": [
+    "package.json",
+    "firebase.json",
+    "firestore.indexes.json",
+    ".github/workflows",
+    "AGENTS.md"
+  ],
+  "localHttp": [
+    {
+      "url": "http://127.0.0.1:8765/trang-chinh.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/hero-loop.mp4",
+      "status": 404
+    }
+  ]
+}
