@@ -64,6 +64,8 @@ function disposeSession() {
 function cancelLoad() { generation++; loadController?.abort(); loadController = null; }
 async function returnToSetup({ focus = true } = {}) {
   cancelLoad();if(session){session.pause();try{await session.whenSaved();}catch{}}disposeSession();try{await closingSave;}catch{}closeDialog();showScreen('setup');setState('SHELL');
+  root.classList.remove('bd938-hud-collapsed');
+  const hudBtn = byId('hud-toggle'); if (hudBtn) hudBtn.textContent = '👁️ Thu gọn HUD';
   byId('characters').hidden = false; byId('quality').hidden = true;
   byId('camera').textContent = 'Góc nhìn: Toàn cảnh';
   syncChoices(); if (focus) byId('next').focus({ preventScroll: true });
@@ -323,6 +325,11 @@ root.addEventListener('click', event => {
     'bd938-systems-close':()=>{byId('systems').open=false;session?.focus();},
     'bd938-camera': toggleCamera, 'bd938-pause': () => pause(), 'bd938-finish': finish,
     'bd938-map-pause':()=>pause(),
+    'bd938-hud-toggle': () => {
+      const isCollapsed = root.classList.toggle('bd938-hud-collapsed');
+      const btn = byId('hud-toggle');
+      if (btn) btn.textContent = isCollapsed ? '👁️ Mở rộng HUD' : '👁️ Thu gọn HUD';
+    },
     'bd938-dialog-close': () => { if (dialogMode === 'pause') resume(); else if(dialogMode==='retry')combatOutcome(session.snapshot().combat);else if (dialogMode === 'briefing' || dialogMode === 'results') returnToSetup(); },
   };
   actions[target.id]?.();

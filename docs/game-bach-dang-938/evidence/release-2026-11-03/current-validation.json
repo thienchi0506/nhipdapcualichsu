@@ -1,5 +1,5 @@
 {
-  "head": "03aedcd8d85924a35329580774e53d117870284a",
+  "head": "a6ba8e77f61e7c1ca6dd62ff4974c8a185810de4",
   "date": "2026-11-03",
   "productionBlocked": true,
   "suites": [
@@ -1709,7 +1709,10 @@
                 "boatId": "enemy-boat"
               }
             ],
-            "message": ""
+            "message": "",
+            "enemyBoatTrapped": false,
+            "enemyBoatBurning": false,
+            "fireRaftActive": false
           }
         },
         {
@@ -2553,8 +2556,8 @@
         "eliminated": {
           "remainingActorEnemies": 0,
           "remainingSoldierEnemies": 0,
-          "phase": "victory",
-          "ticks": 1
+          "phase": "active",
+          "ticks": 600
         },
         "retreat": {
           "response": {
@@ -2797,13 +2800,13 @@
             "canvas": [
               {
                 "w": 390,
-                "h": 504,
+                "h": 445,
                 "rect": {
                   "x": 0,
-                  "y": 117.796875,
+                  "y": 176.796875,
                   "width": 390,
-                  "height": 504.203125,
-                  "top": 117.796875,
+                  "height": 445.203125,
+                  "top": 176.796875,
                   "right": 390,
                   "bottom": 622,
                   "left": 0
@@ -2840,20 +2843,22 @@
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/app/loader.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/app/diagnostics.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/app/session.js",
-          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/encounter.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/army-config.js",
-          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/repository.js",
+          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/encounter.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/prepare-session.js",
+          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/repository.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/firebase-bridge.js",
+          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/river.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/vessel.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/core/clock.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/app/input.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/army.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/game-state.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/attempt-resolution.js",
-          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/river.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/actor-space.js",
+          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/presentation/audio.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/controller.js",
+          "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/narrative.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/save/retry.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/src/sim/collision.js",
           "http://127.0.0.1:8767/nhipdapcualichsu/game-bach-dang-938/data/shell-scene.json",

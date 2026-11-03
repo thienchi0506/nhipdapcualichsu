@@ -19,9 +19,9 @@
         },
         {
           "name": "resume-runs-task-once",
-          "passed": false,
+          "passed": true,
           "details": {
-            "fired": 0
+            "fired": 1
           }
         },
         {
@@ -53,22 +53,22 @@
         },
         {
           "name": "projectile-resolves-damage",
-          "passed": false,
+          "passed": true,
           "details": {
             "before": 100,
-            "after": 100
+            "after": 93
           }
         },
         {
           "name": "zero-damage-is-not-replaced",
           "passed": true,
           "details": {
-            "before": 100,
-            "after": 100
+            "before": 93,
+            "after": 93
           }
         }
       ],
-      "passed": 9,
+      "passed": 11,
       "total": 11
     },
     "exceptions": []
@@ -184,9 +184,9 @@
           "name": "renderer-drew-scene",
           "passed": true,
           "details": {
-            "frame": 136,
-            "calls": 128,
-            "triangles": 31518,
+            "frame": 198,
+            "calls": 133,
+            "triangles": 30925,
             "points": 450,
             "lines": 0
           }
@@ -285,9 +285,9 @@
           "name": "renderer-drew-scene",
           "passed": true,
           "details": {
-            "frame": 111,
-            "calls": 196,
-            "triangles": 8166,
+            "frame": 160,
+            "calls": 194,
+            "triangles": 8127,
             "points": 450,
             "lines": 0
           }

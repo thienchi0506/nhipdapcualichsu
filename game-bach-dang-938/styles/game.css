@@ -226,3 +226,89 @@ body.bd938-page { margin:0; background:#102725; color:#f0e7d4; font-family:syste
   #bd938-root .bd938-actor-tools { grid-column:1/3;grid-row:2; }
   #bd938-root #bd938-finish { grid-column:3;grid-row:2; }
 }
+
+/* Naval Tactical Command Dock & Collapsible HUD (Restructuring by 10-Agent Team) */
+#bd938-root .bd938-tactical-dock {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 38, 35, 0.92);
+  border: 1px solid var(--bd938-gold);
+  border-radius: 12px;
+  padding: 6px 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  max-width: calc(100% - 24px);
+  overflow-x: auto;
+}
+#bd938-root .bd938-tac-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 66px;
+  min-height: 50px;
+  padding: 4px 8px;
+  background: #1b3d36;
+  border: 1px solid #57786f;
+  border-radius: 8px;
+  color: #fff4d1;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  touch-action: manipulation;
+}
+#bd938-root .bd938-tac-btn:hover {
+  background: #28544a;
+  border-color: var(--bd938-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(226, 186, 111, 0.35);
+}
+#bd938-root .bd938-tac-btn:active {
+  transform: translateY(1px);
+}
+#bd938-root .bd938-tac-icon {
+  font-size: 18px;
+  line-height: 1.2;
+}
+#bd938-root .bd938-tac-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffe6a3;
+  white-space: nowrap;
+}
+#bd938-root .bd938-tac-desc {
+  font-size: 9px;
+  color: var(--bd938-muted);
+  white-space: nowrap;
+}
+
+/* Collapsed HUD Mode ("thu gọn 1 số nút gây vướng") */
+#bd938-root.bd938-hud-collapsed .bd938-move {
+  display: none !important;
+}
+#bd938-root.bd938-hud-collapsed .bd938-actor-tools {
+  display: none !important;
+}
+#bd938-root.bd938-hud-collapsed .bd938-combat-pad {
+  display: none !important;
+}
+#bd938-root.bd938-hud-collapsed .bd938-systems {
+  display: none !important;
+}
+#bd938-root.bd938-hud-collapsed .bd938-help {
+  display: none !important;
+}
+#bd938-root.bd938-hud-collapsed .bd938-controls {
+  padding: 4px 12px;
+  justify-content: flex-end;
+  min-height: 38px;
+}
+#bd938-root.bd938-hud-collapsed .bd938-play {
+  grid-template-rows: auto 1fr auto;
+}

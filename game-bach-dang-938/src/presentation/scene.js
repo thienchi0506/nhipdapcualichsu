@@ -78,6 +78,16 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     const earth = material('#86845b'), sand = material('#c4b58a'), wood = material('#49382a'), deck = material('#aa8551');
     const green = material('#4f7152'), darkGreen = material('#35594a'), stone = material('#819186');
     const skin = material('#d7ae81'), metal = material('#c6bfa3'), dark = material('#283d37');
+    const bronze = material('#c8963e', { roughness: 0.35, metalness: 0.8 });
+    const darkWood = material('#2b1b17', { roughness: 0.85 });
+    const sailRed = material('#b22222', { side: THREE.DoubleSide, roughness: 0.6 });
+    const sailBlack = material('#1c1c1c', { side: THREE.DoubleSide, roughness: 0.8 });
+    const stakeTipMat = material('#8a9ba8', { roughness: 0.28, metalness: 0.85 });
+    const strawMat = material('#8b7355', { roughness: 0.95 });
+    const flameMat = new THREE.MeshBasicMaterial({ color: 0xff3b08, transparent: true, opacity: 0.86, blending: THREE.AdditiveBlending, depthWrite: false });
+    materials.add(flameMat); metrics.materials++;
+    const flameCoreMat = new THREE.MeshBasicMaterial({ color: 0xffdb45, transparent: true, opacity: 0.96, blending: THREE.AdditiveBlending, depthWrite: false });
+    materials.add(flameCoreMat); metrics.materials++;
     const armyGeometry=new THREE.BoxGeometry(.42,1.25,.42);geometries.add(armyGeometry);metrics.geometries++;
     const armyFriendly=new THREE.InstancedMesh(armyGeometry,material('#a4d6a3'),1000),armyEnemy=new THREE.InstancedMesh(armyGeometry,material('#c76c5d'),1000);
     armyFriendly.count=0;armyEnemy.count=0;armyFriendly.frustumCulled=false;armyEnemy.frustumCulled=false;world.add(armyFriendly,armyEnemy);
@@ -120,9 +130,10 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     }
     // Same IDs, positions, bed and tip elevations as the collision system.
     for (const stake of river.map.stakes) {
-      const bed = bedAt(river, stake.x, stake.z), tipLength = 0.3;
-      mesh(new THREE.CylinderGeometry(stake.radiusM, stake.radiusM * 1.3, stake.tipY - bed - tipLength, 5), wood, world, stake.x, (stake.tipY + bed - tipLength) / 2, stake.z);
-      mesh(new THREE.ConeGeometry(stake.radiusM, tipLength, 5), wood, world, stake.x, stake.tipY - tipLength / 2, stake.z);
+      const bed = bedAt(river, stake.x, stake.z), tipLength = 0.85;
+      const bodyH = Math.max(0.1, stake.tipY - bed - tipLength);
+      mesh(new THREE.CylinderGeometry(stake.radiusM, stake.radiusM * 1.3, bodyH, 7), wood, world, stake.x, (stake.tipY + bed - tipLength) / 2, stake.z);
+      mesh(new THREE.ConeGeometry(stake.radiusM * 1.15, tipLength, 7), stakeTipMat, world, stake.x, stake.tipY - tipLength / 2, stake.z);
     }
     const dangerMark = mesh(new THREE.RingGeometry(5.7, 5.85, 40), material('#f2b85f', { side: THREE.DoubleSide, transparent: true, opacity: 0.55 }), world, 11.75, 0.03, -21);
     dangerMark.rotation.x = -Math.PI / 2;
@@ -148,18 +159,29 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     let mooredIndex = 0;
     data.roles.forEach((role, index) => {
       const boat = new THREE.Group(); world.add(boat);
-      occluders.push(box(boat, wood, 0, 0.4, 0, 2.8, 0.8, 7));
-      box(boat, deck, 0, 0.9, 0, 2.4, 0.25, 6.6);
-      mesh(new THREE.ConeGeometry(1.4, 2, 4), wood, boat, 0, 0.4, -4).rotation.x = -Math.PI / 2;
-      box(boat, wood, -1.3, 1.3, 0, 0.15, 0.45, 5.8); box(boat, wood, 1.3, 1.3, 0, 0.15, 0.45, 5.8);
-      const banner = role.id===heroId?material(role.color):figure(boat, role);
-      const details=[box(boat, wood, 0, 3.7, 2, 0.09, 4.8, 0.09),box(boat, banner, 0.75, 5.25, 2, 1.5, 0.9, 0.06)];
-      occluders.push(...details);cameraDetails.push(...details);
-      for (const side of [-1, 1]) {
-        const oar = box(boat, deck, side * 2, 0.9, 1.6, 2.5, 0.09, 0.2); oar.rotation.z = -side * 0.12;
-        if (role.id === heroId) controlledOars.push(oar);
+      // Mô hình Thuyền Nhẹ Tiên Phong (taoMotThuyenNhe từ sa-ban-3d)
+      occluders.push(box(boat, wood, 0, 0.45, 0, 2.6, 0.9, 7.2));
+      box(boat, deck, 0, 0.88, 0, 2.3, 0.25, 6.8);
+      const bowGeo = new THREE.ConeGeometry(1.1, 2.2, 4);
+      bowGeo.rotateZ(Math.PI / 2); bowGeo.rotateY(Math.PI / 4);
+      mesh(bowGeo, bronze, boat, 0, 0.5, -4.2);
+      box(boat, wood, -1.25, 1.15, 0, 0.12, 0.35, 6.0);
+      box(boat, wood, 1.25, 1.15, 0, 0.12, 0.35, 6.0);
+      const banner = role.id === heroId ? material(role.color, { side: THREE.DoubleSide }) : figure(boat, role);
+      const mastMesh = mesh(new THREE.CylinderGeometry(0.1, 0.14, 5.5, 8), wood, boat, 0, 3.2, -0.5);
+      const flagMesh = mesh(new THREE.PlaneGeometry(1.8, 1.4), banner, boat, 0.9, 4.8, -0.5);
+      const details = [mastMesh, flagMesh];
+      occluders.push(...details); cameraDetails.push(...details);
+      for (let o = -2; o <= 2; o += 1.2) {
+        const leftOarGeo = new THREE.CylinderGeometry(0.05, 0.08, 2.6, 6);
+        leftOarGeo.rotateZ(Math.PI / 3);
+        const leftOar = mesh(leftOarGeo, wood, boat, -1.5, 0.45, o);
+        const rightOarGeo = new THREE.CylinderGeometry(0.05, 0.08, 2.6, 6);
+        rightOarGeo.rotateZ(-Math.PI / 3);
+        const rightOar = mesh(rightOarGeo, wood, boat, 1.5, 0.45, o);
+        if (role.id === heroId) controlledOars.push(leftOar, rightOar);
       }
-      const rudder = box(boat, wood, 0, 0.3, 3.7, 0.25, 1, 0.8);
+      const rudder = box(boat, wood, 0, 0.3, 3.7, 0.25, 1.0, 0.8);
       if (role.id === heroId) {
         controlled = boat; controlledRudder = rudder;
         const vessel = river.vessels[vesselType];
@@ -172,10 +194,41 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     });
     const selection = mesh(new THREE.RingGeometry(2.2, 2.35, 32), material('#ffe7a0', { side: THREE.DoubleSide }), controlled, 0, 0.05, 0);
     selection.rotation.x = -Math.PI / 2;
-    const enemyBoat=new THREE.Group();world.add(enemyBoat);enemyBoat.visible=false;
-    occluders.push(box(enemyBoat,wood,0,.4,0,3,.8,8));box(enemyBoat,deck,0,.9,0,3,.25,8);
-    const enemyDetails=[box(enemyBoat,material('#b94d3f'),0,3.2,0,.1,4.4,.1),box(enemyBoat,material('#b94d3f'),.65,4.8,0,1.3,.8,.07)];
-    occluders.push(...enemyDetails);cameraDetails.push(...enemyDetails);
+    const enemyBoat = new THREE.Group(); world.add(enemyBoat); enemyBoat.visible = false;
+    // Soái Hạm Khổng Lồ Của Lưu Hoằng Tháo (taoSoaiHamHoangThao từ sa-ban-3d)
+    occluders.push(box(enemyBoat, darkWood, 0, 1.8, 0, 5.8, 3.2, 14));
+    box(enemyBoat, deck, 0, 3.3, 0, 5.2, 0.3, 13);
+    const prowGeo = new THREE.ConeGeometry(2.0, 3.8, 4);
+    prowGeo.rotateZ(-Math.PI / 2);
+    mesh(prowGeo, bronze, enemyBoat, 0, 2.6, -7.8);
+    box(enemyBoat, darkWood, 0, 4.6, 0.5, 4.4, 2.2, 7.5);
+    box(enemyBoat, darkWood, 0, 6.4, 0.5, 3.0, 1.8, 4.5);
+    const fMast1 = mesh(new THREE.CylinderGeometry(0.18, 0.26, 11, 8), darkWood, enemyBoat, 0, 8.5, -2);
+    const fSail1 = mesh(new THREE.PlaneGeometry(4.8, 6.8), sailBlack, enemyBoat, 0, 8.5, -1.9);
+    const fMast2 = mesh(new THREE.CylinderGeometry(0.14, 0.20, 8.5, 8), darkWood, enemyBoat, 0, 7.2, 3);
+    const fSail2 = mesh(new THREE.PlaneGeometry(3.8, 5.2), sailBlack, enemyBoat, 0, 7.2, 3.1);
+    const fBanner = mesh(new THREE.PlaneGeometry(1.6, 2.6), material('#8B0000', { side: THREE.DoubleSide }), enemyBoat, 0.9, 12.0, -2);
+    const enemyDetails = [fMast1, fSail1, fMast2, fSail2, fBanner];
+    occluders.push(...enemyDetails); cameraDetails.push(...enemyDetails);
+
+    const enemyFireCluster = new THREE.Group();
+    for (let f = 0; f < 5; f++) {
+      const fl = mesh(new THREE.ConeGeometry(0.6 + f * 0.15, 2.2 + f * 0.3, 6), flameMat, enemyFireCluster, (f % 2 ? 1 : -1) * (0.8 + f * 0.3), 5.5 + f * 0.4, -3 + f * 1.6);
+      mesh(new THREE.SphereGeometry(0.35, 6, 6), flameCoreMat, fl, 0, -0.6, 0);
+    }
+    enemyFireCluster.visible = false;
+    enemyBoat.add(enemyFireCluster);
+
+    const fireRaftsGroup = new THREE.Group(); world.add(fireRaftsGroup); fireRaftsGroup.visible = false;
+    for (let r = 0; r < 3; r++) {
+      const raft = new THREE.Group(); raft.position.set((r - 1) * 3.5, 0.2, (r % 2) * 2);
+      box(raft, wood, 0, 0.2, 0, 2.6, 0.3, 3.6);
+      box(raft, strawMat, 0, 0.65, 0, 2.2, 0.6, 3.0);
+      for (let b = 0; b < 3; b++) {
+        mesh(new THREE.ConeGeometry(0.4, 1.4, 5), flameMat, raft, (b - 1) * 0.6, 1.4, (b % 2) * 0.4);
+      }
+      fireRaftsGroup.add(raft);
+    }
     const arrowGeo=new THREE.BoxGeometry(.07,.07,1),arrowMat=material('#ffe6a1');
     const bodyMarker=material('#ffdd79',{side:THREE.DoubleSide}),targetMarker=material('#f1755c',{side:THREE.DoubleSide});
     function visualFor(actor){
@@ -215,7 +268,20 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
         armyFriendly.count=friendly;armyEnemy.count=enemy;armyFriendly.instanceMatrix.needsUpdate=true;armyEnemy.instanceMatrix.needsUpdate=true;
       }else{armyFriendly.count=0;armyEnemy.count=0;}
       if(combat){
-        if(combat.enemyBoat){enemyBoat.visible=true;enemyBoat.position.set(combat.enemyBoat.x,readings.waterY-data.characterConfig.enemyBoat.draftM,combat.enemyBoat.z);enemyBoat.rotation.y=combat.enemyBoat.yaw;}
+        if(combat.enemyBoat){
+          enemyBoat.visible=true;
+          enemyBoat.position.set(combat.enemyBoat.x,readings.waterY-data.characterConfig.enemyBoat.draftM,combat.enemyBoat.z);
+          enemyBoat.rotation.y=combat.enemyBoat.yaw;
+          if(combat.enemyBoatTrapped){enemyBoat.rotation.z=0.18;enemyBoat.rotation.x=-0.12;}
+          else{enemyBoat.rotation.z=0;enemyBoat.rotation.x=0;}
+          enemyFireCluster.visible=!!combat.enemyBoatBurning;
+        }
+        if(combat.fireRaftActive){
+          fireRaftsGroup.visible=true;
+          fireRaftsGroup.position.set(0,readings.waterY,(combat.enemyBoat?combat.enemyBoat.z+10:28)-(state.tick%60)*0.12);
+        }else{
+          fireRaftsGroup.visible=false;
+        }
         for(const actor of combat.actors){
           const visual=visualFor(actor);let px=actor.x,pz=actor.z;
           visual.group.visible=!actor.retired&&(actor.team!=='enemy'||!active||(Math.hypot(actor.x-active.x,actor.z-active.z)<=armyDefaults.sight&&lineOfSight(combat,state,active,actor)));
@@ -235,8 +301,10 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
           live.add(arrow.id);let object=arrowVisuals.get(arrow.id);
           if(!object){object=arrowPool.pop()||mesh(arrowGeo,arrowMat,world);object.visible=true;arrowVisuals.set(arrow.id,object);}
           object.position.set(arrow.x,arrow.y,arrow.z);object.lookAt(arrow.x+arrow.vx,arrow.y+arrow.vy,arrow.z+arrow.vz);
+          if(arrow.isFire){object.material=flameMat;object.scale.set(1.5,1.5,1.5);}
+          else{object.material=arrowMat;object.scale.set(1,1,1);}
         }
-        for(const [id,object] of arrowVisuals)if(!live.has(id)){object.visible=false;arrowVisuals.delete(id);arrowPool.push(object);}
+        for(const [id,object] of arrowVisuals)if(!live.has(id)){object.visible=false;object.scale.set(1,1,1);arrowVisuals.delete(id);arrowPool.push(object);}
       }
       const aspectScale = camera.aspect < 1 ? 1.35 : 1;
       const focus=new THREE.Vector3(active?.x??x,(active?.y??boatY)+1.1,active?.z??z);

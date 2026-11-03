@@ -3,6 +3,8 @@ import { stepRiver } from './vessel.js';
 import { localToWorld, worldToLocal, boatList, closestDeckPoint, supportAt, attach, syncAttachment, segmentBox, deckGap } from './actor-space.js';
 import { armyDefaults } from './army-config.js';
 import { damageArmySoldier } from './army.js';
+import { SoundEngine } from '../presentation/audio.js';
+import { getRandomBark } from './narrative.js';
 
 const alive = actor => !!actor && actor.health > 0 && !['wounded', 'downed', 'dead'].includes(actor.mode);
 const distance = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
@@ -204,6 +206,88 @@ function command(world,river,actor,action,intent){
   if(action.type==='dodge'&&actor.mode==='foot'&&!world.helm&&!actor.action&&actor.stunUntil<=world.tick&&exert(actor,world.config.dodge.cost,world)){
     const {x:mx,z:mz}=moveVector(intent),len=Math.hypot(mx,mz);
     actor.action={id:`dodge:${++world.sequence}`,kind:'dodge',start:world.tick,x:len?mx/len:Math.sin(actor.yaw),z:len?mz/len:Math.cos(actor.yaw)};event(world,'Dodged',{actorId:actor.id});
+    return;
+  }
+  if(action.type==='order-volley'){
+    const c=world.config;
+    if(world.tick<(world.volleyCooldown||0)){notice(world,'Cung thủ đang nạp tên, chờ trong giây lát!');return;}
+    world.volleyCooldown=world.tick+ticks(c,2.5);
+    try{SoundEngine.playArrowVolley();}catch{}
+    const bark=getRandomBark('volley');
+    notice(world,`[${bark.speaker.title}]: "${bark.text}"`);
+    const targetPoint=world.enemyBoat?{x:world.enemyBoat.x,y:1.5,z:world.enemyBoat.z}:{x:0,y:1,z:25};
+    const archers=world.actors.filter(a=>a.team==='friendly'&&alive(a));
+    for(let i=0;i<6;i++){
+      const archer=archers[i%archers.length]||actor;
+      const tx=targetPoint.x+(Math.random()-0.5)*4.5,tz=targetPoint.z+(Math.random()-0.5)*4.5,ty=targetPoint.y;
+      const dist=Math.hypot(tx-archer.x,tz-archer.z)||10,flight=Math.max(0.5,dist/c.bow.speedMps);
+      world.projectiles.push({id:`arrow:${++world.sequence}`,ownerId:archer.id,x:archer.x+(Math.random()-0.5)*1.5,y:archer.y+1.2,z:archer.z+(Math.random()-0.5)*1.5,vx:(tx-archer.x)/flight,vy:(ty-archer.y+0.5*c.gravityMps2*flight*flight)/flight,vz:(tz-archer.z)/flight,age:0,isFire:false});
+    }
+    event(world,'TacticalOrder',{order:'volley'});world.provoked=true;return;
+  }
+  if(action.type==='order-fire-arrow'){
+    const c=world.config;
+    if(world.tick<(world.fireArrowCooldown||0)){notice(world,'Đang chuẩn bị bùi nhùi tẩm dầu, hãy đợi!');return;}
+    world.fireArrowCooldown=world.tick+ticks(c,3.5);
+    try{SoundEngine.playFireArrow();}catch{}
+    const bark=getRandomBark('fireArrow');
+    notice(world,`[${bark.speaker.title}]: "${bark.text}"`);
+    const targetPoint=world.enemyBoat?{x:world.enemyBoat.x,y:2.5,z:world.enemyBoat.z}:{x:0,y:2,z:25};
+    for(let i=0;i<4;i++){
+      const tx=targetPoint.x+(Math.random()-0.5)*3.0,tz=targetPoint.z+(Math.random()-0.5)*3.0,ty=targetPoint.y+1.5;
+      const dist=Math.hypot(tx-actor.x,tz-actor.z)||12,flight=Math.max(0.6,dist/c.bow.speedMps);
+      world.projectiles.push({id:`arrow:${++world.sequence}`,ownerId:actor.id,x:actor.x+(i-1.5)*0.4,y:actor.y+1.3,z:actor.z,vx:(tx-actor.x)/flight,vy:(ty-actor.y+0.5*c.gravityMps2*flight*flight)/flight,vz:(tz-actor.z)/flight,age:0,isFire:true});
+    }
+    world.enemyBoatBurningUntil=world.tick+ticks(c,6.0);
+    for(const e of world.actors.filter(a=>a.team==='enemy'&&alive(a)))applyActorDamage(world,e.id,18,actor.id,`fire:${world.sequence}`);
+    event(world,'TacticalOrder',{order:'fire-arrow'});world.provoked=true;return;
+  }
+  if(action.type==='order-feign-retreat'){
+    const c=world.config;
+    if(world.tick<(world.feignRetreatCooldown||0)){notice(world,'Đang giữ khoảng cách nhử địch!');return;}
+    world.feignRetreatCooldown=world.tick+ticks(c,5.0);
+    world.feignRetreatActive=true;
+    try{SoundEngine.playHorn();}catch{}
+    const bark=getRandomBark('feignRetreat');
+    notice(world,`[${bark.speaker.title}]: "${bark.text}"`);
+    if(world.enemyBoat){world.enemyBoat.lured=true;}
+    event(world,'TacticalOrder',{order:'feign-retreat'});return;
+  }
+  if(action.type==='order-stake-ambush'){
+    const c=world.config;
+    if(world.tick<(world.stakeAmbushCooldown||0)){notice(world,'Bãi cọc đang đón đầu hạm đội giặc!');return;}
+    world.stakeAmbushCooldown=world.tick+ticks(c,5.0);
+    const inStakeField=world.enemyBoat&&world.enemyBoat.z<=28;
+    if(!inStakeField&&!world.feignRetreatActive){notice(world,'[Đô Đốc Kiều Công Hãn]: "Giặc chưa vào tầm cọc! Hãy dùng lệnh Vờ Rút để kéo chúng vào trận địa!"');return;}
+    world.enemyBoatTrapped=true;
+    try{SoundEngine.playStakeImpact();}catch{}
+    const bark=getRandomBark('stakeAmbush');
+    notice(world,`[${bark.speaker.title}]: "${bark.text}"`);
+    for(const e of world.actors.filter(a=>a.team==='enemy'&&alive(a)))applyActorDamage(world,e.id,35,actor.id,`stake:${world.sequence}`);
+    event(world,'TacticalOrder',{order:'stake-ambush'});return;
+  }
+  if(action.type==='order-fire-raft'){
+    const c=world.config;
+    if(world.tick<(world.fireRaftCooldown||0)){notice(world,'Đang gom rơm và dầu chuẩn bị bè mới!');return;}
+    world.fireRaftCooldown=world.tick+ticks(c,7.0);
+    world.fireRaftActive=true;
+    try{SoundEngine.playExplosion();}catch{}
+    const bark=getRandomBark('fireRaft');
+    notice(world,`[${bark.speaker.title}]: "${bark.text}"`);
+    world.enemyBoatBurningUntil=world.tick+ticks(c,8.0);
+    for(const e of world.actors.filter(a=>a.team==='enemy'&&alive(a)))applyActorDamage(world,e.id,45,actor.id,`fireRaft:${world.sequence}`);
+    event(world,'TacticalOrder',{order:'fire-raft'});return;
+  }
+  if(action.type==='order-counterattack'){
+    const c=world.config;
+    if(world.tick<(world.counterattackCooldown||0)){notice(world,'Tướng sĩ đang siết chặt vòng vây!');return;}
+    world.counterattackCooldown=world.tick+ticks(c,8.0);
+    world.counterattackActive=true;
+    try{SoundEngine.playWarDrum();}catch{}
+    const bark=getRandomBark('counterattack');
+    notice(world,`[${bark.speaker.title}]: "${bark.text}"`);
+    for(const e of world.actors.filter(a=>a.team==='enemy'&&alive(a)))applyActorDamage(world,e.id,55,actor.id,`counterattack:${world.sequence}`);
+    event(world,'TacticalOrder',{order:'counterattack'});return;
   }
 }
 function stepRiverActionNotice(world){notice(world,'Đang lái thuyền. Space để neo; E rời tay lái rồi mới nhảy.');}
@@ -382,7 +466,15 @@ export function stepEncounter(world,river,intent={}){
   // including passengers transported by a moving deck during this tick.
   const previous=new Map(world.actors.map(a=>[a.id,{x:a.x,y:a.y,z:a.z}]));
   stepRiver(river,boatIntent,extra);world.tick=river.tick;if(world.army)world.army.tick=world.tick;
-  if(world.enemyBoat){const e=world.enemyBoat,b=c.enemyBoat,t=world.tick/c.tickHz;e.z=b.z+Math.sin(t*b.driftFrequency)*b.driftAmplitudeM;e.vz=Math.cos(t*b.driftFrequency)*b.driftAmplitudeM*b.driftFrequency;}
+  if(world.enemyBoat){
+    const e=world.enemyBoat,b=c.enemyBoat,t=world.tick/c.tickHz;
+    if(e.lured && e.z > -18){
+      e.z -= 0.08;
+    } else {
+      e.z=b.z+Math.sin(t*b.driftFrequency)*b.driftAmplitudeM;
+    }
+    e.vz=Math.cos(t*b.driftFrequency)*b.driftAmplitudeM*b.driftFrequency;
+  }
   for(const actor of world.actors)syncAttachment(actor,world,river,c);
   if(world.takeoverAt!==null&&world.tick>=world.takeoverAt){
     const reserve=world.actors.find(a=>a.kind==='reserve'&&alive(a));world.takeoverAt=null;
@@ -409,8 +501,8 @@ export function stepEncounter(world,river,intent={}){
     const enemies=world.actors.filter(a=>a.team==='enemy');
     const armyEnemies=world.army?world.army.people.filter(p=>p.team==='enemy'):[];
     if(enemies.length>0||armyEnemies.length>0){
-      const aliveActors=enemies.filter(alive).length;
-      const aliveSoldiers=armyEnemies.filter(p=>p.status==='active').length;
+      const aliveActors=enemies.filter(a=>alive(a)||a.mode==='downed').length;
+      const aliveSoldiers=armyEnemies.filter(p=>p.status==='active'||p.status==='downed').length;
       if(aliveActors===0&&aliveSoldiers===0){
         world.phase='victory';
         event(world,'Victory');
@@ -420,4 +512,4 @@ export function stepEncounter(world,river,intent={}){
   }
 }
 
-export function encounterSnapshot(world){return {tick:world.tick,controlledId:world.controlledId,controlEpoch:world.controlEpoch,helm:world.helm,mapOpen:world.mapOpen,phase:world.phase,selectedId:world.selectedId,takeoverAt:world.takeoverAt,enemyBoat:world.enemyBoat?{...world.enemyBoat}:null,actors:world.actors.map(a=>structuredClone(a)),projectiles:world.projectiles.map(a=>({...a})),eventCounts:{...world.eventCounts},events:world.events.map(e=>({...e})),message:world.tick<=world.messageUntil?world.message:''};}
+export function encounterSnapshot(world){return {tick:world.tick,controlledId:world.controlledId,controlEpoch:world.controlEpoch,helm:world.helm,mapOpen:world.mapOpen,phase:world.phase,selectedId:world.selectedId,takeoverAt:world.takeoverAt,enemyBoat:world.enemyBoat?{...world.enemyBoat}:null,actors:world.actors.map(a=>structuredClone(a)),projectiles:world.projectiles.map(a=>({...a})),eventCounts:{...world.eventCounts},events:world.events.map(e=>({...e})),message:world.tick<=world.messageUntil?world.message:'',enemyBoatTrapped:!!world.enemyBoatTrapped,enemyBoatBurning:(world.enemyBoatBurningUntil||0)>world.tick,fireRaftActive:!!world.fireRaftActive};}
