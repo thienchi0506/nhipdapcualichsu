@@ -6,7 +6,7 @@ import { createEncounter, stepEncounter, encounterSnapshot, applyActorDamage } f
 import { createArmy, stepArmy, armySnapshot, issueArmyCommand, queueConvoy, queueArmyJob, bridgeArmyCombat, observeCommander } from '../sim/army.js';
 import { projectGame,captureGame,restoreGame,collectGameEvents } from '../save/game-state.js';
 import { encodeSave } from '../save/repository.js';
-import { recordFailedAttempt } from '../save/attempt-resolution.js';
+import { recordFailedAttempt, recordAttemptResolution } from '../save/attempt-resolution.js';
 
 export function createSession({ root, scene, data, heroId, vesselType = 'light', scenarioId = 'harbor', persistence = null, onPause, onCamera, onClock, onStatus = () => {}, onOutcome = () => {}, onFault = () => {} }) {
   const scope = new AbortController();
@@ -65,14 +65,14 @@ export function createSession({ root, scene, data, heroId, vesselType = 'light',
       }
       stepEncounter(state.combat,state,{...input.read(),actions:actions.filter(a=>!riverActions.includes(a)&&!armyActions.includes(a)),riverActions});
       if(state.army&&state.combat.phase==='active'){stepArmy(state.army,state);observeCommander(state.army,state.combat.actors.find(a=>a.id===state.combat.controlledId));bridgeArmyCombat(state.army,state.combat,applyActorDamage);}
-      if(persistence)recordFailedAttempt(state,persistence);
+      if(persistence){if(state.combat.phase==='failed_command')recordFailedAttempt(state,persistence);else if(state.combat.phase!=='active')recordAttemptResolution(state,persistence,state.combat.phase);}
       if(oldEpoch!==state.combat.controlEpoch||oldHelm!==state.combat.helm||oldMap!==state.combat.mapOpen){input.clear();pending.length=0;}
       if(persistence&&(state.tick%150===0||state.journalPending.length||state.combat.journalPending.length||state.army?.journalPending.length||encodeSave(projectGame(state,persistence.campaignId))!==committedFingerprint)){needsSave=true;return false;}
     });
     backlogMs = result.backlogMs;
     // A restored terminal checkpoint may be rendered before the clock advances
     // its first tick; settle it before publishing an outcome in that case too.
-    if(persistence&&recordFailedAttempt(state,persistence))needsSave=true;
+    if(persistence&&(recordFailedAttempt(state,persistence)||(state.combat.phase!=='active'&&recordAttemptResolution(state,persistence,state.combat.phase))))needsSave=true;
     if(needsSave&&!(await persistTick()))return;
     if(disposed)return;
     scene.render(state, previous, result.alpha); frames++;

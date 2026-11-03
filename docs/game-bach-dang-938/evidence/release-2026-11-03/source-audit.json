@@ -1,0 +1,259 @@
+{
+  "head": "03aedcd8d85924a35329580774e53d117870284a",
+  "protected": [
+    {
+      "path": "dang-nhap.html",
+      "baselineHash": "f811ddce8982fc1435aea70c0814c181900ce93dbff800e2cb52307b484b310b",
+      "currentHash": "f811ddce8982fc1435aea70c0814c181900ce93dbff800e2cb52307b484b310b",
+      "same": true
+    },
+    {
+      "path": "firebase-config.js",
+      "baselineHash": "8ed26e18a860043a282f964f34d5479d09d70f3684eaea47e1c68bd5ad2ab4fd",
+      "currentHash": "8ed26e18a860043a282f964f34d5479d09d70f3684eaea47e1c68bd5ad2ab4fd",
+      "same": true
+    },
+    {
+      "path": "firestore.rules",
+      "baselineHash": "11423cc238ea8fa06fec80a349267b9aff41b4af7656b4b0f434404b6745f961",
+      "currentHash": "11423cc238ea8fa06fec80a349267b9aff41b4af7656b4b0f434404b6745f961",
+      "same": true
+    },
+    {
+      "path": "game-runtime.css",
+      "baselineHash": "b4ca932c94cba96a2883f6235f1c7efe76f4f97a5353664b60ccf959e29dc9f3",
+      "currentHash": "b4ca932c94cba96a2883f6235f1c7efe76f4f97a5353664b60ccf959e29dc9f3",
+      "same": true
+    },
+    {
+      "path": "game-runtime.js",
+      "baselineHash": "f28ca1cd322d9c59c4c254d0f1f7266614604f4b08cf26f7f8cd84be28150e9a",
+      "currentHash": "f28ca1cd322d9c59c4c254d0f1f7266614604f4b08cf26f7f8cd84be28150e9a",
+      "same": true
+    },
+    {
+      "path": "game-upgrades-2d.js",
+      "baselineHash": "b596cf3e4547191df96a579f3e395bdd97d28e6fe48f47b6606f6a2c86686b29",
+      "currentHash": "b596cf3e4547191df96a579f3e395bdd97d28e6fe48f47b6606f6a2c86686b29",
+      "same": true
+    },
+    {
+      "path": "game-upgrades-3d.js",
+      "baselineHash": "e92173bea808d667d5bb6dbe11a11adc07a835933c33d968227dceb5dc75d7df",
+      "currentHash": "e92173bea808d667d5bb6dbe11a11adc07a835933c33d968227dceb5dc75d7df",
+      "same": true
+    },
+    {
+      "path": "grade10-exams.js",
+      "baselineHash": "2fa0a261ca8d3f6ca94004b3e667906895672beeb6e3961b84c30dc56a0ee471",
+      "currentHash": "2fa0a261ca8d3f6ca94004b3e667906895672beeb6e3961b84c30dc56a0ee471",
+      "same": true
+    },
+    {
+      "path": "grade11-exams.js",
+      "baselineHash": "fa1ff1428276f0dbca5ed65c6771a16313108e5a24d14eeb33052c834d0cf413",
+      "currentHash": "fa1ff1428276f0dbca5ed65c6771a16313108e5a24d14eeb33052c834d0cf413",
+      "same": true
+    },
+    {
+      "path": "index.html",
+      "baselineHash": "f043d75787f55982815fb2a90f916ed1bb289a0ecba32fcdeadfed50d8dc7fbb",
+      "currentHash": "f043d75787f55982815fb2a90f916ed1bb289a0ecba32fcdeadfed50d8dc7fbb",
+      "same": true
+    },
+    {
+      "path": "models/model_coc_bach_dang_data.js",
+      "baselineHash": "54c97c7419a42dbe9742e87f6448dfb641a2adf5ba5ec7f80c35f31043cf8df4",
+      "currentHash": "54c97c7419a42dbe9742e87f6448dfb641a2adf5ba5ec7f80c35f31043cf8df4",
+      "same": true
+    },
+    {
+      "path": "models/model_trong_dong_data.js",
+      "baselineHash": "6e63d528a61ca3cd365f452abe10bb041fbfcbdad6a2398f352b27275f7c0a1c",
+      "currentHash": "6e63d528a61ca3cd365f452abe10bb041fbfcbdad6a2398f352b27275f7c0a1c",
+      "same": true
+    },
+    {
+      "path": "quan-anh-hoi.html",
+      "baselineHash": "afccb062e3a4280e32ecba8ff82aeab175984f7f931a12b02db898ae93b83262",
+      "currentHash": "afccb062e3a4280e32ecba8ff82aeab175984f7f931a12b02db898ae93b83262",
+      "same": true
+    },
+    {
+      "path": "sa-ban-3d.html",
+      "baselineHash": "cbbeb4ed8d23a1619eeb5b6bb4fe9df56b9af82c5eb72ad2d705cb8d86aea635",
+      "currentHash": "93c5740e69627c08311a4d29997a3e29f02f563196cd001c08b0dc5d12afd971",
+      "same": false
+    },
+    {
+      "path": "sa-ban-nhu-nguyet.html",
+      "baselineHash": "99490825ba6c1f2b16fe20b0dddb246047e6c88bc5a7518be42782c8fa407719",
+      "currentHash": "99490825ba6c1f2b16fe20b0dddb246047e6c88bc5a7518be42782c8fa407719",
+      "same": true
+    },
+    {
+      "path": "sa-ban.html",
+      "baselineHash": "7383881ffae5e8f4282fb6c9bd3fb58c7bca827c0c1f83a6fe9648018cbafeef",
+      "currentHash": "c4e73aadfd77e76d5b7640b3325e4c4537051bd4c21eb68815074731ab0e486e",
+      "same": false
+    },
+    {
+      "path": "sanh-game.html",
+      "baselineHash": "4d31e2e2283999e88efc32cff1b8bba40100c4ea36bea03820bbc390dddefd96",
+      "currentHash": "4d31e2e2283999e88efc32cff1b8bba40100c4ea36bea03820bbc390dddefd96",
+      "same": true
+    },
+    {
+      "path": "site-music.js",
+      "baselineHash": "707e185e7118b6073b8db6dc979f9c2dec551c75da967b2a4e90ece577f3dcf8",
+      "currentHash": "707e185e7118b6073b8db6dc979f9c2dec551c75da967b2a4e90ece577f3dcf8",
+      "same": true
+    },
+    {
+      "path": "storage.rules",
+      "baselineHash": "eb96fa68f841ce20a3e95eb35b572bea0c35d4d339311fd38f76267fcd1791c1",
+      "currentHash": "eb96fa68f841ce20a3e95eb35b572bea0c35d4d339311fd38f76267fcd1791c1",
+      "same": true
+    },
+    {
+      "path": "tang-thu-cac.html",
+      "baselineHash": "5950f826efba5a6418137dfdd57db82939936bc106e85de96ab66e41aaeaa50a",
+      "currentHash": "5950f826efba5a6418137dfdd57db82939936bc106e85de96ab66e41aaeaa50a",
+      "same": true
+    },
+    {
+      "path": "test_script_0.js",
+      "baselineHash": "4135dafe08c83650a6d02db932438304a8d59866f09f12562f52abaab6f3454d",
+      "currentHash": "4135dafe08c83650a6d02db932438304a8d59866f09f12562f52abaab6f3454d",
+      "same": true
+    },
+    {
+      "path": "thao-truong.html",
+      "baselineHash": "6d57319ca40468510ea3c3c065923a72ab6d99cfb005f76efb3c4cbaa1ef1642",
+      "currentHash": "6d57319ca40468510ea3c3c065923a72ab6d99cfb005f76efb3c4cbaa1ef1642",
+      "same": true
+    },
+    {
+      "path": "tran-do-nhap-vai.html",
+      "baselineHash": "4bab8dbb6e97ecef52e8868d9ad20082d35039d1311cfd6f8c877df154d2c6c7",
+      "currentHash": "4bab8dbb6e97ecef52e8868d9ad20082d35039d1311cfd6f8c877df154d2c6c7",
+      "same": true
+    },
+    {
+      "path": "trang-chinh.html",
+      "baselineHash": "8fa60d8c5e2289d5b73c5e84c04632bb7971cba0ba7d1eea81ad626a4bb49d56",
+      "currentHash": "5acb7a3e2cb4d25e2b64851f6d9de2d9d69ba8c50a39e06ccbc698e8186d1948",
+      "same": false
+    }
+  ],
+  "protectedSame": 21,
+  "protectedTotal": 24,
+  "changedSincePriorHead": [
+    "game-bach-dang-938/index.html",
+    "game-bach-dang-938/src/app/bootstrap.js",
+    "game-bach-dang-938/src/presentation/scene.js",
+    "game-bach-dang-938/src/sim/army.js",
+    "game-bach-dang-938/styles/game.css",
+    "game-bach-dang-938/tests/performance.html"
+  ],
+  "vendorChecks": [
+    {
+      "file": "three.module.js",
+      "size": 1140878,
+      "hashMatches": true,
+      "license": "MIT"
+    },
+    {
+      "file": "LICENSE",
+      "size": 1081,
+      "hashMatches": true,
+      "license": "MIT"
+    }
+  ],
+  "networkReferences": [
+    {
+      "file": "game-bach-dang-938/src/app/bootstrap.js",
+      "line": 145,
+      "text": "const svg=byId('map-view'),ns='http://www.w3.org/2000/svg',map=activeMapConfig.map;"
+    },
+    {
+      "file": "game-bach-dang-938/src/app/loader.js",
+      "line": 8,
+      "text": "const response = await fetch(new URL('../../data/shell-scene.json', import.meta.url), { signal });"
+    },
+    {
+      "file": "game-bach-dang-938/src/app/loader.js",
+      "line": 12,
+      "text": "const riverResponse = await fetch(new URL('../../data/river-config.json', import.meta.url), { signal });"
+    },
+    {
+      "file": "game-bach-dang-938/src/app/loader.js",
+      "line": 15,
+      "text": "const actorResponse = await fetch(new URL('../../data/character-config.json', import.meta.url), { signal });"
+    },
+    {
+      "file": "game-bach-dang-938/src/app/loader.js",
+      "line": 23,
+      "text": "const renderer = await import('../presentation/scene.js');"
+    },
+    {
+      "file": "game-bach-dang-938/src/save/firebase-bridge.js",
+      "line": 3,
+      "text": "const SDK='https://www.gstatic.com/firebasejs/10.12.2/';"
+    },
+    {
+      "file": "game-bach-dang-938/src/save/firebase-bridge.js",
+      "line": 16,
+      "text": "app:await import(`${SDK}firebase-app.js`),"
+    },
+    {
+      "file": "game-bach-dang-938/src/save/firebase-bridge.js",
+      "line": 17,
+      "text": "auth:await import(`${SDK}firebase-auth.js`),"
+    },
+    {
+      "file": "game-bach-dang-938/src/save/firebase-bridge.js",
+      "line": 18,
+      "text": "firestore:await import(`${SDK}firebase-firestore.js`),"
+    }
+  ],
+  "runtimeDataFiles": [
+    "character-config.json",
+    "river-config.json",
+    "shell-scene.json"
+  ],
+  "runtimeHashes": {
+    "game-bach-dang-938/index.html": "6fdc7f7e19480b3bf9c9a9c02cb91b4c8abd69f4809d84acd0f18a59c543664f",
+    "game-bach-dang-938/data/character-config.json": "59d498a6abda7aecb43ea9eb354a80a7a10c1f503935149baf21c97bfeecf5cc",
+    "game-bach-dang-938/data/river-config.json": "e05e496ba21e5fe565f7f94e987dda80c3d0d4568878f1330dd57b0276f36182",
+    "game-bach-dang-938/data/shell-scene.json": "742045b9b4075c45161aeb96ce9e0563a8d66f8448868b4373c3f8b62a1b75e9",
+    "game-bach-dang-938/styles/game.css": "b9655da8ce4b262da3e02b9326774e2b4ff36a1ee5775f71040e05fe52ab8933",
+    "game-bach-dang-938/src/app/bootstrap.js": "0d952cd665bbbb826ff1847bf9ec03b8e1c515e0835ac5605db193ea75289c7c",
+    "game-bach-dang-938/src/app/diagnostics.js": "ab94c3ced23868230840106fdcbc1715abbd18841d16371d166b644a0e4d1e46",
+    "game-bach-dang-938/src/app/input.js": "92e1bd46caf3ddd63a7d0289c1fbd95abe08f723dd01b76a0dc71471a9b3b28d",
+    "game-bach-dang-938/src/app/loader.js": "03b91af3b7c0463fe811292873295de8bcf82cc8e31714a602c1a53293fe9b17",
+    "game-bach-dang-938/src/app/preferences.js": "58cc806c04fce036824cbdd4d3d4a705b5c456ddf9690e5fae26f62ab5893d11",
+    "game-bach-dang-938/src/app/session.js": "c1a73ed1ada45fc51f2ab74f6d72f7832404a1e9bb76bc7bf6c73ea191b97827",
+    "game-bach-dang-938/src/core/clock.js": "6685ba1b819a267afa0535a83bf562816981088cb678d418dd78896f105c4224",
+    "game-bach-dang-938/src/presentation/scene.js": "501d4c3cafd5ee3d3f770306eea25698ecf70895affddeaed37e8d8213f3652c",
+    "game-bach-dang-938/src/save/attempt-resolution.js": "ac9fa5bab42cbc71ae2d1798de31ac9d55d9c664f7a3ae90fc54e7ddee44d3d3",
+    "game-bach-dang-938/src/save/controller.js": "9b7f695c6b9bdc0694acc58b844faea48a9ddf917de1d908910c16618001da6d",
+    "game-bach-dang-938/src/save/firebase-bridge.js": "342420b4d29d85b4b12d0c3304c833984f1155009f0b4e4055590c874a58d4f8",
+    "game-bach-dang-938/src/save/game-state.js": "8cf79b1e0815fb15a370f1f2439fbece02e9c5753c0b5b4893b1431dda162eeb",
+    "game-bach-dang-938/src/save/prepare-session.js": "b3b5fd2fca2c0c00b128b6e8a6d3e58517be46757dee05d8f2be8d8979f57f42",
+    "game-bach-dang-938/src/save/repository.js": "d3b0d7d044845956cb0422af3f195e37f964c914e0ca5baa0f37a8d3d31f0931",
+    "game-bach-dang-938/src/save/retry.js": "680e345e90f19e505db0811c06516f84dae90c352f64b97db4b326a2828fc4e5",
+    "game-bach-dang-938/src/sim/actor-space.js": "32ac41548604318adc97f9718056f06ca30f08ddd374a7ecffc28063f9e99adc",
+    "game-bach-dang-938/src/sim/army-config.js": "7d89e02cc5594304d6232eec2a4f844ee6cb78326804aedb836b9bfaec96e310",
+    "game-bach-dang-938/src/sim/army.js": "99cbff7a14475d43510e83cc1825208134c89b7b21614202d1862095a56af8c1",
+    "game-bach-dang-938/src/sim/collision.js": "17886b45bec34bf4078914a0678776ee6e23a8a5ad5c99f60c33e08db224f046",
+    "game-bach-dang-938/src/sim/encounter.js": "419ed3d7a119e6fab25e21f7186e5e7f824eaede5399a880da7dec6be06ac29c",
+    "game-bach-dang-938/src/sim/river.js": "4781c7c8eeb6567691194da4d8a78de17a49a6b182a5d0e2ffb4989884ca1740",
+    "game-bach-dang-938/src/sim/vessel.js": "f4fb45d737808096c94999afa8df53b760511fd68022d6a871fe95d3d149ff62"
+  },
+  "notes": [
+    "Comparison baseline is pre-new-game working tree; homepage is expected to differ by its new entry.",
+    "Network scan is a code inventory, not an assessment of every legacy asset license.",
+    "No production rules or remote deployed version queried."
+  ]
+}

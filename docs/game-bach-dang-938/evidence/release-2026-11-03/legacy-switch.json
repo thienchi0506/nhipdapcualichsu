@@ -1,0 +1,40 @@
+[
+  {
+    "size": [
+      1365,
+      900
+    ],
+    "enteredNhuNguyet2d": 1,
+    "afterSelectingBachDang2d": {
+      "stage": 2,
+      "title": "⚔️ TRẬN ĐỒ NHẬP VAI\n• Hồi 2: Sa Bàn Bạch Đằng Thực Chiến"
+    },
+    "nhuNguyetCallsPerClick": 1,
+    "nhuNguyet3d": {
+      "active": true,
+      "campaign": 2,
+      "rafts": 6,
+      "calls": 311
+    },
+    "exceptions": []
+  },
+  {
+    "size": [
+      390,
+      844
+    ],
+    "enteredNhuNguyet2d": 1,
+    "afterSelectingBachDang2d": {
+      "stage": 2,
+      "title": "⚔️ TRẬN ĐỒ NHẬP VAI\n• Hồi 2: Sa Bàn Bạch Đằng Thực Chiến"
+    },
+    "nhuNguyetCallsPerClick": 1,
+    "nhuNguyet3d": {
+      "active": true,
+      "campaign": 2,
+      "rafts": 6,
+      "calls": 245
+    },
+    "exceptions": []
+  }
+]

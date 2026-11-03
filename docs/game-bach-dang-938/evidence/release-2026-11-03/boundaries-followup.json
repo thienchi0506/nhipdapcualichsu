@@ -1,0 +1,234 @@
+{
+  "two_real_windows": {
+    "checks": [
+      {
+        "name": "Two real windows share one exclusive IndexedDB lease",
+        "passed": true
+      },
+      {
+        "name": "Second window reads the same committed casualty",
+        "passed": true
+      },
+      {
+        "name": "A stale window cannot write after lease takeover",
+        "passed": true
+      }
+    ],
+    "passed": 3,
+    "total": 3
+  },
+  "durable_local_reload_and_offline": {
+    "before": {
+      "tick": 19,
+      "x": -6.958938595704766,
+      "z": 26.028970243430717,
+      "yaw": 0,
+      "vx": 0.10924650727370501,
+      "vz": 0.08227890585977665,
+      "yawRate": 0,
+      "vesselType": "light",
+      "scenarioId": "combat",
+      "cargoKg": 600,
+      "floodKg": 0,
+      "timber": 40,
+      "anchor": false,
+      "pumping": false,
+      "recovering": false,
+      "liftM": 0,
+      "components": {
+        "hull": 100,
+        "rudder": 100,
+        "oars": 100,
+        "rigging": 100
+      },
+      "readings": {
+        "waterY": 1.399824074074074,
+        "tideRate": -0.0002777777777777768,
+        "draft": 0.501,
+        "bedY": -3,
+        "depth": 4.399824074074074,
+        "clearance": 3.898824074074074,
+        "current": {
+          "x": 0.1956733579673755,
+          "z": 0.27307139410849146
+        },
+        "speedMps": 0.13676482625655498,
+        "inRepairZone": true,
+        "massKg": 3420
+      },
+      "stuck": null,
+      "repairJob": null,
+      "warnings": [],
+      "eventCounts": {},
+      "events": []
+    },
+    "afterUnload": {
+      "tick": 41,
+      "x": -6.852414761053665,
+      "z": 26.120234657009235,
+      "yaw": 0,
+      "vx": 0.16818634287994474,
+      "vz": 0.15765284244972927,
+      "yawRate": 0,
+      "vesselType": "light",
+      "scenarioId": "combat",
+      "cargoKg": 0,
+      "floodKg": 0,
+      "timber": 40,
+      "anchor": false,
+      "pumping": false,
+      "recovering": false,
+      "liftM": 0,
+      "components": {
+        "hull": 100,
+        "rudder": 100,
+        "oars": 100,
+        "rigging": 100
+      },
+      "readings": {
+        "waterY": 1.3996203703703702,
+        "tideRate": -0.0002777777777777768,
+        "draft": 0.47100000000000003,
+        "bedY": -3,
+        "depth": 4.3996203703703705,
+        "clearance": 3.9286203703703704,
+        "current": {
+          "x": 0.1958178674399873,
+          "z": 0.2740568003882988
+        },
+        "speedMps": 0.23052345794692888,
+        "inRepairZone": true,
+        "massKg": 2820
+      },
+      "stuck": null,
+      "repairJob": null,
+      "warnings": [
+        "Đã bỏ 600 kg hàng để giảm mớn. Hàng không tự quay lại trong lượt thử."
+      ],
+      "eventCounts": {
+        "CargoDiscarded": 1
+      },
+      "events": [
+        {
+          "id": "river:21:1",
+          "tick": 21,
+          "type": "CargoDiscarded",
+          "amountKg": 600
+        }
+      ]
+    },
+    "restored": {
+      "tick": 41,
+      "x": -6.852414761053665,
+      "z": 26.120234657009235,
+      "yaw": 0,
+      "vx": 0.16818634287994474,
+      "vz": 0.15765284244972927,
+      "yawRate": 0,
+      "vesselType": "light",
+      "scenarioId": "combat",
+      "cargoKg": 0,
+      "floodKg": 0,
+      "timber": 40,
+      "anchor": false,
+      "pumping": false,
+      "recovering": false,
+      "liftM": 0,
+      "components": {
+        "hull": 100,
+        "rudder": 100,
+        "oars": 100,
+        "rigging": 100
+      },
+      "readings": {
+        "waterY": 1.3996203703703702,
+        "tideRate": -0.0002777777777777768,
+        "draft": 0.47100000000000003,
+        "bedY": -3,
+        "depth": 4.3996203703703705,
+        "clearance": 3.9286203703703704,
+        "current": {
+          "x": 0.1958178674399873,
+          "z": 0.2740568003882988
+        },
+        "speedMps": 0.23052345794692888,
+        "inRepairZone": true,
+        "massKg": 2820
+      },
+      "stuck": null,
+      "repairJob": null,
+      "warnings": [
+        "Đã bỏ 600 kg hàng để giảm mớn. Hàng không tự quay lại trong lượt thử."
+      ],
+      "eventCounts": {
+        "CargoDiscarded": 1
+      },
+      "events": [
+        {
+          "id": "river:21:1",
+          "tick": 21,
+          "type": "CargoDiscarded",
+          "amountKg": 600
+        }
+      ]
+    },
+    "reopened": {
+      "tick": 112,
+      "x": -6.405169481484713,
+      "z": 26.63631003465541,
+      "yaw": 0,
+      "vx": 0.1956984521068539,
+      "vz": 0.25332785242304234,
+      "yawRate": 0,
+      "vesselType": "light",
+      "scenarioId": "combat",
+      "cargoKg": 0,
+      "floodKg": 0,
+      "timber": 40,
+      "anchor": false,
+      "pumping": false,
+      "recovering": false,
+      "liftM": 0,
+      "components": {
+        "hull": 100,
+        "rudder": 100,
+        "oars": 100,
+        "rigging": 100
+      },
+      "readings": {
+        "waterY": 1.398962962962963,
+        "tideRate": -0.0002777777777777768,
+        "draft": 0.47100000000000003,
+        "bedY": -3,
+        "depth": 4.398962962962963,
+        "clearance": 3.9279629629629627,
+        "current": {
+          "x": 0.1965895677076102,
+          "z": 0.278286799584202
+        },
+        "speedMps": 0.32011386250877877,
+        "inRepairZone": true,
+        "massKg": 2820
+      },
+      "stuck": null,
+      "repairJob": null,
+      "warnings": [
+        "Đã bỏ 600 kg hàng để giảm mớn. Hàng không tự quay lại trong lượt thử."
+      ],
+      "eventCounts": {
+        "CargoDiscarded": 1
+      },
+      "events": [
+        {
+          "id": "river:21:1",
+          "tick": 21,
+          "type": "CargoDiscarded",
+          "amountKg": 600
+        }
+      ]
+    },
+    "sameCargoAfterReload": true,
+    "offlineTicksAdvanced": true,
+    "offlineFault": null
+  }
+}

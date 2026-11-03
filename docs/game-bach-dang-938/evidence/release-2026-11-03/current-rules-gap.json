@@ -1,0 +1,6 @@
+{
+  "repositoryRulesDenyOwnerCreate": true,
+  "repositoryRulesDenyOwnerGet": true,
+  "productionRulesInspected": false,
+  "meaning": "Game fragment is not installed in the repository production rules file."
+}

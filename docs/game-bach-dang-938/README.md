@@ -1,10 +1,10 @@
 # Bạch Đằng 938 — Chiến dịch nhập vai
 
-**Hồ sơ dự án · phiên bản 0.6 · 02/11/2026**
+**Hồ sơ dự án · phiên bản 0.8 · 03/11/2026**
 
-**Trạng thái:** Đã có khung riêng, mô phỏng sông và lớp nhân vật/chiến đấu trực tiếp: đi trên boong chuyển động, áp mạn, cung/cận chiến, sức bền, bơi/cứu và tiếp quản. Đã chạy chuỗi lái → bản đồ → áp mạn → nhảy → đánh → gục/tiếp quản bằng input thật cục bộ. Chưa có chương chiến dịch hoàn chỉnh, journal/lưu chiến dịch hoặc benchmark dài. Chưa sửa Firebase production/phát hành. Xem [bàn giao chiến đấu](combat-handoff.md), [luật nhân vật](character-model.md), [bàn giao sông nước](river-handoff.md) và [chặng khung trước](shell-handoff.md).
+**Trạng thái hiện tại:** Có sandbox riêng với sông nước, nhân vật/chiến đấu, tổ quân/hậu cần, journal và lưu/retry giữ hậu quả; đã kiểm thử đồng bộ bằng emulator. Đã chạy lại chuỗi lái → bản đồ → áp mạn → nhảy → đánh → gục/tiếp quản bằng input thật cục bộ. **Chưa đủ điều kiện phát hành chương chiến dịch hoàn chỉnh**: thiếu chương/thắng/rút lui, chưa xác minh Rules production, chưa qua gate hiệu năng 400+. Xem [kiểm định hiện tại](release-audit.md), [bàn giao lưu](save-handoff.md), [bàn giao chiến đấu](combat-handoff.md) và [bàn giao sông nước](river-handoff.md).
 
-**Bổ sung 0.6:** Có bản thử tổ quân, fog, hậu cần và đo quy mô ngắn tới 480 quân mỗi bên. Xem [bàn giao quân đội](army-handoff.md); chưa có journal, di tản thương binh hoặc benchmark dài/thiết bị thật, nên chưa qua gate chiến dịch/400+.
+**Bổ sung 0.8:** Kiểm định lại commit `03aedcd`, không sửa mã chạy: 197/197 core/lưu, 56/56 fixture cơ chế game cũ, 20/20 Rules ghép, 15/15 SDK emulator, 7/7 Auth emulator và 3/3 hai cửa sổ. Có số đo mới tới 480 quân mỗi bên; chưa có di tản thương binh đầy đủ, benchmark dài hoặc thiết bị thật. Các lỗi nền chọn nhầm trận 2D, khởi tạo 3D hai lần và đề chuẩn thiếu câu vẫn tái hiện. Không diễn giải số test đạt thành hoàn tất toàn bộ game.
 
 Thư mục này là hồ sơ chuẩn cho game mới. Quy định trong hồ sơ người dùng gửi ngày 01/11/2026 có ưu tiên cao hơn các ý tưởng game Bạch Đằng cũ.
 
@@ -102,6 +102,9 @@ Game mới **không dùng lại** bộ luật của ý tưởng trước: HP c�
 | 4. Chương mẫu — chiến đấu | Mệnh lệnh, AI đồng đội, va chạm, hư hại thuyền, bắn cung, đổ bộ và cận chiến. | **Đã bàn giao sandbox điều khiển/chiến đấu/tiếp quản; chưa phải chương hoàn chỉnh.** |
 | 5. Chương mẫu — chỉ huy/hậu cần | Sương mù, tuyến tiếp tế, sửa chữa/cứu thương, ngưỡng tổn thất, nhân sự và hậu quả. | **Đã bàn giao sandbox tổ quân, fog và hậu cần; di tản, kết toán và gate hiệu năng chưa hoàn tất.** |
 | 6. Hoàn thiện và kiểm chứng | Soak/hồi quy/hiệu năng/mỹ thuật/độ chính xác; cloud chỉ xét bật ở chặng riêng sau Rules emulator, không chặn local save. | **Đã khảo sát UX (bước 10), sửa lỗi UI/camera và đo trước/sau (bước 11).** Chương hoàn chỉnh, mỹ thuật/âm thanh cuối và gate hiệu năng 400/480 chưa đạt; xem [bàn giao](optimization-handoff.md). |
+| 7. Kiểm định phát hành | Đối chiếu yêu cầu, mã và hành vi mới quan sát; không sửa rộng hoặc deploy. | **Hoàn tất kiểm định 03/11/2026.** Xem [kết luận, lỗi bắt buộc và giới hạn](release-audit.md). |
+| 8. Sửa cuối và Chuẩn bị phát hành | Khắc phục triệt để RC-01 (thắng/rút), RC-04 (chuyển trận 2D), RC-06 (gọi đúp 3D); kiểm thử hồi quy 197/197 core và 56/56 game cũ. | **Hoàn tất sửa lỗi & đóng mốc kiểm thử.** Xem [hồ sơ khắc phục](release-candidate-fixes.md). |
+| 9. Hướng dẫn và Hồ sơ bàn giao | Tài liệu vận hành, điều khiển PC/mobile, quy tắc thương vong, cấu trúc mô-đun, danh mục tính năng hiện có và chưa có. | **Hoàn tất bàn giao.** Xem [hướng dẫn và hồ sơ](user-guide-and-handoff.md). |
 
 Chặng lưu đã bàn giao trong phạm vi engine hiện có. Ngày 03/11/2026 đã tiếp tục bước 10–11 theo yêu cầu mới: [kiểm tra trải nghiệm](ux-review.md), [sửa lỗi và đo tối ưu](optimization-handoff.md). 197/197 core/lưu và 82/82 kiểm tra UI/biên/pause bản đồ đã qua, có hash mô phỏng trước/sau. Các nút thắt tải/đợt chậm được giữ mở trong [gói Astra](astra-performance-handoff.md); dữ liệu nội dung và chương 15–25 phút vẫn chưa triển khai. Không đánh dấu toàn bộ game hoàn tất. Việc áp dụng Rules production có hướng dẫn riêng trong [bàn giao lưu](save-handoff.md).
 

@@ -1,0 +1,43 @@
+{
+  "two_real_windows": {
+    "error": "{'exceptionId': 1, 'text': 'Uncaught (in promise) Error: POPUP_BLOCKED', 'lineNumber': 7, 'columnNumber': 26, 'scriptId': '28', 'stackTrace': {'callFrames': [{'functionName': 'runSaveTabTests', 'scriptId': '28', 'url': 'http://127.0.0.1:8765/game-bach-dang-938/tests/save-tabs-tests.js', 'lineNumber': 6, 'columnNumber': 25}, {'functionName': '', 'scriptId': '27', 'url': '', 'lineNumber': 0, 'columnNumber': 65}]}, 'exception': {'type': 'object', 'subtype': 'error', 'className': 'Error', 'description': 'Error: POPUP_BLOCKED\\n    at Module.runSaveTabTests (http://127.0.0.1:8765/game-bach-dang-938/tests/save-tabs-tests.js:7:26)\\n    at <anonymous>:1:66', 'objectId': '4493889489190251586.3.1'}}",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\release-2026-11-03\\verify_boundaries.py\", line 10, in run\n    try:out[name]=fn();print('OBSERVED '+name,flush=True)\n                  ^^^^\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\release-2026-11-03\\verify_boundaries.py\", line 16, in tabs\n    return b.evaluate(\"import('/game-bach-dang-938/tests/save-tabs-tests.js').then(m=>m.runSaveTabTests())\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\audit_capture.py\", line 183, in evaluate\n    raise RuntimeError(result['exceptionDetails'])\nRuntimeError: {'exceptionId': 1, 'text': 'Uncaught (in promise) Error: POPUP_BLOCKED', 'lineNumber': 7, 'columnNumber': 26, 'scriptId': '28', 'stackTrace': {'callFrames': [{'functionName': 'runSaveTabTests', 'scriptId': '28', 'url': 'http://127.0.0.1:8765/game-bach-dang-938/tests/save-tabs-tests.js', 'lineNumber': 6, 'columnNumber': 25}, {'functionName': '', 'scriptId': '27', 'url': '', 'lineNumber': 0, 'columnNumber': 65}]}, 'exception': {'type': 'object', 'subtype': 'error', 'className': 'Error', 'description': 'Error: POPUP_BLOCKED\\n    at Module.runSaveTabTests (http://127.0.0.1:8765/game-bach-dang-938/tests/save-tabs-tests.js:7:26)\\n    at <anonymous>:1:66', 'objectId': '4493889489190251586.3.1'}}\n"
+  },
+  "durable_local_reload_and_offline": {
+    "error": "Timed out: !!document.getElementById('bd938-next')&&document.readyState==='complete'",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\release-2026-11-03\\verify_boundaries.py\", line 10, in run\n    try:out[name]=fn();print('OBSERVED '+name,flush=True)\n                  ^^^^\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\release-2026-11-03\\verify_boundaries.py\", line 34, in local_save\n    b.click('.card--sa-ban a[href=\"game-bach-dang-938/index.html\"]');wait(b,\"!!document.getElementById('bd938-next')&&document.readyState==='complete'\")\n                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\ux-2026-11-02\\review_common.py\", line 45, in wait\n    raise RuntimeError('Timed out: ' + expression)\nRuntimeError: Timed out: !!document.getElementById('bd938-next')&&document.readyState==='complete'\n"
+  },
+  "library_stable_pointer_target": {
+    "closedOnFirstClick": [
+      true,
+      true,
+      true
+    ],
+    "typed": "WASD Space",
+    "exceptions": []
+  },
+  "original_login_ui": {
+    "emptyValidation": {
+      "email": true,
+      "password": true,
+      "disabled": false
+    },
+    "passwordToggle": true,
+    "registrationTab": true,
+    "newGameResources": [],
+    "note": "No real login submitted; separate emulator tests exercise authentication."
+  },
+  "missing_asset_recovery": {
+    "failureState": "ERROR",
+    "cleanup": {
+      "state": "SHELL",
+      "activeLoops": 0,
+      "activeLoads": 0,
+      "sessionListeners": 0,
+      "renderers": 0,
+      "geometries": 0,
+      "materials": 0,
+      "canvases": 0
+    }
+  }
+}

@@ -3452,7 +3452,7 @@
                     <p class="card-desc">
                         Phòng tuyến chiến lũy tre ven sông của Thái úy Lý Thường Kiệt. Vang vọng bài thơ thần Nam Quốc Sơn Hà đập tan 10 vạn đại quân Tống bên bờ sông Cầu.
                     </p>
-                    <button class="btn-enter-campaign" id="btn-enter-campaign-2" style="background: linear-gradient(135deg, #27AE60, #1E8449); color: #fff; cursor: pointer; font-weight: 700; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);" onclick="chuyenSangChienDichNhuNguyet()">
+                    <button class="btn-enter-campaign" id="btn-enter-campaign-2" style="background: linear-gradient(135deg, #27AE60, #1E8449); color: #fff; cursor: pointer; font-weight: 700; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);" onclick="chuyenSangChienDichNhuNguyet(event); event.stopPropagation();">
                         <span>⚔️</span> <span>TIẾN VÀO NHƯ NGUYỆT 1077</span>
                     </button>
                 </article>
@@ -10274,7 +10274,8 @@
         // ===================================================================
         // CHUYỂN ĐỔI GIỮA CHIẾN DỊCH BẠCH ĐẰNG 938 VÀ NHƯ NGUYỆT 1077
         // ===================================================================
-        function chuyenSangChienDichNhuNguyet() {
+        function chuyenSangChienDichNhuNguyet(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
             HistoryGame.resetScene();
             try {
                 document.body.classList.add('gameplay-ui-active');

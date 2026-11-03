@@ -68,32 +68,34 @@ export function lineOfSight(world, river, from, to) {
 }
 
 export function applyActorDamage(world, targetId, amount, sourceId, causeId, melee = false, externalSource = null) {
-  const target = world.actors.find(a => a.id === targetId), source = world.actors.find(a => a.id === sourceId) || externalSource, c=world.config;
-  const key = `${causeId}:${targetId}`;
+  const tid = typeof targetId === 'object' ? targetId?.id : targetId;
+  const sid = typeof sourceId === 'object' ? sourceId?.id : sourceId;
+  const target = world.actors.find(a => a.id === tid), source = world.actors.find(a => a.id === sid) || externalSource, c=world.config;
+  const key = `${causeId}:${tid}`;
   if (!target || !alive(target) || world.damageKeys.includes(key)) return false;
   world.damageKeys.push(key);
-  if (target.action?.kind === 'dodge' && world.tick-target.action.start < ticks(c,c.dodge.evadeWindowS)) { event(world,'Evaded',{actorId:targetId,causeId}); return false; }
+  if (target.action?.kind === 'dodge' && world.tick-target.action.start < ticks(c,c.dodge.evadeWindowS)) { event(world,'Evaded',{actorId:tid,causeId}); return false; }
   const n = source ? direction(target,source) : {x:0,z:-1};
   const frontal = (-Math.sin(target.yaw)*n.x-Math.cos(target.yaw)*n.z)>0.1;
   if (target.guard && frontal && target.stamina >= c.defense.guardCost) {
     if (melee && world.tick-target.guardSince <= ticks(c,c.defense.parryWindowS) && exert(target,c.defense.parryCost,world)) {
       target.counterUntil = world.tick+ticks(c,c.defense.counterWindowS);
       if(source){source.stunUntil=world.tick+ticks(c,c.defense.stunS);source.action=null;}
-      event(world,'Parried',{actorId:targetId,sourceId,causeId}); return false;
+      event(world,'Parried',{actorId:tid,sourceId:sid,causeId}); return false;
     }
     target.stamina -= c.defense.guardCost;target.lastExertion=world.tick; amount *= c.defense.guardDamageFraction;
-    event(world,'Blocked',{actorId:targetId,sourceId,causeId});
+    event(world,'Blocked',{actorId:tid,sourceId:sid,causeId});
   } else if (target.guard && target.stamina < c.defense.guardCost) {
-    target.guard=false;target.stunUntil=world.tick+ticks(c,c.defense.stunS);event(world,'GuardBroken',{actorId:targetId});
+    target.guard=false;target.stunUntil=world.tick+ticks(c,c.defense.stunS);event(world,'GuardBroken',{actorId:tid});
   }
   const damage=amount*(1-c.defense.armorFraction);
   target.health=Math.max(0,target.health-damage);target.lastHitTick=world.tick;
   if(target.team==='friendly')world.defenseUntil=world.tick+ticks(c,5);
   if(source?.team==='enemy'||target.team==='enemy')world.provoked=true;
-  event(world,'Damage',{actorId:targetId,sourceId,damage,causeId});
+  event(world,'Damage',{actorId:tid,sourceId:sid,damage,causeId});
   if(target.health===0){
     target.mode=target.kind==='mainHero'?'wounded':'downed';target.wounds=(target.wounds||0)+1;target.action=null;target.guard=false;target.downTick=world.tick;target.rescue=null;
-    event(world,target.kind==='mainHero'?'HeroWounded':'ActorDowned',{actorId:targetId});
+    event(world,target.kind==='mainHero'?'HeroWounded':'ActorDowned',{actorId:tid});
     if(target.id===world.controlledId){world.helm=false;world.takeoverAt=world.tick+ticks(c,c.takeoverDelayS);notice(world,'Nhân vật đã gục. Sĩ quan dự bị đang tiếp quản…');}
   }
   return true;
@@ -403,6 +405,19 @@ export function stepEncounter(world,river,intent={}){
   }
   stepArrows(world,river,previous);
   if(world.selectedId){const target=selectedTarget(world,player);if(!target||distance(player,target)>armyDefaults.sight||!lineOfSight(world,river,player,target))world.selectedId=null;}
+  if(world.phase==='active'){
+    const enemies=world.actors.filter(a=>a.team==='enemy');
+    const armyEnemies=world.army?world.army.people.filter(p=>p.team==='enemy'):[];
+    if(enemies.length>0||armyEnemies.length>0){
+      const aliveActors=enemies.filter(alive).length;
+      const aliveSoldiers=armyEnemies.filter(p=>p.status==='active').length;
+      if(aliveActors===0&&aliveSoldiers===0){
+        world.phase='victory';
+        event(world,'Victory');
+        notice(world,'Toàn bộ lực lượng địch đã bị quét sạch. Chiến thắng vang dội!');
+      }
+    }
+  }
 }
 
 export function encounterSnapshot(world){return {tick:world.tick,controlledId:world.controlledId,controlEpoch:world.controlEpoch,helm:world.helm,mapOpen:world.mapOpen,phase:world.phase,selectedId:world.selectedId,takeoverAt:world.takeoverAt,enemyBoat:world.enemyBoat?{...world.enemyBoat}:null,actors:world.actors.map(a=>structuredClone(a)),projectiles:world.projectiles.map(a=>({...a})),eventCounts:{...world.eventCounts},events:world.events.map(e=>({...e})),message:world.tick<=world.messageUntil?world.message:''};}

@@ -73,3 +73,15 @@ V01/V02 đã bổ sung kích thước 320/360/375/390/430px và landscape 844×3
 Bổ sung nút tạm dừng ngay trong header bản đồ, kiểm tra pointer → pause đóng băng tick → tiếp tục → đóng bản đồ 15/15 tại năm kích thước. Tổng kiểm tra UI/biên/pause là 82/82; các trường hợp ngang ngắn còn kiểm cả chiều cao và vị trí nút trong viewport.
 
 N02/G201/G301/E03/I01/I03 kiểm lại qua click sau thoát game mới: hai game cũ vào trận/pause, phòng thi chọn/nộp/làm lại ở desktop/390px; thư viện mở/đóng bài và nhập phím đạt ở lượt kiểm bổ sung. Lưu cả lượt harness đóng thư viện chưa thành công, không sửa mã thư viện. Chưa chơi hết trận cũ hoặc kiểm production Firebase. UX01/chương 15–25 phút còn mở; 480 quân chưa qua gate hiệu năng, có số đo chậm và gói tái hiện Astra. Không dùng số draw calls giảm để tự đánh dấu FPS đạt.
+# Kiểm định lại 03/11/2026
+
+- [x] Đọc yêu cầu/mã tại `03aedcd` và chạy lại, không chỉ dùng báo cáo trước.
+- [x] Lối vào cũ/mới, phòng thi, kho kiến thức, UI đăng nhập và prefix GitHub Pages.
+- [x] Core/lưu 197/197; fixture cơ chế game cũ 56/56; Rules/SDK/Auth emulator 20/20, 15/15, 7/7; hai cửa sổ 3/3.
+- [x] Chơi trực tiếp tới tiếp quản, resize/focus, đa chạm/pointercancel; 5 vòng cleanup trong cùng document; lỗi tải/hủy tải.
+- [x] Ghi đo mới 50/100/200/400/480 mỗi bên, không giảm quân; kiểm tra render gần/xa/chất lượng không sửa state.
+- [ ] Chương hoàn chỉnh 15–25 phút, thắng/rút/hậu chiến: chưa triển khai.
+- [ ] Đồng bộ production và thiết bị thật: chưa xác minh, không tự triển khai.
+- [ ] Đóng lỗi nền và gate hiệu năng: RC-03/04/05/06 vẫn mở.
+
+Bằng chứng và quyết định phát hành trong [release-audit.md](release-audit.md). Các dấu hoàn tất ở đây chỉ chỉ việc kiểm tra trong phạm vi ghi rõ, không có nghĩa mọi tiêu chí sản phẩm đã đạt.

@@ -1,0 +1,7 @@
+{
+  "project": "demo-bd938-save",
+  "exitCode": 0,
+  "temporaryConfig": "C:\\Users\\THIENC~1\\AppData\\Local\\Temp\\bd938-release-emulator-x__vbb5o",
+  "productionAccess": false,
+  "rulesSource": "current firestore.rules + current game fragment"
+}

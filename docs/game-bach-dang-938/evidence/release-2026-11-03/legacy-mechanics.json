@@ -1,0 +1,356 @@
+[
+  {
+    "mode": "2d",
+    "campaign": 1,
+    "fixture": true,
+    "result": {
+      "checks": [
+        {
+          "name": "runtime-loaded",
+          "passed": true
+        },
+        {
+          "name": "start-is-idempotent",
+          "passed": true
+        },
+        {
+          "name": "pause-freezes-clock-and-tasks",
+          "passed": true
+        },
+        {
+          "name": "resume-runs-task-once",
+          "passed": false,
+          "details": {
+            "fired": 0
+          }
+        },
+        {
+          "name": "task-cancellation",
+          "passed": true
+        },
+        {
+          "name": "quality-and-accessibility",
+          "passed": true
+        },
+        {
+          "name": "canvas-has-rendered",
+          "passed": true
+        },
+        {
+          "name": "battle-has-selectable-units",
+          "passed": true,
+          "details": {
+            "campaign": 2
+          }
+        },
+        {
+          "name": "rapid-clicks-respect-cooldown",
+          "passed": true,
+          "details": {
+            "before": 0,
+            "after": 1
+          }
+        },
+        {
+          "name": "projectile-resolves-damage",
+          "passed": false,
+          "details": {
+            "before": 100,
+            "after": 100
+          }
+        },
+        {
+          "name": "zero-damage-is-not-replaced",
+          "passed": true,
+          "details": {
+            "before": 100,
+            "after": 100
+          }
+        }
+      ],
+      "passed": 9,
+      "total": 11
+    },
+    "exceptions": []
+  },
+  {
+    "mode": "2d",
+    "campaign": 2,
+    "fixture": true,
+    "result": {
+      "checks": [
+        {
+          "name": "runtime-loaded",
+          "passed": true
+        },
+        {
+          "name": "start-is-idempotent",
+          "passed": true
+        },
+        {
+          "name": "pause-freezes-clock-and-tasks",
+          "passed": true
+        },
+        {
+          "name": "resume-runs-task-once",
+          "passed": true,
+          "details": {
+            "fired": 1
+          }
+        },
+        {
+          "name": "task-cancellation",
+          "passed": true
+        },
+        {
+          "name": "quality-and-accessibility",
+          "passed": true
+        },
+        {
+          "name": "canvas-has-rendered",
+          "passed": true
+        },
+        {
+          "name": "battle-has-selectable-units",
+          "passed": true,
+          "details": {
+            "campaign": 1
+          }
+        },
+        {
+          "name": "rapid-clicks-respect-cooldown",
+          "passed": true,
+          "details": {
+            "before": 0,
+            "after": 1
+          }
+        },
+        {
+          "name": "projectile-resolves-damage",
+          "passed": true,
+          "details": {
+            "before": 120,
+            "after": 113
+          }
+        },
+        {
+          "name": "zero-damage-is-not-replaced",
+          "passed": true,
+          "details": {
+            "before": 113,
+            "after": 113
+          }
+        }
+      ],
+      "passed": 11,
+      "total": 11
+    },
+    "exceptions": []
+  },
+  {
+    "mode": "3d",
+    "campaign": 1,
+    "fixture": true,
+    "result": {
+      "checks": [
+        {
+          "name": "runtime-loaded",
+          "passed": true
+        },
+        {
+          "name": "start-is-idempotent",
+          "passed": true
+        },
+        {
+          "name": "pause-freezes-clock-and-tasks",
+          "passed": true
+        },
+        {
+          "name": "resume-runs-task-once",
+          "passed": true,
+          "details": {
+            "fired": 1
+          }
+        },
+        {
+          "name": "task-cancellation",
+          "passed": true
+        },
+        {
+          "name": "quality-and-accessibility",
+          "passed": true
+        },
+        {
+          "name": "renderer-drew-scene",
+          "passed": true,
+          "details": {
+            "frame": 136,
+            "calls": 128,
+            "triangles": 31518,
+            "points": 450,
+            "lines": 0
+          }
+        },
+        {
+          "name": "shader-time-installed",
+          "passed": true
+        },
+        {
+          "name": "campaign-unit-registration",
+          "passed": true,
+          "details": 17
+        },
+        {
+          "name": "bait-fleet-is-ready",
+          "passed": true
+        },
+        {
+          "name": "campaign-attack-hits-target",
+          "passed": true,
+          "details": {
+            "before": 25000,
+            "after": 24800
+          }
+        },
+        {
+          "name": "health-bar-normalized",
+          "passed": true,
+          "details": {
+            "width": "99.2%",
+            "expected": 99.2
+          }
+        },
+        {
+          "name": "surrendered-unit-ignores-damage",
+          "passed": true
+        },
+        {
+          "name": "all-enemies-resolved-produces-victory",
+          "passed": true,
+          "details": "THANG_TRAN"
+        },
+        {
+          "name": "victory-results-reachable",
+          "passed": true,
+          "details": true
+        },
+        {
+          "name": "old-scene-task-canceled",
+          "passed": true
+        },
+        {
+          "name": "other-campaign-hidden",
+          "passed": true
+        }
+      ],
+      "passed": 17,
+      "total": 17
+    },
+    "exceptions": []
+  },
+  {
+    "mode": "3d",
+    "campaign": 2,
+    "fixture": true,
+    "result": {
+      "checks": [
+        {
+          "name": "runtime-loaded",
+          "passed": true
+        },
+        {
+          "name": "start-is-idempotent",
+          "passed": true
+        },
+        {
+          "name": "pause-freezes-clock-and-tasks",
+          "passed": true
+        },
+        {
+          "name": "resume-runs-task-once",
+          "passed": true,
+          "details": {
+            "fired": 1
+          }
+        },
+        {
+          "name": "task-cancellation",
+          "passed": true
+        },
+        {
+          "name": "quality-and-accessibility",
+          "passed": true
+        },
+        {
+          "name": "renderer-drew-scene",
+          "passed": true,
+          "details": {
+            "frame": 111,
+            "calls": 196,
+            "triangles": 8166,
+            "points": 450,
+            "lines": 0
+          }
+        },
+        {
+          "name": "shader-time-installed",
+          "passed": true
+        },
+        {
+          "name": "campaign-unit-registration",
+          "passed": true,
+          "details": 11
+        },
+        {
+          "name": "campaign-attack-hits-target",
+          "passed": true,
+          "details": {
+            "before": 5000,
+            "after": 4050
+          }
+        },
+        {
+          "name": "health-bar-normalized",
+          "passed": true,
+          "details": {
+            "width": "81%",
+            "expected": 81
+          }
+        },
+        {
+          "name": "surrendered-unit-ignores-damage",
+          "passed": true
+        },
+        {
+          "name": "ambush-triggers-at-the-river-line",
+          "passed": true,
+          "details": {
+            "x": 23.925,
+            "ambushStarted": true
+          }
+        },
+        {
+          "name": "all-enemies-resolved-produces-victory",
+          "passed": true,
+          "details": "THANG_TRAN_NHU_NGUYET"
+        },
+        {
+          "name": "victory-results-reachable",
+          "passed": true,
+          "details": true
+        },
+        {
+          "name": "old-scene-task-canceled",
+          "passed": true
+        },
+        {
+          "name": "other-campaign-hidden",
+          "passed": true
+        }
+      ],
+      "passed": 17,
+      "total": 17
+    },
+    "exceptions": []
+  }
+]

@@ -379,6 +379,21 @@ export function stepArmyLogistics(army) {
 export function stepArmy(army, river) {
   army.tick=river.tick;army.waterY=river.readings.waterY;
   stepArmyPaths(army);stepArmyAI(army);stepArmyCombat(army);stepArmyLogistics(army);
+  if(river?.combat&&river.combat.phase==='active'){
+    const friendly=army.squads.filter(s=>s.team==='friendly');
+    const retreating=friendly.filter(s=>s.order?.type==='retreat');
+    if(retreating.length>0&&retreating.every(s=>s.status==='holding')){
+      river.combat.phase='tactical_retreat';
+      if(!river.campaignLedger)river.campaignLedger={chapterInstanceId:`campaign:${river.scenarioId||'combat'}`,missionResults:[]};
+      const attemptId=retreating[0].order?.id||'audit-retreat';
+      if(!river.campaignLedger.missionResults.some(r=>r.attemptId===attemptId)){
+        const result={chapterInstanceId:river.campaignLedger.chapterInstanceId,attemptId,outcome:'tactical_retreat',tick:river.tick};
+        river.campaignLedger.missionResults.push(result);
+        if(!Array.isArray(river.journalPending))river.journalPending=[];
+        river.journalPending.push({id:'attempt-resolution',type:'AttemptResolved',tick:river.tick,...result});
+      }
+    }
+  }
 }
 
 export function armySnapshot(army) {

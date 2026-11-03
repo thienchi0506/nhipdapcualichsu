@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "name": "Initial save reaches a real Firestore emulator transaction",
+      "passed": true
+    },
+    {
+      "name": "A second device imports the signed-in user save",
+      "passed": true
+    },
+    {
+      "name": "Death and consumption synchronize to the emulator",
+      "passed": true
+    },
+    {
+      "name": "Offline divergence is detected and the local branch is retained",
+      "passed": true
+    },
+    {
+      "name": "A different Firebase user cannot read the first user slot",
+      "passed": true
+    },
+    {
+      "name": "Retry cannot overwrite the committed death",
+      "passed": true
+    },
+    {
+      "name": "Full simulation checkpoint and casualty restore from emulator to a fresh device",
+      "passed": true
+    },
+    {
+      "name": "Interrupted chunk upload keeps pending local data and publishes no head",
+      "passed": true
+    },
+    {
+      "name": "Large save publishes a manifest only after all chunks upload",
+      "passed": true
+    },
+    {
+      "name": "A new device reconstructs Vietnamese and emoji content without corruption",
+      "passed": true
+    },
+    {
+      "name": "Chunked save restores 400 soldiers per side with stable casualty IDs",
+      "passed": true
+    },
+    {
+      "name": "Uploaded chunks are immutable and private to their account",
+      "passed": true
+    },
+    {
+      "name": "Retry after a chunked head commit does not advance the cloud twice",
+      "passed": true
+    },
+    {
+      "name": "Incomplete manifests are rejected rather than importing partial saves",
+      "passed": true
+    },
+    {
+      "name": "A device with an old wound imports a verified camp recovery from cloud",
+      "passed": true
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "largeSave": {
+    "soldiers": 800,
+    "payloadBytes": 1487033,
+    "chunks": 22,
+    "transportVersion": 2
+  }
+}

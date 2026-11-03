@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "name": "Bridge observes the existing real Firebase Auth emulator session",
+      "passed": true
+    },
+    {
+      "name": "Auth user can sync a local save using actual Firestore SDK",
+      "passed": true
+    },
+    {
+      "name": "Signing out retains the unsynced account-specific outbox",
+      "passed": true
+    },
+    {
+      "name": "Signed-out state cannot write the former user save",
+      "passed": true
+    },
+    {
+      "name": "A different authenticated emulator account cannot read the save",
+      "passed": true
+    },
+    {
+      "name": "Original user can resume the pending sync after signing back in",
+      "passed": true
+    },
+    {
+      "name": "Existing Firebase Auth session is restored in a new document",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "total": 7
+}

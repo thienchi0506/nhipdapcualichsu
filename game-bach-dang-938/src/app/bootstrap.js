@@ -179,7 +179,14 @@ function updateMap(combat,riverState,army){
 }
 function combatOutcome(combat){
   setState('RESULTS');
-  openDialog('results','Không còn sĩ quan dự bị',[ 'Nhân vật trung tâm và các sĩ quan dự bị đã mất khả năng tiếp tục. Lượt thử kết thúc.',saveHandle?'Kết quả đã được ghi. Về trại để xem người và vật tư có thể thu hồi trước khi trở lại chặng.':'Chế độ này không lưu; chơi lại tạo lượt thử mới.' ],saveHandle?[{label:'Về trại / Chơi lại',run:showRetryConfirmation},{label:'Xuất bản lưu',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]:[{label:'Chơi lại lượt thử',run:beginLoad},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);
+  const phase=combat?.phase||'failed_command';
+  if(phase==='victory'){
+    openDialog('results','Toàn Thắng Trận Đồ',['Toàn bộ lực lượng thủy bộ địch đã bị đánh tan trên sông Bạch Đằng.',saveHandle?'Chiến công và thương vong đã được ghi nhận vào bản lưu chiến dịch.':'Chế độ này không lưu; có thể bắt đầu lượt thử mới.'],saveHandle?[{label:'Tải mốc / Chơi tiếp',run:beginLoad},{label:'Xuất bản lưu',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]:[{label:'Chơi lại lượt thử',run:beginLoad},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);
+  }else if(phase==='tactical_retreat'){
+    openDialog('results','Rút Quân Chiến Thuật',['Các cánh quân đã hoàn thành lui quân an toàn về cứ điểm hậu phương.',saveHandle?'Tổn thất và tiêu hao vật tư đã được lưu lại theo thực tế.':'Chế độ này không lưu; có thể bắt đầu lượt thử mới.'],saveHandle?[{label:'Về trại / Kết toán',run:showRetryConfirmation},{label:'Xuất bản lưu',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]:[{label:'Chơi lại lượt thử',run:beginLoad},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);
+  }else{
+    openDialog('results','Không còn sĩ quan dự bị',[ 'Nhân vật trung tâm và các sĩ quan dự bị đã mất khả năng tiếp tục. Lượt thử kết thúc.',saveHandle?'Kết quả đã được ghi. Về trại để xem người và vật tư có thể thu hồi trước khi trở lại chặng.':'Chế độ này không lưu; chơi lại tạo lượt thử mới.' ],saveHandle?[{label:'Về trại / Chơi lại',run:showRetryConfirmation},{label:'Xuất bản lưu',run:async()=>downloadSaveBackup(await saveHandle.exportLocal())},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]:[{label:'Chơi lại lượt thử',run:beginLoad},{label:'Chọn lại',run:()=>returnToSetup()},{label:'Về Sa Bàn',run:navigateHome}]);
+  }
 }
 function showRetryConfirmation(){
   try{

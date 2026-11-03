@@ -1,0 +1,1472 @@
+[
+  {
+    "name": "320: fit",
+    "passed": true,
+    "data": {
+      "viewport": [
+        320,
+        740
+      ],
+      "scrollWidth": 320,
+      "scrollHeight": 740,
+      "scrollY": 0,
+      "regions": [
+        {
+          "tag": "HEADER",
+          "id": "",
+          "text": "BẠCH ĐẰNG 938\nBến thử 3D\nKhông lưu\nGóc nhìn: Toàn cảnh\nⅡ Tạm dừng\nVề Sa Bàn\n00:00",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 125.796875,
+            "top": 0,
+            "right": 320,
+            "bottom": 125.796875,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "bd938-viewport",
+          "text": "Triều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m\nNgười dẫn thuyền\nĐang lái · Cận chiến · Tên 40\nMáu 100\nSức 100\nL · Khóa hoặc chạm chọn địch\n\nLuồng sâu ở giữa sông",
+          "rect": {
+            "x": 0,
+            "y": 125.796875,
+            "width": 320,
+            "height": 392.203125,
+            "top": 125.796875,
+            "right": 320,
+            "bottom": 518,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Triều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m",
+          "rect": {
+            "x": 12,
+            "y": 213.359375,
+            "width": 296,
+            "height": 48.375,
+            "top": 213.359375,
+            "right": 308,
+            "bottom": 261.734375,
+            "left": 12
+          },
+          "font": "11px",
+          "lineHeight": "17.6px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Người dẫn thuyền\nĐang lái · Cận chiến · Tên 40\nMáu 100\nSức 100\nL · Khóa hoặc chạm chọn địch",
+          "rect": {
+            "x": 12,
+            "y": 133.796875,
+            "width": 296,
+            "height": 73.5625,
+            "top": 133.796875,
+            "right": 308,
+            "bottom": 207.359375,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "P",
+          "id": "bd938-river-alert",
+          "text": "Luồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.",
+          "rect": {
+            "x": 12,
+            "y": 455.625,
+            "width": 296,
+            "height": 50.375,
+            "top": 455.625,
+            "right": 308,
+            "bottom": 506,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "FOOTER",
+          "id": "",
+          "text": "E · Rời lái\nG · Sang thuyền\nCung / Kiếm\nL · Khóa\nM · Bản đồ\nThuyền & xử lý nguy hiểm\n▲\n◀\n▼\n▶\nĐánh / Bắn\nĐỡ (Q)\nNé (V)\nNhảy\nKết thúc lượt thử",
+          "rect": {
+            "x": 0,
+            "y": 518,
+            "width": 320,
+            "height": 222,
+            "top": 518,
+            "right": 320,
+            "bottom": 740,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BUTTON",
+          "id": "bd938-camera",
+          "text": "Góc nhìn: Toàn cảnh",
+          "rect": {
+            "x": 12,
+            "y": 39.796875,
+            "width": 110,
+            "height": 54,
+            "top": 39.796875,
+            "right": 122,
+            "bottom": 93.796875,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bd938-pause",
+          "text": "Ⅱ Tạm dừng",
+          "rect": {
+            "x": 127,
+            "y": 39.796875,
+            "width": 88,
+            "height": 54,
+            "top": 39.796875,
+            "right": 215,
+            "bottom": 93.796875,
+            "left": 127
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Về Sa Bàn",
+          "rect": {
+            "x": 220,
+            "y": 39.796875,
+            "width": 88,
+            "height": 54,
+            "top": 39.796875,
+            "right": 308,
+            "bottom": 93.796875,
+            "left": 220
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "E · Rời lái",
+          "rect": {
+            "x": 12,
+            "y": 526,
+            "width": 56.796875,
+            "height": 46,
+            "top": 526,
+            "right": 68.796875,
+            "bottom": 572,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "G · Sang thuyền",
+          "rect": {
+            "x": 71.796875,
+            "y": 526,
+            "width": 56.796875,
+            "height": 46,
+            "top": 526,
+            "right": 128.59375,
+            "bottom": 572,
+            "left": 71.796875
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Cung / Kiếm",
+          "rect": {
+            "x": 131.59375,
+            "y": 526,
+            "width": 56.796875,
+            "height": 46,
+            "top": 526,
+            "right": 188.390625,
+            "bottom": 572,
+            "left": 131.59375
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "L · Khóa",
+          "rect": {
+            "x": 191.390625,
+            "y": 526,
+            "width": 56.796875,
+            "height": 46,
+            "top": 526,
+            "right": 248.1875,
+            "bottom": 572,
+            "left": 191.390625
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "M · Bản đồ",
+          "rect": {
+            "x": 251.1875,
+            "y": 526,
+            "width": 56.796875,
+            "height": 46,
+            "top": 526,
+            "right": 307.984375,
+            "bottom": 572,
+            "left": 251.1875
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Thuyền & xử lý nguy hiểm",
+          "rect": {
+            "x": 12,
+            "y": 580,
+            "width": 146,
+            "height": 52,
+            "top": 580,
+            "right": 158,
+            "bottom": 632,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▲",
+          "rect": {
+            "x": 62,
+            "y": 640,
+            "width": 46,
+            "height": 44,
+            "top": 640,
+            "right": 108,
+            "bottom": 684,
+            "left": 62
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "◀",
+          "rect": {
+            "x": 12,
+            "y": 688,
+            "width": 46,
+            "height": 44,
+            "top": 688,
+            "right": 58,
+            "bottom": 732,
+            "left": 12
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▼",
+          "rect": {
+            "x": 62,
+            "y": 688,
+            "width": 46,
+            "height": 44,
+            "top": 688,
+            "right": 108,
+            "bottom": 732,
+            "left": 62
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▶",
+          "rect": {
+            "x": 112,
+            "y": 688,
+            "width": 46,
+            "height": 44,
+            "top": 688,
+            "right": 158,
+            "bottom": 732,
+            "left": 112
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Đánh / Bắn",
+          "rect": {
+            "x": 188,
+            "y": 640,
+            "width": 58,
+            "height": 44,
+            "top": 640,
+            "right": 246,
+            "bottom": 684,
+            "left": 188
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Đỡ (Q)",
+          "rect": {
+            "x": 250,
+            "y": 640,
+            "width": 58,
+            "height": 44,
+            "top": 640,
+            "right": 308,
+            "bottom": 684,
+            "left": 250
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Né (V)",
+          "rect": {
+            "x": 188,
+            "y": 688,
+            "width": 58,
+            "height": 44,
+            "top": 688,
+            "right": 246,
+            "bottom": 732,
+            "left": 188
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Nhảy",
+          "rect": {
+            "x": 250,
+            "y": 688,
+            "width": 58,
+            "height": 44,
+            "top": 688,
+            "right": 308,
+            "bottom": 732,
+            "left": 250
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bd938-finish",
+          "text": "Kết thúc lượt thử",
+          "rect": {
+            "x": 166,
+            "y": 580,
+            "width": 142,
+            "height": 52,
+            "top": 580,
+            "right": 308,
+            "bottom": 632,
+            "left": 166
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        }
+      ],
+      "text": "BẠCH ĐẰNG 938\nBến thử 3D\nKhông lưu\nGóc nhìn: Toàn cảnh\nⅡ Tạm dừng\nVề Sa Bàn\n00:00\nTriều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m\nNgười dẫn thuyền\nĐang lái · Cận chiến · Tên 40\nMáu 100\nSức 100\nL · Khóa hoặc chạm chọn địch\n\nLuồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.\n\n▶ Người dẫn thuyền · 100\nE · Rời lái\nG · Sang thuyền\nCung / Kiếm\nL · Khóa\nM · Bản đồ\nThuyền & xử lý nguy hiểm\n▲\n◀\n▼\n▶\nĐánh / Bắn\nĐỡ (Q)\nNé (V)\nNhảy\nKết thúc lượt thử",
+      "dialog": null
+    }
+  },
+  {
+    "name": "320: touch size",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "320: close panel returns canvas focus",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "667: fit",
+    "passed": true,
+    "data": {
+      "viewport": [
+        667,
+        375
+      ],
+      "scrollWidth": 667,
+      "scrollHeight": 375,
+      "scrollY": 0,
+      "regions": [
+        {
+          "tag": "HEADER",
+          "id": "",
+          "text": "Góc nhìn: Toàn cảnh\nⅡ Tạm dừng\nVề Sa Bàn\n00:00",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 667,
+            "height": 67,
+            "top": 0,
+            "right": 667,
+            "bottom": 67,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "bd938-viewport",
+          "text": "Triều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m\nNgười dẫn thuyền\nMáu 100\nSức 100\n\nLuồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.\n\n▶ Người dẫn thuy",
+          "rect": {
+            "x": 0,
+            "y": 67,
+            "width": 667,
+            "height": 184,
+            "top": 67,
+            "right": 667,
+            "bottom": 251,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Triều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m",
+          "rect": {
+            "x": 12,
+            "y": 112.1875,
+            "width": 334.359375,
+            "height": 48.375,
+            "top": 112.1875,
+            "right": 346.359375,
+            "bottom": 160.5625,
+            "left": 12
+          },
+          "font": "11px",
+          "lineHeight": "17.6px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Người dẫn thuyền\nMáu 100\nSức 100",
+          "rect": {
+            "x": 12,
+            "y": 75,
+            "width": 643,
+            "height": 31.1875,
+            "top": 75,
+            "right": 655,
+            "bottom": 106.1875,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "P",
+          "id": "bd938-river-alert",
+          "text": "Luồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.",
+          "rect": {
+            "x": 374.875,
+            "y": 188.625,
+            "width": 280.125,
+            "height": 50.375,
+            "top": 188.625,
+            "right": 655,
+            "bottom": 239,
+            "left": 374.875
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "FOOTER",
+          "id": "",
+          "text": "E · Rời lái\nG · Sang thuyền\nCung / Kiếm\nL · Khóa\nM · Bản đồ\nThuyền & xử lý nguy hiểm\n▲\n◀\n▼\n▶\nĐánh / Bắn\nĐỡ (Q)\nNé (V)\nNhảy\nKết thúc lượt thử",
+          "rect": {
+            "x": 0,
+            "y": 251,
+            "width": 667,
+            "height": 124,
+            "top": 251,
+            "right": 667,
+            "bottom": 375,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BUTTON",
+          "id": "bd938-camera",
+          "text": "Góc nhìn: Toàn cảnh",
+          "rect": {
+            "x": 12,
+            "y": 10,
+            "width": 120.828125,
+            "height": 46,
+            "top": 10,
+            "right": 132.828125,
+            "bottom": 56,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bd938-pause",
+          "text": "Ⅱ Tạm dừng",
+          "rect": {
+            "x": 137.828125,
+            "y": 10,
+            "width": 79.046875,
+            "height": 46,
+            "top": 10,
+            "right": 216.875,
+            "bottom": 56,
+            "left": 137.828125
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Về Sa Bàn",
+          "rect": {
+            "x": 221.875,
+            "y": 10,
+            "width": 66.5625,
+            "height": 46,
+            "top": 10,
+            "right": 288.4375,
+            "bottom": 56,
+            "left": 221.875
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "E · Rời lái",
+          "rect": {
+            "x": 8,
+            "y": 318,
+            "width": 76,
+            "height": 46,
+            "top": 318,
+            "right": 84,
+            "bottom": 364,
+            "left": 8
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "G · Sang thuyền",
+          "rect": {
+            "x": 87,
+            "y": 318,
+            "width": 76,
+            "height": 46,
+            "top": 318,
+            "right": 163,
+            "bottom": 364,
+            "left": 87
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Cung / Kiếm",
+          "rect": {
+            "x": 166,
+            "y": 318,
+            "width": 76,
+            "height": 46,
+            "top": 318,
+            "right": 242,
+            "bottom": 364,
+            "left": 166
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "L · Khóa",
+          "rect": {
+            "x": 245,
+            "y": 318,
+            "width": 76,
+            "height": 46,
+            "top": 318,
+            "right": 321,
+            "bottom": 364,
+            "left": 245
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "M · Bản đồ",
+          "rect": {
+            "x": 324,
+            "y": 318,
+            "width": 76,
+            "height": 46,
+            "top": 318,
+            "right": 400,
+            "bottom": 364,
+            "left": 324
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Thuyền & xử lý nguy hiểm",
+          "rect": {
+            "x": 408,
+            "y": 255,
+            "width": 251,
+            "height": 52,
+            "top": 255,
+            "right": 659,
+            "bottom": 307,
+            "left": 408
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▲",
+          "rect": {
+            "x": 8,
+            "y": 259,
+            "width": 44,
+            "height": 44,
+            "top": 259,
+            "right": 52,
+            "bottom": 303,
+            "left": 8
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "◀",
+          "rect": {
+            "x": 56,
+            "y": 259,
+            "width": 44,
+            "height": 44,
+            "top": 259,
+            "right": 100,
+            "bottom": 303,
+            "left": 56
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▼",
+          "rect": {
+            "x": 104,
+            "y": 259,
+            "width": 44,
+            "height": 44,
+            "top": 259,
+            "right": 148,
+            "bottom": 303,
+            "left": 104
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▶",
+          "rect": {
+            "x": 152,
+            "y": 259,
+            "width": 44,
+            "height": 44,
+            "top": 259,
+            "right": 196,
+            "bottom": 303,
+            "left": 152
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Đánh / Bắn",
+          "rect": {
+            "x": 204,
+            "y": 259,
+            "width": 46,
+            "height": 44,
+            "top": 259,
+            "right": 250,
+            "bottom": 303,
+            "left": 204
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Đỡ (Q)",
+          "rect": {
+            "x": 254,
+            "y": 259,
+            "width": 46,
+            "height": 44,
+            "top": 259,
+            "right": 300,
+            "bottom": 303,
+            "left": 254
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Né (V)",
+          "rect": {
+            "x": 304,
+            "y": 259,
+            "width": 46,
+            "height": 44,
+            "top": 259,
+            "right": 350,
+            "bottom": 303,
+            "left": 304
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Nhảy",
+          "rect": {
+            "x": 354,
+            "y": 259,
+            "width": 46,
+            "height": 44,
+            "top": 259,
+            "right": 400,
+            "bottom": 303,
+            "left": 354
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bd938-finish",
+          "text": "Kết thúc lượt thử",
+          "rect": {
+            "x": 555.53125,
+            "y": 315,
+            "width": 103.46875,
+            "height": 52,
+            "top": 315,
+            "right": 659,
+            "bottom": 367,
+            "left": 555.53125
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        }
+      ],
+      "text": "Góc nhìn: Toàn cảnh\nⅡ Tạm dừng\nVề Sa Bàn\n00:00\nTriều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m\nNgười dẫn thuyền\nMáu 100\nSức 100\n\nLuồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.\n\n▶ Người dẫn thuyền · 100\nE · Rời lái\nG · Sang thuyền\nCung / Kiếm\nL · Khóa\nM · Bản đồ\nThuyền & xử lý nguy hiểm\n▲\n◀\n▼\n▶\nĐánh / Bắn\nĐỡ (Q)\nNé (V)\nNhảy\nKết thúc lượt thử",
+      "dialog": null
+    }
+  },
+  {
+    "name": "667: touch size",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "667: close panel returns canvas focus",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "568: fit",
+    "passed": true,
+    "data": {
+      "viewport": [
+        568,
+        320
+      ],
+      "scrollWidth": 568,
+      "scrollHeight": 320,
+      "scrollY": 0,
+      "regions": [
+        {
+          "tag": "HEADER",
+          "id": "",
+          "text": "Góc nhìn: Toàn cảnh\nⅡ Tạm dừng\nVề Sa Bàn\n00:00",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 568,
+            "height": 67,
+            "top": 0,
+            "right": 568,
+            "bottom": 67,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "bd938-viewport",
+          "text": "Triều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m\nNgười dẫn thuyền\nMáu 100\nSức 100\n\nLuồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.\n\n▶ Người dẫn thuy",
+          "rect": {
+            "x": 0,
+            "y": 67,
+            "width": 568,
+            "height": 129,
+            "top": 67,
+            "right": 568,
+            "bottom": 196,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Triều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m",
+          "rect": {
+            "x": 12,
+            "y": 112.1875,
+            "width": 282.875,
+            "height": 48.375,
+            "top": 112.1875,
+            "right": 294.875,
+            "bottom": 160.5625,
+            "left": 12
+          },
+          "font": "11px",
+          "lineHeight": "17.6px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "text": "Người dẫn thuyền\nMáu 100\nSức 100",
+          "rect": {
+            "x": 12,
+            "y": 75,
+            "width": 544,
+            "height": 31.1875,
+            "top": 75,
+            "right": 556,
+            "bottom": 106.1875,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": false,
+          "inViewport": true
+        },
+        {
+          "tag": "P",
+          "id": "bd938-river-alert",
+          "text": "Luồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.",
+          "rect": {
+            "x": 317.453125,
+            "y": 133.625,
+            "width": 238.546875,
+            "height": 50.375,
+            "top": 133.625,
+            "right": 556,
+            "bottom": 184,
+            "left": 317.453125
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "FOOTER",
+          "id": "",
+          "text": "E · Rời lái\nG · Sang thuyền\nCung / Kiếm\nL · Khóa\nM · Bản đồ\nThuyền & xử lý nguy hiểm\n▲\n◀\n▼\n▶\nĐánh / Bắn\nĐỡ (Q)\nNé (V)\nNhảy\nKết thúc lượt thử",
+          "rect": {
+            "x": 0,
+            "y": 196,
+            "width": 568,
+            "height": 124,
+            "top": 196,
+            "right": 568,
+            "bottom": 320,
+            "left": 0
+          },
+          "font": "16px",
+          "lineHeight": "25.6px",
+          "hit": true,
+          "inViewport": true
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BUTTON",
+          "id": "bd938-camera",
+          "text": "Góc nhìn: Toàn cảnh",
+          "rect": {
+            "x": 12,
+            "y": 10,
+            "width": 120.828125,
+            "height": 46,
+            "top": 10,
+            "right": 132.828125,
+            "bottom": 56,
+            "left": 12
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bd938-pause",
+          "text": "Ⅱ Tạm dừng",
+          "rect": {
+            "x": 137.828125,
+            "y": 10,
+            "width": 79.046875,
+            "height": 46,
+            "top": 10,
+            "right": 216.875,
+            "bottom": 56,
+            "left": 137.828125
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Về Sa Bàn",
+          "rect": {
+            "x": 221.875,
+            "y": 10,
+            "width": 66.5625,
+            "height": 46,
+            "top": 10,
+            "right": 288.4375,
+            "bottom": 56,
+            "left": 221.875
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "E · Rời lái",
+          "rect": {
+            "x": 8,
+            "y": 263,
+            "width": 76,
+            "height": 46,
+            "top": 263,
+            "right": 84,
+            "bottom": 309,
+            "left": 8
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "G · Sang thuyền",
+          "rect": {
+            "x": 87,
+            "y": 263,
+            "width": 76,
+            "height": 46,
+            "top": 263,
+            "right": 163,
+            "bottom": 309,
+            "left": 87
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Cung / Kiếm",
+          "rect": {
+            "x": 166,
+            "y": 263,
+            "width": 76,
+            "height": 46,
+            "top": 263,
+            "right": 242,
+            "bottom": 309,
+            "left": 166
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "L · Khóa",
+          "rect": {
+            "x": 245,
+            "y": 263,
+            "width": 76,
+            "height": 46,
+            "top": 263,
+            "right": 321,
+            "bottom": 309,
+            "left": 245
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "M · Bản đồ",
+          "rect": {
+            "x": 324,
+            "y": 263,
+            "width": 76,
+            "height": 46,
+            "top": 263,
+            "right": 400,
+            "bottom": 309,
+            "left": 324
+          },
+          "font": "12px",
+          "lineHeight": "15.6px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "SUMMARY",
+          "id": "",
+          "text": "Thuyền & xử lý nguy hiểm",
+          "rect": {
+            "x": 408,
+            "y": 200,
+            "width": 152,
+            "height": 52,
+            "top": 200,
+            "right": 560,
+            "bottom": 252,
+            "left": 408
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▲",
+          "rect": {
+            "x": 8,
+            "y": 204,
+            "width": 44,
+            "height": 44,
+            "top": 204,
+            "right": 52,
+            "bottom": 248,
+            "left": 8
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "◀",
+          "rect": {
+            "x": 56,
+            "y": 204,
+            "width": 44,
+            "height": 44,
+            "top": 204,
+            "right": 100,
+            "bottom": 248,
+            "left": 56
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▼",
+          "rect": {
+            "x": 104,
+            "y": 204,
+            "width": 44,
+            "height": 44,
+            "top": 204,
+            "right": 148,
+            "bottom": 248,
+            "left": 104
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "▶",
+          "rect": {
+            "x": 152,
+            "y": 204,
+            "width": 44,
+            "height": 44,
+            "top": 204,
+            "right": 196,
+            "bottom": 248,
+            "left": 152
+          },
+          "font": "19px",
+          "lineHeight": "30.4px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Đánh / Bắn",
+          "rect": {
+            "x": 204,
+            "y": 204,
+            "width": 46,
+            "height": 44,
+            "top": 204,
+            "right": 250,
+            "bottom": 248,
+            "left": 204
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Đỡ (Q)",
+          "rect": {
+            "x": 254,
+            "y": 204,
+            "width": 46,
+            "height": 44,
+            "top": 204,
+            "right": 300,
+            "bottom": 248,
+            "left": 254
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Né (V)",
+          "rect": {
+            "x": 304,
+            "y": 204,
+            "width": 46,
+            "height": 44,
+            "top": 204,
+            "right": 350,
+            "bottom": 248,
+            "left": 304
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Nhảy",
+          "rect": {
+            "x": 354,
+            "y": 204,
+            "width": 46,
+            "height": 44,
+            "top": 204,
+            "right": 400,
+            "bottom": 248,
+            "left": 354
+          },
+          "font": "12px",
+          "lineHeight": "19.2px",
+          "hit": true,
+          "inViewport": true
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bd938-finish",
+          "text": "Kết thúc lượt thử",
+          "rect": {
+            "x": 456.53125,
+            "y": 260,
+            "width": 103.46875,
+            "height": 52,
+            "top": 260,
+            "right": 560,
+            "bottom": 312,
+            "left": 456.53125
+          },
+          "font": "12px",
+          "lineHeight": "18px",
+          "hit": true,
+          "inViewport": true
+        }
+      ],
+      "text": "Góc nhìn: Toàn cảnh\nⅡ Tạm dừng\nVề Sa Bàn\n00:00\nTriều\n+1,40 m ↓\nĐộ sâu\n4,40 m\nDưới đáy\n3,90 m\nNgười dẫn thuyền\nMáu 100\nSức 100\n\nLuồng sâu ở giữa sông. Cọc và tải nặng đều ảnh hưởng đường đi.\n\n▶ Người dẫn thuyền · 100\nE · Rời lái\nG · Sang thuyền\nCung / Kiếm\nL · Khóa\nM · Bản đồ\nThuyền & xử lý nguy hiểm\n▲\n◀\n▼\n▶\nĐánh / Bắn\nĐỡ (Q)\nNé (V)\nNhảy\nKết thúc lượt thử",
+      "dialog": null
+    }
+  },
+  {
+    "name": "568: touch size",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "568: close panel returns canvas focus",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "Independent multi-touch",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "Pointercancel stops both controls",
+    "passed": true,
+    "data": null
+  },
+  {
+    "name": "No uncaught exception",
+    "passed": true,
+    "data": []
+  }
+]

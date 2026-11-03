@@ -63,8 +63,9 @@ function validateProjection(projection,previous,recovered=new Set()){
   for(const amount of Object.values(projection.inventory||{}))if(!Number.isFinite(amount)||amount<0)throw new Error('INVALID_INVENTORY');
   if(projection.missionResults!==undefined&&!Array.isArray(projection.missionResults))throw new Error('INVALID_MISSION_RESULTS');
   const results=new Map();
+  const validOutcomes=new Set(['failed_command','victory','tactical_retreat']);
   for(const result of projection.missionResults||[]){
-    if(!result||typeof result.attemptId!=='string'||!result.attemptId||typeof result.chapterInstanceId!=='string'||!result.chapterInstanceId||result.outcome!=='failed_command'||!Number.isSafeInteger(result.tick)||result.tick<0||results.has(result.attemptId))throw new Error('INVALID_MISSION_RESULTS');
+    if(!result||typeof result.attemptId!=='string'||!result.attemptId||typeof result.chapterInstanceId!=='string'||!result.chapterInstanceId||!validOutcomes.has(result.outcome)||!Number.isSafeInteger(result.tick)||result.tick<0||results.has(result.attemptId))throw new Error('INVALID_MISSION_RESULTS');
     results.set(result.attemptId,encodeSave(result));
   }
   for(const result of previous?.missionResults||[])if(results.get(result.attemptId)!==encodeSave(result))throw new Error('MISSION_RESULT_ROLLBACK');
