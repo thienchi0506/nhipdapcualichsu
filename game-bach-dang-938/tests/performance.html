@@ -1,0 +1,27 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>BD938 — kiểm tra hiệu năng cô lập</title>
+<style>html,body{margin:0;background:#102725;color:#eee;font:16px system-ui}#scene{position:relative;width:100vw;height:85vh}canvas{width:100%;height:100%}p{margin:8px}.bd938-actor-label{display:none}</style>
+<p>Fixture đo cục bộ · quân có mô phỏng thật · không lưu hoặc gọi Firebase. Chạy qua công cụ trong hồ sơ evidence.</p><div id="scene"></div>
+<script type="module">
+import {loadScene} from '../src/app/loader.js';
+import {createRiverState} from '../src/sim/vessel.js';
+import {createEncounter,stepEncounter,applyActorDamage} from '../src/sim/encounter.js';
+import {createArmy,stepArmyPaths,stepArmyAI,stepArmyCombat,stepArmyLogistics,bridgeArmyCombat,issueArmyCommand} from '../src/sim/army.js';
+import {metrics} from '../src/app/diagnostics.js';
+const summary=values=>{const s=[...values].sort((a,b)=>a-b),n=s.length;return {samples:n,meanMs:n?s.reduce((a,b)=>a+b,0)/n:0,p50Ms:s[Math.floor(n*.5)]||0,p95Ms:s[Math.floor(n*.95)]||0,p99Ms:s[Math.floor(n*.99)]||0,maxMs:s[n-1]||0,over50ms:s.filter(x=>x>50).length};};
+export async function runVisualBenchmark(count=400,durationS=8){
+ const scope=new AbortController(),loaded=await loadScene({signal:scope.signal,onProgress(){}}),data=loaded.data;
+ const state=createRiverState(data.riverConfig,{scenarioId:'combat',heroId:'H01'});state.combat=createEncounter(data.characterConfig,state,'H01');state.army=createArmy(state,{playerCount:count,enemyCount:count});state.combat.army=state.army;
+ for(const [i,s] of state.army.squads.filter(s=>s.team==='enemy').entries()){const dx=(-32+(i%3)*3)-s.x,dz=(30+(i%5)*2)-s.z;s.x+=dx;s.z+=dz;s.order.point={x:s.x,z:s.z};s.goal={x:s.x,z:s.z};for(const id of s.members){const p=state.army.byId.get(id);p.x+=dx;p.z+=dz;}}
+ for(const s of state.army.squads.filter(s=>s.team==='friendly'))issueArmyCommand(state.army,{id:'perf:'+s.id,squadId:s.id,type:'attack',x:-30,z:20,lossThreshold:.8});
+ const scene=loaded.createScene({host:document.getElementById('scene'),data,quality:'economy',heroId:'H01',scope,onContextLost(){throw Error('context lost')}});
+ const phases={frame:[],render:[],path:[],ai:[],combat:[],logistics:[],encounter:[]};let last=null,backlog=0,start=null,frames=0;
+ try{await new Promise((resolve,reject)=>{function frame(now){try{if(start===null)start=now;const delta=last===null?0:now-last;last=now;backlog+=delta;if(now-start>=1000)phases.frame.push(delta);
+  let steps=0;while(backlog>=1000/30&&steps++<8){let t=performance.now();stepEncounter(state.combat,state,{});phases.encounter.push(performance.now()-t);state.army.tick=state.tick;state.army.waterY=state.readings.waterY;
+   for(const [key,fn] of [['path',stepArmyPaths],['ai',stepArmyAI],['combat',stepArmyCombat],['logistics',stepArmyLogistics]]){t=performance.now();fn(state.army);phases[key].push(performance.now()-t);}bridgeArmyCombat(state.army,state.combat,applyActorDamage);backlog-=1000/30;
+  }const t=performance.now();scene.render(state);if(now-start>=1000)phases.render.push(performance.now()-t);frames++;if(now-start<durationS*1000)requestAnimationFrame(frame);else resolve();}catch(e){reject(e);}}requestAnimationFrame(frame);});
+  return {countPerSide:count,totalPeople:state.army.people.length,uniqueIds:new Set(state.army.people.map(p=>p.id)).size,ticks:state.tick,frames,backlogMs:backlog,stats:scene.stats(),phases:Object.fromEntries(Object.entries(phases).map(([k,v])=>[k,summary(v)])),heap:performance.memory?.usedJSHeapSize||null};
+ }finally{scene.dispose();document.querySelectorAll('.bd938-actor-label').forEach(e=>e.remove());}
+}
+export function ownership(){return {...metrics,canvases:document.querySelectorAll('canvas').length};}
+window.runVisualBenchmark=runVisualBenchmark;window.benchmarkOwnership=ownership;
+</script></html>

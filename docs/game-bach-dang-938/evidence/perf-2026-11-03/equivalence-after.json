@@ -1,0 +1,187 @@
+[
+  {
+    "perSide": 50,
+    "hashes": [
+      {
+        "tick": 30,
+        "sha256": "9c53b9c4397aaaaeb3a96d02be10f8e941e1ca41d3604011cbe0fe830da58b56"
+      },
+      {
+        "tick": 60,
+        "sha256": "7d642eb8941ac5b8f71c743b369006b47262299f0776afbf0ca6839b4e4ba4ac"
+      },
+      {
+        "tick": 90,
+        "sha256": "6ca52ea397ee1193813fafaedeae6bab58cec51efba0a2a1973714a0eb2de367"
+      },
+      {
+        "tick": 120,
+        "sha256": "0e5864e7b62ed842f625daa2d5f4730fb78548ab89615ebad580342e5938fcdd"
+      },
+      {
+        "tick": 150,
+        "sha256": "03e2f063648d2533718ed82a2b539e369f803fa93fd2282db14f98742a9dd51a"
+      },
+      {
+        "tick": 180,
+        "sha256": "1d3ba36dbbb3477a7cd39b15ab7e58900b9b135f1f46420266747b1c6b214d2e"
+      },
+      {
+        "tick": 210,
+        "sha256": "15ee447df291aefe244b5f65d8216a2c81ef7e7e833c0a448ecbe3aac8215211"
+      },
+      {
+        "tick": 240,
+        "sha256": "2d929ba6b071614768ea8dcf6d4255799a81c9e2eaf83fc5236f3b90e562a463"
+      }
+    ]
+  },
+  {
+    "perSide": 100,
+    "hashes": [
+      {
+        "tick": 30,
+        "sha256": "8518cfd4c5b3b2a3acdf3be330900a0dfdae69b8d0546c1372612b6517a5672f"
+      },
+      {
+        "tick": 60,
+        "sha256": "60af9847820ed81a6066be6e0b9a85f863c95ac4dc01a686dcdf27be6f6a7af9"
+      },
+      {
+        "tick": 90,
+        "sha256": "5144716f3f31d9e6efdac40ad8a4d04e68415815de0f99ac0c5b91a97bd3f72e"
+      },
+      {
+        "tick": 120,
+        "sha256": "06ccc0d5e84b7e6778b3badd04cc1705bc815ac98da55429fdecef9eebe414f8"
+      },
+      {
+        "tick": 150,
+        "sha256": "afd58fd036bf776d898560960235098cdc7a6bea5a5acc98e714b72d1e9538cb"
+      },
+      {
+        "tick": 180,
+        "sha256": "223ea01a76c2bcf0ccf5686b6a3430acfca3241e0f44329038095eb4ee5b11a9"
+      },
+      {
+        "tick": 210,
+        "sha256": "9e3133b05aa201df007947f1b4d5ecda854fa6d99d9ac0644cd957b290caa784"
+      },
+      {
+        "tick": 240,
+        "sha256": "d42bdc4ddbe9db9a03c189b83c1fb55f0e7ca979a6297645872257e94cd3e8ea"
+      }
+    ]
+  },
+  {
+    "perSide": 200,
+    "hashes": [
+      {
+        "tick": 30,
+        "sha256": "ca086b3afe6cd68c48c2da7fc5afc8c9aaf5c855bc269acd2695051c8293f1eb"
+      },
+      {
+        "tick": 60,
+        "sha256": "4cc63b3310f549ec277448f3579a026d960d0d1c79ebc429de9dac4833c9e881"
+      },
+      {
+        "tick": 90,
+        "sha256": "c8160780add61a90a2dd374b815e7e74117fd45cb7745daa44673479f32a8023"
+      },
+      {
+        "tick": 120,
+        "sha256": "0460abfcaef3712580c3a0729613ce626a521342189b9ef7c8b8e2c60f401495"
+      },
+      {
+        "tick": 150,
+        "sha256": "b108930e705ad0d7ad1a6a6fe3f808ad4c4339bdfcc83bfa060875e12cb99f76"
+      },
+      {
+        "tick": 180,
+        "sha256": "57f31711c2dbd2b067193a10f575b3c54542a25028013fe9da14604922fa7d8b"
+      },
+      {
+        "tick": 210,
+        "sha256": "e05f968aa2d9e1472a5ff725c36b3351863ca0c79a33156a99586fe29998390d"
+      },
+      {
+        "tick": 240,
+        "sha256": "85d066696660d9d46fb30aa3420d2cbd627975e22399710b1a49efb84099a384"
+      }
+    ]
+  },
+  {
+    "perSide": 400,
+    "hashes": [
+      {
+        "tick": 30,
+        "sha256": "f89f5e42339665fd08e305c830fe3bcf970060ac08fc4b0577238c9c5a05116c"
+      },
+      {
+        "tick": 60,
+        "sha256": "61e1a70287355adcf7987538b586633ac411d89a06cfa9447c0d8f38d4980582"
+      },
+      {
+        "tick": 90,
+        "sha256": "ee8fb32c1fc8efbc1f60d648278494ca70a78e84411cf20dd9a3ece901d96842"
+      },
+      {
+        "tick": 120,
+        "sha256": "1a10ed39130a7ad10de7a66e3f1025511579b971c1026af2c696cd3f0058c397"
+      },
+      {
+        "tick": 150,
+        "sha256": "ed8074f9798918b45b892fbe3cc45a81535017b8bcb76696fa7f157a5aa9b968"
+      },
+      {
+        "tick": 180,
+        "sha256": "bdc3095b44c7fe7e8c17b2f0a318b33606b2772571212730a0143b0fc6b96153"
+      },
+      {
+        "tick": 210,
+        "sha256": "8bfe3f6bb0b83242224e4d4fbe18645bb7594cd5579a80f006c5f40a23fd8a00"
+      },
+      {
+        "tick": 240,
+        "sha256": "798bb096b0707fbfa54663042e917c8b30212a7ecae8a28311be0f4006a978a5"
+      }
+    ]
+  },
+  {
+    "perSide": 480,
+    "hashes": [
+      {
+        "tick": 30,
+        "sha256": "55e30644422511e07e6af3407a8cb29c211f334b7d78eecc2f613121d43befb9"
+      },
+      {
+        "tick": 60,
+        "sha256": "b9901f6da7a2480eab0c2a1f3c247c1593440ec5d7393a54a6a6f1115acf0b1f"
+      },
+      {
+        "tick": 90,
+        "sha256": "3a4ee0ce349332623f49c9b563e34f3aa36e4f77a2765c501b6bf176f4b254d0"
+      },
+      {
+        "tick": 120,
+        "sha256": "3c1ad447cc0654d11c746a2ce086f386809b892836fa40ffcb343403b7e4a472"
+      },
+      {
+        "tick": 150,
+        "sha256": "2c7b375b92b3525745a74985f3b7543c270a041a11e3b00b55b601e4fb711d04"
+      },
+      {
+        "tick": 180,
+        "sha256": "8449bcaf36091c8164b05906f7fd27ce0d83ce7f1fe2c8ad90d14e429ba33f25"
+      },
+      {
+        "tick": 210,
+        "sha256": "409707aad3f8fff7840828cbbcc6a213766d2336f797f584d3a1f5bce1d5b046"
+      },
+      {
+        "tick": 240,
+        "sha256": "b094be72131136653cf4ba38912b2792a5d091c3f6e0a0f64ac13655bd87debf"
+      }
+    ]
+  }
+]

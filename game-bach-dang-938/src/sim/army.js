@@ -6,6 +6,9 @@ const active = person => person && person.status === 'active';
 const dist = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
 const key = (x, z) => `${x},${z}`;
 const copy = value => structuredClone(value);
+// Derived spatial scratch only; never persisted or shared between armies.
+// Keep numeric cell order identical to the former dx/dz traversal.
+const spatialScratch = new WeakMap();
 
 function record(army, type, data = {}) {
   const e = { ...data, id: `army:${army.tick}:${++army.sequence}`, tick: army.tick, type };
@@ -178,12 +181,35 @@ export function stepArmyPaths(army) {
 }
 
 function indexPeople(army) {
-  army.grid.clear();const cell=army.config.spatialCellM;
-  for(const p of army.people)if(active(p)){const k=key(Math.floor(p.x/cell),Math.floor(p.z/cell));if(!army.grid.has(k))army.grid.set(k,[]);army.grid.get(k).push(p);}
+  let scratch=spatialScratch.get(army);
+  if(!scratch){scratch={pool:new Map(),cells:[],rows:new Map()};spatialScratch.set(army,scratch);}
+  for(const bucket of army.grid.values())bucket.length=0;
+  for(const row of scratch.rows.values())row.clear();
+  army.grid.clear();scratch.cells.length=0;const cell=army.config.spatialCellM;
+  for(const p of army.people)if(active(p)){
+    const x=Math.floor(p.x/cell),z=Math.floor(p.z/cell),k=key(x,z);
+    let bucket=army.grid.get(k);
+    if(!bucket){bucket=scratch.pool.get(k)||[];scratch.pool.set(k,bucket);bucket.length=0;army.grid.set(k,bucket);scratch.cells.push({x,z,people:bucket});
+      let row=scratch.rows.get(x);if(!row){row=new Map();scratch.rows.set(x,row);}row.set(z,bucket);
+    }
+    bucket.push(p);
+  }
+  scratch.cells.sort((a,b)=>a.x-b.x||a.z-b.z);
 }
 function nearby(army,person,range) {
   const size=army.config.spatialCellM,x=Math.floor(person.x/size),z=Math.floor(person.z/size),r=Math.ceil(range/size),out=[];
-  for(let dx=-r;dx<=r;dx++)for(let dz=-r;dz<=r;dz++)for(const p of army.grid.get(key(x+dx,z+dz))||[])if(p.id!==person.id&&dist(p,person)<=range)out.push(p);
+  const scratch=spatialScratch.get(army),cells=scratch?.cells;
+  // Long sight/fire queries previously scanned 121–169 mostly empty cells.
+  // Only occupied cells are candidates; exact distance and visit order stay unchanged.
+  if(r>=2&&cells){
+    for(const c of cells){if(c.x<x-r)continue;if(c.x>x+r)break;if(c.z<z-r||c.z>z+r)continue;
+      for(const p of c.people)if(p.id!==person.id&&Math.abs(p.x-person.x)<=range&&Math.abs(p.z-person.z)<=range&&dist(p,person)<=range)out.push(p);
+    }
+  }else if(scratch){
+    for(let dx=-r;dx<=r;dx++){const row=scratch.rows.get(x+dx);if(!row)continue;
+      for(let dz=-r;dz<=r;dz++)for(const p of row.get(z+dz)||[])if(p.id!==person.id&&Math.abs(p.x-person.x)<=range&&Math.abs(p.z-person.z)<=range&&dist(p,person)<=range)out.push(p);
+    }
+  }else for(let dx=-r;dx<=r;dx++)for(let dz=-r;dz<=r;dz++)for(const p of army.grid.get(key(x+dx,z+dz))||[])if(p.id!==person.id&&dist(p,person)<=range)out.push(p);
   return out;
 }
 function visible(army,a,b) {

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "320: map pause target",
+    "passed": true
+  },
+  {
+    "name": "320: map pause freezes",
+    "passed": true
+  },
+  {
+    "name": "320: resume and close map",
+    "passed": true
+  },
+  {
+    "name": "360: map pause target",
+    "passed": true
+  },
+  {
+    "name": "360: map pause freezes",
+    "passed": true
+  },
+  {
+    "name": "360: resume and close map",
+    "passed": true
+  },
+  {
+    "name": "390: map pause target",
+    "passed": true
+  },
+  {
+    "name": "390: map pause freezes",
+    "passed": true
+  },
+  {
+    "name": "390: resume and close map",
+    "passed": true
+  },
+  {
+    "name": "844: map pause target",
+    "passed": true
+  },
+  {
+    "name": "844: map pause freezes",
+    "passed": true
+  },
+  {
+    "name": "844: resume and close map",
+    "passed": true
+  },
+  {
+    "name": "1365: map pause target",
+    "passed": true
+  },
+  {
+    "name": "1365: map pause freezes",
+    "passed": true
+  },
+  {
+    "name": "1365: resume and close map",
+    "passed": true
+  }
+]

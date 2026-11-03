@@ -1,6 +1,6 @@
 # Ngân sách hiệu năng, benchmark và mỹ thuật
 
-**Ngân sách dự kiến, chưa đo game mới. Không cam kết FPS.** Chrome headless/SwiftShader của khảo sát phù hợp test logic/UI, không đại diện GPU điện thoại/PC. Giá trị cấu hình ở [gameplay-defaults.json](gameplay-defaults.json); thay đổi phải có version/kết quả đo.
+**Ngân sách dự kiến, không cam kết FPS.** Đã bổ sung [số đo trước/sau ngày 03/11/2026](optimization-handoff.md); 400/480 quân vẫn chưa qua gate. Chrome headless/SwiftShader của khảo sát phù hợp test logic/UI, không đại diện GPU điện thoại/PC. Giá trị cấu hình ở [gameplay-defaults.json](gameplay-defaults.json); thay đổi phải có version/kết quả đo.
 
 ## 1. Mục tiêu ban đầu
 
@@ -85,4 +85,4 @@ Mỗi asset đi qua manifest: assetId, tác giả/URL/giấy phép/ngày, nguồ
 3. Asset có license/provenance, nhìn rõ hành động/hit/độ sâu ở các preset.
 4. Chơi tự nhiên chương mẫu; hồi quy site cũ không tệ hơn baseline.
 
-Hiện tại: **chưa có benchmark game mới, chưa có asset game mới, chưa kiểm tra FPS trên thiết bị thật**. Báo cáo này là kế hoạch đo và sản xuất, không dùng 56/56 test của game cũ để chứng minh hiệu năng game mới.
+Đã có benchmark sandbox 50/100/200/400/480 quân mỗi bên và phép đo tải/lặp vào ra; xem [bàn giao bước 11](optimization-handoff.md), bao gồm các mẫu chậm và giới hạn đo. **Chưa có bộ mỹ thuật cuối và chưa kiểm tra FPS trên thiết bị thật.** Các ngân sách trên vẫn là mục tiêu; không dùng test logic của game cũ để chứng minh hiệu năng game mới.

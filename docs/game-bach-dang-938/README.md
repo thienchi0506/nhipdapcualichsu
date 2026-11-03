@@ -101,9 +101,9 @@ Game mới **không dùng lại** bộ luật của ý tưởng trước: HP c�
 | 3. Chương mẫu — nền tảng và lưu | Vòng đời, core deterministic/journal, camera, điều khiển PC/mobile, thuyền/sông; test replay/retry trước combat có mất mát. | **Đã bàn giao lưu cho sandbox:** checkpoint, journal, kết toán/retry và đồng bộ chia phần đã kiểm thử. Rules production chưa áp dụng. Xem [bàn giao lưu](save-handoff.md). |
 | 4. Chương mẫu — chiến đấu | Mệnh lệnh, AI đồng đội, va chạm, hư hại thuyền, bắn cung, đổ bộ và cận chiến. | **Đã bàn giao sandbox điều khiển/chiến đấu/tiếp quản; chưa phải chương hoàn chỉnh.** |
 | 5. Chương mẫu — chỉ huy/hậu cần | Sương mù, tuyến tiếp tế, sửa chữa/cứu thương, ngưỡng tổn thất, nhân sự và hậu quả. | **Đã bàn giao sandbox tổ quân, fog và hậu cần; di tản, kết toán và gate hiệu năng chưa hoàn tất.** |
-| 6. Hoàn thiện và kiểm chứng | Soak/hồi quy/hiệu năng/mỹ thuật/độ chính xác; cloud chỉ xét bật ở chặng riêng sau Rules emulator, không chặn local save. | Chưa làm |
+| 6. Hoàn thiện và kiểm chứng | Soak/hồi quy/hiệu năng/mỹ thuật/độ chính xác; cloud chỉ xét bật ở chặng riêng sau Rules emulator, không chặn local save. | **Đã khảo sát UX (bước 10), sửa lỗi UI/camera và đo trước/sau (bước 11).** Chương hoàn chỉnh, mỹ thuật/âm thanh cuối và gate hiệu năng 400/480 chưa đạt; xem [bàn giao](optimization-handoff.md). |
 
-Chặng lưu đã bàn giao trong phạm vi engine hiện có. Chặng tiếp theo là dữ liệu nội dung game mới; việc chủ dự án áp dụng Rules production được hướng dẫn riêng trong [bàn giao lưu](save-handoff.md).
+Chặng lưu đã bàn giao trong phạm vi engine hiện có. Ngày 03/11/2026 đã tiếp tục bước 10–11 theo yêu cầu mới: [kiểm tra trải nghiệm](ux-review.md), [sửa lỗi và đo tối ưu](optimization-handoff.md). 197/197 core/lưu và 82/82 kiểm tra UI/biên/pause bản đồ đã qua, có hash mô phỏng trước/sau. Các nút thắt tải/đợt chậm được giữ mở trong [gói Astra](astra-performance-handoff.md); dữ liệu nội dung và chương 15–25 phút vẫn chưa triển khai. Không đánh dấu toàn bộ game hoàn tất. Việc áp dụng Rules production có hướng dẫn riêng trong [bàn giao lưu](save-handoff.md).
 
 ## 6. Kiểm tra chặng 1
 

@@ -100,6 +100,7 @@ function downloadSaveBackup(payload){const url=URL.createObjectURL(new Blob([pay
 function updateRiverHUD(state, backlogMs, combat, army = null) {
   const f = value => (Math.abs(value) < 0.005 ? 0 : value).toFixed(2).replace('.', ',');
   const r = state.readings;
+  setText('river-details',`Triều ${f(r.waterY)} m · Độ sâu ${f(r.depth)} m · Mớn ${f(r.draft)} m · Tốc độ ${f(r.speedMps)} m/s · Dòng ${f(Math.hypot(r.current.x,r.current.z))} m/s · Dưới đáy ${f(r.clearance)} m.`);
   setText('tide', `${r.waterY >= 0 ? '+' : ''}${f(r.waterY)} m ${r.tideRate < 0 ? '↓' : r.tideRate > 0 ? '↑' : '—'}`);
   setText('depth', `${f(r.depth)} m`); setText('draft', `${f(r.draft)} m`);
   setText('speed', `${f(r.speedMps)} m/s`);
@@ -121,6 +122,7 @@ function updateRiverHUD(state, backlogMs, combat, army = null) {
   if(combat){
     const actor=combat.actors.find(a=>a.id===combat.controlledId),target=combat.actors.find(a=>a.id===combat.selectedId);
     byId('play').dataset.control=combat.helm?'helm':actor.mode;
+    byId('play').dataset.hasTarget=String(!!combat.selectedId);
     setText('character-name',actor.name);
     const modes={foot:'Trên bờ / boong',air:'Đang nhảy / rơi',swim:'Đang bơi',wounded:'Bị thương',downed:'Đã gục',dead:'Tử trận'};
     const stance=actor.stunUntil>combat.tick?'CHOÁNG':actor.rescue?'Đang được cứu':actor.guard?'Đang đỡ':actor.action?.kind==='bow'?'Giương cung':actor.action?.kind==='melee'?'Ra đòn':actor.action?.kind==='dodge'?'Đang né':'';
@@ -163,8 +165,12 @@ function updateMap(combat,riverState,army){
   const select=byId('army-squad');
   for(const squad of army.squads){let option=Array.from(select.options).find(o=>o.value===squad.id);if(!option){option=document.createElement('option');option.value=squad.id;select.append(option);}option.textContent=`${squad.name} · ${squad.counts.active||0}/${squad.deployedAtStart} còn chiến đấu`;}
   const chosen=army.squads.find(s=>s.id===select.value)||army.squads[0];
-  if(chosen)setText('army-report',`${army.feedback?army.feedback+' · ':''}${chosen.name}: ${chosen.report} · Tên ${chosen.ammo} · Thuốc cứu ${chosen.medicine}.`);
-  setText('army-stores',army.depots.map(d=>`${d.name} (${d.health}%): ${d.stock.ammo} tên, ${d.stock.timber} gỗ, ${d.stock.medicine} thuốc, ${d.stock.recruits} quân bổ sung`).join(' · ') + (army.convoys.some(c=>c.amount)?` · Tuyến hàng: ${army.convoys.filter(c=>c.amount).map(c=>c.status).join(', ')}`:''));
+  if(chosen){setText('army-report',`${army.feedback?army.feedback+' · ':''}${chosen.name}: ${chosen.report} · Tên ${chosen.ammo} · Thuốc cứu ${chosen.medicine}.`);
+    const labels={active:'chiến đấu',downed:'gục, cần cứu',wounded:'bị thương',dead:'tử trận',missing:'mất tích',captured:'bị bắt',retired:'đã rút'};
+    setText('army-losses',`Quân số ${chosen.name}: ${Object.entries(chosen.counts).map(([k,n])=>`${n} ${labels[k]||k}`).join(' · ')}.`);
+  }
+  const convoyLabels={planning:'đang lập tuyến',moving:'đang vận chuyển',contested:'bị địch chặn',blocked:'tắc tuyến',delivered:'đã giao'};
+  setText('army-stores',army.depots.map(d=>`${d.name} (${d.health}%): ${d.stock.ammo} tên, ${d.stock.timber} gỗ, ${d.stock.medicine} thuốc, ${d.stock.recruits} quân bổ sung`).join(' · ') + (army.convoys.some(c=>c.amount)?` · Tuyến hàng: ${army.convoys.filter(c=>c.amount).map(c=>convoyLabels[c.status]||c.status).join(', ')}`:''));
   setText('army-intel',army.intel.length?`Trinh sát: ${army.intel.slice(0,3).map(i=>`${i.id} (${Math.round(i.x)}, ${Math.round(i.z)}) · ${Math.floor(i.ageTicks/30)} giây trước`).join(' | ')}${army.intel.length>3?` · và ${army.intel.length-3} tin khác`:''}`:'Trinh sát: chưa thấy quân địch.');
   const markers=[...army.squads.map(s=>({id:s.id,x:s.x,z:s.z,color:'#a5edb6',radius:1.4})),...army.intel.map(i=>({id:i.id,x:i.x,z:i.z,color:i.visible?'#ff907b':'#b8a0a0',radius:.7})),...army.depots.map(d=>({id:d.id,x:d.x,z:d.z,color:'#f5d772',radius:1.5}))];
   const wanted=new Set(markers.map(m=>m.id));
@@ -208,7 +214,7 @@ async function beginLoad() {
   const current = generation; const controller = new AbortController(); loadController = controller;
   showScreen('loading'); setState('LOAD');
   byId('systems').open = false;
-  byId('camera').textContent = 'Góc nhìn: Toàn cảnh'; byId('clock').textContent = '00:00';
+  byId('camera').textContent = 'Góc nhìn: Toàn cảnh'; byId('clock').textContent = '00:00';byId('clock-compact').textContent='00:00';
   const progress = (done, text) => {
     if (generation !== current) return;
     byId('progress').value = done; byId('loading-text').textContent = text;
@@ -258,7 +264,7 @@ async function beginLoad() {
     });
     if (generation !== current) { scene.dispose(); return; }
     activeMapConfig=loaded.data.riverConfig;lastMapOpen=false;byId('map').hidden=true;byId('map-view').replaceChildren();byId('map-targets').replaceChildren();
-    session = createSession({ root, scene, data: loaded.data, heroId: preferences.hero, ...labOptions,persistence:saveHandle, onPause: pause, onCamera: toggleCamera, onStatus: updateRiverHUD,onOutcome:combatOutcome,onFault(error){lastFault=String(error.stack||error);setState('ERROR');openDialog('error','Mô phỏng đã dừng',['Lượt chơi đã dừng. Nếu lỗi xảy ra khi lưu, mốc đã xác nhận trước đó được giữ lại.',error.message], [{label:'Tải mốc trước',run:beginLoad},{label:'Về lựa chọn',run:()=>returnToSetup()}]);}, onClock: second => { byId('clock').textContent = formatTime(second); } });
+    session = createSession({ root, scene, data: loaded.data, heroId: preferences.hero, ...labOptions,persistence:saveHandle, onPause: pause, onCamera: toggleCamera, onStatus: updateRiverHUD,onOutcome:combatOutcome,onFault(error){lastFault=String(error.stack||error);setState('ERROR');openDialog('error','Mô phỏng đã dừng',['Lượt chơi đã dừng. Nếu lỗi xảy ra khi lưu, mốc đã xác nhận trước đó được giữ lại.',error.message], [{label:'Tải mốc trước',run:beginLoad},{label:'Về lựa chọn',run:()=>returnToSetup()}]);}, onClock: second => { byId('clock').textContent = formatTime(second);byId('clock-compact').textContent=formatTime(second); } });
     progress(3, 'Cảnh đã dựng xong. Sẵn sàng khám phá.');
     showScreen('play'); scene.resize();
     const role = loaded.data.roles.find(item => item.id === preferences.hero);
@@ -307,12 +313,14 @@ root.addEventListener('click', event => {
     'bd938-next': () => { byId('characters').hidden = true; byId('quality').hidden = false; byId('load').focus({ preventScroll: true }); },
     'bd938-previous': () => { byId('characters').hidden = false; byId('quality').hidden = true; byId('next').focus({ preventScroll: true }); },
     'bd938-load': beginLoad, 'bd938-cancel-load': () => returnToSetup(),
+    'bd938-systems-close':()=>{byId('systems').open=false;session?.focus();},
     'bd938-camera': toggleCamera, 'bd938-pause': () => pause(), 'bd938-finish': finish,
+    'bd938-map-pause':()=>pause(),
     'bd938-dialog-close': () => { if (dialogMode === 'pause') resume(); else if(dialogMode==='retry')combatOutcome(session.snapshot().combat);else if (dialogMode === 'briefing' || dialogMode === 'results') returnToSetup(); },
   };
   actions[target.id]?.();
 });
-root.addEventListener('keydown',event=>{if(event.target.closest('input,select,textarea,[contenteditable="true"]'))return;if(!byId('map').hidden&&!event.ctrlKey&&!event.metaKey&&!event.altKey){if(event.code==='KeyM'){event.preventDefault();session?.action('map');}if(event.code==='Escape'){event.preventDefault();pause();}}});
+root.addEventListener('keydown',event=>{if(event.target.closest('input,select,textarea,[contenteditable="true"]'))return;if(byId('systems').open&&event.code==='Escape'){event.preventDefault();event.stopPropagation();byId('systems').open=false;session?.focus();return;}if(!byId('map').hidden&&!event.ctrlKey&&!event.metaKey&&!event.altKey){if(event.code==='KeyM'){event.preventDefault();session?.action('map');}if(event.code==='Escape'){event.preventDefault();pause();}}});
 byId('map-view').addEventListener('pointerup',event=>{if(byId('army-panel').hidden)return;const svg=byId('map-view'),matrix=svg.getScreenCTM();if(!matrix)return;const p=svg.createSVGPoint();p.x=event.clientX;p.y=event.clientY;const v=p.matrixTransform(matrix.inverse());byId('army-x').value=String(Math.round(v.x));byId('army-z').value=String(Math.round(v.y));});
 root.addEventListener('change', event => {
   if (event.target.id === 'bd938-vessel') labOptions.vesselType = event.target.value;

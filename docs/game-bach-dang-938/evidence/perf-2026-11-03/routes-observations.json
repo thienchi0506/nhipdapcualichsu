@@ -1,0 +1,1512 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.80",
+    "revision": "@fb096c0011f9d50f0a264a9376420cdea9c421e3",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "productionBackendBlocked": true,
+  "reports": [
+    {
+      "name": "new-roundtrip-1365",
+      "links": [
+        {
+          "text": "🗺️ Sa Bàn 2D",
+          "href": "sa-ban.html"
+        },
+        {
+          "text": "🚀 Sa Bàn 3D",
+          "href": "sa-ban-3d.html"
+        },
+        {
+          "text": "Bạch Đằng 938 — Chiến dịch nhập vai",
+          "href": "game-bach-dang-938/index.html"
+        }
+      ],
+      "initialNewResources": [],
+      "entered": {
+        "sessionsCreated": 0,
+        "sessionsDisposed": 0,
+        "activeLoops": 0,
+        "activeLoads": 0,
+        "sessionListeners": 0,
+        "observers": 0,
+        "renderers": 0,
+        "geometries": 0,
+        "materials": 0,
+        "state": "SHELL",
+        "preferences": {
+          "hero": "H01",
+          "quality": "balanced"
+        },
+        "pauseReasons": [],
+        "session": null,
+        "lastDisposed": null,
+        "lastFault": null,
+        "canvases": 0,
+        "dialogOpen": false
+      },
+      "returned": {
+        "url": "http://127.0.0.1:8765/trang-chinh.html#khu-vuc",
+        "gameGlobals": "undefined",
+        "newResources": []
+      },
+      "exceptions": []
+    },
+    {
+      "name": "old-2d-after-new-1365",
+      "lobby": {
+        "url": "http://127.0.0.1:8765/sa-ban.html",
+        "title": "Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử",
+        "viewport": [
+          1365,
+          900
+        ],
+        "width": 1350,
+        "bodyClass": "",
+        "canvas": [
+          {
+            "id": "bg-canvas",
+            "w": 1365,
+            "h": 900,
+            "visible": true
+          },
+          {
+            "id": "gameCanvas",
+            "w": 1000,
+            "h": 560,
+            "visible": false
+          },
+          {
+            "id": "avatarCanvas",
+            "w": 90,
+            "h": 90,
+            "visible": false
+          },
+          {
+            "id": "golden-ember-canvas",
+            "w": 1365,
+            "h": 900,
+            "visible": true
+          }
+        ],
+        "actions": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "←\nVề Trang Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-voice",
+            "text": "🔊\nGiọng Đọc: Bật",
+            "href": null,
+            "onclick": "toggleGiongDoc()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-music",
+            "text": "🎵\nNhạc: Tắt",
+            "href": null,
+            "onclick": "xuLyClickNutNhac(event)",
+            "type": "submit"
+          },
+          {
+            "tag": "INPUT",
+            "id": "player-name-input",
+            "text": "Lý Tướng Quân",
+            "href": null,
+            "onclick": null,
+            "type": "text"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🏆\nBảng Xếp Hạng",
+            "href": null,
+            "onclick": "moModalBangXepHang()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🎒\nKho Bảo Vật",
+            "href": null,
+            "onclick": "moModalKhoBaoVat()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🌊 Vào Sa Bàn Chiến Đấu (10s Thủy Triều) ➔",
+            "href": null,
+            "onclick": "vaoThangSaBanChienDau()",
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⛺ Khám Phá Doanh Trại",
+            "href": null,
+            "onclick": "vaoAiBachDang()",
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⚔️ VÀO SA BÀN THỰC CHIẾN (SÔNG NHƯ NGUYỆT) ➔",
+            "href": null,
+            "onclick": "vaoThangSaBanNhuNguyet()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⛺ KHÁM PHÁ DOANH TRẠI & LŨY TRE ➔",
+            "href": null,
+            "onclick": "vaoAiNhuNguyet()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔",
+            "href": null,
+            "onclick": "event.stopPropagation(); vaoSaBan3D(2);",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🌊 VÀO SA BÀN CHIẾN ĐẤU (10S THỦY TRIỀU) ➔",
+            "href": null,
+            "onclick": "vaoThangSaBanChienDau()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⛺ KHÁM PHÁ DOANH TRẠI NHẬP VAI ➔",
+            "href": null,
+            "onclick": "vaoAiBachDang()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔",
+            "href": null,
+            "onclick": "event.stopPropagation(); vaoSaBan3D(1);",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🔒 Nhấn Để Xem Chi Tiết",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "hg-pause",
+            "text": "⏸ Tạm dừng",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "hg-open",
+            "text": "⚙ Tùy chỉnh",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          }
+        ],
+        "localStorageKeys": [
+          "giongDocBat",
+          "dcls.bd938.preferences.v1"
+        ],
+        "sessionStorageKeys": [
+          "dcls.music.session.v1"
+        ],
+        "runtime": {
+          "time": 0.08333333333333333,
+          "paused": false,
+          "reasons": [],
+          "quality": "medium",
+          "requestedQuality": "auto",
+          "frames": 6,
+          "frameP50": 16.66666603088379,
+          "frameP95": 166.3000030517578,
+          "tasks": 0,
+          "loops": [
+            "ambient-2d",
+            "sparks-2d",
+            "battle-2d"
+          ],
+          "droppedSteps": 3,
+          "renderedFrames": 4,
+          "renderP50": 0.6000000238418579,
+          "renderP95": 0.6000000238418579
+        },
+        "phase": 1,
+        "text": "←\nVề Trang Chính\nSA BÀN CHIẾN THUẬT\nẢI NHƯ NGUYỆT\n🔊\nGiọng Đọc: Bật\n🎵\nNhạc: Tắt\nBẢN ĐỒ CHIẾN DỊCH LỊCH SỬ\nSA BÀN CHIẾN DỊCH ĐẠI VIỆT\n\n\"Cầm gươm giữ vững non sông — Dùng mưu phạt tâm công — Giữ gìn sinh mạng tướng sĩ để kiến tạo thái bình muôn thuở.\"\n\n⚔️\nTÊN DANH TƯỚNG:\n🏆\nBảng Xếp Hạng\n🎒\nKho Bảo Vật\n⚔️\nNÂNG CẤP ĐẶC BIỆT\nSA BÀN TRẬN ĐỒ NHẬP VAI 2D — ĐẠI THẮNG BẠCH ĐẰNG 938\n\nĐã tích hợp Engine Canvas 2D hoàn chỉnh: Tự do khám phá Doanh trại, điều binh thời gian thực trên sông cắm cọc ngầm và Xử trí hậu chiến an dân (Chính thức thay thế chế độ trả lời câu hỏi và chọn đáp án trước đây).\n\n🌊 Vào Sa Bàn Chiến Đấu (10s Thủy Triều) ➔\n⛺ Khám Phá Doanh Trại\nCHỌN ẢI TIẾN VÀO SA BÀN\n🔥 ĐÃ MỞ KHÓA\nNăm 1077\nẢi 1: Phòng Tuyến Sông Như Nguyệt\n\nCùng Thái úy Lý Thường Kiệt dựng lũy tre bên dòng sông lịch sử, dùng mưu phạt tâm công để giữ gìn sinh mạng tướng sĩ và kiến tạo hòa bình.\n\n⚔️ Kháng Tống\n🛡️ Binh lực: 50.000\n✨ Điểm khởi đầu: 100\n⚔️ VÀO SA BÀN THỰC CHIẾN (SÔNG NHƯ NGUYỆT) ➔\n⛺ KHÁM PHÁ DOANH TRẠI & LŨY TRE ➔\n🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔\n🔥 ĐÃ MỞ KHÓA\nNăm 938\nẢi 2: Bạch Đằng Giang (938) — Trận Đồ Nhập Vai\n\nChế độ Trận Đồ Nhập Vai 2D: Khám phá doanh trại đêm, điều binh khiển tướng trên sông Bạch Đằng theo con nước thủy triều và xử trí hậu chiến an dân (Đã thay thế toàn bộ phần câu hỏi trắc nghiệm cũ).\n\n🌊 Thủy chiến Bạch Đằng\n🛡️ Binh lực: 35.000\n🪵 Trận địa cọc ngầm\n✨ Điểm khởi đầu: 100\n🌊 VÀO SA BÀN CHIẾN ĐẤU (10S THỦY TRIỀU) ➔\n⛺ KHÁM PHÁ DOANH TRẠI NHẬP VAI ➔\n🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔\n🔒 ĐANG PHÁT TRIỂN\nNăm 1427\nẢi 3: Chi Lăng — Xương Giang\n\nKhởi nghĩa Lam Sơn chém Liễu Thăng tại gò Mã Yên, giải phóng giang sơn và kết thúc 20 năm đô hộ tàn bạo của nhà Minh, mở ra triều đại Hậu Lê rực rỡ.\n\n🏹 Khởi nghĩa Lam Sơn\n📜 Bình Ngô Đại Cáo\n⏳ Đang điêu khắc sa bàn\n🔒 Nhấn Để Xem Chi Tiết\n⏸ Tạm dừng\n⚙ Tùy chỉnh",
+        "resources": [
+          {
+            "url": "http://127.0.0.1:8765/site-music.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.js",
+            "duration": 15,
+            "bytes": 13900
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.css",
+            "duration": 15,
+            "bytes": 3965
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2",
+            "duration": 109,
+            "bytes": 1675
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-upgrades-2d.js",
+            "duration": 13,
+            "bytes": 5087
+          },
+          {
+            "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/hinh-4.jpg",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/anh-nen.jpg",
+            "duration": 0,
+            "bytes": 0
+          }
+        ]
+      },
+      "battle": {
+        "stage": 2,
+        "act": 2,
+        "title": "⚔️ TRẬN ĐỒ NHẬP VAI\n• Hồi 2: Sa Bàn Bạch Đằng Thực Chiến",
+        "frames": 35
+      },
+      "paused": true,
+      "returnedLobby": true,
+      "exceptions": []
+    },
+    {
+      "name": "old-3d-after-new-1365",
+      "lobby": {
+        "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+        "title": "Sa Bàn 3D Bạch Đằng Giang (938) • Dấu Chân Lịch Sử",
+        "viewport": [
+          1365,
+          900
+        ],
+        "width": 1365,
+        "bodyClass": "campaign-bach-dang",
+        "canvas": [
+          {
+            "id": "webgl-canvas",
+            "w": 1365,
+            "h": 900,
+            "visible": true
+          },
+          {
+            "id": "minimap-canvas",
+            "w": 220,
+            "h": 160,
+            "visible": false
+          },
+          {
+            "id": "relic-3d-canvas",
+            "w": 300,
+            "h": 150,
+            "visible": false
+          }
+        ],
+        "actions": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "⬅\nTrang Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "🎮\nChuyển sang Bản 2D",
+            "href": "sa-ban.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-voice",
+            "text": "🔊\nGiọng Đọc: Bật",
+            "href": null,
+            "onclick": "toggleGiongDoc()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-music",
+            "text": "🎵\nNhạc: Tắt",
+            "href": null,
+            "onclick": "toggleNhacNen()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "cam-btn-tactical",
+            "text": "🗺️\nSa Bàn Toàn Cảnh",
+            "href": null,
+            "onclick": "datGocNhinCamera('TACTICAL')",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-call-battle",
+            "text": "🚤\nSẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN",
+            "href": null,
+            "onclick": "khoiDongChienTranHoi2()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-quest-toggle",
+            "text": "[-]",
+            "href": null,
+            "onclick": "toggleQuestOverlay(event)",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⚔️\nVÀO SA BÀN CHIẾN TRƯỜNG 3D",
+            "href": null,
+            "onclick": "chuyenVaoThucChien(event)",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-enter-campaign-2",
+            "text": "⚔️\nTIẾN VÀO NHƯ NGUYỆT 1077",
+            "href": null,
+            "onclick": "chuyenSangChienDichNhuNguyet()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🏛️\nBảo Tàng Cổ Vật 3D",
+            "href": null,
+            "onclick": "moModalBaoTang()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🏆\nBảng Xếp Hạng",
+            "href": null,
+            "onclick": "moModalBangVang()",
+            "type": "submit"
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "⬅\nVề Trang Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "BUTTON",
+            "id": "hg-pause",
+            "text": "⏸ Tạm dừng",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "hg-open",
+            "text": "⚙ Tùy chỉnh",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          }
+        ],
+        "localStorageKeys": [
+          "giongDocBat",
+          "dcls.bd938.preferences.v1"
+        ],
+        "sessionStorageKeys": [
+          "dcls.music.session.v1"
+        ],
+        "runtime": {
+          "time": 0.11666666666666665,
+          "paused": false,
+          "reasons": [],
+          "quality": "medium",
+          "requestedQuality": "auto",
+          "frames": 4,
+          "frameP50": 16.66666603088379,
+          "frameP95": 41.900001525878906,
+          "tasks": 1,
+          "loops": [
+            "battle-3d"
+          ],
+          "droppedSteps": 3,
+          "renderedFrames": 4,
+          "renderP50": 235.29999995231628,
+          "renderP95": 235.29999995231628
+        },
+        "phase": "CHUA_BAT_DAU",
+        "text": "⬅\nTrang Chính\n🎮\nChuyển sang Bản 2D\n🔊\nGiọng Đọc: Bật\n🎵\nNhạc: Tắt\n🌊\nĐỒNG HỒ THỦY TRIỀU\nĐỈNH TRIỀU (100%)\nMực nước: +1.3m (Cọc ngầm chìm hẳn)\n🗺️\nSa Bàn Toàn Cảnh\n🚤\nSẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN\n📜\nNHIỆM VỤ QUÂN CƠ\n[-]\n🌊 THỦY TRIỀU DẪN DỤ\nKế giả thua nhử toàn bộ hạm đội giặc vào bãi cọc ngầm!\n🎖️\nHUÂN CHƯƠNG DANH TƯỚNG\nBẬC THẦY THỦY CHIẾN\nDụ 100% thuyền giặc vào bãi cọc ngầm sông Bạch Đằng!\n⚔️ HỆ THỐNG SA BÀN 3D THỜI GIAN THỰC\nĐẠI CHIẾN BẠCH ĐẰNG GIANG (938)\n\n\"Cắm cọc vạt nhọn bịt sắt dưới lòng sông, lợi dụng con nước triều lên nhử địch vào bẫy, triều rút dốc toàn lực diệt gọn hạm đội Hoằng Tháo — Chấm dứt hơn một nghìn năm Bắc thuộc, mở ra kỷ nguyên độc lập muôn thuở.\"\n\n★ CHIẾN DỊCH TRỌNG ĐIỂM 3D\nẢI 1: BẠCH ĐẰNG GIANG (938)\n\nChỉ huy thế trận cọc ngầm ba chiều, đón đầu thủy quân Nam Hán dưới sự dẫn dắt của Lưu Hoằng Tháo. Sử dụng kế giả thua nhử địch khi triều dâng và phản công khi triều rút.\n\n⚔️\nVÀO SA BÀN CHIẾN TRƯỜNG 3D\n★ ĐÃ SẴN SÀNG THỰC CHIẾN 3D\nẢI 2: PHÒNG TUYẾN NHƯ NGUYỆT (1077)\n\nPhòng tuyến chiến lũy tre ven sông của Thái úy Lý Thường Kiệt. Vang vọng bài thơ thần Nam Quốc Sơn Hà đập tan 10 vạn đại quân Tống bên bờ sông Cầu.\n\n⚔️\nTIẾN VÀO NHƯ NGUYỆT 1077\n🏛️\nBảo Tàng Cổ Vật 3D\n🏆\nBảng Xếp Hạng\n⬅\nVề Trang Chính\n⏸ Tạm dừng\n⚙ Tùy chỉnh",
+        "resources": [
+          {
+            "url": "http://127.0.0.1:8765/site-music.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.css",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2",
+            "duration": 102,
+            "bytes": 1879
+          },
+          {
+            "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+            "duration": 21,
+            "bytes": 20599
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+            "duration": 0,
+            "bytes": 0
+          }
+        ]
+      },
+      "battle": {
+        "active": true,
+        "campaign": 1,
+        "fleet": 6,
+        "enemies": 7,
+        "renderCalls": 238
+      },
+      "paused": true,
+      "exceptions": []
+    },
+    {
+      "name": "exam-after-new-1365",
+      "catalogCount": 70,
+      "initial": {
+        "id": "de-01",
+        "p1": 22,
+        "p2": 2,
+        "options": 4,
+        "timer": 2700
+      },
+      "selected": true,
+      "newGameResources": [],
+      "submitted": {
+        "submitted": true,
+        "score": "0.27",
+        "result": true
+      },
+      "retake": {
+        "submitted": false,
+        "answer": null
+      },
+      "exceptions": []
+    },
+    {
+      "name": "new-roundtrip-390",
+      "links": [
+        {
+          "text": "🗺️ Sa Bàn 2D",
+          "href": "sa-ban.html"
+        },
+        {
+          "text": "🚀 Sa Bàn 3D",
+          "href": "sa-ban-3d.html"
+        },
+        {
+          "text": "Bạch Đằng 938 — Chiến dịch nhập vai",
+          "href": "game-bach-dang-938/index.html"
+        }
+      ],
+      "initialNewResources": [],
+      "entered": {
+        "sessionsCreated": 0,
+        "sessionsDisposed": 0,
+        "activeLoops": 0,
+        "activeLoads": 0,
+        "sessionListeners": 0,
+        "observers": 0,
+        "renderers": 0,
+        "geometries": 0,
+        "materials": 0,
+        "state": "SHELL",
+        "preferences": {
+          "hero": "H01",
+          "quality": "economy"
+        },
+        "pauseReasons": [],
+        "session": null,
+        "lastDisposed": null,
+        "lastFault": null,
+        "canvases": 0,
+        "dialogOpen": false
+      },
+      "returned": {
+        "url": "http://127.0.0.1:8765/trang-chinh.html#khu-vuc",
+        "gameGlobals": "undefined",
+        "newResources": []
+      },
+      "exceptions": []
+    },
+    {
+      "name": "old-2d-after-new-390",
+      "lobby": {
+        "url": "http://127.0.0.1:8765/sa-ban.html",
+        "title": "Sa Bàn Chiến Thuật — Dấu Chân Lịch Sử",
+        "viewport": [
+          390,
+          844
+        ],
+        "width": 390,
+        "bodyClass": "",
+        "canvas": [
+          {
+            "id": "bg-canvas",
+            "w": 390,
+            "h": 844,
+            "visible": true
+          },
+          {
+            "id": "gameCanvas",
+            "w": 1000,
+            "h": 560,
+            "visible": false
+          },
+          {
+            "id": "avatarCanvas",
+            "w": 90,
+            "h": 90,
+            "visible": false
+          },
+          {
+            "id": "golden-ember-canvas",
+            "w": 390,
+            "h": 844,
+            "visible": true
+          }
+        ],
+        "actions": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "←\nVề Trang Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-voice",
+            "text": "🔊\nGiọng Đọc: Bật",
+            "href": null,
+            "onclick": "toggleGiongDoc()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-music",
+            "text": "🎵\nNhạc: Tắt",
+            "href": null,
+            "onclick": "xuLyClickNutNhac(event)",
+            "type": "submit"
+          },
+          {
+            "tag": "INPUT",
+            "id": "player-name-input",
+            "text": "Lý Tướng Quân",
+            "href": null,
+            "onclick": null,
+            "type": "text"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🏆\nBảng Xếp Hạng",
+            "href": null,
+            "onclick": "moModalBangXepHang()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🎒\nKho Bảo Vật",
+            "href": null,
+            "onclick": "moModalKhoBaoVat()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🌊 Vào Sa Bàn Chiến Đấu (10s Thủy Triều) ➔",
+            "href": null,
+            "onclick": "vaoThangSaBanChienDau()",
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⛺ Khám Phá Doanh Trại",
+            "href": null,
+            "onclick": "vaoAiBachDang()",
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⚔️ VÀO SA BÀN THỰC CHIẾN (SÔNG NHƯ NGUYỆT) ➔",
+            "href": null,
+            "onclick": "vaoThangSaBanNhuNguyet()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⛺ KHÁM PHÁ DOANH TRẠI & LŨY TRE ➔",
+            "href": null,
+            "onclick": "vaoAiNhuNguyet()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔",
+            "href": null,
+            "onclick": "event.stopPropagation(); vaoSaBan3D(2);",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🌊 VÀO SA BÀN CHIẾN ĐẤU (10S THỦY TRIỀU) ➔",
+            "href": null,
+            "onclick": "vaoThangSaBanChienDau()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⛺ KHÁM PHÁ DOANH TRẠI NHẬP VAI ➔",
+            "href": null,
+            "onclick": "vaoAiBachDang()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔",
+            "href": null,
+            "onclick": "event.stopPropagation(); vaoSaBan3D(1);",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🔒 Nhấn Để Xem Chi Tiết",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "hg-pause",
+            "text": "⏸ Tạm dừng",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "hg-open",
+            "text": "⚙ Tùy chỉnh",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          }
+        ],
+        "localStorageKeys": [
+          "giongDocBat",
+          "dcls_peaceScore",
+          "thao_truong_best_de-01",
+          "dcls.bd938.preferences.v1"
+        ],
+        "sessionStorageKeys": [
+          "dcls.music.session.v1"
+        ],
+        "runtime": {
+          "time": 0.13333333333333333,
+          "paused": false,
+          "reasons": [],
+          "quality": "medium",
+          "requestedQuality": "auto",
+          "frames": 5,
+          "frameP50": 16.66666603088379,
+          "frameP95": 358.29998779296875,
+          "tasks": 0,
+          "loops": [
+            "ambient-2d",
+            "sparks-2d",
+            "battle-2d"
+          ],
+          "droppedSteps": 4,
+          "renderedFrames": 4,
+          "renderP50": 0.5,
+          "renderP95": 40.10000002384186
+        },
+        "phase": 1,
+        "text": "←\nVề Trang Chính\nSA BÀN CHIẾN THUẬT\n🔊\nGiọng Đọc: Bật\n🎵\nNhạc: Tắt\nBẢN ĐỒ CHIẾN DỊCH LỊCH SỬ\nSA BÀN CHIẾN DỊCH ĐẠI VIỆT\n\n\"Cầm gươm giữ vững non sông — Dùng mưu phạt tâm công — Giữ gìn sinh mạng tướng sĩ để kiến tạo thái bình muôn thuở.\"\n\n⚔️\nTÊN DANH TƯỚNG:\n🏆\nBảng Xếp Hạng\n🎒\nKho Bảo Vật\n⚔️\nNÂNG CẤP ĐẶC BIỆT\nSA BÀN TRẬN ĐỒ NHẬP VAI 2D — ĐẠI THẮNG BẠCH ĐẰNG 938\n\nĐã tích hợp Engine Canvas 2D hoàn chỉnh: Tự do khám phá Doanh trại, điều binh thời gian thực trên sông cắm cọc ngầm và Xử trí hậu chiến an dân (Chính thức thay thế chế độ trả lời câu hỏi và chọn đáp án trước đây).\n\n🌊 Vào Sa Bàn Chiến Đấu (10s Thủy Triều) ➔\n⛺ Khám Phá Doanh Trại\nCHỌN ẢI TIẾN VÀO SA BÀN\n🔥 ĐÃ MỞ KHÓA\nNăm 1077\nẢi 1: Phòng Tuyến Sông Như Nguyệt\n\nCùng Thái úy Lý Thường Kiệt dựng lũy tre bên dòng sông lịch sử, dùng mưu phạt tâm công để giữ gìn sinh mạng tướng sĩ và kiến tạo hòa bình.\n\n⚔️ Kháng Tống\n🛡️ Binh lực: 50.000\n✨ Điểm khởi đầu: 100\n⚔️ VÀO SA BÀN THỰC CHIẾN (SÔNG NHƯ NGUYỆT) ➔\n⛺ KHÁM PHÁ DOANH TRẠI & LŨY TRE ➔\n🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔\n🔥 ĐÃ MỞ KHÓA\nNăm 938\nẢi 2: Bạch Đằng Giang (938) — Trận Đồ Nhập Vai\n\nChế độ Trận Đồ Nhập Vai 2D: Khám phá doanh trại đêm, điều binh khiển tướng trên sông Bạch Đằng theo con nước thủy triều và xử trí hậu chiến an dân (Đã thay thế toàn bộ phần câu hỏi trắc nghiệm cũ).\n\n🌊 Thủy chiến Bạch Đằng\n🛡️ Binh lực: 35.000\n🪵 Trận địa cọc ngầm\n✨ Điểm khởi đầu: 100\n🌊 VÀO SA BÀN CHIẾN ĐẤU (10S THỦY TRIỀU) ➔\n⛺ KHÁM PHÁ DOANH TRẠI NHẬP VAI ➔\n🚀 CHƠI BẢN SA BÀN 3D TOÀN CẢNH ➔\n🔒 ĐANG PHÁT TRIỂN\nNăm 1427\nẢi 3: Chi Lăng — Xương Giang\n\nKhởi nghĩa Lam Sơn chém Liễu Thăng tại gò Mã Yên, giải phóng giang sơn và kết thúc 20 năm đô hộ tàn bạo của nhà Minh, mở ra triều đại Hậu Lê rực rỡ.\n\n🏹 Khởi nghĩa Lam Sơn\n📜 Bình Ngô Đại Cáo\n⏳ Đang điêu khắc sa bàn\n🔒 Nhấn Để Xem Chi Tiết\n⏸ Tạm dừng\n⚙ Tùy chỉnh",
+        "resources": [
+          {
+            "url": "http://127.0.0.1:8765/site-music.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.js",
+            "duration": 7,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.css",
+            "duration": 7,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2",
+            "duration": 7,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-upgrades-2d.js",
+            "duration": 8,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/anh-nen2.jpg",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/hinh-4.jpg",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/anh-nen.jpg",
+            "duration": 0,
+            "bytes": 0
+          }
+        ]
+      },
+      "battle": {
+        "stage": 2,
+        "act": 2,
+        "title": "⚔️ TRẬN ĐỒ NHẬP VAI\n• Hồi 2: Sa Bàn Bạch Đằng Thực Chiến",
+        "frames": 47
+      },
+      "paused": true,
+      "returnedLobby": true,
+      "exceptions": []
+    },
+    {
+      "name": "old-3d-after-new-390",
+      "lobby": {
+        "url": "http://127.0.0.1:8765/sa-ban-3d.html",
+        "title": "Sa Bàn 3D Bạch Đằng Giang (938) • Dấu Chân Lịch Sử",
+        "viewport": [
+          390,
+          844
+        ],
+        "width": 390,
+        "bodyClass": "campaign-bach-dang",
+        "canvas": [
+          {
+            "id": "webgl-canvas",
+            "w": 390,
+            "h": 844,
+            "visible": true
+          },
+          {
+            "id": "minimap-canvas",
+            "w": 220,
+            "h": 160,
+            "visible": false
+          },
+          {
+            "id": "relic-3d-canvas",
+            "w": 300,
+            "h": 150,
+            "visible": false
+          }
+        ],
+        "actions": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "⬅\nTrang Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "🎮\nChuyển sang Bản 2D",
+            "href": "sa-ban.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-voice",
+            "text": "🔊\nGiọng Đọc: Bật",
+            "href": null,
+            "onclick": "toggleGiongDoc()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-toggle-music",
+            "text": "🎵\nNhạc: Tắt",
+            "href": null,
+            "onclick": "toggleNhacNen()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "cam-btn-tactical",
+            "text": "🗺️\nSa Bàn Toàn Cảnh",
+            "href": null,
+            "onclick": "datGocNhinCamera('TACTICAL')",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-call-battle",
+            "text": "🚤\nSẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN",
+            "href": null,
+            "onclick": "khoiDongChienTranHoi2()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-quest-toggle",
+            "text": "[-]",
+            "href": null,
+            "onclick": "toggleQuestOverlay(event)",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "⚔️\nVÀO SA BÀN CHIẾN TRƯỜNG 3D",
+            "href": null,
+            "onclick": "chuyenVaoThucChien(event)",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-enter-campaign-2",
+            "text": "⚔️\nTIẾN VÀO NHƯ NGUYỆT 1077",
+            "href": null,
+            "onclick": "chuyenSangChienDichNhuNguyet()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🏛️\nBảo Tàng Cổ Vật 3D",
+            "href": null,
+            "onclick": "moModalBaoTang()",
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "🏆\nBảng Xếp Hạng",
+            "href": null,
+            "onclick": "moModalBangVang()",
+            "type": "submit"
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "⬅\nVề Trang Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          }
+        ],
+        "localStorageKeys": [
+          "giongDocBat",
+          "dcls_peaceScore",
+          "thao_truong_best_de-01",
+          "dcls.bd938.preferences.v1"
+        ],
+        "sessionStorageKeys": [
+          "dcls.music.session.v1"
+        ],
+        "runtime": {
+          "time": 0.13333333333333333,
+          "paused": false,
+          "reasons": [],
+          "quality": "medium",
+          "requestedQuality": "auto",
+          "frames": 7,
+          "frameP50": 16.66666603088379,
+          "frameP95": 25,
+          "tasks": 1,
+          "loops": [
+            "battle-3d"
+          ],
+          "droppedSteps": 3,
+          "renderedFrames": 6,
+          "renderP50": 23.800000071525574,
+          "renderP95": 33.700000047683716
+        },
+        "phase": "CHUA_BAT_DAU",
+        "text": "⬅\nTrang Chính\n🎮\nChuyển sang Bản 2D\n🔊\nGiọng Đọc: Bật\n🎵\nNhạc: Tắt\n🌊\nĐỒNG HỒ THỦY TRIỀU\nĐỈNH TRIỀU (100%)\nMực nước: +1.3m (Cọc ngầm chìm hẳn)\n🗺️\nSa Bàn Toàn Cảnh\n🚤\nSẴN SÀNG CHIẾN ĐẤU · 6 THUYỀN\n📜\nNHIỆM VỤ QUÂN CƠ\n[-]\n🌊 THỦY TRIỀU DẪN DỤ\nKế giả thua nhử toàn bộ hạm đội giặc vào bãi cọc ngầm!\n🎖️\nHUÂN CHƯƠNG DANH TƯỚNG\nBẬC THẦY THỦY CHIẾN\nDụ 100% thuyền giặc vào bãi cọc ngầm sông Bạch Đằng!\n⚔️ HỆ THỐNG SA BÀN 3D THỜI GIAN THỰC\nĐẠI CHIẾN BẠCH ĐẰNG GIANG (938)\n\n\"Cắm cọc vạt nhọn bịt sắt dưới lòng sông, lợi dụng con nước triều lên nhử địch vào bẫy, triều rút dốc toàn lực diệt gọn hạm đội Hoằng Tháo — Chấm dứt hơn một nghìn năm Bắc thuộc, mở ra kỷ nguyên độc lập muôn thuở.\"\n\n★ CHIẾN DỊCH TRỌNG ĐIỂM 3D\nẢI 1: BẠCH ĐẰNG GIANG (938)\n\nChỉ huy thế trận cọc ngầm ba chiều, đón đầu thủy quân Nam Hán dưới sự dẫn dắt của Lưu Hoằng Tháo. Sử dụng kế giả thua nhử địch khi triều dâng và phản công khi triều rút.\n\n⚔️\nVÀO SA BÀN CHIẾN TRƯỜNG 3D\n★ ĐÃ SẴN SÀNG THỰC CHIẾN 3D\nẢI 2: PHÒNG TUYẾN NHƯ NGUYỆT (1077)\n\nPhòng tuyến chiến lũy tre ven sông của Thái úy Lý Thường Kiệt. Vang vọng bài thơ thần Nam Quốc Sơn Hà đập tan 10 vạn đại quân Tống bên bờ sông Cầu.\n\n⚔️\nTIẾN VÀO NHƯ NGUYỆT 1077\n🏛️\nBảo Tàng Cổ Vật 3D\n🏆\nBảng Xếp Hạng\n⬅\nVề Trang Chính",
+        "resources": [
+          {
+            "url": "http://127.0.0.1:8765/site-music.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-runtime.css",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2",
+            "duration": 4,
+            "bytes": 0
+          },
+          {
+            "url": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "http://127.0.0.1:8765/game-upgrades-3d.js",
+            "duration": 4,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Dct-FG.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3Hct-FG.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6faw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_P3_ctw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYeGD33Esw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf1D33Esw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf0D33Esw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+            "duration": 0,
+            "bytes": 0
+          }
+        ]
+      },
+      "battle": {
+        "active": true,
+        "campaign": 1,
+        "fleet": 6,
+        "enemies": 7,
+        "renderCalls": 148
+      },
+      "paused": true,
+      "exceptions": []
+    },
+    {
+      "name": "exam-after-new-390",
+      "catalogCount": 70,
+      "initial": {
+        "id": "de-01",
+        "p1": 22,
+        "p2": 2,
+        "options": 4,
+        "timer": 2700
+      },
+      "selected": true,
+      "newGameResources": [],
+      "submitted": {
+        "submitted": true,
+        "score": "0.00",
+        "result": true
+      },
+      "retake": {
+        "submitted": false,
+        "answer": null
+      },
+      "exceptions": []
+    },
+    {
+      "name": "library-and-text-input-after-new",
+      "inputs": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "⬅ Quay lại Sảnh Chính",
+          "href": "trang-chinh.html",
+          "onclick": null,
+          "type": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btn-music",
+          "text": "🔇 Nhạc: Tắt",
+          "href": null,
+          "onclick": "toggleMusic()",
+          "type": "submit"
+        },
+        {
+          "tag": "INPUT",
+          "id": "search",
+          "text": "Tìm tên bài học, khái niệm hoặc chủ đề (VD: Hiện thực lịch sử, Văn Lang, Đại Việt, ASEAN...)",
+          "href": null,
+          "onclick": null,
+          "type": "search"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "KHỐI 10\n7 Chủ đề • 13 Bài",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "KHỐI 11\n6 Chủ đề • 13 Bài",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "KHỐI 12\n6 Chủ đề • 17 Bài",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "toggle-all",
+          "text": "↕ Mở rộng / Thu gọn tất cả",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 1. Lịch sử và Sử học\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📖 Vào học",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📖 Vào học",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 2. Vai trò của Sử học\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 3. Một số nền văn minh thế giới thời cổ - trung đại\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 4. Các cuộc cách mạng công nghiệp trong lịch sử thế giới\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 5. Văn minh Đông Nam Á thời cổ - trung đại\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 6. Một số nền văn minh trên đất nước Việt Nam trước năm 1858\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "📁 CHỦ ĐỀ 7. Cộng đồng các dân tộc Việt Nam\n▼",
+          "href": null,
+          "onclick": null,
+          "type": "submit"
+        }
+      ],
+      "lesson": {
+        "title": "Liên hợp quốc",
+        "open": true
+      },
+      "failure": {
+        "error": "{'blockedClick': '#search', 'rect': {'x': 675, 'y': 199.7578125, 'w': 620, 'h': 56.390625, 'hit': False, 'text': ''}}",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\perf-2026-11-03\\validate_routes.py\", line 16, in record\n    fn(item);item['exceptions']=errors(b);print('DONE '+name,flush=True)\n    ^^^^^^^^\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\perf-2026-11-03\\validate_routes.py\", line 96, in library\n    b.click('#'+field);b.call('Input.insertText',{'text':'WASD Space'})\n    ^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\THIEN CHI\\Documents\\GitHub\\nhipdapcualichsu\\docs\\game-bach-dang-938\\evidence\\audit_capture.py\", line 212, in click\n    raise RuntimeError({'blockedClick': selector, 'rect': rect})\nRuntimeError: {'blockedClick': '#search', 'rect': {'x': 675, 'y': 199.7578125, 'w': 620, 'h': 56.390625, 'hit': False, 'text': ''}}\n"
+      },
+      "snapshot": {
+        "url": "http://127.0.0.1:8765/tang-thu-cac.html",
+        "title": "Tàng Thư Các - Kho Tàng Tri Thức Lịch Sử",
+        "viewport": [
+          1365,
+          900
+        ],
+        "width": 1350,
+        "bodyClass": "",
+        "canvas": [
+          {
+            "id": "golden-ember-canvas",
+            "w": 1365,
+            "h": 900,
+            "visible": true
+          }
+        ],
+        "actions": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "⬅ Quay lại Sảnh Chính",
+            "href": "trang-chinh.html",
+            "onclick": null,
+            "type": ""
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-music",
+            "text": "🔇 Nhạc: Tắt",
+            "href": null,
+            "onclick": "toggleMusic()",
+            "type": "submit"
+          },
+          {
+            "tag": "INPUT",
+            "id": "search",
+            "text": "Tìm tên bài học, khái niệm hoặc chủ đề (VD: Hiện thực lịch sử, Văn Lang, Đại Việt, ASEAN...)",
+            "href": null,
+            "onclick": null,
+            "type": "search"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "KHỐI 10\n7 Chủ đề • 13 Bài",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "KHỐI 11\n6 Chủ đề • 13 Bài",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "KHỐI 12\n6 Chủ đề • 17 Bài",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "toggle-all",
+            "text": "↕ Mở rộng / Thu gọn tất cả",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📁 CHỦ ĐỀ 1. Thế giới trong và sau Chiến tranh lạnh\n▼",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📖 Vào học",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📖 Vào học",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📖 Vào học",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📁 CHỦ ĐỀ 2. ASEAN: Những chặng đường lịch sử\n▼",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📁 CHỦ ĐỀ 3. Cách mạng tháng Tám năm 1945, chiến tranh giải phóng dân tộc và chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam (từ",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📁 CHỦ ĐỀ 4. Công cuộc Đổi mới ở Việt Nam từ năm 1986 đến nay\n▼",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📁 CHỦ ĐỀ 5. Lịch sử đối ngoại của Việt Nam thời cận – hiện đại\n▼",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "📁 CHỦ ĐỀ 6. Hồ Chí Minh trong lịch sử Việt Nam\n▼",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "close",
+            "text": "×",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-spotlight",
+            "text": "🔦\nĐèn Soi Sử Liệu",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btn-speech",
+            "text": "🔊\nNghe đọc bài",
+            "href": null,
+            "onclick": null,
+            "type": "button"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "mark-done",
+            "text": "✅ Đánh dấu Đã học",
+            "href": null,
+            "onclick": null,
+            "type": "submit"
+          }
+        ],
+        "localStorageKeys": [
+          "giongDocBat",
+          "dcls_peaceScore",
+          "thao_truong_best_de-01",
+          "dcls.bd938.preferences.v1"
+        ],
+        "sessionStorageKeys": [
+          "dcls.music.session.v1"
+        ],
+        "runtime": null,
+        "phase": null,
+        "text": "⬅ Quay lại Sảnh Chính\n🔇 Nhạc: Tắt\n📜 Đã lĩnh hội: 0 / 43 bài học\nTÀNG THƯ CÁC - KHO TÀNG TRI THỨC LỊCH SỬ\n\nHệ thống hóa toàn diện Khái niệm, Kiến thức cốt lõi & Sự kiện trọng tâm Lịch sử THPT (Khối 10, 11, 12)\n\nKHỐI 10\n7 Chủ đề • 13 Bài\nKHỐI 11\n6 Chủ đề • 13 Bài\nKHỐI 12\n6 Chủ đề • 17 Bài\nDanh mục Chương trình Lịch sử Khối 12\n↕ Mở rộng / Thu gọn tất cả\n📁 CHỦ ĐỀ 1. Thế giới trong và sau Chiến tranh lạnh\n▼\n📜 Liên hợp quốc\n📖 Vào học\n📜 Trật tự thế giới trong Chiến tranh lạnh\n📖 Vào học\n📜 Trật tự thế giới sau Chiến tranh lạnh\n📖 Vào học\n📁 CHỦ ĐỀ 2. ASEAN: Những chặng đường lịch sử\n▼\n📁 CHỦ ĐỀ 3. Cách mạng tháng Tám năm 1945, chiến tranh giải phóng dân tộc và chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam (từ tháng 8 năm 1945 đến nay)\n▼\n📁 CHỦ ĐỀ 4. Công cuộc Đổi mới ở Việt Nam từ năm 1986 đến nay\n▼\n📁 CHỦ ĐỀ 5. Lịch sử đối ngoại của Việt Nam thời cận – hiện đại\n▼\n📁 CHỦ ĐỀ 6. Hồ Chí Minh trong lịch sử Việt Nam\n▼\n×\nKhối 12 • Thế giới trong và sau Chiến tranh lạnh\n🔦\nĐèn Soi Sử Liệu\n🔊\nNghe đọc bài\nLiên hợp quốc\n📌 Hệ Thống Khái Niệm & Kiến Thức Cốt Lõi Cần Học Thuộc\n1. Một số vấn đề cơ bản về Liên hợp quốc\nBối cảnh lịch sử: Vào giai đoạn cuối của Chiến tranh thế giới thứ hai, sức mạnh và ưu thế trên chiến trường thuộc về phe Đồng minh chống phát xít và việc tổ chức lại thế giới sau chiến tranh càng trở nên cấp bách. Các nước Đồng minh chống phát xít mong muốn thiết lập một tổ chức quốc tế thực sự có vai trò duy trì hoà bình, an ninh thế giới để thay thế cho Hội Quốc liên (tổ chức thành lập năm 1920 nhưng không đủ sức mạnh bảo vệ hoà bình và chính thức giải thể năm 1946). Trong bối cảnh đó, các nước Liên Xô, Mỹ, Anh đã triển khai các hoạt động để thành lập Liên hợp quốc.\nQuá trình hình thành: Ngày 1-1-1942, đại diện 26 nước chống phát xít đã kí bản Tuyên bố về Liên hợp quốc, cam kết thành lập một tổ chức quốc tế vì hoà bình và an ninh sau chiến tranh. Từ năm 1943, các nước thoả thuận được một số điểm cơ bản về cơ cấu Liên hợp quốc, Đại hội đồng, thành viên thường trực Hội đồng Bảo an,.... Tại Hội nghị Tê-hê-ran (I-ran, từ ngày 28-11 đến ngày 1-12-1943), ba nước Liên Xô, Mỹ, Anh khẳng định quyết tâm thành lập Liên hợp quốc. Tại Hội nghị I-an-ta (Liên Xô, tháng ",
+        "resources": [
+          {
+            "url": "http://127.0.0.1:8765/site-music.js",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2",
+            "duration": 151,
+            "bytes": 1465
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cHrqvyzw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cGrqvyzw.woff2",
+            "duration": 0,
+            "bytes": 0
+          },
+          {
+            "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6saw1J5X9T9RW6j9bNfFIMZhhWnFTyNZIQD1-_FXP0RgnaOg9MYBNLg_cIrqs.woff2",
+            "duration": 0,
+            "bytes": 0
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -32,9 +32,10 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
   function box(parent, mat, x, y, z, w, h, d) { return mesh(new THREE.BoxGeometry(w, h, d), mat, parent, x, y, z); }
   const world = new THREE.Group(); scene.add(world);
   const boats = [];
-  const actorVisuals=new Map(),arrowVisuals=new Map(),arrowPool=[],occluders=[];
+  const actorVisuals=new Map(),arrowVisuals=new Map(),arrowPool=[],occluders=[],cameraDetails=[];
+  const detailBounds=new THREE.Box3();
   const raycaster=new THREE.Raycaster();
-  let cameraTargetId=null,cameraClearance=0,screenTargets=[];
+  let cameraTargetId=null,cameraClearance=0,screenTargets=[],cameraObstructed=false,cameraOffset=0;
   function dispose() {
     if (disposed) return;
     disposed = true;
@@ -97,9 +98,19 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
       occluders.push(mesh(hillGeo, i % 3 ? green : stone, world, side * (42 + i % 3 * 7), 7, -65 + i * 12));
     }
     const trunkGeo = new THREE.CylinderGeometry(0.25, 0.35, 3, 5), leafGeo = new THREE.ConeGeometry(2.2, 5, 6);
+    const instanceMatrix=new THREE.Matrix4();
+    function instances(geometry,mat,count){
+      if(!geometries.has(geometry)){geometries.add(geometry);metrics.geometries++;}
+      const result=new THREE.InstancedMesh(geometry,mat,count);result.castShadow=true;result.receiveShadow=true;
+      // r128 has no per-instance bounding sphere; preserve visibility at all cameras.
+      result.frustumCulled=false;world.add(result);return result;
+    }
+    const trunks=instances(trunkGeo,wood,24),leaves=instances(leafGeo,green,16),darkLeaves=instances(leafGeo,darkGreen,8);
+    let greenIndex=0,darkIndex=0;
     for (let i = 0; i < 24; i++) {
       const x = (i % 2 ? 1 : -1) * (26 + (i % 4) * 2.5), z = -53 + i * 4.6;
-      mesh(trunkGeo, wood, world, x, 2, z); mesh(leafGeo, i % 3 ? green : darkGreen, world, x, 5, z);
+      instanceMatrix.makeTranslation(x,2,z);trunks.setMatrixAt(i,instanceMatrix);
+      instanceMatrix.makeTranslation(x,5,z);if(i%3)leaves.setMatrixAt(greenIndex++,instanceMatrix);else darkLeaves.setMatrixAt(darkIndex++,instanceMatrix);
     }
     // A small jetty and stores mark the point of departure.
     occluders.push(box(world, deck, -17, 1.7, 22, 13, 0.65, 4));
@@ -142,7 +153,8 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
       mesh(new THREE.ConeGeometry(1.4, 2, 4), wood, boat, 0, 0.4, -4).rotation.x = -Math.PI / 2;
       box(boat, wood, -1.3, 1.3, 0, 0.15, 0.45, 5.8); box(boat, wood, 1.3, 1.3, 0, 0.15, 0.45, 5.8);
       const banner = role.id===heroId?material(role.color):figure(boat, role);
-      box(boat, wood, 0, 3.7, 2, 0.09, 4.8, 0.09); box(boat, banner, 0.75, 5.25, 2, 1.5, 0.9, 0.06);
+      const details=[box(boat, wood, 0, 3.7, 2, 0.09, 4.8, 0.09),box(boat, banner, 0.75, 5.25, 2, 1.5, 0.9, 0.06)];
+      occluders.push(...details);cameraDetails.push(...details);
       for (const side of [-1, 1]) {
         const oar = box(boat, deck, side * 2, 0.9, 1.6, 2.5, 0.09, 0.2); oar.rotation.z = -side * 0.12;
         if (role.id === heroId) controlledOars.push(oar);
@@ -162,7 +174,8 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     selection.rotation.x = -Math.PI / 2;
     const enemyBoat=new THREE.Group();world.add(enemyBoat);enemyBoat.visible=false;
     occluders.push(box(enemyBoat,wood,0,.4,0,3,.8,8));box(enemyBoat,deck,0,.9,0,3,.25,8);
-    box(enemyBoat,material('#b94d3f'),0,3.2,0,.1,4.4,.1);box(enemyBoat,material('#b94d3f'),.65,4.8,0,1.3,.8,.07);
+    const enemyDetails=[box(enemyBoat,material('#b94d3f'),0,3.2,0,.1,4.4,.1),box(enemyBoat,material('#b94d3f'),.65,4.8,0,1.3,.8,.07)];
+    occluders.push(...enemyDetails);cameraDetails.push(...enemyDetails);
     const arrowGeo=new THREE.BoxGeometry(.07,.07,1),arrowMat=material('#ffe6a1');
     const bodyMarker=material('#ffdd79',{side:THREE.DoubleSide}),targetMarker=material('#f1755c',{side:THREE.DoubleSide});
     function visualFor(actor){
@@ -235,13 +248,33 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
         const c=data.characterConfig.camera;
         camera.position.set(focus.x+Math.sin(orbit)*c.followDistanceM*zoom,focus.y+c.followHeightM*zoom,focus.z+Math.cos(orbit)*c.followDistanceM*zoom);
       }
+      for(const detail of cameraDetails)detail.visible=true;
       scene.updateMatrixWorld(true);
-      const delta=camera.position.clone().sub(focus),length=delta.length();raycaster.set(focus,delta.normalize());raycaster.far=length;
-      const hit=raycaster.intersectObjects(occluders.filter(o=>o.visible&&o.parent?.visible),false).find(h=>h.distance>data.characterConfig.camera.minimumDistanceM);
-      if(hit)camera.position.copy(focus).addScaledVector(delta,Math.max(data.characterConfig.camera.minimumDistanceM,hit.distance-data.characterConfig.camera.clearanceM));
+      const blockers=occluders.filter(o=>o.visible&&o.parent?.visible),c=data.characterConfig.camera;
+      const desired=camera.position.clone(),delta=desired.clone().sub(focus),length=delta.length();
+      function clearDistance(position){const direction=position.clone().sub(focus),distance=direction.length();raycaster.set(focus,direction.normalize());raycaster.far=distance;
+        const hit=raycaster.intersectObjects(blockers,false).find(h=>h.distance>.05);
+        return hit?Math.max(.1,hit.distance-c.clearanceM):distance;
+      }
+      let available=clearDistance(desired);cameraObstructed=available<length-.01;cameraOffset=0;
+      // A camera squeezed against a nearby hull shows a wall of wood. Seek a
+      // clear side angle before shortening it, without changing the chosen target.
+      if(mode==='follow'&&available<Math.min(length*.75,4)){
+        for(const offset of [Math.PI/3,-Math.PI/3,Math.PI*2/3,-Math.PI*2/3,Math.PI]){
+          const candidate=focus.clone().add(new THREE.Vector3(Math.sin(orbit+offset)*c.followDistanceM*zoom,c.followHeightM*zoom,Math.cos(orbit+offset)*c.followDistanceM*zoom));
+          const distance=clearDistance(candidate);
+          if(distance>available+.15){available=distance;desired.copy(candidate);cameraOffset=offset;}
+          if(available>=length-.01)break;
+        }
+      }
+      camera.position.copy(focus).addScaledVector(desired.sub(focus).normalize(),Math.min(length,available));
       camera.position.y=Math.max(camera.position.y,bedAt(river,camera.position.x,camera.position.z)+data.characterConfig.camera.clearanceM,readings.waterY+data.characterConfig.camera.clearanceM);
       cameraClearance=camera.position.y-bedAt(river,camera.position.x,camera.position.z);
       camera.lookAt(focus);camera.updateMatrixWorld();
+      // A thin mast next to the near plane may miss the centre ray yet fill
+      // the picture. Cull only these decorative details near a follow camera;
+      // hulls, soldiers, terrain and authoritative collision remain intact.
+      if(mode==='follow')for(const detail of cameraDetails)if(detail.parent.visible&&detailBounds.setFromObject(detail).distanceToPoint(camera.position)<1.5)detail.visible=false;
       screenTargets=[];
       for(const actor of combat?.actors||[]){
         const visual=actorVisuals.get(actor.id),p=visual.group.position.clone();p.y+=2.05;p.project(camera);
@@ -264,13 +297,14 @@ export function createScene({ host, data, quality, heroId, vesselType = 'light',
     resize(); renderer.compile(scene, camera);
     return {
       canvas, render, resize, dispose,
-      orbitBy(delta){orbit+=delta;},zoomBy(delta){zoom=clampZoom(zoom+delta*.001);},movementYaw(){return mode==='follow'?orbit:orbit+.65;},
+      orbitBy(delta){orbit+=delta;},zoomBy(delta){zoom=clampZoom(zoom+delta*.001);},movementYaw(){return mode==='follow'?orbit+cameraOffset:orbit+.65;},
       pick(clientX,clientY){const r=canvas.getBoundingClientRect();raycaster.setFromCamera(new THREE.Vector2((clientX-r.left)/r.width*2-1,-(clientY-r.top)/r.height*2+1),camera);raycaster.far=300;const groups=[...actorVisuals.entries()].filter(([id,v])=>v.group.visible&&lastState?.combat?.actors.find(a=>a.id===id)?.team==='enemy').map(([,v])=>v.group);const hit=raycaster.intersectObjects([...groups,armyEnemy],true)[0];return hit?.object===armyEnemy?armyEnemyIds[hit.instanceId]||null:hit?.object.userData.actorId||null;},
       releaseControls() { if (drag && canvas.hasPointerCapture(drag.id)) canvas.releasePointerCapture(drag.id); drag = null; },
       toggleCamera() { mode = mode === 'tactical' ? 'follow' : 'tactical'; orbit = mode==='follow'?(lastState?.combat?.actors.find(a=>a.id===lastState.combat.controlledId)?.yaw||0):0; zoom = 1; if (lastState) render(lastState); return mode; },
       stats() {
         const rect=canvas.getBoundingClientRect(),armyTargets=armyEnemyIds.map(id=>{const p=lastState?.army?.byId.get(id);if(!p)return null;const projected=new THREE.Vector3(p.x,bedAt(river,p.x,p.z)+.625,p.z).project(camera);return {id,x:rect.left+(projected.x+1)*rect.width/2,y:rect.top+(1-projected.y)*rect.height/2,visible:projected.z>=-1&&projected.z<=1&&Math.abs(projected.x)<=1&&Math.abs(projected.y)<=1};}).filter(Boolean);
-        return { drawCalls: renderer.info.render.calls, triangles: renderer.info.render.triangles, gpuGeometries: renderer.info.memory.geometries, mode,cameraTargetId,cameraClearance,screenTargets:screenTargets.map(p=>({...p})),armyTargets,width: canvas.width, height: canvas.height };
+        let objects=0;scene.traverse(()=>objects++);
+        return { drawCalls: renderer.info.render.calls, triangles: renderer.info.render.triangles, gpuGeometries: renderer.info.memory.geometries, objects, mode,cameraTargetId,cameraClearance,cameraObstructed,cameraOffset,cameraPosition:camera.position.toArray(),cameraDetailsHidden:cameraDetails.filter(d=>!d.visible).length,screenTargets:screenTargets.map(p=>({...p})),armyTargets,width: canvas.width, height: canvas.height };
       },
     };
   } catch (error) { dispose(); throw error; }

@@ -1,0 +1,29 @@
+{
+  "status": "functional fixes verified; performance and full chapter gates open",
+  "baseHead": "34cc8209f54a2e063e51bda364d1f8fe7bf65b60",
+  "corePassed": 197,
+  "coreTotal": 197,
+  "uiPassed": 82,
+  "uiTotal": 82,
+  "deterministic40HashesEqual": true,
+  "protectedFiles": 97,
+  "protectedChanged": [],
+  "physicalDeviceTested": false,
+  "productionBackendTested": false,
+  "casualties": {
+    "counts": {
+      "downed": 1,
+      "active": 9
+    },
+    "text": "Quân số Tổ 1: 1 gục, cần cứu · 9 chiến đấu.",
+    "passed": true,
+    "exceptions": [],
+    "paused": true
+  },
+  "libraryFollowup": {
+    "opened": true,
+    "closed": true,
+    "exceptions": [],
+    "typed": "WASD Space"
+  }
+}

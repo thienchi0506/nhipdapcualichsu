@@ -33,3 +33,9 @@ Không tải `site-music.js` hoặc runtime game cũ. Khung này chưa tạo Aud
 Tham số sông/tình huống trong `data/river-config.json`, nhân vật/chiến đấu/camera trong `data/character-config.json`; `data/shell-scene.json` giữ vai trò/đồ họa. `src/sim/` và `src/core/clock.js` sở hữu mô phỏng; input/renderer không sửa state trực tiếp. Three.js 0.128.0 pin tại `vendor/three-r128/`, kèm MIT LICENSE, URL nguồn và SHA-256. Không tải CDN engine khi chơi.
 
 Xem [bàn giao quân đội](../docs/game-bach-dang-938/army-handoff.md), [bàn giao chiến đấu](../docs/game-bach-dang-938/combat-handoff.md), [luật nhân vật/cứu/tiếp quản](../docs/game-bach-dang-938/character-model.md), [mức xấp xỉ sông](../docs/game-bach-dang-938/river-model.md) và [kiến trúc](../docs/game-bach-dang-938/architecture.md). Mở `tests/index.html` để chạy fixture sông, nhân vật và quân đội; đây không phải benchmark FPS.
+
+## Kiểm tra và tối ưu 03/11/2026
+
+[Bàn giao bước 11](../docs/game-bach-dang-938/optimization-handoff.md) ghi lỗi đã sửa, ảnh và số đo trước/sau, gồm cả các đợt chậm chưa giải được. Panel có nút đóng riêng; HUD/bản đồ hỗ trợ dọc/ngang; cột buồm sát camera được tạm ẩn theo góc nhìn. Luật chơi, cấu hình mô phỏng và schema lưu giữ nguyên.
+
+Fixture độc lập `tests/performance.html` không lưu và không dùng Firebase; mở bằng HTTP rồi dùng `window.runVisualBenchmark(480, 30)` trong DevTools để đo 480 quân mỗi bên. Xem [gói Astra](../docs/game-bach-dang-938/astra-performance-handoff.md) trước khi diễn giải kết quả. Chưa có chứng nhận FPS trên máy thật hoặc chương mẫu hoàn chỉnh.

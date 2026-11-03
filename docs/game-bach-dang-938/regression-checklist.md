@@ -65,3 +65,11 @@ V01/V02 đã bổ sung kích thước 320/360/375/390/430px và landscape 844×3
 ## Cập nhật chặng lưu, 02-11-2026
 
 [Bàn giao lưu](save-handoff.md): 71/71 core/lưu/retry; 7/7 UI lưu thiết bị; 9/9 UI trại/retry, 62/62 hồi quy vỏ game và các lối vào. Rules emulator 20/20, Firestore trình duyệt 15/15, Auth emulator 7/7; dữ liệu thử duy nhất thuộc project demo. Có thử phục hồi 400 quân mỗi bên, bản 1.487.033 byte chia 22 phần và upload bị ngắt. Đây là kết quả kiểm thử lưu, không phải benchmark FPS. Xem JSON trong evidence/save-2026-11-02 để phân biệt fixture và tương tác thật. Các ghi nhận ở những chặng trước là lịch sử tại thời điểm bàn giao; cloud production và thiết bị thật vẫn chưa được kiểm tra.
+
+## Bước 10–11, 03-11-2026
+
+[Báo cáo UX](ux-review.md) và [bàn giao sửa lỗi/hiệu năng](optimization-handoff.md): sửa camera bị cột buồm che, panel đè nút ở ngang, HUD/bản đồ mobile, nút theo/giữ trùng và thông báo tổn thất/tiếp tế. Core/lưu 197/197; UI năm kích thước 55/55, biên 320px/667×375/568×320 và multi-touch/cancel 12/12. Chơi áp mạn/cận chiến và tiếp quản thực; không ép thắng. Sáu lần vào/ra trả các bộ đếm tài nguyên về 0. Hash 40 mốc mô phỏng đủ 50/100/200/400/480 mỗi bên khớp; 97 tệp ngoài game mới trong manifest không đổi.
+
+Bổ sung nút tạm dừng ngay trong header bản đồ, kiểm tra pointer → pause đóng băng tick → tiếp tục → đóng bản đồ 15/15 tại năm kích thước. Tổng kiểm tra UI/biên/pause là 82/82; các trường hợp ngang ngắn còn kiểm cả chiều cao và vị trí nút trong viewport.
+
+N02/G201/G301/E03/I01/I03 kiểm lại qua click sau thoát game mới: hai game cũ vào trận/pause, phòng thi chọn/nộp/làm lại ở desktop/390px; thư viện mở/đóng bài và nhập phím đạt ở lượt kiểm bổ sung. Lưu cả lượt harness đóng thư viện chưa thành công, không sửa mã thư viện. Chưa chơi hết trận cũ hoặc kiểm production Firebase. UX01/chương 15–25 phút còn mở; 480 quân chưa qua gate hiệu năng, có số đo chậm và gói tái hiện Astra. Không dùng số draw calls giảm để tự đánh dấu FPS đạt.
