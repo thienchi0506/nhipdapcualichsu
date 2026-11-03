@@ -7432,10 +7432,15 @@
             window.addEventListener('resize', resizeGameViewport, { passive: true });
             window.visualViewport?.addEventListener('resize', resizeGameViewport, { passive: true });
 
-            // Kéo chuột để xoay quanh cảnh vật
+            // Kéo chuột hoặc chạm vuốt để xoay quanh cảnh vật
             window.addEventListener('pointerdown', (e) => {
-                // Chỉ nhận khi không click trúng các nút UI
                 if (e.target.closest('.interactive, button, a, [role="button"]') || e.target.closest('.modal-3d-container')) return;
+                if (Game3D.isCinematicActive) {
+                    Game3D.isCinematicActive = false;
+                    Game3D.cheDoCamera = 'TACTICAL';
+                    const lb = document.getElementById('cinematic-action-letterbox');
+                    if (lb) lb.style.display = 'none';
+                }
                 Game3D.isDragging = true;
                 Game3D.previousMousePosition = { x: e.clientX, y: e.clientY };
             });
@@ -7444,10 +7449,11 @@
                 if (!Game3D.isDragging) return;
                 const deltaX = e.clientX - Game3D.previousMousePosition.x;
                 const deltaY = e.clientY - Game3D.previousMousePosition.y;
+                const rotFactor = e.pointerType === 'touch' ? 0.0075 : 0.005;
 
                 if (Game3D.cheDoCamera === 'LOBBY' || Game3D.cheDoCamera === 'TACTICAL') {
-                    Game3D.sphericalCoords.theta -= deltaX * 0.005;
-                    Game3D.sphericalCoords.phi = Math.max(0.4, Math.min(1.45, Game3D.sphericalCoords.phi - deltaY * 0.005));
+                    Game3D.sphericalCoords.theta -= deltaX * rotFactor;
+                    Game3D.sphericalCoords.phi = Math.max(0.25, Math.min(1.4, Game3D.sphericalCoords.phi - deltaY * rotFactor));
                 } else if (Game3D.cheDoCamera === 'FIRST_PERSON') {
                     Game3D.targetCamLook.x += deltaX * 0.08;
                     Game3D.targetCamLook.y = Math.max(-5, Math.min(25, Game3D.targetCamLook.y - deltaY * 0.06));
@@ -7460,10 +7466,61 @@
                 Game3D.isDragging = false;
             });
 
+            // Hỗ trợ pinch-zoom và kéo 2 ngón để di chuyển camera tự do trên mobile
+            let lastTouchDist = 0;
+            let lastTouchCenter = null;
+            window.addEventListener('touchstart', (e) => {
+                if (e.target.closest('.interactive, button, a, [role="button"]') || e.target.closest('.modal-3d-container')) return;
+                if (Game3D.isCinematicActive) {
+                    Game3D.isCinematicActive = false;
+                    Game3D.cheDoCamera = 'TACTICAL';
+                    const lb = document.getElementById('cinematic-action-letterbox');
+                    if (lb) lb.style.display = 'none';
+                }
+                if (e.touches.length === 2) {
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    lastTouchDist = Math.hypot(dx, dy);
+                    lastTouchCenter = {
+                        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+                        y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+                    };
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2 && lastTouchDist > 0) {
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    const dist = Math.hypot(dx, dy);
+                    const zoomDelta = (lastTouchDist - dist) * 0.45;
+                    Game3D.sphericalCoords.radius = Math.max(30, Math.min(220, (Game3D.sphericalCoords.radius || 115) + zoomDelta));
+                    lastTouchDist = dist;
+
+                    if (lastTouchCenter) {
+                        const curX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                        const curY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                        const panX = (curX - lastTouchCenter.x) * 0.35;
+                        const panZ = (curY - lastTouchCenter.y) * 0.35;
+                        if (!Game3D.targetCamLook) Game3D.targetCamLook = new THREE.Vector3(0, 0, 0);
+                        Game3D.targetCamLook.x -= panX;
+                        Game3D.targetCamLook.z -= panZ;
+                        lastTouchCenter = { x: curX, y: curY };
+                    }
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchend', (e) => {
+                if (e.touches.length < 2) {
+                    lastTouchDist = 0;
+                    lastTouchCenter = null;
+                }
+            }, { passive: true });
+
             // Cuộn chuột để zoom gần / xa
             window.addEventListener('wheel', (e) => {
                 if (e.target.closest('.modal-3d-container')) return;
-                Game3D.sphericalCoords.radius = Math.max(45, Math.min(220, Game3D.sphericalCoords.radius + e.deltaY * 0.08));
+                Game3D.sphericalCoords.radius = Math.max(30, Math.min(220, Game3D.sphericalCoords.radius + e.deltaY * 0.08));
             }, { passive: true });
         }
 
@@ -7667,13 +7724,16 @@
                     Game3D.targetCamPos.z = r * Math.sin(ph) * Math.cos(th);
                     Game3D.targetCamLook.set(0, 5, 0);
                 } else if (Game3D.cheDoCamera === 'TACTICAL') {
-                    const r = Game3D.sphericalCoords.radius || 115;
+                    const r = THREE.MathUtils.clamp(Game3D.sphericalCoords.radius || 115, 30, 200);
                     const th = Game3D.sphericalCoords.theta || 0;
-                    const ph = Math.min(1.1, Game3D.sphericalCoords.phi || 0.85);
+                    const ph = THREE.MathUtils.clamp(Game3D.sphericalCoords.phi || 0.85, 0.25, 1.4);
+                    const lookX = Game3D.targetCamLook?.x || 0;
+                    const lookY = Game3D.targetCamLook?.y || 0;
+                    const lookZ = Game3D.targetCamLook?.z || 0;
 
-                    Game3D.targetCamPos.x = r * Math.sin(ph) * Math.sin(th);
-                    Game3D.targetCamPos.y = Math.max(65, r * Math.cos(ph));
-                    Game3D.targetCamPos.z = r * Math.sin(ph) * Math.cos(th);
+                    Game3D.targetCamPos.x = lookX + r * Math.sin(ph) * Math.sin(th);
+                    Game3D.targetCamPos.y = lookY + Math.max(18, r * Math.cos(ph));
+                    Game3D.targetCamPos.z = lookZ + r * Math.sin(ph) * Math.cos(th);
                 } else if (Game3D.cheDoCamera === 'FIRST_PERSON') {
                     if (Game3D.player && Game3D.player.mesh && Game3D.player.pos) {
                         const p = Game3D.player;
@@ -8311,6 +8371,18 @@
             });
         }
 
+        function layMucTieuBachDangHopLe() {
+            const state = Game3D.bachDang;
+            if (!state || !state.active) return null;
+            if (state.target && HistoryGame.active(state.target)) return state.target;
+            const fallback = (Game3D.danhSachTauDich || []).find(HistoryGame.active) || null;
+            if (fallback) {
+                state.target = fallback;
+                Game3D.selectedEnemyTarget = fallback;
+            }
+            return fallback;
+        }
+
         function chonMucTieuBachDang(ship) {
             if (!isBachDangCombatActive() || !ship || ship.type !== 'dich' || !HistoryGame.active(ship)) return;
             Game3D.bachDang.target = ship;
@@ -8332,12 +8404,14 @@
         function capNhatHUDTranBachDang() {
             const state = Game3D.bachDang;
             if (!state) return;
+            const target = layMucTieuBachDangHopLe();
+            const hasEnemy = !!target;
             const dock = document.getElementById('bachdang-ability-dock');
             if (dock) dock.classList.toggle('active', !!state.active && !state.result);
             const tray = document.getElementById('bachdang-boat-selection');
             if (tray) tray.classList.toggle('active', !!state.active && state.controlMode === 'INDIVIDUAL' && !state.result);
-            capNhatNhomNutBachDang('bachdang-special-shot', 'bachdang-special-cd', state.specialCooldown, !!state.target && HistoryGame.active(state.target));
-            capNhatNhomNutBachDang('bachdang-fire-volley', 'bachdang-fire-cd', state.fireCooldown, state.elapsed >= 15 && !!state.target && HistoryGame.active(state.target));
+            capNhatNhomNutBachDang('bachdang-special-shot', 'bachdang-special-cd', state.specialCooldown, hasEnemy);
+            capNhatNhomNutBachDang('bachdang-fire-volley', 'bachdang-fire-cd', state.fireCooldown, state.elapsed >= 15 && hasEnemy);
             capNhatNhomNutBachDang('bachdang-peace-call', 'bachdang-peace-cd', state.peaceCooldown, state.peaceReady);
             const peaceButton = document.getElementById('bachdang-peace-call');
             if (peaceButton && !state.peaceReady) {
@@ -8345,7 +8419,6 @@
                     ? 'Cần cả 7 tàu địch trúng cọc trước khi gọi hòa bình'
                     : `Gây ${Math.floor(state.damageInPeaceWindow)} / 4.000 sát thương trong cửa sổ 5 giây`;
             }
-            const target = state.target;
             const bannerText = document.getElementById('stage-banner-text');
             if (bannerText && state.active) {
                 const left = Math.max(0, 15 - state.elapsed);
@@ -8445,12 +8518,12 @@
             });
         }
 
-        function phatTenBachDang(source, target, damage, isFire = false, accuracy = 0.9, arrowScale = isFire || damage >= 500 ? 7.5 : 1.5) {
+        function phatTenBachDang(source, target, damage, isFire = false, accuracy = 0.9, arrowScale = isFire ? 6.5 : 3.8) {
             if (!source || !target || !HistoryGame.active(target)) return false;
             const fired = GameTactics3D.projectile(source.pos, target.pos, () => {
                 if (!isBachDangCombatActive() || !HistoryGame.active(target)) return;
                 apDungSatThuongDich(target, damage);
-                target.hitFlash = 0.22;
+                target.hitFlash = 0.25;
                 if (isFire) taoHieuUngTauChayBachDang(target);
                 if (Game3D.bachDang.peaceWindowStart !== null && !Game3D.bachDang.peaceReady && Game3D.bachDang.elapsed - Game3D.bachDang.peaceWindowStart <= 5) {
                     Game3D.bachDang.damageInPeaceWindow += damage;
@@ -8464,15 +8537,16 @@
                     target.speed = 0;
                     target.mesh.position.y = Math.min(target.mesh.position.y, Game3D.thuyTrieu.mucNuocY - 1.2);
                     phatNoManhVoVaCotNuoc(target.pos.x, target.pos.y, target.pos.z);
+                    layMucTieuBachDangHopLe();
                 }
                 capNhatHUDTranBachDang();
                 kiemTraKetQuaTranBachDang();
-            }, { fire: isFire, accuracy, spread: accuracy < 0.85 ? 10 : 3, speed: isFire ? 2.6 : 2.2, target, hitRadius: 5, size: arrowScale });
+            }, { fire: isFire, accuracy, spread: accuracy < 0.85 ? 8 : 2.5, speed: isFire ? 1.45 : 1.35, height: 7.5, target, hitRadius: 5.5, size: arrowScale });
             if (!fired) return false;
             for (let i = 0; i < 5; i++) {
                 GameTactics3D.projectile(source.pos, target.pos, null, {
-                    fire: isFire, accuracy: 0, spread: isFire ? 38 : 30,
-                    speed: 1.25 + Math.random() * .85, height: 4 + Math.random() * 5,
+                    fire: isFire, accuracy: 0, spread: isFire ? 30 : 22,
+                    speed: 1.15 + Math.random() * .45, height: 6 + Math.random() * 4,
                     size: arrowScale
                 });
             }
@@ -8481,7 +8555,7 @@
 
         function banLoatTenThuongBachDang() {
             const state = Game3D.bachDang;
-            const target = state?.target;
+            const target = layMucTieuBachDangHopLe();
             if (!isBachDangCombatActive() || !target || !HistoryGame.active(target) || state.normalFireCooldown > 0) return;
             const sources = (Game3D.baitFleet || []).filter(HistoryGame.active);
             ['cungThuBac', 'cungThuNam'].forEach(id => {
@@ -8489,32 +8563,32 @@
                 if (archer && archer.mesh?.visible) sources.push(archer);
             });
             if (!sources.length) return;
-            sources.forEach(source => phatTenBachDang(source, target, 200, false, 0.92));
+            sources.forEach(source => phatTenBachDang(source, target, 400, false, 0.95));
             state.normalFireCooldown = 0.55;
             AudioEngine.playArrow();
         }
 
         function kichHoatCungLonBachDang() {
             const state = Game3D.bachDang;
-            const target = state?.target;
+            const target = layMucTieuBachDangHopLe();
             if (!isBachDangCombatActive() || state.specialCooldown > 0 || !target || !HistoryGame.active(target)) return;
             const source = HistoryGame.active(Game3D.selectedUnit) && Game3D.baitFleet.includes(Game3D.selectedUnit)
                 ? Game3D.selectedUnit : Game3D.baitFleet.find(HistoryGame.active);
             if (!source) return;
             state.specialCooldown = 3;
-            phatTenBachDang(source, target, 500, false, 0.96);
+            phatTenBachDang(source, target, 2500, false, 0.98);
             AudioEngine.playArrow();
             capNhatHUDTranBachDang();
         }
 
         function kichHoatTenLuaPhucKichBachDang() {
             const state = Game3D.bachDang;
-            const target = state?.target;
+            const target = layMucTieuBachDangHopLe();
             if (!isBachDangCombatActive() || state.elapsed < 15 || state.fireCooldown > 0 || !target || !HistoryGame.active(target)) return;
             state.fireCooldown = 5;
             ['cungThuBac', 'cungThuNam'].forEach(id => {
                 const archer = Game3D.units[id];
-                if (archer && archer.mesh?.visible) phatTenBachDang(archer, target, 700, true, 0.96);
+                if (archer && archer.mesh?.visible) phatTenBachDang(archer, target, 3500, true, 0.98);
             });
             AudioEngine.playArrow();
             capNhatHUDTranBachDang();
@@ -8633,11 +8707,25 @@
                     ship.trapped = true;
                     ship.speed = 0;
                     ship.morale = Math.max(0, ship.morale - 45);
-                    apDungSatThuongDich(ship, 14000);
+                    const stakeDmg = (ship.id === 'dichLauThuyen' || ship.flagship) ? 19000 : 17500;
+                    apDungSatThuongDich(ship, stakeDmg);
                     ship.mesh.rotation.z = (index % 2 ? -1 : 1) * (0.2 + index * 0.015);
                     ship.mesh.rotation.x = -0.12;
                     AudioEngine.playStakeImpact();
                     phatNoManhVoVaCotNuoc(ship.pos.x, ship.pos.y, ship.pos.z);
+                    if (ship.hp <= 0) {
+                        ship.sunk = true;
+                        layMucTieuBachDangHopLe();
+                    }
+                }
+                if (ship.trapped && !ship.sunk) {
+                    apDungSatThuongDich(ship, 120 * delta);
+                    if (ship.hp <= 0) {
+                        ship.sunk = true;
+                        ship.mesh.position.y = Math.min(ship.mesh.position.y, Game3D.thuyTrieu.mucNuocY - 1.2);
+                        phatNoManhVoVaCotNuoc(ship.pos.x, ship.pos.y, ship.pos.z);
+                        layMucTieuBachDangHopLe();
+                    }
                 }
                 ship.normalShotCooldown = Math.max(0, (ship.normalShotCooldown || 0) - delta);
                 ship.fireShotCooldown = Math.max(0, (ship.fireShotCooldown || 0) - delta);

@@ -59,10 +59,10 @@
         arrowHeadGeometry=new THREE.ConeGeometry(.15,.42,7);arrowHeadGeometry.rotateX(Math.PI/2);
         flameGeometry=new THREE.ConeGeometry(.2,.72,7);flameGeometry.rotateX(-Math.PI/2);
         flameCoreGeometry=new THREE.SphereGeometry(.16,8,8);
-        arrowMaterial=new THREE.MeshBasicMaterial({color:0xffdb83});
-        arrowHeadMaterial=new THREE.MeshBasicMaterial({color:0xfff1c2});
-        fireArrowMaterial=new THREE.MeshBasicMaterial({color:0xff5722});
-        fireHeadMaterial=new THREE.MeshBasicMaterial({color:0xffff91});
+        arrowMaterial=new THREE.MeshBasicMaterial({color:0xffd700});
+        arrowHeadMaterial=new THREE.MeshBasicMaterial({color:0xfff6a6});
+        fireArrowMaterial=new THREE.MeshBasicMaterial({color:0xff4500});
+        fireHeadMaterial=new THREE.MeshBasicMaterial({color:0xffff80});
         flameMaterial=new THREE.MeshBasicMaterial({color:0xff3b08,transparent:true,opacity:.86,blending:THREE.AdditiveBlending,depthWrite:false});
         flameCoreMaterial=new THREE.MeshBasicMaterial({color:0xffdb45,transparent:true,opacity:.96,blending:THREE.AdditiveBlending,depthWrite:false});
     }
@@ -99,7 +99,7 @@
         if(Game3D.arrows3D.length>=180)return false;
         const hit=options.accuracy===undefined||Math.random()<=options.accuracy;
         const spread=options.spread||0;
-        const isFire=!!options.fire,size=options.size||(isFire?7.5:1.5);
+        const isFire=!!options.fire,size=options.size||(isFire?7.5:3.8);
         const mesh=acquireArrow(isFire,size), start=new THREE.Vector3(from.x,from.y+3,from.z), end=new THREE.Vector3(to.x+(Math.random()-.5)*spread,to.y+2,to.z+(Math.random()-.5)*spread);
         mesh.position.copy(start);
         const resolveHit=hit&&onHit?()=>{
