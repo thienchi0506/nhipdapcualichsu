@@ -3405,7 +3405,7 @@
           </div>
 
           <!-- 2. DROPDOWN 1: LỌC THEO KHỐI -->
-          <select class="catalog-select-field" id="select-filter-grade" onchange="onCatalogFilterChange()">
+          <select class="catalog-select-field" id="select-filter-grade" onchange="onCatalogGradeChange()">
             <option value="all">🏛️ Tất cả Khối (10, 11, 12)</option>
             <option value="10">🏛️ Khối 10 (Văn minh & Thế giới)</option>
             <option value="11">⚔️ Khối 11 (Cận đại & Kháng chiến)</option>
@@ -3415,38 +3415,45 @@
           <!-- 3. DROPDOWN 2: LỌC THEO CHỦ ĐỀ / BÀI HỌC -->
           <select class="catalog-select-field" id="select-filter-topic" onchange="onCatalogFilterChange()">
             <option value="all">📜 Tất cả Chủ đề / Bài học</option>
-            <option value="bai-01">Bài 1: Liên hợp quốc (LHQ)</option>
-            <option value="bai-02">Bài 2: Trật tự thế giới trong Chiến tranh Lạnh</option>
-            <option value="bai-03">Bài 3: Trật tự thế giới sau Chiến tranh Lạnh</option>
-            <option value="bai-04">Bài 4: Sự ra đời & phát triển của ASEAN</option>
-            <option value="bai-05">Bài 5: Cộng đồng ASEAN: Từ ý tưởng đến hiện thực</option>
-            <option value="bai-06">Bài 6: Cách mạng tháng Tám 1945</option>
-            <option value="bai-07">Bài 7: Cuộc kháng chiến chống Pháp (1945 – 1954)</option>
-            <option value="bai-08">Bài 8: Cuộc kháng chiến chống Mỹ (1954 – 1975)</option>
-            <option value="bai-09">Bài 9: Đấu tranh bảo vệ Tổ quốc từ sau 1975</option>
-            <option value="bai-10-11">Bài 10 - 11: Công cuộc Đổi mới ở Việt Nam</option>
-            <option value="bai-12-14">Bài 12 - 14: Hoạt động đối ngoại của Việt Nam</option>
-            <option value="g11-bai-01">Lớp 11 · Bài 1: Cách mạng tư sản</option>
-            <option value="g11-bai-02">Lớp 11 · Bài 2: Chủ nghĩa tư bản</option>
-            <option value="g11-bai-03">Lớp 11 · Bài 3: Liên bang Xô viết</option>
-            <option value="g11-bai-04">Lớp 11 · Bài 4: Chủ nghĩa xã hội</option>
-            <option value="g11-bai-05">Lớp 11 · Bài 5: Thực dân ở Đông Nam Á</option>
-            <option value="g11-bai-06">Lớp 11 · Bài 6: Độc lập ở Đông Nam Á</option>
-            <option value="g11-bai-07">Lớp 11 · Bài 7: Chiến tranh bảo vệ Tổ quốc</option>
-            <option value="g11-bai-08">Lớp 11 · Bài 8: Khởi nghĩa và chiến tranh giải phóng</option>
-            <option value="g11-bai-09">Lớp 11 · Bài 9: Cải cách Hồ Quý Ly</option>
-            <option value="g11-bai-10">Lớp 11 · Bài 10: Cải cách Lê Thánh Tông</option>
-            <option value="g11-bai-11">Lớp 11 · Bài 11: Cải cách Minh Mạng</option>
-            <option value="g11-bai-12">Lớp 11 · Bài 12: Biển Đông</option>
-            <option value="g11-bai-13">Lớp 11 · Bài 13: Việt Nam và Biển Đông</option>
-            <option value="g10-chu-de-01">Lớp 10 · Chủ đề 1: Lịch sử và Sử học</option>
-            <option value="g10-chu-de-02">Lớp 10 · Chủ đề 2: Di sản</option>
-            <option value="g10-chu-de-03">Lớp 10 · Chủ đề 3: Văn minh thế giới</option>
-            <option value="g10-chu-de-04">Lớp 10 · Chủ đề 4: Cách mạng công nghiệp</option>
-            <option value="g10-chu-de-05">Lớp 10 · Chủ đề 5: Văn minh Đông Nam Á</option>
-            <option value="g10-chu-de-06">Lớp 10 · Chủ đề 6: Văn minh Việt Nam</option>
-            <option value="g10-tong-on">Lớp 10 · Tổng ôn (câu còn dư)</option>
-            <option value="hsg">👑 Đề Học Sinh Giỏi (HSG Cấp Tỉnh / Quốc Gia)</option>
+            <optgroup label="🏛️ Khối 10 (Văn minh & Thế giới)">
+              <option value="g10-chu-de-01">Chủ đề 1: Lịch sử và Sử học</option>
+              <option value="g10-chu-de-02">Chủ đề 2: Bảo tồn và phát huy giá trị di sản văn hóa</option>
+              <option value="g10-chu-de-03">Chủ đề 3: Một số nền văn minh thế giới thời kì cổ - trung đại</option>
+              <option value="g10-chu-de-04">Chủ đề 4: Các cuộc cách mạng công nghiệp thời kì cận - hiện đại</option>
+              <option value="g10-chu-de-05">Chủ đề 5: Văn minh Đông Nam Á thời kì cổ - trung đại</option>
+              <option value="g10-chu-de-06">Chủ đề 6: Một số nền văn minh trên đất nước Việt Nam</option>
+              <option value="g10-tong-on">Tổng ôn Lịch sử 10 (Toàn bộ ngân hàng câu hỏi)</option>
+            </optgroup>
+            <optgroup label="⚔️ Khối 11 (Cận đại & Kháng chiến)">
+              <option value="g11-bai-01">Bài 1: Một số vấn đề chung về cách mạng tư sản</option>
+              <option value="g11-bai-02">Bài 2: Sự xác lập và phát triển của chủ nghĩa tư bản</option>
+              <option value="g11-bai-03">Bài 3: Sự hình thành Liên bang Cộng hòa xã hội chủ nghĩa Xô viết</option>
+              <option value="g11-bai-04">Bài 4: Sự phát triển của chủ nghĩa xã hội từ sau CTTG II đến nay</option>
+              <option value="g11-bai-05">Bài 5: Quá trình xâm lược và cai trị của chủ nghĩa thực dân ở ĐNA</option>
+              <option value="g11-bai-06">Bài 6: Hành trình đi đến độc lập dân tộc ở Đông Nam Á</option>
+              <option value="g11-bai-07">Bài 7: Chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam</option>
+              <option value="g11-bai-08">Bài 8: Một số cuộc khởi nghĩa và chiến tranh giải phóng</option>
+              <option value="g11-bai-09">Bài 9: Cuộc cải cách của Hồ Quý Ly và triều Hồ</option>
+              <option value="g11-bai-10">Bài 10: Cuộc cải cách của Lê Thánh Tông</option>
+              <option value="g11-bai-11">Bài 11: Cuộc cải cách của Minh Mạng</option>
+              <option value="g11-bai-12">Bài 12: Vị trí và tầm quan trọng của Biển Đông</option>
+              <option value="g11-bai-13">Bài 13: Việt Nam và Biển Đông</option>
+            </optgroup>
+            <optgroup label="⭐ Khối 12 (Trọng tâm THPT 2025)">
+              <option value="bai-01">Bài 1: Liên hợp quốc (LHQ)</option>
+              <option value="bai-02">Bài 2: Trật tự thế giới trong Chiến tranh Lạnh</option>
+              <option value="bai-03">Bài 3: Trật tự thế giới sau Chiến tranh Lạnh</option>
+              <option value="bai-04">Bài 4: Sự ra đời & phát triển của ASEAN</option>
+              <option value="bai-05">Bài 5: Cộng đồng ASEAN: Từ ý tưởng đến hiện thực</option>
+              <option value="bai-06">Bài 6: Cách mạng tháng Tám năm 1945</option>
+              <option value="bai-07">Bài 7: Cuộc kháng chiến chống Pháp (1945 – 1954)</option>
+              <option value="bai-08">Bài 8: Cuộc kháng chiến chống Mỹ (1954 – 1975)</option>
+              <option value="bai-09">Bài 9: Đấu tranh bảo vệ Tổ quốc từ sau 1975</option>
+              <option value="bai-10-11">Bài 10 - 11: Công cuộc Đổi mới ở Việt Nam</option>
+              <option value="bai-12-14">Bài 12 - 14: Hoạt động đối ngoại của Việt Nam</option>
+              <option value="hsg">👑 Đề Học Sinh Giỏi (HSG Cấp Tỉnh / Quốc Gia)</option>
+              <option value="tong-hop-12">⭐ Đề ôn tập tổng hợp Khối 12 (Toàn bộ ngân hàng)</option>
+            </optgroup>
           </select>
 
           <!-- 4. DROPDOWN 3: TRẠNG THÁI -->
@@ -48082,6 +48089,21 @@ const EXAMS_DATA = [
 EXAMS_DATA.push(...(window.GRADE11_ARCHIVE_EXAMS || []));
 EXAMS_DATA.push(...(window.GRADE10_ARCHIVE_EXAMS || []));
 
+// Chuẩn hóa grade và category cho toàn bộ dữ liệu đề khối 10
+EXAMS_DATA.forEach(ex => {
+  if (ex && ex.id && ex.id.startsWith('de-10-')) {
+    if (!Number.isInteger(ex.grade)) ex.grade = 10;
+    if (!ex.category) {
+      if (ex.sourceExamId) {
+        ex.category = ex.sourceExamId.replace('de-10-', 'g10-');
+      } else {
+        const m = ex.id.match(/de-10-(chu-de-\d+|tong-on)/);
+        if (m) ex.category = 'g10-' + m[1];
+      }
+    }
+  }
+});
+
 // Gộp ngân hàng khối 12 để học sinh luyện toàn bộ câu hỏi, không chỉ mẫu 25 + 4.
 function normalizeQuestionForDedup(value) {
   return String(value ?? '')
@@ -48589,6 +48611,7 @@ function switchLobbyMode(mode) {
     if (panelCatalog) { panelCatalog.style.display = 'block'; panelCatalog.classList.add('active'); }
     
     const searchInput = $('search-input');
+    updateCatalogTopicsDropdown(true);
     renderCatalog();
   }
 }
@@ -48670,6 +48693,102 @@ function launchRandomExam() {
   }
 }
 
+const CATALOG_TOPICS_CONFIG = {
+  10: [
+    { value: 'g10-chu-de-01', label: 'Chủ đề 1: Lịch sử và Sử học' },
+    { value: 'g10-chu-de-02', label: 'Chủ đề 2: Bảo tồn và phát huy giá trị di sản văn hóa' },
+    { value: 'g10-chu-de-03', label: 'Chủ đề 3: Một số nền văn minh thế giới thời kì cổ - trung đại' },
+    { value: 'g10-chu-de-04', label: 'Chủ đề 4: Các cuộc cách mạng công nghiệp thời kì cận - hiện đại' },
+    { value: 'g10-chu-de-05', label: 'Chủ đề 5: Văn minh Đông Nam Á thời kì cổ - trung đại' },
+    { value: 'g10-chu-de-06', label: 'Chủ đề 6: Một số nền văn minh trên đất nước Việt Nam' },
+    { value: 'g10-tong-on', label: 'Tổng ôn Lịch sử 10 (Toàn bộ ngân hàng câu hỏi)' }
+  ],
+  11: [
+    { value: 'g11-bai-01', label: 'Bài 1: Một số vấn đề chung về cách mạng tư sản' },
+    { value: 'g11-bai-02', label: 'Bài 2: Sự xác lập và phát triển của chủ nghĩa tư bản' },
+    { value: 'g11-bai-03', label: 'Bài 3: Sự hình thành Liên bang Cộng hòa xã hội chủ nghĩa Xô viết' },
+    { value: 'g11-bai-04', label: 'Bài 4: Sự phát triển của chủ nghĩa xã hội từ sau CTTG II đến nay' },
+    { value: 'g11-bai-05', label: 'Bài 5: Quá trình xâm lược và cai trị của chủ nghĩa thực dân ở ĐNA' },
+    { value: 'g11-bai-06', label: 'Bài 6: Hành trình đi đến độc lập dân tộc ở Đông Nam Á' },
+    { value: 'g11-bai-07', label: 'Bài 7: Chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam' },
+    { value: 'g11-bai-08', label: 'Bài 8: Một số cuộc khởi nghĩa và chiến tranh giải phóng' },
+    { value: 'g11-bai-09', label: 'Bài 9: Cuộc cải cách của Hồ Quý Ly và triều Hồ' },
+    { value: 'g11-bai-10', label: 'Bài 10: Cuộc cải cách của Lê Thánh Tông' },
+    { value: 'g11-bai-11', label: 'Bài 11: Cuộc cải cách của Minh Mạng' },
+    { value: 'g11-bai-12', label: 'Bài 12: Vị trí và tầm quan trọng của Biển Đông' },
+    { value: 'g11-bai-13', label: 'Bài 13: Việt Nam và Biển Đông' }
+  ],
+  12: [
+    { value: 'bai-01', label: 'Bài 1: Liên hợp quốc (LHQ)' },
+    { value: 'bai-02', label: 'Bài 2: Trật tự thế giới trong Chiến tranh Lạnh' },
+    { value: 'bai-03', label: 'Bài 3: Trật tự thế giới sau Chiến tranh Lạnh' },
+    { value: 'bai-04', label: 'Bài 4: Sự ra đời & phát triển của ASEAN' },
+    { value: 'bai-05', label: 'Bài 5: Cộng đồng ASEAN: Từ ý tưởng đến hiện thực' },
+    { value: 'bai-06', label: 'Bài 6: Cách mạng tháng Tám năm 1945' },
+    { value: 'bai-07', label: 'Bài 7: Cuộc kháng chiến chống Pháp (1945 – 1954)' },
+    { value: 'bai-08', label: 'Bài 8: Cuộc kháng chiến chống Mỹ (1954 – 1975)' },
+    { value: 'bai-09', label: 'Bài 9: Đấu tranh bảo vệ Tổ quốc từ sau 1975' },
+    { value: 'bai-10-11', label: 'Bài 10 - 11: Công cuộc Đổi mới ở Việt Nam' },
+    { value: 'bai-12-14', label: 'Bài 12 - 14: Hoạt động đối ngoại của Việt Nam' },
+    { value: 'hsg', label: '👑 Đề Học Sinh Giỏi (HSG Cấp Tỉnh / Quốc Gia)' },
+    { value: 'tong-hop-12', label: '⭐ Đề ôn tập tổng hợp Khối 12 (Toàn bộ ngân hàng)' }
+  ]
+};
+
+function updateCatalogTopicsDropdown(keepSelectedValue = true) {
+  const gradeSelect = $('select-filter-grade');
+  const topicSelect = $('select-filter-topic');
+  if (!gradeSelect || !topicSelect) return;
+
+  const currentGrade = gradeSelect.value;
+  const prevVal = keepSelectedValue ? topicSelect.value : 'all';
+
+  let html = '';
+  if (currentGrade === '10') {
+    html += '<option value="all">📜 Tất cả Chủ đề Khối 10</option>';
+    CATALOG_TOPICS_CONFIG[10].forEach(item => {
+      html += `<option value="${item.value}">${item.label}</option>`;
+    });
+  } else if (currentGrade === '11') {
+    html += '<option value="all">📜 Tất cả Bài học Khối 11</option>';
+    CATALOG_TOPICS_CONFIG[11].forEach(item => {
+      html += `<option value="${item.value}">${item.label}</option>`;
+    });
+  } else if (currentGrade === '12') {
+    html += '<option value="all">📜 Tất cả Bài học Khối 12</option>';
+    CATALOG_TOPICS_CONFIG[12].forEach(item => {
+      html += `<option value="${item.value}">${item.label}</option>`;
+    });
+  } else {
+    html += '<option value="all">📜 Tất cả Chủ đề / Bài học</option>';
+    html += '<optgroup label="🏛️ Khối 10 (Văn minh & Thế giới)">';
+    CATALOG_TOPICS_CONFIG[10].forEach(item => {
+      html += `<option value="${item.value}">${item.label}</option>`;
+    });
+    html += '</optgroup>';
+    html += '<optgroup label="⚔️ Khối 11 (Cận đại & Kháng chiến)">';
+    CATALOG_TOPICS_CONFIG[11].forEach(item => {
+      html += `<option value="${item.value}">${item.label}</option>`;
+    });
+    html += '</optgroup>';
+    html += '<optgroup label="⭐ Khối 12 (Trọng tâm THPT 2025)">';
+    CATALOG_TOPICS_CONFIG[12].forEach(item => {
+      html += `<option value="${item.value}">${item.label}</option>`;
+    });
+    html += '</optgroup>';
+  }
+
+  topicSelect.innerHTML = html;
+
+  const hasPrev = Array.from(topicSelect.options).some(opt => opt.value === prevVal);
+  topicSelect.value = hasPrev ? prevVal : 'all';
+}
+
+function onCatalogGradeChange() {
+  updateCatalogTopicsDropdown(true);
+  renderCatalog();
+}
+
 function onCatalogFilterChange() {
   renderCatalog();
 }
@@ -48678,6 +48797,14 @@ function clearCatalogSearch() {
   const searchInput = $('search-input');
   if (searchInput) searchInput.value = '';
   renderCatalog();
+}
+
+function getExamCatalogGrade(ex) {
+  if (Number.isInteger(ex.grade)) return ex.grade;
+  const eid = ex.id || '';
+  if (eid.startsWith('de-10-') || eid.startsWith('de-th-10-')) return 10;
+  if (eid.startsWith('de-11-') || eid.startsWith('de-th-11-')) return 11;
+  return 12;
 }
 
 function renderCatalog() {
@@ -48694,6 +48821,9 @@ function renderCatalog() {
   const selectedGradeVal = gradeSelect ? gradeSelect.value : 'all';
 
   const topicSelect = $('select-filter-topic');
+  if (topicSelect && topicSelect.options.length === 0) {
+    updateCatalogTopicsDropdown(true);
+  }
   const selectedTopicVal = topicSelect ? topicSelect.value : 'all';
 
   const statusSelect = $('select-filter-status');
@@ -48705,27 +48835,47 @@ function renderCatalog() {
     // 1. Lọc theo Khối (Dropdown 1)
     if (selectedGradeVal !== 'all') {
       const g = parseInt(selectedGradeVal, 10);
-      const examGrades = getExamGrades(ex);
-      if (!examGrades.includes(g)) return false;
+      if (getExamCatalogGrade(ex) !== g) return false;
     }
 
     // 2. Lọc theo Chủ đề / Bài học (Dropdown 2)
     if (selectedTopicVal !== 'all') {
-      if (selectedTopicVal.startsWith('g11-bai-') || selectedTopicVal.startsWith('g10-chu-de-') || selectedTopicVal === 'g10-tong-on') {
-        if (ex.category !== selectedTopicVal) return false;
+      const eid = ex.id || '';
+      const cat = ex.category;
+      const src = ex.sourceExamId;
+      if (selectedTopicVal.startsWith('g10-')) {
+        if (selectedTopicVal === 'g10-chu-de-01') {
+          if (!eid.startsWith('de-10-chu-de-01') && cat !== 'g10-chu-de-01') return false;
+        } else if (selectedTopicVal === 'g10-chu-de-02') {
+          if (!eid.startsWith('de-10-chu-de-02') && cat !== 'g10-chu-de-02') return false;
+        } else if (selectedTopicVal === 'g10-chu-de-03') {
+          if (!eid.startsWith('de-10-chu-de-03') && cat !== 'g10-chu-de-03' && src !== 'de-10-chu-de-03') return false;
+        } else if (selectedTopicVal === 'g10-chu-de-04') {
+          if (!eid.startsWith('de-10-chu-de-04') && cat !== 'g10-chu-de-04' && src !== 'de-10-chu-de-04') return false;
+        } else if (selectedTopicVal === 'g10-chu-de-05') {
+          if (!eid.startsWith('de-10-chu-de-05') && cat !== 'g10-chu-de-05') return false;
+        } else if (selectedTopicVal === 'g10-chu-de-06') {
+          if (!eid.startsWith('de-10-chu-de-06') && cat !== 'g10-chu-de-06' && src !== 'de-10-chu-de-06') return false;
+        } else if (selectedTopicVal === 'g10-tong-on') {
+          if (!eid.startsWith('de-10-tong-on') && cat !== 'g10-tong-on') return false;
+        }
+      } else if (selectedTopicVal.startsWith('g11-bai-')) {
+        const expectedPrefix = 'de-11-bai-' + selectedTopicVal.replace('g11-bai-', '');
+        if (cat !== selectedTopicVal && !eid.startsWith(expectedPrefix)) return false;
       } else {
-      if (selectedTopicVal === 'bai-01' && ex.id !== 'de-01') return false;
-      if (selectedTopicVal === 'bai-02' && !['de-02', 'de-03'].includes(ex.id)) return false;
-      if (selectedTopicVal === 'bai-03' && ex.id !== 'de-04') return false;
-      if (selectedTopicVal === 'bai-04' && !(ex.id >= 'de-05' && ex.id <= 'de-11')) return false;
-      if (selectedTopicVal === 'bai-05' && !(ex.id >= 'de-12' && ex.id <= 'de-17')) return false;
-      if (selectedTopicVal === 'bai-06' && !(ex.id >= 'de-18' && ex.id <= 'de-27')) return false;
-      if (selectedTopicVal === 'bai-07' && !['de-28', 'de-29'].includes(ex.id)) return false;
-      if (selectedTopicVal === 'bai-08' && !['de-30', 'de-31', 'de-32'].includes(ex.id)) return false;
-      if (selectedTopicVal === 'bai-09' && ex.id !== 'de-33') return false;
-      if (selectedTopicVal === 'bai-10-11' && !(ex.id >= 'de-34' && ex.id <= 'de-37')) return false;
-      if (selectedTopicVal === 'bai-12-14' && !(ex.id >= 'de-39' && ex.id <= 'de-42')) return false;
-      if (selectedTopicVal === 'hsg' && !(ex.id === 'de-38' || (ex.level && ex.level.includes('Học Sinh Giỏi')))) return false;
+        if (selectedTopicVal === 'bai-01' && eid !== 'de-01') return false;
+        if (selectedTopicVal === 'bai-02' && !['de-02', 'de-03'].includes(eid)) return false;
+        if (selectedTopicVal === 'bai-03' && eid !== 'de-04') return false;
+        if (selectedTopicVal === 'bai-04' && !(eid >= 'de-05' && eid <= 'de-11')) return false;
+        if (selectedTopicVal === 'bai-05' && !(eid >= 'de-12' && eid <= 'de-17')) return false;
+        if (selectedTopicVal === 'bai-06' && !(eid >= 'de-18' && eid <= 'de-27')) return false;
+        if (selectedTopicVal === 'bai-07' && !['de-28', 'de-29'].includes(eid)) return false;
+        if (selectedTopicVal === 'bai-08' && !['de-30', 'de-31', 'de-32'].includes(eid)) return false;
+        if (selectedTopicVal === 'bai-09' && eid !== 'de-33') return false;
+        if (selectedTopicVal === 'bai-10-11' && !(eid >= 'de-34' && eid <= 'de-37')) return false;
+        if (selectedTopicVal === 'bai-12-14' && !(eid >= 'de-39' && eid <= 'de-42')) return false;
+        if (selectedTopicVal === 'hsg' && !(eid === 'de-38' || (ex.level && ex.level.includes('Học Sinh Giỏi')))) return false;
+        if (selectedTopicVal === 'tong-hop-12' && !(eid === 'de-12-tong-hop' || eid.startsWith('de-th-12-'))) return false;
       }
     }
 
@@ -50038,6 +50188,7 @@ $('btn-back-to-catalog').onclick = () => {
 // =========================================================================
 // 11. INITIALIZATION
 // =========================================================================
+updateCatalogTopicsDropdown(true);
 renderCatalog();
 
 </script>
