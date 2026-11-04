@@ -255,6 +255,24 @@
             box-shadow: 0 0 12px rgba(212,175,55,0.4);
         }
 
+        .navbar__btn--quan-anh {
+            background: linear-gradient(135deg, rgba(123, 30, 30, 0.9) 0%, rgba(92, 58, 33, 0.95) 100%);
+            color: #FFF3D6;
+            font-weight: 700;
+            border-color: var(--vang-dong);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .navbar__btn--quan-anh:hover {
+            background: linear-gradient(135deg, #9B2E2E 0%, #7B1E1E 100%);
+            color: #FFFAEE;
+            transform: scale(1.05);
+            box-shadow: 0 0 14px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-color: var(--vang-hover);
+        }
+
 
         /* ====================================================== */
         /*  PHẦN 3: KHU VỰC "CHỌN HÀNH TRÌNH CỦA BẠN"             */
@@ -3531,11 +3549,13 @@
 
             .nav-music-text,
             .nav-auth-text,
+            .nav-quan-anh-text,
             #trang-thai-nhac {
                 display: none !important;
             }
 
-            #btn-auth {
+            #btn-auth,
+            #btn-nav-quan-anh-hoi {
                 width: 42px !important;
                 height: 42px !important;
                 min-width: 42px !important;
@@ -4478,6 +4498,9 @@
                 <button class="navbar__btn navbar__btn--ghost" id="btn-toggle-music" onclick="xuLyClickNutNhac(event)" ondblclick="chuyenBaiNhacNgauNhien(event)" title="Click 1 lần: Bật/Tắt | Click 2 lần: Đổi bài ngẫu nhiên" aria-label="Bật hoặc tắt nhạc nền, click 2 lần liên tiếp để đổi bài">
                     <span class="nav-music-icon">🎵</span> <span id="trang-thai-nhac" class="nav-music-text">Nhạc Nền</span>
                 </button>
+                <a href="quan-anh-hoi.html" class="navbar__btn navbar__btn--quan-anh" id="btn-nav-quan-anh-hoi" title="Quần Anh Hội — Diễn đàn & Đàm luận Lịch sử" aria-label="Đến Quần Anh Hội - Diễn đàn đàm luận lịch sử">
+                    <span class="nav-quan-anh-icon">⚔️</span><span class="nav-quan-anh-text"> Quần Anh Hội</span>
+                </a>
                 <a href="dang-nhap.html" class="navbar__btn navbar__btn--solid" id="btn-auth" title="Tài khoản / Đăng nhập">
                     <span class="nav-auth-icon">🔑</span><span class="nav-auth-text"> Đăng Nhập</span>
                 </a>
