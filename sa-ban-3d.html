@@ -3031,8 +3031,194 @@
         }
 
     </style>
+<style>
+
+        /* ========================================================================= */
+        /*  THÔNG BÁO TƯƠNG THÍCH THIẾT BỊ DI ĐỘNG (MOBILE COMPATIBILITY NOTICE)     */
+        /* ========================================================================= */
+        .mobile-notice-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(5, 4, 3, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .mobile-notice-overlay.is-open {
+            display: flex;
+            animation: mobileNoticeFadeIn 0.22s ease-out;
+        }
+        @keyframes mobileNoticeFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .mobile-notice-dialog {
+            position: relative;
+            width: min(100%, 620px);
+            max-height: min(88vh, 760px);
+            overflow-y: auto;
+            padding: 34px clamp(20px, 5vw, 42px) 30px;
+            color: #F5EADB;
+            text-align: center;
+            background: radial-gradient(ellipse at top, #382019, #17100d 58%, #120d0b 100%);
+            border: 2px solid #D4AF37;
+            border-radius: 20px;
+            box-shadow: 0 24px 90px rgba(0, 0, 0, 0.75), 0 0 42px rgba(212, 175, 55, 0.25), inset 0 0 30px rgba(212, 175, 55, 0.05);
+            animation: mobileNoticeRise 0.28s cubic-bezier(.2,.8,.2,1) both;
+        }
+        @keyframes mobileNoticeRise {
+            from { opacity: 0; transform: translateY(16px) scale(.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .mobile-notice-close {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 243, 214, 0.42);
+            border-radius: 50%;
+            color: #FFF3D6;
+            background: rgba(255, 255, 255, 0.08);
+            font: 400 36px/1 Arial, sans-serif;
+            cursor: pointer;
+            transition: transform .18s ease, background .18s ease, border-color .18s ease;
+        }
+        .mobile-notice-close:hover, .mobile-notice-close:focus-visible {
+            transform: rotate(90deg) scale(1.06);
+            border-color: #FFD76A;
+            background: rgba(212, 175, 55, 0.2);
+            outline: none;
+        }
+        .mobile-notice-crest {
+            display: grid;
+            place-items: center;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 14px;
+            border: 1px solid rgba(255, 215, 106, 0.7);
+            border-radius: 50%;
+            color: #FFD76A;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2), rgba(123, 30, 30, 0.25));
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.18);
+            font-size: 2.2rem;
+        }
+        .mobile-notice-eyebrow {
+            margin-bottom: 6px;
+            color: #E3C56D;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .mobile-notice-title {
+            margin: 0 30px 16px;
+            color: #FFF0C2;
+            font-family: 'Noto Serif', serif;
+            font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+            line-height: 1.3;
+        }
+        .mobile-notice-section {
+            margin-top: 12px;
+            padding: 14px 16px;
+            border: 1px solid rgba(212, 175, 55, 0.34);
+            border-left: 4px solid #D4AF37;
+            border-radius: 12px;
+            background: #211914;
+            text-align: left;
+        }
+        .mobile-notice-section h3 {
+            margin: 0 0 6px;
+            color: #FFD76A;
+            font-size: .95rem;
+        }
+        .mobile-notice-section p {
+            margin: 0;
+            color: #E5D6BD;
+            font-size: .88rem;
+            line-height: 1.6;
+        }
+        .mobile-notice-recommendation {
+            margin: 16px 0 0;
+            color: #FFF0C2;
+            font-size: .92rem;
+            font-weight: 700;
+        }
+        .mobile-notice-btn-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .mobile-notice-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-size: .92rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .2s ease;
+        }
+        .mobile-notice-btn--primary {
+            background: linear-gradient(135deg, #7B1E1E, #B71C1C);
+            border: 1px solid #D4AF37;
+            color: #FFF0C2;
+            box-shadow: 0 4px 15px rgba(123, 30, 30, 0.4);
+        }
+        .mobile-notice-btn--primary:hover {
+            background: linear-gradient(135deg, #932424, #D32F2F);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+        .mobile-notice-btn--secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #E5D6BD;
+        }
+        .mobile-notice-btn--secondary:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #FFF0C2;
+        }
+
+    </style>
 </head>
 <body class="campaign-bach-dang">
+    <div class="mobile-notice-overlay" id="mobile-compat-notice" aria-hidden="true" onclick="if (event.target === this) dongThongBaoMobile();">
+        <section class="mobile-notice-dialog" role="dialog" aria-modal="true" aria-labelledby="mobile-notice-title" aria-describedby="mobile-notice-description">
+            <button type="button" class="mobile-notice-close" aria-label="Đóng thông báo" title="Đóng thông báo" onclick="dongThongBaoMobile()">×</button>
+            <div class="mobile-notice-crest" aria-hidden="true">⚔️</div>
+            <p class="mobile-notice-eyebrow">Thông báo tương thích thiết bị</p>
+            <h2 class="mobile-notice-title" id="mobile-notice-title">Sa Bàn Tạm Khóa Trên Thiết Bị Di Động</h2>
+
+            <div class="mobile-notice-section" id="mobile-notice-description">
+                <h3>📱 Sa bàn đang gặp lỗi &amp; chưa tương thích Mobile</h3>
+                <p>Hiện tại, các mục <strong>Sa bàn trận đồ 2D (cả 2 trận: Bạch Đằng 938 &amp; Phòng tuyến Sông Như Nguyệt 1077)</strong> cùng <strong>Mô hình Sa bàn 3D</strong> đang gặp lỗi hiển thị, lệch tỷ lệ khung hình và chưa tương thích tốt với màn hình cảm ứng điện thoại. Nhằm đảm bảo trải nghiệm tốt nhất, các mục Sa Bàn tạm thời bị chặn truy cập trên thiết bị di động.</p>
+            </div>
+
+            <div class="mobile-notice-section">
+                <h3>💻 Khuyến nghị trải nghiệm trên Laptop / PC</h3>
+                <p>Kính mong bạn chuyển sang sử dụng <strong>máy tính xách tay (Laptop) hoặc máy tính để bàn (PC)</strong> để có trải nghiệm điều binh khiển tướng, quan sát trận địa và tương tác sa bàn mượt mà, trực quan nhất!</p>
+            </div>
+
+            <p class="mobile-notice-recommendation">Hẹn gặp lại bạn trên màn hình lớn của Laptop hoặc PC nhé!</p>
+            <div class="mobile-notice-btn-row">
+                <a href="trang-chinh.html" class="mobile-notice-btn mobile-notice-btn--primary">← Quay về Trang Chủ</a>
+                <button type="button" class="mobile-notice-btn mobile-notice-btn--secondary" onclick="dongThongBaoMobile()">Đã hiểu thông báo</button>
+            </div>
+        </section>
+    </div>
+
+
 
     <!-- 1. THẺ NHẠC NỀN ĐỒNG BỘ LOCAL STORAGE -->
     <audio id="bg-music" src="nhac-nen-1.mp3" preload="none"></audio>
@@ -10473,6 +10659,7 @@
         }
 
         function chuyenSangChienDichBachDang() {
+            if (chanSaBanTrenMobile()) return;
             HistoryGame.resetScene();
             try {
                 document.body.classList.add('gameplay-ui-active');
@@ -11437,6 +11624,7 @@
 
         // 10. Chọn & Mở Khóa Đa Chiến Dịch (Campaign Progression)
         function chonAiChienDich(aiId) {
+            if (chanSaBanTrenMobile()) return;
             try {
                 if (aiId === 1) {
                     chuyenSangChienDichBachDang();
@@ -11944,7 +12132,60 @@
         /* ========================================================================== */
         /*  N. KHỞI CHẠY HỆ THỐNG KHI TẢI TRANG                                      */
         /* ========================================================================== */
+        
+        // =========================================================================
+        //  KIỂM TRA VÀ CHẶN THIẾT BỊ DI ĐỘNG CHO MỤC SA BÀN (2D & 3D)
+        // =========================================================================
+        function laThietBiDiDong() {
+            var uaData = navigator.userAgentData;
+            var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            return !!(uaData && uaData.mobile === true)
+                || /Android|iPhone|iPad|iPod|Windows Phone|Mobile|CriOS/i.test(navigator.userAgent || '')
+                || (isTouch && window.innerWidth <= 900);
+        }
+
+        function moThongBaoMobile() {
+            var overlay = document.getElementById('mobile-compat-notice');
+            if (!overlay) return;
+            overlay.classList.add('is-open');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('mobile-notice-open');
+            var closeButton = overlay.querySelector('.mobile-notice-close');
+            if (closeButton) closeButton.focus();
+        }
+
+        function dongThongBaoMobile() {
+            var overlay = document.getElementById('mobile-compat-notice');
+            if (!overlay) return;
+            overlay.classList.remove('is-open');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('mobile-notice-open');
+        }
+
+        function chanSaBanTrenMobile() {
+            if (laThietBiDiDong()) {
+                moThongBaoMobile();
+                return true;
+            }
+            return false;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') dongThongBaoMobile();
+        });
+
+
         window.addEventListener('DOMContentLoaded', () => {
+            if (laThietBiDiDong()) {
+                moThongBaoMobile();
+                // Chặn toàn bộ khởi tạo Three.js / WebGL nặng trên di động
+                var lobbyNotice = document.createElement('div');
+                lobbyNotice.style.cssText = 'position:fixed;inset:0;background:#0d0907;z-index:99999;display:flex;align-items:center;justify-content:center;color:#F5EADB;text-align:center;padding:24px;';
+                lobbyNotice.innerHTML = '<div style="max-width:520px;background:#1a110c;border:2px solid #D4AF37;border-radius:18px;padding:32px 24px;box-shadow:0 12px 50px rgba(0,0,0,0.8);"><div style="font-size:3.2rem;margin-bottom:14px;">⚔️📱</div><h2 style="color:#FFF0C2;font-family:serif;font-size:1.5rem;margin-bottom:14px;">Sa Bàn 3D Tạm Khóa Trên Mobile</h2><p style="color:#E5D6BD;line-height:1.65;font-size:0.95rem;margin-bottom:24px;">Không gian Sa bàn 3D (Bạch Đằng 938 &amp; Sông Như Nguyệt 1077) hiện chưa tương thích với thiết bị di động. Vui lòng chuyển sang sử dụng <strong>Laptop hoặc PC</strong> để có trải nghiệm tốt nhất.</p><a href="trang-chinh.html" style="display:inline-block;padding:12px 30px;background:linear-gradient(135deg,#7B1E1E,#B71C1C);color:#FFF0C2;border:1px solid #D4AF37;border-radius:999px;text-decoration:none;font-weight:bold;font-size:0.95rem;">← Quay về Trang Chủ</a></div>';
+                document.body.appendChild(lobbyNotice);
+                return;
+            }
+
             khoiDongAmThanh();
             khoiTaoThreeJSEngine();
             capNhatHUD();

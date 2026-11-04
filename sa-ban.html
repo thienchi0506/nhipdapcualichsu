@@ -4528,21 +4528,24 @@
         <section class="mobile-notice-dialog" role="dialog" aria-modal="true" aria-labelledby="mobile-notice-title" aria-describedby="mobile-notice-description">
             <button type="button" class="mobile-notice-close" aria-label="Đóng thông báo" title="Đóng thông báo" onclick="dongThongBaoMobile()">×</button>
             <div class="mobile-notice-crest" aria-hidden="true">⚔️</div>
-            <p class="mobile-notice-eyebrow">Thông báo từ nhóm phát triển</p>
-            <h2 class="mobile-notice-title" id="mobile-notice-title">Một lời nhắn gửi đến bạn</h2>
+            <p class="mobile-notice-eyebrow">Thông báo tương thích thiết bị</p>
+            <h2 class="mobile-notice-title" id="mobile-notice-title">Sa Bàn Tạm Khóa Trên Thiết Bị Di Động</h2>
 
             <div class="mobile-notice-section" id="mobile-notice-description">
-                <h3>📱 Về trải nghiệm trên điện thoại</h3>
-                <p>Chúng mình xin lỗi vì sa bàn hiện chưa tương thích tốt với thiết bị di động. Nhóm đang khắc phục các lỗi hiển thị và điều khiển; mong bạn thông cảm và tạm thời truy cập bằng laptop hoặc máy tính để bàn để trải nghiệm đầy đủ hơn. Chúng mình sẽ tiếp tục hoàn thiện phiên bản di động sớm nhất có thể.</p>
+                <h3>📱 Sa bàn 2D đang lỗi &amp; chưa tương thích Mobile</h3>
+                <p>Hiện tại, các mục <strong>Sa bàn trận đồ 2D (cả 2 trận: Bạch Đằng 938 &amp; Phòng tuyến Sông Như Nguyệt 1077)</strong> cùng mô hình 3D đang gặp lỗi hiển thị, lệch tỷ lệ khung hình và chưa tương thích tốt với thiết bị di động. Nhằm đảm bảo trải nghiệm tốt nhất, các mục Sa Bàn tạm thời bị chặn truy cập trên điện thoại.</p>
             </div>
 
             <div class="mobile-notice-section">
-                <h3>📜 Dự án vẫn đang được phát triển</h3>
-                <p>Sa bàn vẫn còn những phần chưa hoàn thiện. Với kinh nghiệm lập trình còn đang tích lũy ở bậc THPT, chúng mình biết dự án cần thêm thời gian và sự cố gắng. Tình yêu dành cho lịch sử là động lực để nhóm tiếp tục xây dựng mô hình này, giúp học sinh cảm nhận lịch sử gần gũi và rung động hơn. Cảm ơn bạn đã kiên nhẫn đồng hành!</p>
+                <h3>💻 Khuyến nghị trải nghiệm trên Laptop / PC</h3>
+                <p>Kính mong bạn chuyển sang sử dụng <strong>máy tính xách tay (Laptop) hoặc máy tính để bàn (PC)</strong> để có trải nghiệm điều binh khiển tướng, quan sát trận địa và tương tác sa bàn mượt mà, trực quan nhất!</p>
             </div>
 
-            <p class="mobile-notice-recommendation">Hẹn gặp bạn trên laptop hoặc PC nhé!</p>
-            <button type="button" class="mobile-notice-dismiss" onclick="dongThongBaoMobile()">Đã hiểu, cảm ơn bạn</button>
+            <p class="mobile-notice-recommendation">Hẹn gặp lại bạn trên màn hình lớn của Laptop hoặc PC nhé!</p>
+            <div class="mobile-notice-btn-row" style="display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                <a href="trang-chinh.html" class="mobile-notice-btn mobile-notice-btn--primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #7B1E1E, #B71C1C); border: 1px solid #D4AF37; color: #FFF0C2; font-weight: 700; padding: 12px 24px; border-radius: 999px;">← Quay về Trang Chủ</a>
+                <button type="button" class="mobile-notice-btn mobile-notice-btn--secondary" onclick="dongThongBaoMobile()" style="cursor: pointer; padding: 12px 20px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(212,175,55,0.4); color: #E5D6BD; font-weight: 700;">Đã hiểu thông báo</button>
+            </div>
         </section>
     </div>
 
@@ -8239,8 +8242,10 @@
         // Device gate: only mobile devices are blocked from entering the battle map.
         function laThietBiDiDong() {
             var uaData = navigator.userAgentData;
+            var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
             return !!(uaData && uaData.mobile === true)
-                || /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(navigator.userAgent || '');
+                || /Android|iPhone|iPad|iPod|Windows Phone|Mobile|CriOS/i.test(navigator.userAgent || '')
+                || (isTouch && window.innerWidth <= 900);
         }
 
         function moThongBaoMobile() {
@@ -8271,8 +8276,19 @@
         });
 
         function chanSaBanTrenMobile() {
+            if (laThietBiDiDong()) {
+                moThongBaoMobile();
+                return true;
+            }
             return false;
         }
+
+        // Tự động kiểm tra và khóa ngay khi tải trang trên mobile
+        window.addEventListener('DOMContentLoaded', function() {
+            if (laThietBiDiDong()) {
+                moThongBaoMobile();
+            }
+        });
 
         function vaoThangSaBanChienDau() {
             if (chanSaBanTrenMobile()) return;

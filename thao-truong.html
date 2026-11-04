@@ -136,6 +136,22 @@
       display: inline-flex;
       align-items: center;
     }
+    .music-badge-pill {
+      cursor: pointer;
+      font-family: inherit;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .music-badge-pill:hover {
+      background: rgba(197, 155, 39, 0.25);
+      border-color: #c59b27;
+      color: #fff;
+    }
+    .music-badge-pill.active {
+      border-color: #f1c40f;
+      color: #ffe1a0;
+      box-shadow: 0 0 8px rgba(241, 196, 15, 0.3);
+    }
 
     main {
       flex: 1;
@@ -3245,6 +3261,9 @@
       <div class="header-sub">Hệ Thống Đề Thi Lịch Sử 12 Chuẩn Bộ GD&ĐT 2025 · 45 Phút / Đề</div>
     </div>
     <div class="header-badges">
+      <button type="button" class="badge-pill music-badge-pill" id="btn-toggle-music" onclick="window.SiteMusic && window.SiteMusic.toggle()" ondblclick="window.SiteMusic && window.SiteMusic.next()" title="Click 1 lần: Bật/Tắt | Click 2 lần: Đổi bài ngẫu nhiên" aria-label="Bật hoặc tắt nhạc nền">
+        <span id="music-btn-icon">🎵</span> <span id="music-btn-text">Nhạc: Bật</span>
+      </button>
       <div class="badge-pill" id="commander-badge">🎖️ Tướng quân: Khách</div>
       <div class="badge-pill" id="peace-badge">🕊️ Thái Bình: 1000</div>
     </div>
