@@ -1399,7 +1399,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
       "q": "Nội dung nào sau đây phản ánh đúng điểm tương đồng giữa văn hóa và văn minh?",
       "options": [
         "Đều mang đậm bản sắc riêng của tộc người và có tính khép kín",
-        "Đều phản ánh những tiến bộ vượt bậc về khoa học học và kĩ thuật",
+        "Đều phản ánh những tiến bộ vượt bậc về khoa học và kĩ thuật",
         "Đều là những giá trị vật chất và tinh thần do con người sáng tạo nên",
         "Đều bắt đầu xuất hiện khi con người biết sử dụng công cụ bằng sắt"
       ],
@@ -1649,7 +1649,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         },
         {
           "letter": "d",
-          "text": "Một trong những yếu tố làm nên giá trị đặc sắc của chùa hang là sự kết hợp hài hòa giữa giữa nghệ thuật kiến trúc với nghệ thuật điêu khắc và hội họa.",
+          "text": "Một trong những yếu tố làm nên giá trị đặc sắc của chùa hang là sự kết hợp hài hòa giữa nghệ thuật kiến trúc với nghệ thuật điêu khắc và hội họa.",
           "isTrue": true
         }
       ]
@@ -2265,7 +2265,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "công nghiệp hóa, hiện đại hóa các nước tư bản châu Âu.",
         "hình thành hai giai cấp cơ bản là tư sản và công nhân.",
         "cơ khí hóa nền sản xuất thay thế cho lao động thủ công.",
-        "hình thành nền tảng kinh tế của của chủ nghĩa tư bản."
+        "hình thành nền tảng kinh tế của chủ nghĩa tư bản."
       ],
       "ans": 2,
       "answer": 2
@@ -3000,7 +3000,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "Văn minh Đông Nam Á giai đoạn đầu Công nguyên đến đến thế kỉ VII có điểm tương đồng nào sau đây so với văn minh Đông Nam Á giai đoạn thế kỉ VII đến thế kỉ XV?",
+        "q": "Văn minh Đông Nam Á giai đoạn đầu Công nguyên đến thế kỉ VII có điểm tương đồng nào sau đây so với văn minh Đông Nam Á giai đoạn thế kỉ VII đến thế kỉ XV?",
         "options": [
           "Có sự xâm nhập và lan tỏa của Hồi giáo",
           "Có sự xâm nhập và lan tỏa của Thiên chúa giáo",
@@ -3066,7 +3066,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "“Dù ai đi ngược về xuôi\nNhớ ngày giỗ tổ mùng mười tháng ba”\nNgày giổ tổ Hùng Vương của Việt Nam hàng năm là một biểu hiện của hình thức thức tín ngưỡng nào sau đây?",
+        "q": "“Dù ai đi ngược về xuôi\nNhớ ngày giỗ tổ mùng mười tháng ba”\nNgày giổ tổ Hùng Vương của Việt Nam hàng năm là một biểu hiện của hình thức tín ngưỡng nào sau đây?",
         "options": [
           "Thờ thần động vật.",
           "Thờ thần tự nhiên.",

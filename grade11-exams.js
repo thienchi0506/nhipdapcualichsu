@@ -2080,7 +2080,7 @@ window.GRADE11_ARCHIVE_EXAMS = [
         "q": "Các nước thực dân phương Tây xâm lược Đông Nam Á trong bối cảnh phần lớn các nước ở đây",
         "options": [
           "có nền kinh tế phát triển mạnh mẽ.",
-          "có tình hình hình chính trị, xã hội ổn định",
+          "có tình hình chính trị, xã hội ổn định",
           "chế độ phong kiến phát triển đỉnh cao.",
           "chế độ phong kiến suy thoái, khủng hoảng."
         ],
@@ -4051,9 +4051,9 @@ window.GRADE11_ARCHIVE_EXAMS = [
       {
         "q": "Chọn các từ cho sẵn sau đây đặt vào vị trí đánh số trong đoạn thông tin để thể hiện nội dung cuộc khởi nghĩa Hai Bà Trưng:",
         "options": [
-          "Mã Viện,",
-          "Tô Định,",
-          "Đông Hán,",
+          "Mã Viện.",
+          "Tô Định.",
+          "Đông Hán.",
           "Hát Môn, E. Thái thú, G. Giao Chỉ. Cuộc khởi nghĩa Hai Bà Trưng bùng nổ năm 40, trong bối cảnh nhà ... (1) đang đặt ách thống trị nặng nề lên vùng ... (2), đặc biệt là thời kì ... (3) làm ... (4). Một thời gian sau đó, nhà Hán cử ... (5) đưa quân sang đàn áp. Sau một thời gian kháng cự, Hai Bà Trưng lui quân về ... (6) và hi sinh. 1. Đông Hán 2. Giao Chỉ 3. Tô Định 4. Thái thú 5. Mã Viện 6. Hát Môn"
         ],
         "ans": 3,
