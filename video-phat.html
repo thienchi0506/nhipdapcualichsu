@@ -590,21 +590,38 @@
 
         // =========================================================================
         // HÀM QUAY LẠI TRANG THƯ VIỆN VIDEO
-        // Đưa người xem về đúng trang trước đó, hỗ trợ cả nút Back trình duyệt
+        // Đưa người xem về đúng trang trước đó và mở lại chính xác thư viện video
         // =========================================================================
         function quayLaiThuVien(event) {
-            if (event) event.preventDefault();
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             try {
                 sessionStorage.setItem('reopen_video_modal', '1');
             } catch (_) {}
 
-            // Nếu người xem đến từ trang nội bộ có lịch sử, dùng history.back()
-            if (window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
-                window.history.back();
-            } else {
-                // Đường dẫn tương đối an toàn với GitHub Pages thư mục con
-                window.location.href = 'trang-chinh.html?modal=video';
-            }
+            var targetUrl = 'trang-chinh.html?modal=video';
+
+            // 1. Nếu đang chạy trong khung iframe của site-music.js (trang chủ cha)
+            try {
+                var master = (window.parent && window.parent.SiteMusic) || (window.top && window.top.SiteMusic);
+                if (master && typeof master.navigateTo === 'function') {
+                    master.navigateTo(targetUrl);
+                    return;
+                }
+            } catch (_) {}
+
+            // 2. Nếu đang chạy trong iframe bất kỳ
+            try {
+                if (window.self !== window.top) {
+                    window.top.location.href = targetUrl;
+                    return;
+                }
+            } catch (_) {}
+
+            // 3. Chạy độc lập ở cửa sổ chính
+            window.location.href = targetUrl;
         }
 
         // =========================================================================

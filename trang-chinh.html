@@ -2048,44 +2048,145 @@
             flex: 1;
         }
 
+        
+        /* CSS CHUYÊN BIỆT CHO MỤC LỊCH SỬ NGÀY NAY */
+        .ngay-nay-nav__btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 15px;
+            border-radius: 20px;
+            background: #FFF8E7;
+            border: 1px solid var(--vang-dong);
+            color: #5C3A21;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .ngay-nay-nav__btn:hover {
+            background: #7B1E1E;
+            color: #FFF;
+            border-color: var(--vang-dong);
+            transform: translateY(-1px);
+        }
+
+        .ngay-nay-topics-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .ngay-nay-topic-block {
+            background: #FFFDF8;
+            border: 1.5px solid #DFCFAA;
+            border-radius: 12px;
+            padding: 22px 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .ngay-nay-topic-block:hover {
+            border-color: var(--vang-dong);
+            box-shadow: 0 8px 24px rgba(75, 38, 14, 0.1);
+        }
+
+        .ngay-nay-topic-header {
+            margin-bottom: 16px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.35);
+            padding-bottom: 10px;
+        }
+
+        .ngay-nay-topic-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #7B1E1E 0%, #581313 100%);
+            color: #FFF3D6;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--vang-dong);
+            margin-bottom: 6px;
+        }
+
+        .ngay-nay-topic-title {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+            font-weight: 800;
+            color: #7B1E1E;
+            line-height: 1.35;
+        }
+
         .ngay-nay-visuals {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
             gap: 14px;
-            margin: 0 0 20px;
+            margin: 0 0 18px;
         }
 
-        .ngay-nay-visuals figure {
-            min-width: 0;
-            margin: 0;
+        .ngay-nay-figure {
+            position: relative;
+            background: #FFFDF7;
+            border: 1px solid #DFCFAA;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #dfcfaa;
-            border-radius: 10px;
-            background: #fffdf7;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 0;
         }
-
-        .ngay-nay-visuals figure > a:first-child { display: block; }
-        .ngay-nay-visuals img {
-            display: block;
+        .ngay-nay-figure:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            border-color: var(--vang-dong);
+        }
+        .ngay-nay-figure img {
             width: 100%;
             height: 190px;
             object-fit: cover;
-            background: #eee5d4;
+            display: block;
+            background: #24170F;
+            cursor: zoom-in;
         }
-
-        .ngay-nay-visuals figcaption {
+        .ngay-nay-figure figcaption {
             padding: 10px 12px;
-            color: #5a4838;
-            font-size: .78rem;
-            line-height: 1.5;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            color: #3D2616;
+            background: #FFFDF8;
+            border-top: 1px solid #EFE4CC;
+            flex: 1;
+        }
+        .ngay-nay-figure figcaption .img-meta {
+            font-size: 0.74rem;
+            color: #705D4C;
+            margin-top: 4px;
+            display: block;
+        }
+        .ngay-nay-figure figcaption a {
+            color: #7B1E1E;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .ngay-nay-figure figcaption a:hover {
+            text-decoration: underline;
         }
 
-        .ngay-nay-visuals figcaption a { color: #7b1e1e; }
-
-        @media (max-width: 650px) {
-            .ngay-nay-visuals { grid-template-columns: 1fr; }
-            .ngay-nay-visuals img { height: auto; max-height: 260px; }
+        .ngay-nay-topic-body p {
+            margin-bottom: 14px;
+            text-align: justify;
+            text-indent: 1.5em;
+            line-height: 1.85;
+            font-size: 0.98rem;
+            color: #2C1E18;
         }
+        .ngay-nay-topic-body p:last-child {
+            margin-bottom: 0;
+        }
+
 
         .modal-video-wrap {
             background: #000;
@@ -12790,88 +12891,333 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             } else if (loai === 'ngay-nay') {
                 titleText = "🌱 Lịch Sử Trong Cuộc Sống Ngày Nay";
                 bodyHtml = `
-                    <section style="margin:0 0 20px;padding:18px 20px;border-left:4px solid #c59b2a;border-radius:8px;background:#fff8e8;color:#4a3726;line-height:1.75">
-                        <h3 style="margin:0 0 8px;color:#7B1E1E;font-family:'Playfair Display',serif">Quá khứ vẫn hiện diện quanh ta</h3>
-                        <p style="margin:0">Lịch sử không chỉ nằm trong sách. Ta gặp lịch sử qua di sản được cộng đồng gìn giữ, tên đất tên làng, bảo tàng và tư liệu, ký ức gia đình, cũng như cách xã hội hôm nay học hỏi từ những lựa chọn của các thế hệ trước. Mục này gợi ý những cách kết nối quá khứ với đời sống hiện đại bằng sự tò mò, tôn trọng chứng cứ và tinh thần nhân văn.</p>
+                    <!-- BANNER TỔNG QUAN -->
+                    <section style="margin:0 0 24px;padding:20px 22px;border-left:5px solid var(--vang-dong);border-radius:10px;background:linear-gradient(135deg, #FFF9ED 0%, #FFF3D6 100%);color:#3D2A1D;line-height:1.8;box-shadow:0 4px 15px rgba(0,0,0,0.06)">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                            <span style="font-size:1.6rem">🌱</span>
+                            <h3 style="margin:0;color:#7B1E1E;font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900">Quá khứ vẫn hiện diện quanh ta — Nhịp đập di sản trong đời sống đương đại</h3>
+                        </div>
+                        <p style="margin:0;font-size:0.96rem;text-align:justify">Lịch sử không chỉ nằm lại trên những trang sách xưa hay cất kín sau tủ kính bảo tàng. Lịch sử hiện hữu sống động qua hơi thở đời thường, qua nếp nhà, lễ hội, lời ca tiếng đàn, tên đất tên làng, qua ý thức gìn giữ chủ quyền và cách mỗi công dân hôm nay đối thoại với ký ức dân tộc. Dưới đây là 6 chuyên khảo chuyên sâu kết nối di sản lịch sử với đời sống hiện đại bằng tinh thần khoa học, sự tôn trọng chứng cứ và trái tim nhân văn sâu sắc.</p>
                     </section>
-                    <div class="ngay-nay-visuals" aria-label="Hình ảnh minh họa di sản và lịch sử Việt Nam">
-                        <figure>
-                            <a href="https://commons.wikimedia.org/wiki/File:Tranh_%C4%90%C3%B4ng_H%E1%BB%93_-_C%C3%A1_ch%C3%A9p.jpg" target="_blank" rel="noopener noreferrer">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tranh_%C4%90%C3%B4ng_H%E1%BB%93_-_C%C3%A1_ch%C3%A9p.jpg?width=720" alt="Tranh dân gian Đông Hồ Cá chép" loading="lazy" decoding="async" width="400" height="622">
-                            </a>
-                            <figcaption>Tranh Đông Hồ “Cá chép” · Tác phẩm dân gian, Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Tranh_%C4%90%C3%B4ng_H%E1%BB%93_-_C%C3%A1_ch%C3%A9p.jpg" target="_blank" rel="noopener noreferrer">Nguồn và giấy phép</a></figcaption>
-                        </figure>
-                        <figure>
-                            <a href="https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_museum.jpg" target="_blank" rel="noopener noreferrer">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ho_Chi_Minh_museum.jpg?width=960" alt="Tòa nhà Bảo tàng Hồ Chí Minh" loading="lazy" decoding="async" width="1280" height="960">
-                            </a>
-                            <figcaption>Bảo tàng Hồ Chí Minh · Ảnh Syced · CC0 1.0 · <a href="https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_museum.jpg" target="_blank" rel="noopener noreferrer">Nguồn và giấy phép</a></figcaption>
-                        </figure>
-                        <figure>
-                            <a href="https://commons.wikimedia.org/wiki/File:Citadelle-thang-long-hanoi.jpg" target="_blank" rel="noopener noreferrer">
-                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Citadelle-thang-long-hanoi.jpg?width=960" alt="Cổng Hoàng thành Thăng Long tại Hà Nội" loading="lazy" decoding="async" width="960" height="642">
-                            </a>
-                            <figcaption>Hoàng thành Thăng Long · Ảnh Alex 69200 vx · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Citadelle-thang-long-hanoi.jpg" target="_blank" rel="noopener noreferrer">Nguồn và giấy phép</a></figcaption>
-                        </figure>
+
+                    <!-- THANH ĐIỀU HƯỚNG NHANH CÁC MỤC -->
+                    <nav class="ngay-nay-nav" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:14px;border-bottom:1.5px dashed rgba(212,175,55,0.4)">
+                        <a href="#muc-1-di-san-song" class="ngay-nay-nav__btn">🎎 Mục 1: Di Sản Sống</a>
+                        <a href="#muc-2-lop-hoc-mo" class="ngay-nay-nav__btn">🏛️ Mục 2: Lớp Học Mở</a>
+                        <a href="#muc-3-cong-nghe" class="ngay-nay-nav__btn">🖥️ Mục 3: Công Nghệ & Ký Ức</a>
+                        <a href="#muc-4-cong-dan-so" class="ngay-nay-nav__btn">🔎 Mục 4: Kỹ Năng Công Dân Số</a>
+                        <a href="#muc-5-nhan-van" class="ngay-nay-nav__btn">🕊️ Mục 5: Bài Học Nhân Văn</a>
+                        <a href="#muc-6-chu-quyen" class="ngay-nay-nav__btn">🧭 Mục 6: Lịch Sử & Chủ Quyền</a>
+                    </nav>
+
+                    <div class="ngay-nay-topics-list">
+
+                        <!-- MỤC 1: DI SẢN SỐNG -->
+                        <article class="ngay-nay-topic-block" id="muc-1-di-san-song">
+                            <div class="ngay-nay-topic-header">
+                                <span class="ngay-nay-topic-tag">Di Sản Phi Vật Thể</span>
+                                <h3 class="ngay-nay-topic-title">MỤC 1: DI SẢN SỐNG – TRUYỀN THỐNG ĐƯỢC TIẾP NỐI TRONG CỘNG ĐỒNG</h3>
+                            </div>
+                            
+                            <div class="ngay-nay-visuals" aria-label="Hình ảnh tư liệu Di sản sống">
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%A0i%20ch%C3%B2i%20H%E1%BB%99i%20An.JPG?width=800', 'Không gian hội diễn Nghệ thuật Bài Chòi tại Hội An')" title="Nhấp để phóng to ảnh: Không gian hội diễn Nghệ thuật Bài Chòi tại Hội An">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%A0i%20ch%C3%B2i%20H%E1%BB%99i%20An.JPG?width=800" alt="Không gian hội diễn Nghệ thuật Bài Chòi tại Hội An" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Không gian hội diễn Nghệ thuật Bài Chòi tại Hội An</strong><br>
+                <span class="img-meta">Di sản văn hóa phi vật thể UNESCO · Ảnh Dũng Nguyễn / CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:B%C3%A0i%20ch%C3%B2i%20H%E1%BB%99i%20An.JPG" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Dan%20Tinh%20lute%20from%20Vietnam.jpg?width=800', 'Cây đàn tính trong nghi lễ Thực hành Then của người Tày, Nùng')" title="Nhấp để phóng to ảnh: Cây đàn tính trong nghi lễ Thực hành Then của người Tày, Nùng">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dan%20Tinh%20lute%20from%20Vietnam.jpg?width=800" alt="Cây đàn tính trong nghi lễ Thực hành Then của người Tày, Nùng" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Cây đàn tính trong nghi lễ Thực hành Then của người Tày, Nùng</strong><br>
+                <span class="img-meta">Nhạc cụ truyền thống dân tộc · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Dan%20Tinh%20lute%20from%20Vietnam.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Tranh%20%C4%90%C3%B4ng%20H%E1%BB%93%20-%20C%C3%A1%20ch%C3%A9p.jpg?width=800', 'Nghệ nhân làng tranh dân gian Đông Hồ quét điệp và in mộc bản')" title="Nhấp để phóng to ảnh: Nghệ nhân làng tranh dân gian Đông Hồ quét điệp và in mộc bản">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tranh%20%C4%90%C3%B4ng%20H%E1%BB%93%20-%20C%C3%A1%20ch%C3%A9p.jpg?width=800" alt="Nghệ nhân làng tranh dân gian Đông Hồ quét điệp và in mộc bản" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Nghệ nhân làng tranh dân gian Đông Hồ quét điệp và in mộc bản</strong><br>
+                <span class="img-meta">Tranh khắc gỗ dân gian Đông Hồ · Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Tranh%20%C4%90%C3%B4ng%20H%E1%BB%93%20-%20C%C3%A1%20ch%C3%A9p.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Tay%20Nguyen%20gongs.JPG?width=800', 'Không gian văn hóa Cồng chiêng Tây Nguyên rực rỡ sắc màu')" title="Nhấp để phóng to ảnh: Không gian văn hóa Cồng chiêng Tây Nguyên rực rỡ sắc màu">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tay%20Nguyen%20gongs.JPG?width=800" alt="Không gian văn hóa Cồng chiêng Tây Nguyên rực rỡ sắc màu" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Không gian văn hóa Cồng chiêng Tây Nguyên rực rỡ sắc màu</strong><br>
+                <span class="img-meta">Kiệt tác truyền khẩu & phi vật thể nhân loại · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Tay%20Nguyen%20gongs.JPG" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                            </div>
+
+                            <div class="ngay-nay-topic-body">
+                                <p>Di sản văn hóa phi vật thể – hay còn gọi là &ldquo;di sản sống&rdquo; – không phải là những cổ vật bất biến được cất kín trong tủ kính trưng bày, mà là hơi thở, là dòng chảy văn hóa tồn tại qua nhiều thế hệ. Các loại hình dân ca, dân vũ, lễ hội truyền thống, nghề thủ công mỹ nghệ và tri thức bản địa chỉ thực sự &ldquo;sống&rdquo; khi chúng được cộng đồng – những chủ thể sáng tạo – thực hành, trân trọng và trao truyền qua đời này sang đời khác. Nếu không còn người biểu diễn, không còn người chế tác hay lớp trẻ tiếp nối, di sản sẽ nhanh chóng biến thành những mẩu tư liệu tĩnh lặng và mai một dần theo thời gian.</p>
+                                
+                                <p>Tại Việt Nam, nhiều nét văn hóa đặc sắc đã được UNESCO vinh danh là Di sản văn hóa phi vật thể của nhân loại. Điển hình như nghệ thuật Xòe Thái – biểu tượng của sự gắn kết, tinh thần cởi mở và lòng hiếu khách của đồng bào dân tộc Thái vùng Tây Bắc; hay Thực hành Then của các dân tộc Tày, Nùng, Thái gắn liền với tín ngưỡng nhân văn, gửi gắm ước vọng về mùa màng bội thu, an lành và hạnh phúc. Nghệ thuật Bài Chòi Trung Bộ lại là bức tranh sinh hoạt bình dị, hài hước, phản ánh tâm hồn mộc mạc và sự gắn bó khăng khít của các cư dân làng xã ven biển. Bên cạnh đó, các làng nghề cổ truyền như nghề làm tranh khắc gỗ dân gian Đông Hồ (Bắc Ninh) đang đứng trước thách thức bảo tồn khẩn cấp trước làn sóng công nghiệp hóa và thị trường hiện đại.</p>
+                                
+                                <p>Việc bảo tồn &ldquo;di sản sống&rdquo; đòi hỏi một chiến lược nhân văn và bền vững: không chỉ bảo tồn kỹ thuật hay bài bản, mà quan trọng nhất là chăm sóc không gian văn hóa và đời sống của các nghệ nhân. Nghệ nhân chính là &ldquo;báu vật nhân văn sống&rdquo;, những người nắm giữ bí quyết, linh hồn và chiều sâu tri thức của di sản. Việc tôn vinh nghệ nhân, mở các lớp truyền dạy cho học sinh - sinh viên trong nhà trường, đồng thời kết hợp quảng bá di sản qua giáo dục trải nghiệm và sản phẩm văn hóa đương đại là con đường tối ưu để di sản tự nuôi sống chính mình, thích nghi linh hoạt mà không đánh mất cội nguồn bản sắc.</p>
+                            </div>
+                        </article>
+
+                        <!-- MỤC 2: HỌC TỪ DI TÍCH VÀ BẢO TÀNG -->
+                        <article class="ngay-nay-topic-block" id="muc-2-lop-hoc-mo">
+                            <div class="ngay-nay-topic-header">
+                                <span class="ngay-nay-topic-tag">Không Gian Trải Nghiệm</span>
+                                <h3 class="ngay-nay-topic-title">MỤC 2: HỌC TỪ DI TÍCH VÀ BẢO TÀNG – ĐỊA ĐIỂM LỊCH SỬ LÀ LỚP HỌC MỞ</h3>
+                            </div>
+
+                            <div class="ngay-nay-visuals" aria-label="Hình ảnh tư liệu Di tích và bảo tàng">
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Nh%C3%A0%20bia%20ti%E1%BA%BFn%20s%C4%A9.jpg?width=800', 'Bia Tiến sĩ triều Lê - Mạc tại Văn Miếu - Quốc Tử Giám')" title="Nhấp để phóng to ảnh: Bia Tiến sĩ triều Lê - Mạc tại Văn Miếu - Quốc Tử Giám">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nh%C3%A0%20bia%20ti%E1%BA%BFn%20s%C4%A9.jpg?width=800" alt="Bia Tiến sĩ triều Lê - Mạc tại Văn Miếu - Quốc Tử Giám" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Bia Tiến sĩ triều Lê - Mạc tại Văn Miếu - Quốc Tử Giám</strong><br>
+                <span class="img-meta">Di sản tư liệu thế giới UNESCO · Ảnh Tuấn Anh / CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Nh%C3%A0%20bia%20ti%E1%BA%BFn%20s%C4%A9.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/B%E1%BA%A3o%20t%C3%A0ng%20L%E1%BB%8Bch%20s%E1%BB%AD%20Qu%C3%A2n%20S%E1%BB%B1%20Vi%E1%BB%87t%20Nam%202024.jpg?width=800', 'Trưng bày hiện vật vũ khí, khí tài quân sự lịch sử')" title="Nhấp để phóng to ảnh: Trưng bày hiện vật vũ khí, khí tài quân sự lịch sử">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/B%E1%BA%A3o%20t%C3%A0ng%20L%E1%BB%8Bch%20s%E1%BB%AD%20Qu%C3%A2n%20S%E1%BB%B1%20Vi%E1%BB%87t%20Nam%202024.jpg?width=800" alt="Trưng bày hiện vật vũ khí, khí tài quân sự lịch sử" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Trưng bày hiện vật vũ khí, khí tài quân sự lịch sử</strong><br>
+                <span class="img-meta">Bảo tàng Lịch sử Quân sự Việt Nam · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:B%E1%BA%A3o%20t%C3%A0ng%20L%E1%BB%8Bch%20s%E1%BB%AD%20Qu%C3%A2n%20S%E1%BB%B1%20Vi%E1%BB%87t%20Nam%202024.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Central%20Sector%20of%20the%20Imperial%20Citadel%20of%20Thang%20Long%20-%20Hanoi.jpg?width=800', 'Khu di tích khảo cổ Hoàng thành Thăng Long với tầng địa tầng')" title="Nhấp để phóng to ảnh: Khu di tích khảo cổ Hoàng thành Thăng Long với tầng địa tầng">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Central%20Sector%20of%20the%20Imperial%20Citadel%20of%20Thang%20Long%20-%20Hanoi.jpg?width=800" alt="Khu di tích khảo cổ Hoàng thành Thăng Long với tầng địa tầng" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Khu di tích khảo cổ Hoàng thành Thăng Long với tầng địa tầng</strong><br>
+                <span class="img-meta">Di sản Văn hóa Thế giới UNESCO · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Central%20Sector%20of%20the%20Imperial%20Citadel%20of%20Thang%20Long%20-%20Hanoi.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/HanoiHilton.jpg?width=800', 'Di tích lịch sử Nhà tù Hỏa Lò')" title="Nhấp để phóng to ảnh: Di tích lịch sử Nhà tù Hỏa Lò">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/HanoiHilton.jpg?width=800" alt="Di tích lịch sử Nhà tù Hỏa Lò" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Di tích lịch sử Nhà tù Hỏa Lò</strong><br>
+                <span class="img-meta">Di tích lịch sử cách mạng quốc gia · Ảnh Lương Tuấn / Public Domain · <a href="https://commons.wikimedia.org/wiki/File:HanoiHilton.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                            </div>
+
+                            <div class="ngay-nay-topic-body">
+                                <p>Rời khỏi không gian lớp học với bốn bức tường và những trang sách in chữ đen trắng, di tích lịch sử và bảo tàng chính là những &ldquo;lớp học mở&rdquo; sống động nhất. Nơi đây cho phép người học chạm tới quá khứ bằng trải nghiệm thực tế trực quan. Mỗi tấm bia đá, mỗi mảnh gốm cổ, bản đồ hay di vật chiến tranh đều là nhân chứng trung thực cho một lát cắt thời gian. Học lịch sử qua di tích không đơn thuần là lắng nghe thuyết minh một chiều, mà là quá trình quan sát, đối chiếu, khám phá và đặt ra các câu hỏi phản biện: Hiện vật này ra đời trong hoàn cảnh nào? Ai là chủ nhân của nó? Vì sao nó còn tồn tại đến ngày hôm nay?</p>
+                                
+                                <p>Một địa điểm lịch sử hiếm khi chỉ đại diện cho một câu chuyện đơn nhất, mà thường là nơi lưu giữ nhiều tầng lớp ký ức văn hóa, xã hội và chính trị qua nhiều triều đại, thời kỳ. Ví dụ như Hoàng thành Thăng Long chứa đựng vết tích của các thời kỳ Lý, Trần, Lê, Nguyễn cho đến thời kỳ hiện đại; hay Văn Miếu - Quốc Tử Giám vừa là nơi tôn vinh đạo học Nho giáo, vừa phản ánh chính sách trọng hiền tài của các bậc đế vương. Khi tiếp cận di tích, người học cần có thói quen đối chiếu thông tin từ lời thuyết minh của hướng dẫn viên với bia ký, văn bản khắc chạm và các công trình nghiên cứu chính thống.</p>
+                                
+                                <p>Học tập tại di tích cũng đặt ra bài học sâu sắc về đạo đức và ý thức bảo tồn di sản. Quy tắc tiên quyết là tôn trọng quy định của không gian trưng bày: tuyệt đối không sờ vào hiện vật, không leo trèo, không vẽ bậy, không làm xáo trộn cảnh quan khảo cổ. Mỗi hành vi vô ý hay thiếu hiểu biết đều có thể phá hủy cấu trúc vật lý của những hiện vật quý giá đã tồn tại hàng trăm năm. Bằng thái độ trân trọng và tư duy nghiên cứu nghiêm túc, thế hệ trẻ sẽ nhận ra di tích không phải là phế tích tĩnh mịch của quá khứ, mà là ngọn hải đăng soi rọi tri thức, nuôi dưỡng tình yêu quê hương đất nước một cách chân thực và sâu lắng nhất.</p>
+                            </div>
+                        </article>
+
+                        <!-- MỤC 3: CÔNG NGHỆ VÀ KÝ ỨC -->
+                        <article class="ngay-nay-topic-block" id="muc-3-cong-nghe">
+                            <div class="ngay-nay-topic-header">
+                                <span class="ngay-nay-topic-tag">Di Sản Số</span>
+                                <h3 class="ngay-nay-topic-title">MỤC 3: CÔNG NGHỆ VÀ KÝ ỨC – SỐ HÓA GIÚP MỞ THÊM CÁNH CỬA TIẾP CẬN</h3>
+                            </div>
+
+                            <div class="ngay-nay-visuals" aria-label="Hình ảnh tư liệu Công nghệ và di sản">
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Tr%E1%BB%91ng%20%C4%91%E1%BB%93ng%20%C4%90%C3%B4ng%20S%C6%A1n%20Vi%E1%BB%87t%20Nam%20Dong%20Son%20Drum.png?width=800', 'Bản vẽ số hóa chi tiết hoa văn Trống đồng Đông Sơn')" title="Nhấp để phóng to ảnh: Bản vẽ số hóa chi tiết hoa văn Trống đồng Đông Sơn">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tr%E1%BB%91ng%20%C4%91%E1%BB%93ng%20%C4%90%C3%B4ng%20S%C6%A1n%20Vi%E1%BB%87t%20Nam%20Dong%20Son%20Drum.png?width=800" alt="Bản vẽ số hóa chi tiết hoa văn Trống đồng Đông Sơn" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Bản vẽ số hóa chi tiết hoa văn Trống đồng Đông Sơn</strong><br>
+                <span class="img-meta">Mô hình số hóa bảo vật quốc gia · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Tr%E1%BB%91ng%20%C4%91%E1%BB%93ng%20%C4%90%C3%B4ng%20S%C6%A1n%20Vi%E1%BB%87t%20Nam%20Dong%20Son%20Drum.png" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/3D%20scanning%20of%20a%20historic%20temple%20chariot%20at%20the%20National%20Crafts%20Museum%2C%20Delhi.png?width=800', 'Công nghệ quét 3D laser (3D Scan) bảo tồn hiện vật di sản')" title="Nhấp để phóng to ảnh: Công nghệ quét 3D laser (3D Scan) bảo tồn hiện vật di sản">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/3D%20scanning%20of%20a%20historic%20temple%20chariot%20at%20the%20National%20Crafts%20Museum%2C%20Delhi.png?width=800" alt="Công nghệ quét 3D laser (3D Scan) bảo tồn hiện vật di sản" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Công nghệ quét 3D laser (3D Scan) bảo tồn hiện vật di sản</strong><br>
+                <span class="img-meta">Bảo tàng số và kỹ thuật bảo tồn hiện đại · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:3D%20scanning%20of%20a%20historic%20temple%20chariot%20at%20the%20National%20Crafts%20Museum%2C%20Delhi.png" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Audio%20guide%20with%20display.jpg?width=800', 'Thiết bị thuyết minh tự động Audio Guide tại bảo tàng')" title="Nhấp để phóng to ảnh: Thiết bị thuyết minh tự động Audio Guide tại bảo tàng">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Audio%20guide%20with%20display.jpg?width=800" alt="Thiết bị thuyết minh tự động Audio Guide tại bảo tàng" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Thiết bị thuyết minh tự động Audio Guide tại bảo tàng</strong><br>
+                <span class="img-meta">Công nghệ bảo tàng thông minh Smart Museum Guide · CC BY-SA 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Audio%20guide%20with%20display.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                            </div>
+
+                            <div class="ngay-nay-topic-body">
+                                <p>Cuộc cách mạng công nghệ số đang làm thay đổi căn bản cách mạng tiếp cận, bảo tồn và phát huy giá trị di sản lịch sử. Nhờ các công nghệ hiện đại như chụp ảnh siêu phân giải (Gigapixel), quét 3D (3D scanning), bản đồ số tương tác và hệ thống thuyết minh tự động (audio tour), rào cản về không gian và địa lý đối với người yêu lịch sử đã dần bị xóa bỏ. Một học sinh ở vùng sâu vùng xa hay một nhà nghiên cứu ở bên kia bán cầu hiện nay hoàn toàn có thể chiêm ngưỡng từng chi tiết chạm khắc tinh xảo trên một chiếc trống đồng thời Đông Sơn hoặc tham quan 360 độ khu di tích Cố đô Huế chỉ qua một cú nhấp chuột.</p>
+                                
+                                <p>Số hóa không chỉ mở rộng khả năng tiếp cận mà còn đóng vai trò như một kho lưu trữ ký ức dự phòng vô giá. Dưới tác động khắc nghiệt của thời gian, thiên tai hay chiến tranh, các công trình kiến trúc cổ và hiện vật gốc hoàn toàn có nguy cơ bị hao mòn hoặc hủy hoại. Bản ghi số chi tiết đến từng milimet sẽ trở thành cơ sở dữ liệu quan trọng để phục dựng nguyên trạng công trình nếu có sự cố xảy ra. Bên cạnh đó, việc ứng dụng trí tuệ nhân tạo (AI) và đồ họa thực tế ảo tăng cường (AR/VR) cho phép người xem được đắm mình vào bối cảnh các trận chiến oai hùng hay các nghi lễ hoàng cung sống động, biến các trang sử khô khan thành trải nghiệm giàu cảm xúc.</p>
+                                
+                                <p>Tuy nhiên, công nghệ rốt cuộc vẫn chỉ là một công cụ hỗ trợ. Bản số hóa hay hình ảnh thực tế ảo dù tinh vi đến đâu cũng không thể thay thế cho giá trị chân xác của hiện vật gốc, không gian linh thiêng của địa điểm lịch sử và tri thức sống của cộng đồng địa phương. Khi khai thác và xây dựng các sản phẩm lịch sử số, nguyên tắc học thuật nghiêm ngặt phải luôn được đặt lên hàng đầu: bắt buộc phải ghi rõ xuất xứ, niên đại, căn cứ tài liệu và phạm vi giới hạn của hiện vật mô phỏng. Số hóa lịch sử phải luôn song hành với sự tôn trọng tính chân thực của quá khứ, tránh lạm dụng kỹ xảo gây sai lệch góc nhìn lịch sử.</p>
+                            </div>
+                        </article>
+
+                        <!-- MỤC 4: KỸ NĂNG CÔNG DÂN SỐ -->
+                        <article class="ngay-nay-topic-block" id="muc-4-cong-dan-so">
+                            <div class="ngay-nay-topic-header">
+                                <span class="ngay-nay-topic-tag">Tư Duy Phản Biện</span>
+                                <h3 class="ngay-nay-topic-title">MỤC 4: KỸ NĂNG CÔNG DÂN SỐ – KIỂM CHỨNG TRƯỚC KHI CHIA SẺ CHUYỆN LỊCH SỬ</h3>
+                            </div>
+
+                            <div class="ngay-nay-visuals" style="grid-template-columns: minmax(0, 1fr);" aria-label="Hình ảnh tư liệu Kỹ năng công dân số">
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Interactive%20media%20seminar%20session%20where%20we%20learn%20fact%20checking%20in%20Abuja.jpg?width=800', 'Hoạt động thực hành kỹ năng kiểm chứng tin tức (Fact-checking)')" title="Nhấp để phóng to ảnh: Hoạt động thực hành kỹ năng kiểm chứng tin tức (Fact-checking)">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Interactive%20media%20seminar%20session%20where%20we%20learn%20fact%20checking%20in%20Abuja.jpg?width=800" alt="Hoạt động thực hành kỹ năng kiểm chứng tin tức (Fact-checking)" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Hoạt động thực hành kỹ năng kiểm chứng tin tức (Fact-checking)</strong><br>
+                <span class="img-meta">Kỹ năng công dân số và xác thực nguồn tin · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Interactive%20media%20seminar%20session%20where%20we%20learn%20fact%20checking%20in%20Abuja.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                            </div>
+
+                            <div class="ngay-nay-topic-body">
+                                <p>Trong kỷ nguyên bùng nổ thông tin và mạng xã hội, các nội dung liên quan đến lịch sử, cổ phong và nhân vật danh nhân ngày càng thu hút sự quan tâm lớn của cộng đồng mạng. Tuy nhiên, đi kèm với sự quan tâm đó là nguy cơ lan truyền chóng mặt của thông tin sai lệch, thuyết âm mưu, tài liệu bị cắt xén khỏi bối cảnh hoặc ảnh chụp đã qua chỉnh sửa kỹ thuật số. Một câu chuyện lịch sử kịch tính nhưng không có căn cứ, khi được thêm thắt chi tiết giật gân, rất dễ bị ngộ nhận là sự thật lịch sử nếu người đọc thiếu tư duy phản biện và kỹ năng công dân số.</p>
+                                
+                                <p>Trở thành một công dân số có trách nhiệm đòi hỏi sự cẩn trọng và tỉnh táo trước khi nhấn nút thích (like) hay chia sẻ (share) bất kỳ thông tin lịch sử nào. Khi tiếp cận một tư liệu, một tấm ảnh hay giai thoại lịch sử, câu hỏi đầu tiên cần đặt ra là: Tư liệu này có nguồn gốc từ đâu? Được công bố vào thời điểm nào? Tác giả là ai? Có tài liệu dẫn chứng, lưu trữ đáng tin cậy hay không? Việc đối chiếu thông tin với các công trình nghiên cứu chính thức của các viện sử học, bảo tàng quốc gia, sách chuyên khảo học thuật hoặc Trung tâm Lưu trữ Quốc gia là bước đi tối quan trọng.</p>
+                                
+                                <p>Bên cạnh đó, người tiếp nhận thông tin cần phân biệt rạch ròi giữa ba khái niệm: sự kiện lịch sử có chứng cứ (những sự kiện đã được kiểm chứng bằng hiện vật khảo cổ, văn bản gốc), quan điểm/diễn giải cá nhân của tác giả (lăng kính góc nhìn chủ quan), và truyền thuyết dân gian/dã sử (vốn mang tính biểu tượng, hư cấu nghệ thuật). Tránh biến các biến cố đau thương, mất mát trong quá khứ thành đề tài câu view, câu like. Nếu một thông tin hay hình ảnh chưa thể xác minh rõ ràng về tính chân thực, nguyên tắc đúng đắn nhất là không phổ biến nó như một chân lý, hoặc phải minh bạch nêu rõ rằng thông tin này còn đang tranh cãi và cần được giới chuyên môn kiểm chứng thêm.</p>
+                            </div>
+                        </article>
+
+                        <!-- MỤC 5: BÀI HỌC NHÂN VĂN -->
+                        <article class="ngay-nay-topic-block" id="muc-5-nhan-van">
+                            <div class="ngay-nay-topic-header">
+                                <span class="ngay-nay-topic-tag">Chiều Sâu Lịch Sử</span>
+                                <h3 class="ngay-nay-topic-title">MỤC 5: BÀI HỌC NHÂN VĂN – NHÌN CHIẾN TRANH TỪ SỐ PHẬN CON NGƯỜI</h3>
+                            </div>
+
+                            <div class="ngay-nay-visuals" aria-label="Hình ảnh tư liệu Bài học nhân văn">
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Ngh%C4%A9a%20trang%20li%E1%BB%87t%20s%C4%A9%20Tr%C6%B0%E1%BB%9Dng%20S%C6%A1n.JPG?width=800', 'Nghĩa trang Liệt sĩ Quốc gia Trường Sơn')" title="Nhấp để phóng to ảnh: Nghĩa trang Liệt sĩ Quốc gia Trường Sơn">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ngh%C4%A9a%20trang%20li%E1%BB%87t%20s%C4%A9%20Tr%C6%B0%E1%BB%9Dng%20S%C6%A1n.JPG?width=800" alt="Nghĩa trang Liệt sĩ Quốc gia Trường Sơn" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Nghĩa trang Liệt sĩ Quốc gia Trường Sơn</strong><br>
+                <span class="img-meta">Nơi yên nghỉ của hơn 10.000 anh hùng liệt sĩ · Ảnh Nguyễn Thanh / CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Ngh%C4%A9a%20trang%20li%E1%BB%87t%20s%C4%A9%20Tr%C6%B0%E1%BB%9Dng%20S%C6%A1n.JPG" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%A0%20m%E1%BA%B9%20Vi%E1%BB%87t%20Nam%20anh%20h%C3%B9ng%20B%C3%B9i%20Th%E1%BB%8B%20M%C3%A8.jpg?width=800', 'Chân dung Mẹ Việt Nam Anh hùng Bùi Thị Mè')" title="Nhấp để phóng to ảnh: Chân dung Mẹ Việt Nam Anh hùng Bùi Thị Mè">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%A0%20m%E1%BA%B9%20Vi%E1%BB%87t%20Nam%20anh%20h%C3%B9ng%20B%C3%B9i%20Th%E1%BB%8B%20M%C3%A8.jpg?width=800" alt="Chân dung Mẹ Việt Nam Anh hùng Bùi Thị Mè" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Chân dung Mẹ Việt Nam Anh hùng Bùi Thị Mè</strong><br>
+                <span class="img-meta">Biểu tượng đức hy sinh cao cả của người mẹ thời chiến · Tư liệu lịch sử / Public Domain · <a href="https://commons.wikimedia.org/wiki/File:B%C3%A0%20m%E1%BA%B9%20Vi%E1%BB%87t%20Nam%20anh%20h%C3%B9ng%20B%C3%B9i%20Th%E1%BB%8B%20M%C3%A8.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                            </div>
+
+                            <div class="ngay-nay-topic-body">
+                                <p>Lịch sử chiến tranh trong các tài liệu tổng kết thường gắn liền với những mốc niên đại, số lượng sư đoàn tham chiến, bản đồ mũi tiến công và những kết quả thắng lợi quân sự giòn giã. Tuy nhiên, nếu chỉ dừng lại ở các con số và ngày tháng khô khan, chúng ta sẽ bỏ sót chiều sâu nhân văn cốt lõi của lịch sử: số phận của từng con người cụ thể đã đi qua cuộc chiến. Phía sau mỗi trận đánh là hàng vạn mảnh đời bị chia cắt, là người lính trẻ ngã xuống nơi chiến hào khi tương lai còn dang dở, là người mẹ mòn mỏi ngóng con bên bậc cửa, là những làng mạc tan hoang và nỗi đau thể xác lẫn tinh thần dai dẳng qua nhiều thế hệ.</p>
+                                
+                                <p>Nhìn nhận chiến tranh từ góc độ thân phận con người giúp chúng ta lắng nghe sâu sắc hơn những trải nghiệm của thường dân vô tội, của những thương bệnh binh và của cả những gia đình ở hậu phương. Những lá thư thời chiến đượm mùi bùn đất, những trang nhật ký như của liệt sĩ Đặng Thùy Trâm, Nguyễn Văn Thạc hay các cuốn hồi ký chân thực không chỉ kể về lý tưởng chiến đấu, mà còn chứa chan nỗi nhớ gia đình, tình yêu đôi lứa và khao khát cháy bỏng được sống trong một ngày đất nước thanh bình. Đó là những tư liệu nhân văn giúp thế hệ hậu sinh thấu hiểu sâu sắc cái giá vô cùng đắt đỏ của độc lập và tự do.</p>
+                                
+                                <p>Quan trọng hơn cả, việc tiếp cận lịch sử chiến tranh từ góc độ số phận con người nhắc nhở chúng ta về tinh thần bao dung, lòng nhân đạo và trách nhiệm gìn giữ hòa bình. Ký ức chiến tranh cần được tôn trọng ở nhiều góc cạnh, không biến những bi kịch, đau thương thành đề tài giật gân, thù hận hay kích động phân hóa xã hội. Lịch sử không dạy con người sống mãi trong oán hờn quá khứ, mà dạy chúng ta biết trân trọng sinh mạng, hiểu rằng mọi cuộc chiến đều mang lại đổ máu, để từ đó cùng chung tay kiến tạo, bảo vệ một nền hòa bình bền vững, tôn trọng sự thấu hiểu và hòa hợp giữa các dân tộc trên toàn cầu.</p>
+                            </div>
+                        </article>
+
+                        <!-- MỤC 6: LỊCH SỬ VÀ CHỦ QUYỀN -->
+                        <article class="ngay-nay-topic-block" id="muc-6-chu-quyen">
+                            <div class="ngay-nay-topic-header">
+                                <span class="ngay-nay-topic-tag">Chủ Quyền Thiêng Liêng</span>
+                                <h3 class="ngay-nay-topic-title">MỤC 6: LỊCH SỬ VÀ CHỦ QUYỀN – TÌM HIỂU BẰNG TƯ LIỆU CÓ XUẤT XỨ</h3>
+                            </div>
+
+                            <div class="ngay-nay-visuals" aria-label="Hình ảnh tư liệu Lịch sử và chủ quyền">
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Nguy%E1%BB%85n%20Dynasty%20period%20map%20-%20%C4%90%E1%BA%A1i%20Nam%20nh%E1%BA%A5t%20th%E1%BB%91ng%20to%C3%A0n%20%C4%91%E1%BB%93.png?width=800', 'Bản đồ Đại Nam nhất thống toàn đồ (1838)')" title="Nhấp để phóng to ảnh: Bản đồ Đại Nam nhất thống toàn đồ (1838)">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nguy%E1%BB%85n%20Dynasty%20period%20map%20-%20%C4%90%E1%BA%A1i%20Nam%20nh%E1%BA%A5t%20th%E1%BB%91ng%20to%C3%A0n%20%C4%91%E1%BB%93.png?width=800" alt="Bản đồ Đại Nam nhất thống toàn đồ (1838)" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Bản đồ Đại Nam nhất thống toàn đồ (1838)</strong><br>
+                <span class="img-meta">Thể hiện rõ ràng hai quần đảo Hoàng Sa và Vạn Lý Trường Sa · Triều Nguyễn / Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Nguy%E1%BB%85n%20Dynasty%20period%20map%20-%20%C4%90%E1%BA%A1i%20Nam%20nh%E1%BA%A5t%20th%E1%BB%91ng%20to%C3%A0n%20%C4%91%E1%BB%93.png" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Minh%20ch%E1%BB%A9ng%20v%E1%BB%81%20ch%E1%BB%A7%20quy%E1%BB%81n%20Ho%C3%A0ng%20Sa%2C%20Tr%C6%B0%E1%BB%9Dng%20Sa%20%28Ch%C3%A2u%20b%E1%BA%A3n%20tri%E1%BB%81u%20Nguy%E1%BB%85n%29%20%C4%90%C3%A0i%20Ti%E1%BA%BFng%20n%C3%B3i%20Vi%E1%BB%87t%20Nam%2001.jpg?width=800', 'Châu bản triều Nguyễn về việc thực thi chủ quyền Hoàng Sa, Trường Sa')" title="Nhấp để phóng to ảnh: Châu bản triều Nguyễn về việc thực thi chủ quyền Hoàng Sa, Trường Sa">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Minh%20ch%E1%BB%A9ng%20v%E1%BB%81%20ch%E1%BB%A7%20quy%E1%BB%81n%20Ho%C3%A0ng%20Sa%2C%20Tr%C6%B0%E1%BB%9Dng%20Sa%20%28Ch%C3%A2u%20b%E1%BA%A3n%20tri%E1%BB%81u%20Nguy%E1%BB%85n%29%20%C4%90%C3%A0i%20Ti%E1%BA%BFng%20n%C3%B3i%20Vi%E1%BB%87t%20Nam%2001.jpg?width=800" alt="Châu bản triều Nguyễn về việc thực thi chủ quyền Hoàng Sa, Trường Sa" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Châu bản triều Nguyễn về việc thực thi chủ quyền Hoàng Sa, Trường Sa</strong><br>
+                <span class="img-meta">Di sản tư liệu thế giới UNESCO · Lưu trữ Quốc gia / Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Minh%20ch%E1%BB%A9ng%20v%E1%BB%81%20ch%E1%BB%A7%20quy%E1%BB%81n%20Ho%C3%A0ng%20Sa%2C%20Tr%C6%B0%E1%BB%9Dng%20Sa%20%28Ch%C3%A2u%20b%E1%BA%A3n%20tri%E1%BB%81u%20Nguy%E1%BB%85n%29%20%C4%90%C3%A0i%20Ti%E1%BA%BFng%20n%C3%B3i%20Vi%E1%BB%87t%20Nam%2001.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Bia%20VNCH%20Truong%20Sa%20-%20Republic%20of%20Vietnam%20Spratly%20Islands%20Territorial%20Marker.JPG?width=800', 'Bia chủ quyền của Việt Nam tại quần đảo Trường Sa')" title="Nhấp để phóng to ảnh: Bia chủ quyền của Việt Nam tại quần đảo Trường Sa">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bia%20VNCH%20Truong%20Sa%20-%20Republic%20of%20Vietnam%20Spratly%20Islands%20Territorial%20Marker.JPG?width=800" alt="Bia chủ quyền của Việt Nam tại quần đảo Trường Sa" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Bia chủ quyền của Việt Nam tại quần đảo Trường Sa</strong><br>
+                <span class="img-meta">Bằng chứng lịch sử về việc quản lý và thực thi chủ quyền · Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Bia%20VNCH%20Truong%20Sa%20-%20Republic%20of%20Vietnam%20Spratly%20Islands%20Territorial%20Marker.JPG" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                                
+        <figure class="ngay-nay-figure">
+            <a href="javascript:void(0)" onclick="moPhongToHinh('https://commons.wikimedia.org/wiki/Special:FilePath/Philippe%20Vandermaelen%20%281795-1865%29%20Atlas%20universel%20de%20g%C3%A9ographie%20%281827%29%20KBR%20Brussel.jpg?width=800', 'Atlas Universel của nhà địa lý Philippe Vandermaelen (1827)')" title="Nhấp để phóng to ảnh: Atlas Universel của nhà địa lý Philippe Vandermaelen (1827)">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Philippe%20Vandermaelen%20%281795-1865%29%20Atlas%20universel%20de%20g%C3%A9ographie%20%281827%29%20KBR%20Brussel.jpg?width=800" alt="Atlas Universel của nhà địa lý Philippe Vandermaelen (1827)" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            </a>
+            <figcaption>
+                <strong>Atlas Universel của nhà địa lý Philippe Vandermaelen (1827)</strong><br>
+                <span class="img-meta">Bản đồ quốc tế khẳng định cương vực biển đảo Việt Nam · Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Philippe%20Vandermaelen%20%281795-1865%29%20Atlas%20universel%20de%20g%C3%A9ographie%20%281827%29%20KBR%20Brussel.jpg" target="_blank" rel="noopener noreferrer">Nguồn tư liệu ↗</a></span>
+            </figcaption>
+        </figure>
+                            </div>
+
+                            <div class="ngay-nay-topic-body">
+                                <p>Lịch sử là nền tảng cốt lõi định hình nên quá trình hình thành cộng đồng, xác lập ranh giới lãnh thổ và thiết lập mối quan hệ bang giao, chủ quyền giữa các quốc gia qua từng thời kỳ lịch sử. Khi nghiên cứu về các vấn đề chủ quyền thiêng liêng của Tổ quốc – từ đường biên giới đất liền đến chủ quyền biển đảo ở Hoàng Sa và Trường Sa – phương pháp tiếp cận mang tính quyết định là phải dựa hoàn toàn vào hệ thống tư liệu lịch sử có xuất xứ rõ ràng, niên đại xác thực và tính pháp lý quốc tế chuẩn mực.</p>
+                                
+                                <p>Một nguyên tắc học thuật căn bản là cần phân biệt rõ giữa tư liệu lịch sử (các dấu tích quá khứ, thư tịch, bản đồ cổ) với kết luận pháp lý hiện hành (dựa trên các công ước quốc tế đương đại như Công ước Liên Hợp Quốc về Luật Biển UNCLOS 1982). Để chứng minh chủ quyền liên tục và hòa bình của Việt Nam đối với hai quần đảo Hoàng Sa và Trường Sa, chúng ta không thể dựa vào cảm tính hay những thông tin trôi nổi thiếu nguồn gốc. Nền tảng vững chắc nhất chính là kho tàng Châu bản triều Nguyễn – di sản tư liệu thế giới – ghi chép chi tiết các chiếu chỉ của triều đình cử Đội Hoàng Sa, Bắc Hải ra khai thác sản vật, đo vẽ hải trình, dựng miếu, trồng cây và cắm mốc chủ quyền.</p>
+                                
+                                <p>Bên cạnh đó, các bản đồ phương Tây cổ do các nhà hàng hải, địa lý danh tiếng xuất bản từ thế kỷ XVII đến thế kỷ XIX, cùng hệ thống văn bản hành chính lưu trữ tại các viện nghiên cứu uy tín trong nước và quốc tế, đều cung cấp những bằng chứng lịch sử khách quan, độc lập. Khi tìm hiểu và lan tỏa thông tin về chủ quyền, người học cần ưu tiên tuyệt đối các nguồn lưu trữ chính thức từ các cơ quan nhà nước, Bộ Ngoại giao, các viện sử học và các công trình khoa học đã được bình duyệt. Sự hiểu biết thấu đáo, chuẩn xác và có cơ sở khoa học về lịch sử chủ quyền chính là vũ khí tri thức mạnh mẽ nhất để mỗi người dân bảo vệ vững chắc quyền lợi quốc gia trên trường quốc tế.</p>
+                            </div>
+                        </article>
+
                     </div>
-                    <div class="modal-cards-grid">
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🎎</div>
-                            <span class="modal-card__tag">Di sản sống</span>
-                            <h4 class="modal-card__title">Truyền thống được tiếp nối trong cộng đồng</h4>
-                            <p class="modal-card__desc">Hát, múa, lễ hội, nghề thủ công và tri thức dân gian chỉ tiếp tục sống khi được người thực hành truyền dạy và cộng đồng chăm sóc. UNESCO ghi danh nhiều thực hành của Việt Nam, như Xòe Thái, thực hành Then của người Tày, Nùng, Thái và Bài Chòi; nghề làm tranh dân gian Đông Hồ được đưa vào Danh sách di sản văn hóa phi vật thể cần bảo vệ khẩn cấp năm 2025. Mỗi loại hình có bối cảnh và nhu cầu bảo vệ riêng, không nên chỉ xem như tiết mục biểu diễn.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🏛️</div>
-                            <span class="modal-card__tag">Học từ di tích và bảo tàng</span>
-                            <h4 class="modal-card__title">Địa điểm lịch sử là lớp học mở</h4>
-                            <p class="modal-card__desc">Khi tham quan, hãy quan sát hiện vật, bia ký, bản đồ và lời thuyết minh; ghi lại câu hỏi rồi đối chiếu với tài liệu đáng tin cậy. Tôn trọng quy định tại di tích, không chạm hoặc làm hư hại hiện vật, và nhớ rằng một địa điểm thường lưu giữ nhiều lớp ký ức chứ không chỉ một câu chuyện đơn giản.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🖥️</div>
-                            <span class="modal-card__tag">Công nghệ và ký ức</span>
-                            <h4 class="modal-card__title">Số hóa giúp mở thêm cánh cửa tiếp cận</h4>
-                            <p class="modal-card__desc">Ảnh tư liệu độ phân giải cao, bản đồ số, thuyết minh âm thanh và mô hình 3D có thể giúp người học khám phá từ xa, so sánh tư liệu và lưu giữ bản ghi. Công nghệ là công cụ hỗ trợ: cần nêu xuất xứ, niên đại và giới hạn của tư liệu; bản số không thay thế việc bảo tồn hiện vật, địa điểm và tri thức của cộng đồng.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🔎</div>
-                            <span class="modal-card__tag">Kỹ năng công dân số</span>
-                            <h4 class="modal-card__title">Kiểm chứng trước khi chia sẻ chuyện lịch sử</h4>
-                            <p class="modal-card__desc">Với một hình ảnh hay câu chuyện lan truyền trên mạng, hãy tìm nguồn ban đầu, thời điểm công bố, tác giả và tài liệu dẫn chứng; đối chiếu với sách, hồ sơ hoặc cơ quan chuyên môn. Phân biệt sự kiện có chứng cứ, cách diễn giải của tác giả và truyền thuyết dân gian. Nếu chưa xác minh được, hãy nói rõ là còn cần kiểm tra.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🕊️</div>
-                            <span class="modal-card__tag">Bài học nhân văn</span>
-                            <h4 class="modal-card__title">Nhìn chiến tranh từ số phận con người</h4>
-                            <p class="modal-card__desc">Tìm hiểu chiến tranh không chỉ là nhớ trận đánh và ngày tháng. Cũng cần lắng nghe trải nghiệm của người dân, người lính, người bị thương và gia đình; từ đó suy ngẫm về mất mát, lòng nhân đạo, trách nhiệm và giá trị của hòa bình. Tôn trọng ký ức khác nhau, tránh biến đau thương thành nội dung giật gân.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🧭</div>
-                            <span class="modal-card__tag">Lịch sử và chủ quyền</span>
-                            <h4 class="modal-card__title">Tìm hiểu bằng tư liệu có xuất xứ</h4>
-                            <p class="modal-card__desc">Lịch sử giúp đặt quá trình hình thành cộng đồng, lãnh thổ và quan hệ giữa các vùng vào đúng bối cảnh. Khi tìm hiểu vấn đề chủ quyền, hãy phân biệt tư liệu lịch sử với kết luận pháp lý hiện hành, kiểm tra niên đại và xuất xứ bản đồ, văn bản; ưu tiên nguồn lưu trữ, cơ quan chuyên môn và văn bản pháp luật chính thức.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">🌿</div>
-                            <span class="modal-card__tag">Di sản và phát triển bền vững</span>
-                            <h4 class="modal-card__title">Du lịch có trách nhiệm, cộng đồng cùng hưởng lợi</h4>
-                            <p class="modal-card__desc">Tham quan di sản có thể hỗ trợ sinh kế và giúp nhiều người hiểu hơn về lịch sử nếu đi cùng bảo tồn, hướng dẫn chính xác và sự tham gia của cư dân địa phương. Người tham quan có thể bắt đầu bằng việc tuân thủ nội quy, giảm rác thải, xin phép trước khi ghi hình sinh hoạt riêng tư và chọn sản phẩm do nghệ nhân địa phương làm.</p>
-                        </div>
-                        <div class="modal-card">
-                            <div class="modal-card__icon">📚</div>
-                            <span class="modal-card__tag">Từ hiểu biết đến hành động</span>
-                            <h4 class="modal-card__title">Mỗi người có thể góp phần giữ ký ức</h4>
-                            <p class="modal-card__desc">Hỏi chuyện người thân về ký ức gia đình, ghi rõ người kể và thời điểm; đọc sách có chú thích nguồn; tham gia hoạt động tại bảo tàng, thư viện hoặc địa phương; chia sẻ nội dung kèm nguồn tham khảo. Khi ghi âm, chụp ảnh hay đăng câu chuyện của người khác, hãy xin sự đồng ý và tôn trọng quyền riêng tư.</p>
-                        </div>
-                    </div>
-                    <section style="margin-top:20px;padding:18px 20px;border:1px solid #dfcfaa;border-radius:10px;background:#fffdf7;line-height:1.7">
-                        <h3 style="margin:0 0 10px;color:#7B1E1E;font-family:'Playfair Display',serif">Tài liệu tham khảo để khám phá tiếp</h3>
-                        <ul style="margin:0;padding-left:22px;color:#4a3726">
-                            <li><a href="https://ich.unesco.org/en/state/viet-nam-VN?cp=VN&info=elements-on-the-lists&topic=ar-state" target="_blank" rel="noopener noreferrer">Danh sách các di sản văn hóa phi vật thể của Việt Nam – UNESCO</a></li>
-                            <li><a href="https://ich.unesco.org/en/documents/instructions-on-preparing-a-curricular-lesson-plan-with-integration-of-intangible-cultural-heritage-viet-nam-47691" target="_blank" rel="noopener noreferrer">Hướng dẫn tích hợp di sản phi vật thể vào dạy và học – UNESCO</a></li>
-                            <li><a href="https://www.unesco.org/sites/default/files/medias/fichiers/2025/04/Hanoi_Monitoring_Report_2024.pdf" target="_blank" rel="noopener noreferrer">Báo cáo Hà Nội 2024 trong Mạng lưới Thành phố Sáng tạo UNESCO: các ví dụ ứng dụng công nghệ số cho di sản</a></li>
+
+                    <!-- TÀI LIỆU THAM KHẢO & CÔNG CỤ TRA CỨU -->
+                    <section style="margin-top:28px;padding:20px 22px;border:1.5px solid #DFCFAA;border-radius:12px;background:#FFFDF7;line-height:1.75;box-shadow:0 4px 14px rgba(0,0,0,0.04)">
+                        <h4 style="margin:0 0 12px;color:#7B1E1E;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800">📚 Tài Liệu Tham Khảo & Cổng Thông Tin Chính Thống Để Khám Phá Tiếp</h4>
+                        <ul style="margin:0;padding-left:22px;color:#4A3726;display:flex;flex-direction:column;gap:8px;font-size:0.92rem">
+                            <li><a href="https://ich.unesco.org/en/state/viet-nam-VN?cp=VN&info=elements-on-the-lists&topic=ar-state" target="_blank" rel="noopener noreferrer" style="color:#7B1E1E;font-weight:600">Danh mục các di sản văn hóa phi vật thể của Việt Nam được ghi danh – UNESCO ↗</a></li>
+                            <li><a href="https://luutru.gov.vn/" target="_blank" rel="noopener noreferrer" style="color:#7B1E1E;font-weight:600">Cổng thông tin Cục Văn thư và Lưu trữ Nhà nước Việt Nam (Châu bản & Mộc bản Triều Nguyễn) ↗</a></li>
+                            <li><a href="https://biendong.net/" target="_blank" rel="noopener noreferrer" style="color:#7B1E1E;font-weight:600">Tư liệu lịch sử và cơ sở pháp lý về chủ quyền biển đảo Việt Nam ↗</a></li>
+                            <li><a href="https://ich.unesco.org/en/documents/instructions-on-preparing-a-curricular-lesson-plan-with-integration-of-intangible-cultural-heritage-viet-nam-47691" target="_blank" rel="noopener noreferrer" style="color:#7B1E1E;font-weight:600">Hướng dẫn tích hợp di sản phi vật thể vào dạy và học trong nhà trường – UNESCO ↗</a></li>
                         </ul>
-                        <p style="margin:12px 0 0;color:#705d4c;font-size:.88rem">Danh sách UNESCO là một phần của kho tàng di sản, không phải danh mục đầy đủ mọi di sản của Việt Nam. Hãy xem nguồn gốc, bối cảnh và tiếng nói của cộng đồng thực hành khi tìm hiểu từng trường hợp.</p>
+                        <p style="margin:14px 0 0;color:#705D4C;font-size:0.86rem;font-style:italic">Ghi chú học thuật: Mỗi tư liệu lịch sử đều gắn liền với không gian, thời gian và cộng đồng sáng tạo. Hãy luôn kiểm chứng niên đại, xuất xứ và tham khảo ý kiến của các cơ quan chuyên môn để giữ gìn sự trong sáng, trung thực của lịch sử.</p>
                     </section>
                 `;
             } else if (loai.startsWith('qa')) {
@@ -12941,6 +13287,18 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             var youtubeFrame = document.getElementById('youtube-video-frame');
             if (youtubeFrame) youtubeFrame.src = 'about:blank';
 
+            // Dọn dẹp query param modal=video để không tự mở lại khi refresh trang
+            try {
+                var url = new URL(window.location.href);
+                if (url.searchParams.has('modal')) {
+                    url.searchParams.delete('modal');
+                    window.history.replaceState({}, '', url.pathname + (url.search ? url.search : '') + url.hash);
+                }
+                if (url.hash === '#video') {
+                    window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+                }
+            } catch (_) {}
+
             capNhatBreadcrumb('Trang chủ');
         }
 
@@ -12991,25 +13349,41 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
         }
 
         // Tự động mở lại modal Thư viện video khi người xem quay lại từ video-phat.html
-        (function kiemTraQuayLaiThuVienVideo() {
-            function checkAndOpen() {
-                try {
-                    var params = new URLSearchParams(window.location.search);
-                    var needOpen = (params.get('modal') === 'video') || (window.location.hash === '#video') || (sessionStorage.getItem('reopen_video_modal') === '1');
-                    if (needOpen) {
-                        sessionStorage.removeItem('reopen_video_modal');
-                        if (typeof moModalDuLieu === 'function') {
-                            moModalDuLieu('video', 'Khám phá > Video');
-                        }
+        window.kiemTraVaMoModalVideo = function kiemTraVaMoModalVideo() {
+            try {
+                var search = window.location.search || '';
+                var hash = window.location.hash || '';
+                var params = new URLSearchParams(search);
+                var needOpen = (params.get('modal') === 'video') ||
+                               (hash === '#video') ||
+                               (search.indexOf('modal=video') !== -1) ||
+                               (sessionStorage.getItem('reopen_video_modal') === '1');
+                if (needOpen) {
+                    sessionStorage.removeItem('reopen_video_modal');
+                    var overlay = document.getElementById('antique-modal-overlay');
+                    if (!overlay || typeof moModalDuLieu !== 'function') {
+                        setTimeout(kiemTraVaMoModalVideo, 60);
+                        return;
                     }
-                } catch (_) {}
-            }
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', checkAndOpen);
-            } else {
-                setTimeout(checkAndOpen, 80);
-            }
-        })();
+                    moModalDuLieu('video', 'Khám phá > Video');
+                }
+            } catch (_) {}
+        };
+
+        // Kích hoạt ngay khi tài liệu sẵn sàng hoặc phục hồi từ bộ nhớ đệm BFCache
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            window.kiemTraVaMoModalVideo();
+        } else {
+            document.addEventListener('DOMContentLoaded', window.kiemTraVaMoModalVideo);
+        }
+        window.addEventListener('load', window.kiemTraVaMoModalVideo);
+        window.addEventListener('pageshow', window.kiemTraVaMoModalVideo);
+        window.addEventListener('popstate', window.kiemTraVaMoModalVideo);
+        window.addEventListener('hashchange', window.kiemTraVaMoModalVideo);
+        window.addEventListener('sitemusic:navigated', window.kiemTraVaMoModalVideo);
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) window.kiemTraVaMoModalVideo();
+        });
 
         function guiDongGopTuLieu(event) {
             event.preventDefault();

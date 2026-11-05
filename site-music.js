@@ -15,9 +15,9 @@
 
     if (isInsideFrame) {
         try {
-            const host = (window.parent && window.parent.SiteMusic) || (window.top && window.top.SiteMusic);
+            const host = window.top && window.top.SiteMusic;
             if (host && host.__isMaster) {
-                // Delegate to master player in host window
+                // Delegate to master player in top window
                 window.SiteMusic = host;
 
                 // Sync UI on this document when ready
@@ -48,7 +48,7 @@
     if (window.SiteMusic && window.SiteMusic.__isMaster) return;
 
     // =========================================================================
-    //  CASE B: RUNNING AS MASTER PLAYER IN TOP/PARENT WINDOW
+    //  CASE B: RUNNING AS MASTER PLAYER IN TOP WINDOW
     // =========================================================================
     let saved = {};
     try {
@@ -113,7 +113,8 @@
     }
 
     function allowed() {
-        // Music stays active during same-site navigation and pauses when the site is hidden.
+        // Background music plays if enabled, audio ready, and not ducked by in-game voice.
+        // It DOES NOT stop when switching tabs, minimizing, or during navigation!
         return enabled && ready && !gameNarration && speaking.size === 0;
     }
 
@@ -243,7 +244,6 @@
         playVersion++;
         pending = false;
         audio.src = tracks[track];
-        enabled = true; // Choosing or shuffling a track turns music ON
         store();
         reconcile();
     }
@@ -268,31 +268,6 @@
                 if (audio) audio.pause();
                 updateUI();
             }
-        }
-    }
-
-    function stopForLeavingSite() {
-        // Preserve the track and playhead, but do not auto-resume when the visitor returns.
-        if (audio && Number.isFinite(audio.currentTime) && audio.currentTime > 0) {
-            position = audio.currentTime;
-        }
-        enabled = false;
-        pending = false;
-        playVersion++;
-        if (audio) {
-            try { audio.pause(); } catch (_) {}
-        }
-        store();
-        updateUI();
-    }
-
-    function leaveSite(url, sourceWindow) {
-        stopForLeavingSite();
-        try {
-            const hostWindow = (sourceWindow || window).top || window.top;
-            hostWindow.location.assign(url);
-        } catch (_) {
-            (sourceWindow || window).location.assign(url);
         }
     }
 
@@ -405,6 +380,12 @@
             history.pushState({ siteMusicNav: true, url: targetUrl.href }, '', targetUrl.href);
             updateDocUI(document);
             window.scrollTo(0, 0);
+            try {
+                window.dispatchEvent(new CustomEvent('sitemusic:navigated', { detail: { url: targetUrl.href } }));
+                if (typeof window.kiemTraVaMoModalVideo === 'function') {
+                    window.kiemTraVaMoModalVideo();
+                }
+            } catch (_) {}
             return;
         }
 
@@ -421,6 +402,12 @@
             frame.style.display = 'none';
             frame.src = 'about:blank';
             updateDocUI(document);
+            try {
+                window.dispatchEvent(new CustomEvent('sitemusic:navigated', { detail: { url: location.href } }));
+                if (typeof window.kiemTraVaMoModalVideo === 'function') {
+                    window.kiemTraVaMoModalVideo();
+                }
+            } catch (_) {}
         } else {
             frame.style.display = 'block';
             frame.src = location.href;
@@ -436,6 +423,7 @@
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 if (event.detail > 1) {
+                    enabled = true;
                     next();
                 } else {
                     toggle();
@@ -446,6 +434,7 @@
             // Internal navigation link handling
             const anchor = event.target.closest && event.target.closest('a[href]');
             if (!anchor) return;
+            if (anchor.target && anchor.target !== '_self') return;
             if (anchor.hasAttribute('download')) return;
 
             const href = anchor.getAttribute('href');
@@ -453,19 +442,7 @@
 
             try {
                 const targetUrl = new URL(href, win.location.href);
-                if (targetUrl.origin !== win.location.origin) {
-                    // External destinations should leave the site's persistent music host.
-                    if (anchor.target && anchor.target !== '_self' && anchor.target !== '_top') {
-                        stopForLeavingSite();
-                        return;
-                    }
-                    event.preventDefault();
-                    event.stopPropagation();
-                    leaveSite(targetUrl.href, win);
-                    return;
-                }
-
-                if (anchor.target && anchor.target !== '_self') return;
+                if (targetUrl.origin !== win.location.origin) return;
 
                 const path = targetUrl.pathname.toLowerCase();
                 if (path.endsWith('.html') || path.endsWith('/') || !path.includes('.')) {
@@ -495,7 +472,7 @@
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 if (event.detail > 1) {
-                    masterHost.next();
+                    masterHost.choose((masterHost.track + 1) % 4);
                 } else {
                     masterHost.toggle();
                 }
@@ -504,6 +481,7 @@
 
             const anchor = event.target.closest && event.target.closest('a[href]');
             if (!anchor) return;
+            if (anchor.target && anchor.target !== '_self') return;
             if (anchor.hasAttribute('download')) return;
 
             const href = anchor.getAttribute('href');
@@ -511,18 +489,7 @@
 
             try {
                 const targetUrl = new URL(href, win.location.href);
-                if (targetUrl.origin !== win.location.origin) {
-                    if (anchor.target && anchor.target !== '_self' && anchor.target !== '_top') {
-                        masterHost.stopForLeavingSite();
-                        return;
-                    }
-                    event.preventDefault();
-                    event.stopPropagation();
-                    masterHost.leaveSite(targetUrl.href, win);
-                    return;
-                }
-
-                if (anchor.target && anchor.target !== '_self') return;
+                if (targetUrl.origin !== win.location.origin) return;
 
                 const path = targetUrl.pathname.toLowerCase();
                 if (path.endsWith('.html') || path.endsWith('/') || !path.includes('.')) {
@@ -643,19 +610,17 @@
         }
     });
 
-    // Stop audio when this site is sent to the background. Internal page changes
-    // stay inside the persistent host, so they do not trigger this handler.
+    // Handle tab visibility: DOES NOT PAUSE background music!
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             narrationMedia.forEach(media => { try { media.pause(); } catch (_) {} });
             if (window.speechSynthesis) window.speechSynthesis.cancel();
-            stopForLeavingSite();
         }
     });
 
-    // The host is being closed/replaced (including an external top-level link).
+    // Handle page unload without early pausing
     function onPageLeave() {
-        stopForLeavingSite();
+        store();
     }
     window.addEventListener('pagehide', onPageLeave);
     window.addEventListener('beforeunload', onPageLeave);
@@ -672,8 +637,6 @@
         watchNarration,
         releaseNarration,
         navigateTo,
-        leaveSite,
-        stopForLeavingSite,
         watchSpeech,
         get audio() { return audio; },
         get enabled() { return enabled; },
