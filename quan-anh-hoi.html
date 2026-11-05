@@ -3,6 +3,7 @@
 <head>
   <script src="site-music.js"></script>
   <script src="firebase-config.js"></script>
+  <script src="cloudinary-config.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quần Anh Hội — Diễn Đàn Đàm Luận Lịch Sử Đại Việt</title>
@@ -1011,8 +1012,8 @@
 
             <div class="composer-media-tools">
                 <label class="btn-media-picker" for="post-media-input">🖼️ Ảnh / video</label>
-                <input id="post-media-input" type="file" accept="image/*,video/mp4,video/webm,video/ogg" hidden>
-                <span class="media-hint">Ảnh tối đa 15 MB · video tối đa 80 MB</span>
+                <input id="post-media-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm,video/ogg" hidden>
+                <span class="media-hint" id="media-service-hint">Ảnh tối đa 15 MB · video tối đa 80 MB</span>
             </div>
             <div id="media-preview" class="media-preview" aria-live="polite"></div>
             <div id="media-upload-status" class="media-upload-status" hidden><span id="media-upload-label">Đang tải tệp…</span><progress id="media-upload-progress" max="100" value="0"></progress></div>
@@ -1105,6 +1106,19 @@
             messagingSenderId: "YOUR_SENDER_ID",
             appId: "YOUR_APP_ID"
         };
+
+        // Cloudinary chỉ cần cloud name và unsigned presets; không đặt API secret ở trình duyệt.
+        const cloudinaryConfig = window.__CLOUDINARY_CONFIG__ || {};
+        const isCloudinaryConfigured = () => {
+            const values = [cloudinaryConfig.cloudName, cloudinaryConfig.imageUploadPreset, cloudinaryConfig.videoUploadPreset];
+            return values.every(value => typeof value === 'string' && value.trim() && !value.includes('YOUR_'));
+        };
+        const mediaServiceHint = document.getElementById('media-service-hint');
+        if (mediaServiceHint) {
+            mediaServiceHint.textContent = isCloudinaryConfigured()
+                ? 'Ảnh tối đa 15 MB · video tối đa 80 MB · lưu qua Cloudinary'
+                : 'Ảnh/video cần cấu hình Cloudinary; bài chữ vẫn dùng Firebase miễn phí';
+        }
 
         // Kiểm tra xem cấu hình đã được thay bằng key thật chưa
         const isRealFirebase = !Object.values(firebaseConfig).some(val => 
@@ -1246,7 +1260,7 @@
         if (mediaInput) mediaInput.addEventListener('change', () => {
             const file = mediaInput.files && mediaInput.files[0];
             if (!file) return;
-            const isImage = file.type.startsWith('image/');
+            const isImage = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'].includes(file.type);
             const isVideo = file.type.startsWith('video/') && ['video/mp4', 'video/webm', 'video/ogg'].includes(file.type);
             const maxSize = isImage ? 15 * 1024 * 1024 : 80 * 1024 * 1024;
             if ((!isImage && !isVideo) || file.size > maxSize) {
@@ -1297,6 +1311,69 @@
                     } catch (error) { reject(error); }
                 });
             });
+        }
+
+        function taiMediaLenCloudinary(file) {
+            return new Promise((resolve, reject) => {
+                if (!isCloudinaryConfigured()) {
+                    reject(new Error('Cloudinary chưa được cấu hình. Hãy điền cloud name và hai upload preset trong cloudinary-config.js.'));
+                    return;
+                }
+                const isVideo = file.type.startsWith('video/');
+                const resourceType = isVideo ? 'video' : 'image';
+                const uploadPreset = isVideo ? cloudinaryConfig.videoUploadPreset : cloudinaryConfig.imageUploadPreset;
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', uploadPreset);
+
+                const status = document.getElementById('media-upload-status');
+                const progress = document.getElementById('media-upload-progress');
+                const label = document.getElementById('media-upload-label');
+                const submit = document.getElementById('btn-submit-post');
+                const xhr = new XMLHttpRequest();
+                if (status) status.hidden = false;
+                if (label) label.textContent = 'Đang tải tệp lên Cloudinary… 0%';
+                xhr.upload.addEventListener('progress', event => {
+                    if (!event.lengthComputable) return;
+                    const percent = Math.round(event.loaded / event.total * 100);
+                    if (progress) progress.value = percent;
+                    if (label) label.textContent = `Đang tải tệp lên Cloudinary… ${percent}%`;
+                    if (submit) submit.innerHTML = `<span>⏳</span> Đang tải ${percent}%`;
+                });
+                xhr.addEventListener('load', () => {
+                    let result = {};
+                    try { result = JSON.parse(xhr.responseText || '{}'); } catch (_) { /* báo lỗi HTTP bên dưới */ }
+                    if (xhr.status < 200 || xhr.status >= 300 || !result.secure_url) {
+                        if (status) status.hidden = true;
+                        reject(new Error(result.error?.message || `Cloudinary từ chối tải tệp (HTTP ${xhr.status}).`));
+                        return;
+                    }
+                    if (status) status.hidden = true;
+                    resolve({
+                        url: result.secure_url,
+                        type: isVideo ? 'video' : 'image',
+                        name: file.name,
+                        provider: 'cloudinary',
+                        publicId: result.public_id
+                    });
+                });
+                xhr.addEventListener('error', () => {
+                    if (status) status.hidden = true;
+                    reject(new Error('Không kết nối được Cloudinary. Kiểm tra mạng và thử lại.'));
+                });
+                xhr.addEventListener('abort', () => {
+                    if (status) status.hidden = true;
+                    reject(new Error('Đã hủy tải tệp lên Cloudinary.'));
+                });
+                xhr.open('POST', `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudinaryConfig.cloudName)}/${resourceType}/upload`);
+                xhr.send(formData);
+            });
+        }
+
+        function taiMediaLen(file) {
+            if (!nguoiDungHienTai) return Promise.reject(new Error('Đăng nhập trước khi tải ảnh/video.'));
+            // Cloudinary được ưu tiên để dùng được trên Firebase Spark; giữ Storage làm phương án tương thích cũ.
+            return isCloudinaryConfigured() ? taiMediaLenCloudinary(file) : taiMediaLenFirebase(file);
         }
         window.xoaMediaDaChon = function() {
             const preview = document.getElementById('media-preview');
@@ -1436,7 +1513,7 @@
                 if (isFirestoreActive && db) {
                     let media = null;
                     if (tepMediaDangChon) {
-                        media = await taiMediaLenFirebase(tepMediaDangChon);
+                        media = await taiMediaLen(tepMediaDangChon);
                     }
                     // Lưu lên Firestore
                     const docRef = await addDoc(collection(db, "posts"), {
@@ -1466,9 +1543,11 @@
                 console.error("Lỗi khi đăng bài:", err);
                 const uploadStatus = document.getElementById('media-upload-status');
                 if (uploadStatus) uploadStatus.hidden = true;
-                const mediaError = err && (err.code === 'storage/unauthorized' || err.code === 'storage/bucket-not-found' || err.message?.includes('Firebase Storage'));
+                const mediaError = err && (err.code === 'storage/unauthorized' || err.code === 'storage/bucket-not-found' || err.message?.includes('Firebase Storage') || err.message?.includes('Cloudinary'));
                 hienToast(mediaError
-                    ? 'Không tải được tệp. Hãy kiểm tra Storage Rules, bucket và đăng nhập.'
+                    ? (isCloudinaryConfigured()
+                        ? `Không tải được tệp: ${err.message}`
+                        : 'Chưa tải được media. Hãy cấu hình Cloudinary miễn phí hoặc bật Firebase Storage.')
                     : 'Có lỗi khi đăng bài. Kiểm tra kết nối/quyền Firebase rồi thử lại.');
             } finally {
                 btnSubmit.disabled = false;
@@ -1902,12 +1981,12 @@
         // Hướng dẫn mở modal bật Firestore
         window.moHuongDanFirebase = function() {
             alert(
-                "📋 QUẦN ANH HỘI DÙNG FIREBASE AUTH, FIRESTORE VÀ STORAGE\n\n" +
+                "📋 QUẦN ANH HỘI DÙNG FIREBASE AUTH, FIRESTORE VÀ CLOUDINARY\n\n" +
                 "1. Đăng nhập bằng tài khoản Firebase đã bật trong Firebase Authentication.\n" +
-                "2. Trong Firebase Console, bật Firestore Database và Storage.\n" +
-                "3. Sao lưu Rules hiện tại; gộp các match trong firestore.rules và storage.rules của dự án, giữ lại Rules của tính năng khác rồi Publish.\n" +
-                "4. Kiểm tra firebase-config.js có projectId và storageBucket đúng với dự án.\n\n" +
-                "Không bật test mode công khai. Nếu tải ảnh/video báo lỗi, kiểm tra Rules của Storage và trạng thái đăng nhập."
+                "2. Bài viết và bình luận dùng Cloud Firestore; trong Firestore Rules chỉ cho phép đọc công khai và yêu cầu đăng nhập để ghi. Không bật test mode công khai.\n" +
+                "3. Để đăng ảnh/video miễn phí, tạo Cloudinary unsigned presets rồi điền cloud name và tên presets vào cloudinary-config.js. Tên preset hiện trong mã trang nên cần giới hạn định dạng và theo dõi mức dùng.\n" +
+                "4. Firebase Storage là lựa chọn riêng; hiện Firebase yêu cầu gói Blaze để tạo hoặc tiếp tục dùng Storage. Không cần Storage nếu đã cấu hình Cloudinary.\n\n" +
+                "Nếu đăng bài chữ/bình luận lỗi, kiểm tra Firestore Rules và đăng nhập. Nếu tải media lỗi, kiểm tra Cloudinary config và preset."
             );
         };
 

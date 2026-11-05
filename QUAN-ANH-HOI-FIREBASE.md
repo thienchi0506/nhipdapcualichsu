@@ -1,20 +1,37 @@
-# Kích hoạt đầy đủ Quần Anh Hội
+# Kích hoạt đăng bài và bình luận Quần Anh Hội
 
-Trang đã dùng cấu hình từ `firebase-config.js`. Firebase Auth cần bật phương thức đăng nhập mà website đang cung cấp. Bài viết và bình luận công khai để đọc, còn đăng, thán phục, bình luận và tải tệp yêu cầu tài khoản đã đăng nhập.
+Quần Anh Hội dùng Firebase Authentication để nhận diện tài khoản và Cloud Firestore để lưu bài viết, bình luận, lượt thán phục. Ảnh/video có thể dùng Cloudinary Free; xem [CLOUDINARY-QUAN-ANH-HOI.md](CLOUDINARY-QUAN-ANH-HOI.md). Không cần Firebase Storage nếu đã cấu hình Cloudinary.
 
-## Cấu hình một lần trong Firebase Console
+## Firebase Authentication
 
-1. Mở dự án `nhipdapcualichsu` trong [Firebase Console](https://console.firebase.google.com/).
-2. Trong **Authentication → Sign-in method**, bật phương thức đăng nhập đang dùng ở `dang-nhap.html`.
-3. Trong **Firestore Database → Rules**, sao lưu Rules hiện có. Nếu dự án chưa có Rules cho tính năng khác, có thể dùng `firestore.rules`; nếu đã có, chỉ gộp hai khối `match /posts` và `match /comments` vào Rules hiện tại, không xóa các khối còn lại.
-4. Tạo/bật **Storage**, mở mục **Rules** và sao lưu Rules đang dùng. Gộp khối `match /posts/{userId}/{fileName}` từ `storage.rules`, giữ Rules cho đường dẫn khác, rồi chọn **Publish**.
-5. Kiểm tra **Project settings → Your apps**: `projectId` và `storageBucket` trong `firebase-config.js` phải trỏ đúng dự án/bucket.
-6. Thêm domain GitHub Pages đang dùng vào **Authentication → Settings → Authorized domains** nếu domain chưa có.
+1. Mở Firebase Console của dự án `nhipdapcualichsu`.
+2. Vào **Authentication → Connection method** và bật nhà cung cấp mà người dùng sẽ sử dụng. Trang đăng nhập hiện hỗ trợ email/mật khẩu và Google.
+3. Trong **Authentication → Settings → Authorized domains**, thêm `thienchi0506.github.io` nếu chưa có.
 
-- Không bật test mode công khai. Rules mẫu cho phép mọi người đọc bài/bình luận và media của diễn đàn, nhưng chỉ người đã đăng nhập mới được tạo nội dung; mỗi lượt tải chỉ ghi được vào thư mục UID của tài khoản đó. Khi gộp Rules, giữ nguyên quyền của những tính năng khác trong cùng dự án Firebase.
+## Cloud Firestore
 
-## Giới hạn tải tệp
+1. Tạo Cloud Firestore database nếu dự án chưa có.
+2. Mở **Firestore → Rules**.
+3. Sao lưu Rules hiện có. Với database mới chỉ có Rules mặc định từ chối mọi truy cập, thay nội dung bằng `firestore.rules` ở gốc dự án. Nếu Rules đã bảo vệ dữ liệu khác, chỉ gộp các khối `match /posts/{postId}` và `match /comments/{commentId}` bên trong `match /databases/{database}/documents`; giữ nguyên các khối khác.
+4. Nhấn **Publish**. Không dùng test mode công khai.
 
-- Ảnh: tối đa 15 MB.
-- Video MP4, WebM hoặc Ogg: tối đa 80 MB.
-- Nếu Storage chưa bật hoặc Rules chưa được publish, bài văn bản vẫn có thể đăng; bài có tệp sẽ báo lỗi để người dùng thử lại sau khi cấu hình.
+Rules cho phép đọc bài/bình luận công khai, yêu cầu đăng nhập cho thao tác ghi, và không cho xóa bài hoặc bình luận qua trình duyệt.
+
+## Thử chức năng
+
+1. Mở Quần Anh Hội và đăng nhập.
+2. Đăng một bài chỉ có chữ, rồi gửi một bình luận.
+3. Kiểm tra dữ liệu xuất hiện ở Firestore collections `posts` và `comments`; thử mở trang trên trình duyệt khác để xác nhận dữ liệu đồng bộ qua mạng.
+4. Nếu Firestore báo permission denied, kiểm tra đã Publish Rules trên đúng database `(default)` trong đúng dự án Firebase.
+
+## Firebase Storage
+
+Firebase Storage không cần thiết cho bài chữ và bình luận. Firebase hiện yêu cầu dự án ở gói Blaze để tạo hoặc tiếp tục truy cập Cloud Storage for Firebase. Vì Blaze là pay-as-you-go, không chuyển gói nếu chưa chấp nhận liên kết thanh toán. Trên dự án Spark, cấu hình Cloudinary Free theo tài liệu riêng để hỗ trợ ảnh/video.
+
+## Lưu ý về an toàn và chi phí
+
+- Firebase web config và Cloudinary unsigned preset là thông tin công khai trong ứng dụng trình duyệt; không đưa mật khẩu, API secret hay khóa quản trị vào mã trang.
+- Cloudinary Free có hạn mức theo credits. Theo dõi mức sử dụng và giới hạn loại media trong presets. Unsigned preset có thể bị người ngoài gọi trực tiếp nên không thể coi kiểm tra đăng nhập ở giao diện là biện pháp bảo vệ phía máy chủ.
+- Không bật Rules cho phép `read, write: if true` trên toàn bộ database.
+
+Tham khảo: [Firebase Firestore Rules](https://firebase.google.com/docs/firestore/security/get-started), [Firebase Storage và yêu cầu gói](https://firebase.google.com/docs/storage/faqs-storage-changes-announced-sept-2024).

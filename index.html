@@ -399,11 +399,30 @@
         }
 
         /* ====================================================== */
-        /*  NÚT "BẮT ĐẦU HÀNH TRÌNH"                             */
+        /*  NÚT "SẴN SÀNG" & KHẨU HIỆU LÝ TƯỞNG                  */
         /* ====================================================== */
 
         .cta-wrapper {
             animation: fadeInSlow 0.9s ease-out 1.2s both;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-motto {
+            font-family: 'Noto Serif', serif;
+            font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+            color: #FFF3D6;
+            font-style: italic;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 0 12px rgba(212, 175, 55, 0.45);
+            text-align: center;
+            max-width: 90vw;
+            line-height: 1.5;
+            user-select: none;
+            pointer-events: none;
         }
 
         .splash__cta,
@@ -764,6 +783,14 @@
                 align-items: center !important;
                 justify-content: center !important;
                 width: 100% !important;
+            }
+
+            .cta-motto {
+                font-size: 0.74rem !important;
+                letter-spacing: 0.4px !important;
+                margin-bottom: 8px !important;
+                line-height: 1.35 !important;
+                padding: 0 14px !important;
             }
 
             #btn-start,
@@ -1272,7 +1299,7 @@
 
             <!-- Phụ đề -->
             <p class="splash__subtitle">
-                Tích hợp Học và Chơi Lịch Sử Việt Nam
+                Lắng nghe lịch sử bằng trái tim
             </p>
 
             <!-- Đoạn văn truyền cảm hứng -->
@@ -1306,10 +1333,11 @@
                 </div>
             </div>
 
-            <!-- NÚT BẮT ĐẦU HÀNH TRÌNH (PROMPT 11: #btn-start, .btn-start) -->
+            <!-- NÚT SẴN SÀNG (PROMPT 11: #btn-start, .btn-start) -->
             <div class="cta-wrapper">
+                <p class="cta-motto">✦ "Vì Tổ quốc xã hội chủ nghĩa, vì lý tưởng của Bác Hồ vĩ đại" ✦</p>
                 <a href="trang-chinh.html" class="splash__cta btn-start" id="btn-start" data-alias="btn-bat-dau" onclick="batDauChuyenCanh(event)">
-                    ⚔️ BẮT ĐẦU HÀNH TRÌNH
+                    ⭐ SẴN SÀNG ➔
                 </a>
             </div>
 

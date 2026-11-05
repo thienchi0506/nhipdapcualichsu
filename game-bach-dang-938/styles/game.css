@@ -312,3 +312,81 @@ body.bd938-page { margin:0; background:#102725; color:#f0e7d4; font-family:syste
 #bd938-root.bd938-hud-collapsed .bd938-play {
   grid-template-rows: auto 1fr auto;
 }
+
+/* ========================================================================= */
+/*  KHÓA GAME BẠCH ĐẰNG 3D MỚI TRÊN TẤT CẢ THIẾT BỊ (ĐANG HOÀN THIỆN DẦN)     */
+/* ========================================================================= */
+.bd938-lock-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999999;
+    background: radial-gradient(circle at center, rgba(20, 35, 33, 0.96) 0%, rgba(8, 14, 13, 0.98) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+.bd938-lock-card {
+    background: linear-gradient(135deg, rgba(26, 50, 47, 0.95) 0%, rgba(14, 28, 26, 0.98) 100%);
+    border: 1.5px solid rgba(226, 186, 111, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 30px rgba(226, 186, 111, 0.2);
+    max-width: 540px;
+    width: 100%;
+    padding: 36px 30px;
+    text-align: center;
+    box-sizing: border-box;
+    animation: bd938LockFadeIn 0.3s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes bd938LockFadeIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.bd938-lock-icon {
+    font-size: 52px;
+    margin-bottom: 12px;
+}
+.bd938-lock-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--bd938-gold, #e2ba6f);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+.bd938-lock-title {
+    font-size: clamp(24px, 4vw, 32px);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.bd938-lock-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(226, 186, 111, 0.15);
+    border: 1px solid rgba(226, 186, 111, 0.4);
+    border-radius: 999px;
+    color: #ffd885;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.bd938-lock-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #dbe4dc;
+    margin-bottom: 14px;
+}
+.bd938-lock-subdesc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #a8b8ad;
+    margin-bottom: 26px;
+}
+.bd938-lock-actions {
+    display: flex;
+    justify-content: center;
+}

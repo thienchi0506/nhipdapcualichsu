@@ -348,7 +348,11 @@ dialog.addEventListener('cancel', event => {
 });
 window.addEventListener('pagehide', exit);
 window.addEventListener('pageshow', event => { if (event.persisted) returnToSetup({ focus: false }); });
-syncChoices();
+if (document.getElementById('bd938-lock-overlay')) {
+  console.info('Bạch Đằng 938 (3D Mới) đang tạm khóa trên tất cả thiết bị (đang hoàn thiện dần).');
+} else {
+  syncChoices();
+}
 
 // Test/inspection API stays in module scope; no global gameplay handlers or keys.
 export function getDiagnostics() {

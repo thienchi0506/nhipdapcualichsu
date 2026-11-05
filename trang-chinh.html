@@ -5204,8 +5204,13 @@
                             🚀 Sa Bàn 3D
                         </a>
                     </div>
-                    <a href="game-bach-dang-938/index.html" class="card__btn" id="bd938-entry" style="margin-top: 10px; min-height: 44px; box-sizing: border-box; line-height: 1.5; white-space: normal;">
-                        Bạch Đằng 938 — Chiến dịch nhập vai
+                    <a href="javascript:void(0)" class="card__btn card__btn--locked" id="bd938-entry" onclick="hienThongBaoGameDangHoanThien(event)" style="margin-top: 10px; min-height: 48px; box-sizing: border-box; line-height: 1.35; white-space: normal; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: linear-gradient(135deg, rgba(38, 26, 20, 0.92), rgba(18, 12, 8, 0.96)); border: 1.5px dashed rgba(212, 175, 55, 0.5); color: #C5B59E; cursor: not-allowed; text-decoration: none;" title="Bạch Đằng 938 (3D Mới) — Đang hoàn thiện dần">
+                        <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: #E5D6BD;">
+                            <span>🔒</span> Bạch Đằng 938 — Chiến dịch 3D mới
+                        </span>
+                        <span style="font-size: 0.74rem; color: #E5C378; font-style: italic; font-weight: 600;">
+                            (Đang hoàn thiện dần)
+                        </span>
                     </a>
                 </div>
             </div>
@@ -12629,6 +12634,33 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
         </section>
     </div>
 
+    <!-- ========================================================================= -->
+    <!--  THÔNG BÁO KHÓA GAME BẠCH ĐẰNG 3D MỚI TRÊN TẤT CẢ THIẾT BỊ (ĐANG HOÀN THIỆN) -->
+    <!-- ========================================================================= -->
+    <div class="mobile-notice-overlay" id="modal-bd938-locked" aria-hidden="true" onclick="if (event.target === this) dongThongBaoBd938Locked();">
+        <section class="mobile-notice-dialog" role="dialog" aria-modal="true" aria-labelledby="bd938-locked-title" aria-describedby="bd938-locked-desc">
+            <button type="button" class="mobile-notice-close" aria-label="Đóng thông báo" title="Đóng thông báo" onclick="dongThongBaoBd938Locked()">×</button>
+            <div class="mobile-notice-crest" aria-hidden="true">🔒</div>
+            <p class="mobile-notice-eyebrow">Hệ Thống Trận Đồ Lịch Sử</p>
+            <h2 class="mobile-notice-title" id="bd938-locked-title">Bạch Đằng 938 (3D Mới) — Đang Hoàn Thiện Dần</h2>
+
+            <div class="mobile-notice-section" id="bd938-locked-desc">
+                <h3>⚙️ Đang nâng cấp &amp; hoàn thiện tính năng</h3>
+                <p>Chiến dịch <strong>Bạch Đằng 938 (3D mới)</strong> đang trong giai đoạn hoàn thiện dần cơ chế mô phỏng sông nước, chỉ huy chiến thuật và tối ưu hóa hiệu năng trên tất cả các thiết bị (Máy tính &amp; Điện thoại di động).</p>
+            </div>
+
+            <div class="mobile-notice-section">
+                <h3>⚔️ Trải nghiệm các trận đồ sẵn có</h3>
+                <p>Trong thời gian hoàn thiện, kính mời bạn trải nghiệm <strong>Sa Bàn 2D</strong> hoặc <strong>Sa Bàn 3D</strong> hiện có trên máy tính để tiếp tục khám phá các trận đánh hào hùng của dân tộc!</p>
+            </div>
+
+            <p class="mobile-notice-recommendation">Rất mong quý tướng quân thông cảm và đón chờ trong bản cập nhật chính thức!</p>
+            <div class="mobile-notice-btn-row">
+                <button type="button" class="mobile-notice-btn mobile-notice-btn--primary" onclick="dongThongBaoBd938Locked()">Đã hiểu thông báo</button>
+            </div>
+        </section>
+    </div>
+
 
 <script>
 (function() {
@@ -12670,13 +12702,50 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             return false;
         }
 
+        function moThongBaoBd938Locked() {
+            var overlay = document.getElementById('modal-bd938-locked');
+            if (!overlay) return;
+            overlay.classList.add('is-open');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('mobile-notice-open');
+            var closeButton = overlay.querySelector('.mobile-notice-close');
+            if (closeButton) closeButton.focus();
+        }
+
+        function dongThongBaoBd938Locked() {
+            var overlay = document.getElementById('modal-bd938-locked');
+            if (!overlay) return;
+            overlay.classList.remove('is-open');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('mobile-notice-open');
+        }
+
+        window.hienThongBaoGameDangHoanThien = function(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            moThongBaoBd938Locked();
+        };
+
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') dongThongBaoMobile();
+            if (event.key === 'Escape') {
+                dongThongBaoMobile();
+                dongThongBaoBd938Locked();
+            }
         });
 
-
-    // Chặn người dùng mobile click vào bất kỳ liên kết/nút bấm sa bàn nào trên Trang Chính
+    // Chặn click vào game Bạch Đằng 3D mới trên TẤT CẢ THIẾT BỊ (đang hoàn thiện dần)
+    // Và GIỮ NGUYÊN KHÓA TRÊN ĐIỆN THOẠI cho tất cả các game Sa Bàn 2D & 3D đã áp dụng trước đó
     document.addEventListener('click', function(e) {
+        var bdLink = e.target.closest('#bd938-entry, a[href*="game-bach-dang-938"]');
+        if (bdLink) {
+            e.preventDefault();
+            e.stopPropagation();
+            moThongBaoBd938Locked();
+            return;
+        }
+
         var link = e.target.closest('a[href*="sa-ban.html"], a[href*="sa-ban-3d.html"], a[href*="sa-ban-nhu-nguyet.html"]');
         if (link && laThietBiDiDong()) {
             e.preventDefault();
