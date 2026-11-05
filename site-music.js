@@ -113,8 +113,7 @@
     }
 
     function allowed() {
-        // Background music plays if enabled, audio ready, and not ducked by in-game voice.
-        // It DOES NOT stop when switching tabs, minimizing, or during navigation!
+        // Music stays active during same-site navigation and pauses when the site is hidden.
         return enabled && ready && !gameNarration && speaking.size === 0;
     }
 
@@ -272,6 +271,31 @@
         }
     }
 
+    function stopForLeavingSite() {
+        // Preserve the track and playhead, but do not auto-resume when the visitor returns.
+        if (audio && Number.isFinite(audio.currentTime) && audio.currentTime > 0) {
+            position = audio.currentTime;
+        }
+        enabled = false;
+        pending = false;
+        playVersion++;
+        if (audio) {
+            try { audio.pause(); } catch (_) {}
+        }
+        store();
+        updateUI();
+    }
+
+    function leaveSite(url, sourceWindow) {
+        stopForLeavingSite();
+        try {
+            const hostWindow = (sourceWindow || window).top || window.top;
+            hostWindow.location.assign(url);
+        } catch (_) {
+            (sourceWindow || window).location.assign(url);
+        }
+    }
+
     function setExam(active) {
         exam = !!active;
         if (exam && window.speechSynthesis) {
@@ -422,7 +446,6 @@
             // Internal navigation link handling
             const anchor = event.target.closest && event.target.closest('a[href]');
             if (!anchor) return;
-            if (anchor.target && anchor.target !== '_self') return;
             if (anchor.hasAttribute('download')) return;
 
             const href = anchor.getAttribute('href');
@@ -430,7 +453,19 @@
 
             try {
                 const targetUrl = new URL(href, win.location.href);
-                if (targetUrl.origin !== win.location.origin) return;
+                if (targetUrl.origin !== win.location.origin) {
+                    // External destinations should leave the site's persistent music host.
+                    if (anchor.target && anchor.target !== '_self' && anchor.target !== '_top') {
+                        stopForLeavingSite();
+                        return;
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                    leaveSite(targetUrl.href, win);
+                    return;
+                }
+
+                if (anchor.target && anchor.target !== '_self') return;
 
                 const path = targetUrl.pathname.toLowerCase();
                 if (path.endsWith('.html') || path.endsWith('/') || !path.includes('.')) {
@@ -469,7 +504,6 @@
 
             const anchor = event.target.closest && event.target.closest('a[href]');
             if (!anchor) return;
-            if (anchor.target && anchor.target !== '_self') return;
             if (anchor.hasAttribute('download')) return;
 
             const href = anchor.getAttribute('href');
@@ -477,7 +511,18 @@
 
             try {
                 const targetUrl = new URL(href, win.location.href);
-                if (targetUrl.origin !== win.location.origin) return;
+                if (targetUrl.origin !== win.location.origin) {
+                    if (anchor.target && anchor.target !== '_self' && anchor.target !== '_top') {
+                        masterHost.stopForLeavingSite();
+                        return;
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                    masterHost.leaveSite(targetUrl.href, win);
+                    return;
+                }
+
+                if (anchor.target && anchor.target !== '_self') return;
 
                 const path = targetUrl.pathname.toLowerCase();
                 if (path.endsWith('.html') || path.endsWith('/') || !path.includes('.')) {
@@ -598,17 +643,19 @@
         }
     });
 
-    // Handle tab visibility: DOES NOT PAUSE background music!
+    // Stop audio when this site is sent to the background. Internal page changes
+    // stay inside the persistent host, so they do not trigger this handler.
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             narrationMedia.forEach(media => { try { media.pause(); } catch (_) {} });
             if (window.speechSynthesis) window.speechSynthesis.cancel();
+            stopForLeavingSite();
         }
     });
 
-    // Handle page unload without early pausing
+    // The host is being closed/replaced (including an external top-level link).
     function onPageLeave() {
-        store();
+        stopForLeavingSite();
     }
     window.addEventListener('pagehide', onPageLeave);
     window.addEventListener('beforeunload', onPageLeave);
@@ -625,6 +672,8 @@
         watchNarration,
         releaseNarration,
         navigateTo,
+        leaveSite,
+        stopForLeavingSite,
         watchSpeech,
         get audio() { return audio; },
         get enabled() { return enabled; },
