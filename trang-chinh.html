@@ -276,6 +276,300 @@
             border-color: var(--vang-hover);
         }
 
+        /* ====================================================== */
+        /*  CỬA SỔ TÀI KHOẢN (ACCOUNT POPOVER)                     */
+        /* ====================================================== */
+        .navbar-account-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .account-popover {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 290px;
+            max-width: calc(100vw - 20px);
+            background: linear-gradient(165deg, #2D1810 0%, #1A0D08 100%);
+            border: 1.5px solid var(--vang-dong, #D4AF37);
+            border-radius: 14px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 16px rgba(212, 175, 55, 0.2);
+            padding: 16px;
+            z-index: 1010;
+            color: #FFF3D6;
+            font-family: 'Noto Serif', serif;
+            box-sizing: border-box;
+            animation: accountPopoverFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: top right;
+        }
+
+        .account-popover[hidden] {
+            display: none !important;
+        }
+
+        @keyframes accountPopoverFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .account-popover__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .account-popover__avatar-wrap {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(74, 14, 14, 0.6));
+            border: 1.5px solid var(--vang-dong, #D4AF37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+        }
+
+        .account-popover__avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .account-popover__avatar-img[hidden] {
+            display: none !important;
+        }
+
+        .account-popover__meta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .account-popover__name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #FFDF79;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.3;
+        }
+
+        .account-popover__email {
+            font-size: 0.78rem;
+            color: rgba(255, 243, 214, 0.75);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            margin-top: 2px;
+        }
+
+        .account-popover__actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .account-popover__btn {
+            flex: 1;
+            min-height: 40px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            touch-action: manipulation;
+            box-sizing: border-box;
+        }
+
+        .account-popover__btn--rename {
+            background: rgba(212, 175, 55, 0.15);
+            color: #FFDF79;
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .account-popover__btn--rename:hover,
+        .account-popover__btn--rename:focus-visible {
+            background: rgba(212, 175, 55, 0.3);
+            border-color: #FFDF79;
+            color: #FFF;
+            outline: none;
+        }
+
+        .account-popover__btn--logout {
+            background: rgba(180, 40, 40, 0.2);
+            color: #FFB3B3;
+            border-color: rgba(220, 70, 70, 0.5);
+        }
+
+        .account-popover__btn--logout:hover,
+        .account-popover__btn--logout:focus-visible {
+            background: rgba(200, 40, 40, 0.35);
+            border-color: #FF7070;
+            color: #FFF;
+            outline: none;
+        }
+
+        .account-popover__btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .account-popover__rename-form {
+            margin-top: 12px;
+        }
+
+        .account-popover__rename-label {
+            display: block;
+            font-size: 0.82rem;
+            color: #FFDF79;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .account-popover__input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 12px;
+            min-height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid var(--vang-dong, #D4AF37);
+            border-radius: 8px;
+            color: #FFF3D6;
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .account-popover__input:focus {
+            border-color: #FFDF79;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.45);
+        }
+
+        .account-popover__error {
+            font-size: 0.78rem;
+            color: #FF6B6B;
+            background: rgba(180, 20, 20, 0.25);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            border-radius: 6px;
+            padding: 6px 10px;
+            margin-top: 6px;
+            line-height: 1.4;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        .account-popover__error[hidden] {
+            display: none !important;
+        }
+
+        .account-popover__rename-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .account-popover__btn--save {
+            background: var(--vang-dong, #D4AF37);
+            color: #2C1E18;
+            font-weight: 700;
+            border-color: var(--vang-dong, #D4AF37);
+        }
+
+        .account-popover__btn--save:hover,
+        .account-popover__btn--save:focus-visible {
+            background: var(--vang-hover, #FFE082);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            outline: none;
+        }
+
+        .account-popover__btn--cancel {
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFF3D6;
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .account-popover__btn--cancel:hover,
+        .account-popover__btn--cancel:focus-visible {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.4);
+            outline: none;
+        }
+
+        .account-popover__msg {
+            margin-top: 10px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        .account-popover__msg[hidden] {
+            display: none !important;
+        }
+
+        .account-popover__msg--success {
+            background: rgba(30, 130, 60, 0.25);
+            border: 1px solid rgba(70, 200, 100, 0.45);
+            color: #85E89D;
+        }
+
+        .account-popover__msg--error {
+            background: rgba(180, 20, 20, 0.25);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            color: #FF8585;
+        }
+
+        .nav-auth-avatar {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .nav-auth-caret {
+            font-size: 0.72rem;
+            opacity: 0.85;
+            margin-left: 3px;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-auth-caret {
+                display: none !important;
+            }
+            .account-popover {
+                width: 285px;
+                max-width: calc(100vw - 20px);
+                right: 0;
+            }
+        }
+
 
         /* ====================================================== */
         /*  PHẦN 3: KHU VỰC "CHỌN HÀNH TRÌNH CỦA BẠN"             */
@@ -4695,9 +4989,52 @@
                 <a href="quan-anh-hoi.html" class="navbar__btn navbar__btn--quan-anh" id="btn-nav-quan-anh-hoi" title="Quần Anh Hội — Diễn đàn & Đàm luận Lịch sử" aria-label="Đến Quần Anh Hội - Diễn đàn đàm luận lịch sử">
                     <span class="nav-quan-anh-icon">⚔️</span><span class="nav-quan-anh-text"> Quần Anh Hội</span>
                 </a>
-                <a href="dang-nhap.html" class="navbar__btn navbar__btn--solid" id="btn-auth" title="Tài khoản / Đăng nhập">
-                    <span class="nav-auth-icon">🔑</span><span class="nav-auth-text"> Đăng Nhập</span>
-                </a>
+                <div class="navbar-account-wrap" id="navbar-account-wrap">
+                    <a href="dang-nhap.html" class="navbar__btn navbar__btn--solid" id="btn-auth" title="Tài khoản / Đăng nhập">
+                        <span class="nav-auth-icon">🔑</span><span class="nav-auth-text"> Đăng Nhập</span>
+                    </a>
+                    <!-- Cửa sổ tài khoản nhỏ cạnh nút đăng nhập -->
+                    <div id="account-popover-menu" class="account-popover" hidden aria-hidden="true" role="dialog" aria-label="Hồ sơ tài khoản">
+                        <div class="account-popover__header">
+                            <div class="account-popover__avatar-wrap" id="account-popover-avatar-wrap">
+                                <span class="account-popover__avatar-fallback" id="account-popover-avatar-fallback">👤</span>
+                                <img id="account-popover-avatar-img" class="account-popover__avatar-img" src="" alt="Ảnh đại diện" hidden>
+                            </div>
+                            <div class="account-popover__meta">
+                                <div class="account-popover__name" id="account-popover-name">Tài khoản</div>
+                                <div class="account-popover__email" id="account-popover-email">Chưa có email</div>
+                            </div>
+                        </div>
+
+                        <!-- Thông báo popover -->
+                        <div id="account-popover-msg" class="account-popover__msg" role="alert" aria-live="polite" hidden></div>
+
+                        <!-- Các lựa chọn ở chế độ xem -->
+                        <div class="account-popover__actions" id="account-popover-view-actions">
+                            <button type="button" class="account-popover__btn account-popover__btn--rename" id="btn-account-open-rename">
+                                <span aria-hidden="true">✏️</span> Đổi tên
+                            </button>
+                            <button type="button" class="account-popover__btn account-popover__btn--logout" id="btn-account-logout">
+                                <span aria-hidden="true">🚪</span> Đăng xuất
+                            </button>
+                        </div>
+
+                        <!-- Khung đổi tên (mặc định ẩn) -->
+                        <form class="account-popover__rename-form" id="account-popover-rename-form" hidden onsubmit="return false;">
+                            <label class="account-popover__rename-label" for="account-popover-name-input">Đổi tên hiển thị (2 - 32 ký tự):</label>
+                            <input type="text" id="account-popover-name-input" class="account-popover__input" maxlength="32" minlength="2" placeholder="Nhập tên mới..." autocomplete="off">
+                            <div id="account-popover-rename-error" class="account-popover__error" role="alert" aria-live="polite" hidden></div>
+                            <div class="account-popover__rename-actions">
+                                <button type="button" class="account-popover__btn account-popover__btn--save" id="btn-account-save-rename">
+                                    💾 Lưu
+                                </button>
+                                <button type="button" class="account-popover__btn account-popover__btn--cancel" id="btn-account-cancel-rename">
+                                    Hủy
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </nav>
 
@@ -5383,20 +5720,29 @@
     <!-- ============================================================ -->
     <script>
         // ===================================================
-        //  1. HIỂN THỊ TÊN NGƯỜI DÙNG (nếu đã đăng nhập)
+        //  1. HIỂN THỊ TÊN NGƯỜI DÙNG (Khởi tạo giao diện ban đầu từ bộ nhớ cục bộ)
         // ===================================================
         document.addEventListener('DOMContentLoaded', function() {
             var ten = localStorage.getItem('tenNguoiDung');
+            var email = localStorage.getItem('emailNguoiDung');
             if (ten) {
                 var elTen = document.getElementById('ten-nguoi-dung');
                 if (elTen) elTen.textContent = ten;
 
                 var btnAuth = document.getElementById('btn-auth');
                 if (btnAuth) {
-                    btnAuth.innerHTML = '<span class="nav-auth-icon">👤</span><span class="nav-auth-text"> ' + ten + '</span>';
+                    btnAuth.innerHTML = '<span class="nav-auth-icon">👤</span><span class="nav-auth-text"> ' + ten + '</span><span class="nav-auth-caret" aria-hidden="true">▾</span>';
                     btnAuth.href = '#';
-                    btnAuth.title = 'Bạn đã đăng nhập: ' + ten;
+                    btnAuth.title = 'Tài khoản: ' + ten;
+                    btnAuth.setAttribute('role', 'button');
+                    btnAuth.setAttribute('aria-haspopup', 'dialog');
+                    btnAuth.setAttribute('aria-expanded', 'false');
+                    btnAuth.setAttribute('aria-label', 'Mở bảng thông tin tài khoản: ' + ten);
                 }
+                var popName = document.getElementById('account-popover-name');
+                if (popName) popName.textContent = ten;
+                var popEmail = document.getElementById('account-popover-email');
+                if (popEmail && email) popEmail.textContent = email;
             }
         });
 
@@ -12539,7 +12885,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
 
         // --- 1.1 HIỆU ỨNG HẠT BỤI VÀNG LƠ LỬNG BẰNG CANVAS (GOLD DUST) ---
         (function initGoldDustCanvas() {
-            if (window.self !== window.top) return;
+            if (window.self !== window.top && !window.top.__SiteMusicHost) return;
             var canvas = document.getElementById('banner-gold-dust');
             if (!canvas) return;
             var ctx = canvas.getContext('2d');
@@ -12823,7 +13169,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
 </script>
 <script type="module">
     import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+    import { getAuth, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
     import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
     const feedbackDbConfig = window.__FIREBASE_CONFIG__;
@@ -12843,6 +13189,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
         feedbackDb = getFirestore(app);
         onAuthStateChanged(feedbackAuth, user => {
             feedbackUser = user;
+            dongBoTrangThaiTaiKhoan(user);
             capNhatTrangThaiGopY();
         });
     } catch (error) {
@@ -13027,6 +13374,344 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             alert('Không cập nhật được trạng thái. Kiểm tra Firestore Rules.');
         }
     });
+
+    // ===================================================
+    //  QUẢN LÝ CỬA SỔ TÀI KHOẢN & ĐỔI TÊN / ĐĂNG XUẤT (FIREBASE AUTH)
+    // ===================================================
+    function escapeUserText(str) {
+        return String(str ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+    }
+
+    function capNhatGiaoDienTaiKhoan(ten, email, photoURL) {
+        const elTen = document.getElementById('ten-nguoi-dung');
+        if (elTen) elTen.textContent = ten || 'Khách';
+
+        const btnAuth = document.getElementById('btn-auth');
+        if (btnAuth) {
+            if (ten) {
+                btnAuth.href = '#';
+                btnAuth.title = 'Tài khoản: ' + ten;
+                btnAuth.setAttribute('role', 'button');
+                btnAuth.setAttribute('aria-haspopup', 'dialog');
+                btnAuth.setAttribute('aria-expanded', 'false');
+                btnAuth.setAttribute('aria-label', 'Mở bảng thông tin tài khoản: ' + ten);
+                const avatarPart = photoURL
+                    ? `<img src="${escapeUserText(photoURL)}" alt="Avatar" class="nav-auth-avatar">`
+                    : `<span class="nav-auth-icon">👤</span>`;
+                btnAuth.innerHTML = `${avatarPart}<span class="nav-auth-text"> ${escapeUserText(ten)}</span><span class="nav-auth-caret" aria-hidden="true">▾</span>`;
+            } else {
+                btnAuth.href = 'dang-nhap.html';
+                btnAuth.title = 'Tài khoản / Đăng nhập';
+                btnAuth.removeAttribute('role');
+                btnAuth.removeAttribute('aria-haspopup');
+                btnAuth.removeAttribute('aria-expanded');
+                btnAuth.setAttribute('aria-label', 'Đăng nhập tài khoản');
+                btnAuth.innerHTML = `<span class="nav-auth-icon">🔑</span><span class="nav-auth-text"> Đăng Nhập</span>`;
+            }
+        }
+
+        const popName = document.getElementById('account-popover-name');
+        if (popName) popName.textContent = ten || 'Khách';
+
+        const popEmail = document.getElementById('account-popover-email');
+        if (popEmail) popEmail.textContent = email || (ten ? 'Chưa liên kết email' : 'Chưa đăng nhập');
+
+        const popImg = document.getElementById('account-popover-avatar-img');
+        const popFallback = document.getElementById('account-popover-avatar-fallback');
+        if (popImg && popFallback) {
+            if (photoURL) {
+                popImg.src = photoURL;
+                popImg.hidden = false;
+                popFallback.hidden = true;
+            } else {
+                popImg.hidden = true;
+                popFallback.hidden = false;
+            }
+        }
+    }
+
+    function dongBoTrangThaiTaiKhoan(user) {
+        if (user) {
+            const tenHienThi = user.displayName || (user.email ? user.email.split('@')[0] : 'Người dùng');
+            localStorage.setItem('tenNguoiDung', tenHienThi);
+            if (user.email) localStorage.setItem('emailNguoiDung', user.email);
+            if (user.uid) localStorage.setItem('uidNguoiDung', user.uid);
+            capNhatGiaoDienTaiKhoan(tenHienThi, user.email || '', user.photoURL || '');
+        } else {
+            localStorage.removeItem('tenNguoiDung');
+            localStorage.removeItem('emailNguoiDung');
+            localStorage.removeItem('uidNguoiDung');
+            capNhatGiaoDienTaiKhoan('', '', '');
+            dongPopoverTaiKhoan();
+        }
+    }
+
+    function moPopoverTaiKhoan() {
+        const pop = document.getElementById('account-popover-menu');
+        const btnAuth = document.getElementById('btn-auth');
+        if (!pop) return;
+        pop.hidden = false;
+        pop.setAttribute('aria-hidden', 'false');
+        if (btnAuth) btnAuth.setAttribute('aria-expanded', 'true');
+        dongFormDoiTen();
+        xoaThongBaoPopover();
+    }
+
+    function dongPopoverTaiKhoan() {
+        const pop = document.getElementById('account-popover-menu');
+        const btnAuth = document.getElementById('btn-auth');
+        if (!pop || pop.hidden) return;
+        pop.hidden = true;
+        pop.setAttribute('aria-hidden', 'true');
+        if (btnAuth) btnAuth.setAttribute('aria-expanded', 'false');
+        dongFormDoiTen();
+        xoaThongBaoPopover();
+    }
+
+    function batTatPopoverTaiKhoan(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        const pop = document.getElementById('account-popover-menu');
+        if (!pop) return;
+        if (pop.hidden) {
+            moPopoverTaiKhoan();
+        } else {
+            dongPopoverTaiKhoan();
+        }
+    }
+
+    function moFormDoiTen() {
+        const viewActions = document.getElementById('account-popover-view-actions');
+        const form = document.getElementById('account-popover-rename-form');
+        const input = document.getElementById('account-popover-name-input');
+        const err = document.getElementById('account-popover-rename-error');
+        if (viewActions) viewActions.hidden = true;
+        if (form) form.hidden = false;
+        if (err) {
+            err.hidden = true;
+            err.textContent = '';
+        }
+        xoaThongBaoPopover();
+        if (input) {
+            const currentName = (feedbackUser && feedbackUser.displayName) || localStorage.getItem('tenNguoiDung') || '';
+            input.value = currentName;
+            setTimeout(() => {
+                input.focus();
+                input.select();
+            }, 50);
+        }
+    }
+
+    function dongFormDoiTen() {
+        const viewActions = document.getElementById('account-popover-view-actions');
+        const form = document.getElementById('account-popover-rename-form');
+        const err = document.getElementById('account-popover-rename-error');
+        if (viewActions) viewActions.hidden = false;
+        if (form) form.hidden = true;
+        if (err) {
+            err.hidden = true;
+            err.textContent = '';
+        }
+    }
+
+    function thongBaoPopover(msg, type = 'info') {
+        const el = document.getElementById('account-popover-msg');
+        if (!el) return;
+        el.textContent = msg;
+        el.className = 'account-popover__msg ' + (type === 'success' ? 'account-popover__msg--success' : (type === 'error' ? 'account-popover__msg--error' : ''));
+        el.hidden = false;
+    }
+
+    function xoaThongBaoPopover() {
+        const el = document.getElementById('account-popover-msg');
+        if (el) {
+            el.hidden = true;
+            el.textContent = '';
+        }
+    }
+
+    async function xuLyLuuDoiTen() {
+        const input = document.getElementById('account-popover-name-input');
+        const err = document.getElementById('account-popover-rename-error');
+        const btnSave = document.getElementById('btn-account-save-rename');
+        const btnCancel = document.getElementById('btn-account-cancel-rename');
+        if (!input) return;
+
+        // Chuẩn hóa tên: loại bỏ khoảng trắng đầu/cuối và khoảng trắng thừa liên tiếp
+        const cleanName = input.value.trim().replace(/\s+/g, ' ');
+
+        // Kiểm tra độ dài từ 2 đến 32 ký tự
+        if (!cleanName || cleanName.length < 2 || cleanName.length > 32) {
+            if (err) {
+                err.textContent = 'Tên không được để trống và phải dài từ 2 đến 32 ký tự.';
+                err.hidden = false;
+            }
+            input.focus();
+            return;
+        }
+
+        const currentName = (feedbackUser && feedbackUser.displayName) || localStorage.getItem('tenNguoiDung') || '';
+        if (cleanName === currentName) {
+            dongFormDoiTen();
+            return;
+        }
+
+        // Bắt đầu lưu với Firebase
+        input.disabled = true;
+        if (btnSave) {
+            btnSave.disabled = true;
+            btnSave.textContent = '⏳ Đang lưu...';
+        }
+        if (btnCancel) btnCancel.disabled = true;
+        if (err) {
+            err.hidden = true;
+            err.textContent = '';
+        }
+
+        try {
+            if (!feedbackAuth || !feedbackAuth.currentUser) {
+                throw new Error('Chưa đăng nhập hoặc phiên làm việc đã kết thúc.');
+            }
+
+            // Gọi Firebase Auth updateProfile
+            await updateProfile(feedbackAuth.currentUser, {
+                displayName: cleanName
+            });
+
+            // Firebase xác nhận thành công!
+            if (feedbackUser) {
+                feedbackUser.displayName = cleanName;
+            }
+            localStorage.setItem('tenNguoiDung', cleanName);
+
+            // Đồng bộ lên toàn bộ trang
+            capNhatGiaoDienTaiKhoan(cleanName, feedbackUser?.email || '', feedbackUser?.photoURL || '');
+            capNhatTrangThaiGopY();
+
+            dongFormDoiTen();
+            thongBaoPopover('Đã đổi tên thành công!', 'success');
+        } catch (error) {
+            console.error('Lỗi khi đổi tên hồ sơ Firebase:', error);
+            if (err) {
+                err.textContent = 'Không thể đổi tên: ' + (error.message || 'Lỗi không xác định. Vui lòng thử lại.');
+                err.hidden = false;
+            }
+        } finally {
+            input.disabled = false;
+            if (btnSave) {
+                btnSave.disabled = false;
+                btnSave.innerHTML = '💾 Lưu';
+            }
+            if (btnCancel) btnCancel.disabled = false;
+        }
+    }
+
+    async function xuLyDangXuat() {
+        const btnLogout = document.getElementById('btn-account-logout');
+        const btnRename = document.getElementById('btn-account-open-rename');
+
+        if (btnLogout) {
+            btnLogout.disabled = true;
+            btnLogout.textContent = '⏳ Đang đăng xuất...';
+        }
+        if (btnRename) btnRename.disabled = true;
+
+        try {
+            if (feedbackAuth) {
+                await signOut(feedbackAuth);
+            }
+            // Đăng xuất thành công
+            localStorage.removeItem('tenNguoiDung');
+            localStorage.removeItem('emailNguoiDung');
+            localStorage.removeItem('uidNguoiDung');
+
+            feedbackUser = null;
+            dongPopoverTaiKhoan();
+            capNhatGiaoDienTaiKhoan('', '', '');
+            capNhatTrangThaiGopY();
+        } catch (error) {
+            console.error('Lỗi khi đăng xuất:', error);
+            thongBaoPopover('Đăng xuất thất bại: ' + (error.message || 'Vui lòng thử lại.'), 'error');
+            if (btnLogout) {
+                btnLogout.disabled = false;
+                btnLogout.innerHTML = '<span aria-hidden="true">🚪</span> Đăng xuất';
+            }
+            if (btnRename) btnRename.disabled = false;
+        }
+    }
+
+    // Gắn sự kiện cho các thành phần tài khoản
+    const btnAuthEl = document.getElementById('btn-auth');
+    if (btnAuthEl) {
+        btnAuthEl.addEventListener('click', (e) => {
+            if (feedbackUser || (feedbackAuth && feedbackAuth.currentUser) || localStorage.getItem('tenNguoiDung')) {
+                e.preventDefault();
+                e.stopPropagation();
+                batTatPopoverTaiKhoan();
+            }
+        });
+    }
+
+    document.getElementById('btn-account-open-rename')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        moFormDoiTen();
+    });
+
+    document.getElementById('btn-account-cancel-rename')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        dongFormDoiTen();
+    });
+
+    document.getElementById('btn-account-save-rename')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        xuLyLuuDoiTen();
+    });
+
+    document.getElementById('account-popover-rename-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        xuLyLuuDoiTen();
+    });
+
+    document.getElementById('btn-account-logout')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        xuLyDangXuat();
+    });
+
+    // Đóng popover khi nhấn phím Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const pop = document.getElementById('account-popover-menu');
+            if (pop && !pop.hidden) {
+                dongPopoverTaiKhoan();
+                document.getElementById('btn-auth')?.focus();
+            }
+        }
+    });
+
+    // Đóng popover khi bấm chuột ra ngoài
+    document.addEventListener('click', (e) => {
+        const wrap = document.getElementById('navbar-account-wrap');
+        if (wrap && !wrap.contains(e.target)) {
+            dongPopoverTaiKhoan();
+        }
+    });
+
+    // Cung cấp giao diện kiểm thử và điều khiển nếu cần
+    window.__accountManager = {
+        moPopoverTaiKhoan,
+        dongPopoverTaiKhoan,
+        moFormDoiTen,
+        dongFormDoiTen,
+        xuLyLuuDoiTen,
+        xuLyDangXuat,
+        capNhatGiaoDienTaiKhoan,
+        dongBoTrangThaiTaiKhoan,
+        get feedbackAuth() { return feedbackAuth; },
+        get feedbackUser() { return feedbackUser; }
+    };
+
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && document.getElementById('web-feedback-overlay')?.classList.contains('open')) window.dongGopYWeb();
     });

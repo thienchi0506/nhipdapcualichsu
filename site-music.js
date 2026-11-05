@@ -1,13 +1,55 @@
 /* Shared background music lifecycle across all pages.
-   User preference persists via localStorage and syncs across tabs. */
+   User preference persists via localStorage and syncs across tabs.
+   Supports seamless continuous audio playback across internal page transitions. */
 (function () {
     'use strict';
-    if (window.SiteMusic) return;
 
     const STORAGE_KEY = 'dcls.music.v2';
     const LEGACY_KEY = 'dcls.music.session.v1';
     const tracks = [1, 2, 3, 4].map(n => 'nhac-nen-' + n + '.mp3');
 
+    // =========================================================================
+    //  CASE A: RUNNING INSIDE THE SEAMLESS NAVIGATION FRAME
+    // =========================================================================
+    const isInsideFrame = (window.self !== window.top);
+
+    if (isInsideFrame) {
+        try {
+            const host = (window.parent && window.parent.SiteMusic) || (window.top && window.top.SiteMusic);
+            if (host && host.__isMaster) {
+                // Delegate to master player in host window
+                window.SiteMusic = host;
+
+                // Sync UI on this document when ready
+                function syncChildUI() {
+                    if (host.updateUI) host.updateUI(document);
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', syncChildUI);
+                } else {
+                    syncChildUI();
+                }
+
+                // Intercept clicks on links inside the iframe
+                attachFrameInterceptors(window, host);
+
+                // Coordinate speech synthesis with master host
+                if (window.speechSynthesis && host.watchSpeech) {
+                    host.watchSpeech(window);
+                }
+
+                return;
+            }
+        } catch (_) {
+            // If cross-origin or restricted, fall through to standalone player
+        }
+    }
+
+    if (window.SiteMusic && window.SiteMusic.__isMaster) return;
+
+    // =========================================================================
+    //  CASE B: RUNNING AS MASTER PLAYER IN TOP/PARENT WINDOW
+    // =========================================================================
     let saved = {};
     try {
         const raw = localStorage.getItem(STORAGE_KEY) ||
@@ -19,11 +61,18 @@
 
     let enabled = saved.enabled === true;
     let track = Number.isInteger(saved.track) && saved.track >= 0 && saved.track < tracks.length ? saved.track : 0;
+
+    // Estimate elapsed time since last store for smooth continuation
     let position = Number.isFinite(saved.position) ? Math.max(0, saved.position) : 0;
+    if (saved.timestamp && Number.isFinite(saved.timestamp)) {
+        const elapsed = (Date.now() - saved.timestamp) / 1000;
+        if (elapsed > 0 && elapsed < 8) {
+            position = Math.max(0, position + elapsed);
+        }
+    }
 
     let audio = null;
     let ready = false;
-    let leaving = false;
     let pending = false;
     let exam = false;
     let gameNarration = false;
@@ -33,42 +82,50 @@
     let failures = 0;
     let playVersion = 0;
     const narrationMedia = new Set();
-    const gamePage = /(?:sa-ban(?:-3d|-nhu-nguyet)?|tran-do-nhap-vai)\.html$/.test(location.pathname);
+
+    let activeFrame = null;
 
     function store() {
         if (audio && audio.readyState > 0 && Number.isFinite(audio.currentTime)) {
             position = audio.currentTime;
         }
-        const data = JSON.stringify({ enabled, track, position });
+        const data = JSON.stringify({
+            enabled,
+            track,
+            position,
+            timestamp: Date.now()
+        });
         try { localStorage.setItem(STORAGE_KEY, data); } catch (_) {}
         try { sessionStorage.setItem(STORAGE_KEY, data); } catch (_) {}
         try { sessionStorage.setItem(LEGACY_KEY, data); } catch (_) {}
     }
 
-    function gameActive() {
-        if (!gamePage) return false;
-        const lobby3d = document.getElementById('lobby-3d-modal');
+    function gameActive(targetDoc) {
+        const doc = targetDoc || (activeFrame && activeFrame.contentDocument) || document;
+        const path = doc.location ? doc.location.pathname : location.pathname;
+        const isGame = /(?:sa-ban(?:-3d|-nhu-nguyet)?|tran-do-nhap-vai)\.html$/.test(path);
+        if (!isGame) return false;
+        const lobby3d = doc.getElementById('lobby-3d-modal');
         if (lobby3d) return lobby3d.classList.contains('hidden');
-        const stage = document.getElementById('game-stage-wrapper');
+        const stage = doc.getElementById('game-stage-wrapper');
         if (stage) return !stage.hidden && getComputedStyle(stage).display !== 'none';
         return true;
     }
 
     function allowed() {
-        // Music plays if enabled, audio ready, not hidden in background tab, not unloading,
-        // and not currently suppressed by in-game voice narration.
-        // Background music is NOT blocked by exams or window blur!
-        return enabled && ready && !gameNarration && speaking.size === 0 && !document.hidden && !leaving;
+        // Background music plays if enabled, audio ready, and not ducked by in-game voice.
+        // It DOES NOT stop when switching tabs, minimizing, or during navigation!
+        return enabled && ready && !gameNarration && speaking.size === 0;
     }
 
-    function updateUI() {
+    function updateDocUI(doc) {
+        if (!doc) return;
         const playing = !!audio && !audio.paused && allowed();
-        // If enabled is true, show as 'Bật' unless tab is hidden ('Tạm dừng')
-        const status = !enabled ? 'Tắt' : (document.hidden ? 'Tạm dừng' : 'Bật');
+        const status = !enabled ? 'Tắt' : 'Bật';
         const title = 'Nhấp để ' + (enabled ? 'tắt' : 'bật') + ' nhạc · Nhấp đúp để đổi bài';
 
         ['btn-toggle-music', 'btn-music', 'audio-badge', 'site-music-toggle'].forEach(id => {
-            const button = document.getElementById(id);
+            const button = doc.getElementById(id);
             if (!button) return;
             button.classList.toggle('active', enabled);
             button.setAttribute('aria-pressed', String(enabled));
@@ -88,16 +145,28 @@
             }
         });
 
-        const bars = document.getElementById('sound-bars');
+        const bars = doc.getElementById('sound-bars');
         if (bars) bars.classList.toggle('playing', playing);
-        if (window.Game3D) window.Game3D.cheDoNhac = enabled;
+        const win = doc.defaultView;
+        if (win && win.Game3D) win.Game3D.cheDoNhac = enabled;
+    }
+
+    function updateUI(targetDoc) {
+        if (targetDoc) {
+            updateDocUI(targetDoc);
+        } else {
+            updateDocUI(document);
+            if (activeFrame && activeFrame.contentDocument) {
+                try { updateDocUI(activeFrame.contentDocument); } catch (_) {}
+            }
+        }
     }
 
     function applyPosition() {
         if (!audio) return;
         if (position > 0 && audio.readyState >= 1 && Number.isFinite(audio.duration)) {
             try {
-                if (Math.abs(audio.currentTime - position) > 1) {
+                if (Math.abs(audio.currentTime - position) > 0.5) {
                     audio.currentTime = Math.min(position, Math.max(0, audio.duration - 0.5));
                 }
             } catch (_) {}
@@ -142,7 +211,6 @@
                 }).catch(() => {
                     if (version !== playVersion) return;
                     pending = false;
-                    // Autoplay restriction on fresh page document - wait for first user gesture
                     updateUI();
                 });
             } else {
@@ -160,6 +228,9 @@
         if (previousGame && !active) {
             gameNarration = false;
             if (window.speechSynthesis) window.speechSynthesis.cancel();
+            if (activeFrame?.contentWindow?.speechSynthesis) {
+                try { activeFrame.contentWindow.speechSynthesis.cancel(); } catch (_) {}
+            }
         }
         previousGame = active;
         reconcile();
@@ -173,6 +244,7 @@
         playVersion++;
         pending = false;
         audio.src = tracks[track];
+        enabled = true; // Choosing or shuffling a track turns music ON
         store();
         reconcile();
     }
@@ -184,18 +256,14 @@
 
     function toggle() {
         if (!enabled) {
-            // User turned music ON
             enabled = true;
             store();
             reconcile();
         } else {
-            // enabled is true
             if (audio && audio.paused && allowed()) {
-                // If paused due to browser autoplay policy, resume immediately
                 pending = false;
-                audio.play().then(updateUI).catch(() => { reconcile(); });
+                audio.play().then(() => updateUI()).catch(() => reconcile());
             } else {
-                // Audio was playing, user turned it OFF
                 enabled = false;
                 store();
                 if (audio) audio.pause();
@@ -209,7 +277,6 @@
         if (exam && window.speechSynthesis) {
             try { window.speechSynthesis.cancel(); } catch (_) {}
         }
-        // Background music is permitted during exams; do not silence music.
         updateUI();
     }
 
@@ -222,7 +289,6 @@
         let token;
         narrationMedia.add(media);
         media.addEventListener('play', () => {
-            if (document.hidden || leaving) { media.pause(); return; }
             token = {};
             speaking.add(token);
             if (gameActive()) gameNarration = true;
@@ -237,13 +303,12 @@
         return media;
     }
 
-    // Speech listeners coexist with game-specific onend/onerror handlers and queues.
-    if (window.speechSynthesis) {
-        const synth = window.speechSynthesis;
+    function watchSpeech(win) {
+        if (!win || !win.speechSynthesis) return;
+        const synth = win.speechSynthesis;
         const nativeSpeak = synth.speak.bind(synth);
         const nativeCancel = synth.cancel.bind(synth);
         synth.speak = function (utterance) {
-            if (document.hidden || leaving) return;
             const generation = speechGeneration;
             const token = {};
             speaking.add(token);
@@ -267,13 +332,183 @@
         };
     }
 
+    watchSpeech(window);
+
+    // =========================================================================
+    //  SEAMLESS NAVIGATION ENGINE
+    // =========================================================================
+    const initialUrl = location.href;
+    const initialPath = location.pathname;
+
+    function getFrame() {
+        if (!activeFrame) {
+            activeFrame = document.getElementById('site-nav-frame');
+        }
+        if (!activeFrame) {
+            activeFrame = document.createElement('iframe');
+            activeFrame.id = 'site-nav-frame';
+            activeFrame.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;border:none;margin:0;padding:0;z-index:2147483647;background:#110B08;display:none;';
+            (document.body || document.documentElement).appendChild(activeFrame);
+
+            activeFrame.addEventListener('load', () => {
+                try {
+                    const childDoc = activeFrame.contentDocument;
+                    if (childDoc) {
+                        if (childDoc.title) document.title = childDoc.title;
+                        updateDocUI(childDoc);
+                        const childUrl = activeFrame.contentWindow.location.pathname + activeFrame.contentWindow.location.search;
+                        const currUrl = location.pathname + location.search;
+                        if (childUrl && childUrl !== currUrl) {
+                            history.replaceState({ siteMusicNav: true, url: childUrl }, '', childUrl);
+                        }
+                    }
+                } catch (_) {}
+            });
+        }
+        return activeFrame;
+    }
+
+    function navigateTo(url) {
+        if (!url) return;
+        const targetUrl = new URL(url, location.href);
+        const targetPath = targetUrl.pathname;
+
+        // If target matches initial host page
+        if (targetUrl.href === initialUrl || targetPath === initialPath) {
+            const frame = getFrame();
+            frame.style.display = 'none';
+            frame.src = 'about:blank';
+            history.pushState({ siteMusicNav: true, url: targetUrl.href }, '', targetUrl.href);
+            updateDocUI(document);
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        const frame = getFrame();
+        frame.style.display = 'block';
+        frame.src = targetUrl.href;
+        history.pushState({ siteMusicNav: true, url: targetUrl.href }, '', targetUrl.href);
+    }
+
+    window.addEventListener('popstate', () => {
+        const frame = getFrame();
+        const currentPath = location.pathname;
+        if (location.href === initialUrl || currentPath === initialPath) {
+            frame.style.display = 'none';
+            frame.src = 'about:blank';
+            updateDocUI(document);
+        } else {
+            frame.style.display = 'block';
+            frame.src = location.href;
+        }
+    });
+
+    function attachNavigationInterceptor(win) {
+        const doc = win.document;
+        doc.addEventListener('click', event => {
+            // Music button handling
+            const musicBtn = event.target.closest && event.target.closest('#btn-toggle-music, #btn-music, #audio-badge, #site-music-toggle');
+            if (musicBtn) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                if (event.detail > 1) {
+                    next();
+                } else {
+                    toggle();
+                }
+                return;
+            }
+
+            // Internal navigation link handling
+            const anchor = event.target.closest && event.target.closest('a[href]');
+            if (!anchor) return;
+            if (anchor.target && anchor.target !== '_self') return;
+            if (anchor.hasAttribute('download')) return;
+
+            const href = anchor.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+            try {
+                const targetUrl = new URL(href, win.location.href);
+                if (targetUrl.origin !== win.location.origin) return;
+
+                const path = targetUrl.pathname.toLowerCase();
+                if (path.endsWith('.html') || path.endsWith('/') || !path.includes('.')) {
+                    if (targetUrl.pathname === win.location.pathname && targetUrl.search === win.location.search && targetUrl.hash) {
+                        return; // Allow in-page anchor jumping
+                    }
+
+                    event.preventDefault();
+                    navigateTo(targetUrl.href);
+                }
+            } catch (_) {}
+        }, true);
+
+        doc.addEventListener('dblclick', event => {
+            if (event.target.closest && event.target.closest('#btn-toggle-music, #btn-music, #audio-badge, #site-music-toggle')) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+    }
+
+    function attachFrameInterceptors(win, masterHost) {
+        const doc = win.document;
+        doc.addEventListener('click', event => {
+            const musicBtn = event.target.closest && event.target.closest('#btn-toggle-music, #btn-music, #audio-badge, #site-music-toggle');
+            if (musicBtn) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                if (event.detail > 1) {
+                    masterHost.next();
+                } else {
+                    masterHost.toggle();
+                }
+                return;
+            }
+
+            const anchor = event.target.closest && event.target.closest('a[href]');
+            if (!anchor) return;
+            if (anchor.target && anchor.target !== '_self') return;
+            if (anchor.hasAttribute('download')) return;
+
+            const href = anchor.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+            try {
+                const targetUrl = new URL(href, win.location.href);
+                if (targetUrl.origin !== win.location.origin) return;
+
+                const path = targetUrl.pathname.toLowerCase();
+                if (path.endsWith('.html') || path.endsWith('/') || !path.includes('.')) {
+                    if (targetUrl.pathname === win.location.pathname && targetUrl.search === win.location.search && targetUrl.hash) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    masterHost.navigateTo(targetUrl.href);
+                }
+            } catch (_) {}
+        }, true);
+
+        doc.addEventListener('dblclick', event => {
+            if (event.target.closest && event.target.closest('#btn-toggle-music, #btn-music, #audio-badge, #site-music-toggle')) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+    }
+
     function init() {
         if (ready) { refresh(); return; }
+
         audio = document.getElementById('bg-music');
         if (!audio) {
-            audio = document.createElement('audio');
+            audio = new Audio();
             audio.id = 'bg-music';
-            document.body.appendChild(audio);
+            if (document.body) {
+                try { document.body.appendChild(audio); } catch (_) {}
+            }
         }
         audio.autoplay = false;
         audio.preload = 'auto';
@@ -294,21 +529,35 @@
                 reconcile();
             }
         });
-        audio.addEventListener('play', updateUI);
-        audio.addEventListener('pause', updateUI);
+        audio.addEventListener('play', () => updateUI());
+        audio.addEventListener('pause', () => updateUI());
 
         let lastStoreTime = 0;
         audio.addEventListener('timeupdate', () => {
             if (Number.isFinite(audio.currentTime) && audio.currentTime > 0) {
                 position = audio.currentTime;
                 const now = Date.now();
-                if (now - lastStoreTime > 2000) {
+                if (now - lastStoreTime > 1000) {
                     lastStoreTime = now;
                     store();
                 }
             }
         });
 
+        ready = true;
+        previousGame = gameActive();
+
+        if (document.body) {
+            setupMasterBody();
+        } else {
+            document.addEventListener('DOMContentLoaded', setupMasterBody);
+        }
+
+        reconcile();
+        setInterval(store, 1500);
+    }
+
+    function setupMasterBody() {
         if (!document.querySelector('#btn-toggle-music, #btn-music, #audio-badge')) {
             const button = document.createElement('button');
             button.id = 'site-music-toggle';
@@ -317,48 +566,24 @@
             document.body.appendChild(button);
         }
 
-        ready = true;
-        previousGame = gameActive();
-
         ['game-stage-wrapper', 'lobby-3d-modal'].forEach(id => {
             const target = document.getElementById(id);
             if (target) new MutationObserver(refresh).observe(target, { attributes: true, attributeFilter: ['class', 'style', 'hidden'] });
         });
 
-        reconcile();
-        setInterval(store, 2000);
+        attachNavigationInterceptor(window);
+        updateUI();
     }
 
-    // Global interaction listener: immediately resumes music on first user gesture on new page
+    // Global interaction listener: immediately resumes music on first user gesture if blocked by autoplay
     function resumeOnFirstGesture() {
-        if (enabled && audio && audio.paused && !leaving && !document.hidden && allowed()) {
-            audio.play().then(updateUI).catch(() => {});
+        if (enabled && audio && audio.paused && allowed()) {
+            audio.play().then(() => updateUI()).catch(() => {});
         }
     }
     ['click', 'pointerdown', 'touchstart', 'keydown'].forEach(evt => {
         document.addEventListener(evt, resumeOnFirstGesture, { capture: true, passive: true });
     });
-
-    // Control button click & dblclick handler
-    document.addEventListener('click', event => {
-        const button = event.target.closest && event.target.closest('#btn-toggle-music, #btn-music, #audio-badge, #site-music-toggle');
-        if (!button) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if (event.detail > 1) {
-            enabled = true;
-            next();
-        } else {
-            toggle();
-        }
-    }, true);
-
-    document.addEventListener('dblclick', event => {
-        if (event.target.closest && event.target.closest('#btn-toggle-music, #btn-music, #audio-badge, #site-music-toggle')) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-    }, true);
 
     // Sync across tabs
     window.addEventListener('storage', event => {
@@ -373,30 +598,42 @@
         }
     });
 
-    // Handle tab visibility (pause when backgrounded, resume when foregrounded)
+    // Handle tab visibility: DOES NOT PAUSE background music!
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             narrationMedia.forEach(media => { try { media.pause(); } catch (_) {} });
             if (window.speechSynthesis) window.speechSynthesis.cancel();
         }
-        reconcile();
     });
 
-    // Handle page transitions
+    // Handle page unload without early pausing
     function onPageLeave() {
-        leaving = true;
         store();
-        narrationMedia.forEach(media => { try { media.pause(); } catch (_) {} });
-        if (window.speechSynthesis) window.speechSynthesis.cancel();
     }
     window.addEventListener('pagehide', onPageLeave);
     window.addEventListener('beforeunload', onPageLeave);
-    window.addEventListener('pageshow', () => {
-        leaving = false;
-        refresh();
-    });
 
-    window.SiteMusic = { init, toggle, next, choose, refresh, updateUI, setExam, watchNarration, releaseNarration };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-    else init();
+    window.SiteMusic = {
+        __isMaster: true,
+        init,
+        toggle,
+        next,
+        choose,
+        refresh,
+        updateUI,
+        setExam,
+        watchNarration,
+        releaseNarration,
+        navigateTo,
+        watchSpeech,
+        get audio() { return audio; },
+        get enabled() { return enabled; },
+        get track() { return track; },
+        get position() { return position; }
+    };
+
+    window.__SiteMusicHost = window.SiteMusic;
+
+    // Initialize immediately
+    init();
 })();
