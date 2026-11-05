@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <script src="site-music.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Phát Video Tư Liệu - Dấu Chân Lịch Sử</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --sat: env(safe-area-inset-top, 0px);
+            --sab: env(safe-area-inset-bottom, 0px);
+            --sal: env(safe-area-inset-left, 0px);
+            --sar: env(safe-area-inset-right, 0px);
+
+            --paper: #F4ECD8;
+            --paper-dark: #EADCB9;
+            --red: #7B1E1E;
+            --red-dark: #581313;
+            --gold: #D4AF37;
+            --gold-light: #F7E8B5;
+            --ink: #2C1E18;
+            --card: #FFFDF8;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: clip;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Noto Serif', serif;
+            background: #1E140F;
+            color: #F4ECD8;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER THƯỢNG ĐỈNH */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(90deg, #7B1E1E 0%, #4A1212 100%);
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: calc(8px + var(--sat)) max(16px, var(--sar)) 8px max(16px, var(--sal));
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            transition: color 0.2s ease;
+        }
+
+        .brand-link:hover {
+            color: #FFF3D6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .header-btn--music {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--gold);
+            color: #FCE09B;
+        }
+
+        .header-btn--music:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: #FFF;
+        }
+
+        .header-btn--back {
+            background: linear-gradient(135deg, #A02B2B 0%, #6E1515 100%);
+            border: 1.5px solid var(--gold);
+            color: #FFF8E7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .header-btn--back:hover {
+            background: var(--gold);
+            color: #380C0C;
+            transform: translateY(-1px);
+        }
+
+        /* THANH ĐỊNH VỊ (BREADCRUMB) */
+        .breadcrumb-strip {
+            background: #2D1A12;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 8px max(16px, var(--sar)) 8px max(16px, var(--sal));
+            font-size: 0.8rem;
+            color: rgba(244, 236, 216, 0.75);
+        }
+
+        .breadcrumb-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .breadcrumb-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .breadcrumb-inner a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .breadcrumb-inner a:hover {
+            text-decoration: underline;
+        }
+
+        /* KHU VỰC NỘI DUNG CHÍNH */
+        .main-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 16px calc(32px + var(--sab));
+            flex: 1;
+        }
+
+        /* THANH ĐIỀU HƯỚNG QUAY LẠI TRÊN TRANG */
+        .top-nav-bar {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-return-library {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #3C1B13 0%, #26110B 100%);
+            color: #FFF2CE;
+            border: 1.5px solid var(--gold);
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+            transition: all 0.25s ease;
+        }
+
+        .btn-return-library:hover {
+            background: linear-gradient(135deg, #7B1E1E 0%, #581313 100%);
+            color: #FFF;
+            border-color: #FFF;
+            transform: translateX(-3px);
+            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.35);
+        }
+
+        /* KHUNG PHÁT VIDEO */
+        .video-player-card {
+            background: #271911;
+            border: 2px solid var(--gold);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+            margin-bottom: 30px;
+        }
+
+        .video-player-header {
+            padding: 20px 22px 16px;
+            background: linear-gradient(180deg, #382115 0%, #271911 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .video-badge {
+            display: inline-block;
+            background: var(--red);
+            color: #FFF3D6;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .video-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 900;
+            color: #FFF8E7;
+            line-height: 1.35;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.88rem;
+            color: rgba(244, 236, 216, 0.85);
+        }
+
+        .video-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-meta .channel-name {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* WRAPPER GIỮ TỶ LỆ 16:9 CHUẨN TRÊN MỌI THIẾT BỊ */
+        .player-viewport-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .player-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: #000;
+        }
+
+        .video-player-footer {
+            padding: 16px 22px;
+            background: #1F130D;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .player-desc-note {
+            font-size: 0.85rem;
+            color: rgba(244, 236, 216, 0.7);
+            font-style: italic;
+        }
+
+        /* KHUNG THÔNG BÁO LỖI (KHI THIẾU HOẶC SAI ID) */
+        .error-card {
+            background: #2D1414;
+            border: 2px solid #C0392B;
+            border-radius: 14px;
+            padding: 36px 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+            margin: 20px 0 35px;
+        }
+
+        .error-icon {
+            font-size: 3.2rem;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 12px rgba(231, 76, 60, 0.6));
+        }
+
+        .error-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFB3B3;
+            margin-bottom: 10px;
+        }
+
+        .error-desc {
+            font-size: 0.95rem;
+            color: #F8D7DA;
+            max-width: 650px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        /* DANH SÁCH VIDEO TƯ LIỆU KHÁC */
+        .related-section {
+            margin-top: 35px;
+        }
+
+        .related-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--gold);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 4px solid var(--red);
+            padding-left: 10px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: 16px;
+        }
+
+        .related-card {
+            display: flex;
+            flex-direction: column;
+            background: #271911;
+            border: 1.5px solid rgba(212, 175, 55, 0.45);
+            border-radius: 10px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .related-card.current {
+            border-color: var(--gold);
+            background: #3B2215;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+            pointer-events: none;
+        }
+
+        .related-card img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #100D0A;
+        }
+
+        .related-card__body {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .related-card__title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #FFF3D6;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .related-card__meta {
+            font-size: 0.78rem;
+            color: rgba(244, 236, 216, 0.7);
+            margin-top: auto;
+        }
+
+        .current-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: #2C1E18;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+            align-self: flex-start;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            margin-top: auto;
+            background: #110A07;
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 16px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(244, 236, 216, 0.6);
+        }
+
+        @media (max-width: 640px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .video-player-header {
+                padding: 16px 14px 12px;
+            }
+            .video-title {
+                font-size: 1.25rem;
+            }
+            .btn-return-library {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THANH HEADER CHÍNH -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="trang-chinh.html" class="brand-link" title="Về Sảnh Chính Dấu Chân Lịch Sử">
+                🏛️ Dấu Chân Lịch Sử
+            </a>
+            <div class="header-actions">
+                <button type="button" class="header-btn header-btn--music" id="btn-toggle-music" onclick="xuLyClickNutNhac(event)" ondblclick="chuyenBaiNhacNgauNhien(event)" title="Click 1 lần: Bật/Tắt | Click 2 lần: Đổi bài ngẫu nhiên" aria-label="Bật hoặc tắt nhạc nền">
+                    <span class="nav-music-icon">🎵</span> <span id="trang-thai-nhac" class="nav-music-text">Nhạc Nền</span>
+                </button>
+                <a href="trang-chinh.html?modal=video" class="header-btn header-btn--back" id="btn-back-header" onclick="quayLaiThuVien(event)" title="Quay lại thư viện video">
+                    ← Quay lại thư viện video
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- THANH ĐỊNH VỊ BREADCRUMB -->
+    <div class="breadcrumb-strip">
+        <div class="breadcrumb-inner">
+            <span>Bạn đang ở: </span>
+            <a href="trang-chinh.html">Trang chủ</a> &gt; 
+            <a href="trang-chinh.html?modal=video" onclick="quayLaiThuVien(event)">Thư viện Video</a> &gt; 
+            <strong id="breadcrumb-current-video">Đang tải...</strong>
+        </div>
+    </div>
+
+    <!-- KHU VỰC CHÍNH -->
+    <main class="main-container">
+        
+        <!-- NÚT QUAY LẠI TRÊN CÙNG -->
+        <div class="top-nav-bar">
+            <a href="trang-chinh.html?modal=video" class="btn-return-library" id="btn-back-top" onclick="quayLaiThuVien(event)">
+                ← Quay lại thư viện video
+            </a>
+        </div>
+
+        <!-- KHUNG PHÁT VIDEO CHÍNH (CHỈ HIỂN THỊ KHI ID HỢP LỆ) -->
+        <article class="video-player-card" id="video-player-card" hidden>
+            <div class="video-player-header">
+                <span class="video-badge">🎬 Thước Phim Lịch Sử Hào Hùng</span>
+                <h1 class="video-title" id="video-display-title">Tiêu đề video</h1>
+                <div class="video-meta">
+                    <span id="video-display-channel">📺 Kênh: <strong>-</strong></span>
+                    <span id="video-display-note">📜 Ghi chú: -</span>
+                </div>
+            </div>
+
+            <!-- VIEWPORT GIỮ TỶ LỆ 16:9 CHUẨN, KHÔNG TRÀN NGANG -->
+            <div class="player-viewport-wrapper" id="player-viewport">
+                <!-- Iframe YouTube sẽ chỉ được tạo động tại đây sau khi xác minh ID hợp lệ -->
+            </div>
+
+            <div class="video-player-footer">
+                <span class="player-desc-note">Nguồn phát: Trình nhúng bảo mật YouTube-NoCookie · Tương thích hoàn hảo máy tính &amp; di động</span>
+                <a href="trang-chinh.html?modal=video" class="btn-return-library" id="btn-back-bottom" onclick="quayLaiThuVien(event)" style="font-size: 0.82rem; padding: 7px 14px;">
+                    ← Quay lại thư viện video
+                </a>
+            </div>
+        </article>
+
+        <!-- THÔNG BÁO LỖI (KHI THIẾU HOẶC SAI ID) -->
+        <section class="error-card" id="error-card" hidden>
+            <div class="error-icon">⚠️</div>
+            <h2 class="error-title">Không tìm thấy video yêu cầu</h2>
+            <p class="error-desc" id="error-desc-text">
+                Mã video không hợp lệ hoặc không nằm trong danh mục tư liệu được phép phát của Dấu Chân Lịch Sử. Vui lòng chọn một video từ danh sách chính thức dưới đây.
+            </p>
+            <a href="trang-chinh.html?modal=video" class="btn-return-library" onclick="quayLaiThuVien(event)" style="margin-bottom: 20px;">
+                ← Quay lại thư viện video
+            </a>
+        </section>
+
+        <!-- CÁC VIDEO KHÁC TRONG DANH MỤC TƯ LIỆU -->
+        <section class="related-section" id="related-section">
+            <h2 class="related-title">🎞️ Danh Mục Video Tư Liệu Lịch Sử</h2>
+            <div class="related-grid" id="related-grid">
+                <!-- Danh sách 4 video sẽ được render tại đây -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        DỰ ÁN KHKT 2026 · DẤU CHÂN LỊCH SỬ 🇻🇳
+    </footer>
+
+    <script>
+        // =========================================================================
+        // DANH MỤC 4 VIDEO CHÍNH THỨC ĐƯỢC PHÉP PHÁT (WHITELIST BẢO MẬT)
+        // Không ghép trực tiếp giá trị ID tùy ý từ URL vào iframe
+        // =========================================================================
+        const DANH_MUC_VIDEO = {
+            'HBmWbe1tFbk': {
+                id: 'HBmWbe1tFbk',
+                title: 'Việt Nam: Cuộc hành trình toàn thắng',
+                channel: 'Rạng rỡ Việt Nam',
+                note: 'Phim tài liệu lịch sử.'
+            },
+            '3EsLm7K8iVA': {
+                id: '3EsLm7K8iVA',
+                title: 'Đại tướng Võ Nguyên Giáp – Một huyền thoại',
+                channel: 'Ấn tượng VTV',
+                note: 'Phim tài liệu về Đại tướng Võ Nguyên Giáp.'
+            },
+            'oFVyyTvHGUo': {
+                id: 'oFVyyTvHGUo',
+                title: 'Những thước phim quý về đại tá, Anh hùng phi công Nguyễn Văn Bảy',
+                channel: 'ANTV',
+                note: 'Phim tư liệu nhân vật lịch sử.'
+            },
+            'nmEyNHkCMlI': {
+                id: 'nmEyNHkCMlI',
+                title: 'Toàn cảnh trận Điện Biên Phủ – Cuộc đấu trí của tướng Giáp và Navarre',
+                channel: 'Vệ Quốc Quân',
+                note: 'Video dài về chiến dịch Điện Biên Phủ năm 1954.'
+            }
+        };
+
+        // Danh sách mảng để render gợi ý
+        const DANH_SACH_VIDEO = Object.values(DANH_MUC_VIDEO);
+
+        // =========================================================================
+        // HÀM QUAY LẠI TRANG THƯ VIỆN VIDEO
+        // Đưa người xem về đúng trang trước đó, hỗ trợ cả nút Back trình duyệt
+        // =========================================================================
+        function quayLaiThuVien(event) {
+            if (event) event.preventDefault();
+            try {
+                sessionStorage.setItem('reopen_video_modal', '1');
+            } catch (_) {}
+
+            // Nếu người xem đến từ trang nội bộ có lịch sử, dùng history.back()
+            if (window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
+                window.history.back();
+            } else {
+                // Đường dẫn tương đối an toàn với GitHub Pages thư mục con
+                window.location.href = 'trang-chinh.html?modal=video';
+            }
+        }
+
+        // =========================================================================
+        // KHỞI TẠO TRANG PHÁT & KIỂM TRA TÍNH HỢP LỆ CỦA ID
+        // =========================================================================
+        (function khoiTaoTrangPhat() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var videoId = urlParams.get('id');
+
+            var cardEl = document.getElementById('video-player-card');
+            var errorEl = document.getElementById('error-card');
+            var viewportEl = document.getElementById('player-viewport');
+            var titleEl = document.getElementById('video-display-title');
+            var channelEl = document.getElementById('video-display-channel');
+            var noteEl = document.getElementById('video-display-note');
+            var breadcrumbEl = document.getElementById('breadcrumb-current-video');
+            var relatedGridEl = document.getElementById('related-grid');
+
+            // 1. Kiểm tra ID có nằm trong danh mục cho phép (Whitelist) hay không
+            var videoData = videoId ? DANH_MUC_VIDEO[videoId] : null;
+
+            if (videoData) {
+                // --- TRƯỜNG HỢP HỢP LỆ ---
+                document.title = videoData.title + ' — Dấu Chân Lịch Sử';
+                breadcrumbEl.textContent = videoData.title;
+                titleEl.textContent = videoData.title;
+                channelEl.innerHTML = '📺 Kênh: <span class="channel-name">' + escapeHtml(videoData.channel) + '</span>';
+                noteEl.textContent = '📜 Ghi chú: ' + videoData.note;
+
+                // CHỈ TẢI IFRAME YOUTUBE SAU KHI XÁC MINH ID HỢP LỆ
+                // Dùng youtube-nocookie.com và ID từ hằng số Whitelist (không dùng giá trị thô)
+                var safeEmbedUrl = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoData.id) + '?autoplay=1&rel=0';
+                
+                viewportEl.innerHTML = '<iframe id="youtube-iframe" class="player-iframe" ' +
+                    'src="' + safeEmbedUrl + '" ' +
+                    'title="' + escapeHtml(videoData.title) + '" ' +
+                    'loading="eager" ' +
+                    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+                    'referrerpolicy="strict-origin-when-cross-origin" ' +
+                    'allowfullscreen></iframe>';
+
+                cardEl.hidden = false;
+                errorEl.hidden = true;
+            } else {
+                // --- TRƯỜNG HỢP THIẾU HOẶC SAI ID ---
+                document.title = 'Không tìm thấy video — Dấu Chân Lịch Sử';
+                breadcrumbEl.textContent = 'Lỗi: Không tìm thấy video';
+
+                var errorTextEl = document.getElementById('error-desc-text');
+                if (!videoId) {
+                    errorTextEl.textContent = 'Không có mã video nào được chỉ định trong đường dẫn. Vui lòng chọn một video trong danh sách bên dưới hoặc quay lại thư viện video.';
+                } else {
+                    errorTextEl.textContent = 'Mã video "' + escapeHtml(videoId) + '" không tồn tại hoặc không nằm trong danh mục video tư liệu được phép phát.';
+                }
+
+                viewportEl.innerHTML = ''; // Đảm bảo tuyệt đối không có iframe nào được nhúng
+                cardEl.hidden = true;
+                errorEl.hidden = false;
+            }
+
+            // 2. Render danh sách các video trong danh mục
+            if (relatedGridEl) {
+                relatedGridEl.innerHTML = DANH_SACH_VIDEO.map(function(item) {
+                    var isCurrent = (videoData && item.id === videoData.id);
+                    var thumbUrl = 'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg';
+                    var itemHref = 'video-phat.html?id=' + encodeURIComponent(item.id);
+
+                    if (isCurrent) {
+                        return '<div class="related-card current" aria-current="true">' +
+                            '<img src="' + thumbUrl + '" alt="Ảnh bìa: ' + escapeHtml(item.title) + '" loading="lazy">' +
+                            '<div class="related-card__body">' +
+                                '<span class="related-card__title">' + escapeHtml(item.title) + '</span>' +
+                                '<span class="related-card__meta">' + escapeHtml(item.channel) + '</span>' +
+                                '<span class="current-badge">▶ Đang phát video này</span>' +
+                            '</div>' +
+                        '</div>';
+                    } else {
+                        return '<a href="' + itemHref + '" class="related-card" aria-label="Xem video: ' + escapeHtml(item.title) + '">' +
+                            '<img src="' + thumbUrl + '" alt="Ảnh bìa: ' + escapeHtml(item.title) + '" loading="lazy">' +
+                            '<div class="related-card__body">' +
+                                '<span class="related-card__title">' + escapeHtml(item.title) + '</span>' +
+                                '<span class="related-card__meta">' + escapeHtml(item.channel) + '</span>' +
+                            '</div>' +
+                        '</a>';
+                    }
+                }).join('');
+            }
+        })();
+
+        // Helper escape HTML chống XSS
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>
+

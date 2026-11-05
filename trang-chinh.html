@@ -2048,6 +2048,45 @@
             flex: 1;
         }
 
+        .ngay-nay-visuals {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0 0 20px;
+        }
+
+        .ngay-nay-visuals figure {
+            min-width: 0;
+            margin: 0;
+            overflow: hidden;
+            border: 1px solid #dfcfaa;
+            border-radius: 10px;
+            background: #fffdf7;
+        }
+
+        .ngay-nay-visuals figure > a:first-child { display: block; }
+        .ngay-nay-visuals img {
+            display: block;
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: #eee5d4;
+        }
+
+        .ngay-nay-visuals figcaption {
+            padding: 10px 12px;
+            color: #5a4838;
+            font-size: .78rem;
+            line-height: 1.5;
+        }
+
+        .ngay-nay-visuals figcaption a { color: #7b1e1e; }
+
+        @media (max-width: 650px) {
+            .ngay-nay-visuals { grid-template-columns: 1fr; }
+            .ngay-nay-visuals img { height: auto; max-height: 260px; }
+        }
+
         .modal-video-wrap {
             background: #000;
             border-radius: 10px;
@@ -2079,6 +2118,7 @@
             background: #fffaf0;
             color: #3d2616;
             text-align: left;
+            text-decoration: none;
             cursor: pointer;
             transition: transform .18s ease, box-shadow .18s ease;
         }
@@ -2086,9 +2126,10 @@
         .video-library-card:hover,
         .video-library-card:focus-visible {
             transform: translateY(-3px);
-            box-shadow: 0 8px 22px rgba(75, 38, 14, .2);
+            box-shadow: 0 8px 22px rgba(75, 38, 14, .25);
             outline: 2px solid #c59b2a;
             outline-offset: 2px;
+            color: #3d2616;
         }
 
         .video-library-card img {
@@ -2099,9 +2140,23 @@
             background: #24170f;
         }
 
-        .video-library-card__body { display: block; padding: 13px 15px 15px; }
-        .video-library-card__title { display: block; margin: 0 0 7px; font-size: 1.02rem; line-height: 1.4; font-weight: 700; }
-        .video-library-card__meta { display: block; color: #705d4c; font-size: .88rem; line-height: 1.5; }
+        .video-library-card__body { display: flex; flex-direction: column; flex: 1; padding: 13px 15px 15px; }
+        .video-library-card__title { display: block; margin: 0 0 7px; font-size: 1.02rem; line-height: 1.4; font-weight: 700; color: #2C1E18; }
+        .video-library-card__meta { display: block; color: #705d4c; font-size: .88rem; line-height: 1.5; margin-bottom: 8px; }
+        .video-library-card__cta {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #7B1E1E;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+        .video-library-card:hover .video-library-card__cta {
+            color: #B8860B;
+        }
         .video-library-player { background: #100d0a; border-radius: 12px; overflow: hidden; }
         .video-library-player__top { display: flex; align-items: center; gap: 12px; padding: 12px; color: #fff4d4; }
         .video-library-player__top h3 { margin: 0; font-size: 1rem; line-height: 1.4; }
@@ -12735,26 +12790,89 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             } else if (loai === 'ngay-nay') {
                 titleText = "🌱 Lịch Sử Trong Cuộc Sống Ngày Nay";
                 bodyHtml = `
+                    <section style="margin:0 0 20px;padding:18px 20px;border-left:4px solid #c59b2a;border-radius:8px;background:#fff8e8;color:#4a3726;line-height:1.75">
+                        <h3 style="margin:0 0 8px;color:#7B1E1E;font-family:'Playfair Display',serif">Quá khứ vẫn hiện diện quanh ta</h3>
+                        <p style="margin:0">Lịch sử không chỉ nằm trong sách. Ta gặp lịch sử qua di sản được cộng đồng gìn giữ, tên đất tên làng, bảo tàng và tư liệu, ký ức gia đình, cũng như cách xã hội hôm nay học hỏi từ những lựa chọn của các thế hệ trước. Mục này gợi ý những cách kết nối quá khứ với đời sống hiện đại bằng sự tò mò, tôn trọng chứng cứ và tinh thần nhân văn.</p>
+                    </section>
+                    <div class="ngay-nay-visuals" aria-label="Hình ảnh minh họa di sản và lịch sử Việt Nam">
+                        <figure>
+                            <a href="https://commons.wikimedia.org/wiki/File:Tranh_%C4%90%C3%B4ng_H%E1%BB%93_-_C%C3%A1_ch%C3%A9p.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tranh_%C4%90%C3%B4ng_H%E1%BB%93_-_C%C3%A1_ch%C3%A9p.jpg?width=720" alt="Tranh dân gian Đông Hồ Cá chép" loading="lazy" decoding="async" width="400" height="622">
+                            </a>
+                            <figcaption>Tranh Đông Hồ “Cá chép” · Tác phẩm dân gian, Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Tranh_%C4%90%C3%B4ng_H%E1%BB%93_-_C%C3%A1_ch%C3%A9p.jpg" target="_blank" rel="noopener noreferrer">Nguồn và giấy phép</a></figcaption>
+                        </figure>
+                        <figure>
+                            <a href="https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_museum.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ho_Chi_Minh_museum.jpg?width=960" alt="Tòa nhà Bảo tàng Hồ Chí Minh" loading="lazy" decoding="async" width="1280" height="960">
+                            </a>
+                            <figcaption>Bảo tàng Hồ Chí Minh · Ảnh Syced · CC0 1.0 · <a href="https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_museum.jpg" target="_blank" rel="noopener noreferrer">Nguồn và giấy phép</a></figcaption>
+                        </figure>
+                        <figure>
+                            <a href="https://commons.wikimedia.org/wiki/File:Citadelle-thang-long-hanoi.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Citadelle-thang-long-hanoi.jpg?width=960" alt="Cổng Hoàng thành Thăng Long tại Hà Nội" loading="lazy" decoding="async" width="960" height="642">
+                            </a>
+                            <figcaption>Hoàng thành Thăng Long · Ảnh Alex 69200 vx · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Citadelle-thang-long-hanoi.jpg" target="_blank" rel="noopener noreferrer">Nguồn và giấy phép</a></figcaption>
+                        </figure>
+                    </div>
                     <div class="modal-cards-grid">
                         <div class="modal-card">
-                            <div class="modal-card__icon">🏛️</div>
-                            <span class="modal-card__tag">Chuyển Đổi Số Di Sản</span>
-                            <h4 class="modal-card__title">Bảo Tàng Lịch Sử Số & Sa Bàn 3D</h4>
-                            <p class="modal-card__desc">Ứng dụng công nghệ thực tế ảo VR/AR và Gamification tương tác để tái hiện các chiến dịch lịch sử, đưa bài học quá khứ đến gần hơn với học sinh, sinh viên thế hệ Gen Z.</p>
+                            <div class="modal-card__icon">🎎</div>
+                            <span class="modal-card__tag">Di sản sống</span>
+                            <h4 class="modal-card__title">Truyền thống được tiếp nối trong cộng đồng</h4>
+                            <p class="modal-card__desc">Hát, múa, lễ hội, nghề thủ công và tri thức dân gian chỉ tiếp tục sống khi được người thực hành truyền dạy và cộng đồng chăm sóc. UNESCO ghi danh nhiều thực hành của Việt Nam, như Xòe Thái, thực hành Then của người Tày, Nùng, Thái và Bài Chòi; nghề làm tranh dân gian Đông Hồ được đưa vào Danh sách di sản văn hóa phi vật thể cần bảo vệ khẩn cấp năm 2025. Mỗi loại hình có bối cảnh và nhu cầu bảo vệ riêng, không nên chỉ xem như tiết mục biểu diễn.</p>
                         </div>
                         <div class="modal-card">
-                            <div class="modal-card__icon">🌊</div>
-                            <span class="modal-card__tag">Chủ Quyền Thiêng Liêng</span>
-                            <h4 class="modal-card__title">Giữ Vững Biển Đảo Tổ Quốc</h4>
-                            <p class="modal-card__desc">Tiếp nối hào khí Bạch Đằng Giang, nhân dân cả nước luôn hướng về các chiến sĩ Hải quân, Cảnh sát biển ngày đêm vững vàng tay súng bảo vệ chủ quyền Hoàng Sa - Trường Sa.</p>
+                            <div class="modal-card__icon">🏛️</div>
+                            <span class="modal-card__tag">Học từ di tích và bảo tàng</span>
+                            <h4 class="modal-card__title">Địa điểm lịch sử là lớp học mở</h4>
+                            <p class="modal-card__desc">Khi tham quan, hãy quan sát hiện vật, bia ký, bản đồ và lời thuyết minh; ghi lại câu hỏi rồi đối chiếu với tài liệu đáng tin cậy. Tôn trọng quy định tại di tích, không chạm hoặc làm hư hại hiện vật, và nhớ rằng một địa điểm thường lưu giữ nhiều lớp ký ức chứ không chỉ một câu chuyện đơn giản.</p>
+                        </div>
+                        <div class="modal-card">
+                            <div class="modal-card__icon">🖥️</div>
+                            <span class="modal-card__tag">Công nghệ và ký ức</span>
+                            <h4 class="modal-card__title">Số hóa giúp mở thêm cánh cửa tiếp cận</h4>
+                            <p class="modal-card__desc">Ảnh tư liệu độ phân giải cao, bản đồ số, thuyết minh âm thanh và mô hình 3D có thể giúp người học khám phá từ xa, so sánh tư liệu và lưu giữ bản ghi. Công nghệ là công cụ hỗ trợ: cần nêu xuất xứ, niên đại và giới hạn của tư liệu; bản số không thay thế việc bảo tồn hiện vật, địa điểm và tri thức của cộng đồng.</p>
+                        </div>
+                        <div class="modal-card">
+                            <div class="modal-card__icon">🔎</div>
+                            <span class="modal-card__tag">Kỹ năng công dân số</span>
+                            <h4 class="modal-card__title">Kiểm chứng trước khi chia sẻ chuyện lịch sử</h4>
+                            <p class="modal-card__desc">Với một hình ảnh hay câu chuyện lan truyền trên mạng, hãy tìm nguồn ban đầu, thời điểm công bố, tác giả và tài liệu dẫn chứng; đối chiếu với sách, hồ sơ hoặc cơ quan chuyên môn. Phân biệt sự kiện có chứng cứ, cách diễn giải của tác giả và truyền thuyết dân gian. Nếu chưa xác minh được, hãy nói rõ là còn cần kiểm tra.</p>
                         </div>
                         <div class="modal-card">
                             <div class="modal-card__icon">🕊️</div>
-                            <span class="modal-card__tag">Thông Điệp Hòa Bình</span>
-                            <h4 class="modal-card__title">Khát Vọng Hòa Bình & Hữu Nghị</h4>
-                            <p class="modal-card__desc">Dân tộc Việt Nam trải qua nghìn năm chiến tranh hiểu rõ giá trị thiêng liêng của hòa bình. Tinh thần nhân đạo "đem đại nghĩa để thắng hung tàn" luôn là ngọn hải đăng soi sáng chính sách đối ngoại.</p>
+                            <span class="modal-card__tag">Bài học nhân văn</span>
+                            <h4 class="modal-card__title">Nhìn chiến tranh từ số phận con người</h4>
+                            <p class="modal-card__desc">Tìm hiểu chiến tranh không chỉ là nhớ trận đánh và ngày tháng. Cũng cần lắng nghe trải nghiệm của người dân, người lính, người bị thương và gia đình; từ đó suy ngẫm về mất mát, lòng nhân đạo, trách nhiệm và giá trị của hòa bình. Tôn trọng ký ức khác nhau, tránh biến đau thương thành nội dung giật gân.</p>
+                        </div>
+                        <div class="modal-card">
+                            <div class="modal-card__icon">🧭</div>
+                            <span class="modal-card__tag">Lịch sử và chủ quyền</span>
+                            <h4 class="modal-card__title">Tìm hiểu bằng tư liệu có xuất xứ</h4>
+                            <p class="modal-card__desc">Lịch sử giúp đặt quá trình hình thành cộng đồng, lãnh thổ và quan hệ giữa các vùng vào đúng bối cảnh. Khi tìm hiểu vấn đề chủ quyền, hãy phân biệt tư liệu lịch sử với kết luận pháp lý hiện hành, kiểm tra niên đại và xuất xứ bản đồ, văn bản; ưu tiên nguồn lưu trữ, cơ quan chuyên môn và văn bản pháp luật chính thức.</p>
+                        </div>
+                        <div class="modal-card">
+                            <div class="modal-card__icon">🌿</div>
+                            <span class="modal-card__tag">Di sản và phát triển bền vững</span>
+                            <h4 class="modal-card__title">Du lịch có trách nhiệm, cộng đồng cùng hưởng lợi</h4>
+                            <p class="modal-card__desc">Tham quan di sản có thể hỗ trợ sinh kế và giúp nhiều người hiểu hơn về lịch sử nếu đi cùng bảo tồn, hướng dẫn chính xác và sự tham gia của cư dân địa phương. Người tham quan có thể bắt đầu bằng việc tuân thủ nội quy, giảm rác thải, xin phép trước khi ghi hình sinh hoạt riêng tư và chọn sản phẩm do nghệ nhân địa phương làm.</p>
+                        </div>
+                        <div class="modal-card">
+                            <div class="modal-card__icon">📚</div>
+                            <span class="modal-card__tag">Từ hiểu biết đến hành động</span>
+                            <h4 class="modal-card__title">Mỗi người có thể góp phần giữ ký ức</h4>
+                            <p class="modal-card__desc">Hỏi chuyện người thân về ký ức gia đình, ghi rõ người kể và thời điểm; đọc sách có chú thích nguồn; tham gia hoạt động tại bảo tàng, thư viện hoặc địa phương; chia sẻ nội dung kèm nguồn tham khảo. Khi ghi âm, chụp ảnh hay đăng câu chuyện của người khác, hãy xin sự đồng ý và tôn trọng quyền riêng tư.</p>
                         </div>
                     </div>
+                    <section style="margin-top:20px;padding:18px 20px;border:1px solid #dfcfaa;border-radius:10px;background:#fffdf7;line-height:1.7">
+                        <h3 style="margin:0 0 10px;color:#7B1E1E;font-family:'Playfair Display',serif">Tài liệu tham khảo để khám phá tiếp</h3>
+                        <ul style="margin:0;padding-left:22px;color:#4a3726">
+                            <li><a href="https://ich.unesco.org/en/state/viet-nam-VN?cp=VN&info=elements-on-the-lists&topic=ar-state" target="_blank" rel="noopener noreferrer">Danh sách các di sản văn hóa phi vật thể của Việt Nam – UNESCO</a></li>
+                            <li><a href="https://ich.unesco.org/en/documents/instructions-on-preparing-a-curricular-lesson-plan-with-integration-of-intangible-cultural-heritage-viet-nam-47691" target="_blank" rel="noopener noreferrer">Hướng dẫn tích hợp di sản phi vật thể vào dạy và học – UNESCO</a></li>
+                            <li><a href="https://www.unesco.org/sites/default/files/medias/fichiers/2025/04/Hanoi_Monitoring_Report_2024.pdf" target="_blank" rel="noopener noreferrer">Báo cáo Hà Nội 2024 trong Mạng lưới Thành phố Sáng tạo UNESCO: các ví dụ ứng dụng công nghệ số cho di sản</a></li>
+                        </ul>
+                        <p style="margin:12px 0 0;color:#705d4c;font-size:.88rem">Danh sách UNESCO là một phần của kho tàng di sản, không phải danh mục đầy đủ mọi di sản của Việt Nam. Hãy xem nguồn gốc, bối cảnh và tiếng nói của cộng đồng thực hành khi tìm hiểu từng trường hợp.</p>
+                    </section>
                 `;
             } else if (loai.startsWith('qa')) {
                 titleText = "❓ Hỏi Đáp Lịch Sử & Đóng Góp Tư Liệu";
@@ -12836,35 +12954,62 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
         ];
 
         function renderVideoLibraryHtml() {
-            return '<div class="video-library-grid" id="video-library-grid">' + VIDEO_LIBRARY_ITEMS.map(function(item, index) {
+            return '<div class="video-library-grid" id="video-library-grid">' + VIDEO_LIBRARY_ITEMS.map(function(item) {
                 var thumb = 'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg';
-                return '<button type="button" class="video-library-card" onclick="moVideoThuVien(' + index + ')" aria-label="Phát video: ' + item.title.replace(/"/g, '&quot;') + '">' +
+                var href = 'video-phat.html?id=' + encodeURIComponent(item.id);
+                return '<a href="' + href + '" class="video-library-card" onclick="dieuHuongTrangVideo(event, \'' + item.id + '\')" aria-label="Mở trang phát video: ' + item.title.replace(/"/g, '&quot;') + '">' +
                     '<img src="' + thumb + '" alt="Ảnh bìa video: ' + item.title.replace(/"/g, '&quot;') + '" loading="lazy" referrerpolicy="no-referrer">' +
-                    '<span class="video-library-card__body"><span class="video-library-card__title">' + item.title + '</span><span class="video-library-card__meta">' + item.channel + ' · ' + item.note + '</span></span></button>';
-            }).join('') + '</div><p class="modal-video-desc">Chọn một thẻ để mở video từ YouTube. Video chỉ được tải khi bạn nhấn phát.</p>' +
-                '<div id="video-library-player" hidden></div>';
+                    '<span class="video-library-card__body">' +
+                        '<span class="video-library-card__title">' + item.title + '</span>' +
+                        '<span class="video-library-card__meta">' + item.channel + ' · ' + item.note + '</span>' +
+                        '<span class="video-library-card__cta">▶ Mở trang phát video ➔</span>' +
+                    '</span>' +
+                '</a>';
+            }).join('') + '</div><p class="modal-video-desc">Nhấp vào thẻ để chuyển sang trang phát riêng. Video chỉ tải trình phát YouTube sau khi bạn chọn mở.</p>';
+        }
+
+        function dieuHuongTrangVideo(event, videoId) {
+            try {
+                sessionStorage.setItem('reopen_video_modal', '1');
+            } catch (_) {}
         }
 
         function moVideoThuVien(index) {
             var item = VIDEO_LIBRARY_ITEMS[index];
-            var grid = document.getElementById('video-library-grid');
-            var player = document.getElementById('video-library-player');
-            if (!item || !grid || !player) return;
-            grid.hidden = true;
-            player.hidden = false;
-            player.className = 'video-library-player';
-            player.innerHTML = '<div class="video-library-player__top"><button type="button" class="video-library-back" onclick="dongVideoThuVien()">← Danh sách video</button><h3>' + item.title + '</h3></div>' +
-                '<iframe id="youtube-video-frame" class="video-library-frame" src="https://www.youtube-nocookie.com/embed/' + item.id + '?autoplay=1&rel=0" title="' + item.title.replace(/"/g, '&quot;') + '" loading="eager" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+            if (!item) return;
+            try {
+                sessionStorage.setItem('reopen_video_modal', '1');
+            } catch (_) {}
+            window.location.href = 'video-phat.html?id=' + encodeURIComponent(item.id);
         }
 
         function dongVideoThuVien() {
-            var frame = document.getElementById('youtube-video-frame');
-            if (frame) frame.src = 'about:blank';
             var player = document.getElementById('video-library-player');
             var grid = document.getElementById('video-library-grid');
             if (player) { player.innerHTML = ''; player.hidden = true; }
             if (grid) grid.hidden = false;
         }
+
+        // Tự động mở lại modal Thư viện video khi người xem quay lại từ video-phat.html
+        (function kiemTraQuayLaiThuVienVideo() {
+            function checkAndOpen() {
+                try {
+                    var params = new URLSearchParams(window.location.search);
+                    var needOpen = (params.get('modal') === 'video') || (window.location.hash === '#video') || (sessionStorage.getItem('reopen_video_modal') === '1');
+                    if (needOpen) {
+                        sessionStorage.removeItem('reopen_video_modal');
+                        if (typeof moModalDuLieu === 'function') {
+                            moModalDuLieu('video', 'Khám phá > Video');
+                        }
+                    }
+                } catch (_) {}
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', checkAndOpen);
+            } else {
+                setTimeout(checkAndOpen, 80);
+            }
+        })();
 
         function guiDongGopTuLieu(event) {
             event.preventDefault();
