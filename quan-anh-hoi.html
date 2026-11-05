@@ -4,6 +4,7 @@
   <script src="site-music.js"></script>
   <script src="firebase-config.js"></script>
   <script src="cloudinary-config.js"></script>
+  <script src="quan-anh-hoi-admin-config.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quần Anh Hội — Diễn Đàn Đàm Luận Lịch Sử Đại Việt</title>
@@ -379,6 +380,84 @@
             cursor: pointer;
         }
 
+        .composer-custom-topic-input {
+            background: #FFFDF8;
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--do-ba-trau);
+            outline: none;
+            transition: all 0.2s;
+            box-shadow: 0 1px 4px rgba(44, 30, 24, 0.08);
+        }
+
+        .composer-custom-topic-input:focus {
+            border-color: var(--do-ba-trau);
+            background: #FFF;
+            box-shadow: 0 0 6px rgba(123, 30, 30, 0.25);
+        }
+
+        .composer-hashtags-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            background: rgba(244, 236, 216, 0.55);
+            border: 1px dashed #D3C3A6;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        .composer-hashtags-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--nau-go);
+            white-space: nowrap;
+        }
+
+        .composer-hashtags-input {
+            flex: 1;
+            min-width: 0;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.86rem;
+            color: var(--nau-den);
+        }
+
+        .composer-hashtags-input::placeholder {
+            color: #9C8265;
+            font-style: italic;
+        }
+
+        .post-hashtags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0 12px;
+        }
+
+        .post-hashtag-item {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--do-ba-trau);
+            background: rgba(123, 30, 30, 0.07);
+            border: 1px solid rgba(123, 30, 30, 0.18);
+            padding: 2px 8px;
+            border-radius: 12px;
+            transition: background 0.2s, color 0.2s;
+            user-select: text;
+        }
+
+        .post-hashtag-item:hover {
+            background: rgba(123, 30, 30, 0.15);
+        }
+
         .composer-textarea {
             width: 100%;
             min-height: 110px;
@@ -510,6 +589,105 @@
             background: var(--do-ba-trau);
             color: #FFF;
             border-color: var(--do-ba-trau);
+        }
+
+        .feed-controls-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            padding: 10px 16px;
+            background: #FDF8EE;
+            border: 1.5px solid #D8C7A5;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(44, 30, 24, 0.05);
+        }
+
+        .viewer-topic-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .viewer-topic-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--do-ba-trau);
+            white-space: nowrap;
+        }
+
+        .viewer-topic-select {
+            background: #FFFDF8;
+            border: 1.5px solid #C4A575;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--nau-den);
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            max-width: 280px;
+        }
+
+        .viewer-topic-select:focus {
+            border-color: var(--do-ba-trau);
+            background: #FFF;
+        }
+
+        .viewer-actions-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .viewer-feed-stats {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--chu-phu);
+        }
+
+        .btn-shuffle-feed {
+            background: linear-gradient(135deg, #FAF4E6 0%, #EDE0C8 100%);
+            border: 1.2px solid var(--vang-dong);
+            color: var(--do-ba-trau);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(44, 30, 24, 0.08);
+        }
+
+        .btn-shuffle-feed:hover {
+            background: var(--do-ba-trau);
+            color: #FFF;
+            border-color: var(--do-ba-trau);
+            transform: translateY(-1px);
+        }
+
+        .post-unread-badge {
+            background: #27AE60;
+            color: #FFF;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-left: 4px;
+            vertical-align: middle;
+            display: inline-block;
+            letter-spacing: 0.3px;
         }
 
         .feed-list {
@@ -673,6 +851,87 @@
             color: #FFF;
             border-color: var(--do-ba-trau);
         }
+
+        .admin-reports-panel {
+            margin: 14px 0 20px;
+            padding: 18px;
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 12px;
+            background: var(--giay-co);
+            box-shadow: 0 8px 24px rgba(44, 30, 24, 0.1);
+        }
+        .admin-reports-panel[hidden] { display: none; }
+        #btn-admin-reports[hidden] { display: none; }
+        .admin-reports-heading, .admin-report-heading, .report-dialog-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .admin-reports-heading { margin-bottom: 14px; }
+        .admin-reports-heading h4, .report-dialog-heading h3 {
+            margin: 0;
+            color: var(--do-ba-trau);
+            font-family: 'Playfair Display', serif;
+        }
+        .admin-reports-list { display: grid; gap: 10px; }
+        .admin-report-card {
+            padding: 14px;
+            border: 1px solid #D6C2A0;
+            border-radius: 9px;
+            background: #FFFDF8;
+        }
+        .admin-report-card p { margin: 7px 0; overflow-wrap: anywhere; }
+        .admin-report-meta { color: #705A3A; font-size: 0.82rem; }
+        .admin-report-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .admin-report-controls select, .admin-report-controls button, .admin-reports-heading button {
+            min-height: 40px;
+            border: 1px solid #C6A850;
+            border-radius: 7px;
+            padding: 7px 11px;
+            background: #F7EEDB;
+            color: var(--nau-den);
+            font: inherit;
+            cursor: pointer;
+        }
+        .forum-report-dialog {
+            width: min(520px, calc(100vw - 28px));
+            max-height: min(84dvh, 720px);
+            overflow: auto;
+            padding: 0;
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 14px;
+            color: var(--nau-den);
+            background: var(--giay-co);
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+        }
+        .forum-report-dialog::backdrop { background: rgba(20, 12, 8, 0.68); }
+        .report-dialog-form { padding: 20px; }
+        .report-dialog-heading { margin-bottom: 16px; }
+        .report-dialog-heading button {
+            width: 42px; height: 42px; border: 1px solid #A33; border-radius: 50%;
+            background: #7B1E1E; color: #FFF; font-size: 1.5rem; cursor: pointer;
+        }
+        .report-dialog-form label { display: block; margin: 12px 0 6px; font-weight: 700; }
+        .report-dialog-form select, .report-dialog-form textarea {
+            width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #C6A850;
+            border-radius: 7px; background: #FFFDF8; color: var(--nau-den); font: inherit;
+        }
+        .report-dialog-form textarea { min-height: 110px; resize: vertical; }
+        .report-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+        .report-dialog-actions button {
+            min-height: 44px; padding: 9px 15px; border: 1px solid #C6A850; border-radius: 7px;
+            background: #F7EEDB; color: var(--nau-den); font: inherit; font-weight: 700; cursor: pointer;
+        }
+        .report-dialog-actions .report-submit { background: var(--do-ba-trau); color: #FFF; }
+        :root[data-theme="dark"] .admin-reports-panel,
+        :root[data-theme="dark"] .forum-report-dialog { background: #211A16; color: #F1E7D6; }
+        :root[data-theme="dark"] .admin-report-card { background: #302720; border-color: #705A3A; }
+        :root[data-theme="dark"] .admin-reports-heading h4,
+        :root[data-theme="dark"] .report-dialog-heading h3 { color: #F3D981; }
+        :root[data-theme="dark"] .admin-report-meta { color: #C6AE83; }
+        :root[data-theme="dark"] .report-dialog-form select,
+        :root[data-theme="dark"] .report-dialog-form textarea { background: #302720; color: #F1E7D6; }
 
         /* ====================================================== */
         /*  KHU VỰC 3: BÌNH LUẬN (Reply Drawer)                   */
@@ -863,11 +1122,25 @@
         :root[data-theme="dark"] .comment-author-name { color: #F3D981; }
         :root[data-theme="dark"] .composer-author-input,
         :root[data-theme="dark"] .composer-topic-select,
+        :root[data-theme="dark"] .composer-custom-topic-input,
         :root[data-theme="dark"] .composer-textarea,
+        :root[data-theme="dark"] .composer-hashtags-input,
         :root[data-theme="dark"] .comment-input,
         :root[data-theme="dark"] .comment-item { background: #302720; color: #F1E7D6; border-color: #705A3A; }
+        :root[data-theme="dark"] .composer-hashtags-row { background: #2B211A; border-color: #705A3A; }
+        :root[data-theme="dark"] .composer-hashtags-label { color: #E6C894; }
+        :root[data-theme="dark"] .composer-hashtags-input::placeholder { color: #9A8671; }
+        :root[data-theme="dark"] .post-hashtag-item { background: rgba(212, 175, 55, 0.15); color: #F3D981; border-color: rgba(212, 175, 55, 0.35); }
+        :root[data-theme="dark"] .post-hashtag-item:hover { background: rgba(212, 175, 55, 0.28); }
         :root[data-theme="dark"] .post-body-content,
         :root[data-theme="dark"] .comment-text { color: #F1E7D6; }
+        :root[data-theme="dark"] .feed-controls-bar { background: #251D18; border-color: #59472E; }
+        :root[data-theme="dark"] .viewer-topic-label { color: #F3D981; }
+        :root[data-theme="dark"] .viewer-topic-select { background: #302720; border-color: #705A3A; color: #F1E7D6; }
+        :root[data-theme="dark"] .viewer-feed-stats { color: #CDB79E; }
+        :root[data-theme="dark"] .btn-shuffle-feed { background: #35281E; color: #F3D981; border-color: #80682F; }
+        :root[data-theme="dark"] .btn-shuffle-feed:hover { background: #80682F; color: #FFF; }
+        :root[data-theme="dark"] .post-unread-badge { background: #2ECC71; color: #102416; }
         :root[data-theme="dark"] .post-category-tag,
         :root[data-theme="dark"] .feed-filter-btn,
         :root[data-theme="dark"] .btn-media-picker { background: #382B20; color: #F3D981; border-color: #80682F; }
@@ -898,6 +1171,8 @@
             .composer-author-box { display: grid; grid-template-columns: auto minmax(0, 1fr); width: 100%; }
             .composer-author-input { width: 100%; min-width: 0; }
             .composer-topic-select { grid-column: 1 / -1; width: 100%; min-width: 0; }
+            .composer-custom-topic-input { grid-column: 1 / -1; width: 100%; min-width: 0; }
+            .composer-hashtags-row { flex-direction: column; align-items: stretch; gap: 6px; }
             .composer-footer { flex-direction: column; align-items: stretch; }
             .btn-submit-post { width: 100%; justify-content: center; }
             .feed-header { flex-direction: column; align-items: flex-start; }
@@ -905,6 +1180,12 @@
             .header-user-status { flex-wrap: wrap; justify-content: center; }
             .comment-input-row { flex-direction: column; }
             .comment-input-row .btn-send-comment { width: 100%; }
+            .feed-controls-bar { flex-direction: column; align-items: stretch; gap: 10px; }
+            .viewer-topic-box { width: 100%; justify-content: space-between; }
+            .viewer-topic-select { flex: 1; max-width: none; }
+            .viewer-actions-box { width: 100%; justify-content: space-between; }
+            .admin-reports-panel { padding: 12px; }
+            .report-dialog-form { padding: 16px; }
         }
     </style>
 </head>
@@ -975,8 +1256,8 @@
     <!-- ============================================================ -->
     <main class="forum-container">
 
-        <!-- Banner thông báo kết nối Firebase -->
-        <div id="firebase-status-banner" class="firebase-status-banner mock">
+        <!-- Banner thông báo kết nối Firebase (chỉ hiển thị khi mất kết nối hoặc chế độ dự phòng) -->
+        <div id="firebase-status-banner" class="firebase-status-banner mock" style="display: none;">
             <div id="firebase-status-text">
                 ⚡ <strong>Đang kiểm tra kết nối Firebase…</strong>
             </div>
@@ -992,14 +1273,25 @@
                 <div class="composer-author-box">
                     <span>Danh xưng:</span>
                     <input type="text" id="composer-author" class="composer-author-input" placeholder="Tướng quân / Hiền sĩ..." maxlength="32">
-                    <select id="composer-topic" class="composer-topic-select" aria-label="Chủ đề đàm luận">
+                    <select id="composer-topic" class="composer-topic-select" aria-label="Chủ đề đàm luận" onchange="xuLyDoiTopic(this.value)">
                         <option value="Bạch Đằng 938">🌊 Bạch Đằng 938</option>
                         <option value="Như Nguyệt 1077">🎋 Như Nguyệt 1077</option>
                         <option value="Khảo Cứu Bảo Vật">🏺 Khảo Cứu Bảo Vật</option>
                         <option value="Chiến Thuật Quân Sự">⚔️ Chiến Thuật Quân Sự</option>
                         <option value="Di Sản Biển Đảo">🗺️ Di Sản Biển Đảo</option>
                         <option value="Hỏi Đáp Ôn Thi GDPT">🎯 Hỏi Đáp Ôn Thi GDPT</option>
+                        <option value="Nhân vật lịch sử">👑 Nhân vật lịch sử</option>
+                        <option value="Triều đại và nhà nước">🏛️ Triều đại và nhà nước</option>
+                        <option value="Kháng chiến và chiến trận">🛡️ Kháng chiến và chiến trận</option>
+                        <option value="Di tích và di sản">🏯 Di tích và di sản</option>
+                        <option value="Văn hóa và đời sống">🎭 Văn hóa và đời sống</option>
+                        <option value="Tư liệu và khảo cứu">📜 Tư liệu và khảo cứu</option>
+                        <option value="Phương pháp học lịch sử">💡 Phương pháp học lịch sử</option>
+                        <option value="Lịch sử thế giới">🌍 Lịch sử thế giới</option>
+                        <option value="Hỏi đáp ôn tập">❓ Hỏi đáp ôn tập</option>
+                        <option value="Khác">✨ Khác (tự nhập)...</option>
                     </select>
+                    <input type="text" id="composer-custom-topic" class="composer-custom-topic-input" placeholder="Nhập chủ đề riêng (2-50 ký tự)..." maxlength="50" style="display: none;" autocomplete="off" aria-label="Chủ đề đàm luận riêng">
                 </div>
             </div>
 
@@ -1009,6 +1301,18 @@
                 placeholder="Kính mời chư vị anh hào đặt câu hỏi, chia sẻ kiến thức lịch sử, khảo luận cổ vật hoặc nêu thắc mắc ôn tập..." 
                 maxlength="1500"
             ></textarea>
+
+            <div class="composer-hashtags-row">
+                <label for="composer-hashtags" class="composer-hashtags-label">🏷️ Thẻ hashtag:</label>
+                <input
+                    type="text"
+                    id="composer-hashtags"
+                    class="composer-hashtags-input"
+                    placeholder="#BạchĐằng, #LịchSử (phân tách bằng dấu cách, phẩy hoặc xuống dòng)..."
+                    maxlength="160"
+                    autocomplete="off"
+                >
+            </div>
 
             <div class="composer-media-tools">
                 <label class="btn-media-picker" for="post-media-input">🖼️ Ảnh / video</label>
@@ -1046,7 +1350,34 @@
                     <button class="feed-filter-btn" onclick="locBaiViet(this, 'Khảo Cứu Bảo Vật')">Bảo Vật</button>
                     <button class="feed-filter-btn" onclick="locBaiViet(this, 'Hỏi Đáp Ôn Thi GDPT')">Ôn Thi</button>
                 </div>
+                <button type="button" id="btn-admin-reports" class="btn-post-action" onclick="moDongBaoCaoAdmin()" hidden>🛡️ Báo cáo bài viết</button>
             </div>
+
+            <!-- THANH ĐIỀU KHIỂN & ĐỀ XUẤT CHO NGƯỜI XEM -->
+            <div class="feed-controls-bar">
+                <div class="viewer-topic-box">
+                    <label for="viewer-topic-select" class="viewer-topic-label">🎯 Chủ đề xem:</label>
+                    <select id="viewer-topic-select" class="viewer-topic-select" onchange="doiChuDeXem(this.value)" aria-label="Chọn chủ đề xem bài">
+                        <option value="all">🌟 Tất cả chủ đề (Đề xuất ngẫu nhiên)</option>
+                    </select>
+                </div>
+                <div class="viewer-actions-box">
+                    <span id="viewer-feed-stats" class="viewer-feed-stats">Đang tải đề xuất…</span>
+                    <button type="button" id="btn-shuffle-feed" class="btn-shuffle-feed" onclick="lamMoiDeXuat()" title="Xáo trộn và đề xuất danh sách mới">
+                        <span>🎲</span> <span>Đổi đề xuất</span>
+                    </button>
+                </div>
+            </div>
+
+            <section id="admin-reports-panel" class="admin-reports-panel" hidden aria-label="Quản lý báo cáo bài viết">
+                <div class="admin-reports-heading">
+                    <h4>🛡️ Báo cáo bài viết</h4>
+                    <button type="button" onclick="dongDongBaoCaoAdmin()" aria-label="Đóng bảng báo cáo">Đóng</button>
+                </div>
+                <div id="admin-reports-list" class="admin-reports-list" aria-live="polite">
+                    <p>Đang tải báo cáo…</p>
+                </div>
+            </section>
 
             <!-- Danh sách bài đăng -->
             <div id="posts-container" class="feed-list">
@@ -1066,6 +1397,29 @@
             Tất cả vì tình yêu lịch sử Việt Nam 🇻🇳 • <a href="trang-chinh.html">Quay về Sảnh Chính</a> • <a href="dang-nhap.html">Quản lý Tài Khoản</a>
         </p>
     </footer>
+
+    <dialog id="forum-report-dialog" class="forum-report-dialog" aria-labelledby="report-dialog-title">
+        <form id="forum-report-form" class="report-dialog-form" onsubmit="guiBaoCaoBaiViet(event)">
+            <div class="report-dialog-heading">
+                <h3 id="report-dialog-title">Báo cáo bài viết</h3>
+                <button type="button" onclick="dongFormBaoCao()" aria-label="Đóng cửa sổ báo cáo">×</button>
+            </div>
+            <label for="report-reason">Lý do báo cáo</label>
+            <select id="report-reason" required>
+                <option value="misinformation">Thông tin sai lệch</option>
+                <option value="spam">Spam hoặc quảng cáo</option>
+                <option value="harassment">Xúc phạm hoặc quấy rối</option>
+                <option value="inappropriate">Nội dung không phù hợp</option>
+                <option value="other">Lý do khác</option>
+            </select>
+            <label for="report-details">Mô tả thêm (không bắt buộc)</label>
+            <textarea id="report-details" maxlength="500" placeholder="Nêu ngắn gọn vấn đề để quản trị viên xem xét…"></textarea>
+            <div class="report-dialog-actions">
+                <button type="button" onclick="dongFormBaoCao()">Hủy</button>
+                <button class="report-submit" type="submit">Gửi báo cáo</button>
+            </div>
+        </form>
+    </dialog>
 
     <!-- TOAST THÔNG BÁO -->
     <div id="forum-toast" class="toast-box">Thông báo</div>
@@ -1088,8 +1442,10 @@
             query,
             orderBy,
             where,
+            limit,
             serverTimestamp,
             doc,
+            setDoc,
             updateDoc,
             increment
         } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
@@ -1109,6 +1465,11 @@
 
         // Cloudinary chỉ cần cloud name và unsigned presets; không đặt API secret ở trình duyệt.
         const cloudinaryConfig = window.__CLOUDINARY_CONFIG__ || {};
+        const forumAdminUids = new Set(
+            Array.isArray(window.__QUAN_ANH_HOI_ADMIN_UIDS__)
+                ? window.__QUAN_ANH_HOI_ADMIN_UIDS__.filter(uid => typeof uid === 'string' && uid.trim())
+                : []
+        );
         const isCloudinaryConfigured = () => {
             const values = [cloudinaryConfig.cloudName, cloudinaryConfig.imageUploadPreset, cloudinaryConfig.videoUploadPreset];
             return values.every(value => typeof value === 'string' && value.trim() && !value.includes('YOUR_'));
@@ -1148,6 +1509,7 @@
                 console.log("🔥 Đã kết nối thành công Firebase Cloud Firestore!");
                 onAuthStateChanged(auth, user => {
                     nguoiDungHienTai = user;
+                    capNhatNutBaoCaoAdmin();
                     const displayName = user && (user.displayName || user.email || localStorage.getItem('tenNguoiDung'));
                     if (displayName) {
                         const author = document.getElementById('composer-author');
@@ -1156,6 +1518,7 @@
                         if (header) header.textContent = displayName;
                     }
                     if (daNhanDuLieuCloud) capNhatTrangThaiKetNoi(true, user ? "Đã đăng nhập Firebase" : "Đã kết nối · cần đăng nhập để đăng bài");
+                    khoiPhucChuDeVaLichSuXemTheoUser();
                 });
                 const networkBadge = document.getElementById('stat-network-status');
                 if (networkBadge) networkBadge.textContent = "Đang tải";
@@ -1231,10 +1594,321 @@
         };
 
         // ===================================================
-        //  QUẢN LÝ TRẠNG THÁI & LOCAL STORAGE DỰ PHÒNG
+        //  QUẢN LÝ TRẠNG THÁI, ĐỀ XUẤT NGẪU NHIÊN & LỊCH SỬ XEM
         // ===================================================
         let danhSachBaiViet = [];
         let boLocHienTai = 'all';
+        let thuTuDeXuatHienTai = []; // Mảng postId theo thứ tự đề xuất hiện tại
+        let chuDeDeXuatHienTai = null;
+        let theoDoiXemObserver = null;
+        const thoiGianXemTimers = new Map();
+
+        // Danh sách 15 chủ đề chuẩn của Quần Anh Hội
+        const DANH_SACH_CHU_DE_CHUAN = [
+            'Bạch Đằng 938',
+            'Như Nguyệt 1077',
+            'Khảo Cứu Bảo Vật',
+            'Chiến Thuật Quân Sự',
+            'Di Sản Biển Đảo',
+            'Hỏi Đáp Ôn Thi GDPT',
+            'Nhân vật lịch sử',
+            'Triều đại và nhà nước',
+            'Kháng chiến và chiến trận',
+            'Di tích và di sản',
+            'Văn hóa và đời sống',
+            'Tư liệu và khảo cứu',
+            'Phương pháp học lịch sử',
+            'Lịch sử thế giới',
+            'Hỏi đáp ôn tập'
+        ];
+
+        // Tiền tố lưu trữ cục bộ phân tách giữa các tài khoản Firebase và khách
+        function layPrefixNguoiDung() {
+            return (nguoiDungHienTai && nguoiDungHienTai.uid)
+                ? `user_${nguoiDungHienTai.uid}`
+                : 'guest';
+        }
+
+        // Lấy Set các ID bài viết đã xem từ localStorage
+        function layDanhSachDaXem() {
+            try {
+                const key = `quanAnhHoi_viewed_${layPrefixNguoiDung()}`;
+                const raw = localStorage.getItem(key);
+                if (!raw) return new Set();
+                const parsed = JSON.parse(raw);
+                return Array.isArray(parsed) ? new Set(parsed) : new Set();
+            } catch(e) {
+                return new Set();
+            }
+        }
+
+        // Lưu danh sách ID đã xem vào localStorage (giới hạn 500 bài gần nhất)
+        function luuDanhSachDaXem(viewedSet) {
+            try {
+                const key = `quanAnhHoi_viewed_${layPrefixNguoiDung()}`;
+                const arr = Array.from(viewedSet).slice(-500);
+                localStorage.setItem(key, JSON.stringify(arr));
+            } catch(e) {}
+        }
+
+        function daDocBai(postId) {
+            if (!postId) return false;
+            return layDanhSachDaXem().has(postId);
+        }
+
+        // Đánh dấu bài đã đọc (cập nhật trạng thái cục bộ mà không xáo trộn lại vị trí bài)
+        function danhDauDaXem(postId) {
+            if (!postId) return;
+            const viewedSet = layDanhSachDaXem();
+            if (viewedSet.has(postId)) return;
+            viewedSet.add(postId);
+            luuDanhSachDaXem(viewedSet);
+
+            const card = document.getElementById(`post-${postId}`);
+            if (card) {
+                card.classList.remove('post-unread');
+                const badge = card.querySelector('.post-unread-badge');
+                if (badge) badge.remove();
+            }
+            capNhatThongKeDeXuat();
+        }
+
+        // Đọc chủ đề đã lưu cho tài khoản này
+        function layChuDeDaLuu() {
+            try {
+                const key = `quanAnhHoi_topic_${layPrefixNguoiDung()}`;
+                return localStorage.getItem(key) || 'all';
+            } catch(e) {
+                return 'all';
+            }
+        }
+
+        // Lưu chủ đề người xem đã chọn
+        function luuChuDeDaChon(topic) {
+            try {
+                const key = `quanAnhHoi_topic_${layPrefixNguoiDung()}`;
+                localStorage.setItem(key, topic || 'all');
+            } catch(e) {}
+        }
+
+        // Cập nhật danh sách chủ đề trong dropdown người xem (hợp nhất chủ đề chuẩn & chủ đề tự nhập)
+        function capNhatDanhSachChuDeXem() {
+            const select = document.getElementById('viewer-topic-select');
+            if (!select) return;
+
+            const existingTopics = new Set();
+            danhSachBaiViet.forEach(p => {
+                if (p && p.topic && typeof p.topic === 'string') {
+                    existingTopics.add(p.topic.trim());
+                }
+            });
+
+            const allTopics = [...DANH_SACH_CHU_DE_CHUAN];
+            existingTopics.forEach(t => {
+                if (!allTopics.includes(t)) {
+                    allTopics.push(t);
+                }
+            });
+
+            const currentVal = boLocHienTai || 'all';
+            let optionsHtml = `<option value="all"${currentVal === 'all' ? ' selected' : ''}>🌟 Tất cả chủ đề (Đề xuất ngẫu nhiên)</option>`;
+            allTopics.forEach(t => {
+                const isSel = t === currentVal ? ' selected' : '';
+                optionsHtml += `<option value="${escapeHtml(t)}"${isSel}>📜 ${escapeHtml(t)}</option>`;
+            });
+
+            select.innerHTML = optionsHtml;
+        }
+
+        // Đồng bộ giao diện tabs và dropdown
+        function dongBoFilterTabsUI(topic) {
+            document.querySelectorAll('.feed-filter-btn').forEach(btn => {
+                const onclickAttr = btn.getAttribute('onclick') || '';
+                if (topic === 'all' && onclickAttr.includes("'all'")) {
+                    btn.classList.add('active');
+                } else if (topic !== 'all' && onclickAttr.includes(`'${topic}'`)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function dongBoViewerTopicUI(topic) {
+            const select = document.getElementById('viewer-topic-select');
+            if (select) select.value = topic;
+        }
+
+        // Tính điểm đề xuất ngẫu nhiên có trọng số (Efraimidis-Spirakis: u^(1/w))
+        // Ưu tiên bài có tương tác thực tế nhưng vẫn bảo đảm tính ngẫu nhiên
+        function tinhDiemDeXuat(post) {
+            const likes = Number(post.likes) || 0;
+            const comments = Number(post.commentsCount) || 0;
+            const shares = (typeof post.shares === 'number' && post.shares > 0) ? post.shares : 0;
+            const engagement = Math.max(0, likes * 1.5 + comments * 2.5 + shares * 3.0);
+            const baseWeight = 1.0 + Math.log(1.0 + engagement);
+            const u = Math.max(0.0001, Math.min(0.9999, Math.random()));
+            return Math.pow(u, 1.0 / baseWeight);
+        }
+
+        function tronDeXuatTheoTrongSo(posts) {
+            if (!posts || posts.length <= 1) return [...(posts || [])];
+            const scored = posts.map(p => ({
+                post: p,
+                score: tinhDiemDeXuat(p)
+            }));
+            scored.sort((a, b) => b.score - a.score);
+            return scored.map(item => item.post);
+        }
+
+        // Tạo thứ tự đề xuất: ưu tiên bài chưa đọc trước, bài đã đọc sau; cả hai đều xáo trộn theo trọng số
+        function taoThuTuDeXuat(postsInTopic, viewedSet) {
+            if (!postsInTopic || postsInTopic.length === 0) return [];
+            const unread = postsInTopic.filter(p => !viewedSet.has(p.id));
+            const read = postsInTopic.filter(p => viewedSet.has(p.id));
+
+            const sortedUnread = tronDeXuatTheoTrongSo(unread);
+            const sortedRead = tronDeXuatTheoTrongSo(read);
+
+            return [...sortedUnread, ...sortedRead].map(p => p.id);
+        }
+
+        // Lấy danh sách bài đã sắp xếp đề xuất, chống nhảy giật vị trí khi live update
+        function layDanhSachDeXuat(forceReshuffle = false) {
+            let postsInTopic = danhSachBaiViet;
+            if (boLocHienTai !== 'all') {
+                postsInTopic = danhSachBaiViet.filter(p => p.topic === boLocHienTai);
+            }
+            if (postsInTopic.length === 0) {
+                thuTuDeXuatHienTai = [];
+                chuDeDeXuatHienTai = boLocHienTai;
+                return [];
+            }
+
+            const viewedSet = layDanhSachDaXem();
+
+            if (forceReshuffle || chuDeDeXuatHienTai !== boLocHienTai || thuTuDeXuatHienTai.length === 0) {
+                thuTuDeXuatHienTai = taoThuTuDeXuat(postsInTopic, viewedSet);
+                chuDeDeXuatHienTai = boLocHienTai;
+            } else {
+                const currentPostMap = new Map(postsInTopic.map(p => [p.id, p]));
+                const keptOrder = thuTuDeXuatHienTai.filter(id => currentPostMap.has(id));
+                const keptSet = new Set(keptOrder);
+                const newPosts = postsInTopic.filter(p => !keptSet.has(p.id));
+                if (newPosts.length > 0) {
+                    const newOrdered = taoThuTuDeXuat(newPosts, viewedSet);
+                    thuTuDeXuatHienTai = [...newOrdered, ...keptOrder];
+                } else {
+                    thuTuDeXuatHienTai = keptOrder;
+                }
+            }
+
+            const postMap = new Map(postsInTopic.map(p => [p.id, p]));
+            return thuTuDeXuatHienTai.map(id => postMap.get(id)).filter(Boolean);
+        }
+
+        // Cập nhật thống kê bài viết trên thanh điều khiển
+        function capNhatThongKeDeXuat() {
+            const statsEl = document.getElementById('viewer-feed-stats');
+            if (!statsEl) return;
+            let postsInTopic = danhSachBaiViet;
+            if (boLocHienTai !== 'all') {
+                postsInTopic = danhSachBaiViet.filter(p => p.topic === boLocHienTai);
+            }
+            const total = postsInTopic.length;
+            if (total === 0) {
+                statsEl.textContent = 'Chưa có bài luận đàm';
+                return;
+            }
+            const viewedSet = layDanhSachDaXem();
+            const unreadCount = postsInTopic.filter(p => !viewedSet.has(p.id)).length;
+            if (unreadCount > 0) {
+                statsEl.textContent = `${total} bài • ${unreadCount} bài mới`;
+            } else {
+                statsEl.textContent = `${total} bài (đã đọc hết)`;
+            }
+        }
+
+        // Kích hoạt IntersectionObserver theo dõi thời gian đọc bài (dwell time 1.5s)
+        function kichHoatTheoDoiXemBai() {
+            if (theoDoiXemObserver) {
+                theoDoiXemObserver.disconnect();
+            }
+            thoiGianXemTimers.forEach(t => clearTimeout(t));
+            thoiGianXemTimers.clear();
+
+            if (!('IntersectionObserver' in window)) return;
+
+            theoDoiXemObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const card = entry.target;
+                    const postId = card.getAttribute('data-post-id');
+                    if (!postId) return;
+
+                    if (entry.isIntersecting) {
+                        if (!daDocBai(postId) && !thoiGianXemTimers.has(postId)) {
+                            const timer = setTimeout(() => {
+                                danhDauDaXem(postId);
+                                thoiGianXemTimers.delete(postId);
+                                if (theoDoiXemObserver) theoDoiXemObserver.unobserve(card);
+                            }, 1500);
+                            thoiGianXemTimers.set(postId, timer);
+                        }
+                    } else {
+                        if (thoiGianXemTimers.has(postId)) {
+                            clearTimeout(thoiGianXemTimers.get(postId));
+                            thoiGianXemTimers.delete(postId);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const viewedSet = layDanhSachDaXem();
+            document.querySelectorAll('.scroll-post-card').forEach(card => {
+                const postId = card.getAttribute('data-post-id');
+                if (postId && !viewedSet.has(postId)) {
+                    theoDoiXemObserver.observe(card);
+                }
+            });
+        }
+
+        // Khôi phục chủ đề và lịch sử xem khi khởi động hoặc đổi tài khoản
+        function khoiPhucChuDeVaLichSuXemTheoUser() {
+            boLocHienTai = layChuDeDaLuu();
+            capNhatDanhSachChuDeXem();
+            dongBoViewerTopicUI(boLocHienTai);
+            dongBoFilterTabsUI(boLocHienTai);
+            renderBangTin(true);
+        }
+
+        // Đồng bộ các biến trạng thái cốt lõi giữa module và window
+        try {
+            Object.defineProperty(window, 'danhSachBaiViet', {
+                get() { return danhSachBaiViet; },
+                set(val) { danhSachBaiViet = val; },
+                configurable: true
+            });
+            Object.defineProperty(window, 'boLocHienTai', {
+                get() { return boLocHienTai; },
+                set(val) { boLocHienTai = val; },
+                configurable: true
+            });
+            Object.defineProperty(window, 'nguoiDungHienTai', {
+                get() { return nguoiDungHienTai; },
+                set(val) { nguoiDungHienTai = val; },
+                configurable: true
+            });
+        } catch(e) {}
+
+        // Xuất các hàm hỗ trợ lên window để phục vụ kiểm thử và tương tác ngoại vi
+        window.layDanhSachDeXuat = layDanhSachDeXuat;
+        window.daDocBai = daDocBai;
+        window.danhDauDaXem = danhDauDaXem;
+        window.tinhDiemDeXuat = tinhDiemDeXuat;
+        window.layChuDeDaLuu = layChuDeDaLuu;
+        window.luuChuDeDaChon = luuChuDeDaChon;
+        window.layDanhSachDaXem = layDanhSachDaXem;
+        window.khoiPhucChuDeVaLichSuXemTheoUser = khoiPhucChuDeVaLichSuXemTheoUser;
         let tepMediaDangChon = null;
         const unsubscribeBinhLuan = new Map();
         const binhLuanCache = new Map();
@@ -1402,7 +2076,64 @@
             });
         }
 
-        function capNhatTrangThaiKetNoi(isOnline, text) {
+        // Xử lý chọn chủ đề (hiển thị ô nhập khi chọn "Khác")
+        window.xuLyDoiTopic = function(val) {
+            const customTopicInput = document.getElementById('composer-custom-topic');
+            if (val === 'Khác') {
+                if (customTopicInput) {
+                    customTopicInput.style.display = 'inline-block';
+                    customTopicInput.focus();
+                }
+            } else {
+                if (customTopicInput) {
+                    customTopicInput.style.display = 'none';
+                }
+            }
+            // Đồng bộ trạng thái active với các pill gợi ý nếu có
+            document.querySelectorAll('.topic-pill').forEach(p => {
+                const attr = p.getAttribute('onclick') || '';
+                if (attr.includes(`'${val}'`)) {
+                    p.classList.add('active');
+                } else {
+                    p.classList.remove('active');
+                }
+            });
+        };
+
+        const topicSelect = document.getElementById('composer-topic');
+        if (topicSelect) {
+            topicSelect.addEventListener('change', function() {
+                window.xuLyDoiTopic(this.value);
+            });
+        }
+
+        // Hàm chuẩn hóa hashtag an toàn, giữ tiếng Việt có dấu, loại bỏ trùng lặp và ký tự lạ
+        window.chuanHoaHashtags = function(rawInput) {
+            if (!rawInput || typeof rawInput !== 'string') return [];
+            const parts = rawInput.split(/[\s,\r\n]+/);
+            const seen = new Set();
+            const result = [];
+            for (let part of parts) {
+                let clean = part.replace(/[\u0000-\u001F\u007F-\u009F]/g, '').trim();
+                clean = clean.replace(/^#+/, '');
+                clean = clean.replace(/[.,;:!?]+$/, '');
+                if (!clean) continue;
+                // Giữ lại chữ tiếng Việt có dấu (Unicode \p{L}), số (\p{N}) và gạch dưới (_)
+                clean = clean.replace(/[^\p{L}\p{N}_]/gu, '');
+                if (!clean) continue;
+                if (clean.length > 30) clean = clean.slice(0, 30);
+                const lower = clean.toLowerCase();
+                if (!seen.has(lower)) {
+                    seen.add(lower);
+                    result.push('#' + clean);
+                }
+                if (result.length >= 10) break;
+            }
+            return result;
+        };
+        const chuanHoaHashtags = window.chuanHoaHashtags;
+
+        window.capNhatTrangThaiKetNoi = function capNhatTrangThaiKetNoi(isOnline, text) {
             const banner = document.getElementById('firebase-status-banner');
             const statusText = document.getElementById('firebase-status-text');
             const networkBadge = document.getElementById('stat-network-status');
@@ -1410,14 +2141,18 @@
             if (networkBadge) networkBadge.textContent = isOnline ? "Trực Tuyến" : (isFirestoreActive ? "Mất kết nối" : "Thử Nghiệm");
             if (banner && statusText) {
                 if (isOnline) {
+                    // Yêu cầu: Bỏ thông báo kết nối Firebase thành công trên giao diện
+                    banner.style.display = 'none';
                     banner.className = "firebase-status-banner connected";
-                    statusText.innerHTML = `🟢 <strong>Firebase:</strong> ${escapeHtml(text)}. Bài đăng và bình luận sẽ đồng bộ trực tiếp khi tài khoản có quyền truy cập.`;
+                    statusText.textContent = '';
                 } else if (isFirestoreActive) {
+                    banner.style.display = 'flex';
                     banner.className = "firebase-status-banner mock";
                     statusText.innerHTML = `⚠️ <strong>Firebase chưa phản hồi:</strong> ${escapeHtml(text)}. Đăng bài và bình luận vẫn cần Firestore; bản cục bộ chỉ lưu trên thiết bị này.`;
                 } else {
+                    banner.style.display = 'flex';
                     banner.className = "firebase-status-banner mock";
-                    statusText.innerHTML = `⚡ <strong>Chế độ Vận hành:</strong> ${text}. Mọi bài đăng và bình luận đều hoạt động mượt mà ngay trên máy của bạn.`;
+                    statusText.innerHTML = `⚡ <strong>Chế độ Vận hành:</strong> ${escapeHtml(text)}. Mọi bài đăng và bình luận đều hoạt động mượt mà ngay trên máy của bạn.`;
                 }
             }
         }
@@ -1481,11 +2216,36 @@
         // ===================================================
         window.dangBaiMoi = async function() {
             const author = (document.getElementById('composer-author').value || 'Hiền sĩ ẩn danh').trim();
-            const topic = document.getElementById('composer-topic').value;
+            const topicSelectEl = document.getElementById('composer-topic');
+            const customTopicInputEl = document.getElementById('composer-custom-topic');
+            let topic = topicSelectEl ? topicSelectEl.value : 'Bạch Đằng 938';
+
+            if (topic === 'Khác') {
+                const rawCustom = customTopicInputEl ? customTopicInputEl.value : '';
+                const cleanCustom = rawCustom
+                    .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                if (!cleanCustom) {
+                    hienToast('⚠️ Vui lòng nhập chủ đề cho bài viết.');
+                    if (customTopicInputEl) customTopicInputEl.focus();
+                    return;
+                }
+                if (cleanCustom.length < 2 || cleanCustom.length > 50) {
+                    hienToast('⚠️ Chủ đề tự nhập cần có độ dài từ 2 đến 50 ký tự.');
+                    if (customTopicInputEl) customTopicInputEl.focus();
+                    return;
+                }
+                topic = cleanCustom;
+            }
+
+            const rawHashtags = document.getElementById('composer-hashtags') ? document.getElementById('composer-hashtags').value : '';
+            const hashtags = chuanHoaHashtags(rawHashtags);
+
             const contentEl = document.getElementById('composer-content');
             const content = contentEl.value.trim();
             const btnSubmit = document.getElementById('btn-submit-post');
-            if (isFirestoreActive && !nguoiDungHienTai) {
+            if (isFirestoreActive && !window.__TEST_MODE__ && !nguoiDungHienTai) {
                 hienToast('Đăng nhập tài khoản trước khi đăng bài lên diễn đàn.');
                 window.location.href = 'dang-nhap.html';
                 return;
@@ -1504,13 +2264,14 @@
                 author: author,
                 authorUid: nguoiDungHienTai ? nguoiDungHienTai.uid : null,
                 topic: topic,
+                hashtags: hashtags,
                 content: content,
                 likes: 0,
                 commentsCount: 0
             };
 
             try {
-                if (isFirestoreActive && db) {
+                if (isFirestoreActive && db && !window.__TEST_MODE__) {
                     let media = null;
                     if (tepMediaDangChon) {
                         media = await taiMediaLen(tepMediaDangChon);
@@ -1537,6 +2298,17 @@
                 }
 
                 contentEl.value = "";
+                const hashtagsInput = document.getElementById('composer-hashtags');
+                if (hashtagsInput) hashtagsInput.value = '';
+                if (customTopicInputEl) {
+                    customTopicInputEl.value = '';
+                    customTopicInputEl.style.display = 'none';
+                }
+                if (topicSelectEl) topicSelectEl.value = 'Bạch Đằng 938';
+                document.querySelectorAll('.topic-pill').forEach((p, idx) => {
+                    if (idx === 0) p.classList.add('active');
+                    else p.classList.remove('active');
+                });
                 window.xoaMediaDaChon();
                 hienToast("🎉 Đã đăng bài thành công lên Quần Anh Hội!");
             } catch (err) {
@@ -1559,6 +2331,7 @@
         //  TÍNH NĂNG 2: THÁN PHỤC (LIKE)
         // ===================================================
         window.thichBaiViet = async function(postId, btnEl) {
+            danhDauDaXem(postId);
             if (isFirestoreActive && !nguoiDungHienTai) {
                 hienToast('Đăng nhập tài khoản trước khi thán phục bài viết.');
                 window.location.href = 'dang-nhap.html';
@@ -1593,6 +2366,7 @@
         //  TÍNH NĂNG 3: BÌNH LUẬN (REPLY / LUẬN BÀN)
         // ===================================================
         window.batTatLuanBan = function(postId) {
+            danhDauDaXem(postId);
             const drawer = document.getElementById(`comments-drawer-${postId}`);
             const btn = document.getElementById(`btn-luanban-${postId}`);
             if (!drawer) return;
@@ -1688,6 +2462,7 @@
         }
 
         window.guiBinhLuan = async function(postId) {
+            danhDauDaXem(postId);
             const inputEl = document.getElementById(`input-comment-${postId}`);
             if (!inputEl) return;
             const content = inputEl.value.trim();
@@ -1762,10 +2537,204 @@
             }
         };
 
+        const reportReasons = new Set(['misinformation', 'spam', 'harassment', 'inappropriate', 'other']);
+        const reportReasonLabels = {
+            misinformation: 'Thông tin sai lệch',
+            spam: 'Spam hoặc quảng cáo',
+            harassment: 'Xúc phạm hoặc quấy rối',
+            inappropriate: 'Nội dung không phù hợp',
+            other: 'Lý do khác'
+        };
+        const reportStatusLabels = {
+            pending: 'Chưa xem',
+            reviewing: 'Đang xử lý',
+            resolved: 'Đã xử lý',
+            dismissed: 'Không vi phạm'
+        };
+        let adminReportsUnsubscribe = null;
+        let adminReportsCache = [];
+
+        function laQuanTriVien() {
+            return Boolean(nguoiDungHienTai && forumAdminUids.has(nguoiDungHienTai.uid));
+        }
+
+        function capNhatNutBaoCaoAdmin() {
+            const button = document.getElementById('btn-admin-reports');
+            const panel = document.getElementById('admin-reports-panel');
+            if (button) button.hidden = !laQuanTriVien();
+            if (!laQuanTriVien() && panel && !panel.hidden) window.dongDongBaoCaoAdmin();
+        }
+
+        window.moBaoCaoBaiViet = function(postId) {
+            if (!nguoiDungHienTai) {
+                hienToast('Đăng nhập để gửi báo cáo bài viết.');
+                window.location.href = 'dang-nhap.html';
+                return;
+            }
+            if (!db || !isFirestoreActive) {
+                hienToast('Không thể gửi báo cáo khi Firestore chưa kết nối.');
+                return;
+            }
+            const dialog = document.getElementById('forum-report-dialog');
+            const form = document.getElementById('forum-report-form');
+            if (!dialog || !form) return;
+            dialog.dataset.postId = postId;
+            form.reset();
+            dialog.showModal();
+        };
+
+        window.dongFormBaoCao = function() {
+            const dialog = document.getElementById('forum-report-dialog');
+            if (dialog?.open) dialog.close();
+        };
+
+        window.guiBaoCaoBaiViet = async function(event) {
+            event.preventDefault();
+            const dialog = document.getElementById('forum-report-dialog');
+            const form = document.getElementById('forum-report-form');
+            const submitButton = form?.querySelector('[type="submit"]');
+            const postId = dialog?.dataset.postId;
+            const reason = document.getElementById('report-reason')?.value;
+            const details = (document.getElementById('report-details')?.value || '')
+                .replace(/[\u0000-\u001F\u007F-\u009F]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim()
+                .slice(0, 500);
+
+            if (!nguoiDungHienTai || !db || !isFirestoreActive || !postId || !reportReasons.has(reason)) {
+                hienToast('Không thể gửi báo cáo lúc này. Hãy đăng nhập và kiểm tra kết nối.');
+                return;
+            }
+
+            if (submitButton) submitButton.disabled = true;
+            try {
+                const reportId = `${postId}_${nguoiDungHienTai.uid}`;
+                await setDoc(doc(db, 'reports', reportId), {
+                    postId,
+                    reporterUid: nguoiDungHienTai.uid,
+                    reason,
+                    details,
+                    status: 'pending',
+                    createdAt: serverTimestamp()
+                });
+                if (dialog?.open) dialog.close();
+                hienToast('Đã gửi báo cáo. Quản trị viên sẽ xem xét.');
+            } catch (error) {
+                console.error('Không gửi được báo cáo bài viết:', error);
+                if (error?.code === 'permission-denied') {
+                    hienToast('Chưa gửi được: Rules báo cáo chưa được áp dụng hoặc bạn đã báo cáo bài này rồi.');
+                } else {
+                    hienToast('Không gửi được báo cáo. Kiểm tra kết nối rồi thử lại.');
+                }
+            } finally {
+                if (submitButton) submitButton.disabled = false;
+            }
+        };
+
+        window.moDongBaoCaoAdmin = function() {
+            if (!laQuanTriVien()) return;
+            const panel = document.getElementById('admin-reports-panel');
+            if (!panel) return;
+            panel.hidden = false;
+            taiBaoCaoChoAdmin();
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        window.dongDongBaoCaoAdmin = function() {
+            const panel = document.getElementById('admin-reports-panel');
+            if (panel) panel.hidden = true;
+            if (adminReportsUnsubscribe) adminReportsUnsubscribe();
+            adminReportsUnsubscribe = null;
+        };
+
+        function taiBaoCaoChoAdmin() {
+            const list = document.getElementById('admin-reports-list');
+            if (!list || !laQuanTriVien() || !db) return;
+            if (adminReportsUnsubscribe) adminReportsUnsubscribe();
+            list.innerHTML = '<p>Đang tải báo cáo…</p>';
+            const reportsQuery = query(collection(db, 'reports'), orderBy('createdAt', 'desc'), limit(100));
+            adminReportsUnsubscribe = onSnapshot(reportsQuery, snapshot => {
+                adminReportsCache = snapshot.docs.map(reportDoc => ({ id: reportDoc.id, ...reportDoc.data() }));
+                renderBaoCaoChoAdmin();
+            }, error => {
+                console.error('Không tải được danh sách báo cáo:', error);
+                list.innerHTML = '<p role="alert">Không đọc được báo cáo. Kiểm tra UID quản trị viên và Firestore Rules đã Publish.</p>';
+            });
+        }
+
+        function renderBaoCaoChoAdmin() {
+            const list = document.getElementById('admin-reports-list');
+            if (!list) return;
+            if (!adminReportsCache.length) {
+                list.innerHTML = '<p>Chưa có báo cáo bài viết.</p>';
+                return;
+            }
+            list.innerHTML = adminReportsCache.map(report => {
+                const status = reportStatusLabels[report.status] ? report.status : 'pending';
+                const reason = reportReasonLabels[report.reason] || 'Lý do khác';
+                return `
+                    <article class="admin-report-card">
+                        <div class="admin-report-heading">
+                            <strong>${escapeHtml(reason)}</strong>
+                            <span class="admin-report-meta">${escapeHtml(reportStatusLabels[status])}</span>
+                        </div>
+                        <p>${escapeHtml(report.details || 'Không có mô tả thêm.')}</p>
+                        <p class="admin-report-meta">Bài viết: ${escapeHtml(report.postId || '')} · Người gửi UID: ${escapeHtml(report.reporterUid || '')} · ${escapeHtml(dinhDangThoiGian(report.createdAt))}</p>
+                        <div class="admin-report-controls">
+                            <button type="button" data-open-reported-post="${escapeHtml(report.postId || '')}">Mở bài viết</button>
+                            <label for="report-status-${escapeHtml(report.id)}">Trạng thái:</label>
+                            <select id="report-status-${escapeHtml(report.id)}" data-report-status="${escapeHtml(report.id)}" aria-label="Cập nhật trạng thái báo cáo">
+                                ${Object.entries(reportStatusLabels).map(([value, label]) => `<option value="${value}" ${status === value ? 'selected' : ''}>${label}</option>`).join('')}
+                            </select>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        async function capNhatTrangThaiBaoCao(reportId, status) {
+            if (!laQuanTriVien() || !reportStatusLabels[status]) return;
+            try {
+                await updateDoc(doc(db, 'reports', reportId), {
+                    status,
+                    updatedAt: serverTimestamp()
+                });
+                hienToast('Đã cập nhật trạng thái báo cáo.');
+            } catch (error) {
+                console.error('Không cập nhật được trạng thái báo cáo:', error);
+                hienToast('Không thể cập nhật báo cáo. Kiểm tra Firestore Rules.');
+            }
+        }
+
+        const postsContainerForReports = document.getElementById('posts-container');
+        postsContainerForReports?.addEventListener('click', event => {
+            const button = event.target.closest('[data-report-post]');
+            if (button) window.moBaoCaoBaiViet(button.dataset.reportPost);
+        });
+        const adminReportsList = document.getElementById('admin-reports-list');
+        adminReportsList?.addEventListener('click', event => {
+            const button = event.target.closest('[data-open-reported-post]');
+            if (!button) return;
+            window.dongDongBaoCaoAdmin();
+            const postId = button.dataset.openReportedPost;
+            if (boLocHienTai !== 'all') {
+                boLocHienTai = 'all';
+                document.querySelectorAll('.feed-filter-btn').forEach(filterButton => {
+                    filterButton.classList.toggle('active', filterButton.textContent.trim() === 'Tất cả');
+                });
+                renderBangTin();
+            }
+            requestAnimationFrame(() => document.getElementById(`post-${postId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+        });
+        adminReportsList?.addEventListener('change', event => {
+            const select = event.target.closest('[data-report-status]');
+            if (select) capNhatTrangThaiBaoCao(select.dataset.reportStatus, select.value);
+        });
+
         // ===================================================
         //  RENDER GIAO DIỆN BẢNG TIN (FEED HTML)
         // ===================================================
-        function renderBangTin() {
+        window.renderBangTin = function renderBangTin(forceReshuffle = false) {
             const container = document.getElementById('posts-container');
             if (!container) return;
             const openedThreads = [...container.querySelectorAll('.comments-drawer:not(.hidden)')]
@@ -1773,12 +2742,12 @@
             const commentDrafts = new Map([...container.querySelectorAll('.comment-input')]
                 .map(input => [input.id.replace('input-comment-', ''), input.value]));
 
-            let filtered = danhSachBaiViet;
-            if (boLocHienTai !== 'all') {
-                filtered = danhSachBaiViet.filter(p => p.topic === boLocHienTai);
-            }
+            capNhatDanhSachChuDeXem();
+            capNhatThongKeDeXuat();
 
-            if (filtered.length === 0) {
+            const orderedPosts = layDanhSachDeXuat(forceReshuffle);
+
+            if (orderedPosts.length === 0) {
                 container.innerHTML = `
                     <div class="empty-feed-state">
                         <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">📭</span>
@@ -1795,7 +2764,9 @@
                 return;
             }
 
-            container.innerHTML = filtered.map(post => {
+            const viewedSet = layDanhSachDaXem();
+
+            container.innerHTML = orderedPosts.map(post => {
                 const postId = post.id;
                 const author = escapeHtml(post.author || 'Hiền sĩ ẩn danh');
                 const content = escapeHtml(post.content || '');
@@ -1803,14 +2774,22 @@
                 const timeStr = dinhDangThoiGian(post.createdAt);
                 const likes = post.likes || 0;
                 const commentsCount = post.commentsCount || 0;
+                const isUnread = !viewedSet.has(postId);
                 const media = post.media && typeof post.media.url === 'string' && /^https:\/\//i.test(post.media.url)
                     ? (post.media.type === 'video'
                         ? `<video class="post-media" src="${escapeHtml(post.media.url)}" controls playsinline preload="metadata" aria-label="Video trong bài đăng"></video>`
                         : `<img class="post-media" src="${escapeHtml(post.media.url)}" alt="Ảnh trong bài đăng" loading="lazy" decoding="async">`)
                     : '';
 
+                const hashtagsHtml = Array.isArray(post.hashtags) && post.hashtags.length > 0
+                    ? `<div class="post-hashtags-list">${post.hashtags
+                        .filter(t => typeof t === 'string' && t.trim().length > 0)
+                        .map(t => `<span class="post-hashtag-item">${escapeHtml(t.trim())}</span>`)
+                        .join('')}</div>`
+                    : '';
+
                 return `
-                    <article class="scroll-post-card" id="post-${postId}">
+                    <article class="scroll-post-card${isUnread ? ' post-unread' : ''}" id="post-${postId}" data-post-id="${postId}">
                         <div class="post-top-meta">
                             <div class="post-author-cluster">
                                 <div class="post-seal-avatar" title="${author}">
@@ -1819,6 +2798,7 @@
                                 <div>
                                     <span class="post-author-name">${author}</span>
                                     <span class="post-author-badge">Anh Hào</span>
+                                    ${isUnread ? '<span class="post-unread-badge">Mới</span>' : ''}
                                     <span class="post-timestamp">⏱️ ${timeStr}</span>
                                 </div>
                             </div>
@@ -1826,6 +2806,7 @@
                         </div>
 
                         <div class="post-body-content">${content}</div>
+                        ${hashtagsHtml}
                         ${media}
 
                         <div class="post-action-bar">
@@ -1839,9 +2820,14 @@
                                     <span>Luận Bàn (${commentsCount})</span>
                                 </button>
                             </div>
-                            <button class="btn-post-action" onclick="saoChepLienKet('${postId}')" title="Sao chép luận đề">
-                                <span>🔗</span> Chia sẻ
-                            </button>
+                            <div class="action-btns-group">
+                                <button class="btn-post-action" onclick="saoChepLienKet('${postId}')" title="Sao chép luận đề">
+                                    <span>🔗</span> Chia sẻ
+                                </button>
+                                <button class="btn-post-action" type="button" data-report-post="${escapeHtml(postId)}" aria-label="Báo cáo bài viết của ${author}">
+                                    <span>⚑</span> Báo cáo
+                                </button>
+                            </div>
                         </div>
 
                         <!-- KHU VỰC BÌNH LUẬN XỔ XUỐNG -->
@@ -1884,6 +2870,9 @@
                 if (binhLuanCache.has(postId)) renderDanhSachBinhLuan(postId, binhLuanCache.get(postId));
                 else if (!unsubscribeBinhLuan.has(postId)) taiBinhLuan(postId);
             });
+
+            // Kích hoạt theo dõi bài viết đã đọc trong viewport
+            kichHoatTheoDoiXemBai();
         }
 
         // ===================================================
@@ -1902,20 +2891,38 @@
         }
 
         window.locBaiViet = function(btn, topic) {
-            document.querySelectorAll('.feed-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            boLocHienTai = topic;
-            renderBangTin();
+            boLocHienTai = topic || 'all';
+            luuChuDeDaChon(boLocHienTai);
+            dongBoFilterTabsUI(boLocHienTai);
+            dongBoViewerTopicUI(boLocHienTai);
+            renderBangTin(true);
+        };
+
+        window.doiChuDeXem = function(topic) {
+            boLocHienTai = topic || 'all';
+            luuChuDeDaChon(boLocHienTai);
+            dongBoFilterTabsUI(boLocHienTai);
+            renderBangTin(true);
+        };
+
+        window.lamMoiDeXuat = function() {
+            renderBangTin(true);
+            hienToast("🎲 Đã làm mới danh sách đề xuất!");
         };
 
         window.chonNhanhTopic = function(pill, topicName) {
             document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
             pill.classList.add('active');
             const select = document.getElementById('composer-topic');
-            if (select) select.value = topicName;
+            const customInput = document.getElementById('composer-custom-topic');
+            if (select) {
+                select.value = topicName;
+                if (customInput) customInput.style.display = 'none';
+            }
         };
 
         window.saoChepLienKet = function(postId) {
+            danhDauDaXem(postId);
             const url = window.location.href.split('#')[0] + `#post-${postId}`;
             navigator.clipboard.writeText(url).then(() => {
                 hienToast("📋 Đã sao chép liên kết luận đề!");
@@ -1992,6 +2999,9 @@
 
         // Khởi động khi tải xong DOM
         document.addEventListener('DOMContentLoaded', () => {
+            boLocHienTai = layChuDeDaLuu();
+            dongBoViewerTopicUI(boLocHienTai);
+            dongBoFilterTabsUI(boLocHienTai);
             khoiTaoBangTin();
         });
     </script>

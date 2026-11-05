@@ -12,10 +12,18 @@ Quần Anh Hội dùng Firebase Authentication để nhận diện tài khoản 
 
 1. Tạo Cloud Firestore database nếu dự án chưa có.
 2. Mở **Firestore → Rules**.
-3. Sao lưu Rules hiện có. Với database mới chỉ có Rules mặc định từ chối mọi truy cập, thay nội dung bằng `firestore.rules` ở gốc dự án. Nếu Rules đã bảo vệ dữ liệu khác, chỉ gộp các khối `match /posts/{postId}` và `match /comments/{commentId}` bên trong `match /databases/{database}/documents`; giữ nguyên các khối khác.
+3. Sao lưu Rules hiện có. Với database mới chỉ có Rules mặc định từ chối mọi truy cập, thay nội dung bằng `firestore.rules` ở gốc dự án. Nếu Rules đã bảo vệ dữ liệu khác, giữ nguyên các khối đó và gộp các khối `posts`, `comments`, `reports`, `websiteFeedback` cùng các hàm quản trị/liên quan bên trong `match /databases/{database}/documents`.
 4. Nhấn **Publish**. Không dùng test mode công khai.
 
-Rules cho phép đọc bài/bình luận công khai, yêu cầu đăng nhập cho thao tác ghi, và không cho xóa bài hoặc bình luận qua trình duyệt.
+Rules cho phép đọc bài/bình luận công khai, yêu cầu đăng nhập cho thao tác ghi, và không cho xóa bài hoặc bình luận qua trình duyệt. Báo cáo bài viết và góp ý website chỉ UID quản trị đã cấu hình mới đọc được; người gửi phải đăng nhập.
+
+## Góp ý và báo lỗi website
+
+- Mục **GÓP Ý WEB** trên thanh điều hướng trang chính mở biểu mẫu gửi tiêu đề, chủ đề (**Báo lỗi website** hoặc **Góp ý xây dựng**), mô tả và tối đa 3 ảnh/video.
+- Cần đăng nhập Firebase. Ảnh/video dùng Cloudinary Free theo hai unsigned preset đã cấu hình; ảnh tối đa 15 MB/tệp, video tối đa 80 MB/tệp và một video mỗi góp ý.
+- Firestore lưu trong collection `websiteFeedback`. Thành viên không có quyền đọc; chỉ UID trong `quan-anh-hoi-admin-config.js` được xem danh sách và đổi trạng thái.
+- Trong Firebase Console → Firestore → Rules, publish các quy tắc phù hợp trong `firestore.rules`. Nếu có quy tắc riêng của tính năng khác, gộp thay vì thay toàn bộ.
+- Trên trang chính, admin đăng nhập rồi mở **GÓP Ý WEB** → **Xem góp ý gửi về**. Bảng admin theo dõi tối đa 100 mục gần nhất; không có email tự động.
 
 ## Thử chức năng
 

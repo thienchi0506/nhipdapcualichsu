@@ -2,6 +2,9 @@
 <html lang="vi">
 <head>
   <script src="site-music.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="cloudinary-config.js"></script>
+  <script src="quan-anh-hoi-admin-config.js"></script>
     <!-- Google tag (gtag.js) - Firebase Google Analytics 4 (nhipdapcualichsu) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JMF58FGDRN"></script>
     <script>
@@ -4626,6 +4629,37 @@
             color: #FFF0C2;
         }
 
+        /* Góp ý website: phạm vi riêng, không đổi kiểu các modal nội dung khác */
+        .web-feedback-overlay { position:fixed; inset:0; z-index:10000000; display:none; place-items:center; padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom)); background:rgba(16,10,7,.76); backdrop-filter:blur(5px); }
+        .web-feedback-overlay.open { display:grid; }
+        .web-feedback-dialog { width:min(760px,100%); max-height:min(88dvh,900px); overflow:auto; border:2px solid #D4AF37; border-radius:16px; background:#FFF9EC; color:#2B1B12; box-shadow:0 22px 70px rgba(0,0,0,.4); padding:clamp(16px,3vw,28px); }
+        .web-feedback-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:8px; }
+        .web-feedback-head h2 { margin:0; color:#7B1E1E; font-family:'Playfair Display',serif; }
+        .web-feedback-close { width:44px; height:44px; flex:0 0 44px; border:1px solid #9C2929; border-radius:50%; background:#7B1E1E; color:#fff; font-size:1.5rem; cursor:pointer; }
+        .web-feedback-intro { margin:6px 0 18px; line-height:1.6; color:#634A34; }
+        .web-feedback-form label { display:block; margin:13px 0 6px; font-weight:700; }
+        .web-feedback-form input, .web-feedback-form select, .web-feedback-form textarea { width:100%; min-height:46px; padding:10px 12px; border:1px solid #C6A850; border-radius:8px; background:#fffefa; color:#2B1B12; font:inherit; box-sizing:border-box; }
+        .web-feedback-form textarea { min-height:130px; resize:vertical; }
+        .web-feedback-form input[type=file] { padding:8px; }
+        .web-feedback-hint, .web-feedback-status { font-size:.9rem; color:#705A3A; }
+        .web-feedback-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+        .web-feedback-actions button, .web-feedback-admin-toggle, .web-feedback-item button { min-height:44px; padding:9px 15px; border:1px solid #B8952E; border-radius:8px; background:#F5E8C8; color:#352316; font:inherit; font-weight:700; cursor:pointer; }
+        .web-feedback-actions .primary { background:#7B1E1E; color:#fff; }
+        .web-feedback-actions button:disabled { opacity:.6; cursor:wait; }
+        .web-feedback-admin { margin-top:22px; padding-top:18px; border-top:1px solid #D9C69A; }
+        .web-feedback-admin[hidden] { display:none; }
+        .web-feedback-admin-list { display:grid; gap:12px; margin-top:12px; }
+        .web-feedback-item { padding:14px; border:1px solid #D2BD8D; border-radius:10px; background:#fffefa; overflow-wrap:anywhere; }
+        .web-feedback-item h3 { margin:0 0 8px; color:#7B1E1E; }
+        .web-feedback-item p { white-space:pre-wrap; line-height:1.55; }
+        .web-feedback-item img, .web-feedback-item video { display:block; max-width:min(100%,420px); max-height:320px; margin:8px 0; border-radius:8px; }
+        .web-feedback-item select { min-height:42px; padding:8px; border:1px solid #C6A850; border-radius:7px; background:#fffefa; }
+        :root[data-theme="dark"] .web-feedback-dialog { background:#211A16; color:#F1E7D6; }
+        :root[data-theme="dark"] .web-feedback-intro, :root[data-theme="dark"] .web-feedback-hint, :root[data-theme="dark"] .web-feedback-status { color:#D4C2A6; }
+        :root[data-theme="dark"] .web-feedback-form input, :root[data-theme="dark"] .web-feedback-form select, :root[data-theme="dark"] .web-feedback-form textarea, :root[data-theme="dark"] .web-feedback-item, :root[data-theme="dark"] .web-feedback-item select { background:#302720; color:#F1E7D6; border-color:#705A3A; }
+        :root[data-theme="dark"] .web-feedback-item h3 { color:#F3D981; }
+        @media (max-width:520px) { .web-feedback-overlay { padding-left:10px; padding-right:10px; } .web-feedback-dialog { max-height:90dvh; border-radius:12px; } .web-feedback-actions { flex-direction:column; } .web-feedback-actions button { width:100%; } }
+
     </style>
 </head>
 <body>
@@ -4765,16 +4799,11 @@
                         </a>
                     </li>
 
-                    <!-- 9. Q&A ▾ -->
-                    <li class="sub-navbar__item has-dropdown" data-name="Q&A">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('qa', 'Q&A')">
-                            ❓ Q&A <span class="arrow-down">▾</span>
+                    <!-- 9. GÓP Ý WEBSITE -->
+                    <li class="sub-navbar__item" data-name="Góp ý Web">
+                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moGopYWeb()" aria-haspopup="dialog">
+                            📝 GÓP Ý WEB
                         </a>
-                        <ul class="sub-navbar__dropdown">
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('qa-hoi-dap', 'Q&A > Hỏi đáp Lịch sử')">❓ Hỏi đáp Lịch sử</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('qa-nghi-an', 'Q&A > Giải mã Nghi án Sử Việt')">🔍 Giải mã Nghi án Sử Việt</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('qa-dong-gop', 'Q&A > Đóng góp Tư liệu')">✍️ Đóng góp Tư liệu</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
@@ -12381,6 +12410,43 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
     <!-- ============================================================ -->
     <!--  HỘP THOẠI MODAL CỔ TRANG TƯƠNG TÁC CHO CÁC MỤC MENU          -->
     <!-- ============================================================ -->
+    <div class="web-feedback-overlay" id="web-feedback-overlay" onclick="dongGopYWeb(event)" aria-hidden="true">
+        <section class="web-feedback-dialog" role="dialog" aria-modal="true" aria-labelledby="web-feedback-title">
+            <div class="web-feedback-head">
+                <h2 id="web-feedback-title">📝 Góp ý xây dựng website</h2>
+                <button type="button" class="web-feedback-close" onclick="dongGopYWeb()" aria-label="Đóng cửa sổ">×</button>
+            </div>
+            <p class="web-feedback-intro">Đây là nơi mọi người gửi góp ý để website tốt hơn hoặc báo lỗi đang gặp. Bạn có thể đính kèm ảnh/video và mô tả chi tiết; nội dung gửi chỉ quản trị viên xem được.</p>
+            <p id="web-feedback-auth-status" class="web-feedback-status" aria-live="polite">Đang kiểm tra đăng nhập…</p>
+            <form id="web-feedback-form" class="web-feedback-form">
+                <label for="web-feedback-title-input">Tiêu đề</label>
+                <input id="web-feedback-title-input" name="title" type="text" maxlength="120" required placeholder="Ví dụ: Nút đăng nhập không phản hồi">
+                <label for="web-feedback-topic">Chủ đề</label>
+                <select id="web-feedback-topic" name="topic" required>
+                    <option value="suggestion">💡 Góp ý xây dựng website</option>
+                    <option value="bug">🐞 Báo lỗi website</option>
+                </select>
+                <label for="web-feedback-content">Mô tả</label>
+                <textarea id="web-feedback-content" name="content" maxlength="3000" required placeholder="Mô tả góp ý hoặc các bước khiến lỗi xảy ra…"></textarea>
+                <label for="web-feedback-media">Ảnh/video minh họa (tối đa 3 tệp)</label>
+                <input id="web-feedback-media" name="media" type="file" accept="image/*,video/*" multiple>
+                <p class="web-feedback-hint">Ảnh tối đa 15 MB/tệp, video tối đa 80 MB/tệp. Tệp được lưu qua Cloudinary; không chọn quá 3 tệp.</p>
+                <div id="web-feedback-upload-status" class="web-feedback-status" aria-live="polite"></div>
+                <div class="web-feedback-actions">
+                    <button type="button" onclick="dongGopYWeb()">Đóng</button>
+                    <button type="submit" id="web-feedback-submit" class="primary">Gửi góp ý</button>
+                </div>
+            </form>
+            <div id="web-feedback-admin-area" class="web-feedback-admin" hidden>
+                <button type="button" id="web-feedback-admin-toggle" class="web-feedback-admin-toggle">🛡️ Xem góp ý gửi về</button>
+                <div id="web-feedback-admin-panel" hidden>
+                    <h3>Góp ý và báo lỗi (chỉ quản trị viên)</h3>
+                    <div id="web-feedback-admin-list" class="web-feedback-admin-list" aria-live="polite"><p>Chọn “Xem góp ý gửi về” để tải danh sách.</p></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <div class="antique-modal-overlay" id="antique-modal-overlay" onclick="dongModalDuLieu(event)">
         <div class="antique-modal-box" onclick="event.stopPropagation()">
             <div class="antique-modal-header">
@@ -12754,6 +12820,216 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
         }
     }, true);
 })();
+</script>
+<script type="module">
+    import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+    const feedbackDbConfig = window.__FIREBASE_CONFIG__;
+    const feedbackCloudinary = window.__CLOUDINARY_CONFIG__ || {};
+    const feedbackAdminUids = new Set(Array.isArray(window.__QUAN_ANH_HOI_ADMIN_UIDS__) ? window.__QUAN_ANH_HOI_ADMIN_UIDS__ : []);
+    let feedbackAuth = null;
+    let feedbackDb = null;
+    let feedbackUser = null;
+    let feedbackAdminUnsubscribe = null;
+    let feedbackItems = [];
+    let feedbackPreviousBodyOverflow = '';
+
+    try {
+        if (!feedbackDbConfig?.projectId) throw new Error('Thiếu cấu hình Firebase.');
+        const app = getApps().length ? getApp() : initializeApp(feedbackDbConfig);
+        feedbackAuth = getAuth(app);
+        feedbackDb = getFirestore(app);
+        onAuthStateChanged(feedbackAuth, user => {
+            feedbackUser = user;
+            capNhatTrangThaiGopY();
+        });
+    } catch (error) {
+        console.error('Không khởi tạo được hệ thống góp ý:', error);
+        const status = document.getElementById('web-feedback-auth-status');
+        if (status) status.textContent = 'Chưa kết nối được Firebase. Bạn vẫn có thể đọc trang; gửi góp ý hiện chưa khả dụng.';
+    }
+
+    function escapeFeedbackHtml(value) {
+        return String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+    }
+    function isFeedbackAdmin() { return Boolean(feedbackUser && feedbackAdminUids.has(feedbackUser.uid)); }
+    function capNhatTrangThaiGopY() {
+        const status = document.getElementById('web-feedback-auth-status');
+        const submit = document.getElementById('web-feedback-submit');
+        const adminArea = document.getElementById('web-feedback-admin-area');
+        if (status) status.innerHTML = feedbackUser
+            ? `Đang gửi với tài khoản <strong>${escapeFeedbackHtml(feedbackUser.displayName || feedbackUser.email || 'đã đăng nhập')}</strong>. Chỉ quản trị viên có thể xem nội dung.`
+            : 'Bạn cần đăng nhập để gửi góp ý. <a href="dang-nhap.html">Đăng nhập tài khoản</a> rồi quay lại trang này.';
+        if (submit) submit.disabled = !feedbackUser || !feedbackDb;
+        if (adminArea) adminArea.hidden = !isFeedbackAdmin();
+        if (!isFeedbackAdmin()) {
+            if (feedbackAdminUnsubscribe) feedbackAdminUnsubscribe();
+            feedbackAdminUnsubscribe = null;
+            const panel = document.getElementById('web-feedback-admin-panel');
+            if (panel) panel.hidden = true;
+        }
+    }
+
+    window.moGopYWeb = function() {
+        const overlay = document.getElementById('web-feedback-overlay');
+        if (!overlay) return;
+        if (!overlay.classList.contains('open')) feedbackPreviousBodyOverflow = document.body.style.overflow;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => document.getElementById('web-feedback-title-input')?.focus(), 30);
+    };
+    window.dongGopYWeb = function(event) {
+        if (event && event.target !== event.currentTarget) return;
+        const overlay = document.getElementById('web-feedback-overlay');
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = feedbackPreviousBodyOverflow;
+        if (feedbackAdminUnsubscribe) feedbackAdminUnsubscribe();
+        feedbackAdminUnsubscribe = null;
+    };
+
+    function uploadFeedbackFile(file, index, total) {
+        const isVideo = file.type.startsWith('video/');
+        const resourceType = isVideo ? 'video' : 'image';
+        const preset = isVideo ? feedbackCloudinary.videoUploadPreset : feedbackCloudinary.imageUploadPreset;
+        const url = `https://api.cloudinary.com/v1_1/${encodeURIComponent(feedbackCloudinary.cloudName)}/${resourceType}/upload`;
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', preset);
+            xhr.open('POST', url);
+            xhr.upload.onprogress = event => {
+                if (!event.lengthComputable) return;
+                const percent = Math.round(event.loaded / event.total * 100);
+                const status = document.getElementById('web-feedback-upload-status');
+                if (status) status.textContent = `Đang tải tệp ${index}/${total}: ${percent}%`;
+            };
+            xhr.onload = () => {
+                let result;
+                try { result = JSON.parse(xhr.responseText); } catch (_) { result = null; }
+                if (xhr.status >= 200 && xhr.status < 300 && result?.secure_url) resolve(result.secure_url);
+                else reject(new Error(result?.error?.message || 'Cloudinary không nhận được tệp.'));
+            };
+            xhr.onerror = () => reject(new Error('Mất kết nối khi tải tệp lên.'));
+            xhr.send(formData);
+        });
+    }
+
+    document.getElementById('web-feedback-form')?.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (!feedbackUser || !feedbackDb) {
+            alert('Vui lòng đăng nhập và kiểm tra kết nối Firebase trước khi gửi.');
+            return;
+        }
+        const form = event.currentTarget;
+        const submit = document.getElementById('web-feedback-submit');
+        const status = document.getElementById('web-feedback-upload-status');
+        const files = Array.from(document.getElementById('web-feedback-media')?.files || []);
+        const title = document.getElementById('web-feedback-title-input').value.trim();
+        const topic = document.getElementById('web-feedback-topic').value;
+        const content = document.getElementById('web-feedback-content').value.trim();
+        if (files.length > 3) { alert('Vui lòng chọn tối đa 3 tệp.'); return; }
+        if (files.some(file => !file.type.startsWith('image/') && !file.type.startsWith('video/'))) { alert('Chỉ nhận tệp ảnh hoặc video.'); return; }
+        if (files.filter(file => file.type.startsWith('video/')).length > 1) { alert('Mỗi góp ý chỉ đính kèm tối đa 1 video.'); return; }
+        if (files.some(file => file.size > (file.type.startsWith('video/') ? 80 : 15) * 1024 * 1024)) { alert('Ảnh tối đa 15 MB và video tối đa 80 MB mỗi tệp.'); return; }
+        if (!feedbackCloudinary.cloudName || !feedbackCloudinary.imageUploadPreset || !feedbackCloudinary.videoUploadPreset) {
+            if (files.length) { alert('Chưa cấu hình Cloudinary. Bạn có thể bỏ tệp đính kèm và gửi phần chữ.'); return; }
+        }
+
+        submit.disabled = true;
+        if (status) status.textContent = 'Đang gửi nội dung…';
+        try {
+            const media = [];
+            for (let index = 0; index < files.length; index++) media.push(await uploadFeedbackFile(files[index], index + 1, files.length));
+            if (status) status.textContent = 'Đang lưu góp ý…';
+            await addDoc(collection(feedbackDb, 'websiteFeedback'), {
+                title: title.slice(0, 120),
+                topic,
+                content: content.slice(0, 3000),
+                reporterUid: feedbackUser.uid,
+                reporterName: (feedbackUser.displayName || '').slice(0, 80),
+                reporterEmail: (feedbackUser.email || '').slice(0, 160),
+                media,
+                status: 'new',
+                createdAt: serverTimestamp()
+            });
+            form.reset();
+            if (status) status.textContent = 'Đã gửi góp ý thành công. Cảm ơn bạn đã giúp website tốt hơn!';
+        } catch (error) {
+            console.error('Gửi góp ý website thất bại:', error);
+            if (status) status.textContent = error?.code === 'permission-denied'
+                ? 'Firestore Rules chưa được cập nhật cho mục góp ý. Hãy báo quản trị viên.'
+                : `Gửi chưa thành công: ${error.message || 'lỗi kết nối'}`;
+        } finally {
+            submit.disabled = !feedbackUser || !feedbackDb;
+        }
+    });
+
+    function formatFeedbackDate(timestamp) {
+        const date = timestamp?.toDate ? timestamp.toDate() : null;
+        return date ? date.toLocaleString('vi-VN') : 'Vừa gửi';
+    }
+    function renderFeedbackAdmin() {
+        const list = document.getElementById('web-feedback-admin-list');
+        if (!list) return;
+        if (!feedbackItems.length) { list.innerHTML = '<p>Chưa có góp ý nào được gửi.</p>'; return; }
+        list.innerHTML = feedbackItems.map(item => {
+            const mediaHtml = (item.media || []).map(url => {
+                const safeUrl = escapeFeedbackHtml(url);
+                return url.includes('/video/upload/')
+                    ? `<video controls playsinline preload="metadata" src="${safeUrl}"></video>`
+                    : `<a href="${safeUrl}" target="_blank" rel="noopener"><img loading="lazy" src="${safeUrl}" alt="Tệp đính kèm trong góp ý"></a>`;
+            }).join('');
+            const status = ['new','reviewing','resolved','dismissed'].includes(item.status) ? item.status : 'new';
+            const statusOptions = [['new','Mới nhận'],['reviewing','Đang xem xét'],['resolved','Đã xử lý'],['dismissed','Đã đóng']]
+                .map(([value,label]) => `<option value="${value}" ${status === value ? 'selected' : ''}>${label}</option>`).join('');
+            return `<article class="web-feedback-item">
+                <h3>${escapeFeedbackHtml(item.title)}</h3>
+                <p><strong>${item.topic === 'bug' ? '🐞 Báo lỗi website' : '💡 Góp ý xây dựng'}</strong> · ${escapeFeedbackHtml(formatFeedbackDate(item.createdAt))}</p>
+                <p>${escapeFeedbackHtml(item.content)}</p>${mediaHtml}
+                <p class="web-feedback-hint">Người gửi: ${escapeFeedbackHtml(item.reporterName || 'Thành viên')} · ${escapeFeedbackHtml(item.reporterEmail || item.reporterUid || '')}</p>
+                <label>Trạng thái: <select data-feedback-status="${escapeFeedbackHtml(item.id)}">${statusOptions}</select></label>
+            </article>`;
+        }).join('');
+    }
+    function loadFeedbackForAdmin() {
+        if (!isFeedbackAdmin() || !feedbackDb) return;
+        if (feedbackAdminUnsubscribe) feedbackAdminUnsubscribe();
+        const list = document.getElementById('web-feedback-admin-list');
+        list.innerHTML = '<p>Đang tải góp ý…</p>';
+        feedbackAdminUnsubscribe = onSnapshot(query(collection(feedbackDb, 'websiteFeedback'), orderBy('createdAt', 'desc'), limit(100)), snapshot => {
+            feedbackItems = snapshot.docs.map(itemDoc => ({ id:itemDoc.id, ...itemDoc.data() }));
+            renderFeedbackAdmin();
+        }, error => {
+            console.error('Không đọc được góp ý website:', error);
+            list.innerHTML = '<p role="alert">Không xem được góp ý. Kiểm tra quyền admin và Firestore Rules đã Publish.</p>';
+        });
+    }
+    document.getElementById('web-feedback-admin-toggle')?.addEventListener('click', () => {
+        if (!isFeedbackAdmin()) return;
+        const panel = document.getElementById('web-feedback-admin-panel');
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden) loadFeedbackForAdmin();
+        else if (feedbackAdminUnsubscribe) { feedbackAdminUnsubscribe(); feedbackAdminUnsubscribe = null; }
+    });
+    document.getElementById('web-feedback-admin-list')?.addEventListener('change', async event => {
+        const select = event.target.closest('[data-feedback-status]');
+        if (!select || !isFeedbackAdmin() || !feedbackDb) return;
+        try {
+            await updateDoc(doc(feedbackDb, 'websiteFeedback', select.dataset.feedbackStatus), { status:select.value, updatedAt:serverTimestamp() });
+        } catch (error) {
+            console.error('Không cập nhật trạng thái góp ý:', error);
+            alert('Không cập nhật được trạng thái. Kiểm tra Firestore Rules.');
+        }
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && document.getElementById('web-feedback-overlay')?.classList.contains('open')) window.dongGopYWeb();
+    });
 </script>
 </body>
 

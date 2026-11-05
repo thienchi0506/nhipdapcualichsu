@@ -1,6 +1,19 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isForumAdmin() {
+      return request.auth != null
+        && request.auth.uid == 'xTC4fHaFUeMQFe0jLyzJNy2sQN83';
+    }
+
+    function isFeedbackMediaListValid(media) {
+      return media is list
+        && media.size() <= 3
+        && (media.size() < 1 || (media[0] is string && media[0].size() <= 2048 && media[0].matches('https://res\\.cloudinary\\.com/[^/]+/(image|video)/upload/.*')))
+        && (media.size() < 2 || (media[1] is string && media[1].size() <= 2048 && media[1].matches('https://res\\.cloudinary\\.com/[^/]+/(image|video)/upload/.*')))
+        && (media.size() < 3 || (media[2] is string && media[2].size() <= 2048 && media[2].matches('https://res\\.cloudinary\\.com/[^/]+/(image|video)/upload/.*')));
+    }
+
     match /posts/{postId} {
       allow read: if true;
       allow create: if request.auth != null
@@ -37,6 +50,74 @@ service cloud.firestore {
         && request.resource.data.content.size() > 0
         && request.resource.data.content.size() <= 500;
       allow update, delete: if false;
+    }
+
+    match /reports/{reportId} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasAll(['postId', 'reporterUid', 'reason', 'details', 'status', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['postId', 'reporterUid', 'reason', 'details', 'status', 'createdAt'])
+        && request.resource.data.postId is string
+        && request.resource.data.reporterUid == request.auth.uid
+        && request.resource.data.reason in ['misinformation', 'spam', 'harassment', 'inappropriate', 'other']
+        && request.resource.data.details is string
+        && request.resource.data.details.size() <= 500
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time
+        && reportId == request.resource.data.postId + '_' + request.auth.uid
+        && exists(/databases/$(database)/documents/posts/$(request.resource.data.postId))
+        && !exists(/databases/$(database)/documents/reports/$(reportId));
+
+      allow read: if isForumAdmin();
+
+      allow update: if isForumAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['pending', 'reviewing', 'resolved', 'dismissed']
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.postId == resource.data.postId
+        && request.resource.data.reporterUid == resource.data.reporterUid
+        && request.resource.data.reason == resource.data.reason
+        && request.resource.data.details == resource.data.details
+        && request.resource.data.createdAt == resource.data.createdAt;
+
+      allow delete: if false;
+    }
+
+    match /websiteFeedback/{feedbackId} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasAll(['title', 'topic', 'content', 'reporterUid', 'reporterName', 'reporterEmail', 'media', 'status', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['title', 'topic', 'content', 'reporterUid', 'reporterName', 'reporterEmail', 'media', 'status', 'createdAt'])
+        && request.resource.data.title is string
+        && request.resource.data.title.size() >= 3
+        && request.resource.data.title.size() <= 120
+        && request.resource.data.topic in ['bug', 'suggestion']
+        && request.resource.data.content is string
+        && request.resource.data.content.size() > 0
+        && request.resource.data.content.size() <= 3000
+        && request.resource.data.reporterUid == request.auth.uid
+        && request.resource.data.reporterName is string
+        && request.resource.data.reporterName.size() <= 80
+        && request.resource.data.reporterEmail is string
+        && request.resource.data.reporterEmail.size() <= 160
+        && isFeedbackMediaListValid(request.resource.data.media)
+        && request.resource.data.status == 'new'
+        && request.resource.data.createdAt == request.time;
+
+      allow read: if isForumAdmin();
+
+      allow update: if isForumAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['new', 'reviewing', 'resolved', 'dismissed']
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.title == resource.data.title
+        && request.resource.data.topic == resource.data.topic
+        && request.resource.data.content == resource.data.content
+        && request.resource.data.reporterUid == resource.data.reporterUid
+        && request.resource.data.reporterName == resource.data.reporterName
+        && request.resource.data.reporterEmail == resource.data.reporterEmail
+        && request.resource.data.media == resource.data.media
+        && request.resource.data.createdAt == resource.data.createdAt;
+
+      allow delete: if false;
     }
   }
 }
