@@ -1217,15 +1217,15 @@
             border-bottom: 2px solid var(--vang-dong);
             position: relative;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+            z-index: 999;
+            overflow: visible;
         }
 
         .sub-navbar__inner {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 max(16px, var(--sar)) 0 max(16px, var(--sal));
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            overflow: visible;
         }
         .sub-navbar__inner::-webkit-scrollbar {
             display: none;
@@ -1236,10 +1236,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
-            gap: 2px;
+            gap: 8px;
             white-space: nowrap;
+            flex-wrap: wrap;
         }
 
         .sub-navbar__item {
@@ -1249,11 +1250,11 @@
         .sub-navbar__link {
             display: flex;
             align-items: center;
-            gap: 5px;
-            padding: 9px 14px;
+            gap: 6px;
+            padding: 9px 18px;
             color: #F4ECD8;
             font-family: 'Playfair Display', 'Noto Serif', serif;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             font-weight: 700;
             letter-spacing: 0.6px;
             text-transform: uppercase;
@@ -1261,9 +1262,12 @@
             position: relative;
             cursor: pointer;
             border-bottom: 3px solid transparent;
+            user-select: none;
+            border-radius: 4px;
         }
 
-        .sub-navbar__link:hover {
+        .sub-navbar__link:hover,
+        .sub-navbar__item.is-open > .sub-navbar__link {
             background-color: #7A5230;
             color: #FFF8E7;
             text-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
@@ -1282,7 +1286,8 @@
             transition: transform 0.25s ease;
         }
 
-        .sub-navbar__item:hover .arrow-down {
+        .sub-navbar__item:hover .arrow-down,
+        .sub-navbar__item.is-open .arrow-down {
             transform: rotate(180deg);
         }
 
@@ -1294,7 +1299,7 @@
             background: linear-gradient(180deg, #4A2E1A 0%, #382112 100%);
             border: 1.5px solid var(--vang-dong);
             border-radius: 0 0 8px 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
             list-style: none;
             padding: 8px 0;
             margin: 0;
@@ -1304,34 +1309,40 @@
             pointer-events: none;
             transform: translate3d(0, 8px, 0);
             transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
-            z-index: 1001;
+            z-index: 1005;
             will-change: opacity, transform;
             backface-visibility: hidden;
         }
 
         .sub-navbar__item:hover > .sub-navbar__dropdown,
-        .sub-navbar__item:focus-within > .sub-navbar__dropdown {
+        .sub-navbar__item:focus-within > .sub-navbar__dropdown,
+        .sub-navbar__item.is-open > .sub-navbar__dropdown {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
             transform: translate3d(0, 0, 0);
         }
 
-        /* Đảo chiều menu con sang trái cho các mục nằm sát mép phải màn hình để không gây tràn cuộn ngang */
-        .sub-navbar__item:last-child > .sub-navbar__dropdown,
-        .sub-navbar__item:nth-last-child(2) > .sub-navbar__dropdown {
+        /* Đảo chiều menu con sang trái cho mục sát mép phải */
+        .sub-navbar__item:last-child > .sub-navbar__dropdown {
             left: auto;
             right: 0;
+        }
+
+        /* Dropdown của Khám phá: danh sách dọc gọn gàng */
+        .sub-navbar__dropdown--kham-pha {
+            min-width: 200px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .sub-navbar__dropdown li a {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 9px 18px;
+            gap: 12px;
+            padding: 10px 18px;
             color: #F4ECD8;
             font-family: 'Noto Serif', serif;
-            font-size: 0.84rem;
+            font-size: 0.86rem;
             font-weight: 500;
             white-space: nowrap;
             border-left: 3px solid transparent;
@@ -1343,6 +1354,19 @@
             color: var(--vang-hover);
             border-left-color: var(--vang-dong);
             transform: translateX(4px);
+        }
+
+        .sub-navbar__dropdown .dropdown-item-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .sub-navbar__dropdown .dropdown-item-text {
+            flex-grow: 1;
         }
 
         /* 1.3 Thanh Định Vị (Breadcrumb Bar) */
@@ -2037,6 +2061,55 @@
             height: auto;
             max-height: 440px;
             display: block;
+        }
+
+        .video-library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: 16px;
+        }
+
+        .video-library-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
+            border: 1px solid rgba(177, 132, 28, .55);
+            border-radius: 12px;
+            background: #fffaf0;
+            color: #3d2616;
+            text-align: left;
+            cursor: pointer;
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+
+        .video-library-card:hover,
+        .video-library-card:focus-visible {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(75, 38, 14, .2);
+            outline: 2px solid #c59b2a;
+            outline-offset: 2px;
+        }
+
+        .video-library-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #24170f;
+        }
+
+        .video-library-card__body { display: block; padding: 13px 15px 15px; }
+        .video-library-card__title { display: block; margin: 0 0 7px; font-size: 1.02rem; line-height: 1.4; font-weight: 700; }
+        .video-library-card__meta { display: block; color: #705d4c; font-size: .88rem; line-height: 1.5; }
+        .video-library-player { background: #100d0a; border-radius: 12px; overflow: hidden; }
+        .video-library-player__top { display: flex; align-items: center; gap: 12px; padding: 12px; color: #fff4d4; }
+        .video-library-player__top h3 { margin: 0; font-size: 1rem; line-height: 1.4; }
+        .video-library-back { flex: 0 0 auto; min-height: 44px; padding: 8px 13px; border: 1px solid #c59b2a; border-radius: 8px; background: #3c1b13; color: #fff1c2; cursor: pointer; }
+        .video-library-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+        @media (max-width: 520px) {
+            .video-library-grid { grid-template-columns: 1fr; }
+            .video-library-player__top { align-items: flex-start; flex-direction: column; }
         }
 
         .modal-video-desc {
@@ -3870,20 +3943,19 @@
                 box-sizing: border-box !important;
             }
 
-            /* Thanh danh mục phụ (#sub-navbar): Horizontal Scrollable Pills */
+            /* Thanh danh mục phụ (#sub-navbar): Centered Compact Pills */
             .sub-navbar {
                 background: #2A0808 !important;
                 border-bottom: 2px solid var(--vang-dong) !important;
                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
                 position: relative !important;
                 width: 100% !important;
+                overflow: visible !important;
             }
 
             .sub-navbar__inner {
                 padding: 0 !important;
-                overflow-x: auto !important;
-                -webkit-overflow-scrolling: touch !important;
-                scrollbar-width: none !important;
+                overflow: visible !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
             }
@@ -3894,17 +3966,15 @@
 
             .sub-navbar__menu {
                 display: flex !important;
-                flex-wrap: nowrap !important;
-                overflow-x: auto !important;
-                -webkit-overflow-scrolling: touch !important;
-                gap: 8px !important;
-                padding: 8px 12px !important;
-                padding-left: max(12px, var(--sal)) !important;
-                padding-right: max(12px, var(--sar)) !important;
-                scrollbar-width: none !important;
+                flex-wrap: wrap !important;
+                gap: 6px !important;
+                padding: 7px 8px !important;
                 list-style: none !important;
                 margin: 0 !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
 
             .sub-navbar__menu::-webkit-scrollbar {
@@ -3912,6 +3982,7 @@
             }
 
             .sub-navbar__item {
+                position: relative !important;
                 flex-shrink: 0 !important;
                 list-style: none !important;
             }
@@ -3919,17 +3990,17 @@
             .sub-navbar__link {
                 display: inline-flex !important;
                 align-items: center !important;
-                gap: 5px !important;
-                padding: 7px 15px !important;
-                min-height: 40px !important;
+                gap: 4px !important;
+                padding: 6px 12px !important;
+                min-height: 36px !important;
                 background: linear-gradient(135deg, #7B1E1E 0%, #4A0E0E 100%) !important;
                 border: 1.5px solid var(--vang-dong) !important;
                 border-radius: 20px !important;
                 color: #FCE09B !important;
                 font-family: 'Playfair Display', serif !important;
-                font-size: 0.8rem !important;
+                font-size: 0.76rem !important;
                 font-weight: 700 !important;
-                letter-spacing: 0.5px !important;
+                letter-spacing: 0.4px !important;
                 text-transform: uppercase !important;
                 white-space: nowrap !important;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
@@ -3953,7 +4024,25 @@
             }
 
             .sub-navbar__dropdown {
-                display: none !important;
+                display: none;
+            }
+
+            .sub-navbar__item.is-open > .sub-navbar__dropdown {
+                display: block !important;
+                position: absolute !important;
+                top: calc(100% + 6px) !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                background: linear-gradient(180deg, #4A2E1A 0%, #2A0808 100%) !important;
+                border: 1.5px solid var(--vang-dong) !important;
+                border-radius: 8px !important;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                z-index: 1010 !important;
+                min-width: 190px !important;
+                padding: 6px 0 !important;
             }
 
 
@@ -5049,96 +5138,65 @@
                         </a>
                     </li>
 
-                    <!-- 2. DÒNG LỊCH SỬ -->
-                    <li class="sub-navbar__item" data-name="Dòng lịch sử">
-                        <a href="#interactive-timeline" class="sub-navbar__link" onclick="chonTabMenu(event, 'Dòng lịch sử', 'interactive-timeline')">
-                            📜 DÒNG LỊCH SỬ
-                        </a>
-                    </li>
-
-                    <!-- 3. BẢO TÀNG ▾ -->
-                    <li class="sub-navbar__item has-dropdown" data-name="Bảo tàng">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('bao-tang', 'Bảo tàng Cổ vật')">
+                    <!-- 2. BẢO TÀNG ▾ -->
+                    <li class="sub-navbar__item has-dropdown" data-name="Bảo tàng" id="nav-item-bao-tang">
+                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="toggleDropdownSubnav(event, 'bao-tang')" aria-haspopup="true" aria-expanded="false" title="Bảo tàng Cổ vật & Di sản">
                             🏛️ BẢO TÀNG <span class="arrow-down">▾</span>
                         </a>
-                        <ul class="sub-navbar__dropdown">
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('bao-vat-3d', 'Bảo tàng > Bảo Vật 3D')">🏺 Bảo Vật 3D (Mô hình Tương tác 360°)</a></li>
-                            <li><a href="sa-ban-3d.html">🚀 Sa Bàn 3D Bạch Đằng & Cổ Vật</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('tu-lieu-chieu-hich', 'Bảo tàng > Bình Ngô Đại Cáo')">✍️ Bình Ngô Đại Cáo (1428)</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('tu-lieu-namquoc', 'Bảo tàng > Nam Quốc Sơn Hà')">📜 Thơ Thần Nam Quốc Sơn Hà</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('tu-lieu-chau-ban', 'Bảo tàng > Châu bản Triều Nguyễn')">📜 Châu bản Triều Nguyễn (UNESCO)</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('tu-lieu-ban-do', 'Bảo tàng > Bản đồ cổ Đại Việt')">🗺️ Bản Đồ Cổ Đại Việt & Hoàng Sa</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('tu-lieu-hien-vat', 'Bảo tàng > Trống Đồng Ngọc Lũ')">🪘 Trống Đồng Ngọc Lũ I</a></li>
+                        <ul class="sub-navbar__dropdown" id="dropdown-bao-tang">
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('bao-tang', 'Bảo tàng Cổ vật')">🏛️ Xem Toàn Bộ Bảo Tàng Cổ Vật</a></li>
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('bao-vat-3d', 'Bảo tàng > Bảo Vật 3D')">🏺 Bảo Vật 3D (Mô hình Tương tác 360°)</a></li>
+                            <li><a href="sa-ban-3d.html" onclick="dongTatCaDropdown()">🚀 Sa Bàn 3D Bạch Đằng & Cổ Vật</a></li>
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('tu-lieu-chieu-hich', 'Bảo tàng > Bình Ngô Đại Cáo')">✍️ Bình Ngô Đại Cáo (1428)</a></li>
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('tu-lieu-namquoc', 'Bảo tàng > Nam Quốc Sơn Hà')">📜 Thơ Thần Nam Quốc Sơn Hà</a></li>
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('tu-lieu-chau-ban', 'Bảo tàng > Châu bản Triều Nguyễn')">📜 Châu bản Triều Nguyễn (UNESCO)</a></li>
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('tu-lieu-ban-do', 'Bảo tàng > Bản đồ cổ Đại Việt')">🗺️ Bản Đồ Cổ Đại Việt & Hoàng Sa</a></li>
+                            <li><a href="javascript:void(0)" onclick="dongTatCaDropdown(); moModalDuLieu('tu-lieu-hien-vat', 'Bảo tàng > Trống Đồng Ngọc Lũ')">🪘 Trống Đồng Ngọc Lũ I</a></li>
                         </ul>
                     </li>
 
-                    <!-- 4. NHÂN VẬT ▾ -->
-                    <li class="sub-navbar__item has-dropdown" data-name="Nhân vật">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('nhan-vat', 'Nhân vật')">
-                            👑 NHÂN VẬT <span class="arrow-down">▾</span>
+                    <!-- 3. KHÁM PHÁ ▾ (Gộp: Nhân vật, Di tích, Ngày nay, Sách, Video) -->
+                    <li class="sub-navbar__item has-dropdown" data-name="Khám phá" id="nav-item-kham-pha">
+                        <a href="javascript:void(0)" class="sub-navbar__link" id="btn-kham-pha" onclick="toggleDropdownSubnav(event, 'kham-pha')" aria-haspopup="true" aria-expanded="false" title="Khám phá Lịch sử Việt Nam">
+                            🧭 KHÁM PHÁ <span class="arrow-down">▾</span>
                         </a>
-                        <ul class="sub-navbar__dropdown sub-navbar__dropdown--nhan-vat">
-                            <li class="dropdown-group-header">🏛️ PHÂN LOẠI DANH NHÂN</li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('nhan-vat-de-vuong', 'Nhân vật > Đế Vương Đại Việt')">👑 Đế Vương Đại Việt</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('nhan-vat-danh-tuong', 'Nhân vật > Danh Tướng Lẫy Lừng')">⚔️ Danh Tướng Lẫy Lừng</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('nhan-vat-danh-nhan', 'Nhân vật > Danh Nhân Văn Hóa')">📜 Danh Nhân Văn Hóa</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('nhan-vat-nu-kiet', 'Nhân vật > Nữ Kiệt Anh Hùng')">🌸 Nữ Kiệt Anh Hùng</a></li>
-                            <li class="dropdown-divider-line"></li>
-                            <li class="dropdown-group-header">⭐ DANH TƯỚNG & ĐẾ VƯƠNG TIÊU BIỂU</li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('ngo-quyen')">🗡️ Ngô Quyền (898–944)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('dinh-bo-linh')">👑 Đinh Tiên Hoàng (924–979)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('ly-thai-to')">👑 Lý Thái Tổ (974–1028)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('ly-thuong-kiet')">🛡️ Lý Thường Kiệt (1019–1105)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('tran-hung-dao')">⚔️ Trần Hưng Đạo (1228–1300)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('le-loi')">👑 Lê Lợi (1385–1433)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('nguyen-trai')">📜 Nguyễn Trãi (1380–1442)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('quang-trung')">🔥 Quang Trung (1753–1792)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('ho-chi-minh')">⭐ Hồ Chí Minh (1890–1969)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('hai-ba-trung')">🌸 Hai Bà Trưng (14–43)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('ba-trieu')">🌸 Bà Triệu (226–248)</a></li>
-                            <li><a href="javascript:void(0)" onclick="xemChiTietNhanVat('vo-nguyen-giap')">🎖️ Võ Nguyên Giáp (1911–2013)</a></li>
+                        <ul class="sub-navbar__dropdown sub-navbar__dropdown--kham-pha" id="dropdown-kham-pha">
+                            <li>
+                                <a href="javascript:void(0)" onclick="chonMucKhamPha('nhan-vat', 'Nhân vật')">
+                                    <span class="dropdown-item-icon">👑</span>
+                                    <span class="dropdown-item-text">Nhân vật</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="chonMucKhamPha('di-tich', 'Di tích')">
+                                    <span class="dropdown-item-icon">🏰</span>
+                                    <span class="dropdown-item-text">Di tích</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="chonMucKhamPha('ngay-nay', 'Ngày nay')">
+                                    <span class="dropdown-item-icon">🌐</span>
+                                    <span class="dropdown-item-text">Ngày nay</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="chonMucKhamPha('sach', 'Sách')">
+                                    <span class="dropdown-item-icon">📚</span>
+                                    <span class="dropdown-item-text">Sách</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="chonMucKhamPha('video', 'Video')">
+                                    <span class="dropdown-item-icon">🎬</span>
+                                    <span class="dropdown-item-text">Video</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
-                    <!-- 5. DI TÍCH ▾ -->
-                    <li class="sub-navbar__item has-dropdown" data-name="Di tích">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('di-tich', 'Di tích')">
-                            🏰 DI TÍCH <span class="arrow-down">▾</span>
-                        </a>
-                        <ul class="sub-navbar__dropdown">
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('di-tich-thanglong', 'Di tích > Hoàng Thành Thăng Long')">🏰 Hoàng Thành Thăng Long</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('di-tich-coloa', 'Di tích > Cổ Loa')">🏹 Khu Di Tích Cổ Loa</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('di-tich-bachdang', 'Di tích > Bạch Đằng Giang')">🌊 Quần Thể Bạch Đằng Giang</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('di-tich-nhunguyet', 'Di tích > Phòng Tuyến Sông Như Nguyệt')">🛡️ Phòng Tuyến Sông Như Nguyệt</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('di-tich-hue', 'Di tích > Cố Đô Huế')">⛩️ Quần Thể Cố Đô Huế</a></li>
-                            <li><a href="javascript:void(0)" onclick="moModalDuLieu('di-tich-dienbienphu', 'Di tích > Chiến Trường Điện Biên Phủ')">⭐ Chiến Trường Điện Biên Phủ</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- 6. NGÀY NAY -->
-                    <li class="sub-navbar__item" data-name="Ngày nay">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('ngay-nay', 'Ngày nay')">
-                            🌐 NGÀY NAY
-                        </a>
-                    </li>
-
-                    <!-- 7. SÁCH -->
-                    <li class="sub-navbar__item" data-name="Sách">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('sach', 'Sách')">
-                            📚 SÁCH
-                        </a>
-                    </li>
-
-                    <!-- 8. VIDEO -->
-                    <li class="sub-navbar__item" data-name="Video">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moModalDuLieu('video', 'Video')">
-                            🎬 VIDEO
-                        </a>
-                    </li>
-
-                    <!-- 9. GÓP Ý WEBSITE -->
+                    <!-- 4. GÓP Ý WEB -->
                     <li class="sub-navbar__item" data-name="Góp ý Web">
-                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moGopYWeb()" aria-haspopup="dialog">
+                        <a href="javascript:void(0)" class="sub-navbar__link" onclick="moGopYWeb()" aria-haspopup="dialog" title="Góp ý phát triển Website">
                             📝 GÓP Ý WEB
                         </a>
                     </li>
@@ -6778,6 +6836,61 @@
                 }
             }
         }
+
+        // Xử lý bật/tắt menu xổ xuống trên sub-navbar (Khám phá & Bảo tàng)
+        function toggleDropdownSubnav(event, type) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            var targetId = (type === 'kham-pha') ? 'nav-item-kham-pha' : 'nav-item-bao-tang';
+            var item = document.getElementById(targetId);
+            if (!item) return;
+
+            var isCurrentlyOpen = item.classList.contains('is-open');
+            dongTatCaDropdown();
+
+            if (!isCurrentlyOpen) {
+                item.classList.add('is-open');
+                var link = item.querySelector('.sub-navbar__link');
+                if (link) link.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        function dongTatCaDropdown() {
+            var items = document.querySelectorAll('.sub-navbar__item.has-dropdown');
+            items.forEach(function(el) {
+                el.classList.remove('is-open');
+                var link = el.querySelector('.sub-navbar__link');
+                if (link) link.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        function chonMucKhamPha(loai, label) {
+            dongTatCaDropdown();
+            var items = document.querySelectorAll('.sub-navbar__item');
+            items.forEach(function(item) {
+                if (item.getAttribute('data-name') === 'Khám phá') {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            moModalDuLieu(loai, 'Khám phá > ' + label);
+        }
+
+        // Bấm ra ngoài hoặc phím Escape để tự động đóng dropdown sub-navbar
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.sub-navbar__item.has-dropdown')) {
+                dongTatCaDropdown();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                dongTatCaDropdown();
+            }
+        });
 
 
         // ===================================================
@@ -12606,22 +12719,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                 bodyHtml = renderDanhSachDiTichHtml(activeTab);
             } else if (loai === 'video') {
                 titleText = "🎬 Thư Viện Thước Phim Lịch Sử Hào Hùng";
-                bodyHtml = `
-                    <div class="modal-tabs">
-                        <button class="modal-tab-btn active" onclick="chuyenVideoModal('video1.mp4', 'Khúc Tráng Ca Lịch Sử', this)">🎬 Video 1: Khúc Tráng Ca</button>
-                        <button class="modal-tab-btn" onclick="chuyenVideoModal('video2.mp4', 'Khí Phách Non Sông Đại Việt', this)">🎬 Video 2: Khí Phách Non Sông</button>
-                        <button class="modal-tab-btn" onclick="chuyenVideoModal('video3.mp4', 'Khát Vọng Hòa Bình & Độc Lập', this)">🎬 Video 3: Khát Vọng Hòa Bình</button>
-                    </div>
-                    <div class="modal-video-wrap">
-                        <video id="modal-video-player" controls preload="metadata" playsinline>
-                            <source id="modal-video-src" src="video1.mp4" type="video/mp4">
-                            Trình duyệt của bạn không hỗ trợ thẻ video.
-                        </video>
-                    </div>
-                    <p class="modal-video-desc" id="modal-video-desc">
-                        ⚔️ <strong>Khúc Tráng Ca Lịch Sử (video1.mp4):</strong> Đoạn phim tư liệu điện ảnh tái hiện những trang sử vệ quốc chói lọi từ thời các vua Hùng dựng nước đến các triều đại phong kiến độc lập tự cường.
-                    </p>
-                `;
+                bodyHtml = renderVideoLibraryHtml();
             } else if (loai === 'sach' || loai.startsWith('sach-')) {
                 var activeTabKey = 'tongquan';
                 if (loai === 'sach-toanthu') activeTabKey = 'toanthu';
@@ -12722,26 +12820,50 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             if (vid) {
                 vid.pause();
             }
+            var youtubeFrame = document.getElementById('youtube-video-frame');
+            if (youtubeFrame) youtubeFrame.src = 'about:blank';
 
             capNhatBreadcrumb('Trang chủ');
         }
 
 // [ĐÃ TỐI ƯU] Đã hợp nhất hàm locNhanVat chuẩn vào khối Nhân vật phía trên
 
-        function chuyenVideoModal(videoSrc, videoTitle, btn) {
-            var btns = document.querySelectorAll('.modal-tab-btn');
-            btns.forEach(function(b) { b.classList.remove('active'); });
-            if (btn) btn.classList.add('active');
+        var VIDEO_LIBRARY_ITEMS = [
+            { id: 'HBmWbe1tFbk', title: 'Việt Nam: Cuộc hành trình toàn thắng', channel: 'Rạng rỡ Việt Nam', note: 'Phim tài liệu lịch sử.' },
+            { id: '3EsLm7K8iVA', title: 'Đại tướng Võ Nguyên Giáp – Một huyền thoại', channel: 'Ấn tượng VTV', note: 'Phim tài liệu về Đại tướng Võ Nguyên Giáp.' },
+            { id: 'oFVyyTvHGUo', title: 'Những thước phim quý về đại tá, Anh hùng phi công Nguyễn Văn Bảy', channel: 'ANTV', note: 'Phim tư liệu nhân vật lịch sử.' },
+            { id: 'nmEyNHkCMlI', title: 'Toàn cảnh trận Điện Biên Phủ – Cuộc đấu trí của tướng Giáp và Navarre', channel: 'Vệ Quốc Quân', note: 'Video dài về chiến dịch Điện Biên Phủ năm 1954.' }
+        ];
 
-            var player = document.getElementById('modal-video-player');
-            var desc = document.getElementById('modal-video-desc');
-            if (player) {
-                player.src = videoSrc;
-                player.play().catch(function() {});
-            }
-            if (desc) {
-                desc.innerHTML = '⚔️ <strong>' + videoTitle + ' (' + videoSrc + '):</strong> Thước phim tư liệu lịch sử Đại Việt hào hùng, khơi dậy niềm tự hào dân tộc và lòng biết ơn tổ tiên.';
-            }
+        function renderVideoLibraryHtml() {
+            return '<div class="video-library-grid" id="video-library-grid">' + VIDEO_LIBRARY_ITEMS.map(function(item, index) {
+                var thumb = 'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg';
+                return '<button type="button" class="video-library-card" onclick="moVideoThuVien(' + index + ')" aria-label="Phát video: ' + item.title.replace(/"/g, '&quot;') + '">' +
+                    '<img src="' + thumb + '" alt="Ảnh bìa video: ' + item.title.replace(/"/g, '&quot;') + '" loading="lazy" referrerpolicy="no-referrer">' +
+                    '<span class="video-library-card__body"><span class="video-library-card__title">' + item.title + '</span><span class="video-library-card__meta">' + item.channel + ' · ' + item.note + '</span></span></button>';
+            }).join('') + '</div><p class="modal-video-desc">Chọn một thẻ để mở video từ YouTube. Video chỉ được tải khi bạn nhấn phát.</p>' +
+                '<div id="video-library-player" hidden></div>';
+        }
+
+        function moVideoThuVien(index) {
+            var item = VIDEO_LIBRARY_ITEMS[index];
+            var grid = document.getElementById('video-library-grid');
+            var player = document.getElementById('video-library-player');
+            if (!item || !grid || !player) return;
+            grid.hidden = true;
+            player.hidden = false;
+            player.className = 'video-library-player';
+            player.innerHTML = '<div class="video-library-player__top"><button type="button" class="video-library-back" onclick="dongVideoThuVien()">← Danh sách video</button><h3>' + item.title + '</h3></div>' +
+                '<iframe id="youtube-video-frame" class="video-library-frame" src="https://www.youtube-nocookie.com/embed/' + item.id + '?autoplay=1&rel=0" title="' + item.title.replace(/"/g, '&quot;') + '" loading="eager" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+        }
+
+        function dongVideoThuVien() {
+            var frame = document.getElementById('youtube-video-frame');
+            if (frame) frame.src = 'about:blank';
+            var player = document.getElementById('video-library-player');
+            var grid = document.getElementById('video-library-grid');
+            if (player) { player.innerHTML = ''; player.hidden = true; }
+            if (grid) grid.hidden = false;
         }
 
         function guiDongGopTuLieu(event) {
