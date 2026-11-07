@@ -817,6 +817,7 @@
             align-items: center;
             gap: 12px;
         }
+        .post-action-bar .action-btns-group:last-child { flex-wrap: wrap; }
 
         .btn-post-action {
             background: transparent;
@@ -894,6 +895,22 @@
             font: inherit;
             cursor: pointer;
         }
+        .btn-admin-delete-post,
+        .admin-report-delete-post {
+            min-height: 44px;
+            padding: 8px 12px;
+            border: 1px solid #9F2424 !important;
+            border-radius: 8px;
+            background: #8F1D1D !important;
+            color: #FFF !important;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-admin-delete-post:hover,
+        .admin-report-delete-post:hover { background: #B52A2A !important; }
+        .btn-admin-delete-post:disabled,
+        .admin-report-delete-post:disabled { opacity: .58; cursor: wait; }
         .forum-report-dialog {
             width: min(520px, calc(100vw - 28px));
             max-height: min(84dvh, 720px);
@@ -1447,7 +1464,9 @@
             doc,
             setDoc,
             updateDoc,
-            increment
+            increment,
+            getDocs,
+            writeBatch
         } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
         // ===================================================
@@ -1492,6 +1511,7 @@
         let nguoiDungHienTai = null;
         let isFirestoreActive = false;
         let daNhanDuLieuCloud = false;
+        let daTaiBaiVietCloud = false;
 
         // Khởi tạo Firebase nếu có cấu hình thật
         if (isRealFirebase) {
@@ -1510,6 +1530,7 @@
                 onAuthStateChanged(auth, user => {
                     nguoiDungHienTai = user;
                     capNhatNutBaoCaoAdmin();
+                    if (typeof window.renderBangTin === 'function') window.renderBangTin();
                     const displayName = user && (user.displayName || user.email || localStorage.getItem('tenNguoiDung'));
                     if (displayName) {
                         const author = document.getElementById('composer-author');
@@ -2172,6 +2193,7 @@
                 }, 8000);
                 onSnapshot(q, (snapshot) => {
                     daNhanDuLieuCloud = true;
+                    daTaiBaiVietCloud = true;
                     clearTimeout(fallbackTimer);
                     const posts = [];
                     snapshot.forEach(docSnap => {
@@ -2180,6 +2202,7 @@
                     danhSachBaiViet = posts;
                     capNhatTrangThaiKetNoi(true, nguoiDungHienTai ? "Đã đăng nhập Firebase" : "Đã kết nối · cần đăng nhập để đăng bài");
                     renderBangTin();
+                    if (laQuanTriVien()) renderBaoCaoChoAdmin();
                     capNhatThongSo();
                 }, (error) => {
                     daNhanDuLieuCloud = true;
@@ -2553,6 +2576,7 @@
         };
         let adminReportsUnsubscribe = null;
         let adminReportsCache = [];
+        const deletingPostsInProgress = new Set();
 
         function laQuanTriVien() {
             return Boolean(nguoiDungHienTai && forumAdminUids.has(nguoiDungHienTai.uid));
@@ -2672,6 +2696,8 @@
             list.innerHTML = adminReportsCache.map(report => {
                 const status = reportStatusLabels[report.status] ? report.status : 'pending';
                 const reason = reportReasonLabels[report.reason] || 'Lý do khác';
+                const postId = typeof report.postId === 'string' ? report.postId : '';
+                const postIsKnownDeleted = daTaiBaiVietCloud && !danhSachBaiViet.some(post => post.id === postId);
                 return `
                     <article class="admin-report-card">
                         <div class="admin-report-heading">
@@ -2679,9 +2705,11 @@
                             <span class="admin-report-meta">${escapeHtml(reportStatusLabels[status])}</span>
                         </div>
                         <p>${escapeHtml(report.details || 'Không có mô tả thêm.')}</p>
-                        <p class="admin-report-meta">Bài viết: ${escapeHtml(report.postId || '')} · Người gửi UID: ${escapeHtml(report.reporterUid || '')} · ${escapeHtml(dinhDangThoiGian(report.createdAt))}</p>
+                        <p class="admin-report-meta">Bài viết: ${escapeHtml(postId)} · Người gửi UID: ${escapeHtml(report.reporterUid || '')} · ${escapeHtml(dinhDangThoiGian(report.createdAt))}</p>
+                        ${postIsKnownDeleted ? '<p class="admin-report-meta">🗑️ Bài viết đã bị xóa; báo cáo được giữ lại để lưu hồ sơ.</p>' : ''}
                         <div class="admin-report-controls">
-                            <button type="button" data-open-reported-post="${escapeHtml(report.postId || '')}">Mở bài viết</button>
+                            <button type="button" data-open-reported-post="${escapeHtml(postId)}" ${postIsKnownDeleted ? 'disabled' : ''}>Mở bài viết</button>
+                            ${postIsKnownDeleted ? '' : `<button type="button" class="admin-report-delete-post" data-admin-delete-post="${escapeHtml(postId)}" aria-label="Xóa bài viết được báo cáo">🗑 Xóa bài này</button>`}
                             <label for="report-status-${escapeHtml(report.id)}">Trạng thái:</label>
                             <select id="report-status-${escapeHtml(report.id)}" data-report-status="${escapeHtml(report.id)}" aria-label="Cập nhật trạng thái báo cáo">
                                 ${Object.entries(reportStatusLabels).map(([value, label]) => `<option value="${value}" ${status === value ? 'selected' : ''}>${label}</option>`).join('')}
@@ -2706,13 +2734,86 @@
             }
         }
 
+        async function xoaBaiVietKemDuLieu(postId, button = null) {
+            if (!laQuanTriVien()) {
+                hienToast('Chỉ quản trị viên mới được xóa bài viết.');
+                return;
+            }
+            if (!db || !isFirestoreActive || !postId || deletingPostsInProgress.has(postId)) {
+                if (!db || !isFirestoreActive) hienToast('Firestore chưa sẵn sàng; chưa có dữ liệu nào bị xóa.');
+                return;
+            }
+
+            const post = danhSachBaiViet.find(item => item.id === postId);
+            const author = post?.author || 'bài viết này';
+            const excerpt = (post?.content || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+            const approved = window.confirm(
+                `Xóa bài của ${author}?${excerpt ? `\n\n“${excerpt}${post.content.length > 160 ? '…' : ''}”` : ''}\n\nBài viết và toàn bộ bình luận sẽ bị xóa. Các báo cáo liên quan được giữ lại và chuyển sang “Đã xử lý”. Thao tác không thể hoàn tác.`
+            );
+            if (!approved) return;
+
+            deletingPostsInProgress.add(postId);
+            if (button) { button.disabled = true; button.textContent = 'Đang xóa…'; }
+            try {
+                const [commentsSnapshot, reportsSnapshot] = await Promise.all([
+                    getDocs(query(collection(db, 'comments'), where('postId', '==', postId))),
+                    getDocs(query(collection(db, 'reports'), where('postId', '==', postId)))
+                ]);
+                const writeCount = commentsSnapshot.size + reportsSnapshot.size + 1;
+                if (writeCount > 500) {
+                    throw new Error(`Bài này có ${writeCount} dữ liệu liên quan, vượt giới hạn 500 thao tác của một lần xóa an toàn. Chưa có dữ liệu nào bị xóa.`);
+                }
+
+                const batch = writeBatch(db);
+                commentsSnapshot.docs.forEach(commentDoc => batch.delete(commentDoc.ref));
+                reportsSnapshot.docs.forEach(reportDoc => batch.update(reportDoc.ref, {
+                    status: 'resolved',
+                    updatedAt: serverTimestamp()
+                }));
+                batch.delete(doc(db, 'posts', postId));
+                await batch.commit();
+
+                danhSachBaiViet = danhSachBaiViet.filter(item => item.id !== postId);
+                try {
+                    renderBangTin();
+                    capNhatThongSo();
+                    renderBaoCaoChoAdmin();
+                } catch (refreshError) {
+                    console.warn('Đã xóa thành công nhưng không làm mới được giao diện ngay:', refreshError);
+                }
+                hienToast(`Đã xóa bài viết cùng ${commentsSnapshot.size} bình luận. Các báo cáo được lưu lại.`);
+            } catch (error) {
+                console.error('Không thể xóa bài viết và dữ liệu liên quan:', error);
+                if (error?.code === 'permission-denied') {
+                    hienToast('Firestore từ chối xóa. Hãy kiểm tra Rules admin đã được Publish; dữ liệu vẫn được giữ nguyên.');
+                } else if (error?.message?.includes('500 thao tác')) {
+                    hienToast(error.message);
+                } else {
+                    hienToast('Không xóa được bài viết. Kiểm tra mạng và Firestore Rules; dữ liệu chưa được xác nhận là đã xóa.');
+                }
+            } finally {
+                deletingPostsInProgress.delete(postId);
+                if (button?.isConnected) { button.disabled = false; button.textContent = '🗑 Xóa bài này'; }
+            }
+        }
+
         const postsContainerForReports = document.getElementById('posts-container');
         postsContainerForReports?.addEventListener('click', event => {
+            const deleteButton = event.target.closest('[data-admin-delete-post]');
+            if (deleteButton) {
+                xoaBaiVietKemDuLieu(deleteButton.dataset.adminDeletePost, deleteButton);
+                return;
+            }
             const button = event.target.closest('[data-report-post]');
             if (button) window.moBaoCaoBaiViet(button.dataset.reportPost);
         });
         const adminReportsList = document.getElementById('admin-reports-list');
         adminReportsList?.addEventListener('click', event => {
+            const deleteButton = event.target.closest('[data-admin-delete-post]');
+            if (deleteButton) {
+                xoaBaiVietKemDuLieu(deleteButton.dataset.adminDeletePost, deleteButton);
+                return;
+            }
             const button = event.target.closest('[data-open-reported-post]');
             if (!button) return;
             window.dongDongBaoCaoAdmin();
@@ -2827,6 +2928,7 @@
                                 <button class="btn-post-action" type="button" data-report-post="${escapeHtml(postId)}" aria-label="Báo cáo bài viết của ${author}">
                                     <span>⚑</span> Báo cáo
                                 </button>
+                                ${laQuanTriVien() ? `<button class="btn-admin-delete-post" type="button" data-admin-delete-post="${escapeHtml(postId)}" aria-label="Xóa bài viết này">🗑 Xóa bài</button>` : ''}
                             </div>
                         </div>
 
