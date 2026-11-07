@@ -51,7 +51,9 @@
             font-family: 'Noto Serif', 'Times New Roman', serif;
             color: var(--nau-den);
             background-color: var(--giay-co);
-            background-image: radial-gradient(circle at 50% 0%, #FFF9EB 0%, #F4ECD8 65%, #EADBBE 100%);
+            background-image: 
+                radial-gradient(circle at 50% 0%, #FFF9EB 0%, #F4ECD8 65%, #EADBBE 100%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%237B1E1E' fill-opacity='0.028' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
             line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
@@ -129,8 +131,10 @@
         .sub-navbar {
             background: #24140D;
             border-top: 1px solid rgba(212, 175, 55, 0.3);
-            overflow-x: auto;
-            white-space: nowrap;
+            border-bottom: 2px solid var(--vang-dong);
+            position: relative;
+            z-index: 999;
+            overflow: visible;
         }
 
         .sub-navbar__menu {
@@ -138,12 +142,22 @@
             margin: 0 auto;
             padding: 0 24px;
             display: flex;
+            align-items: center;
             list-style: none;
             gap: 6px;
+            overflow: visible;
+            flex-wrap: wrap;
         }
 
-        .sub-navbar__item a {
-            display: block;
+        .sub-navbar__item {
+            position: relative;
+        }
+
+        .sub-navbar__item a,
+        .sub-navbar__link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             padding: 10px 16px;
             font-size: 0.82rem;
             font-weight: 700;
@@ -151,13 +165,100 @@
             color: #E0CEB3;
             transition: all 0.25s ease;
             border-bottom: 3px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
         }
 
         .sub-navbar__item a:hover,
-        .sub-navbar__item.active a {
+        .sub-navbar__item.active a,
+        .sub-navbar__item.is-open > .sub-navbar__link,
+        .sub-navbar__link:hover {
             color: var(--vang-dong);
             background: rgba(212, 175, 55, 0.1);
             border-bottom-color: var(--vang-dong);
+        }
+
+        .arrow-down {
+            font-size: 0.72rem;
+            color: var(--vang-dong);
+            transition: transform 0.25s ease;
+            display: inline-block;
+        }
+
+        .sub-navbar__item.is-open .arrow-down {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown Menu Tài Liệu (gồm: Ngày nay, Video, Nhân vật — phong cách trang chính) */
+        .sub-navbar__dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(180deg, #4A2E1A 0%, #382112 100%);
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
+            list-style: none;
+            padding: 8px 0;
+            margin: 0;
+            min-width: 210px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(0, 8px, 0);
+            transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
+            z-index: 1005;
+        }
+
+        .sub-navbar__item:hover > .sub-navbar__dropdown,
+        .sub-navbar__item:focus-within > .sub-navbar__dropdown,
+        .sub-navbar__item.is-open > .sub-navbar__dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .sub-navbar__dropdown li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sub-navbar__dropdown li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 18px;
+            color: #F4ECD8;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.86rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-left: 3px solid transparent;
+            border-bottom: none;
+            transition: color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+        }
+
+        .sub-navbar__dropdown li a:hover {
+            background: #5C3A21;
+            color: var(--vang-hover, #E8C84A);
+            border-left-color: var(--vang-dong);
+            transform: translateX(4px);
+        }
+
+        .sub-navbar__dropdown .dropdown-item-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .sub-navbar__dropdown .dropdown-item-text {
+            flex-grow: 1;
         }
 
         /* ====================================================== */
@@ -245,6 +346,113 @@
             font-size: 1.1rem;
         }
 
+        /* Lớp tro than lửa thiêng chuyển động ngầm (Canvas Embers) */
+        .forum-hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.72;
+        }
+
+        /* Anh Hào Bảng: Vinh danh Sĩ tử & Tinh anh tuần này */
+        .forum-honor-roll {
+            margin-top: 26px;
+            background: rgba(22, 12, 7, 0.74);
+            border: 1.5px solid var(--vang-dong);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 16px rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(4px);
+        }
+
+        .honor-roll-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.92rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #FFF2A8;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .honor-roll-title::before, .honor-roll-title::after {
+            content: '';
+            height: 1px;
+            width: 40px;
+            background: linear-gradient(90deg, transparent, var(--vang-dong));
+        }
+        .honor-roll-title::after {
+            background: linear-gradient(90deg, var(--vang-dong), transparent);
+        }
+
+        .honor-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .honor-card {
+            background: rgba(36, 20, 13, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 9px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.25s ease;
+            text-align: left;
+        }
+
+        .honor-card:hover {
+            border-color: var(--vang-dong);
+            transform: translateY(-2px);
+            background: rgba(48, 27, 18, 0.95);
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.2);
+        }
+
+        .honor-card--first {
+            border-color: rgba(212, 175, 55, 0.65);
+            background: linear-gradient(135deg, rgba(60, 30, 15, 0.9) 0%, rgba(36, 20, 13, 0.85) 100%);
+        }
+
+        .honor-medal {
+            font-size: 1.6rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            flex-shrink: 0;
+        }
+
+        .honor-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .honor-role {
+            font-size: 0.74rem;
+            color: #CDB79E;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .honor-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: #FFF2A8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         /* ====================================================== */
         /*  MAIN CONTAINER LAYOUT                                 */
         /* ====================================================== */
@@ -312,19 +520,67 @@
             background-image: 
                 radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
                 radial-gradient(ellipse at bottom right, rgba(123, 30, 30, 0.05) 0%, transparent 60%);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .scroll-composer.dragover {
+            border-color: #2ECC71 !important;
+            box-shadow: 0 0 24px rgba(46, 204, 113, 0.4) !important;
+            background-color: #F8FFF9 !important;
         }
 
         /* Họa tiết góc cổ điển */
         .scroll-composer::before,
         .scroll-composer::after {
-            content: '✦';
+            content: '❖';
             position: absolute;
             color: var(--vang-dong);
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1;
         }
         .scroll-composer::before { top: 8px; left: 10px; }
         .scroll-composer::after { bottom: 8px; right: 10px; }
+
+        /* Nhãn thẩm định & trích dẫn lịch sử (Fact-Check Chips) */
+        .composer-fact-chips {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0 14px;
+            padding: 8px 12px;
+            background: rgba(244, 236, 216, 0.6);
+            border: 1px dashed #D3C3A6;
+            border-radius: 8px;
+        }
+
+        .fact-chips-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--do-ba-trau);
+            white-space: nowrap;
+        }
+
+        .fact-chip-btn {
+            background: #FFFDF8;
+            border: 1px solid #C4A575;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--nau-go);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .fact-chip-btn:hover {
+            background: var(--do-ba-trau);
+            color: #FFF;
+            border-color: var(--do-ba-trau);
+            transform: translateY(-1px);
+        }
 
         .composer-header {
             display: flex;
@@ -719,8 +975,8 @@
 
         .scroll-post-card:hover {
             border-color: var(--vang-dong);
-            box-shadow: 0 8px 26px rgba(44, 30, 24, 0.14);
-            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(44, 30, 24, 0.16), 0 0 1px 1px rgba(212, 175, 55, 0.5);
+            transform: translateY(-3px);
         }
 
         /* Họa tiết thanh cuốn hai đầu */
@@ -734,6 +990,39 @@
             background: linear-gradient(90deg, transparent 0%, var(--vang-dong) 50%, transparent 100%);
         }
 
+        /* Triện son Hoàng Gia (Cinnabar Imperial Seal) */
+        .post-royal-seal {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            border: 2px solid #B22222;
+            color: #B22222;
+            background: rgba(178, 34, 34, 0.06);
+            padding: 3px 8px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            border-radius: 4px;
+            transform: rotate(6deg);
+            user-select: none;
+            box-shadow: inset 0 0 4px rgba(178, 34, 34, 0.2), 0 2px 6px rgba(178, 34, 34, 0.15);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .post-royal-seal::before {
+            content: '「';
+            margin-right: 2px;
+        }
+        .post-royal-seal::after {
+            content: '」';
+            margin-left: 2px;
+        }
+
         .post-top-meta {
             display: flex;
             align-items: center;
@@ -741,6 +1030,7 @@
             margin-bottom: 14px;
             flex-wrap: wrap;
             gap: 10px;
+            padding-right: 70px; /* Chừa khoảng trống cho Triện Son */
         }
 
         .post-author-cluster {
@@ -750,8 +1040,8 @@
         }
 
         .post-seal-avatar {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             background: linear-gradient(135deg, #7B1E1E 0%, #4A1212 100%);
             border: 2px solid var(--vang-dong);
@@ -760,8 +1050,14 @@
             justify-content: center;
             font-size: 1.3rem;
             color: #FFF2A8;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
             flex-shrink: 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .post-seal-avatar:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
         }
 
         .post-author-name {
@@ -780,6 +1076,36 @@
             font-weight: 700;
             margin-left: 6px;
             border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        /* Huy hiệu học vị / phẩm cấp hoàng gia */
+        .post-author-rank {
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .rank-tuong-soai {
+            background: rgba(212, 175, 55, 0.2);
+            color: #8A6D1C;
+            border: 1px solid var(--vang-dong);
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+        }
+
+        .rank-han-lam {
+            background: rgba(46, 204, 113, 0.15);
+            color: #196F3D;
+            border: 1px solid #27AE60;
+        }
+
+        .rank-hien-si {
+            background: rgba(123, 30, 30, 0.1);
+            color: var(--do-ba-trau);
+            border: 1px solid rgba(123, 30, 30, 0.3);
         }
 
         .post-timestamp {
@@ -848,15 +1174,108 @@
         }
 
         .btn-post-action.liked {
-            color: #C0392B;
-            border-color: #C0392B;
-            background: rgba(192, 57, 43, 0.08);
+            color: #B22222;
+            border-color: #B22222;
+            background: rgba(178, 34, 34, 0.12);
+            font-weight: 800;
+        }
+
+        /* Hoạt họa va chạm kim khí & tia lửa (Sword Clash Sparkle) */
+        @keyframes swordClashSpark {
+            0% { transform: scale(1); filter: drop-shadow(0 0 0 gold); }
+            30% { transform: scale(1.4) rotate(-18deg); filter: drop-shadow(0 0 12px #F5D77F); }
+            60% { transform: scale(1.2) rotate(18deg); filter: drop-shadow(0 0 16px #D4AF37); }
+            100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.5)); }
+        }
+
+        .btn-post-action.sparkle-active span:first-child {
+            display: inline-block;
+            animation: swordClashSpark 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .btn-post-action.comment-active {
             background: var(--do-ba-trau);
             color: #FFF;
             border-color: var(--do-ba-trau);
+        }
+
+        /* Nút trích dẫn trong bình luận */
+        .btn-quote-comment {
+            background: transparent;
+            border: none;
+            color: #7D6B58;
+            font-size: 0.74rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-quote-comment:hover {
+            color: var(--do-ba-trau);
+            background: rgba(123, 30, 30, 0.08);
+        }
+
+        /* Nút thỉnh Sử Quan Ảo ý kiến phản biện */
+        .btn-ask-su-quan {
+            background: linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%);
+            color: #FFF;
+            border: 1px solid #63B3ED;
+            border-radius: 6px;
+            padding: 9px 14px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-ask-su-quan:hover {
+            background: linear-gradient(135deg, #2B6CB0 0%, #3182CE 100%);
+            box-shadow: 0 2px 10px rgba(43, 108, 176, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* Nút Khai Bút Nổi (Floating Action Button - FAB Mobile & Scroll) */
+        .forum-mobile-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--do-ba-trau) 0%, #9B2E2E 100%);
+            color: #FFF;
+            border: 2px solid var(--vang-dong);
+            border-radius: 28px;
+            padding: 10px 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 10px rgba(212, 175, 55, 0.4);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 990;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+
+        .forum-mobile-fab.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .forum-mobile-fab:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(123, 30, 30, 0.5), 0 0 14px rgba(212, 175, 55, 0.6);
         }
 
         .admin-reports-panel {
@@ -1177,7 +1596,13 @@
         .media-upload-status progress { display: block; width: min(100%, 420px); height: 10px; margin-top: 5px; accent-color: var(--do-ba-trau); }
         .post-media { display: block; width: min(100%, 720px); max-height: 520px; object-fit: contain; border-radius: 12px; border: 1px solid #C5AC81; background: #1E1815; margin: 0 0 18px; }
 
-        :root[data-theme="dark"] body { color: #F1E7D6; background: radial-gradient(circle at 50% 0%, #30241D 0%, #17120F 70%, #100D0B 100%); }
+        :root[data-theme="dark"] body { 
+            color: #F1E7D6; 
+            background-color: #17120F;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #30241D 0%, #17120F 70%, #100D0B 100%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.035' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+        }
         :root[data-theme="dark"] .scroll-composer,
         :root[data-theme="dark"] .scroll-post-card,
         :root[data-theme="dark"] .empty-feed-state,
@@ -1196,6 +1621,10 @@
         :root[data-theme="dark"] .composer-hashtags-row { background: #2B211A; border-color: #705A3A; }
         :root[data-theme="dark"] .composer-hashtags-label { color: #E6C894; }
         :root[data-theme="dark"] .composer-hashtags-input::placeholder { color: #9A8671; }
+        :root[data-theme="dark"] .composer-fact-chips { background: #2B211A; border-color: #705A3A; }
+        :root[data-theme="dark"] .fact-chips-title { color: #F3D981; }
+        :root[data-theme="dark"] .fact-chip-btn { background: #382B20; color: #F3D981; border-color: #80682F; }
+        :root[data-theme="dark"] .fact-chip-btn:hover { background: #80682F; color: #FFF; }
         :root[data-theme="dark"] .post-hashtag-item { background: rgba(212, 175, 55, 0.15); color: #F3D981; border-color: rgba(212, 175, 55, 0.35); }
         :root[data-theme="dark"] .post-hashtag-item:hover { background: rgba(212, 175, 55, 0.28); }
         :root[data-theme="dark"] .post-body-content,
@@ -1207,10 +1636,19 @@
         :root[data-theme="dark"] .btn-shuffle-feed { background: #35281E; color: #F3D981; border-color: #80682F; }
         :root[data-theme="dark"] .btn-shuffle-feed:hover { background: #80682F; color: #FFF; }
         :root[data-theme="dark"] .post-unread-badge { background: #2ECC71; color: #102416; }
+        :root[data-theme="dark"] .post-royal-seal { border-color: #E74C3C; color: #FF7675; background: rgba(231, 76, 60, 0.15); }
+        :root[data-theme="dark"] .rank-tuong-soai { background: rgba(212, 175, 55, 0.2); color: #F3D981; border-color: #D4AF37; }
+        :root[data-theme="dark"] .rank-han-lam { background: rgba(46, 204, 113, 0.2); color: #58D68D; border-color: #27AE60; }
+        :root[data-theme="dark"] .rank-hien-si { background: rgba(231, 76, 60, 0.2); color: #E6B0AA; border-color: #922B21; }
+        :root[data-theme="dark"] .btn-quote-comment { color: #C6AE83; }
+        :root[data-theme="dark"] .btn-quote-comment:hover { color: #F3D981; background: rgba(212, 175, 55, 0.15); }
         :root[data-theme="dark"] .post-category-tag,
         :root[data-theme="dark"] .feed-filter-btn,
         :root[data-theme="dark"] .btn-media-picker { background: #382B20; color: #F3D981; border-color: #80682F; }
         :root[data-theme="dark"] .comments-drawer { background: rgba(10, 8, 7, 0.45); border-color: #59472E; }
+        :root[data-theme="dark"] .sub-navbar__dropdown { background: linear-gradient(180deg, #2A170E 0%, #1A0D08 100%); border-color: #C6A850; }
+        :root[data-theme="dark"] .sub-navbar__dropdown li a { color: #F1E7D6; }
+        :root[data-theme="dark"] .sub-navbar__dropdown li a:hover { background: #3D2214; color: #F3D981; border-left-color: #F3D981; }
 
         /* TOAST THÔNG BÁO */
         .toast-box {
@@ -1252,6 +1690,8 @@
             .viewer-actions-box { width: 100%; justify-content: space-between; }
             .admin-reports-panel { padding: 12px; }
             .report-dialog-form { padding: 16px; }
+            .sub-navbar__menu { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+            .sub-navbar__dropdown { left: auto; right: 0; min-width: 190px; }
         }
     </style>
 </head>
@@ -1276,7 +1716,7 @@
             </div>
         </div>
 
-        <nav class="sub-navbar">
+        <nav class="sub-navbar" id="sub-navbar">
             <ul class="sub-navbar__menu">
                 <li class="sub-navbar__item"><a href="index.html">🏠 TRANG CHỦ</a></li>
                 <li class="sub-navbar__item"><a href="trang-chinh.html">📜 SẢNH CHÍNH</a></li>
@@ -1285,6 +1725,45 @@
                 <li class="sub-navbar__item"><a href="sa-ban.html">🗺️ SA BÀN 2D</a></li>
                 <li class="sub-navbar__item"><a href="sa-ban-3d.html">🚀 SA BÀN 3D</a></li>
                 <li class="sub-navbar__item active"><a href="quan-anh-hoi.html">⚔️ QUẦN ANH HỘI</a></li>
+
+                <!-- MỤC TÀI LIỆU ▾ (Gộp: Ngày nay, Video, Nhân vật — giống trang chính) -->
+                <li class="sub-navbar__item has-dropdown" data-name="Tài liệu" id="nav-item-tai-lieu">
+                    <a href="javascript:void(0)" class="sub-navbar__link" id="btn-tai-lieu" onclick="toggleDropdownSubnav(event, 'tai-lieu')" aria-haspopup="true" aria-expanded="false" title="Kho Tài Liệu Lịch Sử">
+                        📚 TÀI LIỆU <span class="arrow-down">▾</span>
+                    </a>
+                    <ul class="sub-navbar__dropdown" id="dropdown-tai-lieu">
+                        <li>
+                            <a href="trang-chinh.html?modal=nhan-vat" title="Bách khoa Nhân vật & Danh tướng">
+                                <span class="dropdown-item-icon">👑</span>
+                                <span class="dropdown-item-text">Nhân vật</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="trang-chinh.html?modal=di-tich" title="Quần thể Di tích Lịch sử">
+                                <span class="dropdown-item-icon">🏰</span>
+                                <span class="dropdown-item-text">Di tích</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="trang-chinh.html?modal=ngay-nay" title="Lịch sử Ngày nay & Di sản sống">
+                                <span class="dropdown-item-icon">🌐</span>
+                                <span class="dropdown-item-text">Ngày nay</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="trang-chinh.html?modal=sach" title="Tủ Sách Lịch Sử Kinh Điển">
+                                <span class="dropdown-item-icon">📚</span>
+                                <span class="dropdown-item-text">Sách</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="trang-chinh.html?modal=video" title="Thư viện Video tư liệu lịch sử">
+                                <span class="dropdown-item-icon">🎬</span>
+                                <span class="dropdown-item-text">Video</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -1293,6 +1772,7 @@
     <!--  2. HERO BANNER CỔ ĐIỂN                                      -->
     <!-- ============================================================ -->
     <section class="forum-hero">
+        <canvas id="forum-hero-canvas" class="forum-hero-canvas" aria-hidden="true"></canvas>
         <div class="forum-hero__inner">
             <span class="forum-hero__badge">ĐÀM ĐẠO SỬ HỌC ĐẠI VIỆT</span>
             <h1 class="forum-hero__title">QUẦN ANH HỘI</h1>
@@ -1312,6 +1792,38 @@
                 <div class="stat-badge">
                     <span>⚡ Trạng thái:</span>
                     <strong id="stat-network-status">Đang kết nối</strong>
+                </div>
+            </div>
+
+            <!-- ANH HÀO BẢNG: TOP SĨ TỬ & HÀN LÂM NỔI BẬT -->
+            <div class="forum-honor-roll" id="forum-honor-roll">
+                <div class="honor-roll-title">
+                    <span class="honor-roll-gem">🎖️</span>
+                    <span>ANH HÀO BẢNG TUẦN NÀY</span>
+                    <span class="honor-roll-gem">🎖️</span>
+                </div>
+                <div class="honor-cards-grid">
+                    <div class="honor-card honor-card--first" id="honor-top-author" title="Sĩ tử có nhiều bài khai bút chất lượng nhất">
+                        <span class="honor-medal">🥇</span>
+                        <div class="honor-info">
+                            <span class="honor-role">Thủ Khoa Đàm Đạo</span>
+                            <strong class="honor-name" id="honor-name-posts">Đang tổng kết...</strong>
+                        </div>
+                    </div>
+                    <div class="honor-card" id="honor-top-commenter" title="Sĩ tử tích cực luận bàn và giải đáp nhất">
+                        <span class="honor-medal">⚔️</span>
+                        <div class="honor-info">
+                            <span class="honor-role">Dũng Sĩ Phản Biện</span>
+                            <strong class="honor-name" id="honor-name-comments">Đang tổng kết...</strong>
+                        </div>
+                    </div>
+                    <div class="honor-card" id="honor-top-liked" title="Sĩ tử nhận được nhiều lượt thán phục nhất">
+                        <span class="honor-medal">📜</span>
+                        <div class="honor-info">
+                            <span class="honor-role">Sử Học Uyên Bác</span>
+                            <strong class="honor-name" id="honor-name-likes">Đang tổng kết...</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1359,6 +1871,16 @@
                     </select>
                     <input type="text" id="composer-custom-topic" class="composer-custom-topic-input" placeholder="Nhập chủ đề riêng (2-50 ký tự)..." maxlength="50" style="display: none;" autocomplete="off" aria-label="Chủ đề đàm luận riêng">
                 </div>
+            </div>
+
+            <!-- Nhãn thẩm định & trích dẫn lịch sử nhanh -->
+            <div class="composer-fact-chips">
+                <span class="fact-chips-title">🏷️ Nhãn Luận Điểm:</span>
+                <button type="button" class="fact-chip-btn" onclick="chenTagHocThuat('[Chính Sử SGK]')" title="Nội dung chuẩn SGK và Đại Việt Sử Ký Toàn Thư">🏛️ [Chính Sử SGK]</button>
+                <button type="button" class="fact-chip-btn" onclick="chenTagHocThuat('[Khảo Cổ Thực Chứng]')" title="Hiện vật, bãi cọc, mũi tên đồng, trống đồng...">🏺 [Khảo Cổ Thực Chứng]</button>
+                <button type="button" class="fact-chip-btn" onclick="chenTagHocThuat('[Dã Sử / Dân Gian]')" title="Truyền thuyết, ca dao, truyền ngôn dã sử">🍃 [Dã Sử / Dân Gian]</button>
+                <button type="button" class="fact-chip-btn" onclick="chenTagHocThuat('[Ôn Thi THPT]')" title="Hỏi đáp & bí kíp ôn thi tốt nghiệp GDPT">🎯 [Ôn Thi THPT]</button>
+                <button type="button" class="fact-chip-btn" onclick="chenTagHocThuat('[Chiến Thuật Quân Sự]')" title="Binh pháp, trận đồ, mưu lược quân sự">⚔️ [Chiến Thuật Quân Sự]</button>
             </div>
 
             <textarea 
@@ -1494,6 +2016,12 @@
             </div>
         </form>
     </dialog>
+
+    <!-- Nút Khai Bút Nổi (Mobile & Scroll FAB) -->
+    <button id="forum-mobile-fab" class="forum-mobile-fab" onclick="cuonVeKhaiBut()" aria-label="Khai bút nhanh" title="Cuộn nhanh về án thư khai bút">
+        <span>✍️</span>
+        <span>Khai Bút</span>
+    </button>
 
     <!-- TOAST THÔNG BÁO -->
     <div id="forum-toast" class="toast-box">Thông báo</div>
@@ -2436,6 +2964,11 @@ const docRef = await addDoc(collection(db, "posts"), {
             btnEl.classList.toggle('liked');
             const isLiked = btnEl.classList.contains('liked');
 
+            if (isLiked) {
+                btnEl.classList.add('sparkle-active');
+                setTimeout(() => btnEl.classList.remove('sparkle-active'), 700);
+            }
+
             if (isFirestoreActive && db) {
                 try {
                     const postRef = doc(db, "posts", postId);
@@ -2453,7 +2986,8 @@ const docRef = await addDoc(collection(db, "posts"), {
                     p.likes = (p.likes || 0) + (isLiked ? 1 : -1);
                     if (p.likes < 0) p.likes = 0;
                     localStorage.setItem('quanAnhHoi_posts', JSON.stringify(danhSachBaiViet));
-                    btnEl.innerHTML = `<span>❤️</span> <span>Thán Phục (${p.likes})</span>`;
+                    btnEl.innerHTML = `<span>⚔️</span> <span>Thán Phục (${p.likes})</span>`;
+                    capNhatThongSo();
                 }
             }
         };
@@ -2543,18 +3077,25 @@ const docRef = await addDoc(collection(db, "posts"), {
                 return;
             }
 
-            listEl.innerHTML = comments.map(c => `
+            listEl.innerHTML = comments.map(c => {
+                const cAuthor = escapeHtml(c.author || 'Hiền sĩ');
+                const cContent = escapeHtml(c.content || '');
+                const cRank = window.layHocViAuthor ? window.layHocViAuthor(c.author || '') : { danhXung: 'Hiền Sĩ', rankClass: 'rank-hien-si' };
+                const safeContentForQuote = (c.content || '').replace(/'/g, "\\'").replace(/\n/g, ' ');
+                return `
                 <div class="comment-item">
-                    <div class="comment-avatar">📜</div>
+                    <div class="comment-avatar" title="${cAuthor}">${layBieuTuongAuthor(c.author || '')}</div>
                     <div class="comment-content-box">
                         <div class="comment-author-name">
-                            ${escapeHtml(c.author || 'Hiền sĩ')}
+                            ${cAuthor}
+                            <span class="post-author-rank ${cRank.rankClass}" style="font-size: 0.68rem; padding: 1px 6px;">${cRank.danhXung}</span>
                             <span class="comment-time">• ${dinhDangThoiGian(c.createdAt)}</span>
+                            <button type="button" class="btn-quote-comment" onclick="trichDanBinhLuan('${cAuthor}', '${safeContentForQuote}', '${postId}')" title="Trích dẫn lời đàm đạo này">❝ Trích dẫn</button>
                         </div>
-                        <div class="comment-text">${escapeHtml(c.content || '')}</div>
+                        <div class="comment-text">${cContent}</div>
                     </div>
                 </div>
-            `).join('');
+            `;}).join('');
         }
 
         window.guiBinhLuan = async function(postId) {
@@ -3020,6 +3561,18 @@ const docRef = await addDoc(collection(db, "posts"), {
                 const likes = post.likes || 0;
                 const commentsCount = post.commentsCount || 0;
                 const isUnread = !viewedSet.has(postId);
+                const authorRank = window.layHocViAuthor ? window.layHocViAuthor(post.author || '') : { danhXung: 'Hiền Sĩ', rankClass: 'rank-hien-si' };
+
+                // Triện son Hoàng Gia: Đóng dấu bài viết có chất lượng / kiểm chứng cao
+                const isChuanSu = content.includes('[Chính Sử SGK]') || (post.content && post.content.includes('[Chính Sử SGK]'));
+                const isDacSac = (likes >= 2) || topic.includes('Bạch Đằng') || topic.includes('Như Nguyệt');
+                let royalSealHtml = '';
+                if (isChuanSu) {
+                    royalSealHtml = `<div class="post-royal-seal" title="Chứng thực sử liệu SGK"><span>CHUẨN SỬ</span></div>`;
+                } else if (isDacSac) {
+                    royalSealHtml = `<div class="post-royal-seal" title="Luận đề đặc sắc được quan tâm"><span>ĐẶC SẮC</span></div>`;
+                }
+
                 const media = post.media && typeof post.media.url === 'string' && /^https:\/\//i.test(post.media.url)
                     ? (post.media.type === 'video'
                         ? `<video class="post-media" src="${escapeHtml(post.media.url)}" controls playsinline preload="metadata" aria-label="Video trong bài đăng"></video>`
@@ -3033,16 +3586,19 @@ const docRef = await addDoc(collection(db, "posts"), {
                         .join('')}</div>`
                     : '';
 
+                const safeContentSnippet = (post.content || '').replace(/'/g, "\\'").replace(/\n/g, ' ').slice(0, 100);
+
                 return `
                     <article class="scroll-post-card${isUnread ? ' post-unread' : ''}" id="post-${postId}" data-post-id="${postId}">
+                        ${royalSealHtml}
                         <div class="post-top-meta">
                             <div class="post-author-cluster">
-                                <div class="post-seal-avatar" title="${author}">
-                                    ${layBieuTuongAuthor(author)}
+                                <div class="post-seal-avatar" title="${author} (${authorRank.danhXung})">
+                                    ${layBieuTuongAuthor(post.author || '')}
                                 </div>
                                 <div>
                                     <span class="post-author-name">${author}</span>
-                                    <span class="post-author-badge">Anh Hào</span>
+                                    <span class="post-author-rank ${authorRank.rankClass}">${authorRank.danhXung}</span>
                                     ${isUnread ? '<span class="post-unread-badge">Mới</span>' : ''}
                                     <span class="post-timestamp">⏱️ ${timeStr}</span>
                                 </div>
@@ -3056,8 +3612,8 @@ const docRef = await addDoc(collection(db, "posts"), {
 
                         <div class="post-action-bar">
                             <div class="action-btns-group">
-                                <button class="btn-post-action" onclick="thichBaiViet('${postId}', this)">
-                                    <span>❤️</span>
+                                <button class="btn-post-action" onclick="thichBaiViet('${postId}', this)" title="Bày tỏ thán phục (Kiếm khí tranh hùng)">
+                                    <span>⚔️</span>
                                     <span>Thán Phục (${likes})</span>
                                 </button>
                                 <button class="btn-post-action" id="btn-luanban-${postId}" onclick="batTatLuanBan('${postId}')">
@@ -3088,6 +3644,9 @@ const docRef = await addDoc(collection(db, "posts"), {
                                 >
                                 <button class="btn-send-comment" onclick="guiBinhLuan('${postId}')">
                                     Gửi Luận Bàn ➔
+                                </button>
+                                <button type="button" class="btn-ask-su-quan" onclick="thinhSuQuanBinhLuan('${postId}', '${safeContentSnippet}')" title="Thỉnh Sử Quan Ảo đối chiếu tư liệu luận bàn">
+                                    <span>🤖</span> <span>Thỉnh Sử Quan</span>
                                 </button>
                             </div>
                             <div class="comments-list" id="comments-list-${postId}">
@@ -3131,10 +3690,241 @@ const docRef = await addDoc(collection(db, "posts"), {
             if (statPosts) statPosts.textContent = visiblePosts.length;
 
             let totalReplies = 0;
+            const authorPostCount = {};
+            const authorLikesCount = {};
+            let maxCommentsPost = null;
+
             visiblePosts.forEach(p => {
-                totalReplies += (p.commentsCount || 0);
+                const cCount = (p.commentsCount || 0);
+                const lCount = (p.likes || 0);
+                const auth = (p.author || 'Hiền sĩ').trim();
+
+                totalReplies += cCount;
+                authorPostCount[auth] = (authorPostCount[auth] || 0) + 1;
+                authorLikesCount[auth] = (authorLikesCount[auth] || 0) + lCount;
+
+                if (!maxCommentsPost || cCount > (maxCommentsPost.commentsCount || 0)) {
+                    maxCommentsPost = p;
+                }
             });
             if (statReplies) statReplies.textContent = totalReplies;
+
+            capNhatAnhHaoBang(authorPostCount, authorLikesCount, maxCommentsPost);
+        }
+
+        function capNhatAnhHaoBang(authorPostCount, authorLikesCount, maxCommentsPost) {
+            const elPosts = document.getElementById('honor-name-posts');
+            const elComments = document.getElementById('honor-name-comments');
+            const elLikes = document.getElementById('honor-name-likes');
+
+            // 1. Top tác giả nhiều bài viết nhất
+            let topPostAuthor = 'Lê Quý Đôn';
+            let maxPosts = 0;
+            for (const [auth, count] of Object.entries(authorPostCount)) {
+                if (count > maxPosts) {
+                    maxPosts = count;
+                    topPostAuthor = auth;
+                }
+            }
+            if (elPosts) elPosts.textContent = maxPosts > 0 ? `${topPostAuthor} (${maxPosts} bài)` : 'Lê Quý Đôn (Hàn Lâm)';
+
+            // 2. Dũng sĩ phản biện (bài luận bàn nhiều nhất)
+            if (elComments) {
+                if (maxCommentsPost && (maxCommentsPost.commentsCount || 0) > 0) {
+                    elComments.textContent = `${maxCommentsPost.author || 'Hiền sĩ'} (${maxCommentsPost.commentsCount} luận bàn)`;
+                } else {
+                    elComments.textContent = 'Ngô Sĩ Liên (Sử Quan)';
+                }
+            }
+
+            // 3. Sử học uyên bác (nhiều lượt thán phục nhất)
+            let topLikeAuthor = 'Chu Văn An';
+            let maxLikes = 0;
+            for (const [auth, count] of Object.entries(authorLikesCount)) {
+                if (count > maxLikes) {
+                    maxLikes = count;
+                    topLikeAuthor = auth;
+                }
+            }
+            if (elLikes) elLikes.textContent = maxLikes > 0 ? `${topLikeAuthor} (${maxLikes} ⚔️)` : 'Chu Văn An (Tiến Sĩ)';
+        }
+
+        window.chenTagHocThuat = function(tag) {
+            const textarea = document.getElementById('composer-content');
+            if (!textarea) return;
+            const currentVal = textarea.value;
+            if (currentVal.includes(tag)) {
+                hienToast(`🏷️ Luận đề đã có nhãn ${tag}`);
+                textarea.focus();
+                return;
+            }
+            if (currentVal.trim().length === 0) {
+                textarea.value = tag + " ";
+            } else {
+                textarea.value = tag + " " + currentVal;
+            }
+            textarea.focus();
+            hienToast(`🏷️ Đã gắn nhãn học thuật ${tag}`);
+        };
+
+        window.layHocViAuthor = function(name) {
+            if (!name) return { danhXung: 'Hiền Sĩ', rankClass: 'rank-hien-si' };
+            const n = name.toLowerCase();
+            if (n.includes('tướng') || n.includes('soái') || n.includes('quân') || n.includes('trần') || n.includes('lê') || n.includes('nguyễn') || n.includes('đại việt')) {
+                return { danhXung: 'Tướng Soái', rankClass: 'rank-tuong-soai' };
+            }
+            if (n.includes('sử') || n.includes('tiến sĩ') || n.includes('học') || n.includes('lâm') || n.includes('khoa') || n.includes('thư sinh')) {
+                return { danhXung: 'Hàn Lâm', rankClass: 'rank-han-lam' };
+            }
+            return { danhXung: 'Hiền Sĩ', rankClass: 'rank-hien-si' };
+        };
+
+        window.trichDanBinhLuan = function(author, text, postId) {
+            const input = document.getElementById(`input-comment-${postId}`);
+            if (!input) return;
+            const cleanText = text.replace(/\n+/g, ' ').slice(0, 70);
+            input.value = `> [${author}]: "${cleanText}..."\n` + input.value;
+            input.focus();
+            hienToast(`❝ Đã trích dẫn lời luận bàn của ${author}`);
+        };
+
+        window.thinhSuQuanBinhLuan = function(postId, trichDoan) {
+            if (typeof window.moModalSuQuanAo === 'function') {
+                window.moModalSuQuanAo();
+                const cauHoi = `Kính nhờ Sử Quan Ảo đối chiếu tư liệu lịch sử và góp ý cho luận đề: "${trichDoan || 'Luận đề này'}". Xin trích dẫn chuẩn SGK và sử liệu chính thống.`;
+                if (typeof window.guiCauHoiGoiY === 'function') {
+                    window.guiCauHoiGoiY(cauHoi);
+                }
+            } else {
+                hienToast('🤖 Trợ lý Sử Quan Ảo đang khởi động, vui lòng thử lại sau giây lát!');
+            }
+        };
+
+        window.cuonVeKhaiBut = function() {
+            const composer = document.getElementById('post-composer-box');
+            if (composer) {
+                composer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const textarea = document.getElementById('composer-content');
+                if (textarea) setTimeout(() => textarea.focus(), 400);
+            }
+        };
+
+        function khoiTaoTroThanCanvas() {
+            const canvas = document.getElementById('forum-hero-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            let animationFrameId;
+            let width, height;
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                width = canvas.width = rect.width;
+                height = canvas.height = rect.height;
+            }
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+
+            const embers = Array.from({ length: 26 }, () => ({
+                x: Math.random() * (width || 800),
+                y: Math.random() * (height || 300),
+                radius: Math.random() * 2 + 0.8,
+                speedY: Math.random() * 0.7 + 0.3,
+                speedX: (Math.random() - 0.5) * 0.5,
+                opacity: Math.random() * 0.7 + 0.2,
+                color: Math.random() > 0.4 ? '212, 175, 55' : '245, 166, 35'
+            }));
+
+            let isVisible = true;
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(([entry]) => {
+                    isVisible = entry.isIntersecting;
+                    if (isVisible && !animationFrameId) loop();
+                });
+                observer.observe(canvas);
+            }
+
+            function loop() {
+                if (!isVisible) {
+                    animationFrameId = null;
+                    return;
+                }
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < embers.length; i++) {
+                    const e = embers[i];
+                    e.y -= e.speedY;
+                    e.x += e.speedX;
+
+                    if (e.y < -10) {
+                        e.y = height + 10;
+                        e.x = Math.random() * width;
+                    }
+                    if (e.x < -10) e.x = width + 10;
+                    if (e.x > width + 10) e.x = -10;
+
+                    ctx.beginPath();
+                    ctx.arc(e.x, e.y, e.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${e.color}, ${e.opacity})`;
+                    ctx.shadowColor = `rgba(${e.color}, 0.8)`;
+                    ctx.shadowBlur = 6;
+                    ctx.fill();
+                }
+
+                animationFrameId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        function khoiTaoDragAndDrop() {
+            const composer = document.getElementById('post-composer-box');
+            const mediaInput = document.getElementById('post-media-input');
+            if (!composer || !mediaInput) return;
+
+            ['dragenter', 'dragover'].forEach(name => {
+                composer.addEventListener(name, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    composer.classList.add('dragover');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(name => {
+                composer.addEventListener(name, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    composer.classList.remove('dragover');
+                }, false);
+            });
+
+            composer.addEventListener('drop', (e) => {
+                const dt = e.dataTransfer;
+                if (!dt || !dt.files || dt.files.length === 0) return;
+                const file = dt.files[0];
+                const isImage = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'].includes(file.type);
+                const isVideo = file.type.startsWith('video/') && ['video/mp4', 'video/webm', 'video/ogg'].includes(file.type);
+                const maxSize = isImage ? 15 * 1024 * 1024 : 80 * 1024 * 1024;
+                if ((!isImage && !isVideo) || file.size > maxSize) {
+                    hienToast(!isImage && !isVideo ? 'Chỉ hỗ trợ ảnh hoặc video MP4, WebM, Ogg.' : `Tệp vượt quá giới hạn ${isImage ? '15 MB' : '80 MB'}.`);
+                    return;
+                }
+                tepMediaDangChon = file;
+                hienThiXemTruocMedia(file);
+                hienToast('🖼️ Đã nhận tệp đính kèm!');
+            }, false);
+        }
+
+        function khoiTaoScrollFAB() {
+            const fab = document.getElementById('forum-mobile-fab');
+            if (!fab) return;
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 380) {
+                    fab.classList.add('is-visible');
+                } else {
+                    fab.classList.remove('is-visible');
+                }
+            }, { passive: true });
         }
 
         window.locBaiViet = function(btn, topic) {
@@ -3244,12 +4034,56 @@ const docRef = await addDoc(collection(db, "posts"), {
             );
         };
 
+        // Xử lý đóng / mở menu Dropdown "Tài liệu" trên thanh sub-navbar
+        window.toggleDropdownSubnav = function(event, type) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            var targetId = 'nav-item-' + (type || 'tai-lieu');
+            var item = document.getElementById(targetId);
+            if (!item) return;
+
+            var isCurrentlyOpen = item.classList.contains('is-open');
+            window.dongTatCaDropdown();
+
+            if (!isCurrentlyOpen) {
+                item.classList.add('is-open');
+                var link = item.querySelector('.sub-navbar__link');
+                if (link) link.setAttribute('aria-expanded', 'true');
+            }
+        };
+
+        window.dongTatCaDropdown = function() {
+            var items = document.querySelectorAll('.sub-navbar__item.has-dropdown');
+            items.forEach(function(el) {
+                el.classList.remove('is-open');
+                var link = el.querySelector('.sub-navbar__link');
+                if (link) link.setAttribute('aria-expanded', 'false');
+            });
+        };
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.sub-navbar__item.has-dropdown')) {
+                window.dongTatCaDropdown();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.dongTatCaDropdown();
+            }
+        });
+
         // Khởi động khi tải xong DOM
         document.addEventListener('DOMContentLoaded', () => {
             boLocHienTai = layChuDeDaLuu();
             dongBoViewerTopicUI(boLocHienTai);
             dongBoFilterTabsUI(boLocHienTai);
             khoiTaoBangTin();
+            khoiTaoTroThanCanvas();
+            khoiTaoDragAndDrop();
+            khoiTaoScrollFAB();
         });
     </script>
     <script type="module" src="site-account.js"></script>

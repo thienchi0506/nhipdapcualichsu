@@ -391,3 +391,72 @@ body.theme-truc-thu .dcls-sq-input {
   color: #26160C !important;
 }
 
+/* J. Sub-navbar & Dropdown Tài Liệu (Quần Anh Hội & Toàn Web) */
+body.theme-truc-thu .sub-navbar {
+  background: #4E2A1E !important;
+  border-top-color: rgba(212, 175, 55, 0.4) !important;
+  border-bottom-color: var(--vang-dong) !important;
+}
+body.theme-truc-thu .sub-navbar__dropdown {
+  background: linear-gradient(180deg, #FDF9F0 0%, #F5ECE0 100%) !important;
+  border-color: #8B2500 !important;
+  box-shadow: 0 10px 25px rgba(60, 30, 20, 0.22) !important;
+}
+body.theme-truc-thu .sub-navbar__dropdown li a {
+  color: #26160C !important;
+}
+body.theme-truc-thu .sub-navbar__dropdown li a:hover {
+  background: #EEDDB8 !important;
+  color: #8B2500 !important;
+  border-left-color: #8B2500 !important;
+}
+
+/* K. Quần Anh Hội Cổ Phong: Thẻ Chiếu Thư, Triện Son, Án Thư & Anh Hào Bảng */
+body.theme-truc-thu .scroll-composer,
+body.theme-truc-thu .scroll-post-card {
+  background: #FFFDF8 !important;
+  border-color: #C5AC81 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .scroll-post-card:hover {
+  border-color: #8B2500 !important;
+  box-shadow: 0 10px 32px rgba(60, 30, 20, 0.16) !important;
+}
+body.theme-truc-thu .post-royal-seal {
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+  background: rgba(139, 37, 0, 0.08) !important;
+}
+body.theme-truc-thu .composer-fact-chips {
+  background: #F4EEDF !important;
+  border-color: #D5C2A5 !important;
+}
+body.theme-truc-thu .fact-chip-btn {
+  background: #FFFDF8 !important;
+  border-color: #C4A575 !important;
+  color: #4A3222 !important;
+}
+body.theme-truc-thu .fact-chip-btn:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+  border-color: #8B2500 !important;
+}
+body.theme-truc-thu .forum-honor-roll {
+  background: rgba(38, 22, 12, 0.88) !important;
+  border-color: #D4AF37 !important;
+}
+body.theme-truc-thu .btn-quote-comment {
+  color: #73543F !important;
+}
+body.theme-truc-thu .btn-quote-comment:hover {
+  color: #8B2500 !important;
+  background: rgba(139, 37, 0, 0.08) !important;
+}
+body.theme-truc-thu .forum-mobile-fab {
+  background: linear-gradient(135deg, #8B2500 0%, #A93226 100%) !important;
+  border-color: #D4AF37 !important;
+  color: #FFFDF8 !important;
+}
+
+
+

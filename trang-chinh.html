@@ -14090,41 +14090,60 @@ function renderDanhSachDiTichHtml(activeTab) {
             if (grid) grid.hidden = false;
         }
 
-        // Tự động mở lại modal Thư viện video khi người xem quay lại từ video-phat.html
-        window.kiemTraVaMoModalVideo = function kiemTraVaMoModalVideo() {
+        // Tự động mở lại modal dữ liệu (video, ngay-nay, nhan-vat, di-tich, sach...) khi người xem quay lại từ video-phat.html hoặc đến từ Quần Anh Hội
+        window.kiemTraVaMoModalTuDong = function kiemTraVaMoModalTuDong() {
             try {
                 var search = window.location.search || '';
                 var hash = window.location.hash || '';
                 var params = new URLSearchParams(search);
-                var needOpen = (params.get('modal') === 'video') ||
-                               (hash === '#video') ||
-                               (search.indexOf('modal=video') !== -1) ||
-                               (sessionStorage.getItem('reopen_video_modal') === '1');
-                if (needOpen) {
+                var modalLoai = params.get('modal') || (hash && hash !== '#video' ? hash.replace('#', '') : null);
+
+                if (!modalLoai) {
+                    var needOpenVideo = (params.get('modal') === 'video') ||
+                                        (hash === '#video') ||
+                                        (search.indexOf('modal=video') !== -1) ||
+                                        (sessionStorage.getItem('reopen_video_modal') === '1');
+                    if (needOpenVideo) modalLoai = 'video';
+                }
+
+                if (modalLoai) {
                     sessionStorage.removeItem('reopen_video_modal');
                     var overlay = document.getElementById('antique-modal-overlay');
                     if (!overlay || typeof moModalDuLieu !== 'function') {
-                        setTimeout(kiemTraVaMoModalVideo, 60);
+                        setTimeout(kiemTraVaMoModalTuDong, 60);
                         return;
                     }
-                    moModalDuLieu('video', 'Khám phá > Video');
+                    if (modalLoai === 'ngay-nay') {
+                        chonMucKhamPha('ngay-nay', 'Ngày nay');
+                    } else if (modalLoai === 'nhan-vat' || modalLoai.startsWith('nhan-vat')) {
+                        chonMucKhamPha('nhan-vat', 'Nhân vật');
+                    } else if (modalLoai === 'video') {
+                        moModalDuLieu('video', 'Khám phá > Video');
+                    } else if (modalLoai === 'di-tich') {
+                        chonMucKhamPha('di-tich', 'Di tích');
+                    } else if (modalLoai === 'sach') {
+                        chonMucKhamPha('sach', 'Sách');
+                    } else {
+                        moModalDuLieu(modalLoai, 'Tư liệu');
+                    }
                 }
             } catch (_) {}
         };
+        window.kiemTraVaMoModalVideo = window.kiemTraVaMoModalTuDong;
 
         // Kích hoạt ngay khi tài liệu sẵn sàng hoặc phục hồi từ bộ nhớ đệm BFCache
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            window.kiemTraVaMoModalVideo();
+            window.kiemTraVaMoModalTuDong();
         } else {
-            document.addEventListener('DOMContentLoaded', window.kiemTraVaMoModalVideo);
+            document.addEventListener('DOMContentLoaded', window.kiemTraVaMoModalTuDong);
         }
-        window.addEventListener('load', window.kiemTraVaMoModalVideo);
-        window.addEventListener('pageshow', window.kiemTraVaMoModalVideo);
-        window.addEventListener('popstate', window.kiemTraVaMoModalVideo);
-        window.addEventListener('hashchange', window.kiemTraVaMoModalVideo);
-        window.addEventListener('sitemusic:navigated', window.kiemTraVaMoModalVideo);
+        window.addEventListener('load', window.kiemTraVaMoModalTuDong);
+        window.addEventListener('pageshow', window.kiemTraVaMoModalTuDong);
+        window.addEventListener('popstate', window.kiemTraVaMoModalTuDong);
+        window.addEventListener('hashchange', window.kiemTraVaMoModalTuDong);
+        window.addEventListener('sitemusic:navigated', window.kiemTraVaMoModalTuDong);
         document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) window.kiemTraVaMoModalVideo();
+            if (!document.hidden) window.kiemTraVaMoModalTuDong();
         });
 
         function guiDongGopTuLieu(event) {
