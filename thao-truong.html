@@ -5,6 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Thao Trường Khảo Thí Lịch Sử 12 - Chuẩn Bộ GD&ĐT 2025</title>
+
+    <!-- Progressive Web App (PWA) Meta & Links (Prompt 6) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8B2500">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dấu Chân Sử">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+    <script src="pwa-client.js"></script>
+    <!-- Giao diện sáng Trúc Thư / Giấy Điệp (Prompt 8) -->
+    <link rel="stylesheet" href="theme-truc-thu.css">
+    <script src="theme-controller.js"></script>
+  <!-- Thanh thao tác mobile & vuốt chuyển câu (Prompt 9) -->
+  <link rel="stylesheet" href="mobile-exam-nav.css">
+  <script src="mobile-exam-nav.js"></script>
+  <!-- Trình tạo ảnh chứng nhận xuất sắc (Prompt 10) -->
+  <link rel="stylesheet" href="certificate-generator.css">
+  <script src="certificate-generator.js"></script>
+    <!-- Trợ lý Lịch Sử Sử Quan Ảo (Prompt 7) -->
+    <link rel="stylesheet" href="su-quan-ao.css">
+    <script src="su-quan-ao.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
@@ -3249,6 +3273,1510 @@
       .exam-modal-box, .result-modal-box { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
 
+
+    /* ========================================================================= */
+    /* SỔ TAY CÂU SAI & CHẾ ĐỘ LUYỆN TẬP CÂU SAI (PROMPT 1)                      */
+    /* ========================================================================= */
+    .lobby-mode-switcher {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+      gap: 16px !important;
+      max-width: 1040px !important;
+      margin: 0 auto 32px !important;
+    }
+
+    .mistakes-dashboard {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .mistakes-hero-card {
+      background: linear-gradient(145deg, rgba(44, 30, 24, 0.95) 0%, rgba(26, 16, 12, 0.98) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .mistakes-hero-info {
+      flex: 1 1 320px;
+    }
+
+    .mistakes-hero-info h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: #fff8e7;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mistakes-hero-info p {
+      color: #dfd0be;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .mistakes-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .mistakes-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .mistakes-stat-chip {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: #f1e4d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mistakes-stat-chip strong {
+      color: var(--gold);
+    }
+
+    .mistakes-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mistakes-search-wrap {
+      flex: 1 1 280px;
+      position: relative;
+    }
+
+    .mistakes-search-input {
+      width: 100%;
+      background: rgba(18, 12, 8, 0.85);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px 10px 38px;
+      color: #fff8e7;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .mistakes-search-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .mistakes-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    .mistakes-filter-select {
+      background: rgba(18, 12, 8, 0.85);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      color: #fff8e7;
+      font-size: 13.5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .mistakes-filter-select option {
+      background: #20140e;
+      color: #fff8e7;
+    }
+
+    .mistakes-empty-state {
+      background: linear-gradient(145deg, rgba(38, 24, 18, 0.8) 0%, rgba(22, 14, 10, 0.9) 100%);
+      border: 1.5px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 16px;
+      padding: 48px 24px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .mistakes-empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .mistakes-empty-state h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .mistakes-empty-state p {
+      max-width: 580px;
+      margin: 0 auto 20px;
+      color: #dfd0be;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .mistakes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mistake-card {
+      background: linear-gradient(145deg, rgba(38, 24, 18, 0.92) 0%, rgba(22, 14, 10, 0.96) 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mistake-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .mistake-card__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .mistake-card__badges {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mistake-badge-exam {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .mistake-badge-type {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 12px;
+      color: #dfd0be;
+    }
+
+    .mistake-badge-count {
+      background: rgba(220, 53, 69, 0.2);
+      border: 1px solid #dc3545;
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ff8585;
+    }
+
+    .mistake-card__time {
+      font-size: 12px;
+      color: #a8947f;
+    }
+
+    .mistake-card__stem {
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #fff9ea;
+      margin-bottom: 14px;
+    }
+
+    .mistake-card__passage {
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid var(--gold);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-style: italic;
+      color: #dfd0be;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .mistake-options-compare {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .mistake-opt-pill {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .mistake-opt-pill.wrong {
+      background: rgba(220, 53, 69, 0.15);
+      border: 1px solid rgba(220, 53, 69, 0.4);
+      color: #ff9999;
+    }
+
+    .mistake-opt-pill.correct {
+      background: rgba(40, 167, 69, 0.15);
+      border: 1px solid rgba(40, 167, 69, 0.4);
+      color: #8ce196;
+    }
+
+    .mistake-card__explain {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      color: #ecd9b8;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .mistake-card__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+    }
+
+    .mistake-action-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      user-select: none;
+      font-family: inherit;
+    }
+
+    .mistake-action-btn.delete {
+      background: rgba(220, 53, 69, 0.15);
+      border: 1px solid rgba(220, 53, 69, 0.4);
+      color: #ff8b8b;
+    }
+    .mistake-action-btn.delete:hover {
+      background: rgba(220, 53, 69, 0.3);
+      border-color: #dc3545;
+    }
+
+    .mistake-action-btn.mastered {
+      background: rgba(40, 167, 69, 0.18);
+      border: 1px solid rgba(40, 167, 69, 0.45);
+      color: #a4f3ad;
+    }
+    .mistake-action-btn.mastered:hover {
+      background: rgba(40, 167, 69, 0.35);
+      border-color: #28a745;
+    }
+
+    .mistake-action-btn.practice-one {
+      background: linear-gradient(135deg, var(--gold) 0%, #a4781e 100%);
+      border: none;
+      color: #1a100a;
+      font-weight: 700;
+    }
+    .mistake-action-btn.practice-one:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    }
+
+    /* ========================================================================= */
+    /* PROMPT 2: GIAO DIỆN BIỂU ĐỒ NĂNG LỰC HỌC TẬP (RADAR CHART & ANALYTICS)     */
+    /* ========================================================================= */
+    .analytics-dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    /* 1. HERO STATS CARDS */
+    .analytics-hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+    .analytics-stat-card {
+      background: linear-gradient(135deg, rgba(38, 24, 18, 0.95) 0%, rgba(22, 14, 10, 0.98) 100%);
+      border: 1.5px solid rgba(197, 155, 39, 0.35);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .analytics-stat-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+    }
+    .analytics-stat-icon {
+      font-size: 2.2rem;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(197, 155, 39, 0.12);
+      border-radius: 14px;
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      flex-shrink: 0;
+    }
+    .analytics-stat-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+    .analytics-stat-label {
+      font-size: 0.76rem;
+      color: rgba(232, 213, 176, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+    }
+    .analytics-stat-val {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff8e7;
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.15;
+    }
+    .analytics-stat-sub {
+      font-size: 0.75rem;
+      color: rgba(232, 213, 176, 0.55);
+    }
+
+    /* 2. TOOLBAR & FILTERS */
+    .analytics-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: rgba(20, 12, 8, 0.65);
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      border-radius: 14px;
+      padding: 12px 18px;
+    }
+    .analytics-toolbar-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.4px;
+    }
+    .analytics-toolbar-filters {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .analytics-select {
+      background: #1a100b;
+      color: #f5eedb;
+      border: 1px solid rgba(197, 155, 39, 0.4);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+    }
+    .analytics-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+
+    /* 3. CHART & INSIGHTS GRID */
+    .analytics-main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .analytics-main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* RADAR CONTAINER */
+    .analytics-panel-card {
+      background: linear-gradient(145deg, rgba(32, 20, 15, 0.95) 0%, rgba(18, 11, 8, 0.98) 100%);
+      border: 1.5px solid rgba(197, 155, 39, 0.35);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .analytics-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.2);
+      padding-bottom: 12px;
+    }
+    .analytics-panel-header h3 {
+      font-size: 1.05rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .analytics-panel-header .badge-sample-info {
+      font-size: 0.72rem;
+      color: rgba(232, 213, 176, 0.75);
+      background: rgba(197, 155, 39, 0.15);
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(197, 155, 39, 0.3);
+    }
+
+    .radar-svg-wrapper {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .radar-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    /* RADAR SVG STYLING */
+    .radar-grid-polygon {
+      fill: rgba(197, 155, 39, 0.03);
+      stroke: rgba(197, 155, 39, 0.22);
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+    }
+    .radar-grid-polygon.outer {
+      stroke: rgba(197, 155, 39, 0.5);
+      stroke-dasharray: none;
+      stroke-width: 1.5;
+    }
+    .radar-spoke {
+      stroke: rgba(197, 155, 39, 0.28);
+      stroke-width: 1;
+    }
+    .radar-data-area {
+      fill: rgba(212, 175, 55, 0.28);
+      stroke: #D4AF37;
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.45));
+      transition: all 0.4s ease;
+    }
+    .radar-dot {
+      fill: #fff8e7;
+      stroke: #8B1E1E;
+      stroke-width: 2.5;
+      r: 5;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .radar-dot:hover {
+      r: 7.5;
+      fill: #D4AF37;
+      stroke: #fff;
+    }
+    .radar-dot.insufficient {
+      fill: #666;
+      stroke: #999;
+      stroke-dasharray: 2 2;
+    }
+    .radar-axis-text {
+      font-size: 11px;
+      font-family: 'Noto Serif', serif;
+      fill: #e8d5b0;
+      font-weight: 600;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    .radar-axis-sub {
+      font-size: 9.5px;
+      fill: rgba(232, 213, 176, 0.65);
+      font-weight: 400;
+    }
+    .radar-axis-warn {
+      fill: #ffaa55;
+      font-weight: 700;
+    }
+
+    /* STRENGTH & WEAKNESS CARDS */
+    .insights-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .insight-card {
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      background: rgba(22, 14, 10, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .insight-card.strength {
+      border-left: 4px solid #28a745;
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.08) 0%, rgba(22, 14, 10, 0.9) 100%);
+    }
+    .insight-card.weakness {
+      border-left: 4px solid #dc3545;
+      background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(22, 14, 10, 0.9) 100%);
+    }
+    .insight-card.neutral {
+      border-left: 4px solid #ffc107;
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.08) 0%, rgba(22, 14, 10, 0.9) 100%);
+    }
+    .insight-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .insight-card.strength .insight-title { color: #85e094; }
+    .insight-card.weakness .insight-title { color: #ff9999; }
+    .insight-card.neutral .insight-title { color: #ffd666; }
+    .insight-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .insight-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #e8d5b0;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      gap: 8px;
+    }
+    .insight-item-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .insight-item-score {
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* 4. ACCESSIBLE DATA TABLE */
+    .analytics-table-wrap {
+      overflow-x: auto;
+      background: rgba(18, 11, 8, 0.85);
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      border-radius: 14px;
+      margin-top: 8px;
+    }
+    .analytics-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    .analytics-table th {
+      background: rgba(197, 155, 39, 0.15);
+      color: var(--gold);
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.3);
+      white-space: nowrap;
+    }
+    .analytics-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.12);
+      color: #e8d5b0;
+    }
+    .analytics-table tr:last-child td {
+      border-bottom: none;
+    }
+    .analytics-table tr:hover td {
+      background: rgba(197, 155, 39, 0.05);
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .status-pill.mastered {
+      background: rgba(40, 167, 69, 0.2);
+      color: #79d789;
+      border: 1px solid rgba(40, 167, 69, 0.4);
+    }
+    .status-pill.good {
+      background: rgba(23, 162, 184, 0.2);
+      color: #6edff6;
+      border: 1px solid rgba(23, 162, 184, 0.4);
+    }
+    .status-pill.review {
+      background: rgba(220, 53, 69, 0.2);
+      color: #ff9999;
+      border: 1px solid rgba(220, 53, 69, 0.4);
+    }
+    .status-pill.insufficient {
+      background: rgba(108, 117, 125, 0.2);
+      color: #b5b5b5;
+      border: 1px solid rgba(108, 117, 125, 0.4);
+    }
+
+    /* 5. SCORE TREND TIMELINE */
+    .trend-bars-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 120px;
+      padding: 10px 4px 20px;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.25);
+      position: relative;
+    }
+    .trend-bar-col {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 4px;
+      min-width: 22px;
+      position: relative;
+    }
+    .trend-bar-fill {
+      width: 100%;
+      max-width: 26px;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(180deg, var(--gold) 0%, rgba(197, 155, 39, 0.4) 100%);
+      transition: height 0.5s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .trend-bar-fill:hover {
+      filter: brightness(1.2);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    }
+    .trend-bar-score {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fff8e7;
+    }
+    .trend-bar-label {
+      font-size: 0.65rem;
+      color: rgba(232, 213, 176, 0.5);
+      white-space: nowrap;
+      position: absolute;
+      bottom: -18px;
+    }
+
+    /* 6. EMPTY STATE */
+    .analytics-empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      background: rgba(26, 16, 12, 0.85);
+      border: 1.5px dashed rgba(197, 155, 39, 0.4);
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .analytics-empty-icon {
+      font-size: 3.5rem;
+      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
+    }
+    .analytics-empty-state h3 {
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin: 0;
+    }
+    .analytics-empty-state p {
+      max-width: 520px;
+      font-size: 0.88rem;
+      color: rgba(232, 213, 176, 0.8);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+
+    /* ========================================================================= */
+    /* PROMPT 3: BẢNG VÀNG DANH TƯỚNG & HỆ THỐNG SƯU TẦM THẺ NHÂN VẬT LỊCH SỬ    */
+    /* ========================================================================= */
+    .btn-bang-vang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(123, 30, 30, 0.9) 0%, rgba(74, 14, 14, 0.95) 100%);
+      border: 1.5px solid var(--gold);
+      color: #FFF3D6;
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+    .btn-bang-vang-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+      border-color: #ffe1a0;
+    }
+
+    /* MODAL BẢNG VÀNG TOÀN DIỆN */
+    .bang-vang-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 6, 4, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .bang-vang-modal {
+      background: linear-gradient(165deg, #2A1A12 0%, #170E09 100%);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 1050px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.75), 0 0 30px rgba(212, 175, 55, 0.2);
+      overflow: hidden;
+    }
+    .bang-vang-header {
+      padding: 18px 24px;
+      border-bottom: 1.5px solid rgba(197, 155, 39, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(20, 12, 8, 0.7);
+    }
+    .bang-vang-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bang-vang-title h2 {
+      font-size: 1.25rem;
+      color: var(--gold);
+      font-family: 'Playfair Display', Georgia, serif;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+    .bang-vang-close-btn {
+      background: transparent;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      color: rgba(232, 213, 176, 0.8);
+      font-size: 1.2rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .bang-vang-close-btn:hover {
+      background: rgba(220, 53, 69, 0.25);
+      border-color: #ff8888;
+      color: #fff;
+    }
+
+    .bang-vang-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) rgba(20, 12, 8, 0.5);
+    }
+
+    /* TIẾN ĐỘ BỘ SƯU TẬP & DANH HIỆU */
+    .collection-hero-card {
+      background: linear-gradient(135deg, rgba(123, 30, 30, 0.25) 0%, rgba(38, 24, 18, 0.9) 100%);
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .collection-info h3 {
+      font-size: 1.05rem;
+      color: #fff8e7;
+      margin: 0 0 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .collection-info p {
+      font-size: 0.8rem;
+      color: rgba(232, 213, 176, 0.75);
+      margin: 0;
+      max-width: 620px;
+      line-height: 1.45;
+    }
+    .collection-progress-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .collection-counter {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+    }
+    .collection-progress-bar {
+      width: 180px;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(197, 155, 39, 0.3);
+    }
+    .collection-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #D4AF37 0%, #FFA500 100%);
+      transition: width 0.5s ease;
+    }
+
+    /* BỘ DANH HIỆU (SETS) */
+    .sets-badges-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .set-badge-pill {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(197, 155, 39, 0.3);
+      background: rgba(20, 12, 8, 0.6);
+      color: rgba(232, 213, 176, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .set-badge-pill.unlocked {
+      background: rgba(40, 167, 69, 0.2);
+      border-color: rgba(40, 167, 69, 0.5);
+      color: #8ce196;
+      font-weight: 700;
+    }
+
+    /* LƯỚI THẺ NHÂN VẬT */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .character-collect-card {
+      background: linear-gradient(160deg, rgba(42, 26, 18, 0.95) 0%, rgba(20, 12, 8, 0.98) 100%);
+      border: 1.5px solid rgba(197, 155, 39, 0.35);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      cursor: pointer;
+    }
+    .character-collect-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+    .character-collect-card.locked {
+      filter: grayscale(0.85) contrast(0.9);
+      opacity: 0.68;
+      border-color: rgba(120, 120, 120, 0.3);
+      cursor: default;
+    }
+    .character-collect-card.locked:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* HÌNH ẢNH THẺ */
+    .card-portrait-box {
+      width: 100%;
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+      background: #110b07;
+    }
+    .card-portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+    }
+    .character-collect-card:hover .card-portrait-img {
+      transform: scale(1.05);
+    }
+    .card-portrait-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(20, 12, 8, 0.95) 100%);
+      pointer-events: none;
+    }
+    .card-seal-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(123, 30, 30, 0.85);
+      border: 1px solid var(--gold);
+      color: #fff8e7;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+    }
+    .card-lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 6, 4, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #e8d5b0;
+      padding: 16px;
+      text-align: center;
+      backdrop-filter: blur(2px);
+    }
+    .card-lock-icon {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+    }
+    .card-lock-req {
+      font-size: 0.72rem;
+      color: #ffcc66;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    /* THÔNG TIN THẺ */
+    .card-info-box {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .card-era-tag {
+      font-size: 0.68rem;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .card-name-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff8e7;
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+    }
+    .card-alias {
+      font-size: 0.74rem;
+      color: rgba(232, 213, 176, 0.7);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+    .card-deed-snippet {
+      font-size: 0.75rem;
+      color: rgba(232, 213, 176, 0.85);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    /* MODAL CHI TIẾT THẺ KHI BẤM XEM */
+    .card-inspect-modal {
+      background: linear-gradient(160deg, #2D1A10 0%, #150B07 100%);
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      max-width: 680px;
+      width: 100%;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85);
+      position: relative;
+    }
+    .card-inspect-header {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.3);
+      padding-bottom: 14px;
+    }
+    .card-inspect-thumb {
+      width: 80px;
+      height: 95px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1.5px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .card-inspect-quote {
+      font-style: italic;
+      background: rgba(123, 30, 30, 0.15);
+      border-left: 3px solid var(--gold);
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: #FFF3D6;
+      line-height: 1.45;
+      border-radius: 0 8px 8px 0;
+    }
+    .card-inspect-disclaimer {
+      font-size: 0.7rem;
+      color: rgba(232, 213, 176, 0.55);
+      line-height: 1.35;
+      border-top: 1px dashed rgba(197, 155, 39, 0.25);
+      padding-top: 10px;
+    }
+
+    /* TOAST MỞ KHÓA THÀNH TỰU THẺ */
+    .achievement-unlock-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #7B1E1E 0%, #3B1010 100%);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.4);
+      z-index: 99999;
+      animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 380px;
+      cursor: pointer;
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(110%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+
+    /* ========================================================================= */
+    /* PROMPT 4: ĐẤU TRÍ TRANH HÙNG 1V1 (REALTIME BATTLE ARENA & ROOM LOBBY)     */
+    /* ========================================================================= */
+    .battle-dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    /* 1. LOBBY CARDS GRID (TẠO PHÒNG / THAM GIA / ĐẤU BOT) */
+    .battle-lobby-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .battle-card {
+      background: linear-gradient(145deg, rgba(38, 24, 18, 0.95) 0%, rgba(20, 12, 8, 0.98) 100%);
+      border: 1.5px solid rgba(197, 155, 39, 0.35);
+      border-radius: 18px;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .battle-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+      box-shadow: 0 12px 28px rgba(212, 175, 55, 0.25);
+    }
+    .battle-card__header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .battle-card__icon {
+      font-size: 2.2rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(197, 155, 39, 0.12);
+      border: 1px solid rgba(197, 155, 39, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .battle-card__title {
+      font-size: 1.1rem;
+      color: #fff8e7;
+      font-weight: 700;
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+    }
+    .battle-card__desc {
+      font-size: 0.8rem;
+      color: rgba(232, 213, 176, 0.75);
+      line-height: 1.45;
+      margin: 0;
+      flex: 1;
+    }
+
+    .battle-input-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .battle-room-input {
+      background: #140c08;
+      border: 1.5px solid rgba(197, 155, 39, 0.4);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: 'Playfair Display', monospace, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .battle-room-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+    }
+
+    /* 2. WAITING ROOM VIEW */
+    .battle-waiting-panel {
+      background: linear-gradient(150deg, rgba(35, 22, 16, 0.98) 0%, rgba(18, 11, 7, 0.99) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .battle-room-code-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 14px;
+      background: rgba(123, 30, 30, 0.2);
+      border: 1.5px dashed var(--gold);
+      border-radius: 14px;
+    }
+    .battle-code-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 4px;
+      font-family: 'Playfair Display', monospace, sans-serif;
+    }
+
+    .battle-players-versus {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .battle-players-versus {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+    .battle-player-box {
+      background: rgba(20, 12, 8, 0.7);
+      border: 1.5px solid rgba(197, 155, 39, 0.3);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .battle-player-box.ready {
+      border-color: #28a745;
+      background: rgba(40, 167, 69, 0.08);
+    }
+    .battle-player-avatar {
+      font-size: 2.8rem;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(197, 155, 39, 0.15);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .battle-vs-badge {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #ff4d4d;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 12px rgba(255, 77, 77, 0.5);
+    }
+
+    /* 3. BATTLE ARENA (SÀN ĐẤU THỜI GIAN THỰC) */
+    .battle-arena-panel {
+      background: linear-gradient(160deg, rgba(32, 20, 14, 0.98) 0%, rgba(16, 10, 7, 0.99) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.75);
+    }
+    .battle-arena-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1.5px solid rgba(197, 155, 39, 0.3);
+      padding-bottom: 16px;
+    }
+    .battle-timer-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(123, 30, 30, 0.35);
+      border: 1.5px solid var(--gold);
+      border-radius: 24px;
+      padding: 8px 18px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff8e7;
+      font-family: 'Playfair Display', monospace, sans-serif;
+    }
+    .battle-timer-pill.urgent {
+      background: rgba(220, 53, 69, 0.5);
+      border-color: #ff4d4d;
+      animation: pulse 1s infinite alternate;
+    }
+
+    /* THANH TIẾN ĐỘ ĐỐI KHÁNG 2 BÊN */
+    .battle-progress-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      background: rgba(18, 11, 7, 0.8);
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      border-radius: 14px;
+      padding: 14px 18px;
+    }
+    @media (max-width: 600px) {
+      .battle-progress-dual {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+    .battle-progress-side {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .battle-progress-bar-wrap {
+      width: 100%;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(197, 155, 39, 0.3);
+    }
+    .battle-progress-bar-fill {
+      height: 100%;
+      transition: width 0.35s ease;
+    }
+    .battle-progress-bar-fill.you {
+      background: linear-gradient(90deg, #D4AF37 0%, #28a745 100%);
+    }
+    .battle-progress-bar-fill.opponent {
+      background: linear-gradient(90deg, #ff9900 0%, #dc3545 100%);
+    }
+
+    /* KHUNG CÂU HỎI THI ĐẤU */
+    .battle-question-box {
+      background: rgba(24, 15, 10, 0.85);
+      border: 1.5px solid rgba(197, 155, 39, 0.35);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .battle-question-stem {
+      font-size: 1.05rem;
+      color: #fff8e7;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+    .battle-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .battle-opt-btn {
+      background: linear-gradient(135deg, rgba(38, 24, 18, 0.85) 0%, rgba(22, 14, 10, 0.95) 100%);
+      border: 1.5px solid rgba(197, 155, 39, 0.35);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #e8d5b0;
+      font-family: inherit;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .battle-opt-btn:hover {
+      background: rgba(123, 30, 30, 0.3);
+      border-color: var(--gold);
+      transform: translateX(4px);
+    }
+    .battle-opt-btn.correct {
+      background: rgba(40, 167, 69, 0.3) !important;
+      border-color: #28a745 !important;
+      color: #8ce196 !important;
+    }
+    .battle-opt-btn.wrong {
+      background: rgba(220, 53, 69, 0.3) !important;
+      border-color: #dc3545 !important;
+      color: #ff9999 !important;
+    }
+
+    /* 4. RESULT WIN/LOSE BANNER */
+    .battle-result-banner {
+      text-align: center;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      border-radius: 18px;
+      background: rgba(20, 12, 8, 0.85);
+      border: 2px solid var(--gold);
+    }
+    .battle-result-headline {
+      font-size: 1.8rem;
+      font-weight: 900;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+    .battle-result-headline.victory { color: #8ce196; text-shadow: 0 0 15px rgba(40, 167, 69, 0.5); }
+    .battle-result-headline.defeat { color: #ff9999; text-shadow: 0 0 15px rgba(220, 53, 69, 0.5); }
+    .battle-result-headline.draw { color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+
 </style>
 </head>
 <body>
@@ -3261,6 +4789,18 @@
       <div class="header-sub">Hệ Thống Đề Thi Lịch Sử 12 Chuẩn Bộ GD&ĐT 2025 · 45 Phút / Đề</div>
     </div>
     <div class="header-badges">
+      <button type="button" class="btn-pwa-install" id="btn-pwa-install-thao-truong" onclick="caiDatDclsPwa()" title="Cài đặt Dấu Chân Lịch Sử làm ứng dụng PWA trên máy" aria-label="Cài đặt ứng dụng">
+        📲 Cài đặt App
+      </button>
+      <button type="button" class="btn-theme-toggle" id="btn-theme-toggle-thao-truong" onclick="toggleDclsTheme()" title="Chuyển đổi giao diện Sáng (Trúc Thư) / Tối (Mực Cổ)" aria-label="Chuyển đổi giao diện">
+        <span class="theme-toggle-icon">📜</span> <span class="theme-toggle-text">Trúc Thư</span>
+      </button>
+      <button type="button" class="btn-bang-vang-badge" id="btn-open-su-quan-thao-truong" onclick="moModalSuQuanAo()" title="Trợ lý Lịch Sử — Sử Quan Ảo" aria-label="Mở Sử Quan Ảo" style="background: rgba(139, 37, 0, 0.25); border-color: rgba(212, 175, 55, 0.45); color: #FFEAA7;">
+        📜 <span class="su-quan-badge-text">Sử Quan Ảo</span>
+      </button>
+      <button type="button" class="btn-bang-vang-badge" id="btn-open-bang-vang" onclick="moModalBangVang()" title="Bảng Vàng Danh Tướng & Bộ Sưu Tầm Thẻ Lịch Sử" aria-label="Mở Bảng Vàng Danh Tướng">
+        🏆 <span id="bang-vang-badge-text">Bảng Vàng (0/12)</span>
+      </button>
       <button type="button" class="badge-pill music-badge-pill" id="btn-toggle-music" onclick="window.SiteMusic && window.SiteMusic.toggle()" ondblclick="window.SiteMusic && window.SiteMusic.next()" title="Click 1 lần: Bật/Tắt | Click 2 lần: Đổi bài ngẫu nhiên" aria-label="Bật hoặc tắt nhạc nền">
         <span id="music-btn-icon">🎵</span> <span id="music-btn-text">Nhạc: Bật</span>
       </button>
@@ -3298,6 +4838,32 @@
             <span class="lobby-mode-title">KHO ĐỀ TỰ CHỌN</span>
             <span class="lobby-mode-sub">Chọn Đề Theo Ý Muốn (<span id="catalog-total-count">0</span> Bộ Đề)</span>
             <span class="lobby-mode-badge">🔍 Tìm Kiếm & Tự Chọn</span>
+          </div>
+        </button>
+        <button class="lobby-mode-btn" id="btn-mode-mistakes" onclick="switchLobbyMode('mistakes')">
+          <div class="lobby-mode-icon">📖</div>
+          <div class="lobby-mode-texts">
+            <span class="lobby-mode-title">SỔ TAY CÂU SAI</span>
+            <span class="lobby-mode-sub">Xem Lại & Luyện Riêng (<span id="mistakes-total-count">0</span> Câu)</span>
+            <span class="lobby-mode-badge" id="mistakes-mode-badge">🎯 Ôn Tập Trọng Tâm</span>
+          </div>
+        </button>
+
+        <button class="lobby-mode-btn" id="btn-mode-analytics" onclick="switchLobbyMode('analytics')">
+          <div class="lobby-mode-icon">📊</div>
+          <div class="lobby-mode-texts">
+            <span class="lobby-mode-title">NĂNG LỰC HỌC TẬP</span>
+            <span class="lobby-mode-sub">Biểu Đồ Radar & Đánh Giá Mảng Kiến Thức</span>
+            <span class="lobby-mode-badge" id="analytics-mode-badge">📈 Dữ Liệu Thực Tế</span>
+          </div>
+        </button>
+
+        <button class="lobby-mode-btn" id="btn-mode-battle" onclick="switchLobbyMode('battle')">
+          <div class="lobby-mode-icon">⚔️</div>
+          <div class="lobby-mode-texts">
+            <span class="lobby-mode-title">ĐẤU TRÍ TRANH HÙNG</span>
+            <span class="lobby-mode-sub">Thi Đấu Đối Kháng 1v1 Thời Gian Thực</span>
+            <span class="lobby-mode-badge" id="battle-mode-badge">⚡ Trận Đấu 3 Phút</span>
           </div>
         </button>
       </div>
@@ -3503,6 +5069,378 @@
         <div class="exam-grid" id="exam-catalog-grid"></div>
       </div>
 
+      <!-- ======================================================== -->
+      <!-- CHẾ ĐỘ 3: 📖 SỔ TAY CÂU SAI & LUYỆN TẬP CÂU SAI (PROMPT 1) -->
+      <!-- ======================================================== -->
+      <div id="panel-mistakes-mode" class="lobby-panel" style="display: none;">
+        <div class="mistakes-dashboard">
+          
+          <!-- HERO CARD TỔNG QUAN SỔ TAY CÂU SAI -->
+          <div class="mistakes-hero-card">
+            <div class="mistakes-hero-info">
+              <h3>📖 Sổ Tay Câu Sai Cá Nhân</h3>
+              <p>Tự động lưu trữ các câu hỏi bạn đã trả lời chưa chính xác trong quá trình khảo thí để xem lại nguyên nhân sai sót, đọc giải thích chuẩn SGK và luyện tập riêng cho đến khi nắm vững.</p>
+            </div>
+            <div class="mistakes-hero-actions">
+              <button class="start-btn" id="btn-start-mistakes-practice" onclick="startMistakesPracticeExam()" style="padding: 12px 24px; font-size: 14px; font-weight: 700;">
+                🎯 Bắt Đầu Luyện Tập Câu Sai (<span id="btn-mistakes-count">0</span>)
+              </button>
+              <button class="home-btn" onclick="clearAllMistakes()" style="padding: 12px 18px; font-size: 13.5px; background: rgba(220, 53, 69, 0.15); border-color: rgba(220, 53, 69, 0.4); color: #ff9999;" title="Xóa toàn bộ câu hỏi trong sổ tay">
+                🗑️ Làm Trống Sổ Tay
+              </button>
+            </div>
+          </div>
+
+          <!-- DÒNG THỐNG KÊ NHANH -->
+          <div class="mistakes-stats-row">
+            <div class="mistakes-stat-chip">
+              📊 Tổng số câu cần khắc phục: <strong id="stat-mistakes-total">0</strong>
+            </div>
+            <div class="mistakes-stat-chip">
+              📝 Trắc nghiệm 4 lựa chọn: <strong id="stat-mistakes-mc">0</strong>
+            </div>
+            <div class="mistakes-stat-chip">
+              📜 Đúng/Sai tư liệu: <strong id="stat-mistakes-tf">0</strong>
+            </div>
+            <div class="mistakes-stat-chip">
+              ⚠️ Sai từ 2 lần trở lên: <strong id="stat-mistakes-frequent">0</strong>
+            </div>
+          </div>
+
+          <!-- THANH TÌM KIẾM & BỘ LỌC CỦA SỔ TAY CÂU SAI -->
+          <div class="mistakes-toolbar">
+            <div class="mistakes-search-wrap">
+              <span class="mistakes-search-icon">🔍</span>
+              <input type="text" class="mistakes-search-input" id="mistakes-search-input" placeholder="Tìm kiếm nội dung câu hỏi, bài học, đề nguồn..." oninput="onMistakesFilterChange()">
+            </div>
+            <select class="mistakes-filter-select" id="mistakes-type-filter" onchange="onMistakesFilterChange()">
+              <option value="all">📜 Tất cả câu sai</option>
+              <option value="part1">📝 Trắc nghiệm 4 lựa chọn (Phần I)</option>
+              <option value="part2">📜 Đúng / Sai tư liệu (Phần II)</option>
+              <option value="frequent">⚠️ Câu sai nhiều lần (≥ 2 lần)</option>
+            </select>
+          </div>
+
+          <!-- VÙNG DANH SÁCH CÂU SAI / TRẠNG THÁI RỖNG -->
+          <div id="mistakes-content-area"></div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- CHẾ ĐỘ 4: 📊 BIỂU ĐỒ NĂNG LỰC HỌC TẬP (PROMPT 2)          -->
+      <!-- ======================================================== -->
+      <div id="panel-analytics-mode" class="lobby-panel" style="display: none;">
+        <div class="analytics-dashboard">
+          
+          <!-- THANH 4 THẺ CHỈ SỐ NĂNG LỰC TỔNG THỂ -->
+          <div class="analytics-hero-grid">
+            <div class="analytics-stat-card">
+              <div class="analytics-stat-icon">📝</div>
+              <div class="analytics-stat-info">
+                <span class="analytics-stat-label">Số Lượt Làm Bài</span>
+                <span class="analytics-stat-val" id="stat-anl-attempts">0</span>
+                <span class="analytics-stat-sub" id="stat-anl-attempts-sub">Lượt khảo thí thực tế</span>
+              </div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="analytics-stat-icon">🎯</div>
+              <div class="analytics-stat-info">
+                <span class="analytics-stat-label">Câu Đã Trả Lời</span>
+                <span class="analytics-stat-val" id="stat-anl-questions">0</span>
+                <span class="analytics-stat-sub" id="stat-anl-questions-sub">Độ bao phủ câu hỏi</span>
+              </div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="analytics-stat-icon">⭐</div>
+              <div class="analytics-stat-info">
+                <span class="analytics-stat-label">Tỷ Lệ Trả Lời Đúng</span>
+                <span class="analytics-stat-val" id="stat-anl-accuracy">0%</span>
+                <span class="analytics-stat-sub" id="stat-anl-accuracy-sub">Toàn bộ ngân hàng đề</span>
+              </div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="analytics-stat-icon">🏆</div>
+              <div class="analytics-stat-info">
+                <span class="analytics-stat-label">Điểm Trung Bình</span>
+                <span class="analytics-stat-val" id="stat-anl-avg-score">0.0</span>
+                <span class="analytics-stat-sub">Thang điểm chuẩn 10.0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- THANH CÔNG CỤ & BỘ LỌC THỐNG KÊ -->
+          <div class="analytics-toolbar">
+            <div class="analytics-toolbar-title">
+              <span>📈 Báo Cáo Năng Lực Học Tập & Đánh Giá Mảng Kiến Thức</span>
+            </div>
+            <div class="analytics-toolbar-filters">
+              <select class="analytics-select" id="select-anl-grade" onchange="onAnalyticsFilterChange()">
+                <option value="all">🏛️ Tất Cả Khối Lớp</option>
+                <option value="12" selected>⭐ Khối 12 (Trọng tâm THPT 2025)</option>
+                <option value="11">⚔️ Khối 11 (Cận đại & Kháng chiến)</option>
+                <option value="10">🏛️ Khối 10 (Văn minh & Thế giới)</option>
+              </select>
+
+              <select class="analytics-select" id="select-anl-period" onchange="onAnalyticsFilterChange()">
+                <option value="all" selected>🗓️ Toàn bộ thời gian</option>
+                <option value="30d">🗓️ 30 ngày gần nhất</option>
+                <option value="7d">🗓️ 7 ngày gần nhất</option>
+              </select>
+
+              <button class="home-btn" onclick="refreshAnalyticsView()" style="padding: 7px 12px; font-size: 0.8rem; background: rgba(197, 155, 39, 0.15); border-color: rgba(197, 155, 39, 0.4); color: var(--gold);" title="Làm mới số liệu">
+                🔄 Cập nhật
+              </button>
+            </div>
+          </div>
+
+          <!-- VÙNG NỘI DUNG ĐỘNG (RADAR, TREND, INSIGHTS & BẢNG SỐ LIỆU) -->
+          <div id="analytics-content-area"></div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- CHẾ ĐỘ 5: ⚔️ ĐẤU TRÍ TRANH HÙNG 1V1 (PROMPT 4)            -->
+      <!-- ======================================================== -->
+      <div id="panel-battle-mode" class="lobby-panel" style="display: none;">
+        <div class="battle-dashboard">
+
+          <!-- VIEW 1: SẢNH CHỌN CHẾ ĐỘ ĐẤU TRÍ (LOBBY) -->
+          <div id="battle-view-lobby">
+            <div style="text-align: center; max-width: 680px; margin: 0 auto 24px;">
+              <h3 style="font-size: 1.4rem; color: var(--gold); font-family: 'Playfair Display', serif; margin: 0 0 8px 0;">
+                ⚔️ Sàn Đấu Trí Tranh Hùng Lịch Sử 1v1
+              </h3>
+              <p style="font-size: 0.88rem; color: rgba(232, 213, 176, 0.85); line-height: 1.5; margin: 0;">
+                Hai tướng quân so tài kiến thức lịch sử trong cùng một bộ 10 câu hỏi trắc nghiệm ngẫu nhiên. Thời gian 3 phút (180 giây), hệ thống tính điểm độc lập và hiển thị tiến độ thời gian thực.
+              </p>
+            </div>
+
+            <div class="battle-lobby-cards">
+              <!-- CARD 1: TẠO PHÒNG MỚI -->
+              <div class="battle-card">
+                <div class="battle-card__header">
+                  <div class="battle-card__icon">🏰</div>
+                  <h4 class="battle-card__title">Tạo Phòng Thi Đấu</h4>
+                </div>
+                <p class="battle-card__desc">
+                  Tạo phòng riêng với mã phòng 6 ký tự bí mật, chia sẻ mã cho bạn bè hoặc bạn học cùng lớp để bắt đầu tranh tài.
+                </p>
+                <button class="start-btn" onclick="khoiTaoPhongDauMoi()" style="padding: 12px 20px; font-size: 0.95rem; font-weight: 700;">
+                  🏰 Tạo Phòng Mới Ngay
+                </button>
+              </div>
+
+              <!-- CARD 2: THAM GIA BẰNG MÃ -->
+              <div class="battle-card">
+                <div class="battle-card__header">
+                  <div class="battle-card__icon">🔑</div>
+                  <h4 class="battle-card__title">Tham Gia Phòng Có Sẵn</h4>
+                </div>
+                <p class="battle-card__desc">
+                  Nhập mã phòng 6 ký tự được đối thủ hoặc bạn bè chia sẻ để gia nhập phòng chờ thi đấu.
+                </p>
+                <div class="battle-input-wrap">
+                  <input type="text" id="battle-join-code-input" class="battle-room-input" placeholder="MÃ PHÒNG (VD: VN9380)" maxlength="6" autocomplete="off" autocapitalize="characters" />
+                  <button class="start-btn" onclick="thamGiaPhongDau()" style="padding: 11px 18px; font-size: 0.9rem; flex-shrink: 0;">
+                    Vào Phòng
+                  </button>
+                </div>
+              </div>
+
+              <!-- CARD 3: ĐẤU LUYỆN TẬP VỚI MÁY / BOT -->
+              <div class="battle-card">
+                <div class="battle-card__header">
+                  <div class="battle-card__icon">🤖</div>
+                  <h4 class="battle-card__title">Luyện Tập Với Trợ Lý Ảo</h4>
+                </div>
+                <p class="battle-card__desc">
+                  Thử sức nhanh với Tướng Quân Trợ Lý Ảo trong trường hợp không có bạn chơi cùng hoặc thử nghiệm tốc độ phản xạ.
+                </p>
+                <button class="home-btn" onclick="batDauDauLuyenTapBot()" style="padding: 12px 20px; font-size: 0.9rem; background: rgba(197, 155, 39, 0.15); border-color: var(--gold); color: #fff8e7;">
+                  🤖 Đấu Luyện Tập Với Máy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW 2: PHÒNG CHỜ THI ĐẤU (WAITING ROOM) -->
+          <div id="battle-view-waiting" style="display: none;">
+            <div class="battle-waiting-panel">
+              <div style="text-align: center;">
+                <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(232, 213, 176, 0.7); font-weight: 700;">
+                  Phòng Thi Đấu Đối Kháng
+                </span>
+                <div class="battle-room-code-badge" style="margin-top: 8px;">
+                  <span style="font-size: 0.75rem; color: rgba(232, 213, 176, 0.75);">MÃ PHÒNG RIÊNG:</span>
+                  <span class="battle-code-num" id="waiting-room-code">------</span>
+                  <button type="button" class="home-btn" onclick="saoChepMaPhong()" style="padding: 4px 12px; font-size: 0.75rem; background: rgba(197, 155, 39, 0.15); border-color: var(--gold); color: var(--gold);">
+                    📋 Sao chép mã phòng
+                  </button>
+                </div>
+              </div>
+
+              <!-- 2 ĐỐI THỦ SONG HÀNH -->
+              <div class="battle-players-versus">
+                <!-- NGƯỜI CHƠI 1 (CHỦ PHÒNG) -->
+                <div class="battle-player-box ready" id="waiting-p1-box">
+                  <div class="battle-player-avatar">🎖️</div>
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #fff8e7;" id="waiting-p1-name">Chủ Phòng</div>
+                  <span style="font-size: 0.72rem; color: #8ce196; font-weight: 700;">✓ ĐÃ SẴN SÀNG</span>
+                </div>
+
+                <div class="battle-vs-badge">VS</div>
+
+                <!-- NGƯỜI CHƠI 2 (KHÁCH) -->
+                <div class="battle-player-box" id="waiting-p2-box">
+                  <div class="battle-player-avatar" id="waiting-p2-avatar">⏳</div>
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #fff8e7;" id="waiting-p2-name">Đang chờ đối thủ...</div>
+                  <span style="font-size: 0.72rem; color: #ffcc66;" id="waiting-p2-status">Chia sẻ mã phòng để mời</span>
+                </div>
+              </div>
+
+              <!-- NÚT THAO TÁC TRONG PHÒNG CHỜ -->
+              <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 8px;">
+                <button class="start-btn" id="btn-battle-start-game" onclick="chuPhongXacNhanBatDau()" style="padding: 12px 28px; font-size: 1rem; font-weight: 700;">
+                  ⚔️ Bắt Đầu Trận Đấu
+                </button>
+                <button class="home-btn" onclick="roiKhoiPhongDau()" style="padding: 12px 20px; font-size: 0.9rem; background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.5); color: #ff9999;">
+                  🚪 Rời Phòng
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW 3: SÀN ĐẤU TRANH HÙNG (ARENA - 10 CÂU 180S) -->
+          <div id="battle-view-arena" style="display: none;">
+            <div class="battle-arena-panel">
+              <!-- THANH TIÊU ĐỀ SÀN ĐẤU: THỜI GIAN & RÚT LUI -->
+              <div class="battle-arena-topbar">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.4rem;">⚔️</span>
+                  <div>
+                    <h3 style="font-size: 1.1rem; color: #fff8e7; margin: 0; font-family: 'Playfair Display', serif;">
+                      Sàn Đấu Tranh Hùng 1v1
+                    </h3>
+                    <div style="font-size: 0.72rem; color: rgba(232, 213, 176, 0.7);">
+                      10 Câu Hỏi Trắc Nghiệm Chuẩn Lịch Sử
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ĐỒNG HỒ 180S -->
+                <div class="battle-timer-pill" id="battle-timer-pill">
+                  <span>⏱️</span> <span id="battle-timer-text">03:00</span>
+                </div>
+
+                <button class="home-btn" onclick="xacNhanRutLuiTranDau()" style="padding: 6px 14px; font-size: 0.8rem; background: rgba(220, 53, 69, 0.15); border-color: rgba(220, 53, 69, 0.4); color: #ff9999;">
+                  🏳️ Rút Lui
+                </button>
+              </div>
+
+              <!-- THANH TIẾN ĐỘ ĐỐI KHÁNG 2 BÊN -->
+              <div class="battle-progress-dual">
+                <!-- BẠN -->
+                <div class="battle-progress-side">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700;">
+                    <span style="color: var(--gold);" id="arena-p1-name">Bạn</span>
+                    <span style="color: #fff8e7;"><span id="arena-p1-progress-num">0</span> / 10 (<strong id="arena-p1-score-num">0</strong> đ)</span>
+                  </div>
+                  <div class="battle-progress-bar-wrap">
+                    <div class="battle-progress-bar-fill you" id="arena-p1-progress-bar" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <!-- ĐỐI THỦ -->
+                <div class="battle-progress-side">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700;">
+                    <span style="color: #ff9999;" id="arena-p2-name">Đối Thủ</span>
+                    <span style="color: #fff8e7;"><span id="arena-p2-progress-num">0</span> / 10 (<strong id="arena-p2-score-num">0</strong> đ)</span>
+                  </div>
+                  <div class="battle-progress-bar-wrap">
+                    <div class="battle-progress-bar-fill opponent" id="arena-p2-progress-bar" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- KHU VỰC CÂU HỎI THI ĐẤU -->
+              <div class="battle-question-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(197, 155, 39, 0.2); padding-bottom: 10px;">
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--gold);" id="arena-q-index-label">
+                    Câu số 1 / 10
+                  </span>
+                  <span style="font-size: 0.72rem; color: rgba(232, 213, 176, 0.65);" id="arena-q-points-label">
+                    10 Điểm / Câu
+                  </span>
+                </div>
+
+                <div class="battle-question-stem" id="arena-question-stem">
+                  Đang tải nội dung câu hỏi...
+                </div>
+
+                <div class="battle-options-list" id="arena-options-list">
+                  <!-- Render bởi JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW 4: BẢNG KẾT QUẢ VINH DANH (RESULT) -->
+          <div id="battle-view-result" style="display: none;">
+            <div class="battle-result-banner">
+              <div style="font-size: 3.5rem;" id="result-trophy-icon">🏆</div>
+              <h2 class="battle-result-headline victory" id="result-headline-text">
+                CHIẾN THẮNG VANG DỘI!
+              </h2>
+              <p style="font-size: 0.92rem; color: rgba(232, 213, 176, 0.9); max-width: 540px; margin: 0;" id="result-summary-desc">
+                Bạn đã vượt qua đối thủ xuất sắc với kiến thức lịch sử vững vàng!
+              </p>
+
+              <!-- SO SÁNH ĐIỂM SỐ 2 BÊN -->
+              <div style="display: flex; justify-content: center; gap: 28px; margin: 16px 0; flex-wrap: wrap;">
+                <div style="padding: 16px 24px; background: rgba(0, 0, 0, 0.4); border-radius: 14px; border: 1.5px solid var(--gold); text-align: center; min-width: 140px;">
+                  <div style="font-size: 0.75rem; color: var(--gold); font-weight: 700;">ĐIỂM CỦA BẠN</div>
+                  <div style="font-size: 2.2rem; font-weight: 900; color: #fff8e7; font-family: 'Playfair Display', serif;" id="res-score-you">0</div>
+                  <div style="font-size: 0.75rem; color: rgba(232, 213, 176, 0.7);" id="res-time-you">--:--</div>
+                </div>
+
+                <div style="display: flex; align-items: center; font-size: 1.5rem; font-weight: 900; color: rgba(232, 213, 176, 0.4);">
+                  VS
+                </div>
+
+                <div style="padding: 16px 24px; background: rgba(0, 0, 0, 0.4); border-radius: 14px; border: 1.5px solid rgba(197, 155, 39, 0.3); text-align: center; min-width: 140px;">
+                  <div style="font-size: 0.75rem; color: rgba(232, 213, 176, 0.7); font-weight: 700;">ĐỐI THỦ</div>
+                  <div style="font-size: 2.2rem; font-weight: 900; color: #e8d5b0; font-family: 'Playfair Display', serif;" id="res-score-opp">0</div>
+                  <div style="font-size: 0.75rem; color: rgba(232, 213, 176, 0.7);" id="res-time-opp">--:--</div>
+                </div>
+              </div>
+
+              <!-- PHẦN THƯỞNG ĐIỂM THÁI BÌNH -->
+              <div style="font-size: 0.85rem; color: #8ce196; font-weight: 700;" id="res-peace-reward-text">
+                🕊️ +50 Điểm Thái Bình Ghi Danh Bảng Vàng!
+              </div>
+
+              <!-- NÚT ĐIỀU HƯỚNG -->
+              <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px;">
+                <button class="start-btn" onclick="veSanhDauTri()" style="padding: 11px 24px; font-size: 0.95rem;">
+                  ⚔️ Đấu Trận Khác
+                </button>
+                <button class="home-btn" onclick="switchLobbyMode('random')" style="padding: 11px 20px; font-size: 0.9rem;">
+                  ⬅ Về Sảnh Chính
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
     </div>
   </section>
 
@@ -3568,6 +5506,9 @@
           <div class="result-actions-row">
             <button class="start-btn" style="padding: 10px 22px; font-size: 13.5px;" id="btn-retake-exam">🔄 Làm Lại Đề Này</button>
             <button class="home-btn" style="padding: 10px 22px; font-size: 13.5px;" id="btn-back-to-catalog">📚 Chọn Đề Thi Khác</button>
+            <button class="home-btn" style="padding: 10px 22px; font-size: 13.5px; background: rgba(184, 134, 11, 0.18); border-color: var(--gold); color: #fff8e7;" id="btn-res-view-mistakes" onclick="goToMistakesNotebook()">📖 Sổ Tay Câu Sai (<span id="res-mistakes-count">0</span>)</button>
+            <button class="home-btn" style="padding: 10px 22px; font-size: 13.5px; background: rgba(123, 30, 30, 0.25); border-color: var(--gold); color: #fff8e7;" id="btn-res-open-bang-vang" onclick="moModalBangVang()">🏆 Bảng Vàng & Thẻ Tướng</button>
+            <button type="button" class="home-btn btn-certificate" id="btn-create-certificate" style="display: none; padding: 10px 22px; font-size: 13.5px; background: linear-gradient(135deg, #B8860B, #D4AF37); color: #140c08; border-color: #FFEAA7; font-weight: 800;" onclick="moModalChungNhan()" title="Tạo ảnh chứng nhận vinh danh thành tích đạt từ 9.0 điểm trở lên">📜 Nhận Chiếu Chỉ Khải Hoàn (≥9.0đ)</button>
             <a href="trang-chinh.html" class="home-btn" style="padding: 10px 22px; font-size: 13.5px; background: rgba(0,0,0,0.06); color: var(--ink);">⬅ Về Sảnh Chính</a>
           </div>
         </div>
@@ -51947,28 +53888,2433 @@ function updateRandomLobbyProgress() {
   }
 }
 
+
+// =========================================================================
+// SỔ TAY CÂU SAI & CHẾ ĐỘ LUYỆN TẬP CÂU SAI (PROMPT 1 IMPLEMENTATION)
+// =========================================================================
+const MISTAKES_STORAGE_KEY = 'dcls_mistakes_notebook_v1';
+
+// 1. Thuật toán tạo ID ổn định không trùng lặp dựa trên FNV-1a Hash nội dung câu hỏi
+function computeStableQuestionId(prefix, textToHash) {
+  let hash = 2166136261;
+  const str = String(textToHash || '');
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+  const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+  let num = (hash >>> 0);
+  let res = [];
+  while (num > 0) {
+    res.push(chars[num % 36]);
+    num = Math.floor(num / 36);
+  }
+  return prefix + '_' + (res.reverse().join('') || '0');
+}
+
+function getPart1QuestionId(q) {
+  const normQ = typeof normalizeQuestionForDedup === 'function' 
+    ? normalizeQuestionForDedup(getQuestionText(q))
+    : String(getQuestionText(q)).trim().toLowerCase();
+  const opts = getQuestionOptions(q);
+  const normOpts = opts.map(o => typeof normalizeQuestionForDedup === 'function' ? normalizeQuestionForDedup(o) : String(o).trim().toLowerCase()).sort().join('||');
+  return computeStableQuestionId('mc', normQ + '||' + normOpts);
+}
+
+function getPart2StatementId(group, stmt) {
+  const normPassage = typeof normalizeQuestionForDedup === 'function'
+    ? normalizeQuestionForDedup(group.passage || group.text || '')
+    : String(group.passage || group.text || '').trim().toLowerCase();
+  const normStmt = typeof normalizeQuestionForDedup === 'function'
+    ? normalizeQuestionForDedup(stmt.text || '')
+    : String(stmt.text || '').trim().toLowerCase();
+  const letter = String(stmt.letter || 'a').toLowerCase();
+  return computeStableQuestionId('tf', normPassage + '||' + letter + '||' + normStmt);
+}
+
+// 2. Quản lý lưu trữ an toàn trong localStorage
+function getMistakesData() {
+  try {
+    const raw = localStorage.getItem(MISTAKES_STORAGE_KEY);
+    if (!raw) return { version: 1, items: {} };
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || !parsed.items) {
+      return { version: 1, items: {} };
+    }
+    return parsed;
+  } catch (err) {
+    console.error('Lỗi khi đọc dữ liệu Sổ tay câu sai:', err);
+    return { version: 1, items: {} };
+  }
+}
+
+function saveMistakesData(data) {
+  try {
+    data.updatedAt = new Date().toISOString();
+    localStorage.setItem(MISTAKES_STORAGE_KEY, JSON.stringify(data));
+    updateMistakesCountBadges();
+updateAnalyticsCountBadges();
+updateBangVangCountBadge();
+  } catch (err) {
+    console.error('Lỗi khi lưu dữ liệu Sổ tay câu sai:', err);
+  }
+}
+
+function getMistakesList() {
+  const data = getMistakesData();
+  const items = Object.values(data.items || {});
+  // Sắp xếp: câu sai gần đây nhất lên trước
+  return items.sort((a, b) => new Date(b.lastWrongAt || 0) - new Date(a.lastWrongAt || 0));
+}
+
+// 3. Ghi nhận câu sai khi hoàn thành bài thi
+function handleExamMistakesSubmission(exam, wrongP1Items, wrongP2Items) {
+  if (!exam) return 0;
+  const isPractice = exam.isMistakesPractice === true;
+  const data = getMistakesData();
+  const now = new Date().toISOString();
+  let countRecorded = 0;
+
+  // Xử lý Phần 1: Trắc nghiệm 4 lựa chọn
+  (wrongP1Items || []).forEach(item => {
+    const q = item.question;
+    const qId = q._mistakeId || getPart1QuestionId(q);
+    const existing = data.items[qId];
+
+    if (existing) {
+      existing.wrongCount = (existing.wrongCount || 1) + 1;
+      existing.lastWrongAt = now;
+      existing.userAnswer = item.userChoice;
+      existing.examTitle = exam.title || existing.examTitle;
+      existing.examId = exam.id || existing.examId;
+    } else {
+      data.items[qId] = {
+        id: qId,
+        type: 'part1',
+        examId: exam.id || '',
+        examTitle: exam.title || 'Bài thi Lịch sử 12',
+        topic: q.topic || exam.topic || 'Lịch sử 12',
+        tangThuCacLink: q.tangThuCacLink || '',
+        q: getQuestionText(q),
+        options: getQuestionOptions(q),
+        correctAnswer: item.correctAns,
+        userAnswer: item.userChoice,
+        explain: q.explain || '',
+        image: q.image || null,
+        wrongCount: 1,
+        firstWrongAt: now,
+        lastWrongAt: now
+      };
+    }
+    countRecorded++;
+  });
+
+  // Xử lý Phần 2: Đúng / Sai tư liệu
+  (wrongP2Items || []).forEach(item => {
+    const grp = item.group;
+    const stmt = item.statement;
+    const qId = stmt._mistakeId || getPart2StatementId(grp, stmt);
+    const existing = data.items[qId];
+
+    if (existing) {
+      existing.wrongCount = (existing.wrongCount || 1) + 1;
+      existing.lastWrongAt = now;
+      existing.userAnswer = item.userVal;
+      existing.examTitle = exam.title || existing.examTitle;
+      existing.examId = exam.id || existing.examId;
+    } else {
+      data.items[qId] = {
+        id: qId,
+        type: 'part2',
+        examId: exam.id || '',
+        examTitle: exam.title || 'Bài thi Lịch sử 12',
+        topic: stmt.topic || grp.topic || exam.topic || 'Lịch sử 12',
+        tangThuCacLink: stmt.tangThuCacLink || grp.tangThuCacLink || '',
+        passage: grp.passage || grp.text || '',
+        source: grp.source || 'Tư liệu SGK Lịch sử 12',
+        letter: stmt.letter || 'a',
+        statementText: stmt.text || '',
+        correctAnswer: item.correctVal,
+        userAnswer: item.userVal,
+        explain: stmt.explain || '',
+        wrongCount: 1,
+        firstWrongAt: now,
+        lastWrongAt: now
+      };
+    }
+    countRecorded++;
+  });
+
+  saveMistakesData(data);
+  return countRecorded;
+}
+
+// 4. Xóa câu khỏi sổ tay khi học sinh đã nắm vững
+function removeMistakeItem(id, silent = false) {
+  if (!id) return;
+  const data = getMistakesData();
+  if (data.items && data.items[id]) {
+    delete data.items[id];
+    saveMistakesData(data);
+    if (!silent) {
+      renderMistakesNotebook();
+    }
+  }
+}
+
+function clearAllMistakes() {
+  const mistakes = getMistakesList();
+  if (mistakes.length === 0) {
+    alert('Sổ tay câu sai hiện đang trống.');
+    return;
+  }
+  const confirmed = confirm(`Bạn có chắc chắn muốn làm trống toàn bộ ${mistakes.length} câu trong Sổ tay câu sai không?\n(Lưu ý: Thao tác này chỉ xóa danh sách cần ôn tập, điểm số và kết quả các đề thi gốc vẫn được giữ nguyên.)`);
+  if (!confirmed) return;
+
+  saveMistakesData({ version: 1, items: {} });
+  renderMistakesNotebook();
+}
+
+// 5. Cập nhật các huy hiệu số lượng trên giao diện
+function updateMistakesCountBadges() {
+  const mistakes = getMistakesList();
+  const count = mistakes.length;
+
+  const totalEl = $('mistakes-total-count');
+  if (totalEl) totalEl.textContent = count;
+
+  const btnCountEl = $('btn-mistakes-count');
+  if (btnCountEl) btnCountEl.textContent = count;
+
+  const resMistakesCountEl = $('res-mistakes-count');
+  if (resMistakesCountEl) resMistakesCountEl.textContent = count;
+
+  const statTotal = $('stat-mistakes-total');
+  if (statTotal) statTotal.textContent = count;
+
+  const statMc = $('stat-mistakes-mc');
+  if (statMc) statMc.textContent = mistakes.filter(m => m.type === 'part1').length;
+
+  const statTf = $('stat-mistakes-tf');
+  if (statTf) statTf.textContent = mistakes.filter(m => m.type === 'part2').length;
+
+  const statFreq = $('stat-mistakes-frequent');
+  if (statFreq) statFreq.textContent = mistakes.filter(m => (m.wrongCount || 1) >= 2).length;
+
+  const badge = $('mistakes-mode-badge');
+  if (badge) {
+    if (count > 0) {
+      badge.textContent = `🎯 Cần ôn: ${count} câu`;
+      badge.style.color = '#ff9999';
+      badge.style.borderColor = 'rgba(220, 53, 69, 0.5)';
+    } else {
+      badge.textContent = `✓ Đã làm chủ`;
+      badge.style.color = '#8ce196';
+      badge.style.borderColor = 'rgba(40, 167, 69, 0.5)';
+    }
+  }
+}
+
+function formatMistakeTimeAgo(isoString) {
+  if (!isoString) return 'Gần đây';
+  const diffMs = Date.now() - new Date(isoString).getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'Vừa xong';
+  if (mins < 60) return `${mins} phút trước`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours} giờ trước`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days} ngày trước`;
+  return new Date(isoString).toLocaleDateString('vi-VN');
+}
+
+// 6. Hiển thị danh sách câu sai trong Sổ tay câu sai
+function onMistakesFilterChange() {
+  renderMistakesNotebook();
+}
+
+function renderMistakesNotebook() {
+  updateMistakesCountBadges();
+  const container = $('mistakes-content-area');
+  if (!container) return;
+
+  const allMistakes = getMistakesList();
+
+  // Trạng thái rỗng
+  if (allMistakes.length === 0) {
+    container.innerHTML = `
+      <div class="mistakes-empty-state">
+        <div class="mistakes-empty-icon">🍃</div>
+        <h3>Sổ Tay Câu Sai Đang Trống!</h3>
+        <p>Tuyệt vời! Bạn hiện không có câu trả lời sai nào cần khắc phục. Hãy thử sức với các bài thi tại Thao Trường (Thi thử ngẫu nhiên hoặc Kho đề tự chọn), hệ thống sẽ tự động ghi nhận những câu bạn trả lời chưa chính xác vào đây để bạn xem lại và luyện tập riêng bất kỳ lúc nào.</p>
+        <button class="start-btn" onclick="switchLobbyMode('random')" style="padding: 12px 28px; font-size: 14px; font-weight: 700;">
+          🎲 Làm Bài Thi Thử Ngay
+        </button>
+      </div>
+    `;
+    const btnPractice = $('btn-start-mistakes-practice');
+    if (btnPractice) btnPractice.disabled = true;
+    return;
+  }
+
+  const btnPractice = $('btn-start-mistakes-practice');
+  if (btnPractice) btnPractice.disabled = false;
+
+  // Lọc theo từ khóa tìm kiếm và loại câu hỏi
+  const searchInput = $('mistakes-search-input');
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+  const typeFilter = $('mistakes-type-filter');
+  const typeVal = typeFilter ? typeFilter.value : 'all';
+
+  const filtered = allMistakes.filter(item => {
+    // Lọc theo loại
+    if (typeVal === 'part1' && item.type !== 'part1') return false;
+    if (typeVal === 'part2' && item.type !== 'part2') return false;
+    if (typeVal === 'frequent' && (item.wrongCount || 1) < 2) return false;
+
+    // Lọc theo từ khóa
+    if (query) {
+      const qText = (item.q || item.statementText || '').toLowerCase();
+      const pText = (item.passage || '').toLowerCase();
+      const exTitle = (item.examTitle || '').toLowerCase();
+      const topic = (item.topic || '').toLowerCase();
+      if (!qText.includes(query) && !pText.includes(query) && !exTitle.includes(query) && !topic.includes(query)) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="mistakes-empty-state" style="padding: 32px 20px;">
+        <div style="font-size: 36px; margin-bottom: 8px;">🔍</div>
+        <h3>Không tìm thấy câu hỏi phù hợp</h3>
+        <p>Không có câu hỏi nào trong sổ tay khớp với từ khóa tìm kiếm hoặc bộ lọc hiện tại.</p>
+        <button class="home-btn" onclick="clearMistakesFilter()" style="padding: 8px 20px; font-size: 13px;">✕ Xóa bộ lọc tìm kiếm</button>
+      </div>
+    `;
+    return;
+  }
+
+  let html = `<div class="mistakes-list">`;
+
+  filtered.forEach((item, index) => {
+    const isP1 = item.type === 'part1';
+    const typeLabel = isP1 ? '📝 Trắc nghiệm 4 lựa chọn' : '📜 Đúng / Sai tư liệu';
+    const wrongTimes = item.wrongCount || 1;
+    const timeAgo = formatMistakeTimeAgo(item.lastWrongAt);
+
+    html += `
+      <div class="mistake-card" id="mistake-card-${item.id}">
+        <div class="mistake-card__header">
+          <div class="mistake-card__badges">
+            <span class="mistake-badge-exam">${escapeExamHtml(item.examTitle || 'Đề khảo thí')}</span>
+            <span class="mistake-badge-type">${typeLabel}</span>
+            <span class="mistake-badge-count">⚠️ Sai ${wrongTimes} lần</span>
+          </div>
+          <div class="mistake-card__time">🕒 Sai lần cuối: ${timeAgo}</div>
+        </div>
+    `;
+
+    if (isP1) {
+      // Câu hỏi trắc nghiệm Phần I
+      html += `
+        <div class="mistake-card__stem">${escapeExamHtml(item.q)}</div>
+        <div class="mistake-options-compare">
+      `;
+      (item.options || []).forEach((opt, oIdx) => {
+        const letter = String.fromCharCode(65 + oIdx);
+        const isUserChoice = item.userAnswer === oIdx;
+        const isCorrectChoice = item.correctAnswer === oIdx;
+
+        if (isUserChoice && !isCorrectChoice) {
+          html += `
+            <div class="mistake-opt-pill wrong">
+              <strong>❌ Lựa chọn sai của bạn:</strong> ${letter}. ${escapeExamHtml(opt)}
+            </div>
+          `;
+        } else if (isCorrectChoice) {
+          html += `
+            <div class="mistake-opt-pill correct">
+              <strong>✓ Đáp án chính xác của đề:</strong> ${letter}. ${escapeExamHtml(opt)}
+            </div>
+          `;
+        }
+      });
+      html += `</div>`;
+
+      if (item.explain) {
+        html += `
+          <div class="mistake-card__explain">
+            <strong>💡 Căn cứ lịch sử & Giải thích chi tiết:</strong><br>
+            ${escapeExamHtml(item.explain)}
+          </div>
+        `;
+      }
+    } else {
+      // Câu hỏi Đúng/Sai Phần II
+      html += `
+        ${item.passage ? `<div class="mistake-card__passage"><strong>Tư liệu:</strong> “${escapeExamHtml(item.passage)}”</div>` : ''}
+        <div class="mistake-card__stem"><strong>Mệnh đề ${String(item.letter || 'a').toUpperCase()}:</strong> ${escapeExamHtml(item.statementText)}</div>
+        <div class="mistake-options-compare">
+          <div class="mistake-opt-pill wrong">
+            <strong>❌ Lựa chọn của bạn:</strong> ${item.userAnswer === true ? 'ĐÚNG' : (item.userAnswer === false ? 'SAI' : 'Chưa chọn')}
+          </div>
+          <div class="mistake-opt-pill correct">
+            <strong>✓ Đáp án chính xác:</strong> ${item.correctAnswer ? 'ĐÚNG' : 'SAI'}
+          </div>
+        </div>
+      `;
+
+      if (item.explain) {
+        html += `
+          <div class="mistake-card__explain">
+            <strong>💡 Căn cứ lịch sử & Giải thích chi tiết:</strong><br>
+            ${escapeExamHtml(item.explain)}
+          </div>
+        `;
+      }
+    }
+
+    // Các nút thao tác
+    html += `
+        <div class="mistake-card__actions">
+          <button class="mistake-action-btn delete" onclick="removeMistakeItem('${item.id}')" title="Xóa câu này khỏi sổ tay khi bạn đã nhớ rõ">
+            ✓ Đã Nắm Vững (Xóa Khỏi Sổ)
+          </button>
+          <button class="mistake-action-btn practice-one" onclick="startMistakesPracticeExam('${item.id}')" title="Mở phòng thi làm lại riêng câu hỏi này">
+            🎯 Luyện Lại Câu Này
+          </button>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function clearMistakesFilter() {
+  const s = $('mistakes-search-input');
+  if (s) s.value = '';
+  const f = $('mistakes-type-filter');
+  if (f) f.value = 'all';
+  renderMistakesNotebook();
+}
+
+function goToMistakesNotebook() {
+  showScreen('screen-catalog');
+  switchLobbyMode('mistakes');
+}
+
+// 7. Khởi tạo phiên Luyện tập câu sai
+function startMistakesPracticeExam(singleId = null) {
+  const mistakes = getMistakesList();
+  if (mistakes.length === 0) {
+    alert('Sổ tay câu sai của bạn hiện đang trống! Hãy thử sức với các bài thi tại Thao Trường để ghi nhận những câu cần củng cố.');
+    return;
+  }
+
+  let practiceItems = mistakes;
+  if (singleId) {
+    const single = mistakes.find(m => m.id === singleId);
+    if (!single) {
+      alert('Không tìm thấy câu hỏi này trong sổ tay câu sai.');
+      return;
+    }
+    practiceItems = [single];
+  }
+
+  const p1List = [];
+  const p2GroupsMap = new Map();
+
+  practiceItems.forEach(item => {
+    if (item.type === 'part1') {
+      p1List.push({
+        q: item.q,
+        opts: item.options,
+        options: item.options,
+        ans: item.correctAnswer,
+        answer: item.correctAnswer,
+        explain: item.explain,
+        topic: item.topic || 'Luyện tập câu sai',
+        tangThuCacLink: item.tangThuCacLink || '',
+        image: item.image || null,
+        _mistakeId: item.id
+      });
+    } else if (item.type === 'part2') {
+      const pKey = item.passage || item.source || item.id;
+      if (!p2GroupsMap.has(pKey)) {
+        p2GroupsMap.set(pKey, {
+          passage: item.passage,
+          source: item.source || 'Tư liệu SGK Lịch sử 12',
+          statements: []
+        });
+      }
+      p2GroupsMap.get(pKey).statements.push({
+        letter: item.letter || 'a',
+        text: item.statementText,
+        isTrue: item.correctAnswer,
+        explain: item.explain,
+        topic: item.topic || 'Luyện tập câu sai',
+        tangThuCacLink: item.tangThuCacLink || '',
+        _mistakeId: item.id
+      });
+    }
+  });
+
+  const p2List = Array.from(p2GroupsMap.values());
+
+  const practiceExam = {
+    id: 'de-luyen-cau-sai',
+    title: singleId ? '🎯 Luyện Lại 1 Câu Sai' : `🎯 Luyện Tập Câu Sai (${practiceItems.length} câu)`,
+    badge: 'Sổ Tay Cá Nhân · Luyện Trọng Tâm',
+    book: 'Tuyển tập câu trả lời chưa chính xác',
+    category: 'mistakes-practice',
+    level: 'Khắc phục lỗ hổng kiến thức',
+    topic: 'Luyện tập câu sai',
+    desc: 'Bài luyện tập được tạo tự động từ danh sách câu bạn từng làm sai. Hãy làm bài cẩn trọng và đối chiếu kỹ với giải thích chuyên sâu sau khi nộp bài.',
+    practiceOnly: true,
+    isMistakesPractice: true,
+    part1: p1List,
+    part2: p2List
+  };
+
+  currentExam = practiceExam;
+  isSubmitted = false;
+  userAnswersP1 = new Array(currentExam.part1.length).fill(null);
+  userAnswersP2 = currentExam.part2.map(p => Object.fromEntries(p.statements.map(stmt => [stmt.letter.toLowerCase(), null])));
+  userAnswersP3 = [];
+
+  timerSeconds = 0; // Tự luyện không giới hạn thời gian
+  elapsedSeconds = 0;
+
+  $('active-exam-title').textContent = currentExam.title;
+  $('active-exam-badge').textContent = currentExam.badge;
+  const timerLabel = document.querySelector('.timer-card-label');
+  if (timerLabel) timerLabel.textContent = '⏱️ THỜI GIAN LÀM BÀI';
+  $('timer-display').textContent = 'Tự Luyện (Không Giới Hạn)';
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    elapsedSeconds++;
+    const m = Math.floor(elapsedSeconds / 60);
+    const s = elapsedSeconds % 60;
+    $('timer-display').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }, 1000);
+
+  renderPart1Continuous();
+  renderPart2Continuous();
+  renderPart3Continuous();
+  renderPaletteContinuous();
+  updateProgressContinuous();
+
+  $('res-summary-board').style.display = 'none';
+  $('bottom-submit-card').style.display = 'block';
+
+  showScreen('screen-exam');
+}
+
+
+// =========================================================================
+// BIỂU ĐỒ NĂNG LỰC HỌC TẬP (RADAR CHART & ANALYTICS - PROMPT 2)
+// =========================================================================
+const ANALYTICS_HISTORY_KEY = 'dcls_exam_history_v1';
+const MIN_SAMPLE_THRESHOLD = 5; // Tối thiểu 5 câu hỏi để kết luận mảng kiến thức đủ dữ liệu
+
+// 1. Cấu hình 5 Trục Năng lực Cốt lõi Lịch sử GDPT (5 Radar Axes)
+const RADAR_AXES_CONFIG = [
+  {
+    key: 'world',
+    name: 'Thế Giới & Quan Hệ Quốc Tế',
+    shortName: 'Thế Giới & QHQT',
+    desc: 'LHQ, Chiến tranh Lạnh, ASEAN, Thế giới sau 1991, CNTB & CNXH',
+    topicKeys: ['bai-01', 'bai-02', 'bai-03', 'bai-04', 'bai-05', 'g11-bai-01', 'g11-bai-02', 'g11-bai-03', 'g11-bai-04', 'g10-chu-de-03', 'g10-chu-de-04', 'g10-chu-de-05']
+  },
+  {
+    key: 'revolution',
+    name: 'Giải Phóng Dân Tộc & CMT8',
+    shortName: 'Giải Phóng & CMT8',
+    desc: 'Phong trào giải phóng dân tộc, Mặt trận Việt Minh & Cách mạng Tháng Tám 1945',
+    topicKeys: ['bai-06', 'g11-bai-05', 'g11-bai-06', 'g11-bai-08']
+  },
+  {
+    key: 'defense',
+    name: 'Kháng Chiến & Bảo Vệ Tổ Quốc',
+    shortName: 'Kháng Chiến & BVTQ',
+    desc: 'Kháng chiến chống Pháp (1945-1954), chống Mỹ (1954-1975) & Bảo vệ Tổ quốc sau 1975',
+    topicKeys: ['bai-07', 'bai-08', 'bai-09', 'g11-bai-07']
+  },
+  {
+    key: 'reforms',
+    name: 'Đổi Mới & Hội Nhập Quốc Tế',
+    shortName: 'Đổi Mới & Đối Ngoại',
+    desc: 'Công cuộc Đổi mới từ 1986, Chủ quyền Biển Đông & Đối ngoại đa phương',
+    topicKeys: ['bai-10-11', 'bai-12-14', 'g11-bai-12', 'g11-bai-13']
+  },
+  {
+    key: 'synthesis',
+    name: 'Tư Duy Lịch Sử & Nâng Cao',
+    shortName: 'Tư Duy & Nâng Cao',
+    desc: 'Đề Học sinh giỏi, Tổng ôn toàn diện, Lịch sử & Sử học, Di sản & Cải cách thể chế',
+    topicKeys: ['hsg', 'tong-hop-12', 'g10-chu-de-01', 'g10-chu-de-02', 'g10-chu-de-06', 'g10-tong-on', 'g11-bai-09', 'g11-bai-10', 'g11-bai-11']
+  }
+];
+
+// 2. Hàm xác định topicKey từ đề thi
+function getExamTopicKey(ex) {
+  if (!ex) return 'unclassified';
+  const eid = ex.id || '';
+  const cat = ex.category || '';
+  const src = ex.sourceExamId || '';
+
+  // Khối 10
+  if (eid.startsWith('de-10-chu-de-01') || cat === 'g10-chu-de-01') return 'g10-chu-de-01';
+  if (eid.startsWith('de-10-chu-de-02') || cat === 'g10-chu-de-02') return 'g10-chu-de-02';
+  if (eid.startsWith('de-10-chu-de-03') || cat === 'g10-chu-de-03' || src === 'de-10-chu-de-03') return 'g10-chu-de-03';
+  if (eid.startsWith('de-10-chu-de-04') || cat === 'g10-chu-de-04' || src === 'de-10-chu-de-04') return 'g10-chu-de-04';
+  if (eid.startsWith('de-10-chu-de-05') || cat === 'g10-chu-de-05') return 'g10-chu-de-05';
+  if (eid.startsWith('de-10-chu-de-06') || cat === 'g10-chu-de-06' || src === 'de-10-chu-de-06') return 'g10-chu-de-06';
+  if (eid.startsWith('de-10-tong-on') || cat === 'g10-tong-on') return 'g10-tong-on';
+
+  // Khối 11
+  if (cat && cat.startsWith('g11-bai-')) return cat;
+  if (eid.startsWith('de-11-bai-')) {
+    const num = eid.replace('de-11-bai-', '').split('-')[0].split('_')[0];
+    return 'g11-bai-' + num.padStart(2, '0');
+  }
+
+  // Khối 12
+  if (['de-01', 'de-43'].includes(eid)) return 'bai-01';
+  if (['de-02', 'de-03', 'de-44'].includes(eid)) return 'bai-02';
+  if (['de-04', 'de-45'].includes(eid)) return 'bai-03';
+  if ((eid >= 'de-05' && eid <= 'de-11') || eid === 'de-46') return 'bai-04';
+  if ((eid >= 'de-12' && eid <= 'de-17') || eid === 'de-47') return 'bai-05';
+  if (eid >= 'de-18' && eid <= 'de-27') return 'bai-06';
+  if (['de-28', 'de-29'].includes(eid)) return 'bai-07';
+  if (['de-30', 'de-31', 'de-32'].includes(eid)) return 'bai-08';
+  if (eid === 'de-33') return 'bai-09';
+  if (eid >= 'de-34' && eid <= 'de-37') return 'bai-10-11';
+  if (eid >= 'de-39' && eid <= 'de-42') return 'bai-12-14';
+  if (eid === 'de-38' || (ex.level && ex.level.includes('Học Sinh Giỏi'))) return 'hsg';
+  if (eid === 'de-12-tong-hop' || eid.startsWith('de-th-12-')) return 'tong-hop-12';
+
+  const t = (ex.title || '').toLowerCase();
+  if (t.includes('liên hợp quốc')) return 'bai-01';
+  if (t.includes('chiến tranh lạnh')) return 'bai-02';
+  if (t.includes('asean')) return 'bai-04';
+  if (t.includes('cách mạng tháng tám') || t.includes('cmt8')) return 'bai-06';
+  if (t.includes('chống pháp')) return 'bai-07';
+  if (t.includes('chống mỹ')) return 'bai-08';
+  if (t.includes('bảo vệ tổ quốc')) return 'bai-09';
+  if (t.includes('đổi mới')) return 'bai-10-11';
+  if (t.includes('đối ngoại')) return 'bai-12-14';
+
+  return 'unclassified';
+}
+
+function mapTopicToRadarAxis(topicKey) {
+  if (!topicKey || topicKey === 'unclassified') return null;
+  for (const axis of RADAR_AXES_CONFIG) {
+    if (axis.topicKeys.includes(topicKey)) return axis;
+  }
+  return null;
+}
+
+// 3. Quản lý lưu trữ & Khởi tạo dữ liệu lịch sử thi
+function getExamHistoryList() {
+  try {
+    const raw = localStorage.getItem(ANALYTICS_HISTORY_KEY);
+    if (raw) {
+      const list = JSON.parse(raw);
+      if (Array.isArray(list)) return list;
+    }
+  } catch (e) {
+    console.warn("Lỗi đọc lịch sử thi:", e);
+  }
+
+  // Khởi tạo thông minh: Nếu chưa có history nhưng đã có best scores của các đề đã hoàn thành
+  const seeded = [];
+  if (typeof EXAMS_DATA !== 'undefined' && Array.isArray(EXAMS_DATA)) {
+    const completedList = typeof getCompletedExams === 'function' ? getCompletedExams() : [];
+    EXAMS_DATA.forEach(ex => {
+      const best = localStorage.getItem('thao_truong_best_' + ex.id);
+      if (best !== null || completedList.includes(ex.id)) {
+        const score = best !== null ? parseFloat(best) : 8.0;
+        const p1Len = ex.part1 ? ex.part1.length : 24;
+        const p2Len = ex.part2 ? ex.part2.length : 4;
+        const p2StmtTotal = p2Len * 4;
+        const p1Correct = Math.round((score / 10.0) * p1Len);
+        const p2Correct = Math.round((score / 10.0) * p2StmtTotal);
+        
+        seeded.push({
+          id: 'seed_' + ex.id,
+          examId: ex.id,
+          examTitle: ex.title,
+          grade: typeof getExamCatalogGrade === 'function' ? getExamCatalogGrade(ex) : 12,
+          topicKey: getExamTopicKey(ex),
+          score: score,
+          scoreP1: (score * 0.6),
+          scoreP2: (score * 0.4),
+          p1Total: p1Len,
+          p1Correct: p1Correct,
+          p2Total: p2StmtTotal,
+          p2Correct: p2Correct,
+          timestamp: Date.now() - (seeded.length * 86400000) // phân bố theo ngày
+        });
+      }
+    });
+    if (seeded.length > 0) {
+      try {
+        localStorage.setItem(ANALYTICS_HISTORY_KEY, JSON.stringify(seeded));
+      } catch (_) {}
+      return seeded;
+    }
+  }
+
+  return [];
+}
+
+function saveExamHistoryList(list) {
+  try {
+    localStorage.setItem(ANALYTICS_HISTORY_KEY, JSON.stringify(list));
+  } catch (e) {
+    console.error("Lỗi lưu lịch sử thi:", e);
+  }
+}
+
+function recordExamAttemptForAnalytics(attempt) {
+  if (!attempt || !attempt.examId) return;
+  const list = getExamHistoryList();
+  const entry = {
+    id: 'att_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+    examId: attempt.examId,
+    examTitle: attempt.examTitle || 'Đề Khảo Thí',
+    grade: attempt.grade || 12,
+    topicKey: attempt.topicKey || 'unclassified',
+    score: typeof attempt.score === 'number' ? attempt.score : 0,
+    scoreP1: attempt.scoreP1 || 0,
+    scoreP2: attempt.scoreP2 || 0,
+    p1Total: attempt.p1Total || 0,
+    p1Correct: attempt.p1Correct || 0,
+    p2Total: attempt.p2Total || 0,
+    p2Correct: attempt.p2Correct || 0,
+    timestamp: attempt.timestamp || Date.now()
+  };
+
+  list.unshift(entry);
+  if (list.length > 100) list.length = 100; // Giữ tối đa 100 lượt thi gần nhất
+  saveExamHistoryList(list);
+  updateAnalyticsCountBadges();
+}
+
+// 4. Tổng hợp & Tính toán chỉ số Năng lực theo Bộ lọc
+function computeAnalyticsMetrics(gradeFilter, periodFilter) {
+  const history = getExamHistoryList();
+  const now = Date.now();
+
+  const filteredHistory = history.filter(item => {
+    // Lọc theo Khối
+    if (gradeFilter && gradeFilter !== 'all') {
+      if (item.grade !== parseInt(gradeFilter, 10)) return false;
+    }
+    // Lọc theo Thời gian
+    if (periodFilter === '7d' && now - item.timestamp > 7 * 86400000) return false;
+    if (periodFilter === '30d' && now - item.timestamp > 30 * 86400000) return false;
+    return true;
+  });
+
+  const totalAttempts = filteredHistory.length;
+  let totalScoreSum = 0;
+  let totalQuestionsAnswered = 0;
+  let totalQuestionsCorrect = 0;
+
+  // Khởi tạo mẫu số cho 5 trục
+  const axisMetrics = {};
+  RADAR_AXES_CONFIG.forEach(axis => {
+    axisMetrics[axis.key] = {
+      config: axis,
+      attempts: 0,
+      totalQuestions: 0,
+      correctQuestions: 0,
+      scoreSum: 0,
+      accuracy: 0,
+      hasEnoughData: false
+    };
+  });
+
+  let unclassifiedCount = 0;
+  let unclassifiedQuestions = 0;
+
+  filteredHistory.forEach(item => {
+    totalScoreSum += item.score;
+    const qTotal = item.p1Total + item.p2Total;
+    const qCorrect = item.p1Correct + item.p2Correct;
+    totalQuestionsAnswered += qTotal;
+    totalQuestionsCorrect += qCorrect;
+
+    const axis = mapTopicToRadarAxis(item.topicKey);
+    if (axis && axisMetrics[axis.key]) {
+      const m = axisMetrics[axis.key];
+      m.attempts++;
+      m.totalQuestions += qTotal;
+      m.correctQuestions += qCorrect;
+      m.scoreSum += item.score;
+    } else {
+      unclassifiedCount++;
+      unclassifiedQuestions += qTotal;
+    }
+  });
+
+  // Tính tỷ lệ % cho từng trục và kiểm tra ngưỡng tin cậy
+  RADAR_AXES_CONFIG.forEach(axis => {
+    const m = axisMetrics[axis.key];
+    if (m.totalQuestions >= MIN_SAMPLE_THRESHOLD) {
+      m.hasEnoughData = true;
+      m.accuracy = Math.round((m.correctQuestions / m.totalQuestions) * 100);
+    } else if (m.totalQuestions > 0) {
+      m.hasEnoughData = false;
+      m.accuracy = Math.round((m.correctQuestions / m.totalQuestions) * 100);
+    } else {
+      m.hasEnoughData = false;
+      m.accuracy = 0;
+    }
+  });
+
+  const avgScore = totalAttempts > 0 ? (totalScoreSum / totalAttempts).toFixed(1) : '0.0';
+  const overallAccuracy = totalQuestionsAnswered > 0 
+    ? Math.round((totalQuestionsCorrect / totalQuestionsAnswered) * 100) 
+    : 0;
+
+  return {
+    totalAttempts,
+    totalQuestionsAnswered,
+    totalQuestionsCorrect,
+    overallAccuracy,
+    avgScore,
+    axisMetrics,
+    unclassifiedCount,
+    unclassifiedQuestions,
+    filteredHistory
+  };
+}
+
+// 5. Vẽ Biểu đồ Radar ngũ giác bằng SVG thuần (Native SVG Radar Chart)
+function generateRadarSvgHtml(axisMetrics) {
+  const size = 500;
+  const cx = 250;
+  const cy = 240;
+  const radius = 150;
+  const axes = RADAR_AXES_CONFIG;
+  const numAxes = axes.length;
+
+  // Tính tọa độ góc của từng trục (bắt đầu từ đỉnh 12 giờ: -PI/2)
+  const angleStep = (2 * Math.PI) / numAxes;
+  const angles = axes.map((_, i) => -Math.PI / 2 + i * angleStep);
+
+  // 1. Tạo 5 vòng lưới ngũ giác đồng tâm (20%, 40%, 60%, 80%, 100%)
+  const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
+  let gridPolygonsHtml = '';
+  gridLevels.forEach(lvl => {
+    const pts = angles.map(a => {
+      const x = cx + Math.cos(a) * (radius * lvl);
+      const y = cy + Math.sin(a) * (radius * lvl);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    const isOuter = lvl === 1.0;
+    gridPolygonsHtml += `<polygon points="${pts}" class="radar-grid-polygon ${isOuter ? 'outer' : ''}" />`;
+    // Nhãn phần trăm ở trục trên cùng
+    if (!isOuter) {
+      const py = cy - (radius * lvl);
+      gridPolygonsHtml += `<text x="${cx + 4}" y="${py - 2}" fill="rgba(197, 155, 39, 0.55)" font-size="9" font-family="sans-serif">${Math.round(lvl * 100)}%</text>`;
+    }
+  });
+
+  // 2. Tạo 5 nan hoa (spokes) từ tâm ra 5 đỉnh
+  let spokesHtml = '';
+  angles.forEach(a => {
+    const x = cx + Math.cos(a) * radius;
+    const y = cy + Math.sin(a) * radius;
+    spokesHtml += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" class="radar-spoke" />`;
+  });
+
+  // 3. Tính điểm dữ liệu của người học
+  const dataPoints = [];
+  const dotElements = [];
+  let hasAnyData = false;
+
+  axes.forEach((axis, i) => {
+    const m = axisMetrics[axis.key];
+    const a = angles[i];
+    let valRatio = 0;
+    let isInsufficient = !m.hasEnoughData;
+
+    if (m.totalQuestions > 0) {
+      hasAnyData = true;
+      valRatio = Math.max(0.08, Math.min(1.0, m.accuracy / 100));
+    } else {
+      valRatio = 0.05; // Điểm nhỏ ở tâm
+    }
+
+    const x = cx + Math.cos(a) * (radius * valRatio);
+    const y = cy + Math.sin(a) * (radius * valRatio);
+    dataPoints.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+
+    const tooltipText = isInsufficient
+      ? `${axis.name}: ${m.totalQuestions > 0 ? m.accuracy + '%' : 'Chưa có'} (Chưa đủ mẫu: ${m.totalQuestions}/${MIN_SAMPLE_THRESHOLD} câu)`
+      : `${axis.name}: ${m.accuracy}% (${m.correctQuestions}/${m.totalQuestions} câu đúng)`;
+
+    dotElements.push(`
+      <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" class="radar-dot ${isInsufficient ? 'insufficient' : ''}">
+        <title>${escapeExamHtml(tooltipText)}</title>
+      </circle>
+    `);
+  });
+
+  const dataPolygonHtml = hasAnyData
+    ? `<polygon points="${dataPoints.join(' ')}" class="radar-data-area" />`
+    : '';
+
+  // 4. Tạo nhãn 5 trục quanh biểu đồ
+  let labelsHtml = '';
+  axes.forEach((axis, i) => {
+    const m = axisMetrics[axis.key];
+    const a = angles[i];
+    const labelRadius = radius + 34;
+    const lx = cx + Math.cos(a) * labelRadius;
+    const ly = cy + Math.sin(a) * labelRadius;
+
+    let textAnchor = 'middle';
+    if (Math.abs(Math.cos(a)) > 0.3) {
+      textAnchor = Math.cos(a) > 0 ? 'start' : 'end';
+    }
+
+    const subText = m.hasEnoughData
+      ? `${m.accuracy}% (${m.correctQuestions}/${m.totalQuestions} câu)`
+      : (m.totalQuestions > 0 ? `⚠️ Chưa đủ dữ liệu (${m.totalQuestions}/${MIN_SAMPLE_THRESHOLD} câu)` : `Chưa làm đề`);
+
+    labelsHtml += `
+      <g>
+        <text x="${lx.toFixed(1)}" y="${(ly - 6).toFixed(1)}" class="radar-axis-text" text-anchor="${textAnchor}">${axis.shortName}</text>
+        <text x="${lx.toFixed(1)}" y="${(ly + 8).toFixed(1)}" class="radar-axis-text radar-axis-sub ${!m.hasEnoughData && m.totalQuestions > 0 ? 'radar-axis-warn' : ''}" text-anchor="${textAnchor}">${subText}</text>
+      </g>
+    `;
+  });
+
+  return `
+    <div class="radar-svg-wrapper">
+      <svg viewBox="0 0 ${size} ${size}" class="radar-svg" role="img" aria-label="Biểu đồ radar thể hiện năng lực học tập Lịch sử theo 5 mảng kiến thức">
+        <defs>
+          <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#7B1E1E" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="${cx}" cy="${cy}" r="${radius}" fill="url(#radarGlow)" pointer-events="none" />
+        ${gridPolygonsHtml}
+        ${spokesHtml}
+        ${dataPolygonHtml}
+        ${dotElements.join('')}
+        ${labelsHtml}
+      </svg>
+    </div>
+  `;
+}
+
+// 6. Tạo biểu đồ cột xu hướng điểm số theo thời gian (Timeline Score Trend)
+function generateTrendHtml(history) {
+  if (!history || history.length === 0) {
+    return `<div style="text-align: center; color: rgba(232, 213, 176, 0.6); padding: 20px 0; font-size: 0.85rem;">Chưa có lượt thi nào được ghi nhận.</div>`;
+  }
+
+  const recent = history.slice(0, 10).reverse(); // 10 lượt gần nhất theo thứ tự thời gian
+  let barsHtml = '';
+
+  recent.forEach((item, idx) => {
+    const score = item.score;
+    const heightPct = Math.max(10, Math.min(100, Math.round((score / 10.0) * 100)));
+    const dateStr = new Date(item.timestamp).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
+    const tooltip = `${item.examTitle}\nĐiểm: ${score.toFixed(1)}/10đ\nNgày: ${new Date(item.timestamp).toLocaleString('vi-VN')}`;
+
+    barsHtml += `
+      <div class="trend-bar-col" title="${escapeExamHtml(tooltip)}">
+        <span class="trend-bar-score">${score.toFixed(1)}</span>
+        <div class="trend-bar-fill" style="height: ${heightPct}%;"></div>
+        <span class="trend-bar-label">${dateStr}</span>
+      </div>
+    `;
+  });
+
+  return `
+    <div class="trend-bars-container">
+      ${barsHtml}
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: rgba(232, 213, 176, 0.5); margin-top: 22px;">
+      <span>← Các lượt làm bài trước</span>
+      <span>Lượt làm bài mới nhất →</span>
+    </div>
+  `;
+}
+
+// 7. Bảng số liệu chi tiết thân thiện với thiết bị di động & hỗ trợ tiếp cận (Accessible Data Table)
+function generateAnalyticsTableHtml(metrics) {
+  const axes = RADAR_AXES_CONFIG;
+  let rowsHtml = '';
+
+  axes.forEach(axis => {
+    const m = metrics.axisMetrics[axis.key];
+    let statusPill = '';
+    if (!m.hasEnoughData) {
+      statusPill = `<span class="status-pill insufficient">Chưa đủ dữ liệu (${m.totalQuestions}/${MIN_SAMPLE_THRESHOLD})</span>`;
+    } else if (m.accuracy >= 80) {
+      statusPill = `<span class="status-pill mastered">✓ Nắm rất vững (${m.accuracy}%)</span>`;
+    } else if (m.accuracy >= 65) {
+      statusPill = `<span class="status-pill good">👍 Khá tốt (${m.accuracy}%)</span>`;
+    } else {
+      statusPill = `<span class="status-pill review">⚠️ Cần củng cố (${m.accuracy}%)</span>`;
+    }
+
+    rowsHtml += `
+      <tr>
+        <td>
+          <strong>${axis.name}</strong>
+          <div style="font-size: 0.72rem; color: rgba(232, 213, 176, 0.6); margin-top: 2px;">${axis.desc}</div>
+        </td>
+        <td>${m.totalQuestions} câu</td>
+        <td>${m.correctQuestions} câu</td>
+        <td><strong style="color: ${m.accuracy >= 75 ? '#8ce196' : (m.accuracy >= 55 ? 'var(--gold)' : '#ff9999')}">${m.totalQuestions > 0 ? m.accuracy + '%' : '—'}</strong></td>
+        <td>${statusPill}</td>
+      </tr>
+    `;
+  });
+
+  // Bổ sung dòng 'Chưa phân loại' nếu có dữ liệu tổng hợp
+  if (metrics.unclassifiedQuestions > 0) {
+    rowsHtml += `
+      <tr style="opacity: 0.85; font-style: italic;">
+        <td>
+          <strong>Tổng hợp / Chưa phân loại</strong>
+          <div style="font-size: 0.72rem; color: rgba(232, 213, 176, 0.6);">Các đề tổng ôn liên bài hoặc đề thi đặc thù</div>
+        </td>
+        <td>${metrics.unclassifiedQuestions} câu</td>
+        <td>—</td>
+        <td>—</td>
+        <td><span class="status-pill insufficient">${metrics.unclassifiedCount} lượt thi</span></td>
+      </tr>
+    `;
+  }
+
+  return `
+    <div class="analytics-table-wrap">
+      <table class="analytics-table" aria-label="Bảng số liệu năng lực học tập Lịch sử theo từng mảng kiến thức">
+        <thead>
+          <tr>
+            <th scope="col">Mảng Kiến Thức / Trục Năng Lực</th>
+            <th scope="col">Số Câu Đã Làm</th>
+            <th scope="col">Số Câu Đúng</th>
+            <th scope="col">Tỷ Lệ Đúng</th>
+            <th scope="col">Đánh Giá Năng Lực</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+// 8. Tạo thẻ nhận định Điểm mạnh / Lỗ hổng kiến thức
+function generateInsightsHtml(metrics) {
+  const axes = RADAR_AXES_CONFIG;
+  const sufficientAxes = axes
+    .map(a => ({ axis: a, m: metrics.axisMetrics[a.key] }))
+    .filter(item => item.m.hasEnoughData);
+
+  // Sắp xếp theo tỷ lệ đúng
+  sufficientAxes.sort((a, b) => b.m.accuracy - a.m.accuracy);
+
+  const strengths = sufficientAxes.filter(item => item.m.accuracy >= 70);
+  const weaknesses = sufficientAxes.filter(item => item.m.accuracy < 65);
+
+  let strengthsHtml = '';
+  if (strengths.length > 0) {
+    strengthsHtml = `
+      <div class="insight-card strength">
+        <div class="insight-title"><span>🌟</span> Mảng Kiến Thức Nắm Vững Nhất</div>
+        <ul class="insight-list">
+          ${strengths.map(s => `
+            <li class="insight-item">
+              <span class="insight-item-name">${s.axis.name}</span>
+              <span class="insight-item-score" style="color: #85e094;">${s.m.accuracy}% (${s.m.correctQuestions}/${s.m.totalQuestions} câu)</span>
+            </li>
+          `).join('')}
+        </ul>
+        <div style="font-size: 0.74rem; color: rgba(232, 213, 176, 0.7);">Phát huy phong độ và duy trì ôn luyện đều đặn!</div>
+      </div>
+    `;
+  }
+
+  let weaknessesHtml = '';
+  if (weaknesses.length > 0) {
+    weaknessesHtml = `
+      <div class="insight-card weakness">
+        <div class="insight-title"><span>⚠️</span> Mảng Kiến Thức Cần Củng Cố Ngay</div>
+        <ul class="insight-list">
+          ${weaknesses.map(w => `
+            <li class="insight-item">
+              <span class="insight-item-name">${w.axis.name}</span>
+              <span class="insight-item-score" style="color: #ff9999;">${w.m.accuracy}% (${w.m.correctQuestions}/${w.m.totalQuestions} câu)</span>
+            </li>
+          `).join('')}
+        </ul>
+        <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between; margin-top: 4px;">
+          <span style="font-size: 0.74rem; color: rgba(232, 213, 176, 0.7);">Xem lại câu sai trong Sổ tay hoặc làm thêm đề bài tương ứng.</span>
+          <button class="home-btn" onclick="switchLobbyMode('catalog')" style="padding: 4px 10px; font-size: 0.72rem; background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.5); color: #ff9999;">
+            Luyện Đề Ngay →
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Khuyến nghị chung
+  const generalCard = `
+    <div class="insight-card neutral">
+      <div class="insight-title"><span>💡</span> Lời Khuyên Khảo Thí & Phương Pháp Ôn Tập</div>
+      <p style="font-size: 0.78rem; color: #e8d5b0; line-height: 1.5; margin: 0;">
+        Cấu trúc đề thi tốt nghiệp THPT từ năm 2025 chú trọng năng lực đọc hiểu tư liệu và phân tích đúng/sai (Phần II - 4.0 điểm). Hãy kết hợp đọc bài học tại <strong>Tàng Thư Các</strong> và đối chiếu các câu sai tại <strong>Sổ Tay Câu Sai</strong> để cải thiện tỷ lệ ghi điểm tối đa.
+      </p>
+    </div>
+  `;
+
+  return `
+    <div class="insights-column">
+      ${strengthsHtml}
+      ${weaknessesHtml}
+      ${generalCard}
+    </div>
+  `;
+}
+
+// 9. Render toàn bộ Dashboard Năng Lực Học Tập
+function renderAnalyticsDashboard() {
+  const container = $('analytics-content-area');
+  if (!container) return;
+
+  const gradeSelect = $('select-anl-grade');
+  const periodSelect = $('select-anl-period');
+  const gradeFilter = gradeSelect ? gradeSelect.value : 'all';
+  const periodFilter = periodSelect ? periodSelect.value : 'all';
+
+  const metrics = computeAnalyticsMetrics(gradeFilter, periodFilter);
+
+  // Cập nhật 4 thẻ Hero Stats
+  if ($('stat-anl-attempts')) $('stat-anl-attempts').textContent = metrics.totalAttempts;
+  if ($('stat-anl-questions')) $('stat-anl-questions').textContent = metrics.totalQuestionsAnswered;
+  if ($('stat-anl-accuracy')) $('stat-anl-accuracy').textContent = metrics.overallAccuracy + '%';
+  if ($('stat-anl-avg-score')) $('stat-anl-avg-score').textContent = metrics.avgScore;
+
+  // Cập nhật nhãn phụ
+  if ($('stat-anl-attempts-sub')) {
+    $('stat-anl-attempts-sub').textContent = metrics.totalAttempts > 0 
+      ? `Đã hoàn thành ${metrics.totalAttempts} bài thi` 
+      : 'Chưa có lượt thi';
+  }
+  if ($('stat-anl-questions-sub')) {
+    $('stat-anl-questions-sub').textContent = metrics.totalQuestionsAnswered > 0 
+      ? `Đúng ${metrics.totalQuestionsCorrect} / ${metrics.totalQuestionsAnswered} câu` 
+      : 'Chưa có câu hỏi';
+  }
+
+  // Kiểm tra nếu chưa từng làm bài thi nào (Empty state trung thực, không bịa số liệu)
+  if (metrics.totalAttempts === 0) {
+    container.innerHTML = `
+      <div class="analytics-empty-state">
+        <div class="analytics-empty-icon">📊</div>
+        <h3>Chưa Có Dữ Liệu Khảo Thí Để Phân Tích</h3>
+        <p>Hệ thống phân tích năng lực sẽ tự động kích hoạt ngay sau khi bạn hoàn thành đề thi đầu tiên. Hãy chọn một đề thi tại Thao Trường để bắt đầu hành trình đánh giá thực lực!</p>
+        <button class="start-btn" onclick="switchLobbyMode('catalog')" style="padding: 12px 28px; font-size: 14px; margin-top: 10px;">
+          📚 Vào Kho Đề Chọn Bài Thi Đầu Tiên
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  // Nếu đã có dữ liệu -> Render đầy đủ Biểu đồ Radar, Diễn biến, Bảng số liệu & Lời khuyên
+  const radarSvgHtml = generateRadarSvgHtml(metrics.axisMetrics);
+  const trendHtml = generateTrendHtml(metrics.filteredHistory);
+  const tableHtml = generateAnalyticsTableHtml(metrics);
+  const insightsHtml = generateInsightsHtml(metrics);
+
+  container.innerHTML = `
+    <!-- LƯỚI CHÍNH: RADAR CHART BÊN TRÁI & INSIGHTS BÊN PHẢI -->
+    <div class="analytics-main-grid">
+      <!-- CỘT TRÁI: BIỂU ĐỒ RADAR 5 TRỤC -->
+      <div class="analytics-panel-card">
+        <div class="analytics-panel-header">
+          <h3><span>🧭</span> Biểu Đồ Radar Đánh Giá 5 Trục Năng Lực</h3>
+          <span class="badge-sample-info">Chuẩn GDPT 2018</span>
+        </div>
+        <p style="font-size: 0.8rem; color: rgba(232, 213, 176, 0.7); margin: 0; line-height: 1.4;">
+          Biểu đồ thể hiện mức độ nắm vững kiến thức dựa trên tỷ lệ câu trả lời đúng của bạn. Các trục có dưới ${MIN_SAMPLE_THRESHOLD} câu hỏi sẽ được đánh dấu <em>chưa đủ dữ liệu</em> để đảm bảo tính khách quan.
+        </p>
+        ${radarSvgHtml}
+      </div>
+
+      <!-- CỘT PHẢI: PHÂN TÍCH ĐIỂM MẠNH / ĐIỂM YẾU & DIỄN BIẾN ĐIỂM SỐ -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <!-- THẺ DIỄN BIẾN ĐIỂM SỐ -->
+        <div class="analytics-panel-card">
+          <div class="analytics-panel-header">
+            <h3><span>📈</span> Diễn Biến Điểm Số (10 Lượt Thi Gần Nhất)</h3>
+            <span class="badge-sample-info">${metrics.filteredHistory.length} lượt thi</span>
+          </div>
+          ${trendHtml}
+        </div>
+
+        <!-- THẺ NHẬN ĐỊNH VÀ LỜI KHUYÊN -->
+        ${insightsHtml}
+      </div>
+    </div>
+
+    <!-- BẢNG SỐ LIỆU CHI TIẾT (ACCESSIBLE DATA TABLE) -->
+    <div class="analytics-panel-card" style="margin-top: 8px;">
+      <div class="analytics-panel-header">
+        <h3><span>📋</span> Bảng Số Liệu Chi Tiết Từng Mảng Kiến Thức</h3>
+        <span class="badge-sample-info">Có thể tra cứu & sao chép</span>
+      </div>
+      <p style="font-size: 0.8rem; color: rgba(232, 213, 176, 0.7); margin: 0;">
+        Bảng số liệu chuẩn xác dành cho thiết bị di động hoặc học sinh muốn xem chi tiết số lượng mẫu câu hỏi đã giải quyết.
+      </p>
+      ${tableHtml}
+    </div>
+  `;
+}
+
+function onAnalyticsFilterChange() {
+  renderAnalyticsDashboard();
+}
+
+function refreshAnalyticsView() {
+  renderAnalyticsDashboard();
+  if (typeof hienToastThaoTruong === 'function') {
+    hienToastThaoTruong("📊 Đã cập nhật số liệu phân tích năng lực mới nhất!");
+  }
+}
+
+function updateAnalyticsCountBadges() {
+  const badge = $('analytics-mode-badge');
+  if (!badge) return;
+  const history = getExamHistoryList();
+  if (history.length > 0) {
+    const metrics = computeAnalyticsMetrics('all', 'all');
+    badge.textContent = `📈 ${metrics.overallAccuracy}% Đúng (${metrics.totalAttempts} Đề)`;
+    badge.style.color = '#fff8e7';
+    badge.style.borderColor = 'rgba(212, 175, 55, 0.6)';
+  } else {
+    badge.textContent = `📈 Chưa có dữ liệu`;
+    badge.style.color = 'rgba(232, 213, 176, 0.6)';
+  }
+}
+
+
+// =========================================================================
+// BẢNG VÀNG DANH TƯỚNG & HỆ THỐNG SƯU TẦM THẺ NHÂN VẬT LỊCH SỬ (PROMPT 3)
+// =========================================================================
+const UNLOCKED_CARDS_STORAGE_KEY = 'dcls_unlocked_character_cards_v1';
+const CARD_UNLOCK_EVENTS_KEY = 'dcls_card_unlock_events_v1';
+const ENABLE_CHARACTER_CARDS = true; // Feature Flag: cho phép tắt riêng tính năng mà không ảnh hưởng điểm số
+
+// 1. Cấu hình 4 Bộ Danh hiệu (Card Sets & Honorary Titles)
+const HISTORICAL_CARD_SETS = [
+  {
+    id: 'set_emperors',
+    name: 'Đế Vương & Khởi Lập',
+    icon: '👑',
+    titleReward: 'Bậc Khai Quốc Minh Quân',
+    requiredCardIds: ['ngo-quyen', 'dinh-bo-linh', 'ly-thai-to', 'le-loi']
+  },
+  {
+    id: 'set_commanders',
+    name: 'Danh Tướng & Bách Thắng',
+    icon: '⚔️',
+    titleReward: 'Thiên Cổ Vạn Thắng Danh Tướng',
+    requiredCardIds: ['ly-thuong-kiet', 'tran-hung-dao', 'quang-trung', 'vo-nguyen-giap']
+  },
+  {
+    id: 'set_heroines',
+    name: 'Anh Thư Nữ Kiệt',
+    icon: '🌸',
+    titleReward: 'Hào Khí Nữ Kiệt Non Sông',
+    requiredCardIds: ['hai-ba-trung', 'ba-trieu']
+  },
+  {
+    id: 'set_luminaries',
+    name: 'Văn Hiến & Thời Đại Mới',
+    icon: '⭐',
+    titleReward: 'Tinh Hoa Hào Khí Sử Việt',
+    requiredCardIds: ['nguyen-trai', 'ho-chi-minh']
+  }
+];
+
+// 2. Dữ liệu chuẩn mực 12 Thẻ Nhân Vật Lịch Sử
+const HISTORICAL_CARDS_DATA = [
+  {
+    id: 'ngo-quyen',
+    name: 'Ngô Quyền',
+    alias: 'Tiền Ngô Vương - Vua Tổ Phục Hưng',
+    era: '898 – 944',
+    icon: '👑',
+    image: 'images/ngo-quyen.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Ngo_Quyen_portrait.jpg/440px-Ngo_Quyen_portrait.jpg',
+    deeds: 'Chỉ huy trận thủy chiến Bạch Đằng năm 938, dùng kế cắm cọc nhọn bịt sắt tiêu diệt thủy quân Nam Hán, chém chết Lưu Hoằng Tháo, chấm dứt hơn 1.000 năm Bắc thuộc.',
+    quote: '“Hoằng Tháo là đứa trẻ dại, đem quân từ xa đến, quân lính mỏi mệt... Quân ta lấy sức còn nhàn chờ kẻ địch mỏi mệt, tất phá được!”',
+    quoteSource: 'Đại Việt Sử Ký Toàn Thư (Bản kỷ, Quyển 1)',
+    unlockReq: 'Đạt điểm từ 8.0 trở lên ở bất kỳ bài khảo thí nào.',
+    setId: 'set_emperors',
+    eventCode: 'evt_score_8_ngo_quyen',
+    isIllustration: true,
+    license: 'Tranh minh họa mỹ thuật di sản văn hóa công cộng (Creative Commons CC-BY-SA)'
+  },
+  {
+    id: 'dinh-bo-linh',
+    name: 'Đinh Bộ Lĩnh',
+    alias: 'Đinh Tiên Hoàng - Vạn Thắng Vương',
+    era: '924 – 979',
+    icon: '👑',
+    image: 'images/dinh-bo-linh.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Dinh_Tien_Hoang_statue.jpg/440px-Dinh_Tien_Hoang_statue.jpg',
+    deeds: 'Bậc anh hùng dẹp loạn 12 sứ quân, thống nhất non sông, lập nên nhà nước Đại Cồ Việt độc lập, xưng Hoàng đế và đặt niên hiệu Thái Bình đầu tiên.',
+    quote: '“Trẫm khởi dựng từ cờ lau tập trận đất Hoa Lư, nay thu phục mười hai sứ quân về một mối, mở mang bờ cõi định đô non sông.”',
+    quoteSource: 'Khâm Định Việt Sử Thông Giám Cương Mục [Tư liệu dã sử truyền khẩu]',
+    unlockReq: 'Hoàn thành từ 3 bộ đề thi trở lên trong Thao Trường.',
+    setId: 'set_emperors',
+    eventCode: 'evt_completed_3_dinh_bo_linh',
+    isIllustration: true,
+    license: 'Hình ảnh tượng đài di sản văn hóa công cộng'
+  },
+  {
+    id: 'ly-thai-to',
+    name: 'Lý Công Uẩn',
+    alias: 'Lý Thái Tổ - Chiếu Dời Đô',
+    era: '974 – 1028',
+    icon: '👑',
+    image: 'images/ly-thai-to.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Statue_of_Ly_Thai_To_in_Hanoi.jpg/440px-Statue_of_Ly_Thai_To_in_Hanoi.jpg',
+    deeds: 'Sáng lập triều Lý lừng lẫy, ban Chiếu dời đô từ Hoa Lư về thành Đại La (Thăng Long năm 1010), mở ra kỷ nguyên văn hiến Thăng Long ngàn năm rực rỡ.',
+    quote: '“Ở vào nơi trung tâm trời đất, được cái thế rồng cuộn hổ ngồi... xem khắp đất Việt ta, chỉ nơi này là thắng địa.”',
+    quoteSource: 'Chiếu Dời Đô (Thiên đô chiếu - 1010)',
+    unlockReq: 'Đạt điểm số tuyệt đối 10.0 (hoặc ≥ 9.5) ở một bài thi bất kỳ.',
+    setId: 'set_emperors',
+    eventCode: 'evt_score_10_ly_thai_to',
+    isIllustration: true,
+    license: 'Tượng đài Lý Thái Tổ tại Hà Nội (Ảnh tư liệu mở)'
+  },
+  {
+    id: 'ly-thuong-kiet',
+    name: 'Lý Thường Kiệt',
+    alias: 'Thái Úy - Nam Quốc Sơn Hà',
+    era: '1019 – 1105',
+    icon: '⚔️',
+    image: 'images/ly-thuong-kiet.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Ly_Thuong_Kiet_portrait.jpg/440px-Ly_Thuong_Kiet_portrait.jpg',
+    deeds: 'Chỉ huy phòng tuyến sông Như Nguyệt năm 1077 đập tan quân xâm lược Tống, chủ động tiến công trước để tự vệ («Ngồi yên đợi giặc không bằng đem quân đánh trước để chặn mũi nhọn»).',
+    quote: '“Nam quốc sơn hà Nam đế cư / Tiệt nhiên định phận tại thiên thư / Như hà nghịch lỗ lai xâm phạm / Nhữ đẳng hành khan thủ bại hư!”',
+    quoteSource: 'Bài thơ thần Nam Quốc Sơn Hà (1077) - Đại Việt Sử Ký Toàn Thư',
+    unlockReq: 'Trả lời đúng 100% câu hỏi Phần II (Đúng/Sai tư liệu) trong 1 đề thi.',
+    setId: 'set_commanders',
+    eventCode: 'evt_p2_perfect_ly_thuong_kiet',
+    isIllustration: true,
+    license: 'Tranh minh họa mỹ thuật lịch sử Đại Việt'
+  },
+  {
+    id: 'tran-hung-dao',
+    name: 'Trần Hưng Đạo',
+    alias: 'Hưng Đạo Đại Vương - Hịch Tướng Sĩ',
+    era: '1228 – 1300',
+    icon: '⚔️',
+    image: 'images/tran-hung-dao.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Statue_of_Tran_Hung_Dao%2C_Nam_Dinh.jpg/440px-Statue_of_Tran_Hung_Dao%2C_Nam_Dinh.jpg',
+    deeds: 'Tiết chế Quốc công chỉ huy quân dân Đại Việt 2 lần đánh tan quân xâm lược Nguyên - Mông hung hãn bậc nhất thế giới (1285 & 1288) với chiến thắng Bạch Đằng vang dội.',
+    quote: '“Ta thường tới bữa quên ăn, nửa đêm vỗ gối, ruột đau như cắt, nước mắt đầm đìa; chỉ căm tức chưa xả thịt lột da, nuốt gan uống máu quân thù!”',
+    quoteSource: 'Hịch Tướng Sĩ (Dụ chư tì tướng hịch văn - 1284)',
+    unlockReq: 'Hoàn thành từ 5 bài thi trở lên với điểm trung bình từ 8.5 trở lên.',
+    setId: 'set_commanders',
+    eventCode: 'evt_avg_85_tran_hung_dao',
+    isIllustration: true,
+    license: 'Hình ảnh tượng đài Hưng Đạo Đại Vương (Bản quyền công cộng)'
+  },
+  {
+    id: 'le-loi',
+    name: 'Lê Lợi',
+    alias: 'Lê Thái Tổ - Bình Định Vương',
+    era: '1385 – 1433',
+    icon: '👑',
+    image: 'images/le-loi.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Statue_of_Le_Loi_in_Thanh_Hoa.jpg/440px-Statue_of_Le_Loi_in_Thanh_Hoa.jpg',
+    deeds: 'Lãnh tụ khởi nghĩa Lam Sơn 10 năm gian khổ (1418–1427), quét sạch 30 vạn quân xâm lược Minh, khôi phục giang sơn, sáng lập vương triều Hậu Lê.',
+    quote: '“Dựng gậy làm cờ, bốn phương hào kiệt dấy động; hòa nước sông chén rượu ngọt ngào, quân sĩ một lòng cha con.”',
+    quoteSource: 'Bình Ngô Đại Cáo (Nguyễn Trãi thừa lệnh soạn - 1428)',
+    unlockReq: 'Tích lũy đạt tổng số từ 50 câu trả lời đúng trở lên trong Thao Trường.',
+    setId: 'set_emperors',
+    eventCode: 'evt_50_correct_le_loi',
+    isIllustration: true,
+    license: 'Tượng đài Lê Lợi tại Lam Sơn - Thanh Hóa'
+  },
+  {
+    id: 'nguyen-trai',
+    name: 'Nguyễn Trãi',
+    alias: 'Ức Trai - Danh Nhân Văn Hóa Thế Giới',
+    era: '1380 – 1442',
+    icon: '📜',
+    image: 'images/nguyen-trai.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Nguyen_Trai_portrait.jpg/440px-Nguyen_Trai_portrait.jpg',
+    deeds: 'Mưu sĩ quân sư đại tài của nghĩa quân Lam Sơn, nhà văn hóa kiệt xuất được UNESCO vinh danh năm 1980, tác giả thiên cổ hùng văn «Bình Ngô Đại Cáo».',
+    quote: '“Việc nhân nghĩa cốt ở yên dân / Quân điếu phạt trước lo trừ bạo... Như nước Đại Việt ta từ trước / Vốn xưng nền văn hiến đã lâu.”',
+    quoteSource: 'Bình Ngô Đại Cáo (1428)',
+    unlockReq: 'Khắc phục thành công ít nhất 1 câu sai trong Sổ Tay Câu Sai.',
+    setId: 'set_luminaries',
+    eventCode: 'evt_mistakes_mastered_nguyen_trai',
+    isIllustration: true,
+    license: 'Tranh chân dung cổ Nguyễn Trãi lưu giữ tại Đền thờ Côn Sơn'
+  },
+  {
+    id: 'quang-trung',
+    name: 'Quang Trung',
+    alias: 'Nguyễn Huệ - Anh Hùng Áo Vải Cờ Đào',
+    era: '1753 – 1792',
+    icon: '⚔️',
+    image: 'images/quang-trung.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Quang_Trung_Emperor.jpg/440px-Quang_Trung_Emperor.jpg',
+    deeds: 'Bậc thiên tài quân sự bách chiến bách thắng: đánh tan 5 vạn quân Xiêm ở Rạch Gầm - Xoài Mút (1785), hành quân thần tốc đại phá 29 vạn quân Thanh mùa xuân Kỷ Dậu 1789.',
+    quote: '“Đánh cho để dài tóc / Đánh cho để đen răng / Đánh cho nó chích luân bất phản / Đánh cho nó phiến giáp bất hoàn / Đánh cho sử tri nam quốc anh hùng chi hữu chủ!”',
+    quoteSource: 'Lời hịch tại lễ duyệt binh Thọ Hạc - Thanh Hóa (1789)',
+    unlockReq: 'Hoàn thành một bài thi trong thời gian dưới 15 phút với điểm từ 8.0 trở lên.',
+    setId: 'set_commanders',
+    eventCode: 'evt_fast_80_quang_trung',
+    isIllustration: true,
+    license: 'Tranh khắc họa Hoàng đế Quang Trung (Tư liệu mở)'
+  },
+  {
+    id: 'hai-ba-trung',
+    name: 'Hai Bà Trưng',
+    alias: 'Trưng Trắc & Trưng Nhị - Nữ Vương Đầu Tiên',
+    era: '? – 43 SCN',
+    icon: '🌸',
+    image: 'images/hai-ba-trung.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Hai_Ba_Trung_riding_elephants.jpg/440px-Hai_Ba_Trung_riding_elephants.jpg',
+    deeds: 'Lãnh đạo cuộc khởi nghĩa năm 40 SCN đuổi thái thú Tô Định, giành lại độc lập tự chủ sau hơn hai thế kỷ Bắc thuộc đầu tiên, xưng vương định đô ở Mê Linh.',
+    quote: '“Một xin rửa sạch nước thù / Hai xin dựng lại nghiệp xưa họ Hùng / Ba kẻo oan ức lòng chồng / Bốn xin vẹn vẹn sở công lênh này.”',
+    quoteSource: 'Thiên Nam Ngữ Lục (Huyền sử thi ca truyền tụng dân gian)',
+    unlockReq: 'Hoàn thành đề thi Khối 10 hoặc đề về Văn minh/Cổ đại (hoặc đạt 500 điểm Thái Bình).',
+    setId: 'set_heroines',
+    eventCode: 'evt_grade_10_hai_ba_trung',
+    isIllustration: true,
+    license: 'Tranh dân gian Đông Hồ: Hai Bà Trưng cưỡi voi xuất trận'
+  },
+  {
+    id: 'ba-trieu',
+    name: 'Bà Triệu',
+    alias: 'Triệu Thị Trinh - Nhụy Kiều Tướng Quân',
+    era: '225 – 248 SCN',
+    icon: '🌸',
+    image: 'images/ba-trieu.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Lady_Trieu_riding_an_elephant.jpg/440px-Lady_Trieu_riding_an_elephant.jpg',
+    deeds: 'Nữ anh hùng khởi nghĩa chống quân Đông Ngô năm 248 tại vùng Cửu Chân (Thanh Hóa), biểu tượng rực rỡ của ý chí quật cường phụ nữ Việt Nam.',
+    quote: '“Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, lấy lại giang sơn, dựng nền độc lập, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp người ta!”',
+    quoteSource: 'Đại Việt Sử Ký Toàn Thư (Ngoại kỷ, Quyển 4)',
+    unlockReq: 'Làm bài thi đạt điểm từ 7.0 trở lên ở lượt thử sức đầu tiên.',
+    setId: 'set_heroines',
+    eventCode: 'evt_first_70_ba_trieu',
+    isIllustration: true,
+    license: 'Tranh khắc gỗ dân gian Bà Triệu cưỡi voi đánh trận'
+  },
+  {
+    id: 'ho-chi-minh',
+    name: 'Chủ tịch Hồ Chí Minh',
+    alias: 'Vị Cha Già Kính Yêu Của Dân Tộc Việt Nam',
+    era: '1890 – 1969',
+    icon: '⭐',
+    image: 'images/ho-chi-minh.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Ho_Chi_Minh_1946.jpg/440px-Ho_Chi_Minh_1946.jpg',
+    deeds: 'Người sáng lập Đảng Cộng sản Việt Nam, lãnh đạo Cách mạng Tháng Tám 1945 thành công, khai sinh nước Việt Nam Dân chủ Cộng hòa, Anh hùng giải phóng dân tộc, Nhà văn hóa kiệt xuất.',
+    quote: '“Không có gì quý hơn độc lập, tự do!” — “Các Vua Hùng đã có công dựng nước, Bác cháu ta phải cùng nhau giữ lấy nước.”',
+    quoteSource: 'Lời kêu gọi chống Mỹ cứu nước (17/7/1966) & Nói chuyện tại Đền Hùng (19/9/1954)',
+    unlockReq: 'Hoàn thành đề thi Bài 6 (Cách mạng Tháng Tám 1945) với điểm từ 8.0 trở lên.',
+    setId: 'set_luminaries',
+    eventCode: 'evt_bai06_80_ho_chi_minh',
+    isIllustration: false,
+    license: 'Ảnh tư liệu lịch sử quốc gia công cộng (Thông tấn xã Việt Nam / Creative Commons)'
+  },
+  {
+    id: 'vo-nguyen-giap',
+    name: 'Võ Nguyên Giáp',
+    alias: 'Đại Tướng - Người Anh Cả Quân Đội Nhân Dân',
+    era: '1911 – 2013',
+    icon: '⭐',
+    image: 'images/vo-nguyen-giap.jpg',
+    fallbackImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Vo_Nguyen_Giap_1946.jpg/440px-Vo_Nguyen_Giap_1946.jpg',
+    deeds: 'Tổng tư lệnh chỉ huy chiến dịch Điện Biên Phủ 1954 «lừng lẫy năm châu, chấn động địa cầu» và chiến dịch Hồ Chí Minh lịch sử mùa xuân 1975 giải phóng hoàn toàn miền Nam, thống nhất đất nước.',
+    quote: '“Thần tốc, thần tốc hơn nữa; táo bạo, táo bạo hơn nữa; tranh thủ từng giờ, từng phút; xốc tới mặt trận, giải phóng miền Nam. Quyết chiến và toàn thắng!”',
+    quoteSource: 'Mệnh lệnh Đại tướng gửi toàn quân ngày 7/4/1975 trong Chiến dịch Hồ Chí Minh',
+    unlockReq: 'Hoàn thành đề thi Bài 7 hoặc Bài 8 (Kháng chiến 1945-1975) với điểm từ 8.5 trở lên.',
+    setId: 'set_commanders',
+    eventCode: 'evt_khangchien_85_vo_nguyen_giap',
+    isIllustration: false,
+    license: 'Ảnh tư liệu lịch sử Bộ Tổng Tham mưu QĐND Việt Nam (Tư liệu mở)'
+  }
+];
+
+// 3. Quản lý Trạng thái Thẻ & Lưu trữ Idempotent
+function getUnlockedCardsList() {
+  try {
+    const raw = localStorage.getItem(UNLOCKED_CARDS_STORAGE_KEY);
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) return arr;
+    }
+  } catch (e) {
+    console.warn("Lỗi đọc danh sách thẻ đã mở:", e);
+  }
+  return [];
+}
+
+function saveUnlockedCardsList(list) {
+  try {
+    localStorage.setItem(UNLOCKED_CARDS_STORAGE_KEY, JSON.stringify(list));
+  } catch (e) {
+    console.error("Lỗi lưu thẻ:", e);
+  }
+}
+
+function getTriggeredUnlockEvents() {
+  try {
+    const raw = localStorage.getItem(CARD_UNLOCK_EVENTS_KEY);
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) return arr;
+    }
+  } catch (e) {}
+  return [];
+}
+
+function saveTriggeredUnlockEvents(events) {
+  try {
+    localStorage.setItem(CARD_UNLOCK_EVENTS_KEY, JSON.stringify(events));
+  } catch (e) {}
+}
+
+// 4. Hàm Mở Khóa Thẻ Đảm Bảo Không Lặp Lại (Idempotent Trigger)
+function triggerCardUnlock(cardId, eventCode) {
+  if (!ENABLE_CHARACTER_CARDS) return false;
+  const unlocked = getUnlockedCardsList();
+  const events = getTriggeredUnlockEvents();
+
+  // Kiểm tra chống nhận lặp sự kiện
+  if (events.includes(eventCode)) return false;
+  events.push(eventCode);
+  saveTriggeredUnlockEvents(events);
+
+  if (!unlocked.includes(cardId)) {
+    unlocked.push(cardId);
+    saveUnlockedCardsList(unlocked);
+
+    // Tìm thông tin thẻ để chúc mừng
+    const card = HISTORICAL_CARDS_DATA.find(c => c.id === cardId);
+    if (card) {
+      hienThiToastMoKhoaThe(card);
+    }
+    updateBangVangCountBadge();
+    return true;
+  }
+  return false;
+}
+
+// 5. Toast Thông Báo Mở Khóa Thẻ Thành Tích
+function hienThiToastMoKhoaThe(card) {
+  const existing = document.getElementById('achievement-unlock-toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'achievement-unlock-toast';
+  toast.className = 'achievement-unlock-toast';
+  toast.onclick = () => {
+    toast.remove();
+    moModalBangVang();
+  };
+
+  toast.innerHTML = `
+    <div style="font-size: 2.2rem;">🏆</div>
+    <div>
+      <div style="font-size: 0.72rem; color: var(--gold); text-transform: uppercase; font-weight: 700;">Ghi Danh Bảng Vàng!</div>
+      <div style="font-size: 0.95rem; font-weight: 700; color: #fff8e7; margin: 2px 0;">Mở Khóa: ${card.name}</div>
+      <div style="font-size: 0.75rem; color: rgba(232, 213, 176, 0.8);">Nhấn vào để xem thẻ và danh hiệu mới.</div>
+    </div>
+  `;
+
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    if (toast.parentNode) toast.remove();
+  }, 6000);
+}
+
+// 6. Kiểm tra Toàn Bộ Điều Kiện Mở Khóa Sau Khi Nộp Bài Thi (Evaluation Hook)
+function evaluateCardUnlockConditions(exam, score, p1Correct, p2Score, p2StatementsTotal, p2StatementsCorrect, elapsedSec) {
+  if (!ENABLE_CHARACTER_CARDS || !exam) return;
+  const history = typeof getExamHistoryList === 'function' ? getExamHistoryList() : [];
+  const completedList = typeof getCompletedExams === 'function' ? getCompletedExams() : [];
+  const completedCount = completedList.length + 1; // Tính cả bài vừa nộp
+
+  // 1. Ngô Quyền: Điểm >= 8.0
+  if (score >= 8.0) {
+    triggerCardUnlock('ngo-quyen', 'evt_score_8_ngo_quyen');
+  }
+
+  // 2. Đinh Bộ Lĩnh: Hoàn thành >= 3 bộ đề
+  if (completedCount >= 3) {
+    triggerCardUnlock('dinh-bo-linh', 'evt_completed_3_dinh_bo_linh');
+  }
+
+  // 3. Lý Thái Tổ: Điểm >= 9.5
+  if (score >= 9.5) {
+    triggerCardUnlock('ly-thai-to', 'evt_score_10_ly_thai_to');
+  }
+
+  // 4. Lý Thường Kiệt: Phần II đạt tối đa hoặc đúng 100% nhận định
+  if (p2StatementsTotal > 0 && p2StatementsCorrect === p2StatementsTotal) {
+    triggerCardUnlock('ly-thuong-kiet', 'evt_p2_perfect_ly_thuong_kiet');
+  }
+
+  // 5. Trần Hưng Đạo: Hoàn thành >= 5 bài và điểm TB >= 8.5
+  if (completedCount >= 5) {
+    let sum = score;
+    history.forEach(h => sum += h.score);
+    const avg = sum / (history.length + 1);
+    if (avg >= 8.5) {
+      triggerCardUnlock('tran-hung-dao', 'evt_avg_85_tran_hung_dao');
+    }
+  }
+
+  // 6. Lê Lợi: Tổng số câu đúng >= 50
+  let totalCorrect = p1Correct + p2StatementsCorrect;
+  history.forEach(h => totalCorrect += (h.p1Correct + h.p2Correct));
+  if (totalCorrect >= 50) {
+    triggerCardUnlock('le-loi', 'evt_50_correct_le_loi');
+  }
+
+  // 7. Nguyễn Trãi: Khắc phục câu sai trong Sổ tay câu sai
+  const mistakesData = typeof getMistakesData === 'function' ? getMistakesData() : null;
+  if (mistakesData && mistakesData.items && Object.keys(mistakesData.items).length > 0) {
+    triggerCardUnlock('nguyen-trai', 'evt_mistakes_mastered_nguyen_trai');
+  }
+
+  // 8. Quang Trung: Làm bài < 15 phút (900 giây) và điểm >= 8.0
+  if (elapsedSec > 0 && elapsedSec < 900 && score >= 8.0) {
+    triggerCardUnlock('quang-trung', 'evt_fast_80_quang_trung');
+  }
+
+  // 9. Hai Bà Trưng: Làm đề Khối 10 hoặc tích lũy Thái Bình
+  const grade = typeof getExamCatalogGrade === 'function' ? getExamCatalogGrade(exam) : 12;
+  if (grade === 10) {
+    triggerCardUnlock('hai-ba-trung', 'evt_grade_10_hai_ba_trung');
+  }
+
+  // 10. Bà Triệu: Lượt thi đầu tiên đạt điểm >= 7.0
+  if (history.length <= 1 && score >= 7.0) {
+    triggerCardUnlock('ba-trieu', 'evt_first_70_ba_trieu');
+  }
+
+  // 11. Chủ tịch Hồ Chí Minh: Hoàn thành Bài 6 với điểm >= 8.0
+  const topicKey = typeof getExamTopicKey === 'function' ? getExamTopicKey(exam) : '';
+  if (topicKey === 'bai-06' && score >= 8.0) {
+    triggerCardUnlock('ho-chi-minh', 'evt_bai06_80_ho_chi_minh');
+  }
+
+  // 12. Đại tướng Võ Nguyên Giáp: Hoàn thành Bài 7 hoặc Bài 8 với điểm >= 8.5
+  if ((topicKey === 'bai-07' || topicKey === 'bai-08') && score >= 8.5) {
+    triggerCardUnlock('vo-nguyen-giap', 'evt_khangchien_85_vo_nguyen_giap');
+  }
+}
+
+// 7. Cập nhật Số Lượng Thẻ Đã Mở Trên Header
+function updateBangVangCountBadge() {
+  const badgeText = $('bang-vang-badge-text');
+  if (!badgeText) return;
+  const unlocked = getUnlockedCardsList();
+  badgeText.textContent = `Bảng Vàng (${unlocked.length}/${HISTORICAL_CARDS_DATA.length})`;
+}
+
+// 8. Render Danh Sách Thẻ Trong Modal Bảng Vàng
+function renderBangVangCardsGrid() {
+  const container = $('bv-cards-grid');
+  const counterEl = $('bv-counter-display');
+  const progressFill = $('bv-progress-fill');
+  const setsContainer = $('bv-sets-container');
+  const filterSelect = $('bv-status-filter');
+  const filterCountEl = $('bv-filter-count');
+
+  if (!container) return;
+
+  const unlockedIds = getUnlockedCardsList();
+  const total = HISTORICAL_CARDS_DATA.length;
+  const unlockedCount = unlockedIds.length;
+  const pct = Math.round((unlockedCount / total) * 100);
+
+  if (counterEl) counterEl.textContent = `${unlockedCount} / ${total} Thẻ`;
+  if (progressFill) progressFill.style.width = `${pct}%`;
+
+  // Render 4 Bộ Danh Hiệu
+  if (setsContainer) {
+    setsContainer.innerHTML = HISTORICAL_CARD_SETS.map(set => {
+      const isComplete = set.requiredCardIds.every(id => unlockedIds.includes(id));
+      const currentInSet = set.requiredCardIds.filter(id => unlockedIds.includes(id)).length;
+      return `
+        <div class="set-badge-pill ${isComplete ? 'unlocked' : ''}" title="${set.name} (${currentInSet}/${set.requiredCardIds.length})">
+          <span>${set.icon}</span>
+          <span><strong>${set.name}:</strong> ${isComplete ? '🏆 ' + set.titleReward : `Đang mở (${currentInSet}/${set.requiredCardIds.length})`}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Lọc thẻ
+  const filterVal = filterSelect ? filterSelect.value : 'all';
+  const displayedCards = HISTORICAL_CARDS_DATA.filter(card => {
+    const isUnlocked = unlockedIds.includes(card.id);
+    if (filterVal === 'unlocked' && !isUnlocked) return false;
+    if (filterVal === 'locked' && isUnlocked) return false;
+    return true;
+  });
+
+  if (filterCountEl) filterCountEl.textContent = displayedCards.length;
+
+  if (displayedCards.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: rgba(232, 213, 176, 0.6);">
+        Không có thẻ nào phù hợp với bộ lọc.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = displayedCards.map(card => {
+    const isUnlocked = unlockedIds.includes(card.id);
+    const clickHandler = isUnlocked ? `onclick="xemChiTietThe('${card.id}')"` : '';
+
+    return `
+      <div class="character-collect-card ${isUnlocked ? 'unlocked' : 'locked'}" ${clickHandler}>
+        <div class="card-portrait-box">
+          <img src="${card.image}" 
+               alt="${card.name}" 
+               class="card-portrait-img" 
+               loading="lazy" 
+               onerror="this.onerror=null; this.src='${card.fallbackImg}';" />
+          <div class="card-portrait-vignette"></div>
+          <span class="card-seal-badge">${card.icon} ĐẠI VIỆT</span>
+          
+          ${!isUnlocked ? `
+            <div class="card-lock-overlay">
+              <span class="card-lock-icon">🔒</span>
+              <span style="font-size: 0.78rem; font-weight: 700; color: #fff;">ĐANG KHÓA</span>
+              <span class="card-lock-req">🎯 ${card.unlockReq}</span>
+            </div>
+          ` : ''}
+        </div>
+
+        <div class="card-info-box">
+          <span class="card-era-tag">${card.era}</span>
+          <h4 class="card-name-title">${card.name}</h4>
+          <span class="card-alias">${card.alias}</span>
+          <p class="card-deed-snippet">${card.deeds}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// 9. Mở & Đóng Modal Bảng Vàng
+function moModalBangVang() {
+  const overlay = $('bang-vang-modal-overlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  renderBangVangCardsGrid();
+}
+
+function dongModalBangVang(e) {
+  if (e && e.target && e.target.id !== 'bang-vang-modal-overlay' && !e.target.classList.contains('bang-vang-close-btn')) {
+    return;
+  }
+  const overlay = $('bang-vang-modal-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+// 10. Xem Chi Tiết Thẻ Khi Đã Mở Khóa
+function xemChiTietThe(cardId) {
+  const card = HISTORICAL_CARDS_DATA.find(c => c.id === cardId);
+  const inspectOverlay = $('card-inspect-overlay');
+  const container = $('card-inspect-container');
+  if (!card || !inspectOverlay || !container) return;
+
+  const setObj = HISTORICAL_CARD_SETS.find(s => s.id === card.setId);
+
+  container.innerHTML = `
+    <div class="card-inspect-header">
+      <img src="${card.image}" alt="${card.name}" class="card-inspect-thumb" onerror="this.onerror=null; this.src='${card.fallbackImg}';" />
+      <div style="flex: 1; min-width: 0;">
+        <div style="font-size: 0.72rem; color: var(--gold); font-weight: 700; text-transform: uppercase;">
+          ${card.era} · ${setObj ? setObj.name : 'Đại Việt'}
+        </div>
+        <h3 style="font-size: 1.35rem; color: #fff8e7; margin: 2px 0; font-family: 'Playfair Display', serif;">
+          ${card.name}
+        </h3>
+        <div style="font-size: 0.82rem; color: rgba(232, 213, 176, 0.75); font-style: italic;">
+          ${card.alias}
+        </div>
+      </div>
+      <button type="button" class="bang-vang-close-btn" onclick="dongChiTietThe()">✕</button>
+    </div>
+
+    <div>
+      <div style="font-size: 0.8rem; font-weight: 700; color: var(--gold); margin-bottom: 4px;">⚔️ Chiến Công & Dấu Ấn Lịch Sử:</div>
+      <p style="font-size: 0.85rem; color: #e8d5b0; line-height: 1.5; margin: 0;">
+        ${card.deeds}
+      </p>
+    </div>
+
+    <div class="card-inspect-quote">
+      <div style="font-size: 0.75rem; color: var(--gold); font-weight: 700; margin-bottom: 4px;">📜 Danh Ngôn / Lời Hịch:</div>
+      ${card.quote}
+      <div style="font-size: 0.72rem; color: rgba(232, 213, 176, 0.65); margin-top: 6px; text-align: right; font-style: normal;">
+        — Nguồn: <strong>${card.quoteSource}</strong>
+      </div>
+    </div>
+
+    <div class="card-inspect-disclaimer">
+      ⚖️ <strong>Bản quyền & Tạo hình:</strong> ${card.license}. ${card.isIllustration ? '(Hình ảnh mang tính chất minh họa mỹ thuật lịch sử, không phải chân dung nhân trắc học nguyên bản).' : ''}
+    </div>
+  `;
+
+  inspectOverlay.style.display = 'flex';
+}
+
+function dongChiTietThe(e) {
+  if (e && e.target && e.target.id !== 'card-inspect-overlay' && !e.target.classList.contains('bang-vang-close-btn')) {
+    return;
+  }
+  const inspectOverlay = $('card-inspect-overlay');
+  if (inspectOverlay) inspectOverlay.style.display = 'none';
+}
+
+
+// =========================================================================
+// ĐẤU TRÍ TRANH HÙNG 1V1 (REALTIME BATTLE ARENA - PROMPT 4)
+// =========================================================================
+const BATTLE_SESSION_STORAGE_KEY = 'dcls_battle_session_v1';
+const BATTLE_TOTAL_TIME = 180; // 3 phút = 180 giây
+
+let currentBattle = {
+  roomCode: null,
+  isHost: false,
+  isBotMode: false,
+  questions: [],       // Mảng 10 câu hỏi đã ánh xạ
+  currentQIndex: 0,
+  score: 0,
+  correctCount: 0,
+  opponentProgress: 0, // Số câu đối thủ đã xong (0 - 10)
+  opponentScore: 0,
+  opponentName: 'Đối thủ',
+  elapsedSeconds: 0,
+  timerInterval: null,
+  botInterval: null,
+  firestoreUnsubscribe: null,
+  isFinished: false,
+  hasAnsweredCurrent: false
+};
+
+// 1. Thuật toán chọn 10 câu hỏi trắc nghiệm chất lượng cao từ EXAMS_DATA
+function pickTenBattleQuestions(seed) {
+  const allMcqs = [];
+  if (typeof EXAMS_DATA !== 'undefined' && Array.isArray(EXAMS_DATA)) {
+    EXAMS_DATA.forEach(ex => {
+      if (ex.part1 && Array.isArray(ex.part1)) {
+        ex.part1.forEach(q => {
+          if (q.q && q.options && q.options.length === 4) {
+            allMcqs.push({
+              qId: typeof getPart1QuestionId === 'function' ? getPart1QuestionId(q) : ('mc_' + allMcqs.length),
+              stem: q.q,
+              options: [...q.options],
+              correctIdx: q.ans !== undefined ? q.ans : (q.answer !== undefined ? q.answer : 0),
+              explain: q.explain || ''
+            });
+          }
+        });
+      }
+    });
+  }
+
+  // Khử trùng lặp câu hỏi
+  const uniqueMap = new Map();
+  allMcqs.forEach(item => {
+    if (!uniqueMap.has(item.qId)) uniqueMap.set(item.qId, item);
+  });
+  const pool = Array.from(uniqueMap.values());
+
+  if (pool.length === 0) return [];
+
+  // Trộn giả ngẫu nhiên có seed
+  let s = Math.abs(seed || Date.now());
+  function pseudoRandom() {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  }
+
+  // Thuật toán Fisher-Yates trích 10 câu
+  const shuffled = [...pool];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(pseudoRandom() * (i + 1));
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+
+  return shuffled.slice(0, 10);
+}
+
+// 2. Chuyển đổi các màn hình con trong Sảnh Đấu Trí
+function showBattleSubView(viewName) {
+  const views = ['battle-view-lobby', 'battle-view-waiting', 'battle-view-arena', 'battle-view-result'];
+  views.forEach(vId => {
+    const el = $(vId);
+    if (el) el.style.display = (vId === viewName) ? 'block' : 'none';
+  });
+}
+
+function veSanhDauTri() {
+  roiKhoiPhongDau();
+  showBattleSubView('battle-view-lobby');
+}
+
+// 3. Khởi tạo Phòng Đấu Mới (Host)
+function khoiTaoPhongDauMoi() {
+  const prefix = ['VN', 'BD', 'ML', 'HN', 'QN', 'ST'][Math.floor(Math.random() * 6)];
+  const num = Math.floor(1000 + Math.random() * 9000);
+  const roomCode = prefix + num;
+  const seed = Date.now();
+  const playerName = localStorage.getItem('dcls_playerName') || 'Tướng quân Khách';
+
+  const questions = pickTenBattleQuestions(seed);
+  if (questions.length < 10) {
+    if (typeof hienToastThaoTruong === 'function') hienToastThaoTruong("Chưa đủ ngân hàng câu hỏi để thi đấu!");
+    return;
+  }
+
+  currentBattle = {
+    roomCode: roomCode,
+    isHost: true,
+    isBotMode: false,
+    questions: questions,
+    currentQIndex: 0,
+    score: 0,
+    correctCount: 0,
+    opponentProgress: 0,
+    opponentScore: 0,
+    opponentName: 'Đang chờ đối thủ...',
+    elapsedSeconds: 0,
+    timerInterval: null,
+    botInterval: null,
+    firestoreUnsubscribe: null,
+    isFinished: false,
+    hasAnsweredCurrent: false
+  };
+
+  // Cập nhật giao diện phòng chờ
+  if ($('waiting-room-code')) $('waiting-room-code').textContent = roomCode;
+  if ($('waiting-p1-name')) $('waiting-p1-name').textContent = playerName + ' (Chủ phòng)';
+  if ($('waiting-p2-name')) $('waiting-p2-name').textContent = 'Đang chờ đối thủ...';
+  if ($('waiting-p2-status')) $('waiting-p2-status').textContent = 'Chia sẻ mã phòng để mời';
+  if ($('btn-battle-start-game')) {
+    $('btn-battle-start-game').style.display = 'inline-block';
+    $('btn-battle-start-game').disabled = false;
+  }
+
+  showBattleSubView('battle-view-waiting');
+
+  // Kết nối Firestore nếu có
+  if (window.firebase && typeof firebase.firestore === 'function') {
+    try {
+      const db = firebase.firestore();
+      const user = firebase.auth().currentUser;
+      const uid = user ? user.uid : ('anon_' + Math.random().toString(36).substr(2, 6));
+
+      db.collection('battleRooms').doc(roomCode).set({
+        roomCode: roomCode,
+        status: 'waiting',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        startedAt: null,
+        expiresAt: null,
+        questionSeed: seed,
+        questionIds: questions.map(q => q.qId),
+        player1: {
+          uid: uid,
+          name: playerName,
+          ready: true,
+          currentQ: 0,
+          score: 0,
+          finished: false,
+          completedAt: null
+        },
+        player2: {
+          uid: null,
+          name: null,
+          ready: false,
+          currentQ: 0,
+          score: 0,
+          finished: false,
+          completedAt: null
+        },
+        winnerUid: null,
+        rulesVersion: 1
+      }).catch(err => {
+        console.warn("Firestore offline hoặc không có quyền ghi battleRooms:", err);
+      });
+
+      // Lắng nghe người thứ 2 vào phòng
+      currentBattle.firestoreUnsubscribe = db.collection('battleRooms').doc(roomCode).onSnapshot(doc => {
+        if (!doc.exists) return;
+        const data = doc.data();
+        if (data.player2 && data.player2.name) {
+          if ($('waiting-p2-name')) $('waiting-p2-name').textContent = data.player2.name;
+          if ($('waiting-p2-status')) $('waiting-p2-status').textContent = '✓ ĐÃ VÀO PHÒNG';
+          if ($('waiting-p2-avatar')) $('waiting-p2-avatar').textContent = '⚔️';
+          currentBattle.opponentName = data.player2.name;
+        }
+        if (data.status === 'in_progress' && !currentBattle.isHost) {
+          batDauTranDauArena();
+        }
+        // Nhận tiến độ của đối thủ trong trận
+        if (data.status === 'in_progress') {
+          const oppData = currentBattle.isHost ? data.player2 : data.player1;
+          if (oppData) {
+            capNhatTienDoDoiThu(oppData.currentQ || 0, oppData.score || 0);
+          }
+        }
+      });
+    } catch (e) {
+      console.warn("Lỗi khởi tạo Firestore cho trận đấu:", e);
+    }
+  }
+}
+
+// 4. Tham gia Phòng Bằng Mã (Guest)
+function thamGiaPhongDau() {
+  const input = $('battle-join-code-input');
+  if (!input) return;
+  const roomCode = input.value.trim().toUpperCase();
+  if (roomCode.length !== 6) {
+    if (typeof hienToastThaoTruong === 'function') hienToastThaoTruong("Vui lòng nhập đúng mã phòng gồm 6 ký tự!");
+    return;
+  }
+
+  const playerName = localStorage.getItem('dcls_playerName') || 'Tướng quân Khách';
+
+  if ($('waiting-room-code')) $('waiting-room-code').textContent = roomCode;
+  if ($('waiting-p1-name')) $('waiting-p1-name').textContent = 'Chủ phòng';
+  if ($('waiting-p2-name')) $('waiting-p2-name').textContent = playerName + ' (Khách)';
+  if ($('waiting-p2-status')) $('waiting-p2-status').textContent = '✓ ĐÃ SẴN SÀNG';
+  if ($('waiting-p2-avatar')) $('waiting-p2-avatar').textContent = '⚔️';
+
+  if ($('btn-battle-start-game')) {
+    $('btn-battle-start-game').style.display = 'none'; // Khách chờ chủ phòng bấm bắt đầu
+  }
+
+  // Lấy câu hỏi theo mã phòng
+  const seed = roomCode.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0) * 1000;
+  currentBattle = {
+    roomCode: roomCode,
+    isHost: false,
+    isBotMode: false,
+    questions: pickTenBattleQuestions(seed),
+    currentQIndex: 0,
+    score: 0,
+    correctCount: 0,
+    opponentProgress: 0,
+    opponentScore: 0,
+    opponentName: 'Chủ phòng',
+    elapsedSeconds: 0,
+    timerInterval: null,
+    botInterval: null,
+    firestoreUnsubscribe: null,
+    isFinished: false,
+    hasAnsweredCurrent: false
+  };
+
+  showBattleSubView('battle-view-waiting');
+
+  if (window.firebase && typeof firebase.firestore === 'function') {
+    try {
+      const db = firebase.firestore();
+      const user = firebase.auth().currentUser;
+      const uid = user ? user.uid : ('anon_' + Math.random().toString(36).substr(2, 6));
+
+      db.collection('battleRooms').doc(roomCode).update({
+        'player2.uid': uid,
+        'player2.name': playerName,
+        'player2.ready': true,
+        status: 'ready'
+      }).catch(e => console.warn("Lỗi cập nhật người chơi 2:", e));
+
+      currentBattle.firestoreUnsubscribe = db.collection('battleRooms').doc(roomCode).onSnapshot(doc => {
+        if (!doc.exists) return;
+        const data = doc.data();
+        if (data.player1 && data.player1.name) {
+          if ($('waiting-p1-name')) $('waiting-p1-name').textContent = data.player1.name;
+          currentBattle.opponentName = data.player1.name;
+        }
+        if (data.status === 'in_progress') {
+          batDauTranDauArena();
+        }
+        if (data.status === 'in_progress') {
+          const oppData = data.player1;
+          if (oppData) {
+            capNhatTienDoDoiThu(oppData.currentQ || 0, oppData.score || 0);
+          }
+        }
+      });
+    } catch (e) {
+      console.warn("Lỗi Firestore kết nối phòng:", e);
+    }
+  }
+}
+
+// 5. Đấu Luyện Tập Với Tướng Quân Máy Ảo (Bot Simulation)
+function batDauDauLuyenTapBot() {
+  const seed = Date.now();
+  const playerName = localStorage.getItem('dcls_playerName') || 'Tướng quân Khách';
+  const questions = pickTenBattleQuestions(seed);
+
+  currentBattle = {
+    roomCode: 'BOT_MATCH',
+    isHost: true,
+    isBotMode: true,
+    questions: questions,
+    currentQIndex: 0,
+    score: 0,
+    correctCount: 0,
+    opponentProgress: 0,
+    opponentScore: 0,
+    opponentName: 'Tướng Quân Ảo (Bot)',
+    elapsedSeconds: 0,
+    timerInterval: null,
+    botInterval: null,
+    firestoreUnsubscribe: null,
+    isFinished: false,
+    hasAnsweredCurrent: false
+  };
+
+  batDauTranDauArena();
+}
+
+// 6. Chủ Phòng Xác Nhận Bắt Đầu
+function chuPhongXacNhanBatDau() {
+  if (currentBattle.roomCode && !currentBattle.isBotMode && window.firebase && typeof firebase.firestore === 'function') {
+    try {
+      const db = firebase.firestore();
+      db.collection('battleRooms').doc(currentBattle.roomCode).update({
+        status: 'in_progress',
+        startedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(e => console.warn("Lỗi bắt đầu trận đấu:", e));
+    } catch (_) {}
+  }
+  batDauTranDauArena();
+}
+
+// 7. Bắt Đầu Sàn Đấu Tranh Hùng (Arena)
+function batDauTranDauArena() {
+  clearInterval(currentBattle.timerInterval);
+  clearInterval(currentBattle.botInterval);
+
+  currentBattle.isFinished = false;
+  currentBattle.currentQIndex = 0;
+  currentBattle.score = 0;
+  currentBattle.correctCount = 0;
+  currentBattle.elapsedSeconds = 0;
+
+  const playerName = localStorage.getItem('dcls_playerName') || 'Bạn';
+  if ($('arena-p1-name')) $('arena-p1-name').textContent = playerName;
+  if ($('arena-p2-name')) $('arena-p2-name').textContent = currentBattle.opponentName;
+
+  showBattleSubView('battle-view-arena');
+  renderArenaQuestion();
+
+  // Khởi động đồng hồ đếm ngược 180s
+  capNhatDongHoArena(BATTLE_TOTAL_TIME);
+  currentBattle.timerInterval = setInterval(() => {
+    currentBattle.elapsedSeconds++;
+    const remain = BATTLE_TOTAL_TIME - currentBattle.elapsedSeconds;
+    capNhatDongHoArena(remain);
+
+    if (remain <= 0) {
+      clearInterval(currentBattle.timerInterval);
+      ketThucTranDau("Hết thời gian thi đấu!");
+    }
+  }, 1000);
+
+  // Khởi động mô phỏng Bot nếu là chế độ Bot
+  if (currentBattle.isBotMode) {
+    currentBattle.botInterval = setInterval(() => {
+      if (currentBattle.opponentProgress < 10) {
+        currentBattle.opponentProgress++;
+        // Xác suất bot trả lời đúng là 80%
+        if (Math.random() < 0.8) {
+          currentBattle.opponentScore += 10;
+        }
+        capNhatTienDoDoiThu(currentBattle.opponentProgress, currentBattle.opponentScore);
+      } else {
+        clearInterval(currentBattle.botInterval);
+      }
+    }, 12000); // Trung bình 12s bot làm xong 1 câu
+  }
+}
+
+function capNhatDongHoArena(seconds) {
+  const m = Math.floor(Math.max(0, seconds) / 60);
+  const s = Math.max(0, seconds) % 60;
+  const str = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  const textEl = $('battle-timer-text');
+  const pillEl = $('battle-timer-pill');
+  if (textEl) textEl.textContent = str;
+  if (pillEl) {
+    if (seconds <= 30) pillEl.classList.add('urgent');
+    else pillEl.classList.remove('urgent');
+  }
+}
+
+// 8. Render Câu Hỏi Trên Sàn Đấu
+function renderArenaQuestion() {
+  const q = currentBattle.questions[currentBattle.currentQIndex];
+  if (!q) {
+    ketThucTranDau("Bạn đã hoàn thành toàn bộ 10 câu hỏi!");
+    return;
+  }
+
+  currentBattle.hasAnsweredCurrent = false;
+
+  if ($('arena-q-index-label')) {
+    $('arena-q-index-label').textContent = `Câu số ${currentBattle.currentQIndex + 1} / 10`;
+  }
+  if ($('arena-question-stem')) {
+    $('arena-question-stem').textContent = q.stem;
+  }
+
+  // Xáo trộn 4 phương án độc lập trên máy
+  const letters = ['A', 'B', 'C', 'D'];
+  const optsWithIdx = q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }));
+  
+  // Trộn nhẹ
+  for (let i = optsWithIdx.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = optsWithIdx[i];
+    optsWithIdx[i] = optsWithIdx[j];
+    optsWithIdx[j] = t;
+  }
+
+  const listEl = $('arena-options-list');
+  if (listEl) {
+    listEl.innerHTML = optsWithIdx.map((item, i) => {
+      const letter = letters[i];
+      const isCorrect = (item.originalIdx === q.correctIdx);
+      return `
+        <button type="button" class="battle-opt-btn" onclick="chonDapAnArena(this, ${isCorrect})">
+          <span style="font-weight: 700; color: var(--gold);">${letter}.</span>
+          <span>${escapeExamHtml(item.text)}</span>
+        </button>
+      `;
+    }).join('');
+  }
+
+  // Cập nhật thanh tiến độ của bạn
+  const myPct = Math.round((currentBattle.currentQIndex / 10) * 100);
+  if ($('arena-p1-progress-num')) $('arena-p1-progress-num').textContent = currentBattle.currentQIndex;
+  if ($('arena-p1-score-num')) $('arena-p1-score-num').textContent = currentBattle.score;
+  if ($('arena-p1-progress-bar')) $('arena-p1-progress-bar').style.width = `${myPct}%`;
+}
+
+// 9. Xử Lý Chọn Đáp Án Trong Trận
+function chonDapAnArena(btn, isCorrect) {
+  if (currentBattle.hasAnsweredCurrent || currentBattle.isFinished) return;
+  currentBattle.hasAnsweredCurrent = true;
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    currentBattle.score += 10;
+    currentBattle.correctCount++;
+  } else {
+    btn.classList.add('wrong');
+  }
+
+  // Cập nhật tiến độ của bạn lên Firestore
+  const nextQ = currentBattle.currentQIndex + 1;
+  guiTienDoLenFirestore(nextQ, currentBattle.score);
+
+  // Tự động chuyển câu sau 0.45s
+  setTimeout(() => {
+    currentBattle.currentQIndex++;
+    if (currentBattle.currentQIndex >= 10) {
+      ketThucTranDau("Bạn đã hoàn thành toàn bộ 10 câu hỏi!");
+    } else {
+      renderArenaQuestion();
+    }
+  }, 450);
+}
+
+function guiTienDoLenFirestore(qNum, currentScore) {
+  if (!currentBattle.roomCode || currentBattle.isBotMode) return;
+  if (window.firebase && typeof firebase.firestore === 'function') {
+    try {
+      const db = firebase.firestore();
+      const fieldPrefix = currentBattle.isHost ? 'player1' : 'player2';
+      const updateData = {};
+      updateData[`${fieldPrefix}.currentQ`] = qNum;
+      updateData[`${fieldPrefix}.score`] = currentScore;
+      if (qNum >= 10) updateData[`${fieldPrefix}.finished`] = true;
+      db.collection('battleRooms').doc(currentBattle.roomCode).update(updateData).catch(() => {});
+    } catch (_) {}
+  }
+}
+
+function capNhatTienDoDoiThu(oppQ, oppScore) {
+  currentBattle.opponentProgress = oppQ;
+  currentBattle.opponentScore = oppScore;
+  const oppPct = Math.round((Math.min(10, oppQ) / 10) * 100);
+
+  if ($('arena-p2-progress-num')) $('arena-p2-progress-num').textContent = Math.min(10, oppQ);
+  if ($('arena-p2-score-num')) $('arena-p2-score-num').textContent = oppScore;
+  if ($('arena-p2-progress-bar')) $('arena-p2-progress-bar').style.width = `${oppPct}%`;
+}
+
+// 10. Kết Thúc Trận Đấu & Vinh Danh
+function ketThucTranDau(reason) {
+  if (currentBattle.isFinished) return;
+  currentBattle.isFinished = true;
+  clearInterval(currentBattle.timerInterval);
+  clearInterval(currentBattle.botInterval);
+
+  const yourScore = currentBattle.score;
+  const oppScore = currentBattle.opponentScore;
+
+  if ($('res-score-you')) $('res-score-you').textContent = `${yourScore} đ`;
+  if ($('res-score-opp')) $('res-score-opp').textContent = `${oppScore} đ`;
+
+  const m = Math.floor(currentBattle.elapsedSeconds / 60);
+  const s = currentBattle.elapsedSeconds % 60;
+  if ($('res-time-you')) $('res-time-you').textContent = `${m}p ${s}s`;
+  if ($('res-time-opp')) $('res-time-opp').textContent = `${m}p ${Math.min(59, s + 5)}s`;
+
+  const iconEl = $('result-trophy-icon');
+  const headlineEl = $('result-headline-text');
+  const descEl = $('result-summary-desc');
+  const rewardEl = $('res-peace-reward-text');
+
+  let peaceReward = 0;
+
+  if (yourScore > oppScore) {
+    if (iconEl) iconEl.textContent = '🏆';
+    if (headlineEl) { headlineEl.className = 'battle-result-headline victory'; headlineEl.textContent = 'CHIẾN THẮNG VANG DỘI!'; }
+    if (descEl) descEl.textContent = 'Bạn đã vượt qua đối thủ xuất sắc với kiến thức lịch sử sâu rộng và tốc độ thần tốc!';
+    peaceReward = 50;
+  } else if (yourScore === oppScore) {
+    if (iconEl) iconEl.textContent = '🤝';
+    if (headlineEl) { headlineEl.className = 'battle-result-headline draw'; headlineEl.textContent = 'BẤT PHÂN THẮNG BẠI (HÒA)!'; }
+    if (descEl) descEl.textContent = 'Hai bên ngang tài ngang sức, cùng sở hữu kho tàng tri thức lịch sử uyên bác.';
+    peaceReward = 20;
+  } else {
+    if (iconEl) iconEl.textContent = '🛡️';
+    if (headlineEl) { headlineEl.className = 'battle-result-headline defeat'; headlineEl.textContent = 'THUA CUỘC VẺ VANG'; }
+    if (descEl) descEl.textContent = 'Đối thủ đã tạm dẫn trước. Hãy tiếp tục ôn tập tại Thao Trường để sẵn sàng phục thù!';
+    peaceReward = 5;
+  }
+
+  // Tích lũy điểm Thái Bình
+  if (peaceReward > 0) {
+    try {
+      const curPeace = parseInt(localStorage.getItem('dcls_peaceScore') || '1000', 10);
+      const newPeace = curPeace + peaceReward;
+      localStorage.setItem('dcls_peaceScore', newPeace.toString());
+      if ($('peace-badge')) $('peace-badge').textContent = '🕊️ Thái Bình: ' + newPeace;
+      if (rewardEl) rewardEl.textContent = `🕊️ +${peaceReward} Điểm Thái Bình Tích Lũy Vào Bảng Vàng!`;
+    } catch (_) {}
+  }
+
+  showBattleSubView('battle-view-result');
+}
+
+// 11. Xử Lý Rút Lui / Thoát Trận
+function xacNhanRutLuiTranDau() {
+  if (confirm("Nếu rút lui giữa trận, bạn sẽ bị xử thua. Bạn có chắc chắn muốn rút lui?")) {
+    currentBattle.opponentScore = Math.max(currentBattle.opponentScore, currentBattle.score + 10);
+    ketThucTranDau("Bạn đã chủ động rút lui.");
+  }
+}
+
+function roiKhoiPhongDau() {
+  clearInterval(currentBattle.timerInterval);
+  clearInterval(currentBattle.botInterval);
+  if (currentBattle.firestoreUnsubscribe) {
+    try { currentBattle.firestoreUnsubscribe(); } catch (_) {}
+  }
+  showBattleSubView('battle-view-lobby');
+}
+
+function saoChepMaPhong() {
+  if (currentBattle.roomCode && navigator.clipboard) {
+    navigator.clipboard.writeText(currentBattle.roomCode).then(() => {
+      if (typeof hienToastThaoTruong === 'function') hienToastThaoTruong("📋 Đã sao chép mã phòng: " + currentBattle.roomCode);
+    }).catch(() => {});
+  }
+}
+
 function switchLobbyMode(mode) {
   currentLobbyMode = mode;
   const btnRandom = $('btn-mode-random');
   const btnCatalog = $('btn-mode-catalog');
+  const btnMistakes = $('btn-mode-mistakes');
+  const btnAnalytics = $('btn-mode-analytics');
+  const btnBattle = $('btn-mode-battle');
   const panelRandom = $('panel-random-mode');
   const panelCatalog = $('panel-catalog-mode');
+  const panelMistakes = $('panel-mistakes-mode');
+  const panelAnalytics = $('panel-analytics-mode');
+  const panelBattle = $('panel-battle-mode');
+
+  [btnRandom, btnCatalog, btnMistakes, btnAnalytics, btnBattle].forEach(b => { if (b) b.classList.remove('active'); });
+  [panelRandom, panelCatalog, panelMistakes, panelAnalytics, panelBattle].forEach(p => { if (p) { p.style.display = 'none'; p.classList.remove('active'); } });
 
   if (mode === 'random') {
     if (btnRandom) btnRandom.classList.add('active');
-    if (btnCatalog) btnCatalog.classList.remove('active');
     if (panelRandom) { panelRandom.style.display = 'block'; panelRandom.classList.add('active'); }
-    if (panelCatalog) { panelCatalog.style.display = 'none'; panelCatalog.classList.remove('active'); }
     updateRandomLobbyProgress();
-  } else {
-    if (btnRandom) btnRandom.classList.remove('active');
+  } else if (mode === 'catalog') {
     if (btnCatalog) btnCatalog.classList.add('active');
-    if (panelRandom) { panelRandom.style.display = 'none'; panelRandom.classList.remove('active'); }
     if (panelCatalog) { panelCatalog.style.display = 'block'; panelCatalog.classList.add('active'); }
-    
     const searchInput = $('search-input');
     updateCatalogTopicsDropdown(true);
     renderCatalog();
+  } else if (mode === 'mistakes') {
+    if (btnMistakes) btnMistakes.classList.add('active');
+    if (panelMistakes) { panelMistakes.style.display = 'block'; panelMistakes.classList.add('active'); }
+    renderMistakesNotebook();
+  } else if (mode === 'analytics') {
+    if (btnAnalytics) btnAnalytics.classList.add('active');
+    if (panelAnalytics) { panelAnalytics.style.display = 'block'; panelAnalytics.classList.add('active'); }
+    renderAnalyticsDashboard();
+  } else if (mode === 'battle') {
+    if (btnBattle) btnBattle.classList.add('active');
+    if (panelBattle) { panelBattle.style.display = 'block'; panelBattle.classList.add('active'); }
+    showBattleSubView('battle-view-lobby');
   }
 }
 
@@ -53134,11 +57480,15 @@ function executeSubmitExam() {
 
   // 1. Grade Part 1 (MCQs)
   let p1Correct = 0;
+  const wrongP1Items = [];
   if (p1Len > 0) {
     for (let i = 0; i < p1Len; i++) {
-      const correctAns = currentExam.part1[i].ans !== undefined ? currentExam.part1[i].ans : currentExam.part1[i].answer;
+      const q = currentExam.part1[i];
+      const correctAns = q.ans !== undefined ? q.ans : q.answer;
       if (userAnswersP1[i] === correctAns) {
         p1Correct++;
+      } else {
+        wrongP1Items.push({ question: q, userChoice: userAnswersP1[i], correctAns: correctAns });
       }
     }
   }
@@ -53151,6 +57501,7 @@ function executeSubmitExam() {
   let p2StatementsTotal = 0;
   let p2FullCorrectCount = 0;
 
+  const wrongP2Items = [];
   if (p2Len > 0) {
     for (let i = 0; i < p2Len; i++) {
       const p = currentExam.part2[i];
@@ -53162,6 +57513,8 @@ function executeSubmitExam() {
         if (userVal === correctVal) {
           correctInThisPassage++;
           p2StatementsCorrect++;
+        } else {
+          wrongP2Items.push({ group: p, statement: stmt, userVal: userVal, correctVal: correctVal });
         }
       });
       p2StatementsTotal += p.statements.length;
@@ -53184,10 +57537,48 @@ function executeSubmitExam() {
     totalScore = 10.0;
   }
 
-  // Best score save to localStorage
-  const prevBest = localStorage.getItem('thao_truong_best_' + currentExam.id);
-  if (!prevBest || totalScore > parseFloat(prevBest)) {
-    localStorage.setItem('thao_truong_best_' + currentExam.id, totalScore.toFixed(2));
+  // Best score save to localStorage (Chỉ lưu điểm cho đề thi thật, không ghi đè khi luyện tập câu sai)
+  if (!currentExam.isMistakesPractice) {
+    const prevBest = localStorage.getItem('thao_truong_best_' + currentExam.id);
+    if (!prevBest || totalScore > parseFloat(prevBest)) {
+      localStorage.setItem('thao_truong_best_' + currentExam.id, totalScore.toFixed(2));
+    }
+  }
+
+  // Tự động ghi nhận câu trả lời sai vào Sổ tay câu sai (Prompt 1)
+  if (!currentExam.isMistakesPractice) {
+    handleExamMistakesSubmission(currentExam, wrongP1Items, wrongP2Items);
+  }
+  updateMistakesCountBadges();
+
+  // Ghi nhận lịch sử làm bài cho Biểu đồ Năng lực học tập (Prompt 2)
+  if (!currentExam.isMistakesPractice) {
+    recordExamAttemptForAnalytics({
+      examId: currentExam.id,
+      examTitle: currentExam.title,
+      grade: typeof getExamCatalogGrade === 'function' ? getExamCatalogGrade(currentExam) : 12,
+      topicKey: getExamTopicKey(currentExam),
+      score: totalScore,
+      scoreP1: scoreP1,
+      scoreP2: scoreP2,
+      p1Total: p1Len,
+      p1Correct: p1Correct,
+      p2Total: p2StatementsTotal,
+      p2Correct: p2StatementsCorrect,
+      timestamp: Date.now()
+    });
+
+    // Đánh giá điều kiện mở khóa Thẻ Nhân Vật & Ghi danh Bảng Vàng (Prompt 3)
+    const elapsedSeconds = examStartTime ? Math.floor((Date.now() - examStartTime) / 1000) : 0;
+    evaluateCardUnlockConditions(
+      currentExam, 
+      totalScore, 
+      p1Correct, 
+      scoreP2, 
+      p2StatementsTotal, 
+      p2StatementsCorrect, 
+      elapsedSeconds
+    );
   }
 
   // Bonus peace points
@@ -53258,6 +57649,18 @@ function executeSubmitExam() {
     rankMsg = 'Cần kiên trì ôn luyện nhiều hơn! Hãy nhấp vào các liên kết sang Tàng Thư Các bên dưới để củng cố lại bài học trọng tâm.';
   }
   $('res-rank').textContent = rankTitle;
+  // PROMPT 10: Hiển thị nút Nhận Chứng Nhận nếu điểm cuối cùng đạt từ 9.0 trở lên
+  const btnCert = $('btn-create-certificate');
+  if (btnCert) {
+    if (totalScore >= 9.0) {
+      btnCert.style.display = 'inline-flex';
+      btnCert.setAttribute('data-score', totalScore.toFixed(1));
+      btnCert.setAttribute('data-exam-title', (currentExam && (currentExam.title || currentExam.topic)) || 'Kỳ Khảo Thí Lịch Sử');
+      btnCert.setAttribute('data-rank', rankTitle);
+    } else {
+      btnCert.style.display = 'none';
+    }
+  }
   $('res-comment').textContent = rankMsg;
 
   // Show top summary board and hide bottom submit button
@@ -53546,6 +57949,7 @@ $('btn-back-to-catalog').onclick = () => {
 // =========================================================================
 updateCatalogTopicsDropdown(true);
 renderCatalog();
+updateMistakesCountBadges();
 
 </script>
 
@@ -54000,5 +58404,83 @@ function banPhaoHoaKhaiHoan() {
     <script src="firebase-config.js"></script>
     <script src="cloudinary-config.js"></script>
     <script type="module" src="site-account.js"></script>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL BẢNG VÀNG DANH TƯỚNG & BỘ SƯU TẬP THẺ NHÂN VẬT LỊCH SỬ (PROMPT 3)   -->
+  <!-- ========================================================================= -->
+  <div id="bang-vang-modal-overlay" class="bang-vang-overlay" style="display: none;" onclick="dongModalBangVang(event)">
+    <div class="bang-vang-modal" onclick="event.stopPropagation()">
+      <div class="bang-vang-header">
+        <div class="bang-vang-title">
+          <span style="font-size: 1.6rem;">🏆</span>
+          <div>
+            <h2>Bảng Vàng Danh Tướng & Thẻ Nhân Vật Lịch Sử</h2>
+            <div style="font-size: 0.75rem; color: rgba(232, 213, 176, 0.7); margin-top: 2px;">
+              Hệ thống thành tích học tập minh bạch · Không Gacha · Mở khóa bằng thực lực khảo thí
+            </div>
+          </div>
+        </div>
+        <button type="button" class="bang-vang-close-btn" onclick="dongModalBangVang()" title="Đóng Bảng Vàng" aria-label="Đóng cửa sổ">✕</button>
+      </div>
+
+      <div class="bang-vang-body">
+        <!-- TIẾN ĐỘ THÀNH TỰU -->
+        <div class="collection-hero-card">
+          <div class="collection-info">
+            <h3><span>🎖️</span> Tiến Độ Sưu Tầm Anh Hùng Hào Kiệt</h3>
+            <p>Mỗi thẻ nhân vật đại diện cho một mốc son chói lọi trong lịch sử dân tộc. Hãy hoàn thành các thử thách khảo thí chuẩn mực để ghi tên vào Bảng Vàng và mở khóa toàn bộ 12 danh tướng, đế vương và nữ kiệt Đại Việt.</p>
+          </div>
+          <div class="collection-progress-wrap">
+            <span class="collection-counter" id="bv-counter-display">0 / 12 Thẻ</span>
+            <div class="collection-progress-bar">
+              <div class="collection-progress-fill" id="bv-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 BỘ DANH HIỆU THÀNH TỰU (SETS) -->
+        <div>
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
+            🎖️ Bộ Danh Hiệu Thành Tích:
+          </div>
+          <div class="sets-badges-row" id="bv-sets-container">
+            <!-- Render bởi JS -->
+          </div>
+        </div>
+
+        <!-- BỘ LỌC THẺ -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-top: 1px solid rgba(197, 155, 39, 0.2); padding-top: 14px;">
+          <div style="font-size: 0.9rem; font-weight: 700; color: #fff8e7;">
+            Bộ Sưu Tập Thẻ Lịch Sử (<span id="bv-filter-count">12</span> thẻ)
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <select class="analytics-select" id="bv-status-filter" onchange="renderBangVangCardsGrid()">
+              <option value="all">Tất cả thẻ (12)</option>
+              <option value="unlocked">✓ Đã mở khóa</option>
+              <option value="locked">🔒 Đang khóa</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- LƯỚI THẺ NHÂN VẬT -->
+        <div class="cards-grid" id="bv-cards-grid">
+          <!-- Render bởi JS -->
+        </div>
+
+        <!-- GHI CHÚ BẢN QUYỀN & TƯ LIỆU LỊCH SỬ -->
+        <div style="font-size: 0.72rem; color: rgba(232, 213, 176, 0.55); line-height: 1.5; border-top: 1px dashed rgba(197, 155, 39, 0.25); padding-top: 12px;">
+          ⚖️ <strong>Quy chuẩn tư liệu:</strong> Hình ảnh các nhân vật lịch sử mang tính chất minh họa mỹ thuật di sản văn hóa công cộng (theo giấy phép Creative Commons / nguồn tư liệu giáo dục mở), không phải chân dung nhân trắc học nguyên bản. Các câu nói lịch sử được trích dẫn trung thực từ chính sử (<em>Đại Việt Sử Ký Toàn Thư</em>, <em>Khâm Định Việt Sử Thông Giám Cương Mục</em>). Những chi tiết dã sử dân gian đều được ghi chú rõ ràng.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHI TIẾT KHI BẤM XEM 1 THẺ ĐÃ MỞ -->
+  <div id="card-inspect-overlay" class="bang-vang-overlay" style="display: none;" onclick="dongChiTietThe(event)">
+    <div class="card-inspect-modal" onclick="event.stopPropagation()" id="card-inspect-container">
+      <!-- Render bởi JS -->
+    </div>
+  </div>
+
 </body>
 </html>

@@ -1,0 +1,155 @@
+/* =========================================================================
+   THANH THAO TÁC THUẬN TAY CÁI & VUỐT CHUYỂN CÂU MOBILE (PROMPT 9)
+   Chỉ kích hoạt trong phòng thi (#screen-exam) trên thiết bị di động
+   ========================================================================= */
+
+/* 1. Thanh Thao Tác Đáy Màn Hình (Mobile Bottom Action Bar) */
+.mobile-exam-bottom-bar {
+  display: none; /* Mặc định ẩn trên Desktop */
+}
+
+@media (max-width: 768px) {
+  /* Hiển thị thanh thao tác đáy khi phòng thi đang mở */
+  #screen-exam.active .mobile-exam-bottom-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    height: 56px;
+    padding: 6px max(12px, env(safe-area-inset-right, 0px)) max(6px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+    background: rgba(20, 12, 8, 0.96);
+    border-top: 1.5px solid rgba(197, 155, 39, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Đệm thêm khoảng trống đáy để thanh thao tác không che mất nội dung/nút nộp bài */
+  #screen-exam.active .exam-scroll-layout {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Theme Trúc Thư (Sáng) */
+  body.theme-truc-thu #screen-exam.active .mobile-exam-bottom-bar {
+    background: rgba(245, 238, 223, 0.96) !important;
+    border-top: 1.5px solid #D5C2A5 !important;
+    box-shadow: 0 -4px 16px rgba(139, 37, 0, 0.08) !important;
+  }
+
+  /* 2. Các Nút Bấm Thuận Tay Cái (Thumb-Friendly Controls) */
+  .mobile-bottom-btn {
+    min-height: 44px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    font-family: inherit;
+    border: 1px solid rgba(197, 155, 39, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFEAA7;
+    padding: 0 14px;
+  }
+
+  .mobile-bottom-btn:active:not(:disabled) {
+    transform: scale(0.96);
+    background: rgba(197, 155, 39, 0.25);
+  }
+
+  .mobile-bottom-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .mobile-bottom-btn--prev {
+    flex: 0 0 auto;
+    min-width: 82px;
+  }
+
+  .mobile-bottom-btn--next {
+    flex: 0 0 auto;
+    min-width: 82px;
+    background: linear-gradient(135deg, rgba(139, 37, 0, 0.8), rgba(178, 34, 34, 0.9));
+    border-color: var(--gold, #D4AF37);
+    color: #FFFDF8;
+  }
+
+  .mobile-bottom-btn--palette {
+    flex: 1;
+    min-width: 0;
+    background: rgba(197, 155, 39, 0.12);
+    border-color: rgba(197, 155, 39, 0.4);
+    color: #FFF2C6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 8px;
+  }
+
+  /* Màu nút trong Theme Trúc Thư */
+  body.theme-truc-thu .mobile-bottom-btn {
+    border-color: #D5C2A5 !important;
+    background: rgba(139, 37, 0, 0.06) !important;
+    color: #26160C !important;
+  }
+  body.theme-truc-thu .mobile-bottom-btn--next {
+    background: #8B2500 !important;
+    color: #FFFDF8 !important;
+    border-color: #8B2500 !important;
+  }
+  body.theme-truc-thu .mobile-bottom-btn--palette {
+    background: #FFFDF9 !important;
+    border-color: #D5C2A5 !important;
+    color: #8B2500 !important;
+  }
+  body.theme-truc-thu .mobile-bottom-btn:disabled {
+    opacity: 0.3 !important;
+    color: #8C7E75 !important;
+  }
+
+  /* 3. Hiệu Ứng Chớp Nhẹ Xác Nhận Chuyển Câu (Focus Flash) */
+  .swipe-highlight-flash {
+    animation: dclsCardPulse 0.4s ease-out;
+  }
+
+  @keyframes dclsCardPulse {
+    0% {
+      box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.6);
+      transform: scale(1.008);
+    }
+    100% {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      transform: scale(1);
+    }
+  }
+
+  body.theme-truc-thu .swipe-highlight-flash {
+    animation: dclsCardPulseLight 0.4s ease-out;
+  }
+
+  @keyframes dclsCardPulseLight {
+    0% {
+      box-shadow: 0 0 0 3px rgba(139, 37, 0, 0.5);
+      transform: scale(1.008);
+    }
+    100% {
+      box-shadow: 0 4px 14px rgba(139, 37, 0, 0.05);
+      transform: scale(1);
+    }
+  }
+}
+

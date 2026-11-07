@@ -2,6 +2,12 @@
 <html lang="vi">
 <head>
   <script src="site-music.js"></script>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="theme-truc-thu.css">
+  <link rel="stylesheet" href="su-quan-ao.css">
+  <script src="pwa-client.js"></script>
+  <script src="theme-controller.js"></script>
+  <script src="su-quan-ao.js"></script>
   <script src="firebase-config.js"></script>
   <script src="cloudinary-config.js"></script>
   <script src="quan-anh-hoi-admin-config.js"></script>
@@ -2358,7 +2364,16 @@
                         media = await taiMediaLen(tepMediaDangChon);
                     }
                     // Lưu lên Firestore
-                    const docRef = await addDoc(collection(db, "posts"), {
+                    // Mở khóa thẻ nhân vật Quần Anh Hội
+try {
+  const events = JSON.parse(localStorage.getItem('dcls_card_unlock_events_v1') || '[]');
+  if (!events.includes('forum_post_active')) {
+    events.push('forum_post_active');
+    localStorage.setItem('dcls_card_unlock_events_v1', JSON.stringify(events));
+  }
+} catch (_) {}
+
+const docRef = await addDoc(collection(db, "posts"), {
                         ...newPostData,
                         media,
                         createdAt: serverTimestamp()

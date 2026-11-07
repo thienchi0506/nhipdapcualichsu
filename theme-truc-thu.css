@@ -1,0 +1,393 @@
+/* =========================================================================
+   HỆ THỐNG GIAO DIỆN SÁNG: "TRÚC THƯ / GIẤY ĐIỆP" (PROMPT 8)
+   Nền giấy cổ ngà ấm áp · Mực nho đậm nét · Chu sa quý phái · Tương phản cao
+   ========================================================================= */
+
+/* 1. Nút Bấm Chuyển Đổi Theme (Thanh Điều Hướng & Đầu Trang) */
+.btn-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139, 37, 0, 0.12);
+  border: 1px solid var(--gold, #D4AF37);
+  color: var(--gold, #FFEAA7);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  font-family: inherit;
+}
+.btn-theme-toggle:hover {
+  background: var(--gold, #D4AF37);
+  color: var(--bg, #140c08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 37, 0, 0.25);
+}
+.btn-theme-toggle:active {
+  transform: scale(0.96);
+}
+
+/* 2. ĐỊNH NGHĨA BIẾN MÀU TẬP TRUNG CHO THEME "TRÚC THƯ / GIẤY ĐIỆP" */
+:root[data-theme="truc-thu"],
+body.theme-truc-thu {
+  /* Biến Thao Trường & Toàn Trang */
+  --bg: #F4EEDF;
+  --bg-darker: #EAE0CD;
+  --paper: #FFFDF9;
+  --paper-dark: #EFE6D5;
+  --paper-card: #FFFFFF;
+  --ink: #26160C;
+  --ink-light: #4A3222;
+  --ink-muted: #73543F;
+  --border: #D5C2A5;
+  --border-dark: #B89C76;
+  --gold: #8B2500;
+  --gold-light: #B22222;
+  --gold-dark: #5C1500;
+  --gold-bg: rgba(139, 37, 0, 0.08);
+  --red: #A93226;
+  --red-light: #FADBD8;
+  --green: #196F3D;
+  --green-light: #D4EFDF;
+  --blue: #1A5276;
+  --blue-light: #D4E6F1;
+
+  /* Biến Sảnh Chính */
+  --giay-co: #F5EFE0;
+  --giay-co-dam: #EBE1CE;
+  --do-ba-trau: #8B2500;
+  --do-hover: #A93226;
+  --vang-dong: #9C7A14;
+  --vang-hover: #B88F18;
+  --nau-den: #26160C;
+  --nen-toi: #ECE2CE;
+  --nen-card: #FFFDF8;
+  --chu-phu: #5C4332;
+}
+
+/* 3. ÁP DỤNG TRÊN THAO TRƯỜNG KHẢO THÍ */
+body.theme-truc-thu {
+  background-color: var(--bg) !important;
+  color: var(--ink) !important;
+}
+
+/* A. Header Thao Trường */
+body.theme-truc-thu .header {
+  background: rgba(245, 238, 223, 0.96) !important;
+  border-bottom: 2px solid #8B2500 !important;
+  box-shadow: 0 4px 16px rgba(139, 37, 0, 0.08) !important;
+}
+body.theme-truc-thu .header-titles h1 {
+  color: #8B2500 !important;
+  text-shadow: none !important;
+}
+body.theme-truc-thu .header-sub {
+  color: #5C4031 !important;
+}
+body.theme-truc-thu .home-btn {
+  background: rgba(139, 37, 0, 0.08) !important;
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .home-btn:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .badge-pill {
+  background: rgba(139, 37, 0, 0.06) !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .btn-bang-vang-badge {
+  background: rgba(139, 37, 0, 0.08) !important;
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .btn-theme-toggle {
+  background: rgba(139, 37, 0, 0.08) !important;
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .btn-theme-toggle:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+
+/* B. Thẻ Chế Độ Sảnh (Lobby Mode Cards) */
+body.theme-truc-thu .lobby-mode-btn {
+  background: linear-gradient(145deg, #FFFDF9 0%, #F5ECE0 100%) !important;
+  border-color: #D5C2A5 !important;
+  box-shadow: 0 4px 14px rgba(139, 37, 0, 0.06) !important;
+}
+body.theme-truc-thu .lobby-mode-btn:hover {
+  border-color: #8B2500 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(139, 37, 0, 0.12) !important;
+}
+body.theme-truc-thu .lobby-mode-btn.active {
+  background: linear-gradient(145deg, #FFF8EC 0%, #F2E4CD 100%) !important;
+  border-color: #8B2500 !important;
+  box-shadow: 0 6px 20px rgba(139, 37, 0, 0.15) !important;
+}
+body.theme-truc-thu .lobby-mode-icon {
+  background: rgba(139, 37, 0, 0.06) !important;
+  border-color: #D5C2A5 !important;
+}
+body.theme-truc-thu .lobby-mode-title {
+  color: #26160C !important;
+  text-shadow: none !important;
+}
+body.theme-truc-thu .lobby-mode-sub {
+  color: #5C4031 !important;
+}
+
+/* C. Thẻ Đề Thi & Danh Mục Khảo Thí */
+body.theme-truc-thu .exam-card,
+body.theme-truc-thu .catalog-card,
+body.theme-truc-thu .random-card {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+  box-shadow: 0 4px 16px rgba(139, 37, 0, 0.06) !important;
+}
+body.theme-truc-thu .exam-card:hover {
+  border-color: #8B2500 !important;
+  box-shadow: 0 6px 22px rgba(139, 37, 0, 0.12) !important;
+}
+body.theme-truc-thu .exam-card-title,
+body.theme-truc-thu .catalog-card-title {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .exam-card-desc,
+body.theme-truc-thu .catalog-card-desc {
+  color: #4A3222 !important;
+}
+
+/* D. Giao Diện Phòng Thi & Câu Hỏi (Test Screen) */
+body.theme-truc-thu .test-header,
+body.theme-truc-thu .test-bottom-bar,
+body.theme-truc-thu .palette-sidebar {
+  background: rgba(245, 238, 223, 0.96) !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .question-card {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+  box-shadow: 0 4px 14px rgba(139, 37, 0, 0.05) !important;
+}
+body.theme-truc-thu .question-title {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .question-text {
+  color: #26160C !important;
+}
+body.theme-truc-thu .option-btn {
+  background: #FAF6EE !important;
+  border-color: #D8C7AA !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .option-btn:hover {
+  background: #F0E6D2 !important;
+  border-color: #8B2500 !important;
+}
+body.theme-truc-thu .option-btn.selected {
+  background: #EAE0CD !important;
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+  font-weight: 700 !important;
+}
+body.theme-truc-thu .option-btn.correct {
+  background: #E8F8F0 !important;
+  border-color: #196F3D !important;
+  color: #196F3D !important;
+  font-weight: 700 !important;
+}
+body.theme-truc-thu .option-btn.wrong {
+  background: #FDEDEC !important;
+  border-color: #A93226 !important;
+  color: #A93226 !important;
+  font-weight: 700 !important;
+}
+body.theme-truc-thu .q-palette-btn {
+  background: #FAF6EE !important;
+  border-color: #D8C7AA !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .q-palette-btn.answered {
+  background: #EAE0CD !important;
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+  font-weight: 700 !important;
+}
+body.theme-truc-thu .q-palette-btn.current {
+  border-color: #8B2500 !important;
+  outline: 2px solid #8B2500 !important;
+}
+
+/* E. Sổ Tay Câu Sai & Biểu Đồ Năng Lực */
+body.theme-truc-thu .mistake-item,
+body.theme-truc-thu .analytics-stat-card,
+body.theme-truc-thu .analytics-chart-box,
+body.theme-truc-thu .analytics-table-box {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+  box-shadow: 0 4px 14px rgba(139, 37, 0, 0.05) !important;
+}
+body.theme-truc-thu .mistakes-filter-input,
+body.theme-truc-thu .analytics-select {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+
+/* F. Đấu Trí 1v1 */
+body.theme-truc-thu .battle-card,
+body.theme-truc-thu .battle-progress-box,
+body.theme-truc-thu .battle-result-card {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+  box-shadow: 0 4px 16px rgba(139, 37, 0, 0.08) !important;
+}
+body.theme-truc-thu .battle-card__title {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .battle-card__desc {
+  color: #4A3222 !important;
+}
+
+/* G. Bảng Vàng Danh Tướng & Thẻ Nhân Vật */
+body.theme-truc-thu .historical-card {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .historical-card.unlocked {
+  border-color: #8B2500 !important;
+}
+body.theme-truc-thu .bv-set-card {
+  background: #FAF6EE !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+
+/* 4. ÁP DỤNG TRÊN SẢNH CHÍNH (TRANG-CHINH.HTML) */
+body.theme-truc-thu .site-header-wrapper,
+body.theme-truc-thu .navbar {
+  background: rgba(245, 238, 223, 0.96) !important;
+  border-bottom: 2px solid #8B2500 !important;
+  box-shadow: 0 4px 16px rgba(139, 37, 0, 0.08) !important;
+}
+body.theme-truc-thu .navbar__brand {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .navbar__btn {
+  background: rgba(139, 37, 0, 0.06) !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .navbar__btn:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+
+/* Modals chung (Bảo tàng, Di tích, Tư liệu) */
+body.theme-truc-thu .antique-modal,
+body.theme-truc-thu .modal-dialog,
+body.theme-truc-thu .modal-content {
+  background: #FDFBF7 !important;
+  border-color: #8B2500 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .modal-card {
+  background: #FFFDF8 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .modal-card h4,
+body.theme-truc-thu .modal-card strong {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .modal-tab-btn {
+  background: #FAF6EE !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .modal-tab-btn.active {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+  border-color: #8B2500 !important;
+}
+
+/* Bản đồ Di sản (Heritage Map) */
+body.theme-truc-thu .heritage-map-container,
+body.theme-truc-thu .map-svg-card,
+body.theme-truc-thu .heritage-info-card {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .map-timeline-btn {
+  background: #FAF6EE !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .map-timeline-btn.active {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+
+/* Sử Quan Ảo trong Theme Sáng */
+body.theme-truc-thu .dcls-su-quan-modal {
+  background: #FDFBF7 !important;
+  border-color: #8B2500 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .dcls-sq-header {
+  background: linear-gradient(90deg, #EFE4D0, #F5ECE0, #EFE4D0) !important;
+  border-bottom-color: #D5C2A5 !important;
+}
+body.theme-truc-thu .dcls-sq-header h3 {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .dcls-sq-header-sub {
+  color: #5C4031 !important;
+}
+body.theme-truc-thu .dcls-sq-notice {
+  background: rgba(139, 37, 0, 0.08) !important;
+  color: #4A3222 !important;
+}
+body.theme-truc-thu .dcls-sq-chip {
+  background: #FAF6EE !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .dcls-sq-chip:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .dcls-sq-msg.assistant .dcls-sq-msg-bubble {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .dcls-sq-msg.user .dcls-sq-msg-bubble {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .dcls-sq-footer {
+  background: #F5EFE0 !important;
+  border-top-color: #D5C2A5 !important;
+}
+body.theme-truc-thu .dcls-sq-input {
+  background: #FFFDF9 !important;
+  border-color: #D5C2A5 !important;
+  color: #26160C !important;
+}
+

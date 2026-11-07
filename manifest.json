@@ -1,0 +1,65 @@
+{
+  "id": "dcls-nhipdapcualichsu-pwa",
+  "name": "Dấu Chân Lịch Sử — Hào Khí Ngàn Năm",
+  "short_name": "Dấu Chân Sử",
+  "description": "Nền tảng học tập, ôn luyện 47+ bộ đề thi trắc nghiệm và trải nghiệm di sản lịch sử Việt Nam trực quan",
+  "start_url": "./trang-chinh.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B0806",
+  "theme_color": "#8B2500",
+  "lang": "vi",
+  "dir": "ltr",
+  "categories": ["education", "history", "books"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Thao Trường Khảo Thí",
+      "short_name": "Thao Trường",
+      "description": "Luyện tập 47 bộ đề thi THPT & Sổ tay câu sai",
+      "url": "./thao-truong.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tàng Thư Các Khảo Cứu",
+      "short_name": "Tàng Thư Các",
+      "description": "Kho tàng bảo vật và tư liệu lịch sử dân tộc",
+      "url": "./tang-thu-cac.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sảnh Chính Di Sản",
+      "short_name": "Sảnh Chính",
+      "description": "Bản đồ di sản và tổng quan lịch sử Việt Nam",
+      "url": "./trang-chinh.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
+

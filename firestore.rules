@@ -144,5 +144,48 @@ service cloud.firestore {
 
       allow delete: if false;
     }
+match /battleRooms/{roomId} {
+      allow read: if request.auth != null && (
+        resource == null
+        || resource.data.player1.uid == request.auth.uid
+        || (resource.data.player2 != null && resource.data.player2.uid == request.auth.uid)
+        || resource.data.status == 'waiting'
+      );
+
+      allow create: if request.auth != null
+        && request.resource.data.roomCode is string
+        && request.resource.data.roomCode.size() == 6
+        && request.resource.data.status == 'waiting'
+        && request.resource.data.player1.uid == request.auth.uid
+        && request.resource.data.player2.uid == null
+        && request.resource.data.questionIds is list
+        && request.resource.data.questionIds.size() == 10
+        && request.resource.data.createdAt == request.time;
+
+      allow update: if request.auth != null && (
+        (resource.data.status == 'waiting'
+          && resource.data.player2.uid == null
+          && request.resource.data.player2.uid == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['player2', 'status']))
+
+        || (resource.data.player1.uid == request.auth.uid
+          && resource.data.status in ['ready', 'waiting']
+          && request.resource.data.status == 'in_progress'
+          && request.resource.data.startedAt == request.time
+          && request.resource.data.expiresAt == request.time + duration.value(180, 's'))
+
+        || (resource.data.player1.uid == request.auth.uid
+          && resource.data.status == 'in_progress'
+          && request.time <= resource.data.expiresAt
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['player1', 'status', 'winnerUid']))
+
+        || (resource.data.player2.uid == request.auth.uid
+          && resource.data.status == 'in_progress'
+          && request.time <= resource.data.expiresAt
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['player2', 'status', 'winnerUid']))
+      );
+
+      allow delete: if false;
+    }
   }
 }

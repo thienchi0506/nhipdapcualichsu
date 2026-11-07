@@ -18,6 +18,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>Dấu Chân Lịch Sử — Sảnh Chính</title>
 
+    <!-- Progressive Web App (PWA) Meta & Links (Prompt 6) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8B2500">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dấu Chân Sử">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+    <script src="pwa-client.js"></script>
+    <!-- Giao diện sáng Trúc Thư / Giấy Điệp (Prompt 8) -->
+    <link rel="stylesheet" href="theme-truc-thu.css">
+    <script src="theme-controller.js"></script>
+    <!-- Trợ lý Lịch Sử Sử Quan Ảo (Prompt 7) -->
+    <link rel="stylesheet" href="su-quan-ao.css">
+    <script src="su-quan-ao.js"></script>
+
     <!-- Font chữ từ Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -5199,7 +5217,283 @@
         :root[data-theme="dark"] .web-feedback-item h3 { color:#F3D981; }
         @media (max-width:520px) { .web-feedback-overlay { padding-left:10px; padding-right:10px; } .web-feedback-dialog { max-height:90dvh; border-radius:12px; } .web-feedback-actions { flex-direction:column; } .web-feedback-actions button { width:100%; } }
 
-    </style>
+    
+    /* ========================================================================= */
+    /* PROMPT 5: BẢN ĐỒ DI SẢN & TRỤC THỜI GIAN TƯƠNG TÁC (HERITAGE MAP)         */
+    /* ========================================================================= */
+    .heritage-map-container {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    /* TRỤC THỜI GIAN DI SẢN (TIMELINE PILLS) */
+    .map-timeline-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 2px 10px 2px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      border-bottom: 1.5px solid rgba(197, 155, 39, 0.3);
+    }
+    .map-timeline-bar::-webkit-scrollbar { display: none; }
+
+    .map-timeline-btn {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(197, 155, 39, 0.4);
+      background: rgba(38, 24, 18, 0.85);
+      color: #E8D5B0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .map-timeline-btn:hover {
+      background: rgba(123, 30, 30, 0.6);
+      border-color: var(--vang-dong);
+      color: #fff;
+    }
+    .map-timeline-btn.active {
+      background: linear-gradient(135deg, #7B1E1E 0%, #4A0E0E 100%);
+      border-color: var(--vang-dong);
+      color: #FFF8E7;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.45);
+    }
+
+    /* BỐ CỤC BẢN ĐỒ & CHI TIẾT ĐỊA DANH */
+    .heritage-map-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .heritage-map-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* KHUNG BẢN ĐỒ SVG */
+    .map-svg-card {
+      background: radial-gradient(circle at center, #261812 0%, #150B07 100%);
+      border: 2px solid rgba(197, 155, 39, 0.4);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .map-svg-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      color: rgba(232, 213, 176, 0.75);
+    }
+    .map-svg-wrapper {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+    }
+    .vietnam-map-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    /* ĐỊNH DẠNG ĐƯỜNG BẢN ĐỒ & ĐỊA DANH */
+    .vn-land-path {
+      fill: #3D261A;
+      stroke: var(--vang-dong);
+      stroke-width: 2.2;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.25));
+    }
+    .vn-island {
+      fill: #D4AF37;
+      stroke: #FFE1A0;
+      stroke-width: 1.5;
+    }
+    .vn-sea-label {
+      font-size: 11px;
+      font-family: 'Playfair Display', serif;
+      fill: rgba(212, 175, 55, 0.6);
+      font-style: italic;
+      letter-spacing: 2px;
+    }
+
+    /* MARKER ĐỊA DANH DI TÍCH */
+    .heritage-marker {
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .heritage-marker-ring {
+      fill: rgba(212, 175, 55, 0.25);
+      stroke: var(--vang-dong);
+      stroke-width: 1.5;
+      animation: markerPulse 2.5s infinite;
+    }
+    .heritage-marker-dot {
+      fill: #7B1E1E;
+      stroke: #fff;
+      stroke-width: 2;
+      transition: all 0.2s;
+    }
+    .heritage-marker:hover .heritage-marker-dot,
+    .heritage-marker.active .heritage-marker-dot {
+      fill: var(--vang-dong);
+      r: 8;
+      stroke: #7B1E1E;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+    }
+    .heritage-marker.dimmed {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .heritage-marker-text {
+      font-size: 10px;
+      font-family: 'Noto Serif', serif;
+      fill: #FFF8E7;
+      font-weight: 700;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+      pointer-events: none;
+    }
+    @keyframes markerPulse {
+      0% { r: 5; opacity: 0.8; }
+      50% { r: 12; opacity: 0.2; }
+      100% { r: 5; opacity: 0.8; }
+    }
+
+    /* CỘT CHI TIẾT DI TÍCH & DANH SÁCH THAY THẾ */
+    .heritage-details-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .heritage-info-card {
+      background: linear-gradient(150deg, rgba(38, 24, 18, 0.95) 0%, rgba(20, 12, 8, 0.98) 100%);
+      border: 1.5px solid var(--vang-dong);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .heritage-info-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(197, 155, 39, 0.35);
+    }
+    .heritage-info-tag {
+      font-size: 0.7rem;
+      color: var(--vang-dong);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+    .heritage-info-title {
+      font-size: 1.2rem;
+      color: #fff8e7;
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+    }
+    .heritage-info-loc {
+      font-size: 0.78rem;
+      color: rgba(232, 213, 176, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .heritage-info-desc {
+      font-size: 0.82rem;
+      color: #E8D5B0;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .heritage-action-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      border-top: 1px solid rgba(197, 155, 39, 0.2);
+      padding-top: 12px;
+    }
+    .heritage-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .heritage-link-btn.lesson {
+      background: rgba(123, 30, 30, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #FFF3D6;
+    }
+    .heritage-link-btn.exam {
+      background: rgba(40, 167, 69, 0.25);
+      border: 1px solid rgba(40, 167, 69, 0.6);
+      color: #8ce196;
+    }
+    .heritage-link-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.2);
+    }
+
+    /* DANH SÁCH DI TÍCH KHẢ THI (ACCESSIBLE LIST) */
+    .heritage-compact-list {
+      background: rgba(20, 12, 8, 0.75);
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      border-radius: 14px;
+      padding: 14px;
+      max-height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--vang-dong) rgba(20, 12, 8, 0.5);
+    }
+    .heritage-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 10px;
+      background: rgba(38, 24, 18, 0.6);
+      border: 1px solid rgba(197, 155, 39, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: #E8D5B0;
+      transition: all 0.2s;
+    }
+    .heritage-list-item:hover,
+    .heritage-list-item.active {
+      background: rgba(123, 30, 30, 0.4);
+      border-color: var(--vang-dong);
+      color: #fff;
+    }
+
+</style>
 </head>
 <body>
     <!-- Kiểm tra tiếp đất êm dịu từ chuyến bay Chim Lạc -->
@@ -5230,6 +5524,15 @@
             <div class="navbar__actions">
                 <button class="navbar__btn navbar__btn--ghost" id="btn-toggle-music" onclick="xuLyClickNutNhac(event)" ondblclick="chuyenBaiNhacNgauNhien(event)" title="Click 1 lần: Bật/Tắt | Click 2 lần: Đổi bài ngẫu nhiên" aria-label="Bật hoặc tắt nhạc nền, click 2 lần liên tiếp để đổi bài">
                     <span class="nav-music-icon">🎵</span> <span id="trang-thai-nhac" class="nav-music-text">Nhạc Nền</span>
+                </button>
+                <button type="button" class="navbar__btn btn-pwa-install" id="btn-pwa-install-nav" onclick="caiDatDclsPwa()" title="Cài đặt Dấu Chân Lịch Sử làm ứng dụng PWA trên máy" aria-label="Cài đặt ứng dụng">
+                    📲 <span class="nav-install-text">Cài đặt App</span>
+                </button>
+                <button type="button" class="navbar__btn btn-theme-toggle" id="btn-theme-toggle-nav" onclick="toggleDclsTheme()" title="Chuyển đổi giao diện Sáng (Trúc Thư) / Tối (Mực Cổ)" aria-label="Chuyển đổi giao diện">
+                    <span class="theme-toggle-icon">📜</span> <span class="theme-toggle-text">Trúc Thư</span>
+                </button>
+                <button type="button" class="navbar__btn navbar__btn--su-quan" id="btn-open-su-quan-nav" onclick="moModalSuQuanAo()" title="Trợ lý Lịch Sử — Sử Quan Ảo" aria-label="Mở Sử Quan Ảo" style="border: 1px solid #D4AF37; background: rgba(139,37,0,0.3); color: #FFEAA7;">
+                    📜 <span class="nav-suquan-text">Sử Quan Ảo</span>
                 </button>
                 <a href="quan-anh-hoi.html" class="navbar__btn navbar__btn--quan-anh" id="btn-nav-quan-anh-hoi" title="Quần Anh Hội — Diễn đàn & Đàm luận Lịch sử" aria-label="Đến Quần Anh Hội - Diễn đàn đàm luận lịch sử">
                     <span class="nav-quan-anh-icon">⚔️</span><span class="nav-quan-anh-text"> Quần Anh Hội</span>
@@ -9695,6 +9998,9 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             if (tabConfigs[target]) {
                 capNhatBreadcrumb('Trang chủ > ' + tabConfigs[target].bc);
             }
+            if (target === 'map' && typeof capNhatGiaoDienBanDoDiTich === 'function') {
+                setTimeout(capNhatGiaoDienBanDoDiTich, 50);
+            }
         };
 
         
@@ -9726,13 +10032,14 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                 if (event.stopPropagation) event.stopPropagation();
             }
             var tabConfigs = {
+                'map':         { wrap: 'ditich-tab-map',                 btn: 'btn-tab-ditich-map',         title: '🗺️ Bản Đồ Di Sản & Trục Thời Gian Lịch Sử',                  bc: 'Di tích > Bản đồ di sản' },
+                'grid':        { wrap: 'ditich-tab-grid',                btn: 'btn-tab-ditich-grid',        title: '🏰 Quần Thể Di Tích & Danh Thắng Trọng Điểm',                 bc: 'Di tích > Danh mục' },
                 'thanglong':   { wrap: 'wrapper-tab-ditich-thanglong',   btn: 'btn-tab-ditich-thanglong',   title: '🏰 Hoàng Thành Thăng Long — Di Sản Văn Hóa Thế Giới UNESCO', bc: 'Di tích > Hoàng Thành Thăng Long' },
                 'coloa':       { wrap: 'wrapper-tab-ditich-coloa',       btn: 'btn-tab-ditich-coloa',       title: '🏹 Khu Di Tích Cổ Loa — Kinh Đô Cổ Kính',                    bc: 'Di tích > Cổ Loa' },
                 'bachdang':    { wrap: 'wrapper-tab-ditich-bachdang',    btn: 'btn-tab-ditich-bachdang',    title: '🌊 Quần Thể Bạch Đằng Giang — Chiến Địa Thủy Chiến',         bc: 'Di tích > Bạch Đằng Giang' },
                 'nhunguyet':   { wrap: 'wrapper-tab-ditich-nhunguyet',   btn: 'btn-tab-ditich-nhunguyet',   title: '🛡️ Phòng Tuyến Sông Như Nguyệt — Phòng Tuyến Vệ Quốc',       bc: 'Di tích > Sông Như Nguyệt' },
                 'hue':         { wrap: 'wrapper-tab-ditich-hue',         btn: 'btn-tab-ditich-hue',         title: '⛩️ Quần Thể Cố Đô Huế — Di Sản Thế Giới UNESCO',            bc: 'Di tích > Cố Đô Huế' },
-                'dienbienphu': { wrap: 'wrapper-tab-ditich-dienbienphu', btn: 'btn-tab-ditich-dienbienphu', title: '⭐ Chiến Trường Điện Biên Phủ — Di Tích Kháng Chiến Quốc Gia', bc: 'Di tích > Điện Biên Phủ' },
-                'grid':        { wrap: 'ditich-tab-grid',                btn: 'btn-tab-ditich-grid',        title: '🏰 Quần Thể Di Tích & Danh Thắng Trọng Điểm', bc: 'Di tích' }
+                'dienbienphu': { wrap: 'wrapper-tab-ditich-dienbienphu', btn: 'btn-tab-ditich-dienbienphu', title: '⭐ Chiến Trường Điện Biên Phủ — Di Tích Kháng Chiến Quốc Gia', bc: 'Di tích > Điện Biên Phủ' }
             };
 
             var target = tabId;
@@ -9771,11 +10078,397 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             }
         };
 
-        function renderDanhSachDiTichHtml(activeTab) {
+        
+// =========================================================================
+// BẢN ĐỒ DI SẢN & TRỤC THỜI GIAN TƯƠNG TÁC (HERITAGE MAP - PROMPT 5)
+// =========================================================================
+
+// 1. Cấu hình 6 Mốc Lớn Trên Trục Thời Gian
+const MAP_TIMELINE_PERIODS = [
+  { key: 'all', name: 'Toàn Bộ Di Sản (9 Địa Danh)' },
+  { key: 'co-dai', name: '1. Khởi Dựng & Cổ Đại (Cổ Loa)' },
+  { key: 'tu-chu', name: '2. Bắc Thuộc & Tự Chủ (Bạch Đằng 938)' },
+  { key: 'dai-viet', name: '3. Kỷ Nguyên Đại Việt (Thăng Long, Chi Lăng, Huế)' },
+  { key: 'chong-phap', name: '4. Kháng Chiến Chống Pháp (Điện Biên Phủ)' },
+  { key: 'chong-my', name: '5. Kháng Chiến Chống Mỹ (Củ Chi)' },
+  { key: 'bien-dao', name: '6. Chủ Quyền Biển Đảo (Hoàng Sa & Trường Sa)' }
+];
+
+// 2. Cở Sở Dữ Liệu 9 Đại Di Tích Quốc Gia & Chủ Quyền
+const DANH_SACH_DI_TICH_BAN_DO = [
+  {
+    id: 'dien-bien-phu',
+    ten: 'Chiến Trường Điện Biên Phủ',
+    xepHang: 'Di tích Quốc gia Đặc biệt',
+    diaDiem: 'Tỉnh Điện Biên (Tây Bắc Bộ)',
+    thoiKy: 'Năm 1954 (Kháng chiến chống thực dân Pháp)',
+    periodKey: 'chong-phap',
+    mapX: 130,
+    mapY: 130,
+    labelPos: 'left',
+    hinhAnh: 'assets/images/di-tich/image6.jpg',
+    suKien: 'Chiến dịch Điện Biên Phủ 56 ngày đêm «khoét núi, ngủ hầm, mưa dầm, cơm vắt», đập tan tập đoàn cứ điểm mạnh nhất Đông Dương của thực dân Pháp, đưa đến việc ký kết Hiệp định Giơ-ne-vơ 1954 lập lại hòa bình ở miền Bắc.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Bảo tàng Chiến thắng Lịch sử Điện Biên Phủ & Bộ VHTTDL'
+  },
+  {
+    id: 'chi-lang',
+    ten: 'Ải Chi Lăng',
+    xepHang: 'Di tích Quốc gia Đặc biệt',
+    diaDiem: 'Huyện Chi Lăng, Tỉnh Lạng Sơn',
+    thoiKy: 'Thế kỷ X – XV (Đặc biệt: Trận Chi Lăng - Xương Giang 1427)',
+    periodKey: 'dai-viet',
+    mapX: 255,
+    mapY: 125,
+    labelPos: 'right',
+    hinhAnh: 'assets/images/di-tich/image4.jpg',
+    suKien: 'Cửa ải yết hầu quân sự hiểm trở bậc nhất phương Bắc, nơi nghĩa quân Lam Sơn phục kích chém chết Liễu Thăng năm 1427, làm tan rã hoàn toàn đạo viện binh 10 vạn quân Minh, kết thúc 20 năm đô hộ.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Cục Di sản Văn hóa - Bộ Văn hóa, Thể thao và Du lịch'
+  },
+  {
+    id: 'co-loa',
+    ten: 'Khu Di Tích Cổ Loa',
+    xepHang: 'Di tích Quốc gia Đặc biệt',
+    diaDiem: 'Huyện Đông Anh, Thành phố Hà Nội',
+    thoiKy: 'Thế kỷ III TCN (Nhà nước Âu Lạc thời An Dương Vương)',
+    periodKey: 'co-dai',
+    mapX: 228,
+    mapY: 155,
+    labelPos: 'left',
+    hinhAnh: 'assets/images/di-tich/image2.jpg',
+    suKien: 'Kinh đô cổ kính của nhà nước Âu Lạc với kỹ thuật quân sự đắp thành xoáy trôn ốc 9 vòng và phát minh nỏ thần liên châu, mũi tên đồng Cổ Loa độc nhất vô nhị trong lịch sử cổ đại phương Đông.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Ban Quản lý Khu di tích Cổ Loa'
+  },
+  {
+    id: 'thang-long',
+    ten: 'Hoàng Thành Thăng Long',
+    xepHang: 'Di sản Văn hóa Thế giới UNESCO (2010)',
+    diaDiem: 'Quận Ba Đình, Thành phố Hà Nội',
+    thoiKy: '1010 – 1789 (Triều Lý, Trần, Lê, Mạc, Nguyễn)',
+    periodKey: 'dai-viet',
+    mapX: 218,
+    mapY: 172,
+    labelPos: 'left',
+    hinhAnh: 'assets/images/di-tich/image1.jpg',
+    suKien: 'Trung tâm quyền lực chính trị và văn hóa liên tục suốt 13 thế kỷ của các vương triều Đại Việt. Nơi lưu giữ Đoan Môn, Điện Kính Thiên, Kỳ Đài và tầng tầng lớp lớp di tích khảo cổ học vô giá ngàn năm.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Trung tâm Bảo tồn Di sản Thăng Long - Hà Nội (UNESCO)'
+  },
+  {
+    id: 'bach-dang',
+    ten: 'Quần Thể Di Tích Bạch Đằng Giang',
+    xepHang: 'Di tích Quốc gia Đặc biệt',
+    diaDiem: 'Hải Phòng & Quảng Ninh',
+    thoiKy: 'Năm 938, 981, 1288 (Thời Ngô Quyền, Lê Hoàn & Trần Hưng Đạo)',
+    periodKey: 'tu-chu',
+    mapX: 265,
+    mapY: 175,
+    labelPos: 'right',
+    hinhAnh: 'assets/images/di-tich/image3.jpg',
+    suKien: 'Dòng sông địa linh nhân kiệt với 3 lần đại thắng thủy chiến lẫy lừng bằng bãi cọc ngầm bịt sắt, đánh tan quân Nam Hán (938), quân Tống (981) và quân Nguyên Mông (1288).',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Khu Di tích Lịch sử Bạch Đằng Giang & Cục Di sản Văn hóa'
+  },
+  {
+    id: 'nhu-nguyet',
+    ten: 'Phòng Tuyến Sông Như Nguyệt',
+    xepHang: 'Di tích Lịch sử Quốc gia',
+    diaDiem: 'Tỉnh Bắc Ninh (Sông Cầu)',
+    thoiKy: 'Năm 1077 (Kháng chiến chống Tống thời Lý)',
+    periodKey: 'dai-viet',
+    mapX: 242,
+    mapY: 162,
+    labelPos: 'right',
+    hinhAnh: 'assets/images/di-tich/image4.jpg',
+    suKien: 'Phòng tuyến đắp lũy cắm chông dọc bờ nam sông Như Nguyệt của Thái úy Lý Thường Kiệt chặn đứng 30 vạn quân Tống, nơi vang lên bài thơ thần «Nam Quốc Sơn Hà» – bản Tuyên ngôn Độc lập đầu tiên.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Sở Văn hóa, Thể thao và Du lịch Bắc Ninh'
+  },
+  {
+    id: 'hue',
+    ten: 'Quần Thể Di Tích Cố Đô Huế',
+    xepHang: 'Di sản Văn hóa Thế giới UNESCO (1993)',
+    diaDiem: 'Tỉnh Thừa Thiên Huế (Bắc Trung Bộ)',
+    thoiKy: '1802 – 1945 (Vương triều Nguyễn)',
+    periodKey: 'dai-viet',
+    mapX: 285,
+    mapY: 345,
+    labelPos: 'left',
+    hinhAnh: 'assets/images/di-tich/image5.jpg',
+    suKien: 'Kinh đô cuối cùng của nền quân chủ phong kiến Việt Nam với hệ thống thành quách đồ sộ Kinh thành, Hoàng thành, Tử Cấm Thành, đàn Nam Giao và lăng tẩm các vị vua triều Nguyễn.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Trung tâm Bảo tồn Di tích Cố đô Huế (UNESCO)'
+  },
+  {
+    id: 'cu-chi',
+    ten: 'Địa Đạo Củ Chi',
+    xepHang: 'Di tích Quốc gia Đặc biệt',
+    diaDiem: 'Huyện Củ Chi, TP. Hồ Chí Minh (Nam Bộ)',
+    thoiKy: '1946 – 1975 (Kháng chiến chống Pháp và chống Mỹ)',
+    periodKey: 'chong-my',
+    mapX: 235,
+    mapY: 575,
+    labelPos: 'left',
+    hinhAnh: 'assets/images/di-tich/image6.jpg',
+    suKien: '«Thành đồng đất thép» với hệ thống công sự ngầm trong lòng đất dài hơn 250km nhiều tầng bậc, biểu tượng rực rỡ của thế trận chiến tranh nhân dân kiên cường chống đế quốc Mỹ.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Ban Quản lý Khu Di tích Lịch sử Địa đạo Củ Chi'
+  },
+  {
+    id: 'hoang-sa-truong-sa',
+    ten: 'Quần Đảo Hoàng Sa & Trường Sa',
+    xepHang: 'Chủ Quyền Bất Khả Xâm Phạm Của Nước CHXHCN Việt Nam',
+    diaDiem: 'Thành phố Đà Nẵng & Tỉnh Khánh Hòa, Biển Đông',
+    thoiKy: 'Thế kỷ XVII – Nay (Từ Đội Hoàng Sa triều Nguyễn đến nay)',
+    periodKey: 'bien-dao',
+    mapX: 375,
+    mapY: 480,
+    labelPos: 'right',
+    hinhAnh: 'assets/images/di-tich/image1.jpg',
+    suKien: 'Bằng chứng lịch sử và căn cứ pháp lý vững chắc khẳng định chủ quyền biển đảo thiêng liêng của Việt Nam: Châu bản Triều Nguyễn (UNESCO), Đại Nam Nhất Thống Toàn Đồ (1838) và các bia chủ quyền quốc gia.',
+    baiHocUrl: 'tang-thu-cac.html',
+    deThiUrl: 'thao-truong.html',
+    nguon: 'Ủy ban Biên giới Quốc gia - Bộ Ngoại giao Việt Nam'
+  }
+];
+
+let activeHeritageId = 'thang-long';
+let activeMapPeriod = 'all';
+
+// 3. Render Giao Diện Bản Đồ Di Sản & Trục Thời Gian
+function renderHeritageMapSectionHtml() {
+  const activeItem = DANH_SACH_DI_TICH_BAN_DO.find(d => d.id === activeHeritageId) || DANH_SACH_DI_TICH_BAN_DO[0];
+
+  // Timeline pills
+  const timelineHtml = `
+    <div class="map-timeline-bar" role="tablist" aria-label="Trục thời gian các mốc di sản lịch sử">
+      ${MAP_TIMELINE_PERIODS.map(p => `
+        <button type="button" 
+                class="map-timeline-btn ${activeMapPeriod === p.key ? 'active' : ''}" 
+                onclick="chonMocThoiGianBanDo('${p.key}')" 
+                role="tab" 
+                aria-selected="${activeMapPeriod === p.key}">
+          ${p.name}
+        </button>
+      `).join('')}
+    </div>
+  `;
+
+  // SVG Markers
+  const markersHtml = DANH_SACH_DI_TICH_BAN_DO.map(item => {
+    const isVisible = (activeMapPeriod === 'all' || item.periodKey === activeMapPeriod);
+    const isSelected = (item.id === activeHeritageId);
+    const textAnchor = item.labelPos === 'right' ? 'start' : 'end';
+    const textDx = item.labelPos === 'right' ? 12 : -12;
+
+    return `
+      <g class="heritage-marker ${isSelected ? 'active' : ''} ${!isVisible ? 'dimmed' : ''}" 
+         onclick="chonDiaDanhBanDo('${item.id}')"
+         role="button"
+         tabindex="0"
+         aria-label="${escapeExamHtml(item.ten)}">
+        <circle cx="${item.mapX}" cy="${item.mapY}" r="10" class="heritage-marker-ring" />
+        <circle cx="${item.mapX}" cy="${item.mapY}" r="5.5" class="heritage-marker-dot" />
+        <text x="${item.mapX + textDx}" y="${item.mapY + 3.5}" class="heritage-marker-text" text-anchor="${textAnchor}">
+          ${item.ten.split(' ')[0]} ${item.ten.split(' ')[1] || ''}
+        </text>
+      </g>
+    `;
+  }).join('');
+
+  // SVG Vietnam Map Template (Clean, Lightweight Vector Geometry)
+  const mapSvgHtml = `
+    <div class="map-svg-card">
+      <div class="map-svg-header">
+        <span>🗺️ Tọa độ di sản văn hóa Việt Nam</span>
+        <span style="color: var(--vang-dong); font-weight: 700;">Biển Đông thiêng liêng</span>
+      </div>
+
+      <div class="map-svg-wrapper">
+        <svg viewBox="0 0 460 680" class="vietnam-map-svg" role="img" aria-label="Bản đồ di sản và địa danh lịch sử Việt Nam">
+          <defs>
+            <linearGradient id="seaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1A2A38" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#0B131B" stop-opacity="0.6"/>
+            </linearGradient>
+            <filter id="mapShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+
+          <!-- Vùng biển nền -->
+          <rect x="0" y="0" width="460" height="680" fill="url(#seaGrad)" rx="12" />
+
+          <!-- Đường lục địa hình chữ S Việt Nam cách điệu chính xác -->
+          <path class="vn-land-path" filter="url(#mapShadow)" d="
+            M 120 100 
+            Q 180 85, 270 95 
+            Q 290 120, 270 170 
+            Q 240 190, 240 230 
+            Q 250 280, 280 320 
+            Q 310 380, 310 430 
+            Q 320 480, 290 530 
+            Q 260 580, 220 620 
+            Q 180 640, 160 610 
+            Q 160 580, 190 560 
+            Q 210 540, 220 500 
+            Q 240 450, 220 410 
+            Q 210 360, 230 310 
+            Q 230 250, 200 210 
+            Q 170 170, 130 150 
+            Z
+          " />
+
+          <!-- Chữ BIỂN ĐÔNG VIỆT NAM -->
+          <text x="320" y="320" class="vn-sea-label" transform="rotate(35 320,320)">BIỂN ĐÔNG VIỆT NAM</text>
+
+          <!-- QUẦN ĐẢO HOÀNG SA (VIỆT NAM) -->
+          <g class="vn-island" title="Quần đảo Hoàng Sa (Việt Nam)">
+            <circle cx="370" cy="285" r="4" />
+            <circle cx="382" cy="278" r="3" />
+            <circle cx="365" cy="296" r="3.5" />
+            <circle cx="378" cy="292" r="2.5" />
+            <text x="392" y="290" fill="#FFE1A0" font-size="9" font-weight="700" font-family="'Noto Serif', serif">QĐ. Hoàng Sa</text>
+          </g>
+
+          <!-- QUẦN ĐẢO TRƯỜNG SA (VIỆT NAM) -->
+          <g class="vn-island" title="Quần đảo Trường Sa (Việt Nam)">
+            <circle cx="360" cy="510" r="4.5" />
+            <circle cx="375" cy="495" r="3" />
+            <circle cx="385" cy="520" r="3.5" />
+            <circle cx="350" cy="535" r="3" />
+            <circle cx="370" cy="545" r="4" />
+            <circle cx="395" cy="550" r="3.2" />
+            <text x="330" y="565" fill="#FFE1A0" font-size="9" font-weight="700" font-family="'Noto Serif', serif">QĐ. Trường Sa (Việt Nam)</text>
+          </g>
+
+          <!-- ĐẢO PHÚ QUỐC -->
+          <g class="vn-island" title="Đảo Phú Quốc">
+            <ellipse cx="155" cy="615" rx="5" ry="8" transform="rotate(-20 155,615)" />
+            <text x="120" y="618" fill="#FFE1A0" font-size="8" font-family="sans-serif">Đ. Phú Quốc</text>
+          </g>
+
+          <!-- CÔN ĐẢO -->
+          <g class="vn-island" title="Côn Đảo">
+            <ellipse cx="230" cy="635" rx="4" ry="3" />
+            <text x="240" y="638" fill="#FFE1A0" font-size="8" font-family="sans-serif">Côn Đảo</text>
+          </g>
+
+          <!-- CÁC MARKER ĐỊA DANH DI TÍCH -->
+          ${markersHtml}
+        </svg>
+      </div>
+    </div>
+  `;
+
+  // Right column: Detailed info card + Accessible List
+  const detailsHtml = `
+    <div class="heritage-details-column">
+      <!-- THẺ THÔNG TIN ĐỊA DANH ĐANG CHỌN -->
+      <div class="heritage-info-card">
+        <img src="${activeItem.hinhAnh}" 
+             alt="${activeItem.ten}" 
+             class="heritage-info-thumb" 
+             loading="lazy" 
+             onerror="this.onerror=null; this.src='assets/images/di-tich/image1.jpg';" />
+
+        <div>
+          <span class="heritage-info-tag">🏛️ ${activeItem.xepHang}</span>
+          <h3 class="heritage-info-title">${activeItem.ten}</h3>
+          <div class="heritage-info-loc">
+            <span>📍 ${activeItem.diaDiem}</span> · <span>⏱️ ${activeItem.thoiKy}</span>
+          </div>
+        </div>
+
+        <p class="heritage-info-desc">
+          ${activeItem.suKien}
+        </p>
+
+        <!-- LIÊN KẾT HỌC TẬP TÀNG THƯ CÁC & THAO TRƯỜNG -->
+        <div class="heritage-action-links">
+          <a href="${activeItem.baiHocUrl}" class="heritage-link-btn lesson" title="Xem bài học chi tiết">
+            📖 Bài Học Tàng Thư Các →
+          </a>
+          <a href="${activeItem.deThiUrl}" class="heritage-link-btn exam" title="Luyện đề trắc nghiệm liên quan">
+            🎯 Luyện Đề Thao Trường →
+          </a>
+        </div>
+
+        <div style="font-size: 0.7rem; color: rgba(232, 213, 176, 0.55); border-top: 1px dashed rgba(197, 155, 39, 0.2); padding-top: 8px;">
+          📚 Nguồn sử liệu: <em>${activeItem.nguon}</em>
+        </div>
+      </div>
+
+      <!-- DANH SÁCH DI TÍCH DỄ TIẾP CẬN (ACCESSIBLE LIST) -->
+      <div>
+        <div style="font-size: 0.82rem; font-weight: 700; color: var(--vang-dong); margin-bottom: 6px;">
+          📋 Danh Sách Địa Danh Di Tích (${DANH_SACH_DI_TICH_BAN_DO.length} Điểm):
+        </div>
+        <div class="heritage-compact-list" role="list">
+          ${DANH_SACH_DI_TICH_BAN_DO.map(d => {
+            const isSel = (d.id === activeHeritageId);
+            return `
+              <div class="heritage-list-item ${isSel ? 'active' : ''}" 
+                   onclick="chonDiaDanhBanDo('${d.id}')"
+                   role="listitem"
+                   tabindex="0">
+                <span><strong>${d.ten}</strong> <small style="color: rgba(232,213,176,0.65);">(${d.diaDiem})</small></span>
+                <span style="font-size: 0.72rem; color: var(--vang-dong); font-weight: 700;">${isSel ? 'Đang chọn' : 'Xem →'}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  return `
+    <div class="heritage-map-container">
+      ${timelineHtml}
+      <div class="heritage-map-layout">
+        ${mapSvgHtml}
+        ${detailsHtml}
+      </div>
+    </div>
+  `;
+}
+
+function chonMocThoiGianBanDo(periodKey) {
+  activeMapPeriod = periodKey;
+  // Tự động chọn địa danh đầu tiên thỏa mãn
+  const matched = DANH_SACH_DI_TICH_BAN_DO.find(d => periodKey === 'all' || d.periodKey === periodKey);
+  if (matched) activeHeritageId = matched.id;
+  capNhatGiaoDienBanDoDiTich();
+}
+
+function chonDiaDanhBanDo(id) {
+  activeHeritageId = id;
+  capNhatGiaoDienBanDoDiTich();
+}
+
+function capNhatGiaoDienBanDoDiTich() {
+  const container = document.getElementById('ditich-tab-map');
+  if (container) {
+    container.innerHTML = renderHeritageMapSectionHtml();
+  }
+}
+
+function renderDanhSachDiTichHtml(activeTab) {
             if (!activeTab) activeTab = 'grid';
             return `
                 <div class="modal-tabs">
-                    <button class="modal-tab-btn ${activeTab === 'grid' ? 'active' : ''}" id="btn-tab-ditich-grid" onclick="chuyenTabDiTich('grid')">🏛️ Danh Mục 6 Đại Di Tích Quốc Gia</button>
+                    <button class="modal-tab-btn ${activeTab === 'map' ? 'active' : ''}" id="btn-tab-ditich-map" onclick="chuyenTabDiTich('map')">🗺️ Bản Đồ Di Sản & Trục Thời Gian</button>
+                    <button class="modal-tab-btn ${activeTab === 'grid' ? 'active' : ''}" id="btn-tab-ditich-grid" onclick="chuyenTabDiTich('grid')">🏛️ Danh Mục Thẻ Di Tích</button>
                     <button class="modal-tab-btn ${activeTab === 'thanglong' ? 'active' : ''}" id="btn-tab-ditich-thanglong" onclick="chuyenTabDiTich('thanglong')">🏰 Hoàng Thành Thăng Long</button>
                     <button class="modal-tab-btn ${activeTab === 'coloa' ? 'active' : ''}" id="btn-tab-ditich-coloa" onclick="chuyenTabDiTich('coloa')">🏹 Khu Di Tích Cổ Loa</button>
                     <button class="modal-tab-btn ${activeTab === 'bachdang' ? 'active' : ''}" id="btn-tab-ditich-bachdang" onclick="chuyenTabDiTich('bachdang')">🌊 Quần Thể Bạch Đằng Giang</button>
@@ -9784,7 +10477,11 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                     <button class="modal-tab-btn ${activeTab === 'dienbienphu' ? 'active' : ''}" id="btn-tab-ditich-dienbienphu" onclick="chuyenTabDiTich('dienbienphu')">⭐ Chiến Trường Điện Biên Phủ</button>
                 </div>
 
-                <div id="ditich-tab-grid" class="modal-cards-grid" style="display: ${activeTab === 'grid' ? 'grid' : 'none'}; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+                <div id="ditich-tab-map" style="display: ${activeTab === 'map' ? 'block' : 'none'};">
+                    ${renderHeritageMapSectionHtml()}
+                </div>
+
+                <div id="ditich-tab-grid" class="modal-cards-grid"  style="display: ${activeTab === 'grid' ? 'grid' : 'none'}; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
                     
         <div class="modal-card" style="cursor: pointer; border: 2px solid #8B2500; background: #FFFDF8; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.06); transition: all 0.25s;" onclick="chuyenTabDiTich('thanglong')">
             <div>
@@ -12873,7 +13570,9 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                     </div>
                 `;
             } else if (loai.startsWith('di-tich')) {
-                var activeTab = 'grid';
+                var activeTab = 'map';
+                if (loai === 'di-tich-grid') activeTab = 'grid';
+                else if (loai === 'di-tich-map') activeTab = 'map';
                 if (loai === 'di-tich-thanglong') activeTab = 'thanglong';
                 else if (loai === 'di-tich-coloa') activeTab = 'coloa';
                 else if (loai === 'di-tich-bachdang') activeTab = 'bachdang';
@@ -12882,6 +13581,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                 else if (loai === 'di-tich-dienbienphu') activeTab = 'dienbienphu';
 
                 var titles = {
+                    'map': '🗺️ Bản Đồ Di Sản & Trục Thời Gian Lịch Sử',
                     'grid': '🏰 Quần Thể Di Tích & Danh Thắng Trọng Điểm',
                     'thanglong': '🏰 Hoàng Thành Thăng Long — Di Sản Văn Hóa Thế Giới UNESCO',
                     'coloa': '🏹 Khu Di Tích Cổ Loa — Kinh Đô Cổ Kính',
@@ -13276,6 +13976,9 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
             bodyEl.scrollTop = 0; // Đặt lại vị trí cuộn của modal lên đầu mượt mà
             if (loai === 'bao-vat-3d' || loai.startsWith('bao-tang')) {
                 setTimeout(function() { if (typeof khoiTaoViewerBaoVat3D === 'function') khoiTaoViewerBaoVat3D(); }, 100);
+            }
+            if (loai.startsWith('di-tich') && activeTab === 'map') {
+                setTimeout(function() { if (typeof capNhatGiaoDienBanDoDiTich === 'function') capNhatGiaoDienBanDoDiTich(); }, 100);
             }
             if (typeof ketThucChuyenCanhVideo === 'function') ketThucChuyenCanhVideo();
             // PROMPT 07: Lưu chính xác vị trí cuộn của trang web trước khi mở modal để chống nhảy trang
