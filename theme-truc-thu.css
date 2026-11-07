@@ -458,5 +458,51 @@ body.theme-truc-thu .forum-mobile-fab {
   color: #FFFDF8 !important;
 }
 
+/* L. BẢO TÀNG DI SẢN & CỔ VẬT V2 (Trúc Thư Theme) */
+body.theme-truc-thu .museum-banner-hero {
+  background: linear-gradient(135deg, #4A2E1A 0%, #382112 100%) !important;
+  border-color: #D4AF37 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .museum-era-filter-bar {
+  background: #F4EEDF !important;
+  border-color: #D5C2A5 !important;
+}
+body.theme-truc-thu .museum-era-chip {
+  background: #FFFDF8 !important;
+  border-color: #C4A575 !important;
+  color: #4A3222 !important;
+}
+body.theme-truc-thu .museum-era-chip:hover,
+body.theme-truc-thu .museum-era-chip.active {
+  background: linear-gradient(135deg, #8B2500 0%, #A93226 100%) !important;
+  color: #FFFDF8 !important;
+  border-color: #D4AF37 !important;
+}
+body.theme-truc-thu .museum-vitrine-card {
+  background: #FFFDF8 !important;
+  border-color: #C5AC81 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .museum-vitrine-card:hover {
+  border-color: #8B2500 !important;
+  box-shadow: 0 10px 30px rgba(60, 30, 20, 0.16) !important;
+}
+body.theme-truc-thu .museum-placard {
+  background: linear-gradient(135deg, #2C1810 0%, #1A0E08 100%) !important;
+  border-color: #D4AF37 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .btn-museum-ask-ai {
+  background: rgba(139, 37, 0, 0.08) !important;
+  border-color: #8B2500 !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .btn-museum-ask-ai:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+
+
 
 

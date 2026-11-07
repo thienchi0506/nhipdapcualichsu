@@ -2066,6 +2066,264 @@
             flex: 1;
         }
 
+        /* ====================================================== */
+        /*  BẢO TÀNG V2: TỦ KÍNH DI SẢN, PLACARD & PHÂN KHU THỜI KỲ*/
+        /* ====================================================== */
+        .museum-banner-hero {
+            background: linear-gradient(135deg, #24140D 0%, #3D1C12 50%, #1A0D08 100%);
+            border: 2px solid var(--vang-dong);
+            border-radius: 14px;
+            padding: 26px 24px;
+            color: #FDF8EE;
+            margin-bottom: 22px;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4), inset 0 0 20px rgba(212,175,55,0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .museum-banner-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .museum-era-filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 0 0 24px;
+            padding: 10px 14px;
+            background: rgba(244, 236, 216, 0.55);
+            border: 1.5px dashed #C4A575;
+            border-radius: 30px;
+        }
+
+        .museum-era-chip {
+            background: #FFFDF8;
+            border: 1px solid #C4A575;
+            color: #4A301D;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.84rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .museum-era-chip:hover,
+        .museum-era-chip.active {
+            background: linear-gradient(135deg, #7B1E1E 0%, #9B2E2E 100%);
+            color: #FFF;
+            border-color: var(--vang-dong);
+            box-shadow: 0 3px 10px rgba(123, 30, 30, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* Tủ kính trưng bày di sản ảo (Virtual Vitrine Card) */
+        .museum-vitrine-card {
+            position: relative;
+            background: #FFFDF8;
+            border: 2px solid #C5AC81;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 18px rgba(44, 30, 24, 0.08);
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at top right, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at bottom left, rgba(123, 30, 30, 0.04) 0%, transparent 45%);
+            animation: museumFadeIn 0.35s ease;
+        }
+
+        @keyframes museumFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .museum-vitrine-card:hover {
+            border-color: var(--vang-dong);
+            box-shadow: 0 10px 30px rgba(44, 30, 24, 0.16), 0 0 1px 1px rgba(212, 175, 55, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .vitrine-curator-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 6px;
+            width: fit-content;
+        }
+
+        .badge-dong-son { background: rgba(212, 175, 55, 0.2); color: #7B1E1E; border: 1px solid rgba(212, 175, 55, 0.5); }
+        .badge-thuy-chien { background: rgba(30, 70, 32, 0.15); color: #1E4620; border: 1px solid rgba(30, 70, 32, 0.35); }
+        .badge-tuyen-ngon { background: rgba(139, 37, 0, 0.15); color: #8B2500; border: 1px solid rgba(139, 37, 0, 0.35); }
+        .badge-3d-space { background: rgba(27, 79, 114, 0.15); color: #1B4F72; border: 1px solid rgba(27, 79, 114, 0.35); }
+
+        /* Bảng Giám Định Hiện Vật Chuẩn Bảo Tàng Quốc Gia (Placard) */
+        .museum-placard {
+            background: linear-gradient(135deg, #241610 0%, #150E0A 100%);
+            border: 2px solid var(--vang-dong);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: #FDF8EE;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            margin: 14px 0;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+
+        .placard-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: #FFF2A8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .placard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px 14px;
+        }
+
+        .placard-item strong {
+            color: var(--vang-dong);
+            display: block;
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .placard-item span {
+            color: #E2CFB4;
+            font-size: 0.86rem;
+        }
+
+        /* Nút Audio Guide & Chiếu Sáng */
+        .museum-tools-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #D6C2A0;
+        }
+
+        .btn-museum-audio {
+            background: linear-gradient(135deg, #7B1E1E 0%, #9B2E2E 100%);
+            color: #FFF;
+            border: 1px solid var(--vang-dong);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-museum-audio:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(123, 30, 30, 0.4);
+        }
+
+        .btn-museum-audio.audio-playing {
+            background: #27AE60;
+            border-color: #2ECC71;
+            animation: audioPulse 1.2s infinite alternate;
+        }
+
+        @keyframes audioPulse {
+            from { box-shadow: 0 0 6px #27AE60; }
+            to { box-shadow: 0 0 16px #2ECC71; }
+        }
+
+        .btn-museum-ask-ai {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--vang-dong);
+            color: #7B1E1E;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-museum-ask-ai:hover {
+            background: var(--vang-dong);
+            color: #1A0E08;
+            transform: translateY(-1px);
+        }
+
+        .museum-lighting-btn {
+            background: rgba(18, 13, 11, 0.75);
+            border: 1px solid rgba(229,193,88,0.5);
+            color: #FFE082;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .museum-lighting-btn.active,
+        .museum-lighting-btn:hover {
+            background: var(--vang-dong);
+            color: #1A0E08;
+            border-color: #FFF;
+        }
+
+        /* Dark Theme adjustments */
+        :root[data-theme="dark"] .museum-era-filter-bar {
+            background: #201813;
+            border-color: #5C3A21;
+        }
+        :root[data-theme="dark"] .museum-era-chip {
+            background: #2E221B;
+            border-color: #5C3A21;
+            color: #E2CFB4;
+        }
+        :root[data-theme="dark"] .museum-vitrine-card {
+            background: #221A15;
+            border-color: #5C3A21;
+            color: #FDF8EE;
+        }
+        :root[data-theme="dark"] .museum-vitrine-card:hover {
+            border-color: var(--vang-dong);
+        }
+        :root[data-theme="dark"] .btn-museum-ask-ai {
+            color: #F3D981;
+            background: rgba(212, 175, 55, 0.12);
+        }
+
         
         /* CSS CHUYÊN BIỆT CHO MỤC LỊCH SỬ NGÀY NAY */
         .ngay-nay-nav__btn {
@@ -11161,7 +11419,7 @@ function renderDanhSachDiTichHtml(activeTab) {
 
         
         // ===================================================
-        //  BẢO TÀNG LỊCH SỬ & CỔ VẬT HOÀNG GIA ĐẠI VIỆT
+        //  BẢO TÀNG LỊCH SỬ & CỔ VẬT HOÀNG GIA ĐẠI VIỆT (V2)
         // ===================================================
         function renderBaoTangModalHtml(loai) {
             var activeTab = 'tong-quan';
@@ -11177,24 +11435,35 @@ function renderDanhSachDiTichHtml(activeTab) {
 
                 <!-- TAB 1: TỔNG QUAN BẢO TÀNG -->
                 <div class="museum-tab-pane" id="pane-bt-tong-quan" style="display: ${activeTab === 'tong-quan' ? 'block' : 'none'};">
-                    <div style="background: linear-gradient(135deg, #2C1810 0%, #1A0E08 100%); border: 2px solid var(--vang-dong); border-radius: 12px; padding: 24px; color: #FDF8EE; margin-bottom: 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.35);">
-                        <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">🏛️</span>
-                        <h3 style="font-family: 'Playfair Display', serif; color: var(--vang-dong); font-size: 1.6rem; margin-bottom: 10px;">KHÔNG GIAN DI SẢN & BẢO TÀNG SỬ HỌC ĐẠI VIỆT</h3>
-                        <p style="font-size: 0.95rem; line-height: 1.7; color: #E8D5B5; max-width: 780px; margin: 0 auto 16px;">
+                    <div class="museum-banner-hero">
+                        <span style="font-size: 2.3rem; display: block; margin-bottom: 8px;">🏛️</span>
+                        <h3 class="museum-banner-title">KHÔNG GIAN DI SẢN & BẢO TÀNG SỬ HỌC ĐẠI VIỆT</h3>
+                        <p class="museum-banner-sub">
                             Nơi lưu giữ, tôn vinh và phục dựng sinh động những chứng tích hào hùng, bảo vật vô giá cùng các tư liệu địa chính trị khẳng định chủ quyền toàn vẹn lãnh thổ ngàn đời của dân tộc Việt Nam.
                         </p>
-                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                        <div class="museum-banner-actions">
                             <a href="sa-ban-3d.html" class="modal-tab-btn active" style="text-decoration: none; padding: 10px 22px; font-size: 0.95rem; background: linear-gradient(135deg, #7B1E1E, #B71C1C); border-color: #D4AF37;">
                                 🚀 Trải Nghiệm Sa Bàn 3D Tương Tác ➔
                             </a>
-                            <button class="modal-tab-btn" onclick="chuyenTabBaoTang('3d-models')">
+                            <button type="button" class="modal-tab-btn" onclick="chuyenTabBaoTang('3d-models')">
                                 🏺 Xem Phòng Trưng Bày Bảo Vật 3D
                             </button>
                         </div>
                     </div>
 
-                    <div class="modal-cards-grid">
-                        <div class="modal-card" style="border: 2px solid #D4AF37; background: #FFFDF8; cursor: pointer;" onclick="window.location.href='sa-ban-3d.html'">
+                    <!-- BỘ LỌC PHÂN KHU & THỜI KỲ DI SẢN -->
+                    <div class="museum-era-filter-bar" id="museum-era-bar" role="tablist" aria-label="Bộ lọc phân khu di sản">
+                        <button type="button" class="museum-era-chip active" onclick="locPhanKhuBaoTang(this, 'all')">🏛️ Tất Cả Di Sản</button>
+                        <button type="button" class="museum-era-chip" onclick="locPhanKhuBaoTang(this, 'dong-son')">🪘 Đông Sơn & Hùng Vương</button>
+                        <button type="button" class="museum-era-chip" onclick="locPhanKhuBaoTang(this, 'thuy-chien')">⚔️ Thủy Chiến & Kháng Chiến</button>
+                        <button type="button" class="museum-era-chip" onclick="locPhanKhuBaoTang(this, 'tuyen-ngon')">📜 Tuyên Ngôn & Chủ Quyền</button>
+                        <button type="button" class="museum-era-chip" onclick="locPhanKhuBaoTang(this, '3d-space')">🌐 Không Gian 3D Số Hóa</button>
+                    </div>
+
+                    <div class="modal-cards-grid" id="museum-grid-cards">
+                        <!-- Card 1: Sa Bàn 3D -->
+                        <div class="modal-card museum-vitrine-card" data-era="3d-space thuy-chien" style="cursor: pointer;" onclick="window.location.href='sa-ban-3d.html'">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">🚀</div>
                             <span class="modal-card__tag" style="background: rgba(212,175,55,0.18); color: #7B1E1E; padding: 2px 8px; border-radius: 4px; display: inline-block;">Không Gian Tương Tác 3D</span>
                             <h4 class="modal-card__title" style="color: #7B1E1E;">Sa Bàn 3D Bạch Đằng Giang & Cổ Vật</h4>
@@ -11202,62 +11471,74 @@ function renderDanhSachDiTichHtml(activeTab) {
                             <a href="sa-ban-3d.html" class="modal-tab-btn active" style="text-decoration: none; text-align: center; margin-top: auto; padding: 6px 14px; border-radius: 6px;">Vào Không Gian 3D ➔</a>
                         </div>
 
-                        <div class="modal-card" style="border: 2px solid #D4AF37; background: #FFFDF8; cursor: pointer;" onclick="chuyenTabBaoTang('3d-models')">
+                        <!-- Card 2: Phòng Trưng Bày Bảo Vật 3D -->
+                        <div class="modal-card museum-vitrine-card" data-era="3d-space dong-son" style="cursor: pointer;" onclick="chuyenTabBaoTang('3d-models')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">🏺</div>
                             <span class="modal-card__tag" style="background: rgba(212,175,55,0.18); color: #7B1E1E; padding: 2px 8px; border-radius: 4px; display: inline-block;">Không Gian 3D Tương Tác 360°</span>
                             <h4 class="modal-card__title" style="color: #7B1E1E;">Phòng Trưng Bày Bảo Vật 3D</h4>
                             <p class="modal-card__desc">Khám phá mô hình 3D tương tác 360° của các bảo vật quốc gia: xoay lật đa góc độ, phóng to chi tiết chạm khắc, đổi ánh sáng và nạp trực tiếp file 3D (.glb, .gltf, .obj) từ máy tính.</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Vào Phòng Trưng Bày 3D ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Vào Phòng Trưng Bày 3D ➔</button>
                         </div>
 
-                        <!-- Thơ Thần Nam Quốc Sơn Hà (1077) -->
-                        <div class="modal-card" style="border: 2px solid #8B2500; background: #FFFDF8; cursor: pointer;" onclick="moModalDuLieu('tu-lieu-namquoc', 'Bảo tàng > Nam Quốc Sơn Hà')">
+                        <!-- Card 3: Thơ Thần Nam Quốc Sơn Hà (1077) -->
+                        <div class="modal-card museum-vitrine-card" data-era="tuyen-ngon thuy-chien" style="cursor: pointer;" onclick="moModalDuLieu('tu-lieu-namquoc', 'Bảo tàng > Nam Quốc Sơn Hà')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">📜</div>
                             <span class="modal-card__tag" style="background: rgba(139,37,0,0.15); color: #8B2500; padding: 2px 8px; border-radius: 4px; display: inline-block;">Tuyên Ngôn Độc Lập Thứ Nhất</span>
                             <h4 class="modal-card__title" style="color: #8B2500;">Thơ Thần Nam Quốc Sơn Hà (1077)</h4>
                             <p class="modal-card__desc">Tiếng sấm sông Như Nguyệt của Thái úy Lý Thường Kiệt: "Nam quốc sơn hà Nam đế cư...", nguyên văn chữ Hán, Phiên âm, Dịch thơ, Dịch nghĩa và nút nghe ngâm thơ hào hùng.</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Đọc & Nghe Ngâm Thơ ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Đọc & Nghe Ngâm Thơ ➔</button>
                         </div>
 
-                        <!-- Bình Ngô Đại Cáo (1428) -->
-                        <div class="modal-card" style="border: 2px solid #D4AF37; background: #FFFDF8; cursor: pointer;" onclick="moModalDuLieu('tu-lieu-chieu-hich', 'Bảo tàng > Bình Ngô Đại Cáo')">
+                        <!-- Card 4: Bình Ngô Đại Cáo (1428) -->
+                        <div class="modal-card museum-vitrine-card" data-era="tuyen-ngon" style="cursor: pointer;" onclick="moModalDuLieu('tu-lieu-chieu-hich', 'Bảo tàng > Bình Ngô Đại Cáo')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">✍️</div>
                             <span class="modal-card__tag" style="background: rgba(212,175,55,0.18); color: #7B1E1E; padding: 2px 8px; border-radius: 4px; display: inline-block;">Thiên Cổ Hùng Văn</span>
                             <h4 class="modal-card__title" style="color: #7B1E1E;">Bình Ngô Đại Cáo (1428)</h4>
                             <p class="modal-card__desc">Bản Tuyên ngôn Độc lập thứ hai do Nguyễn Trãi soạn thảo sau đại thắng Chi Lăng - Xương Giang: "Đem đại nghĩa để thắng hung tàn, Lấy chí nhân để thay cường bạo".</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Đọc Khảo Luận Toàn Văn ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Đọc Khảo Luận Toàn Văn ➔</button>
                         </div>
 
-                        <div class="modal-card" style="border: 2px solid #C0392B; background: #FFFDF8; cursor: pointer;" onclick="moModalDuLieu('tu-lieu-chau-ban', 'Bảo tàng > Châu bản Triều Nguyễn')">
+                        <!-- Card 5: Châu Bản & Mộc Bản Triều Nguyễn -->
+                        <div class="modal-card museum-vitrine-card" data-era="tuyen-ngon" style="cursor: pointer;" onclick="moModalDuLieu('tu-lieu-chau-ban', 'Bảo tàng > Châu bản Triều Nguyễn')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">📜</div>
                             <span class="modal-card__tag" style="background: rgba(192,57,43,0.15); color: #C0392B; padding: 2px 8px; border-radius: 4px; display: inline-block;">Ký Ức Thế Giới UNESCO</span>
                             <h4 class="modal-card__title" style="color: #900C3F;">Châu Bản & Mộc Bản Triều Nguyễn</h4>
                             <p class="modal-card__desc">Kho tàng văn bản hành chính châu phê mực son cùng 34.618 tấm mộc bản khắc gỗ - bằng chứng lịch sử đanh thép khẳng định chủ quyền Hoàng Sa & Trường Sa.</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Toàn Diện ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Toàn Diện ➔</button>
                         </div>
 
-                        <div class="modal-card" style="border: 2px solid #1B4F72; background: #FFFDF8; cursor: pointer;" onclick="moModalDuLieu('tu-lieu-ban-do', 'Bảo tàng > Bản đồ cổ Đại Việt')">
+                        <!-- Card 6: Hệ Thống Bản Đồ Cổ Đại Việt -->
+                        <div class="modal-card museum-vitrine-card" data-era="tuyen-ngon" style="cursor: pointer;" onclick="moModalDuLieu('tu-lieu-ban-do', 'Bảo tàng > Bản đồ cổ Đại Việt')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">🗺️</div>
                             <span class="modal-card__tag" style="background: rgba(27,79,114,0.15); color: #1B4F72; padding: 2px 8px; border-radius: 4px; display: inline-block;">Căn Cứ Pháp Lý Tối Thượng</span>
                             <h4 class="modal-card__title" style="color: #1B4F72;">Hệ Thống Bản Đồ Cổ Đại Việt</h4>
                             <p class="modal-card__desc">Hồng Đức Bản Đồ (1490), Đại Nam Nhất Thống Toàn Đồ (1838) và An Nam Đại Quốc Họa Đồ (1838) xác lập chủ quyền cương vực và hải đảo quốc gia.</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Bản Đồ ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Bản Đồ ➔</button>
                         </div>
 
-                        <div class="modal-card" style="border: 2px solid #D4AF37; background: #FFFDF8; cursor: pointer;" onclick="moModalDuLieu('tu-lieu-hien-vat', 'Bảo tàng > Trống Đồng Ngọc Lũ')">
+                        <!-- Card 7: Trống Đồng Ngọc Lũ I -->
+                        <div class="modal-card museum-vitrine-card" data-era="dong-son" style="cursor: pointer;" onclick="moModalDuLieu('tu-lieu-hien-vat', 'Bảo tàng > Trống Đồng Ngọc Lũ')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">🪘</div>
                             <span class="modal-card__tag" style="background: rgba(212,175,55,0.18); color: #7B1E1E; padding: 2px 8px; border-radius: 4px; display: inline-block;">Văn Hóa Đông Sơn</span>
                             <h4 class="modal-card__title" style="color: #7B1E1E;">Trống Đồng Ngọc Lũ I</h4>
                             <p class="modal-card__desc">Niên đại 2.500 năm tuổi, "Bách khoa toàn thư bằng đồng" về vũ trụ quan, tín ngưỡng phồn thực và thiên anh hùng ca dựng nước thời các vua Hùng.</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Chi Tiết (>2500 từ) ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Chi Tiết (>2500 từ) ➔</button>
                         </div>
 
-                        <div class="modal-card" style="border: 2px solid #1E4620; background: #FFFDF8; cursor: pointer;" onclick="moModalDuLieu('tu-lieu-baicoc', 'Bảo tàng > Bãi Cọc Bạch Đằng')">
+                        <!-- Card 8: Bãi Cọc Bạch Đằng & Cao Quỳ -->
+                        <div class="modal-card museum-vitrine-card" data-era="thuy-chien" style="cursor: pointer;" onclick="moModalDuLieu('tu-lieu-baicoc', 'Bảo tàng > Bãi Cọc Bạch Đằng')">
+                            <span class="vitrine-curator-badge">🏛️ Giám Định Bảo Tàng</span>
                             <div class="modal-card__icon">🪵</div>
                             <span class="modal-card__tag" style="background: rgba(30,70,32,0.15); color: #1E4620; padding: 2px 8px; border-radius: 4px; display: inline-block;">Chiến Trường Sông Bạch Đằng</span>
                             <h4 class="modal-card__title" style="color: #1E4620;">Bãi Cọc Bạch Đằng & Cao Quỳ</h4>
                             <p class="modal-card__desc">Hiện vật cọc gỗ lim, táu nguyên khối vát nhọn bịt sắt khai quật tại lòng sông, minh chứng khảo cổ học chấn động cho thiên tài thủy chiến Việt Nam.</p>
-                            <button class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Chi Tiết (>1000 từ) ➔</button>
+                            <button type="button" class="modal-tab-btn active" style="margin-top: auto; padding: 6px 14px; text-align: center; border-radius: 6px;">Khảo Cứu Chi Tiết (>1000 từ) ➔</button>
                         </div>
                     </div>
                 </div>
@@ -11288,7 +11569,7 @@ function renderDanhSachDiTichHtml(activeTab) {
                     </div>
                 </div>
 
-                <!-- TAB 2: PHÒNG TRƯNG BÀY BẢO VẬT 3D TƯƠNG TÁC (TRỐNG ĐỒNG ĐÔNG SƠN & CỌC BẠCH ĐẰNG 1288) -->
+                <!-- TAB 3: PHÒNG TRƯNG BÀY BẢO VẬT 3D TƯƠNG TÁC (TRỐNG ĐỒNG ĐÔNG SƠN & CỌC BẠCH ĐẰNG 1288) -->
                 <div class="museum-tab-pane" id="pane-bt-3d-models" style="display: ${activeTab === '3d-models' ? 'block' : 'none'};">
                     <!-- Header banner phòng trưng bày -->
                     <div style="background: linear-gradient(135deg, #241610 0%, #150E0A 100%); border: 2px solid var(--vang-dong); border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; color: #FDF8EE; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
@@ -11297,7 +11578,7 @@ function renderDanhSachDiTichHtml(activeTab) {
                                 <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--vang-dong); background: rgba(212,175,55,0.18); padding: 4px 12px; border-radius: 20px; border: 1px solid var(--vang-dong);">Không Gian Bảo Vật 3D WebGL · Tương Tác 360°</span>
                                 <h3 style="font-family: 'Playfair Display', serif; color: var(--vang-dong); font-size: 1.55rem; margin: 8px 0 4px;">🏺 PHÒNG TRƯNG BÀY BẢO VẬT 3D TƯƠNG TÁC</h3>
                                 <p style="font-size: 0.92rem; color: #E0CEB5; margin: 0; line-height: 1.6;">
-                                    Chiêm ngưỡng mô hình 3D thực tế của các bảo vật quốc gia: xoay lật 360°, phóng to chi tiết điêu khắc và hỗ trợ nạp đổi file 3D (.glb) linh hoạt.
+                                    Chiêm ngưỡng mô hình 3D thực tế của các bảo vật quốc gia: xoay lật 360°, phóng to chi tiết điêu khắc, đổi chiếu sáng cổ vật, nghe thuyết minh di sản và tham vấn Sử Quan Ảo.
                                 </p>
                             </div>
                         </div>
@@ -11379,7 +11660,38 @@ function renderDanhSachDiTichHtml(activeTab) {
                                 </div>
                             </div>
 
-                            <!-- Thuyết minh lịch sử -->
+                            <!-- THANH CÔNG CỤ CHIẾU SÁNG & TRỢ LÝ SỬ QUAN / THUYẾT MINH -->
+                            <div class="museum-tools-row">
+                                <div class="museum-lighting-group">
+                                    <span class="lighting-label">Chiếu sáng:</span>
+                                    <button type="button" class="museum-lighting-btn active" id="btn-light-1-neutral" onclick="doiChieuSangBaoTang(1, 'neutral', this)">☀️ Tự Nhiên</button>
+                                    <button type="button" class="museum-lighting-btn" id="btn-light-1-gold" onclick="doiChieuSangBaoTang(1, 'gold', this)">👑 Hoàng Cung</button>
+                                    <button type="button" class="museum-lighting-btn" id="btn-light-1-dramatic" onclick="doiChieuSangBaoTang(1, 'dramatic', this)">🕯️ Trầm Cổ Vật</button>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button type="button" class="btn-museum-audio" id="btn-audio-guide-1" onclick="ngheThuyetMinhBaoTang(1, this)">
+                                        <span>🎧</span> <span>Nghe Thuyết Minh</span>
+                                    </button>
+                                    <button type="button" class="btn-museum-ask-ai" onclick="thinhSuQuanBaoTang('Trống Đồng Đông Sơn')">
+                                        <span>🤖</span> <span>Hỏi Sử Quan Ảo</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- THẺ GIÁM ĐỊNH HIỆN VẬT CHUẨN BẢO TÀNG (CURATORIAL PLACARD) -->
+                            <div class="museum-placard">
+                                <div class="placard-title">BẢO VẬT QUỐC GIA SỐ 01 · ĐỢT 1 (2012)</div>
+                                <div class="placard-grid">
+                                    <div class="placard-item"><span class="placard-lbl">Tên gọi:</span> <span class="placard-val">Trống đồng Ngọc Lũ I (Đông Sơn)</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Niên đại:</span> <span class="placard-val">TK III - II TCN (~2.500 năm)</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Chất liệu:</span> <span class="placard-val">Đồng thau nguyên khối đúc khuôn ba mang</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Nơi phát hiện:</span> <span class="placard-val">Như Trác, Lý Nhân, Hà Nam (1893)</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Kích thước:</span> <span class="placard-val">Đường kính mặt: 86cm · Cao: 63cm · Nặng: 86kg</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Hiện trạng lưu giữ:</span> <span class="placard-val">Bảo tàng Lịch sử Quốc gia Việt Nam</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Thuyết minh lịch sử nguyên bản -->
                             <div style="margin-top: 14px; padding: 14px 16px; background: rgba(212,175,55,0.08); border-left: 4px solid var(--do-ba-trau); border-radius: 6px; font-size: 0.9rem; line-height: 1.65; color: #2C1E18;">
                                 <h5 style="color: var(--do-ba-trau); font-size: 1.02rem; margin-bottom: 6px; font-family: 'Playfair Display', serif;">📖 Thuyết Minh Cổ Vật 3D: Trống Đồng Ngọc Lũ / Đỉnh Cao Đông Sơn</h5>
                                 <p style="margin: 0 0 6px;"><strong>Niên đại & Nền văn minh:</strong> Khoảng thế kỷ thứ III - II TCN · Văn hóa Đông Sơn thời đại Hùng Vương dựng nước.</p>
@@ -11448,7 +11760,38 @@ function renderDanhSachDiTichHtml(activeTab) {
                                 </div>
                             </div>
 
-                            <!-- Thuyết minh lịch sử -->
+                            <!-- THANH CÔNG CỤ CHIẾU SÁNG & TRỢ LÝ SỬ QUAN / THUYẾT MINH -->
+                            <div class="museum-tools-row">
+                                <div class="museum-lighting-group">
+                                    <span class="lighting-label">Chiếu sáng:</span>
+                                    <button type="button" class="museum-lighting-btn active" id="btn-light-2-neutral" onclick="doiChieuSangBaoTang(2, 'neutral', this)">☀️ Tự Nhiên</button>
+                                    <button type="button" class="museum-lighting-btn" id="btn-light-2-gold" onclick="doiChieuSangBaoTang(2, 'gold', this)">👑 Hoàng Cung</button>
+                                    <button type="button" class="museum-lighting-btn" id="btn-light-2-dramatic" onclick="doiChieuSangBaoTang(2, 'dramatic', this)">🕯️ Trầm Cổ Vật</button>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button type="button" class="btn-museum-audio" id="btn-audio-guide-2" onclick="ngheThuyetMinhBaoTang(2, this)">
+                                        <span>🎧</span> <span>Nghe Thuyết Minh</span>
+                                    </button>
+                                    <button type="button" class="btn-museum-ask-ai" onclick="thinhSuQuanBaoTang('Cọc Gỗ Bạch Đằng')">
+                                        <span>🤖</span> <span>Hỏi Sử Quan Ảo</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- THẺ GIÁM ĐỊNH HIỆN VẬT CHUẨN BẢO TÀNG (CURATORIAL PLACARD) -->
+                            <div class="museum-placard">
+                                <div class="placard-title">BẢO VẬT QUỐC GIA SỐ 21 · ĐỢT 9 (2020)</div>
+                                <div class="placard-grid">
+                                    <div class="placard-item"><span class="placard-lbl">Tên gọi:</span> <span class="placard-val">Cọc Gỗ Bạch Đằng (Chiến dịch 1288)</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Niên đại:</span> <span class="placard-val">Tháng 4 năm 1288 (Thời Trần)</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Chất liệu:</span> <span class="placard-val">Gỗ Lim, Táu nguyên thân vát nhọn 45°</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Nơi phát hiện:</span> <span class="placard-val">Bãi cọc Yên Giang & Đồng Vạn Muối, Quảng Ninh</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Kích thước:</span> <span class="placard-val">Dài: 2.6m - 2.8m · Đường kính: 20cm - 30cm</span></div>
+                                    <div class="placard-item"><span class="placard-lbl">Ý nghĩa quân sự:</span> <span class="placard-val">Trận địa cọc cắm chéo lòng sông chặn đường thoái binh Ô Mã Nhi</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Thuyết minh lịch sử nguyên bản -->
                             <div style="margin-top: 14px; padding: 14px 16px; background: rgba(27,79,114,0.08); border-left: 4px solid #1B4F72; border-radius: 6px; font-size: 0.9rem; line-height: 1.65; color: #2C1E18;">
                                 <h5 style="color: #1B4F72; font-size: 1.02rem; margin-bottom: 6px; font-family: 'Playfair Display', serif;">📖 Thuyết Minh Cổ Vật 3D: Cọc Gỗ Bạch Đằng Năm 1288 (Chiến Thắng Thoát Hoan)</h5>
                                 <p style="margin: 0 0 6px;"><strong>Niên đại & Di tích:</strong> Năm 1288 (Trận Bạch Đằng lần 3) · Khai quật tại Bãi cọc Yên Giang, Đầm Điền, Cao Quỳ.</p>
@@ -11756,6 +12099,167 @@ function renderDanhSachDiTichHtml(activeTab) {
             var bodyEl = document.getElementById('modal-body-content');
             if (bodyEl) bodyEl.scrollTop = 0;
         }
+
+        // =========================================================================
+        //  TIỆN ÍCH BẢO TÀNG SỬ HỌC V2: BỘ LỌC, CHIẾU SÁNG, THUYẾT MINH & SỬ QUAN AI
+        // =========================================================================
+
+        // 1. Lọc phân khu & thời kỳ hiện vật bảo tàng
+        window.locPhanKhuBaoTang = function(btn, era) {
+            var bar = document.getElementById('museum-era-bar');
+            if (bar) {
+                var chips = bar.querySelectorAll('.museum-era-chip');
+                chips.forEach(function(c) { c.classList.remove('active'); });
+            }
+            if (btn) btn.classList.add('active');
+
+            var grid = document.getElementById('museum-grid-cards');
+            if (!grid) return;
+            var cards = grid.querySelectorAll('.museum-vitrine-card');
+            cards.forEach(function(card) {
+                var cardEras = (card.getAttribute('data-era') || '').split(' ');
+                if (era === 'all' || cardEras.indexOf(era) !== -1) {
+                    card.style.display = '';
+                    card.style.animation = 'vitrineFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        };
+
+        // 2. Thay đổi chế độ chiếu sáng hiện vật 3D
+        window.doiChieuSangBaoTang = function(frameId, mode, btnEl) {
+            var viewer = document.getElementById('viewer-baovat-' + frameId);
+            if (!viewer) return;
+            var parent = btnEl ? btnEl.parentElement : null;
+            if (parent) {
+                var btns = parent.querySelectorAll('.museum-lighting-btn');
+                btns.forEach(function(b) { b.classList.remove('active'); });
+            }
+            if (btnEl) btnEl.classList.add('active');
+
+            if (mode === 'gold') {
+                viewer.setAttribute('exposure', '1.45');
+                viewer.setAttribute('shadow-intensity', '2.0');
+                viewer.setAttribute('shadow-softness', '0.5');
+            } else if (mode === 'dramatic') {
+                viewer.setAttribute('exposure', '0.85');
+                viewer.setAttribute('shadow-intensity', '2.5');
+                viewer.setAttribute('shadow-softness', '0.2');
+            } else { // neutral
+                viewer.setAttribute('exposure', '1.15');
+                viewer.setAttribute('shadow-intensity', '1.5');
+                viewer.setAttribute('shadow-softness', '0.8');
+            }
+        };
+
+        // 3. Audio Guide: Thuyết minh di sản bằng giọng đọc Web Speech API & chuông đồng
+        window.__museum_speaking_id = null;
+
+        window.dungThuyetMinhBaoTang = function() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            window.__museum_speaking_id = null;
+            [1, 2].forEach(function(id) {
+                var btn = document.getElementById('btn-audio-guide-' + id);
+                if (btn) {
+                    btn.classList.remove('audio-playing');
+                    btn.innerHTML = '<span>🎧</span> <span>Nghe Thuyết Minh</span>';
+                }
+            });
+        };
+
+        window.ngheThuyetMinhBaoTang = function(modelId, btn) {
+            // Nếu chính model này đang phát thì dừng lại
+            if (window.__museum_speaking_id === modelId) {
+                window.dungThuyetMinhBaoTang();
+                return;
+            }
+
+            // Dừng mọi giọng đọc khác trước khi bắt đầu
+            window.dungThuyetMinhBaoTang();
+
+            // Âm chuông trống đồng mở màn bằng Web Audio API
+            try {
+                var AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (AudioCtx) {
+                    var actx = new AudioCtx();
+                    var osc = actx.createOscillator();
+                    var gain = actx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(modelId === 1 ? 146.83 : 130.81, actx.currentTime); // D3 hoặc C3
+                    gain.gain.setValueAtTime(0.35, actx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 2.5);
+                    osc.connect(gain);
+                    gain.connect(actx.destination);
+                    osc.start();
+                    osc.stop(actx.currentTime + 2.5);
+                }
+            } catch(e) {}
+
+            var thuyetMinhText = '';
+            if (modelId === 1) {
+                thuyetMinhText = "Bảo vật quốc gia số một: Trống đồng Ngọc Lũ Một, đỉnh cao rực rỡ của nền văn hóa Đông Sơn thời đại các vua Hùng dựng nước, niên đại khoảng thế kỷ thứ ba đến thế kỷ thứ hai trước Công nguyên. Thân và mặt trống được đúc bằng hợp kim đồng thau nguyên khối với kỹ thuật khuôn ba mang điêu luyện. Giữa tâm mặt trống là hình ngôi sao mười bốn tia tượng trưng cho thần mặt trời - cội nguồn sự sống. Xung quanh là các vành hoa văn chim Lạc sải cánh bay ngược chiều kim đồng hồ, cảnh giã gạo chày đôi, chiến binh mang giáo múa vũ trang và những đoàn thuyền rồng vượt sóng hào hùng. Trống đồng Ngọc Lũ chính là thiên anh hùng ca bất diệt bằng kim loại, kết tinh vũ trụ quan và khát vọng phồn vinh của tổ tiên dân tộc Việt Nam.";
+            } else {
+                thuyetMinhText = "Bảo vật quốc gia: Cọc gỗ Bạch Đằng trong đại thắng thủy chiến năm một nghìn hai trăm tám mươi tám. Hiện vật cọc gỗ lim nguyên khối nghìn năm được đẽo vát nhọn bốn mươi lăm độ, cắm sâu vào lòng sông theo thế trận mai phục kỳ tài của Quốc công Tiết chế Hưng Đạo Đại Vương Trần Quốc Tuấn. Nắm chắc quy luật thủy triều dâng rút của dòng sông Bạch Đằng, quân dân nhà Trần đã nhử toàn bộ chiến thuyền thủy binh quân Nguyên Mông do Ô Mã Nhi và Phàn Tiếp chỉ huy vào bãi cọc ngầm. Nước triều rút nhanh, cọc nhọn đâm vỡ đáy thuyền giặc, chôn vùi dã tâm xâm lược của đế chế Mông Nguyên hùng mạnh nhất thế giới thời bấy giờ. Bãi cọc Bạch Đằng là minh chứng khảo cổ học bất tử cho ý chí độc lập và đỉnh cao nghệ thuật quân sự Việt Nam.";
+            }
+
+            if ('speechSynthesis' in window) {
+                var utter = new SpeechSynthesisUtterance(thuyetMinhText);
+                utter.lang = 'vi-VN';
+                utter.rate = 0.88;
+                utter.pitch = 0.96;
+
+                var voices = window.speechSynthesis.getVoices();
+                var viVoice = voices.find(function(v) { return v.lang && (v.lang.startsWith('vi') || v.lang.startsWith('vi-VN')); });
+                if (viVoice) utter.voice = viVoice;
+
+                utter.onstart = function() {
+                    window.__museum_speaking_id = modelId;
+                    if (btn) {
+                        btn.classList.add('audio-playing');
+                        btn.innerHTML = '<span>⏹️</span> <span>Dừng Thuyết Minh</span>';
+                    }
+                };
+
+                utter.onend = function() {
+                    window.__museum_speaking_id = null;
+                    if (btn) {
+                        btn.classList.remove('audio-playing');
+                        btn.innerHTML = '<span>🎧</span> <span>Nghe Thuyết Minh</span>';
+                    }
+                };
+
+                utter.onerror = function() {
+                    window.__museum_speaking_id = null;
+                    if (btn) {
+                        btn.classList.remove('audio-playing');
+                        btn.innerHTML = '<span>🎧</span> <span>Nghe Thuyết Minh</span>';
+                    }
+                };
+
+                window.speechSynthesis.speak(utter);
+            } else {
+                alert("Trình duyệt của bạn hiện chưa hỗ trợ giọng đọc thuyết minh tự động.");
+            }
+        };
+
+        // 4. Tham vấn Sử Quan Ảo về bảo vật
+        window.thinhSuQuanBaoTang = function(tenBaoVat) {
+            if (typeof window.moModalSuQuanAo === 'function') {
+                window.moModalSuQuanAo();
+                var cauHoi = "Xin Sử Quan giải thích chi tiết về giá trị lịch sử và nghệ thuật của " + tenBaoVat + " trong dòng chảy văn hóa Đại Việt.";
+                setTimeout(function() {
+                    var input = document.getElementById('dcls-sq-input');
+                    if (input) {
+                        input.value = cauHoi;
+                        if (typeof window.capNhatBoDemKyTu === 'function') window.capNhatBoDemKyTu(cauHoi);
+                        input.focus();
+                    }
+                }, 300);
+            }
+        };
 
         // ==============================================================================
         //  TỦ SÁCH LỊCH SỬ KINH ĐIỂN ĐẠI VIỆT - KHẢO CỨU TOÀN DIỆN 6 KIỆT TÁC LỊCH SỬ
@@ -12551,7 +13055,7 @@ function renderDanhSachDiTichHtml(activeTab) {
             });
             var bodyEl = document.getElementById('modal-body-content');
             if (bodyEl) bodyEl.scrollTop = 0;
-        };
+        }
 
         function moModalDuLieu(loai, breadcrumbPath) {
             if (breadcrumbPath) capNhatBreadcrumb('Trang chủ > ' + breadcrumbPath);
@@ -14008,6 +14512,11 @@ function renderDanhSachDiTichHtml(activeTab) {
             }
             var youtubeFrame = document.getElementById('youtube-video-frame');
             if (youtubeFrame) youtubeFrame.src = 'about:blank';
+
+            // Dừng thuyết minh bảo tàng nếu đang đọc
+            if (typeof window.dungThuyetMinhBaoTang === 'function') {
+                window.dungThuyetMinhBaoTang();
+            }
 
             // Dọn dẹp query param modal=video để không tự mở lại khi refresh trang
             try {
