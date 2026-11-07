@@ -10630,7 +10630,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     <h4 style="color: #7B1E1E; font-size: 1.35rem; font-family: 'Playfair Display', serif; margin: 4px 0 0;" id="model-name-1">🪘 Trống Đồng Đông Sơn - Việt Nam</h4>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 8px;">
-                                    <span id="status-badge-1" style="font-size: 0.82rem; font-weight: 600; color: #2E7D32; background: rgba(46,125,50,0.14); padding: 4px 12px; border-radius: 16px; border: 1px solid rgba(46,125,50,0.3);">${window.__MODEL_TRONG_DONG_BLOB_URL ? '🟢 Đang hiển thị 360°' : '⏳ Đang nạp mô hình 3D...'}</span>
+                                    <span id="status-badge-1" style="font-size: 0.82rem; font-weight: 600; color: #2E7D32; background: rgba(46,125,50,0.14); padding: 4px 12px; border-radius: 16px; border: 1px solid rgba(46,125,50,0.3);">${window.__MODEL_TRONG_DONG_BLOB_URL ? '🟢 Đang hiển thị 360°' : '⏸ Sẵn sàng tải khi chọn xem'}</span>
                                     <label class="btn-load-3d-local" title="Nạp file .glb từ máy nếu chạy file:// offline" style="padding: 4px 10px; font-size: 0.78rem; border-radius: 16px; cursor: pointer;">
                                         📁 Đổi file .glb
                                         <input type="file" id="input-file-1" accept=".glb,.gltf" style="display:none;" onchange="napFileModel3DCucBo(event, 1)">
@@ -10642,7 +10642,8 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                             <div class="procedural-3d-wrapper" id="wrapper-viewer-1" style="position: relative; width: 100%; height: 420px; background: radial-gradient(circle at 50% 40%, #2A1F1A 0%, #120D0B 100%); border-radius: 12px; overflow: hidden; border: 2px solid var(--vang-dong); box-shadow: inset 0 0 50px rgba(0,0,0,0.85), 0 6px 22px rgba(0,0,0,0.35); touch-action: pan-y;">
                                 <model-viewer
                                     id="viewer-baovat-1"
-                                    src="${window.__MODEL_TRONG_DONG_BLOB_URL || 'trong_ong_ong_son_-_viet_nam.glb'}"
+                                    data-model-src="trong_ong_ong_son_-_viet_nam.glb"
+                                    poster="images/museum/bronze-drum-preview.svg"
                                     alt="Trống Đồng Đông Sơn - Việt Nam"
                                     auto-rotate
                                     rotation-per-second="20deg"
@@ -10662,9 +10663,9 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     </div>
 
                                     <!-- Loading spinner overlay -->
-                                    <div id="loading-overlay-1" style="position: absolute; inset: 0; display: ${window.__MODEL_TRONG_DONG_BLOB_URL ? 'none' : 'flex'}; flex-direction: column; align-items: center; justify-content: center; background: rgba(18,13,11,0.85); z-index: 5; transition: opacity 0.4s;">
+                                    <div id="loading-overlay-1" style="position: absolute; inset: 0; display: ${window.__MODEL_TRONG_DONG_BLOB_URL ? 'none' : 'flex'}; flex-direction: column; align-items: center; justify-content: center; background: rgba(18,13,11,0.18); z-index: 5; transition: opacity 0.4s; pointer-events: none;">
                                         <div style="width: 44px; height: 44px; border: 3px solid rgba(212,175,55,0.25); border-top: 3px solid var(--vang-dong); border-radius: 50%; animation: spin3D 1s linear infinite;"></div>
-                                        <div id="loading-text-1" style="margin-top: 12px; color: #FDF8EE; font-size: 0.88rem; font-weight: 600; text-align: center; padding: 0 15px;">Đang tải Trống Đồng Đông Sơn (16.5 MB)...</div>
+                                        <div id="loading-text-1" style="margin-top: 12px; color: #FDF8EE; background: rgba(18,13,11,0.84); border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-align: center; padding: 7px 12px;">Mô hình 3D sẽ tải khi bạn chọn xem.</div>
                                         <div style="width: 160px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; margin-top: 10px; overflow: hidden;">
                                             <div id="inner-pbar-1" style="width: 0%; height: 100%; background: linear-gradient(90deg, #D4AF37, #FFF); transition: width 0.15s;"></div>
                                         </div>
@@ -10698,7 +10699,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     <h4 style="color: #1B4F72; font-size: 1.35rem; font-family: 'Playfair Display', serif; margin: 4px 0 0;" id="model-name-2">🪵 Cọc Gỗ Bạch Đằng Năm 1288</h4>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 8px;">
-                                    <span id="status-badge-2" style="font-size: 0.82rem; font-weight: 600; color: #2E7D32; background: rgba(46,125,50,0.14); padding: 4px 12px; border-radius: 16px; border: 1px solid rgba(46,125,50,0.3);">${window.__MODEL_COC_BACH_DANG_BLOB_URL ? '🟢 Đang hiển thị 360°' : '⏳ Đang nạp mô hình 3D...'}</span>
+                                    <span id="status-badge-2" style="font-size: 0.82rem; font-weight: 600; color: #2E7D32; background: rgba(46,125,50,0.14); padding: 4px 12px; border-radius: 16px; border: 1px solid rgba(46,125,50,0.3);">${window.__MODEL_COC_BACH_DANG_BLOB_URL ? '🟢 Đang hiển thị 360°' : '⏸ Sẵn sàng tải khi chọn xem'}</span>
                                     <label class="btn-load-3d-local" title="Nạp file .glb từ máy nếu chạy file:// offline" style="padding: 4px 10px; font-size: 0.78rem; border-radius: 16px; cursor: pointer; background: linear-gradient(135deg, #1B4F72, #2874A6); border-color: #5DADE2;">
                                         📁 Đổi file .glb
                                         <input type="file" id="input-file-2" accept=".glb,.gltf" style="display:none;" onchange="napFileModel3DCucBo(event, 2)">
@@ -10710,7 +10711,8 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                             <div class="procedural-3d-wrapper" id="wrapper-viewer-2" style="position: relative; width: 100%; height: 420px; background: radial-gradient(circle at 50% 40%, #1C2730 0%, #0C1218 100%); border-radius: 12px; overflow: hidden; border: 2px solid #1B4F72; box-shadow: inset 0 0 50px rgba(0,0,0,0.85), 0 6px 22px rgba(0,0,0,0.35); touch-action: pan-y;">
                                 <model-viewer
                                     id="viewer-baovat-2"
-                                    src="${window.__MODEL_COC_BACH_DANG_BLOB_URL || 'coc_bach_ang_nam_1288.glb'}"
+                                    data-model-src="coc_bach_ang_nam_1288.glb"
+                                    poster="images/museum/bach-dang-stakes-preview.svg"
                                     alt="Cọc Gỗ Bạch Đằng Năm 1288"
                                     auto-rotate
                                     rotation-per-second="20deg"
@@ -10730,9 +10732,9 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                                     </div>
 
                                     <!-- Loading spinner overlay -->
-                                    <div id="loading-overlay-2" style="position: absolute; inset: 0; display: ${window.__MODEL_COC_BACH_DANG_BLOB_URL ? 'none' : 'flex'}; flex-direction: column; align-items: center; justify-content: center; background: rgba(12,18,24,0.85); z-index: 5; transition: opacity 0.4s;">
+                                    <div id="loading-overlay-2" style="position: absolute; inset: 0; display: ${window.__MODEL_COC_BACH_DANG_BLOB_URL ? 'none' : 'flex'}; flex-direction: column; align-items: center; justify-content: center; background: rgba(12,18,24,0.18); z-index: 5; transition: opacity 0.4s; pointer-events: none;">
                                         <div style="width: 44px; height: 44px; border: 3px solid rgba(93,173,226,0.25); border-top: 3px solid #5DADE2; border-radius: 50%; animation: spin3D 1s linear infinite;"></div>
-                                        <div id="loading-text-2" style="margin-top: 12px; color: #FDF8EE; font-size: 0.88rem; font-weight: 600; text-align: center; padding: 0 15px;">Đang tải Cọc Gỗ Bạch Đằng (76.4 MB)...</div>
+                                        <div id="loading-text-2" style="margin-top: 12px; color: #FDF8EE; background: rgba(12,18,24,0.84); border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-align: center; padding: 7px 12px;">Mô hình 3D sẽ tải khi bạn chọn xem.</div>
                                         <div style="width: 160px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; margin-top: 10px; overflow: hidden;">
                                             <div id="inner-pbar-2" style="width: 0%; height: 100%; background: linear-gradient(90deg, #5DADE2, #FFF); transition: width 0.15s;"></div>
                                         </div>
@@ -10863,6 +10865,13 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                 if (btn2) { btn2.style.background = '#2A1F1A'; btn2.style.color = '#E0CEB5'; }
                 if (btnBoth) { btnBoth.style.background = 'var(--vang-dong)'; btnBoth.style.color = '#1C1512'; }
             }
+
+            var requestedModels = target === 1 ? [1] : (target === 2 ? [2] : [1, 2]);
+            setTimeout(function() {
+                if (typeof window.khoiTaoViewerBaoVat3D === 'function') {
+                    window.khoiTaoViewerBaoVat3D(requestedModels);
+                }
+            }, 60);
         };
 
         // 6. Nạp / Đổi file 3D từ máy tính (Chống lỗi CORS trên file:// qua URL.createObjectURL)
@@ -10891,15 +10900,20 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
         };
 
         // 7. Khởi tạo và lắng nghe tiến trình nạp mô hình 3D thực tế
-        window.khoiTaoViewerBaoVat3D = function() {
-            [1, 2].forEach(function(frameId) {
+        window.khoiTaoViewerBaoVat3D = function(frameIds) {
+            (Array.isArray(frameIds) && frameIds.length ? frameIds : [1]).forEach(function(frameId) {
                 var viewer = document.getElementById('viewer-baovat-' + frameId);
                 if (!viewer) return;
 
                 var blobUrl = (frameId === 1) ? window.__MODEL_TRONG_DONG_BLOB_URL : window.__MODEL_COC_BACH_DANG_BLOB_URL;
-                if (blobUrl && viewer.src !== blobUrl) {
-                    viewer.src = blobUrl;
+                var modelUrl = blobUrl || viewer.getAttribute('data-model-src');
+
+                // Gắn listener một lần; chuyển tab không tạo listener trùng.
+                if (viewer.dataset.museumLoadEventsBound === '1') {
+                    if (modelUrl && viewer.getAttribute('src') !== modelUrl) viewer.setAttribute('src', modelUrl);
+                    return;
                 }
+                viewer.dataset.museumLoadEventsBound = '1';
 
                 // Tiến trình nạp dữ liệu (Progress)
                 viewer.addEventListener('progress', function(e) {
@@ -10912,7 +10926,7 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                     if (text && percent < 100) {
                         var title = (frameId === 1) ? 'Trống Đồng Đông Sơn' : 'Cọc Gỗ Bạch Đằng';
                         var sz = (frameId === 1) ? '16.5 MB' : '76.4 MB';
-                        text.textContent = 'Đang tải ' + title + ' (' + percent + '% / ' + sz + ')...';
+                        text.textContent = 'Đang tải ' + title + ' (' + percent + '% / ' + sz + ')…';
                     }
                 });
 
@@ -10959,7 +10973,12 @@ Têm trầu cánh kiếm cho chồng ra quân...&rdquo;
                     }
                 });
 
-                // Kiểm tra nếu viewer đã nạp xong từ Blob trước đó
+                // Chỉ gán đường dẫn sau khi đã đăng ký sự kiện tải.
+                if (modelUrl && viewer.getAttribute('src') !== modelUrl) {
+                    viewer.setAttribute('src', modelUrl);
+                }
+
+                // Kiểm tra nếu viewer đã nạp xong từ cache hoặc Blob trước đó
                 if (viewer.loaded) {
                     var overlay = document.getElementById('loading-overlay-' + frameId);
                     if (overlay) {

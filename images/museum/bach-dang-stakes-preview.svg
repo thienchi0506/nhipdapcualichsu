@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Hình xem trước cọc gỗ Bạch Đằng">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#172c3a"/><stop offset="1" stop-color="#284b57"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#43828a"/><stop offset="1" stop-color="#102b3a"/></linearGradient>
+    <linearGradient id="wood" x2="1" y2="1"><stop stop-color="#be9155"/><stop offset=".5" stop-color="#684323"/><stop offset="1" stop-color="#d2a669"/></linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <path d="M0 260q160-48 320 0t320 0 320 0v280H0z" fill="url(#water)"/>
+  <path d="M0 280q140-30 280 0t280 0 280 0 120 0" fill="none" stroke="#a2d2cc" stroke-width="4" opacity=".5"/>
+  <g stroke="#d4ad73" stroke-width="5" stroke-linejoin="round">
+    <path d="M245 360V178l-22 20 22-72 22 72-22-20v182z" fill="url(#wood)"/>
+    <path d="M345 375V145l-24 24 24-82 24 82-24-24v230z" fill="url(#wood)"/>
+    <path d="M450 354V190l-20 20 20-66 20 66-20-20v164z" fill="url(#wood)"/>
+    <path d="M555 380V130l-25 26 25-88 25 88-25-26v250z" fill="url(#wood)"/>
+    <path d="M670 360V180l-22 22 22-74 22 74-22-22v180z" fill="url(#wood)"/>
+    <path d="M760 378V220l-19 18 19-64 19 64-19-18v158z" fill="url(#wood)"/>
+  </g>
+  <g stroke="#c7e1d8" stroke-width="3" opacity=".55"><path d="M75 315h170m240 25h185M130 390h170m350-48h190M300 440h180"/></g>
+  <g fill="#e3d4a9" font-family="serif" text-anchor="middle">
+    <text x="480" y="470" font-size="28" letter-spacing="4">CỌC GỖ BẠCH ĐẰNG</text>
+    <text x="480" y="505" font-size="17" opacity=".82">Đang chuẩn bị mô hình 3D…</text>
+  </g>
+</svg>
