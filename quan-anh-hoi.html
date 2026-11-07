@@ -1545,7 +1545,7 @@
         const mediaServiceHint = document.getElementById('media-service-hint');
         if (mediaServiceHint) {
             mediaServiceHint.textContent = isCloudinaryConfigured()
-                ? 'Ảnh tối đa 15 MB · video tối đa 80 MB · lưu qua Cloudinary'
+                ? 'Ảnh tối đa 15 MB · video tối đa 80 MB'
                 : 'Ảnh/video cần cấu hình Cloudinary; bài chữ vẫn dùng Firebase miễn phí';
         }
 
@@ -3237,5 +3237,6 @@
             khoiTaoBangTin();
         });
     </script>
+    <script type="module" src="site-account.js"></script>
 </body>
 </html>
