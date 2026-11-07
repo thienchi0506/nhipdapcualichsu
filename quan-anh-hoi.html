@@ -895,8 +895,8 @@
             font: inherit;
             cursor: pointer;
         }
-        .btn-admin-delete-post,
-        .admin-report-delete-post {
+        .btn-admin-trash-post,
+        .admin-report-trash-post {
             min-height: 44px;
             padding: 8px 12px;
             border: 1px solid #9F2424 !important;
@@ -907,10 +907,50 @@
             font-weight: 700;
             cursor: pointer;
         }
-        .btn-admin-delete-post:hover,
-        .admin-report-delete-post:hover { background: #B52A2A !important; }
-        .btn-admin-delete-post:disabled,
-        .admin-report-delete-post:disabled { opacity: .58; cursor: wait; }
+        .btn-admin-trash-post:hover,
+        .admin-report-trash-post:hover { background: #B52A2A !important; }
+        .btn-admin-trash-post:disabled,
+        .admin-report-trash-post:disabled { opacity: .58; cursor: wait; }
+        .admin-trash-panel {
+            margin-top: 16px;
+            padding: 14px;
+            border: 1px dashed #C6A850;
+            border-radius: 10px;
+            background: rgba(247, 238, 219, .6);
+        }
+        .admin-trash-panel[hidden] { display: none; }
+        .admin-trash-list { display: grid; gap: 10px; margin-top: 10px; }
+        .admin-trash-card {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px;
+            border: 1px solid #D6C2A0;
+            border-radius: 9px;
+            background: #FFFDF8;
+        }
+        .admin-trash-card p { margin: 4px 0; overflow-wrap: anywhere; }
+        .admin-trash-card__meta { color: #705A3A; font-size: .82rem; }
+        .admin-trash-restore {
+            flex: 0 0 auto;
+            min-height: 44px;
+            padding: 8px 12px;
+            border: 1px solid #317346;
+            border-radius: 8px;
+            background: #2C7042;
+            color: #FFF;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .admin-trash-restore:disabled { opacity: .58; cursor: wait; }
+        @media (max-width: 620px) {
+            .admin-trash-card { flex-direction: column; }
+            .admin-trash-restore { width: 100%; }
+            .admin-reports-heading { align-items: flex-start; }
+            .admin-reports-heading .admin-report-controls { justify-content: flex-end; }
+        }
         .forum-report-dialog {
             width: min(520px, calc(100vw - 28px));
             max-height: min(84dvh, 720px);
@@ -947,6 +987,9 @@
         :root[data-theme="dark"] .admin-reports-heading h4,
         :root[data-theme="dark"] .report-dialog-heading h3 { color: #F3D981; }
         :root[data-theme="dark"] .admin-report-meta { color: #C6AE83; }
+        :root[data-theme="dark"] .admin-trash-panel { background: #2A2119; border-color: #705A3A; }
+        :root[data-theme="dark"] .admin-trash-card { background: #302720; border-color: #705A3A; }
+        :root[data-theme="dark"] .admin-trash-card__meta { color: #C6AE83; }
         :root[data-theme="dark"] .report-dialog-form select,
         :root[data-theme="dark"] .report-dialog-form textarea { background: #302720; color: #F1E7D6; }
 
@@ -1389,11 +1432,19 @@
             <section id="admin-reports-panel" class="admin-reports-panel" hidden aria-label="Quản lý báo cáo bài viết">
                 <div class="admin-reports-heading">
                     <h4>🛡️ Báo cáo bài viết</h4>
-                    <button type="button" onclick="dongDongBaoCaoAdmin()" aria-label="Đóng bảng báo cáo">Đóng</button>
+                    <div class="admin-report-controls">
+                        <button type="button" onclick="moDongThungRacAdmin()">🗑️ Thùng rác (<span id="admin-trash-count">0</span>)</button>
+                        <button type="button" onclick="dongDongBaoCaoAdmin()" aria-label="Đóng bảng báo cáo">Đóng</button>
+                    </div>
                 </div>
                 <div id="admin-reports-list" class="admin-reports-list" aria-live="polite">
                     <p>Đang tải báo cáo…</p>
                 </div>
+                <section id="admin-trash-panel" class="admin-trash-panel" hidden aria-label="Thùng rác bài viết">
+                    <h4>🗑️ Thùng rác bài viết</h4>
+                    <p class="admin-trash-card__meta">Bài ở đây được ẩn khỏi bảng tin. Khôi phục sẽ đưa bài và bình luận trở lại.</p>
+                    <div id="admin-trash-list" class="admin-trash-list" aria-live="polite"></div>
+                </section>
             </section>
 
             <!-- Danh sách bài đăng -->
@@ -1464,9 +1515,7 @@
             doc,
             setDoc,
             updateDoc,
-            increment,
-            getDocs,
-            writeBatch
+            increment
         } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
         // ===================================================
@@ -1618,6 +1667,12 @@
         //  QUẢN LÝ TRẠNG THÁI, ĐỀ XUẤT NGẪU NHIÊN & LỊCH SỬ XEM
         // ===================================================
         let danhSachBaiViet = [];
+        function baiVietDangTrongThungRac(post) {
+            return post?.moderationState === 'trashed';
+        }
+        function layBaiVietDangHienThi() {
+            return danhSachBaiViet.filter(post => !baiVietDangTrongThungRac(post));
+        }
         let boLocHienTai = 'all';
         let thuTuDeXuatHienTai = []; // Mảng postId theo thứ tự đề xuất hiện tại
         let chuDeDeXuatHienTai = null;
@@ -1718,7 +1773,7 @@
             if (!select) return;
 
             const existingTopics = new Set();
-            danhSachBaiViet.forEach(p => {
+            layBaiVietDangHienThi().forEach(p => {
                 if (p && p.topic && typeof p.topic === 'string') {
                     existingTopics.add(p.topic.trim());
                 }
@@ -1796,9 +1851,9 @@
 
         // Lấy danh sách bài đã sắp xếp đề xuất, chống nhảy giật vị trí khi live update
         function layDanhSachDeXuat(forceReshuffle = false) {
-            let postsInTopic = danhSachBaiViet;
+            let postsInTopic = layBaiVietDangHienThi();
             if (boLocHienTai !== 'all') {
-                postsInTopic = danhSachBaiViet.filter(p => p.topic === boLocHienTai);
+                postsInTopic = postsInTopic.filter(p => p.topic === boLocHienTai);
             }
             if (postsInTopic.length === 0) {
                 thuTuDeXuatHienTai = [];
@@ -1832,9 +1887,9 @@
         function capNhatThongKeDeXuat() {
             const statsEl = document.getElementById('viewer-feed-stats');
             if (!statsEl) return;
-            let postsInTopic = danhSachBaiViet;
+            let postsInTopic = layBaiVietDangHienThi();
             if (boLocHienTai !== 'all') {
-                postsInTopic = danhSachBaiViet.filter(p => p.topic === boLocHienTai);
+                postsInTopic = postsInTopic.filter(p => p.topic === boLocHienTai);
             }
             const total = postsInTopic.length;
             if (total === 0) {
@@ -2202,7 +2257,10 @@
                     danhSachBaiViet = posts;
                     capNhatTrangThaiKetNoi(true, nguoiDungHienTai ? "Đã đăng nhập Firebase" : "Đã kết nối · cần đăng nhập để đăng bài");
                     renderBangTin();
-                    if (laQuanTriVien()) renderBaoCaoChoAdmin();
+                    if (laQuanTriVien()) {
+                        renderBaoCaoChoAdmin();
+                        renderThungRacChoAdmin();
+                    }
                     capNhatThongSo();
                 }, (error) => {
                     daNhanDuLieuCloud = true;
@@ -2576,7 +2634,7 @@
         };
         let adminReportsUnsubscribe = null;
         let adminReportsCache = [];
-        const deletingPostsInProgress = new Set();
+        const postActionsInProgress = new Set();
 
         function laQuanTriVien() {
             return Boolean(nguoiDungHienTai && forumAdminUids.has(nguoiDungHienTai.uid));
@@ -2661,7 +2719,16 @@
             if (!panel) return;
             panel.hidden = false;
             taiBaoCaoChoAdmin();
+            renderThungRacChoAdmin();
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        window.moDongThungRacAdmin = function() {
+            if (!laQuanTriVien()) return;
+            const panel = document.getElementById('admin-trash-panel');
+            if (!panel) return;
+            panel.hidden = !panel.hidden;
+            if (!panel.hidden) renderThungRacChoAdmin();
         };
 
         window.dongDongBaoCaoAdmin = function() {
@@ -2680,6 +2747,7 @@
             adminReportsUnsubscribe = onSnapshot(reportsQuery, snapshot => {
                 adminReportsCache = snapshot.docs.map(reportDoc => ({ id: reportDoc.id, ...reportDoc.data() }));
                 renderBaoCaoChoAdmin();
+                renderThungRacChoAdmin();
             }, error => {
                 console.error('Không tải được danh sách báo cáo:', error);
                 list.innerHTML = '<p role="alert">Không đọc được báo cáo. Kiểm tra UID quản trị viên và Firestore Rules đã Publish.</p>';
@@ -2697,7 +2765,9 @@
                 const status = reportStatusLabels[report.status] ? report.status : 'pending';
                 const reason = reportReasonLabels[report.reason] || 'Lý do khác';
                 const postId = typeof report.postId === 'string' ? report.postId : '';
-                const postIsKnownDeleted = daTaiBaiVietCloud && !danhSachBaiViet.some(post => post.id === postId);
+                const linkedPost = danhSachBaiViet.find(post => post.id === postId);
+                const postIsInTrash = baiVietDangTrongThungRac(linkedPost);
+                const postIsMissing = daTaiBaiVietCloud && !linkedPost;
                 return `
                     <article class="admin-report-card">
                         <div class="admin-report-heading">
@@ -2706,10 +2776,11 @@
                         </div>
                         <p>${escapeHtml(report.details || 'Không có mô tả thêm.')}</p>
                         <p class="admin-report-meta">Bài viết: ${escapeHtml(postId)} · Người gửi UID: ${escapeHtml(report.reporterUid || '')} · ${escapeHtml(dinhDangThoiGian(report.createdAt))}</p>
-                        ${postIsKnownDeleted ? '<p class="admin-report-meta">🗑️ Bài viết đã bị xóa; báo cáo được giữ lại để lưu hồ sơ.</p>' : ''}
+                        ${postIsInTrash ? '<p class="admin-report-meta">🗑️ Bài viết đang ở thùng rác; bình luận và báo cáo vẫn được giữ.</p>' : ''}
+                        ${postIsMissing ? '<p class="admin-report-meta">Bài viết không còn trong Firestore; báo cáo vẫn được lưu.</p>' : ''}
                         <div class="admin-report-controls">
-                            <button type="button" data-open-reported-post="${escapeHtml(postId)}" ${postIsKnownDeleted ? 'disabled' : ''}>Mở bài viết</button>
-                            ${postIsKnownDeleted ? '' : `<button type="button" class="admin-report-delete-post" data-admin-delete-post="${escapeHtml(postId)}" aria-label="Xóa bài viết được báo cáo">🗑 Xóa bài này</button>`}
+                            <button type="button" data-open-reported-post="${escapeHtml(postId)}" ${(postIsInTrash || postIsMissing) ? 'disabled' : ''}>Mở bài viết</button>
+                            ${(postIsInTrash || postIsMissing) ? '' : `<button type="button" class="admin-report-trash-post" data-trash-post="${escapeHtml(postId)}" aria-label="Đưa bài viết được báo cáo vào thùng rác">🗑 Đưa vào thùng rác</button>`}
                             <label for="report-status-${escapeHtml(report.id)}">Trạng thái:</label>
                             <select id="report-status-${escapeHtml(report.id)}" data-report-status="${escapeHtml(report.id)}" aria-label="Cập nhật trạng thái báo cáo">
                                 ${Object.entries(reportStatusLabels).map(([value, label]) => `<option value="${value}" ${status === value ? 'selected' : ''}>${label}</option>`).join('')}
@@ -2718,6 +2789,67 @@
                     </article>
                 `;
             }).join('');
+        }
+
+        function renderThungRacChoAdmin() {
+            const list = document.getElementById('admin-trash-list');
+            const count = document.getElementById('admin-trash-count');
+            if (!list || !laQuanTriVien()) return;
+            const trashedPosts = danhSachBaiViet.filter(baiVietDangTrongThungRac);
+            if (count) count.textContent = String(trashedPosts.length);
+            if (!trashedPosts.length) {
+                list.innerHTML = '<p>Thùng rác đang trống.</p>';
+                return;
+            }
+            list.innerHTML = trashedPosts.map(post => {
+                const postId = escapeHtml(post.id);
+                const excerpt = escapeHtml((post.content || '').replace(/\s+/g, ' ').trim().slice(0, 260));
+                return `<article class="admin-trash-card">
+                    <div>
+                        <strong>${escapeHtml(post.author || 'Hiền sĩ ẩn danh')} · ${escapeHtml(post.topic || 'Luận Đạo')}</strong>
+                        <p>${excerpt || 'Bài viết không có nội dung chữ.'}</p>
+                        <p class="admin-trash-card__meta">Đưa vào thùng rác: ${escapeHtml(dinhDangThoiGian(post.deletedAt))}</p>
+                    </div>
+                    <button type="button" class="admin-trash-restore" data-restore-post="${postId}">↩ Khôi phục</button>
+                </article>`;
+            }).join('');
+        }
+
+        async function phucHoiBaiViet(postId, button = null) {
+            if (!laQuanTriVien() || !db || !isFirestoreActive || !postId) return;
+            if (postActionsInProgress.has(postId)) return;
+            const post = danhSachBaiViet.find(item => item.id === postId);
+            if (!baiVietDangTrongThungRac(post)) {
+                hienToast('Bài viết này không còn nằm trong thùng rác.');
+                return;
+            }
+            if (!window.confirm(`Khôi phục bài của ${post.author || 'Hiền sĩ ẩn danh'}? Bài và các bình luận sẽ xuất hiện lại trên bảng tin.`)) return;
+
+            postActionsInProgress.add(postId);
+            if (button) { button.disabled = true; button.textContent = 'Đang khôi phục…'; }
+            try {
+                await updateDoc(doc(db, 'posts', postId), {
+                    moderationState: 'active',
+                    restoredAt: serverTimestamp(),
+                    restoredBy: nguoiDungHienTai.uid
+                });
+                danhSachBaiViet = danhSachBaiViet.map(item => item.id === postId
+                    ? { ...item, moderationState: 'active', restoredAt: new Date(), restoredBy: nguoiDungHienTai.uid }
+                    : item);
+                renderBangTin(true);
+                capNhatThongSo();
+                renderBaoCaoChoAdmin();
+                renderThungRacChoAdmin();
+                hienToast('Đã khôi phục bài viết. Bài và bình luận đã trở lại bảng tin.');
+            } catch (error) {
+                console.error('Không khôi phục được bài viết:', error);
+                hienToast(error?.code === 'permission-denied'
+                    ? 'Firestore từ chối khôi phục. Hãy Publish Rules admin đã cập nhật.'
+                    : 'Không thể khôi phục bài viết. Kiểm tra kết nối rồi thử lại.');
+            } finally {
+                postActionsInProgress.delete(postId);
+                if (button?.isConnected) { button.disabled = false; button.textContent = '↩ Khôi phục'; }
+            }
         }
 
         async function capNhatTrangThaiBaoCao(reportId, status) {
@@ -2734,84 +2866,81 @@
             }
         }
 
-        async function xoaBaiVietKemDuLieu(postId, button = null) {
+        async function duaBaiVietVaoThungRac(postId, button = null) {
             if (!laQuanTriVien()) {
-                hienToast('Chỉ quản trị viên mới được xóa bài viết.');
+                hienToast('Chỉ quản trị viên mới được đưa bài vào thùng rác.');
                 return;
             }
-            if (!db || !isFirestoreActive || !postId || deletingPostsInProgress.has(postId)) {
-                if (!db || !isFirestoreActive) hienToast('Firestore chưa sẵn sàng; chưa có dữ liệu nào bị xóa.');
+            if (!db || !isFirestoreActive || !postId || postActionsInProgress.has(postId)) {
+                if (!db || !isFirestoreActive) hienToast('Firestore chưa sẵn sàng; bài viết chưa bị thay đổi.');
                 return;
             }
 
             const post = danhSachBaiViet.find(item => item.id === postId);
-            const author = post?.author || 'bài viết này';
+            if (!post || baiVietDangTrongThungRac(post)) {
+                hienToast('Bài viết không tồn tại hoặc đã ở trong thùng rác.');
+                return;
+            }
+            const author = post.author || 'Hiền sĩ ẩn danh';
             const excerpt = (post?.content || '').replace(/\s+/g, ' ').trim().slice(0, 160);
             const approved = window.confirm(
-                `Xóa bài của ${author}?${excerpt ? `\n\n“${excerpt}${post.content.length > 160 ? '…' : ''}”` : ''}\n\nBài viết và toàn bộ bình luận sẽ bị xóa. Các báo cáo liên quan được giữ lại và chuyển sang “Đã xử lý”. Thao tác không thể hoàn tác.`
+                `Đưa bài của ${author} vào thùng rác?${excerpt ? `\n\n“${excerpt}${post.content.length > 160 ? '…' : ''}”` : ''}\n\nBài sẽ ẩn khỏi bảng tin. Bình luận và báo cáo vẫn được giữ; admin có thể khôi phục bài sau.`
             );
             if (!approved) return;
 
-            deletingPostsInProgress.add(postId);
-            if (button) { button.disabled = true; button.textContent = 'Đang xóa…'; }
+            postActionsInProgress.add(postId);
+            if (button) { button.disabled = true; button.textContent = 'Đang chuyển…'; }
             try {
-                const [commentsSnapshot, reportsSnapshot] = await Promise.all([
-                    getDocs(query(collection(db, 'comments'), where('postId', '==', postId))),
-                    getDocs(query(collection(db, 'reports'), where('postId', '==', postId)))
-                ]);
-                const writeCount = commentsSnapshot.size + reportsSnapshot.size + 1;
-                if (writeCount > 500) {
-                    throw new Error(`Bài này có ${writeCount} dữ liệu liên quan, vượt giới hạn 500 thao tác của một lần xóa an toàn. Chưa có dữ liệu nào bị xóa.`);
-                }
-
-                const batch = writeBatch(db);
-                commentsSnapshot.docs.forEach(commentDoc => batch.delete(commentDoc.ref));
-                reportsSnapshot.docs.forEach(reportDoc => batch.update(reportDoc.ref, {
-                    status: 'resolved',
-                    updatedAt: serverTimestamp()
-                }));
-                batch.delete(doc(db, 'posts', postId));
-                await batch.commit();
-
-                danhSachBaiViet = danhSachBaiViet.filter(item => item.id !== postId);
+                await updateDoc(doc(db, 'posts', postId), {
+                    moderationState: 'trashed',
+                    deletedAt: serverTimestamp(),
+                    deletedBy: nguoiDungHienTai.uid
+                });
+                danhSachBaiViet = danhSachBaiViet.map(item => item.id === postId
+                    ? { ...item, moderationState: 'trashed', deletedAt: new Date(), deletedBy: nguoiDungHienTai.uid }
+                    : item);
                 try {
                     renderBangTin();
                     capNhatThongSo();
                     renderBaoCaoChoAdmin();
+                    renderThungRacChoAdmin();
                 } catch (refreshError) {
-                    console.warn('Đã xóa thành công nhưng không làm mới được giao diện ngay:', refreshError);
+                    console.warn('Đã chuyển bài vào thùng rác nhưng giao diện chưa làm mới ngay:', refreshError);
                 }
-                hienToast(`Đã xóa bài viết cùng ${commentsSnapshot.size} bình luận. Các báo cáo được lưu lại.`);
+                hienToast('Đã chuyển bài vào thùng rác. Bình luận và báo cáo được giữ nguyên.');
             } catch (error) {
-                console.error('Không thể xóa bài viết và dữ liệu liên quan:', error);
+                console.error('Không thể chuyển bài vào thùng rác:', error);
                 if (error?.code === 'permission-denied') {
-                    hienToast('Firestore từ chối xóa. Hãy kiểm tra Rules admin đã được Publish; dữ liệu vẫn được giữ nguyên.');
-                } else if (error?.message?.includes('500 thao tác')) {
-                    hienToast(error.message);
+                    hienToast('Firestore từ chối thao tác. Hãy Publish Rules admin đã cập nhật; bài vẫn được giữ nguyên.');
                 } else {
-                    hienToast('Không xóa được bài viết. Kiểm tra mạng và Firestore Rules; dữ liệu chưa được xác nhận là đã xóa.');
+                    hienToast('Không thể chuyển bài. Kiểm tra mạng rồi thử lại; bài và bình luận vẫn được giữ.');
                 }
             } finally {
-                deletingPostsInProgress.delete(postId);
-                if (button?.isConnected) { button.disabled = false; button.textContent = '🗑 Xóa bài này'; }
+                postActionsInProgress.delete(postId);
+                if (button?.isConnected) { button.disabled = false; button.textContent = '🗑 Đưa vào thùng rác'; }
             }
         }
 
         const postsContainerForReports = document.getElementById('posts-container');
         postsContainerForReports?.addEventListener('click', event => {
-            const deleteButton = event.target.closest('[data-admin-delete-post]');
-            if (deleteButton) {
-                xoaBaiVietKemDuLieu(deleteButton.dataset.adminDeletePost, deleteButton);
+            const trashButton = event.target.closest('[data-trash-post]');
+            if (trashButton) {
+                duaBaiVietVaoThungRac(trashButton.dataset.trashPost, trashButton);
                 return;
             }
             const button = event.target.closest('[data-report-post]');
             if (button) window.moBaoCaoBaiViet(button.dataset.reportPost);
         });
-        const adminReportsList = document.getElementById('admin-reports-list');
-        adminReportsList?.addEventListener('click', event => {
-            const deleteButton = event.target.closest('[data-admin-delete-post]');
-            if (deleteButton) {
-                xoaBaiVietKemDuLieu(deleteButton.dataset.adminDeletePost, deleteButton);
+        const adminModerationPanel = document.getElementById('admin-reports-panel');
+        adminModerationPanel?.addEventListener('click', event => {
+            const trashButton = event.target.closest('[data-trash-post]');
+            if (trashButton) {
+                duaBaiVietVaoThungRac(trashButton.dataset.trashPost, trashButton);
+                return;
+            }
+            const restoreButton = event.target.closest('[data-restore-post]');
+            if (restoreButton) {
+                phucHoiBaiViet(restoreButton.dataset.restorePost, restoreButton);
                 return;
             }
             const button = event.target.closest('[data-open-reported-post]');
@@ -2827,7 +2956,7 @@
             }
             requestAnimationFrame(() => document.getElementById(`post-${postId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
         });
-        adminReportsList?.addEventListener('change', event => {
+        adminModerationPanel?.addEventListener('change', event => {
             const select = event.target.closest('[data-report-status]');
             if (select) capNhatTrangThaiBaoCao(select.dataset.reportStatus, select.value);
         });
@@ -2928,7 +3057,7 @@
                                 <button class="btn-post-action" type="button" data-report-post="${escapeHtml(postId)}" aria-label="Báo cáo bài viết của ${author}">
                                     <span>⚑</span> Báo cáo
                                 </button>
-                                ${laQuanTriVien() ? `<button class="btn-admin-delete-post" type="button" data-admin-delete-post="${escapeHtml(postId)}" aria-label="Xóa bài viết này">🗑 Xóa bài</button>` : ''}
+                                ${laQuanTriVien() ? `<button class="btn-admin-trash-post" type="button" data-trash-post="${escapeHtml(postId)}" aria-label="Đưa bài viết vào thùng rác">🗑 Thùng rác</button>` : ''}
                             </div>
                         </div>
 
@@ -2983,10 +3112,11 @@
         function capNhatThongSo() {
             const statPosts = document.getElementById('stat-total-posts');
             const statReplies = document.getElementById('stat-total-replies');
-            if (statPosts) statPosts.textContent = danhSachBaiViet.length;
+            const visiblePosts = layBaiVietDangHienThi();
+            if (statPosts) statPosts.textContent = visiblePosts.length;
 
             let totalReplies = 0;
-            danhSachBaiViet.forEach(p => {
+            visiblePosts.forEach(p => {
                 totalReplies += (p.commentsCount || 0);
             });
             if (statReplies) statReplies.textContent = totalReplies;

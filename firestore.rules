@@ -6,6 +6,21 @@ service cloud.firestore {
         && request.auth.uid == 'xTC4fHaFUeMQFe0jLyzJNy2sQN83';
     }
 
+    function isAdminPostModerationUpdate() {
+      return isForumAdmin() && (
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['moderationState', 'deletedAt', 'deletedBy'])
+          && request.resource.data.moderationState == 'trashed'
+          && resource.data.get('moderationState', 'active') != 'trashed'
+          && request.resource.data.deletedAt == request.time
+          && request.resource.data.deletedBy == request.auth.uid)
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['moderationState', 'restoredAt', 'restoredBy'])
+          && resource.data.get('moderationState', 'active') == 'trashed'
+          && request.resource.data.moderationState == 'active'
+          && request.resource.data.restoredAt == request.time
+          && request.resource.data.restoredBy == request.auth.uid)
+      );
+    }
+
     function isFeedbackMediaListValid(media) {
       return media is list
         && media.size() <= 3
@@ -25,6 +40,11 @@ service cloud.firestore {
         && request.resource.data.content.size() <= 1500
         && request.resource.data.likes == 0
         && request.resource.data.commentsCount == 0
+        && !('moderationState' in request.resource.data)
+        && !('deletedAt' in request.resource.data)
+        && !('deletedBy' in request.resource.data)
+        && !('restoredAt' in request.resource.data)
+        && !('restoredBy' in request.resource.data)
         && (!('media' in request.resource.data)
           || request.resource.data.media == null
           || (request.resource.data.media.url is string
@@ -35,8 +55,9 @@ service cloud.firestore {
             || (resource.data.get('likes', 0) > 0 && request.resource.data.likes == resource.data.get('likes', 0) - 1)))
         || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['commentsCount'])
           && request.resource.data.commentsCount == resource.data.get('commentsCount', 0) + 1)
+        || isAdminPostModerationUpdate()
       );
-      allow delete: if isForumAdmin();
+      allow delete: if false;
     }
 
     match /comments/{commentId} {
@@ -49,8 +70,9 @@ service cloud.firestore {
         && request.resource.data.content is string
         && request.resource.data.content.size() > 0
         && request.resource.data.content.size() <= 500
-        && exists(/databases/$(database)/documents/posts/$(request.resource.data.postId));
-      allow delete: if isForumAdmin();
+        && exists(/databases/$(database)/documents/posts/$(request.resource.data.postId))
+        && get(/databases/$(database)/documents/posts/$(request.resource.data.postId)).data.get('moderationState', 'active') != 'trashed';
+      allow delete: if false;
       allow update: if false;
     }
 
@@ -67,6 +89,7 @@ service cloud.firestore {
         && request.resource.data.createdAt == request.time
         && reportId == request.resource.data.postId + '_' + request.auth.uid
         && exists(/databases/$(database)/documents/posts/$(request.resource.data.postId))
+        && get(/databases/$(database)/documents/posts/$(request.resource.data.postId)).data.get('moderationState', 'active') != 'trashed'
         && !exists(/databases/$(database)/documents/reports/$(reportId));
 
       allow read: if isForumAdmin();
