@@ -4543,6 +4543,10 @@
         }
 
         let sapXepHienTai = 'dexuat';
+        Object.defineProperty(window, 'sapXepHienTai', {
+            get() { return sapXepHienTai; },
+            set(val) { sapXepHienTai = val; }
+        });
 
         window.doiKieuSapXep = function(kieu) {
             sapXepHienTai = kieu || 'dexuat';
@@ -6851,8 +6855,8 @@ const docRef = await addDoc(collection(db, "posts"), {
             }
         });
 
-        // Khởi động khi tải xong DOM
-        document.addEventListener('DOMContentLoaded', () => {
+        // Khởi động hệ thống Quần Anh Hội (Hỗ trợ cả khi DOM đã sẵn sàng trước khi module thực thi)
+        function khoiDongQuanAnhHoi() {
             boLocHienTai = layChuDeDaLuu();
             dongBoViewerTopicUI(boLocHienTai);
             dongBoFilterTabsUI(boLocHienTai);
@@ -6885,7 +6889,13 @@ const docRef = await addDoc(collection(db, "posts"), {
                     }
                 }
             } catch (_) {}
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', khoiDongQuanAnhHoi);
+        } else {
+            khoiDongQuanAnhHoi();
+        }
     </script>
     <script type="module" src="site-account.js"></script>
 </body>
