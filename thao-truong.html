@@ -57635,13 +57635,10 @@ function executeSubmitExam() {
   clearInterval(timerInterval);
   const previousNotice = $('submission-error-notice');
   if (previousNotice) previousNotice.style.display = 'none';
-  // Keep one submission-time value in function scope: the result panel uses it
-  // after the analytics-only block below has finished.
-  const submissionElapsedSeconds = examStartTime
-    ? Math.max(0, Math.floor((Date.now() - examStartTime) / 1000))
-    : elapsedSeconds;
-
   try {
+    // Both timed exams and unlimited practice already maintain this counter.
+    // Keep time calculation inside the recovery boundary as part of submission.
+    const submissionElapsedSeconds = Math.max(0, Math.floor(elapsedSeconds));
     executeSubmitExamCore(submissionElapsedSeconds);
   } catch (error) {
     // Never leave a candidate on a frozen exam with no feedback. A malformed
