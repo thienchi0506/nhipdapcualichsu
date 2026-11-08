@@ -87,39 +87,47 @@
     }
 
     /* HEADER */
+    /* HEADER GỌN GÀNG, HIỆN ĐẠI (COMPACT TOPBAR) */
     .header {
       background: rgba(20, 12, 8, 0.95);
-      border-bottom: 2px solid var(--gold);
+      border-bottom: 1.5px solid var(--gold);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 14px rgba(0,0,0,0.45);
       padding-top: var(--sat);
     }
     .header-inner {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 12px max(16px, var(--sar)) 12px max(16px, var(--sal));
+      height: 56px;
+      min-height: 56px;
+      padding: 0 max(16px, var(--sar)) 0 max(16px, var(--sal));
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      box-sizing: border-box;
     }
     .home-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       color: var(--gold);
       text-decoration: none;
       font-weight: 700;
-      font-size: 13.5px;
-      padding: 8px 16px;
+      font-size: 13px;
+      padding: 0 12px;
+      height: 34px;
       border: 1px solid var(--gold);
       border-radius: 8px;
       transition: all 0.2s ease;
       background: rgba(197, 155, 39, 0.1);
-      min-height: 44px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
     .home-btn:hover {
       background: var(--gold);
@@ -128,42 +136,119 @@
     }
     .header-titles {
       text-align: center;
-      flex: 1;
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
     }
     .header-titles h1 {
       font-family: var(--font-serif);
-      font-size: clamp(1rem, 2.5vw + 0.3rem, 1.35rem);
+      font-size: clamp(0.95rem, 1.35vw, 1.18rem);
       font-weight: 800;
       color: var(--gold);
-      letter-spacing: 1px;
-      line-height: 1.3;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      margin: 0;
+      white-space: nowrap;
     }
     .header-sub {
-      font-size: clamp(0.72rem, 1vw + 0.3rem, 0.82rem);
+      font-size: clamp(0.7rem, 0.9vw, 0.76rem);
       color: #dfd0be;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
+      line-height: 1.2;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 380px;
+      opacity: 0.85;
     }
     .header-badges {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
+      flex-shrink: 0;
+      flex-wrap: nowrap;
     }
     .badge-pill {
-      font-size: clamp(0.75rem, 1vw + 0.3rem, 0.85rem);
+      font-size: 0.78rem;
       font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 20px;
+      padding: 0 10px;
+      height: 34px;
+      border-radius: 18px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(197, 155, 39, 0.3);
       color: #dfd0be;
-      min-height: 32px;
       display: inline-flex;
       align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+    #commander-badge {
+      display: none !important;
+    }
+    .btn-bang-vang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(123, 30, 30, 0.9) 0%, rgba(74, 14, 14, 0.95) 100%);
+      border: 1.2px solid var(--gold);
+      color: #FFF3D6;
+      padding: 0 11px;
+      height: 34px;
+      border-radius: 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+    .btn-bang-vang-badge:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+      border-color: #ffe1a0;
+    }
+    .btn-theme-toggle {
+      height: 34px !important;
+      padding: 0 11px !important;
+      font-size: 0.78rem !important;
+      border-radius: 18px !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
+    }
+    .header .site-account-widget {
+      flex-shrink: 0;
+    }
+    .header .site-account-trigger {
+      min-height: 34px !important;
+      height: 34px !important;
+      padding: 2px 10px !important;
+      font-size: 12.5px !important;
+      gap: 6px !important;
+      border-radius: 18px !important;
+      white-space: nowrap !important;
+      box-sizing: border-box !important;
+    }
+    .header .site-account-trigger img,
+    .header .site-account-avatar {
+      width: 24px !important;
+      height: 24px !important;
+      flex: 0 0 24px !important;
+      font-size: 13px !important;
     }
     .music-badge-pill {
       cursor: pointer;
       font-family: inherit;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.2s ease;
     }
     .music-badge-pill:hover {
@@ -175,6 +260,65 @@
       border-color: #f1c40f;
       color: #ffe1a0;
       box-shadow: 0 0 8px rgba(241, 196, 15, 0.3);
+    }
+    @media (max-width: 1100px) {
+      .header-sub {
+        display: none !important;
+      }
+      .header-titles h1 {
+        font-size: 1.05rem !important;
+      }
+      .header-badges {
+        gap: 5px !important;
+      }
+    }
+    @media (max-width: 920px) {
+      .header-inner {
+        gap: 8px !important;
+        padding: 0 10px !important;
+      }
+      .su-quan-badge-text,
+      .theme-toggle-text {
+        display: none !important;
+      }
+      .home-btn {
+        padding: 0 8px !important;
+        font-size: 12px !important;
+      }
+    }
+    /* Giữ thanh đầu trang gọn trên máy tính bảng và laptop hẹp; mọi chức năng
+       vẫn dùng được qua nút biểu tượng có title/aria-label sẵn. */
+    @media (min-width: 769px) and (max-width: 1920px) {
+      .header-inner {
+        height: auto;
+        min-height: 56px;
+        flex-wrap: wrap;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        row-gap: 6px;
+      }
+      .header-titles {
+        flex: 1 1 240px;
+      }
+      .header-badges {
+        flex: 1 1 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .su-quan-badge-text,
+      #bang-vang-badge-text,
+      #music-btn-text,
+      .theme-toggle-text {
+        display: none;
+      }
+      .header-badges .btn-bang-vang-badge,
+      .header-badges .badge-pill,
+      .header-badges .btn-theme-toggle {
+        min-width: 40px;
+        justify-content: center;
+        padding-left: 9px;
+        padding-right: 9px;
+      }
     }
 
     main {
@@ -2281,18 +2425,21 @@
     @media (max-width: 768px) {
       /* --- 1. HEADER CHÍNH CỦA TRANG --- */
       .header {
-        padding: 10px 12px !important;
+        padding: 6px 10px !important;
       }
       .header-inner {
         flex-wrap: wrap !important;
-        gap: 8px !important;
+        gap: 6px !important;
         justify-content: space-between !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 4px 6px !important;
       }
       .home-btn {
-        padding: 8px 12px !important;
-        font-size: 13px !important;
-        height: 38px !important;
-        min-height: 38px !important;
+        padding: 0 10px !important;
+        font-size: 12px !important;
+        height: 32px !important;
+        min-height: 32px !important;
         display: inline-flex !important;
         align-items: center !important;
         touch-action: manipulation !important;
@@ -2301,25 +2448,39 @@
         order: 3 !important;
         width: 100% !important;
         text-align: center !important;
-        margin-top: 4px !important;
+        margin-top: 3px !important;
+        padding: 0 !important;
       }
       .header-titles h1 {
-        font-size: 18px !important;
-        letter-spacing: 1px !important;
+        font-size: 15px !important;
+        letter-spacing: 0.5px !important;
       }
       .header-sub {
-        font-size: 11.5px !important;
+        display: none !important;
       }
       .header-badges {
         display: flex !important;
-        gap: 6px !important;
+        gap: 4px !important;
       }
-      .badge-pill {
+      .badge-pill,
+      .btn-bang-vang-badge,
+      .btn-theme-toggle {
         font-size: 11px !important;
-        padding: 4px 8px !important;
-        height: 32px !important;
-        display: inline-flex !important;
-        align-items: center !important;
+        padding: 0 7px !important;
+        height: 30px !important;
+        min-height: 30px !important;
+      }
+      .header .site-account-trigger {
+        height: 30px !important;
+        min-height: 30px !important;
+        padding: 0 8px !important;
+        font-size: 11.5px !important;
+      }
+      .header .site-account-trigger img,
+      .header .site-account-avatar {
+        width: 20px !important;
+        height: 20px !important;
+        flex: 0 0 20px !important;
       }
 
       /* --- 2. SẢNH CHỜ: INTRO & CHẾ ĐỘ NỔI BẬT --- */
@@ -57472,6 +57633,11 @@ function executeSubmitExam() {
   if (isSubmitted) return;
   isSubmitted = true;
   clearInterval(timerInterval);
+  // Keep one submission-time value in function scope: the result panel uses it
+  // after the analytics-only block below has finished.
+  const submissionElapsedSeconds = examStartTime
+    ? Math.max(0, Math.floor((Date.now() - examStartTime) / 1000))
+    : elapsedSeconds;
 
   const p1Len = currentExam.part1 ? currentExam.part1.length : 0;
   const p2Len = currentExam.part2 ? currentExam.part2.length : 0;
@@ -57569,7 +57735,6 @@ function executeSubmitExam() {
     });
 
     // Đánh giá điều kiện mở khóa Thẻ Nhân Vật & Ghi danh Bảng Vàng (Prompt 3)
-    const elapsedSeconds = examStartTime ? Math.floor((Date.now() - examStartTime) / 1000) : 0;
     evaluateCardUnlockConditions(
       currentExam, 
       totalScore, 
@@ -57577,7 +57742,7 @@ function executeSubmitExam() {
       scoreP2, 
       p2StatementsTotal, 
       p2StatementsCorrect, 
-      elapsedSeconds
+      submissionElapsedSeconds
     );
   }
 
@@ -57625,8 +57790,8 @@ function executeSubmitExam() {
     p3StatEl.style.display = 'block';
   }
   
-  const minsUsed = Math.floor(elapsedSeconds / 60);
-  const secsUsed = elapsedSeconds % 60;
+  const minsUsed = Math.floor(submissionElapsedSeconds / 60);
+  const secsUsed = submissionElapsedSeconds % 60;
   $('res-stat-time').innerHTML = `⏱️ <strong>Thời gian hoàn thành:</strong> ${minsUsed} phút ${secsUsed.toString().padStart(2, '0')} giây`;
 
   // Rank message
