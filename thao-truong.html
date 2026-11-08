@@ -57633,11 +57633,50 @@ function executeSubmitExam() {
   if (isSubmitted) return;
   isSubmitted = true;
   clearInterval(timerInterval);
+  const previousNotice = $('submission-error-notice');
+  if (previousNotice) previousNotice.style.display = 'none';
   // Keep one submission-time value in function scope: the result panel uses it
   // after the analytics-only block below has finished.
   const submissionElapsedSeconds = examStartTime
     ? Math.max(0, Math.floor((Date.now() - examStartTime) / 1000))
     : elapsedSeconds;
+
+  try {
+    executeSubmitExamCore(submissionElapsedSeconds);
+  } catch (error) {
+    // Never leave a candidate on a frozen exam with no feedback. A malformed
+    // question or an optional UI helper must not silently strand the submit flow.
+    console.error('[Thao Trường] Lỗi khi chấm bài; giữ nguyên câu trả lời để thử lại:', error, {
+      examId: currentExam && currentExam.id,
+      examTitle: currentExam && currentExam.title
+    });
+    isSubmitted = false;
+    const resultSummary = $('result-summary-box');
+    if (resultSummary) resultSummary.style.display = 'none';
+    const bottomSubmit = $('bottom-submit-wrapper');
+    if (bottomSubmit) bottomSubmit.style.display = 'block';
+
+    let notice = $('submission-error-notice');
+    if (!notice) {
+      notice = document.createElement('div');
+      notice.id = 'submission-error-notice';
+      notice.setAttribute('role', 'alert');
+      notice.style.cssText = 'margin:16px 0;padding:14px 18px;border:1px solid #dc6b4f;border-radius:12px;background:#fff4ed;color:#702d1d;font-weight:700;line-height:1.6;';
+      const paper = document.querySelector('.exam-paper-container');
+      if (paper) paper.insertBefore(notice, paper.firstChild);
+    }
+    notice.textContent = 'Chưa thể chấm bài do gặp lỗi kỹ thuật. Câu trả lời của bạn vẫn được giữ nguyên; hãy tiếp tục thao tác hoặc bấm “Nộp bài” để thử lại. Lỗi đã được ghi nhận để kiểm tra.';
+    notice.style.display = 'block';
+    if (timerSeconds > 0) {
+      try { startTimer45Min(); } catch (timerError) {
+        console.error('[Thao Trường] Không thể khởi động lại đồng hồ sau lỗi chấm bài:', timerError);
+      }
+    }
+    try { notice.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+  }
+}
+
+function executeSubmitExamCore(submissionElapsedSeconds) {
 
   const p1Len = currentExam.part1 ? currentExam.part1.length : 0;
   const p2Len = currentExam.part2 ? currentExam.part2.length : 0;
