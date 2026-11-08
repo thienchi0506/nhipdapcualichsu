@@ -503,6 +503,151 @@ body.theme-truc-thu .btn-museum-ask-ai:hover {
   color: #FFFDF8 !important;
 }
 
+/* M. TÀNG THƯ CÁC - TRI THỨC LỊCH SỬ (Trúc Thư Theme) */
+body.theme-truc-thu {
+  background-color: #F4EEDF !important;
+}
+
+/* Header Tàng Thư Các */
+body.theme-truc-thu .header h1 {
+  color: #8B2500 !important;
+  text-shadow: none !important;
+}
+body.theme-truc-thu .header p {
+  color: #5C4332 !important;
+}
+body.theme-truc-thu .btn-back,
+body.theme-truc-thu .btn-music,
+body.theme-truc-thu .progress {
+  background: #FFFDF8 !important;
+  border: 1.5px solid #8B2500 !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .btn-back:hover,
+body.theme-truc-thu .btn-music:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .search {
+  background: #FFFDF8 !important;
+  border: 2px solid #8B2500 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .search::placeholder {
+  color: #8C735D !important;
+}
+
+/* Tabs Khối Lớp (Sửa lỗi trùng màu red-on-red "bài mấy" & "khối lớp") */
+body.theme-truc-thu .tab.active,
+body.theme-truc-thu .grade-tabs .tab.active {
+  background: linear-gradient(135deg, #8B2500 0%, #A93226 100%) !important;
+  color: #FFFDF8 !important;
+  border: 2px solid #D4AF37 !important;
+  box-shadow: 0 4px 14px rgba(139, 37, 0, 0.3) !important;
+}
+body.theme-truc-thu .tab.active span,
+body.theme-truc-thu .grade-tabs .tab.active span {
+  color: #FFFDF8 !important;
+  font-weight: 700 !important;
+}
+body.theme-truc-thu .tab.active small,
+body.theme-truc-thu .grade-tabs .tab.active small {
+  color: #FFE6A5 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+body.theme-truc-thu .tab:not(.active),
+body.theme-truc-thu .grade-tabs .tab:not(.active) {
+  background: #EAE0CD !important;
+  border: 2px solid #C8B996 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .tab:not(.active) small,
+body.theme-truc-thu .grade-tabs .tab:not(.active) small {
+  color: #5C4332 !important;
+}
+
+/* Nút "Vào học" (Sửa lỗi mất chữ "vào học") */
+body.theme-truc-thu .study {
+  background: linear-gradient(135deg, #8B2500 0%, #A93226 100%) !important;
+  color: #FFFDF8 !important;
+  border: 1px solid #D4AF37 !important;
+  box-shadow: 0 2px 8px rgba(139, 37, 0, 0.25) !important;
+}
+body.theme-truc-thu .study:hover {
+  background: linear-gradient(135deg, #6B1C00 0%, #8B2500 100%) !important;
+  color: #FFE6A5 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Danh sách chủ đề & bài học */
+body.theme-truc-thu .toolbar {
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .toggle-all {
+  background: #FFFDF8 !important;
+  border: 1.5px solid #8B2500 !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .toggle-all:hover {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+}
+body.theme-truc-thu .topic {
+  background: #FFFDF8 !important;
+  border-color: #D5C2A5 !important;
+  box-shadow: 0 2px 8px rgba(60, 30, 20, 0.06) !important;
+}
+body.theme-truc-thu .topic-head {
+  background: linear-gradient(90deg, rgba(139, 37, 0, 0.08), rgba(212, 175, 55, 0.12)) !important;
+  color: #8B2500 !important;
+}
+body.theme-truc-thu .lesson {
+  border-bottom-color: #E8DEC5 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .lesson-name {
+  color: #26160C !important;
+}
+body.theme-truc-thu .lesson.done .lesson-name {
+  color: #196F3D !important;
+}
+
+/* Modal Chi Tiết Bài Học */
+body.theme-truc-thu .modal-box {
+  background: #FDF9F0 !important;
+  border-color: #8B2500 !important;
+  color: #26160C !important;
+}
+body.theme-truc-thu .close {
+  background: #8B2500 !important;
+  color: #FFFDF8 !important;
+  border-color: #D4AF37 !important;
+}
+body.theme-truc-thu .modal h2 {
+  color: #8B2500 !important;
+  border-bottom-color: #D4AF37 !important;
+}
+body.theme-truc-thu .section {
+  background: #FFFDF8 !important;
+  border-color: #D5C2A5 !important;
+}
+body.theme-truc-thu .section h3 {
+  color: #8B2500 !important;
+  border-left-color: #8B2500 !important;
+}
+body.theme-truc-thu .history-table thead th {
+  background: linear-gradient(135deg, #7B1E1E 0%, #9B2E2E 100%) !important;
+  color: #FFFDF8 !important;
+  border-color: #D4AF37 !important;
+}
+body.theme-truc-thu .mindmap {
+  background: linear-gradient(135deg, #3A2016 0%, #26160C 100%) !important;
+  color: #FFEAA7 !important;
+  border-color: #D4AF37 !important;
+}
+
+
 
 
 

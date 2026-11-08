@@ -4311,7 +4311,7 @@
                 text-overflow: ellipsis !important;
                 flex-shrink: 1 !important;
                 line-height: 1 !important;
-                max-width: calc(100% - 110px) !important;
+                max-width: calc(100% - 150px) !important;
                 margin: 0 !important;
             }
 
@@ -4325,7 +4325,17 @@
                 margin: 0 !important;
             }
 
-            /* Nút Âm thanh & Nút Tài khoản chuyển thành Icon Buttons kim loại 42x42px */
+            /* Ẩn các nút Trợ lý Sử Quan Ảo, Cài đặt App, Trúc Thư trên Mobile theo yêu cầu */
+            #btn-pwa-install-nav,
+            #btn-theme-toggle-nav,
+            #btn-open-su-quan-nav,
+            .btn-pwa-install,
+            .btn-theme-toggle,
+            .navbar__btn--su-quan {
+                display: none !important;
+            }
+
+            /* Các nút còn lại trên mobile (Nhạc nền, Quần Anh Hội) chuyển thành Icon Buttons kim loại 42x42px */
             .navbar__btn {
                 width: 42px !important;
                 height: 42px !important;
@@ -4351,9 +4361,24 @@
 
             .nav-music-text,
             .nav-auth-text,
+            .nav-auth-caret,
             .nav-quan-anh-text,
+            .nav-install-text,
+            .theme-toggle-text,
+            .nav-suquan-text,
             #trang-thai-nhac {
                 display: none !important;
+            }
+
+            /* Nút thông tin tài khoản trên Mobile: Nút tròn 42x42px gọn gàng chứa ảnh đại diện / icon */
+            .navbar-account-wrap {
+                position: relative !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                flex-shrink: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             #btn-auth,
@@ -4362,8 +4387,11 @@
                 height: 42px !important;
                 min-width: 42px !important;
                 min-height: 42px !important;
+                max-width: 42px !important;
+                max-height: 42px !important;
                 border-radius: 50% !important;
                 padding: 0 !important;
+                margin: 0 !important;
                 display: inline-flex !important;
                 align-items: center !important;
                 justify-content: center !important;
@@ -4373,6 +4401,28 @@
                 overflow: hidden !important;
                 white-space: nowrap !important;
                 box-sizing: border-box !important;
+            }
+
+            /* Ảnh đại diện tròn ôm khít nút tròn */
+            #btn-auth .nav-auth-avatar {
+                width: 100% !important;
+                height: 100% !important;
+                min-width: 100% !important;
+                min-height: 100% !important;
+                object-fit: cover !important;
+                border-radius: 50% !important;
+                display: block !important;
+            }
+
+            /* Icon chìa khoá / người dùng căn giữa chuẩn */
+            #btn-auth .nav-auth-icon {
+                font-size: 1.15rem !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                line-height: 1 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             /* Thanh danh mục phụ (#sub-navbar): Centered Compact Pills */
@@ -5855,7 +5905,46 @@
                         </a>
                     </li>
 
-                    <!-- 2. BẢO TÀNG ▾ -->
+                    <!-- 2. SẢNH CHÍNH ▾ (Gộp: Sảnh chính, Tàng thư các, Thao trường, Sa bàn 2D, Sa bàn 3D) -->
+                    <li class="sub-navbar__item has-dropdown" data-name="Sảnh chính" id="nav-item-sanh-chinh">
+                        <a href="javascript:void(0)" class="sub-navbar__link" id="btn-sanh-chinh" onclick="toggleDropdownSubnav(event, 'sanh-chinh')" aria-haspopup="true" aria-expanded="false" title="Khu Vực Sảnh Chính & Tính Năng Học Tập">
+                            📜 SẢNH CHÍNH <span class="arrow-down">▾</span>
+                        </a>
+                        <ul class="sub-navbar__dropdown" id="dropdown-sanh-chinh">
+                            <li>
+                                <a href="trang-chinh.html" onclick="dongTatCaDropdown()">
+                                    <span class="dropdown-item-icon">📜</span>
+                                    <span class="dropdown-item-text">Sảnh Chính</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tang-thu-cac.html" onclick="dongTatCaDropdown()">
+                                    <span class="dropdown-item-icon">📖</span>
+                                    <span class="dropdown-item-text">Tàng Thư Các</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="thao-truong.html" onclick="dongTatCaDropdown()">
+                                    <span class="dropdown-item-icon">🎯</span>
+                                    <span class="dropdown-item-text">Thao Trường</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="sa-ban.html" onclick="dongTatCaDropdown()">
+                                    <span class="dropdown-item-icon">🗺️</span>
+                                    <span class="dropdown-item-text">Sa Bàn 2D</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="sa-ban-3d.html" onclick="dongTatCaDropdown()">
+                                    <span class="dropdown-item-icon">🚀</span>
+                                    <span class="dropdown-item-text">Sa Bàn 3D</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 3. BẢO TÀNG ▾ -->
                     <li class="sub-navbar__item has-dropdown" data-name="Bảo tàng" id="nav-item-bao-tang">
                         <a href="javascript:void(0)" class="sub-navbar__link" onclick="toggleDropdownSubnav(event, 'bao-tang')" aria-haspopup="true" aria-expanded="false" title="Bảo tàng Cổ vật & Di sản">
                             🏛️ BẢO TÀNG <span class="arrow-down">▾</span>
@@ -7560,7 +7649,7 @@
                 event.preventDefault();
                 event.stopPropagation();
             }
-            var targetId = (type === 'kham-pha') ? 'nav-item-kham-pha' : 'nav-item-bao-tang';
+            var targetId = 'nav-item-' + (type || 'bao-tang');
             var item = document.getElementById(targetId);
             if (!item) return;
 
