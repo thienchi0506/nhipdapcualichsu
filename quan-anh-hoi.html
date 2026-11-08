@@ -1951,26 +1951,43 @@
         .feed-filter-tabs {
             display: flex;
             gap: 8px;
-            flex-wrap: wrap;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 2px 2px 6px;
+        }
+
+        .feed-filter-tabs::-webkit-scrollbar {
+            display: none;
         }
 
         .feed-filter-btn {
             background: #EFE6D5;
             border: 1px solid #C4A575;
             color: #4A301D;
-            padding: 5px 14px;
-            border-radius: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
             font-family: 'Noto Serif', serif;
             font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .feed-filter-btn.active, .feed-filter-btn:hover {
             background: var(--do-ba-trau);
             color: #FFF;
             border-color: var(--do-ba-trau);
+            box-shadow: 0 2px 6px rgba(123, 30, 30, 0.25);
+        }
+
+        .feed-sort-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .feed-controls-bar {
@@ -2878,65 +2895,183 @@
             display: none;
         }
 
-        .comment-input-row {
+        /* ====================================================== */
+        /*  NÂNG CẤP KHU VỰC BÌNH LUẬN (PROMPT 7)                 */
+        /* ====================================================== */
+        .comments-drawer {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.3);
             display: flex;
+            flex-direction: column;
+            gap: 14px;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .comments-drawer.hidden {
+            display: none;
+        }
+
+        .comment-composer-box {
+            display: flex;
+            align-items: flex-start;
             gap: 10px;
-            margin-bottom: 16px;
+            width: 100%;
         }
 
-        .comment-input {
+        .comment-current-user-avatar {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7B1E1E 0%, #4A1212 100%);
+            border: 1.5px solid var(--vang-dong);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .comment-user-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comment-user-fallback {
+            line-height: 1;
+        }
+
+        .comment-input-wrap {
             flex: 1;
-            background: #FFF;
-            border: 1.5px solid #D4C3A3;
-            border-radius: 6px;
-            padding: 10px 14px;
-            font-family: 'Noto Serif', serif;
-            font-size: 0.9rem;
-            color: var(--nau-den);
-            outline: none;
-            transition: border-color 0.2s;
+            min-width: 0;
+            background: var(--qah-card-bg, #FFFDF8);
+            border: 1.5px solid rgba(212, 175, 55, 0.35);
+            border-radius: 12px;
+            padding: 8px 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        .comment-input:focus {
-            border-color: var(--do-ba-trau);
+        :root[data-theme="dark"] .comment-input-wrap {
+            background: #241C17;
+            border-color: #59472E;
+        }
+
+        .comment-input-wrap:focus-within {
+            border-color: var(--vang-dong);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+        }
+
+        .comment-textarea {
+            width: 100%;
+            min-height: 38px;
+            max-height: 120px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--qah-text-main, #2C1E18);
+            resize: none;
+            padding: 2px 0;
+        }
+
+        :root[data-theme="dark"] .comment-textarea {
+            color: #F1E7D6;
+        }
+
+        .comment-textarea::placeholder {
+            color: var(--qah-text-muted, #7D6B58);
+            font-style: italic;
+            font-size: 0.84rem;
+        }
+
+        .comment-tools-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.2);
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-ask-su-quan {
+            background: rgba(26, 54, 93, 0.08);
+            color: #1A365D;
+            border: 1px solid rgba(43, 108, 176, 0.4);
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-family: 'Noto Serif', serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        :root[data-theme="dark"] .btn-ask-su-quan {
+            background: rgba(99, 179, 237, 0.12);
+            color: #90CDF4;
+            border-color: rgba(99, 179, 237, 0.35);
+        }
+
+        .btn-ask-su-quan:hover {
+            background: linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%);
+            color: #FFF;
         }
 
         .btn-send-comment {
             background: var(--do-ba-trau);
             color: #FFF;
-            border: none;
+            border: 1px solid var(--do-ba-trau);
             border-radius: 6px;
-            padding: 10px 18px;
+            padding: 5px 14px;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             cursor: pointer;
             white-space: nowrap;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: auto;
         }
 
         .btn-send-comment:hover {
             background: var(--do-hover);
+            transform: translateY(-1px);
         }
 
+        /* Danh sách bình luận & Bong bóng luận bàn */
         .comments-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .comment-item {
-            background: #FFFDF8;
-            border: 1px solid #E6D9C2;
-            border-radius: 8px;
-            padding: 10px 14px;
             display: flex;
+            align-items: flex-start;
             gap: 10px;
+            background: transparent;
+            border: none;
+            padding: 0;
         }
 
         .comment-avatar {
             width: 32px;
             height: 32px;
+            min-width: 32px;
             border-radius: 50%;
             background: #4A1212;
             color: var(--vang-dong);
@@ -2945,40 +3080,130 @@
             justify-content: center;
             font-size: 0.95rem;
             flex-shrink: 0;
-            border: 1px solid var(--vang-dong);
+            border: 1.5px solid var(--vang-dong);
+            overflow: hidden;
+            margin-top: 2px;
         }
 
-        .comment-content-box {
+        .comment-avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comment-bubble {
             flex: 1;
+            min-width: 0;
+            background: rgba(244, 236, 216, 0.55);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 8px 12px;
+            transition: all 0.2s ease;
+        }
+
+        :root[data-theme="dark"] .comment-bubble {
+            background: #251D18;
+            border-color: #59472E;
+        }
+
+        .comment-bubble-header {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 3px;
         }
 
         .comment-author-name {
             font-weight: 700;
             color: var(--do-ba-trau);
-            font-size: 0.86rem;
-            margin-bottom: 2px;
+            font-size: 0.84rem;
+        }
+
+        :root[data-theme="dark"] .comment-author-name {
+            color: #F3D981;
         }
 
         .comment-time {
             font-size: 0.72rem;
-            color: #8C7B6B;
-            margin-left: 6px;
+            color: var(--qah-text-muted, #7D6B58);
             font-weight: normal;
+        }
+
+        :root[data-theme="dark"] .comment-time {
+            color: #A89580;
         }
 
         .comment-text {
             font-size: 0.88rem;
-            line-height: 1.6;
-            color: #3C2B22;
+            line-height: 1.55;
+            color: var(--qah-text-main, #2C1E18);
             white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        :root[data-theme="dark"] .comment-text {
+            color: #E2D3BA;
+        }
+
+        blockquote.comment-quote {
+            margin: 4px 0 8px;
+            padding: 4px 8px;
+            border-left: 2.5px solid var(--vang-dong);
+            background: rgba(212, 175, 55, 0.08);
+            font-size: 0.8rem;
+            color: var(--qah-text-muted, #7D6B58);
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+        }
+
+        :root[data-theme="dark"] blockquote.comment-quote {
+            background: rgba(212, 175, 55, 0.1);
+            color: #C5B095;
+        }
+
+        .comment-actions-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+            padding-top: 4px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.15);
+        }
+
+        .comment-action-btn {
+            background: transparent;
+            border: none;
+            color: var(--qah-text-muted, #7D6B58);
+            font-size: 0.74rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Noto Serif', serif;
+            transition: all 0.15s ease;
+        }
+
+        :root[data-theme="dark"] .comment-action-btn {
+            color: #B8A690;
+        }
+
+        .comment-action-btn:hover {
+            color: var(--do-ba-trau);
+            background: rgba(123, 30, 30, 0.08);
+        }
+
+        :root[data-theme="dark"] .comment-action-btn:hover {
+            color: #F3D981;
+            background: rgba(212, 175, 55, 0.12);
         }
 
         .no-comments-hint {
             text-align: center;
-            font-style: italic;
+            padding: 12px;
             font-size: 0.84rem;
-            color: #8C7B6B;
-            padding: 8px 0;
+            color: var(--qah-text-muted, #7D6B58);
+            font-style: italic;
         }
 
         /* Trạng thái rỗng / Tải dữ liệu */
@@ -3097,41 +3322,114 @@
         /* TOAST THÔNG BÁO */
         .toast-box {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #2C1810;
-            color: #FFF;
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, #2A1710 0%, #1A0D08 100%);
+            color: #F8EED9;
             border: 1.5px solid var(--vang-dong);
-            padding: 12px 22px;
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            font-size: 0.92rem;
-            z-index: 9999;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            font-family: 'Noto Serif', serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            z-index: 10000;
             display: none;
-            animation: fadeIn 0.3s ease;
+            align-items: center;
+            gap: 10px;
+            max-width: min(440px, calc(100vw - 32px));
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            pointer-events: none;
         }
+
+        .toast-box.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
+            .toast-box {
+                bottom: 80px;
+                right: 16px;
+                left: 16px;
+                margin: 0 auto;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* TỐI ƯU HÓA MOBILE (PROMPT 11) */
+            /* 1. Touch targets >= 44x44px */
+            .qah-nav-tab,
+            .sub-navbar__link {
+                min-height: 44px;
+                padding: 8px 12px;
+                display: inline-flex;
+                align-items: center;
+            }
+            .qah-icon-btn,
+            .qah-header-btn,
+            .qah-user-menu-btn {
+                min-width: 44px;
+                min-height: 44px;
+            }
+            .feed-filter-btn {
+                min-height: 44px;
+                padding: 10px 16px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .post-action-btn {
+                min-height: 44px;
+                padding: 10px 8px;
+            }
+            .btn-send-comment,
+            .btn-ask-su-quan {
+                min-height: 44px;
+                padding: 8px 14px;
+            }
+            .btn-quote-comment,
+            .comment-action-btn {
+                min-height: 38px;
+                padding: 6px 10px;
+            }
+            .forum-mobile-fab {
+                min-height: 48px;
+                bottom: 20px;
+                right: 16px;
+            }
+
+            /* 2. Responsive forms and meta */
             .header-top { flex-direction: column; gap: 8px; text-align: center; }
             .composer-header { flex-direction: column; align-items: flex-start; }
             .composer-header, .composer-author-box, .scroll-composer, .feed-section { min-width: 0; max-width: 100%; }
             .composer-author-box { display: grid; grid-template-columns: auto minmax(0, 1fr); width: 100%; }
-            .composer-author-input { width: 100%; min-width: 0; }
-            .composer-topic-select { grid-column: 1 / -1; width: 100%; min-width: 0; }
-            .composer-custom-topic-input { grid-column: 1 / -1; width: 100%; min-width: 0; }
+            .composer-author-input { width: 100%; min-width: 0; min-height: 44px; }
+            .composer-topic-select { grid-column: 1 / -1; width: 100%; min-width: 0; min-height: 44px; }
+            .composer-custom-topic-input { grid-column: 1 / -1; width: 100%; min-width: 0; min-height: 44px; }
             .composer-hashtags-row { flex-direction: column; align-items: stretch; gap: 6px; }
             .composer-footer { flex-direction: column; align-items: stretch; }
-            .btn-submit-post { width: 100%; justify-content: center; }
+            .btn-submit-post { width: 100%; min-height: 44px; justify-content: center; }
             .feed-header { flex-direction: column; align-items: flex-start; }
             .post-top-meta { flex-direction: column; align-items: flex-start; }
             .header-user-status { flex-wrap: wrap; justify-content: center; }
-            .comment-input-row { flex-direction: column; }
-            .comment-input-row .btn-send-comment { width: 100%; }
+            .comment-composer-box { gap: 8px; }
+            .comment-input-wrap { padding: 6px 10px; }
+            .comment-tools-bar { flex-direction: row; justify-content: space-between; }
             .feed-controls-bar { flex-direction: column; align-items: stretch; gap: 10px; }
             .viewer-topic-box { width: 100%; justify-content: space-between; }
-            .viewer-topic-select { flex: 1; max-width: none; }
+            .viewer-topic-select { flex: 1; max-width: none; min-height: 44px; }
+            .feed-sort-box { width: 100%; justify-content: space-between; }
+            .feed-sort-box .viewer-topic-select { flex: 1; min-height: 44px; }
             .viewer-actions-box { width: 100%; justify-content: space-between; }
+            .btn-shuffle-feed { min-height: 44px; padding: 8px 14px; }
             .admin-reports-panel { padding: 12px; }
             .report-dialog-form { padding: 16px; }
             .sub-navbar__menu { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
@@ -3663,21 +3961,33 @@
                     <span>📜</span> Bảng Tin Luận Đàm
                 </h3>
                 <div class="feed-filter-tabs">
-                    <button class="feed-filter-btn active" onclick="locBaiViet(this, 'all')">Tất cả</button>
-                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Bạch Đằng 938')">Bạch Đằng</button>
-                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Như Nguyệt 1077')">Như Nguyệt</button>
-                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Khảo Cứu Bảo Vật')">Bảo Vật</button>
-                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Hỏi Đáp Ôn Thi GDPT')">Ôn Thi</button>
+                    <button class="feed-filter-btn active" onclick="locBaiViet(this, 'all')">🌟 Tất cả</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Bạch Đằng 938')">⛵ Bạch Đằng</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Như Nguyệt 1077')">🛡️ Như Nguyệt</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Khảo Cứu Bảo Vật')">👑 Bảo Vật</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Hỏi Đáp Ôn Thi GDPT')">📚 Ôn Thi</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Chiến Thuật Quân Sự')">⚔️ Chiến Thuật</button>
+                    <button class="feed-filter-btn" onclick="locBaiViet(this, 'Di Sản Biển Đảo')">🌊 Biển Đảo</button>
                 </div>
                 <button type="button" id="btn-admin-reports" class="btn-post-action" onclick="moDongBaoCaoAdmin()" hidden>🛡️ Báo cáo bài viết</button>
             </div>
 
-            <!-- THANH ĐIỀU KHIỂN & ĐỀ XUẤT CHO NGƯỜI XEM -->
+            <!-- THANH ĐIỀU KHIỂN & ĐỀ XUẤT CHO NGƯỜI XEM (PROMPT 8) -->
             <div class="feed-controls-bar">
                 <div class="viewer-topic-box">
                     <label for="viewer-topic-select" class="viewer-topic-label">🎯 Chủ đề xem:</label>
                     <select id="viewer-topic-select" class="viewer-topic-select" onchange="doiChuDeXem(this.value)" aria-label="Chọn chủ đề xem bài">
                         <option value="all">🌟 Tất cả chủ đề (Đề xuất ngẫu nhiên)</option>
+                    </select>
+                </div>
+                <div class="feed-sort-box">
+                    <label for="feed-sort-select" class="viewer-topic-label">⚡ Sắp xếp:</label>
+                    <select id="feed-sort-select" class="viewer-topic-select" onchange="doiKieuSapXep(this.value)" aria-label="Sắp xếp bài viết">
+                        <option value="dexuat">🎲 Đề xuất thông minh</option>
+                        <option value="moinhat">⏳ Mới nhất</option>
+                        <option value="thaoluan">💬 Thảo luận sôi nổi</option>
+                        <option value="thanphuc">⭐ Nhiều thán phục</option>
+                        <option value="hinhanh">🖼️ Có tư liệu ảnh/video</option>
                     </select>
                 </div>
                 <div class="viewer-actions-box">
@@ -3750,20 +4060,26 @@
                         </ul>
                     </div>
 
-                    <!-- 3. THẺ TRỢ GIÚP & TIỆN ÍCH -->
+                    <!-- 3. THẺ LIÊN KẾT SỬ HỌC & TIỆN ÍCH (PROMPT 10) -->
                     <div class="qah-side-card" id="qah-help-card">
                         <div class="qah-side-card__header">
-                            <span class="qah-side-card__title">🛡️ TRỢ GIÚP & HỖ TRỢ</span>
+                            <span class="qah-side-card__title">📚 TÀI NGUYÊN SỬ HỌC</span>
                         </div>
                         <div class="qah-help-links">
+                            <a href="tang-thu-cac.html" class="qah-help-link" title="Khảo cứu bảo vật và tư liệu">
+                                <span>📜</span> <span>Tàng Thư Các (Bảo vật)</span>
+                            </a>
+                            <a href="sa-ban.html" class="qah-help-link" title="Sa bàn diễn biến chiến dịch">
+                                <span>🗺️</span> <span>Sa Bàn Chiến Trận</span>
+                            </a>
+                            <a href="thao-truong.html" class="qah-help-link" title="Khảo thí & Luyện thi lịch sử">
+                                <span>🎯</span> <span>Thao Trường Luyện Sử</span>
+                            </a>
                             <a href="su-quan-ao.html" class="qah-help-link" title="Đàm đạo cùng Sử Quan Ảo">
                                 <span>🤖</span> <span>Hỏi đáp cùng Sử Quan Ảo</span>
                             </a>
                             <a href="gop-y.html" class="qah-help-link" title="Góp ý phát triển diễn đàn">
                                 <span>✍️</span> <span>Góp ý & Báo lỗi hệ thống</span>
-                            </a>
-                            <a href="trang-chinh.html" class="qah-help-link" title="Quay về Sảnh Chính">
-                                <span>🏛️</span> <span>Về Sảnh Chính Hoàng Gia</span>
                             </a>
                         </div>
                     </div>
@@ -3781,7 +4097,7 @@
         </p>
     </footer>
 
-    <dialog id="forum-report-dialog" class="forum-report-dialog" aria-labelledby="report-dialog-title">
+    <dialog id="forum-report-dialog" class="forum-report-dialog" aria-labelledby="report-dialog-title" onclick="if(event.target===this) dongFormBaoCao()">
         <form id="forum-report-form" class="report-dialog-form" onsubmit="guiBaoCaoBaiViet(event)">
             <div class="report-dialog-heading">
                 <h3 id="report-dialog-title">Báo cáo bài viết</h3>
@@ -4226,7 +4542,24 @@
             return [...sortedUnread, ...sortedRead].map(p => p.id);
         }
 
-        // Lấy danh sách bài đã sắp xếp đề xuất, chống nhảy giật vị trí khi live update
+        let sapXepHienTai = 'dexuat';
+
+        window.doiKieuSapXep = function(kieu) {
+            sapXepHienTai = kieu || 'dexuat';
+            const sortEl = document.getElementById('feed-sort-select');
+            if (sortEl && sortEl.value !== sapXepHienTai) sortEl.value = sapXepHienTai;
+            renderBangTin(true);
+            const sortLabels = {
+                dexuat: 'Đề xuất thông minh',
+                moinhat: 'Mới nhất',
+                thaoluan: 'Thảo luận sôi nổi',
+                thanphuc: 'Nhiều thán phục',
+                hinhanh: 'Có tư liệu ảnh/video'
+            };
+            hienToast(`⚡ Sắp xếp theo: ${sortLabels[sapXepHienTai] || 'Mặc định'}`);
+        };
+
+        // Lấy danh sách bài đã sắp xếp đề xuất / bộ lọc (Prompt 8)
         function layDanhSachDeXuat(forceReshuffle = false) {
             let postsInTopic = layBaiVietDangHienThi();
             if (boLocHienTai !== 'all') {
@@ -4238,6 +4571,22 @@
                 return [];
             }
 
+            // SẮP XẾP THEO TIÊU CHÍ (PROMPT 8)
+            if (sapXepHienTai === 'moinhat') {
+                return [...postsInTopic].sort((a, b) => {
+                    const tA = a.createdAt?.toMillis ? a.createdAt.toMillis() : new Date(a.createdAt || 0).getTime();
+                    const tB = b.createdAt?.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt || 0).getTime();
+                    return tB - tA;
+                });
+            } else if (sapXepHienTai === 'thaoluan') {
+                return [...postsInTopic].sort((a, b) => (Number(b.commentsCount) || 0) - (Number(a.commentsCount) || 0));
+            } else if (sapXepHienTai === 'thanphuc') {
+                return [...postsInTopic].sort((a, b) => (Number(b.likes) || 0) - (Number(a.likes) || 0));
+            } else if (sapXepHienTai === 'hinhanh') {
+                return [...postsInTopic].filter(p => !!(p.mediaUrl || p.imageUrl || p.videoUrl));
+            }
+
+            // Mặc định: 'dexuat' (Đề xuất thông minh có trọng số tương tác & thời gian đọc)
             const viewedSet = layDanhSachDaXem();
 
             if (forceReshuffle || chuDeDeXuatHienTai !== boLocHienTai || thuTuDeXuatHienTai.length === 0) {
@@ -4943,35 +5292,72 @@ const docRef = await addDoc(collection(db, "posts"), {
             }
         }
 
+        function dinhDangNoiDungBinhLuan(rawContent) {
+            if (!rawContent) return '';
+            const text = String(rawContent);
+            const lines = text.split('\n');
+            let htmlParts = [];
+            let quoteLines = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const trimmed = line.trim();
+                if (trimmed.startsWith('>')) {
+                    quoteLines.push(escapeHtml(trimmed.replace(/^>\s*/, '')));
+                } else {
+                    if (quoteLines.length > 0) {
+                        htmlParts.push(`<blockquote class="comment-quote">${quoteLines.join('<br>')}</blockquote>`);
+                        quoteLines = [];
+                    }
+                    if (trimmed) {
+                        const safeLine = escapeHtml(line).replace(/(@[^\s,]+)/g, '<b style="color:var(--do-ba-trau);font-weight:700;">$1</b>');
+                        htmlParts.push(`<div>${safeLine}</div>`);
+                    }
+                }
+            }
+            if (quoteLines.length > 0) {
+                htmlParts.push(`<blockquote class="comment-quote">${quoteLines.join('<br>')}</blockquote>`);
+            }
+            return htmlParts.join('') || escapeHtml(rawContent);
+        }
+
         function renderDanhSachBinhLuan(postId, comments) {
             const listEl = document.getElementById(`comments-list-${postId}`);
             if (!listEl) return;
             binhLuanCache.set(postId, comments || []);
 
             if (!comments || comments.length === 0) {
-                listEl.innerHTML = `<p class="no-comments-hint">Chưa có lời luận bàn nào. Hãy là người đầu tiên khai mở đàm luận!</p>`;
+                listEl.innerHTML = `<p class="no-comments-hint" style="padding: 10px 14px; background: rgba(212, 175, 55, 0.06); border-radius: 8px; font-style: italic; font-size: 0.84rem; color: var(--qah-text-muted, #7D6B58); text-align: center;">Chưa có lời luận bàn nào. Hãy là người đầu tiên khai mở đàm luận!</p>`;
                 return;
             }
 
             listEl.innerHTML = comments.map(c => {
                 const cAuthor = escapeHtml(c.author || 'Hiền sĩ');
-                const cContent = escapeHtml(c.content || '');
+                const formattedBody = dinhDangNoiDungBinhLuan(c.content || '');
                 const cRank = window.layHocViAuthor ? window.layHocViAuthor(c.author || '') : { danhXung: 'Hiền Sĩ', rankClass: 'rank-hien-si' };
-                const safeContentForQuote = (c.content || '').replace(/'/g, "\\'").replace(/\n/g, ' ');
+                const safeAuthor = (c.author || 'Hiền sĩ').replace(/'/g, "\\'");
+                const safeContentForQuote = (c.content || '').replace(/'/g, "\\'").replace(/\n/g, ' ').substring(0, 100);
+                const commentId = c.id || '';
+
                 return `
-                <div class="comment-item">
+                <div class="comment-item" id="comment-${commentId}">
                     <div class="comment-avatar" title="${cAuthor}">${layBieuTuongAuthor(c.author || '')}</div>
-                    <div class="comment-content-box">
-                        <div class="comment-author-name">
-                            ${cAuthor}
-                            <span class="post-author-rank ${cRank.rankClass}" style="font-size: 0.68rem; padding: 1px 6px;">${cRank.danhXung}</span>
+                    <div class="comment-bubble">
+                        <div class="comment-bubble-header">
+                            <span class="comment-author-name">${cAuthor}</span>
+                            <span class="post-author-rank ${cRank.rankClass}" style="font-size: 0.65rem; padding: 1px 6px;">${cRank.danhXung}</span>
                             <span class="comment-time">• ${dinhDangThoiGian(c.createdAt)}</span>
-                            <button type="button" class="btn-quote-comment" onclick="trichDanBinhLuan('${cAuthor}', '${safeContentForQuote}', '${postId}')" title="Trích dẫn lời đàm đạo này">❝ Trích dẫn</button>
                         </div>
-                        <div class="comment-text">${cContent}</div>
+                        <div class="comment-text">${formattedBody}</div>
+                        <div class="comment-actions-row">
+                            <button type="button" class="comment-action-btn" onclick="traLoiBinhLuan('${safeAuthor}', '${postId}')" title="Hồi đáp hiền sĩ">💬 Trả lời</button>
+                            <button type="button" class="comment-action-btn" onclick="trichDanBinhLuan('${safeAuthor}', '${safeContentForQuote}', '${postId}')" title="Trích dẫn đàm đạo">❝ Trích dẫn</button>
+                            <button type="button" class="comment-action-btn" onclick="moBaoCaoBinhLuan('${commentId}', '${postId}')" title="Báo cáo vi phạm">⚑ Báo cáo</button>
+                        </div>
                     </div>
                 </div>
-            `;}).join('');
+                `;
+            }).join('');
         }
 
         window.guiBinhLuan = async function(postId) {
@@ -5042,6 +5428,9 @@ const docRef = await addDoc(collection(db, "posts"), {
                 }
 
                 inputEl.value = "";
+                if (typeof window.tuDongCoGianCommentInput === 'function') {
+                    window.tuDongCoGianCommentInput(inputEl);
+                }
                 hienToast("💬 Lời luận bàn đã được khắc ghi thành công!");
                 await taiBinhLuan(postId);
             } catch(e) {
@@ -5099,7 +5488,12 @@ const docRef = await addDoc(collection(db, "posts"), {
 
         window.dongFormBaoCao = function() {
             const dialog = document.getElementById('forum-report-dialog');
-            if (dialog?.open) dialog.close();
+            const titleEl = document.getElementById('report-dialog-title');
+            if (dialog) {
+                delete dialog.dataset.commentId;
+                if (dialog.open) dialog.close();
+            }
+            if (titleEl) titleEl.textContent = 'Báo cáo bài viết';
         };
 
         window.guiBaoCaoBaiViet = async function(event) {
@@ -5122,12 +5516,17 @@ const docRef = await addDoc(collection(db, "posts"), {
 
             if (submitButton) submitButton.disabled = true;
             try {
+                const commentId = dialog?.dataset.commentId;
+                let fullDetails = details;
+                if (commentId) {
+                    fullDetails = `[Báo cáo bình luận #${commentId}] ${details}`.slice(0, 500);
+                }
                 const reportId = `${postId}_${nguoiDungHienTai.uid}`;
                 await setDoc(doc(db, 'reports', reportId), {
                     postId,
                     reporterUid: nguoiDungHienTai.uid,
                     reason,
-                    details,
+                    details: fullDetails,
                     status: 'pending',
                     createdAt: serverTimestamp()
                 });
@@ -5401,7 +5800,7 @@ const docRef = await addDoc(collection(db, "posts"), {
             if (!container) return;
             const openedThreads = [...container.querySelectorAll('.comments-drawer:not(.hidden)')]
                 .map(drawer => drawer.id.replace('comments-drawer-', ''));
-            const commentDrafts = new Map([...container.querySelectorAll('.comment-input')]
+            const commentDrafts = new Map([...container.querySelectorAll('.comment-textarea, .comment-input')]
                 .map(input => [input.id.replace('input-comment-', ''), input.value]));
 
             capNhatDanhSachChuDeXem();
@@ -5411,10 +5810,13 @@ const docRef = await addDoc(collection(db, "posts"), {
 
             if (orderedPosts.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-feed-state">
-                        <span style="font-size: 2.4rem; display: block; margin-bottom: 8px;">📭</span>
-                        <h4 style="font-family: 'Playfair Display', serif; color: var(--do-ba-trau); font-size: 1.25rem;">Chưa Có Luận Đề Nào Trong Chủ Đề Này</h4>
-                        <p style="font-size: 0.92rem; margin-top: 6px;">Hãy là vị hào kiệt đầu tiên khai bút đàm đạo!</p>
+                    <div class="empty-feed-state" style="text-align: center; padding: 36px 20px; background: rgba(244, 236, 216, 0.45); border-radius: 12px; border: 1.5px dashed rgba(212, 175, 55, 0.4); margin: 20px 0;">
+                        <span style="font-size: 2.6rem; display: block; margin-bottom: 8px;">📭</span>
+                        <h4 style="font-family: 'Playfair Display', serif; color: var(--do-ba-trau); font-size: 1.25rem;">Chưa Có Luận Đề Nào Phù Hợp Bộ Lọc</h4>
+                        <p style="font-size: 0.92rem; margin-top: 6px; color: var(--qah-text-muted, #7D6B58);">Hãy là vị hào kiệt đầu tiên khai bút đàm đạo hoặc chuyển về xem tất cả!</p>
+                        <button type="button" class="btn-send-comment" onclick="locBaiViet(null, 'all')" style="margin: 14px auto 0; display: inline-flex;">
+                            Quay Về Tất Cả Chủ Đề
+                        </button>
                     </div>
                 `;
                 unsubscribeBinhLuan.forEach((stop, postId) => {
@@ -5478,6 +5880,10 @@ const docRef = await addDoc(collection(db, "posts"), {
                     : '';
 
                 const safeContentSnippet = rawContent.replace(/'/g, "\\'").replace(/\n/g, ' ').slice(0, 100);
+                const savedCommentDraft = commentDrafts.get(postId) || '';
+                const currentUserAvatarHtml = nguoiDungHienTai && nguoiDungHienTai.photoURL 
+                    ? `<img src="${escapeHtml(nguoiDungHienTai.photoURL)}" alt="Avatar" class="comment-user-img" onerror="this.onerror=null;this.parentElement.innerHTML='⚔️';">`
+                    : `<span class="comment-user-fallback">${escapeHtml(localStorage.getItem('tenNguoiDung') || '⚔️').slice(0, 1) || '⚔️'}</span>`;
 
                 return `
                     <article class="scroll-post-card${isUnread ? ' post-unread' : ''}" id="post-${postId}" data-post-id="${postId}">
@@ -5554,22 +5960,31 @@ const docRef = await addDoc(collection(db, "posts"), {
                             </button>
                         </div>
 
-                        <!-- KHU VỰC BÌNH LUẬN XỔ XUỐNG -->
+                        <!-- KHU VỰC BÌNH LUẬN XỔ XUỐNG (PROMPT 7) -->
                         <div class="comments-drawer hidden" id="comments-drawer-${postId}">
-                            <div class="comment-input-row">
-                                <input 
-                                    type="text" 
-                                    id="input-comment-${postId}" 
-                                    class="comment-input" 
-                                    placeholder="Viết lời đàm đạo, bình luận..."
-                                    onkeydown="if(event.key==='Enter') guiBinhLuan('${postId}')"
-                                >
-                                <button class="btn-send-comment" onclick="guiBinhLuan('${postId}')">
-                                    Gửi Luận Bàn ➔
-                                </button>
-                                <button type="button" class="btn-ask-su-quan" onclick="thinhSuQuanBinhLuan('${postId}', '${safeContentSnippet}')" title="Thỉnh Sử Quan Ảo đối chiếu tư liệu luận bàn">
-                                    <span>🤖</span> <span>Thỉnh Sử Quan</span>
-                                </button>
+                            <div class="comment-composer-box">
+                                <div class="comment-current-user-avatar" title="Tài khoản của bạn">
+                                    ${currentUserAvatarHtml}
+                                </div>
+                                <div class="comment-input-wrap">
+                                    <textarea 
+                                        id="input-comment-${postId}" 
+                                        class="comment-textarea" 
+                                        placeholder="Viết lời đàm đạo, đối chiếu sử liệu... (Nhấn Enter để gửi, Shift+Enter xuống dòng)"
+                                        rows="1"
+                                        oninput="tuDongCoGianCommentInput(this)"
+                                        onkeydown="xuLyGoBinhLuan(event, '${postId}')"
+                                        onfocus="kiemTraDangNhapBinhLuan(event)"
+                                    >${escapeHtml(savedCommentDraft)}</textarea>
+                                    <div class="comment-tools-bar">
+                                        <button type="button" class="btn-ask-su-quan" onclick="thinhSuQuanBinhLuan('${postId}', '${safeContentSnippet}')" title="Thỉnh Sử Quan Ảo đối chiếu sử liệu">
+                                            <span>🤖</span> <span>Thỉnh Sử Quan</span>
+                                        </button>
+                                        <button type="button" class="btn-send-comment" onclick="guiBinhLuan('${postId}')">
+                                            <span>Luận Bàn</span> ➔
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="comments-list" id="comments-list-${postId}">
                                 <!-- Các bình luận sẽ được tải vào đây -->
@@ -6008,12 +6423,69 @@ const docRef = await addDoc(collection(db, "posts"), {
             return { danhXung: 'Hiền Sĩ', rankClass: 'rank-hien-si' };
         };
 
+        window.tuDongCoGianCommentInput = function(textarea) {
+            if (!textarea) return;
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 140) + 'px';
+        };
+
+        window.xuLyGoBinhLuan = function(event, postId) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                window.guiBinhLuan(postId);
+            }
+        };
+
+        window.kiemTraDangNhapBinhLuan = function(event) {
+            if (isFirestoreActive && !nguoiDungHienTai) {
+                hienToast('ℹ️ Vui lòng đăng nhập để bình luận và lưu danh sử sách.');
+            }
+        };
+
+        window.traLoiBinhLuan = function(author, postId) {
+            const input = document.getElementById(`input-comment-${postId}`);
+            if (!input) return;
+            const prefix = `@${author} `;
+            if (!input.value.startsWith(prefix)) {
+                input.value = prefix + input.value;
+            }
+            input.focus();
+            if (typeof window.tuDongCoGianCommentInput === 'function') {
+                window.tuDongCoGianCommentInput(input);
+            }
+            hienToast(`💬 Đang hồi đáp hiền sĩ ${author}`);
+        };
+
+        window.moBaoCaoBinhLuan = function(commentId, postId) {
+            if (!nguoiDungHienTai) {
+                hienToast('Đăng nhập để gửi báo cáo bình luận.');
+                window.location.href = 'dang-nhap.html';
+                return;
+            }
+            if (!db || !isFirestoreActive) {
+                hienToast('Không thể gửi báo cáo khi Firestore chưa kết nối.');
+                return;
+            }
+            const dialog = document.getElementById('forum-report-dialog');
+            const form = document.getElementById('forum-report-form');
+            const titleEl = document.getElementById('report-dialog-title');
+            if (!dialog || !form) return;
+            dialog.dataset.postId = postId;
+            dialog.dataset.commentId = commentId;
+            if (titleEl) titleEl.textContent = 'Báo cáo bình luận';
+            form.reset();
+            dialog.showModal();
+        };
+
         window.trichDanBinhLuan = function(author, text, postId) {
             const input = document.getElementById(`input-comment-${postId}`);
             if (!input) return;
             const cleanText = text.replace(/\n+/g, ' ').slice(0, 70);
             input.value = `> [${author}]: "${cleanText}..."\n` + input.value;
             input.focus();
+            if (typeof window.tuDongCoGianCommentInput === 'function') {
+                window.tuDongCoGianCommentInput(input);
+            }
             hienToast(`❝ Đã trích dẫn lời luận bàn của ${author}`);
         };
 
@@ -6196,6 +6668,8 @@ const docRef = await addDoc(collection(db, "posts"), {
                 hienToast("Đã chọn luận đề!");
             });
         };
+        window.saoChepLienKetBaiViet = window.saoChepLienKet;
+        window.chiaSeBaiViet = window.saoChepLienKet;
 
         // Bật / tắt menu 3 chấm (⋯) của bài viết (Prompt 6)
         window.batTatPostMenu = function(postId, event) {
@@ -6294,14 +6768,22 @@ const docRef = await addDoc(collection(db, "posts"), {
                 .replace(/'/g, "&#039;");
         }
 
+        let toastTimeoutId = null;
         window.hienToast = function(msg) {
             const t = document.getElementById('forum-toast');
             if (!t) return;
-            t.textContent = msg;
-            t.style.display = 'block';
-            setTimeout(() => {
-                t.style.display = 'none';
-            }, 3200);
+            if (toastTimeoutId) clearTimeout(toastTimeoutId);
+            t.innerHTML = `<span>📜</span> <span>${escapeHtml(msg || '')}</span>`;
+            t.style.display = 'flex';
+            requestAnimationFrame(() => {
+                t.classList.add('show');
+            });
+            toastTimeoutId = setTimeout(() => {
+                t.classList.remove('show');
+                setTimeout(() => {
+                    if (!t.classList.contains('show')) t.style.display = 'none';
+                }, 260);
+            }, 3500);
         };
 
         // Hướng dẫn mở modal bật Firestore
