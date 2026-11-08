@@ -7,6 +7,20 @@
   <link rel="stylesheet" href="su-quan-ao.css">
   <script src="pwa-client.js"></script>
   <script src="theme-controller.js"></script>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('quanAnhHoi_theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.dataset.theme = saved;
+        } else {
+          var dcls = localStorage.getItem('dcls_theme');
+          var theme = (dcls === 'dark') ? 'dark' : 'light';
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch (_) {}
+    })();
+  </script>
   <script src="su-quan-ao.js"></script>
   <script src="firebase-config.js"></script>
   <script src="cloudinary-config.js"></script>
@@ -25,42 +39,42 @@
         /*  BIẾN MÀU CỔ TRANG ĐỒNG BỘ VỚI TRANG-CHINH.HTML        */
         /* ====================================================== */
         :root {
-            --giay-co:       #F4ECD8;
-            --giay-co-dam:   #EDE3CF;
+            --giay-co:       #F0F2F5;
+            --giay-co-dam:   #E4E6EB;
             --do-ba-trau:    #7B1E1E;
             --do-hover:      #9B2E2E;
             --do-sang:       #B71C1C;
             --vang-dong:     #D4AF37;
             --vang-hover:    #E8C84A;
-            --nau-den:       #2C1E18;
-            --nau-go:        #5C3A21;
-            --nen-toi:       #1E1815;
-            --nen-card:      #FDF8EE;
-            --chu-phu:       #5A4838;
+            --nau-den:       #1C1E21;
+            --nau-go:        #4B4F56;
+            --nen-toi:       #18191A;
+            --nen-card:      #FFFFFF;
+            --chu-phu:       #65676B;
             --bo-tron:       14px;
-            --shadow-co:     0 6px 24px rgba(44, 30, 24, 0.12);
+            --shadow-co:     0 2px 8px rgba(0, 0, 0, 0.08);
 
             /* ====================================================== */
             /*  HỆ THỐNG BIẾN BỐ CỤC & MÀU SẮC QUẦN ANH HỘI (PROMPT 1) */
             /* ====================================================== */
-            /* Hệ màu nhận diện Đại Việt (Mặc định: Nền Giấy Điệp / Trúc Thư Sáng) */
-            --qah-bg:                 #F4ECD8;
-            --qah-bg-gradient:        radial-gradient(circle at 50% 0%, #FFF9EB 0%, #F4ECD8 65%, #EADBBE 100%);
-            --qah-card-bg:            #FDF8EE;
+            /* Giao diện Sáng (Clean Light Mode) */
+            --qah-bg:                 #F0F2F5;
+            --qah-bg-gradient:        none;
+            --qah-card-bg:            #FFFFFF;
             --qah-card-bg-elevated:   #FFFFFF;
-            --qah-text-main:          #2C1E18;
-            --qah-text-muted:         #6E5846;
+            --qah-text-main:          #1C1E21;
+            --qah-text-muted:         #65676B;
             --qah-text-highlight:     #7B1E1E;
             --qah-gold:               #D4AF37;
             --qah-gold-hover:         #E8C84A;
-            --qah-gold-soft:          rgba(212, 175, 55, 0.15);
+            --qah-gold-soft:          rgba(212, 175, 55, 0.12);
             --qah-red:                #7B1E1E;
             --qah-red-hover:          #9B2E2E;
-            --qah-red-soft:           rgba(123, 30, 30, 0.12);
-            --qah-border:             rgba(212, 175, 55, 0.38);
-            --qah-border-solid:       #C5AC81;
-            --qah-shadow:             0 4px 18px rgba(44, 30, 24, 0.08);
-            --qah-shadow-hover:       0 8px 24px rgba(44, 30, 24, 0.14);
+            --qah-red-soft:           rgba(123, 30, 30, 0.08);
+            --qah-border:             #E4E6EB;
+            --qah-border-solid:       #CED0D4;
+            --qah-shadow:             0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+            --qah-shadow-hover:       0 4px 16px rgba(0, 0, 0, 0.12);
             --qah-radius:             14px;
             --qah-radius-sm:          8px;
 
@@ -74,32 +88,44 @@
         /* Khi kích hoạt theme tối (data-theme="dark" hoặc class theme-muc-co) */
         :root[data-theme="dark"],
         body.theme-muc-co {
-            --qah-bg:                 #17120F;
-            --qah-bg-gradient:        radial-gradient(circle at 50% 0%, #30241D 0%, #17120F 70%, #100D0B 100%);
-            --qah-card-bg:            #241C17;
-            --qah-card-bg-elevated:   #302720;
-            --qah-text-main:          #F1E7D6;
-            --qah-text-muted:         #C5B095;
+            --giay-co:       #18191A;
+            --giay-co-dam:   #242526;
+            --nau-den:       #E4E6EB;
+            --nau-go:        #B0B3B8;
+            --nen-toi:       #18191A;
+            --nen-card:      #242526;
+            --chu-phu:       #B0B3B8;
+
+            /* Giao diện Tối (Clean Dark Mode) */
+            --qah-bg:                 #18191A;
+            --qah-bg-gradient:        none;
+            --qah-card-bg:            #242526;
+            --qah-card-bg-elevated:   #2E3032;
+            --qah-text-main:          #E4E6EB;
+            --qah-text-muted:         #B0B3B8;
             --qah-text-highlight:     #F3D981;
             --qah-gold:               #D4AF37;
             --qah-gold-hover:         #F3D981;
             --qah-gold-soft:          rgba(212, 175, 55, 0.18);
-            --qah-red:                #9B2E2E;
-            --qah-red-hover:          #B71C1C;
-            --qah-red-soft:           rgba(155, 46, 46, 0.25);
-            --qah-border:             rgba(212, 175, 55, 0.25);
-            --qah-border-solid:       #705A3A;
-            --qah-shadow:             0 6px 22px rgba(0, 0, 0, 0.45);
-            --qah-shadow-hover:       0 10px 30px rgba(0, 0, 0, 0.6);
+            --qah-red:                #C53030;
+            --qah-red-hover:          #E53E3E;
+            --qah-red-soft:           rgba(197, 48, 48, 0.22);
+            --qah-border:             #383A3C;
+            --qah-border-solid:       #4E4F50;
+            --qah-shadow:             0 2px 8px rgba(0, 0, 0, 0.4);
+            --qah-shadow-hover:       0 6px 22px rgba(0, 0, 0, 0.6);
         }
 
-        /* Tích hợp theme sáng Trúc Thư (body.theme-truc-thu) đồng bộ toàn site */
+        /* Tích hợp theme sáng đồng bộ toàn site */
         body.theme-truc-thu {
-            --qah-bg:                 #F4ECD8;
-            --qah-card-bg:            #FDF8EE;
-            --qah-text-main:          #2C1E18;
-            --qah-text-muted:         #6E5846;
-            --qah-border:             rgba(181, 148, 91, 0.38);
+            --qah-bg:                 #F0F2F5;
+            --qah-card-bg:            #FFFFFF;
+            --qah-text-main:          #1C1E21;
+            --qah-text-muted:         #65676B;
+            --qah-border:             #E4E6EB;
+            background-color: #F0F2F5 !important;
+            background-image: none !important;
+            color: #1C1E21 !important;
         }
 
         *, *::before, *::after {
@@ -110,14 +136,19 @@
 
         body {
             font-family: 'Noto Serif', 'Times New Roman', serif;
-            color: var(--nau-den);
-            background-color: var(--giay-co);
-            background-image: 
-                radial-gradient(circle at 50% 0%, #FFF9EB 0%, #F4ECD8 65%, #EADBBE 100%),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%237B1E1E' fill-opacity='0.028' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+            color: var(--qah-text-main, #1C1E21);
+            background-color: var(--qah-bg, #F0F2F5);
+            background-image: none;
             line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
+        }
+
+        :root[data-theme="dark"] body,
+        body.theme-muc-co {
+            color: var(--qah-text-main, #E4E6EB) !important;
+            background-color: var(--qah-bg, #18191A) !important;
+            background-image: none !important;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -126,24 +157,25 @@
         /*  THANH ĐẦU TRANG MẠNG XÃ HỘI QUẦN ANH HỘI (PROMPT 2)   */
         /* ====================================================== */
         .site-header.qah-header {
-            background: linear-gradient(180deg, #1C100A 0%, #29160E 100%);
-            border-bottom: 2px solid var(--qah-gold, #D4AF37);
-            color: #FDF8EE;
+            background: var(--qah-card-bg, #FFFFFF);
+            border-bottom: 1.5px solid var(--qah-border, #E4E6EB);
+            color: var(--qah-text-main, #1C1E21);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
             width: 100%;
+            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
         }
 
-        :root[data-theme="dark"] .site-header.qah-header {
-            background: #140E0A;
-            border-bottom-color: #8C6F2D;
-        }
-
-        body.theme-truc-thu .site-header.qah-header {
-            background: linear-gradient(180deg, #3D2214 0%, #2F180C 100%);
-            border-bottom-color: #D4AF37;
+        :root[data-theme="dark"] .site-header.qah-header,
+        :root[data-theme="dark"] body .site-header.qah-header,
+        body.theme-muc-co .site-header.qah-header {
+            background: #242526 !important;
+            border-bottom: 1.5px solid #383A3C !important;
+            border-bottom-color: #383A3C !important;
+            color: #E4E6EB !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
         }
 
         .qah-navbar {
@@ -193,16 +225,26 @@
             font-size: 1.15rem;
             font-weight: 900;
             letter-spacing: 0.6px;
-            color: var(--qah-gold, #D4AF37);
+            color: var(--qah-text-highlight, #7B1E1E);
             white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        :root[data-theme="dark"] .qah-navbar__brand-title {
+            color: #F3D981;
         }
 
         .qah-navbar__brand-sub {
             font-size: 0.72rem;
-            color: #C5B095;
+            color: var(--qah-text-muted, #65676B);
             font-style: italic;
             letter-spacing: 0.3px;
             white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        :root[data-theme="dark"] .qah-navbar__brand-sub {
+            color: #B0B3B8;
         }
 
         /* 2. Khu vực Giữa: Cụm Tab điều hướng mạng xã hội (Social Tabs) */
@@ -242,7 +284,7 @@
             gap: 6px;
             font-size: 0.84rem;
             font-weight: 700;
-            color: #E2D3BA;
+            color: var(--qah-text-muted, #4B4F56);
             text-decoration: none;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1.5px solid transparent;
@@ -253,21 +295,43 @@
             touch-action: manipulation;
         }
 
+        :root[data-theme="dark"] .qah-nav-tab,
+        :root[data-theme="dark"] .sub-navbar__item > a,
+        :root[data-theme="dark"] .sub-navbar__link {
+            color: #B0B3B8;
+        }
+
         .qah-nav-tab:hover,
         .sub-navbar__item > a:hover,
         .sub-navbar__link:hover {
-            color: #FFF2A8;
-            background: rgba(212, 175, 55, 0.12);
-            border-color: rgba(212, 175, 55, 0.4);
+            color: var(--qah-text-main, #1C1E21);
+            background: #F0F2F5;
+            border-color: #CED0D4;
             transform: translateY(-1px);
+        }
+
+        :root[data-theme="dark"] .qah-nav-tab:hover,
+        :root[data-theme="dark"] .sub-navbar__item > a:hover,
+        :root[data-theme="dark"] .sub-navbar__link:hover {
+            color: #E4E6EB;
+            background: #3A3B3C;
+            border-color: #4E4F50;
         }
 
         .sub-navbar__item.active > a,
         .sub-navbar__item.active > .qah-nav-tab {
-            color: #FFF2A8;
-            background: rgba(212, 175, 55, 0.22);
-            border-color: var(--qah-gold, #D4AF37);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.4), inset 0 0 6px rgba(212, 175, 55, 0.2);
+            color: #7B1E1E;
+            background: rgba(123, 30, 30, 0.08);
+            border-color: #7B1E1E;
+            box-shadow: none;
+        }
+
+        :root[data-theme="dark"] .sub-navbar__item.active > a,
+        :root[data-theme="dark"] .sub-navbar__item.active > .qah-nav-tab {
+            color: #F3D981;
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #D4AF37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         .qah-nav-icon {
@@ -299,10 +363,10 @@
             position: absolute;
             top: calc(100% + 6px);
             left: 0;
-            background: linear-gradient(180deg, #3A1F13 0%, #26130B 100%);
-            border: 1.5px solid var(--qah-gold, #D4AF37);
+            background: #FFFFFF;
+            border: 1.5px solid var(--qah-border, #E4E6EB);
             border-radius: 12px;
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.75), 0 0 16px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             list-style: none;
             padding: 8px 0;
             margin: 0;
@@ -313,6 +377,12 @@
             transform: translate3d(0, 8px, 0);
             transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
             z-index: 10020;
+        }
+
+        :root[data-theme="dark"] .sub-navbar__dropdown {
+            background: #242526;
+            border-color: #383A3C;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
         }
 
         .sub-navbar__item:hover > .sub-navbar__dropdown,
@@ -335,7 +405,7 @@
             align-items: center;
             gap: 12px;
             padding: 10px 18px;
-            color: #F4ECD8;
+            color: var(--qah-text-main, #1C1E21);
             font-family: 'Noto Serif', serif;
             font-size: 0.86rem;
             font-weight: 500;
@@ -345,11 +415,21 @@
             text-decoration: none;
         }
 
+        :root[data-theme="dark"] .sub-navbar__dropdown li a {
+            color: #E4E6EB;
+        }
+
         .sub-navbar__dropdown li a:hover {
-            background: #512D1B;
-            color: var(--vang-hover, #F3D981);
-            border-left-color: var(--qah-gold, #D4AF37);
+            background: #F0F2F5;
+            color: var(--qah-text-highlight, #7B1E1E);
+            border-left-color: var(--qah-text-highlight, #7B1E1E);
             transform: translateX(4px);
+        }
+
+        :root[data-theme="dark"] .sub-navbar__dropdown li a:hover {
+            background: #3A3B3C;
+            color: #F3D981;
+            border-left-color: #D4AF37;
         }
 
         .sub-navbar__dropdown .dropdown-item-icon {
@@ -382,9 +462,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1.5px solid var(--qah-gold, #D4AF37);
-            color: #FFF2A8;
+            background: #F0F2F5;
+            border: 1.5px solid #CED0D4;
+            color: #1C1E21;
             font-size: 1.15rem;
             cursor: pointer;
             transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
@@ -393,10 +473,21 @@
             margin: 0;
         }
 
+        :root[data-theme="dark"] .qah-icon-btn {
+            background: #3A3B3C;
+            border: 1.5px solid #4E4F50;
+            color: #E4E6EB;
+        }
+
         .qah-icon-btn:hover {
-            background: rgba(212, 175, 55, 0.25);
+            background: #E4E6EB;
             transform: scale(1.06);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        :root[data-theme="dark"] .qah-icon-btn:hover {
+            background: #4E4F50;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
         }
 
         .qah-icon-btn:active {
@@ -418,26 +509,75 @@
             min-width: 44px !important;
             padding: 4px 12px !important;
             border-radius: 999px !important;
-            border: 1.5px solid var(--qah-gold, #D4AF37) !important;
-            background: rgba(45, 26, 17, 0.95) !important;
-            color: #FFF2A8 !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+            border: 1.5px solid #CED0D4 !important;
+            background: #F0F2F5 !important;
+            color: #1C1E21 !important;
+            box-shadow: none !important;
             touch-action: manipulation !important;
+            transition: all 0.2s ease !important;
+        }
+
+        :root[data-theme="dark"] .site-account-trigger {
+            border: 1.5px solid #4E4F50 !important;
+            background: #3A3B3C !important;
+            color: #E4E6EB !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
         }
 
         .site-account-trigger:hover,
         .site-account-trigger:focus-visible {
-            background: #4A2B1C !important;
-            outline: 2px solid var(--qah-gold) !important;
+            background: #E4E6EB !important;
+            outline: 2px solid var(--qah-gold, #D4AF37) !important;
             outline-offset: 1px !important;
         }
 
+        :root[data-theme="dark"] .site-account-trigger:hover,
+        :root[data-theme="dark"] .site-account-trigger:focus-visible {
+            background: #4E4F50 !important;
+        }
+
         .site-account-popover {
-            background: linear-gradient(165deg, #2D1810 0%, #1A0D08 100%) !important;
-            border: 1.5px solid var(--qah-gold, #D4AF37) !important;
+            background: #FFFFFF !important;
+            border: 1.5px solid #E4E6EB !important;
+            color: #1C1E21 !important;
             border-radius: 14px !important;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 16px rgba(212, 175, 55, 0.25) !important;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15) !important;
             z-index: 10030 !important;
+        }
+
+        :root[data-theme="dark"] .site-account-popover {
+            background: #242526 !important;
+            border: 1.5px solid #383A3C !important;
+            color: #E4E6EB !important;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75) !important;
+        }
+
+        .site-account-popover strong {
+            color: #1C1E21 !important;
+        }
+
+        :root[data-theme="dark"] .site-account-popover strong {
+            color: #E4E6EB !important;
+        }
+
+        .site-account-action {
+            background: #F0F2F5 !important;
+            border: 1px solid #CED0D4 !important;
+            color: #1C1E21 !important;
+        }
+
+        :root[data-theme="dark"] .site-account-action {
+            background: #3A3B3C !important;
+            border: 1px solid #4E4F50 !important;
+            color: #E4E6EB !important;
+        }
+
+        .site-account-action:hover {
+            background: #E4E6EB !important;
+        }
+
+        :root[data-theme="dark"] .site-account-action:hover {
+            background: #4E4F50 !important;
         }
 
         /* Tuyệt đối không hiển thị email hoặc UID theo yêu cầu bảo mật (Prompt 2) */
@@ -750,10 +890,10 @@
 
         /* Các thẻ bên trong Sidebar (Prompt 3) */
         .qah-side-card {
-            background-color: var(--qah-card-bg, #FDF8EE);
-            border: 1.5px solid var(--qah-border, rgba(212, 175, 55, 0.35));
+            background-color: var(--qah-card-bg, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: var(--qah-radius, 14px);
-            box-shadow: var(--qah-shadow, 0 4px 18px rgba(44, 30, 24, 0.08));
+            box-shadow: var(--qah-shadow, 0 1px 2px rgba(0, 0, 0, 0.08));
             padding: 16px 18px;
             display: flex;
             flex-direction: column;
@@ -763,8 +903,9 @@
         }
 
         :root[data-theme="dark"] .qah-side-card {
-            background-color: var(--qah-card-bg, #241C17);
-            border-color: var(--qah-border, rgba(212, 175, 55, 0.25));
+            background-color: var(--qah-card-bg, #242526);
+            border-color: var(--qah-border, #383A3C);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
         }
 
         .qah-side-card__header {
@@ -1214,24 +1355,29 @@
             align-items: center;
             gap: 12px;
             padding: 12px 18px;
-            background: var(--qah-card-bg, #FFFDF8);
-            border: 1.5px solid rgba(212, 175, 55, 0.35);
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 14px;
-            box-shadow: 0 4px 16px rgba(44, 30, 24, 0.08);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
             cursor: pointer;
             transition: all 0.25s ease;
         }
 
         :root[data-theme="dark"] .qah-composer-collapsed {
-            background: #241C17;
-            border-color: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            background: #242526;
+            border-color: #383A3C;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
         }
 
         .qah-composer-collapsed:hover {
-            border-color: var(--qah-gold, #D4AF37);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.18);
+            border-color: #CED0D4;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
             transform: translateY(-1px);
+        }
+
+        :root[data-theme="dark"] .qah-composer-collapsed:hover {
+            border-color: #4E4F50;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
         }
 
         .qah-composer-collapsed__avatar-wrap {
@@ -1265,9 +1411,9 @@
             min-height: 44px;
             padding: 10px 16px;
             border-radius: 24px;
-            background: rgba(244, 236, 216, 0.5);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: var(--qah-text-muted, #6E5846);
+            background: #F0F2F5;
+            border: 1px solid #E4E6EB;
+            color: var(--qah-text-muted, #65676B);
             font-family: 'Noto Serif', serif;
             font-size: 0.92rem;
             text-align: left;
@@ -1281,20 +1427,20 @@
         }
 
         :root[data-theme="dark"] .qah-composer-collapsed__input-btn {
-            background: #302720;
-            border-color: #59472E;
-            color: #C5B095;
+            background: #3A3B3C;
+            border-color: #4E4F50;
+            color: #B0B3B8;
         }
 
         .qah-composer-collapsed:hover .qah-composer-collapsed__input-btn {
-            background: rgba(244, 236, 216, 0.85);
-            border-color: var(--qah-gold, #D4AF37);
-            color: var(--qah-text-main, #2C1E18);
+            background: #E4E6EB;
+            border-color: #CED0D4;
+            color: var(--qah-text-main, #1C1E21);
         }
 
         :root[data-theme="dark"] .qah-composer-collapsed:hover .qah-composer-collapsed__input-btn {
-            background: #3A2E26;
-            color: #F1E7D6;
+            background: #4E4F50;
+            color: #E4E6EB;
         }
 
         .qah-composer-collapsed__quick-actions {
@@ -1314,7 +1460,7 @@
             border-radius: 8px;
             background: transparent;
             border: 1px solid transparent;
-            color: var(--qah-text-main, #2C1E18);
+            color: var(--qah-text-main, #1C1E21);
             font-family: 'Noto Serif', serif;
             font-size: 0.84rem;
             font-weight: 600;
@@ -1323,7 +1469,7 @@
         }
 
         :root[data-theme="dark"] .qah-composer-quick-btn {
-            color: #F1E7D6;
+            color: #E4E6EB;
         }
 
         .qah-composer-quick-btn:hover {
@@ -1405,14 +1551,11 @@
         /* 2. Trạng thái mở rộng (Full Composer) */
         .scroll-composer {
             position: relative;
-            background: #FFFDF8;
-            border: 2px solid var(--vang-dong);
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 1.5px solid var(--qah-border, #E4E6EB);
             border-radius: 14px;
-            box-shadow: 0 8px 30px rgba(44, 30, 24, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             padding: 24px 24px 20px;
-            background-image: 
-                radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at bottom right, rgba(123, 30, 30, 0.05) 0%, transparent 60%);
             transition: border-color 0.25s, box-shadow 0.25s;
         }
 
@@ -1511,8 +1654,8 @@
         }
 
         .composer-author-input {
-            background: #F4ECD8;
-            border: 1px solid #C4A575;
+            background: var(--qah-card-bg-elevated, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 6px;
             padding: 5px 12px;
             font-family: 'Noto Serif', serif;
@@ -1525,12 +1668,12 @@
 
         .composer-author-input:focus {
             border-color: var(--do-ba-trau);
-            background: #FFF;
+            background: var(--qah-card-bg, #FFFFFF);
         }
 
         .composer-topic-select {
-            background: #F4ECD8;
-            border: 1px solid #C4A575;
+            background: var(--qah-card-bg-elevated, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 6px;
             padding: 5px 10px;
             font-family: 'Noto Serif', serif;
@@ -1956,6 +2099,10 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             padding: 2px 2px 6px;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
         }
 
         .feed-filter-tabs::-webkit-scrollbar {
@@ -1963,9 +2110,9 @@
         }
 
         .feed-filter-btn {
-            background: #EFE6D5;
-            border: 1px solid #C4A575;
-            color: #4A301D;
+            background: var(--qah-card-bg-elevated, #F0F2F5);
+            border: 1px solid var(--qah-border, #E4E6EB);
+            color: var(--qah-text-main, #1C1E21);
             padding: 6px 14px;
             border-radius: 8px;
             font-family: 'Noto Serif', serif;
@@ -1999,10 +2146,10 @@
             margin-top: 12px;
             margin-bottom: 8px;
             padding: 10px 16px;
-            background: #FDF8EE;
-            border: 1.5px solid #D8C7A5;
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(44, 30, 24, 0.05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .viewer-topic-box {
@@ -2020,8 +2167,8 @@
         }
 
         .viewer-topic-select {
-            background: #FFFDF8;
-            border: 1.5px solid #C4A575;
+            background: #F0F2F5;
+            border: 1px solid #CED0D4;
             border-radius: 6px;
             padding: 5px 12px;
             font-family: 'Noto Serif', serif;
@@ -2036,7 +2183,7 @@
 
         .viewer-topic-select:focus {
             border-color: var(--do-ba-trau);
-            background: #FFF;
+            background: #FFFFFF;
         }
 
         .viewer-actions-box {
@@ -2096,24 +2243,21 @@
             margin-top: 10px;
         }
 
-        /* KHUNG VIỀN CUỘN GIẤY CỔ ĐIỂN (Scroll Card Frame) */
+        /* KHUNG BÀI VIẾT QUẦN ANH HỘI (Clean Feed Post Card) */
         .scroll-post-card {
             position: relative;
-            background: #FFFDF8;
-            border: 2px solid #C5AC81;
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 12px;
-            box-shadow: 0 4px 18px rgba(44, 30, 24, 0.08);
+            box-shadow: var(--qah-shadow, 0 1px 2px rgba(0, 0, 0, 0.08));
             padding: 24px 26px;
             transition: all 0.25s ease;
-            background-image: 
-                radial-gradient(circle at top right, rgba(212, 175, 55, 0.07) 0%, transparent 40%),
-                radial-gradient(circle at bottom left, rgba(123, 30, 30, 0.04) 0%, transparent 40%);
         }
 
         .scroll-post-card:hover {
-            border-color: var(--vang-dong);
-            box-shadow: 0 10px 32px rgba(44, 30, 24, 0.16), 0 0 1px 1px rgba(212, 175, 55, 0.5);
-            transform: translateY(-3px);
+            border-color: #CED0D4;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
 
         /* Họa tiết thanh cuốn hai đầu */
@@ -2358,10 +2502,10 @@
             top: 100%;
             right: 0;
             margin-top: 4px;
-            background: var(--qah-card-bg, #FFFDF8);
-            border: 1.5px solid var(--vang-dong);
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
             min-width: 175px;
             padding: 6px 0;
             z-index: 100;
@@ -2370,8 +2514,8 @@
         }
 
         :root[data-theme="dark"] .qah-post-menu-dropdown {
-            background: #241C17;
-            border-color: #705A3A;
+            background: #242526;
+            border-color: #383A3C;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
         }
 
@@ -2388,7 +2532,7 @@
             font-family: 'Noto Serif', serif;
             font-size: 0.82rem;
             font-weight: 600;
-            color: var(--qah-text-main, #2C1E18);
+            color: var(--qah-text-main, #1C1E21);
             background: transparent;
             border: none;
             width: 100%;
@@ -2398,7 +2542,7 @@
         }
 
         :root[data-theme="dark"] .qah-post-menu-item {
-            color: #F1E7D6;
+            color: #E4E6EB;
         }
 
         .qah-post-menu-item:hover {
@@ -2742,10 +2886,10 @@
         .admin-reports-panel {
             margin: 14px 0 20px;
             padding: 18px;
-            border: 1.5px solid var(--vang-dong);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 12px;
-            background: var(--giay-co);
-            box-shadow: 0 8px 24px rgba(44, 30, 24, 0.1);
+            background: var(--qah-card-bg, #FFFFFF);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
         .admin-reports-panel[hidden] { display: none; }
         #btn-admin-reports[hidden] { display: none; }
@@ -2764,19 +2908,19 @@
         .admin-reports-list { display: grid; gap: 10px; }
         .admin-report-card {
             padding: 14px;
-            border: 1px solid #D6C2A0;
+            border: 1px solid #E4E6EB;
             border-radius: 9px;
-            background: #FFFDF8;
+            background: #F0F2F5;
         }
         .admin-report-card p { margin: 7px 0; overflow-wrap: anywhere; }
-        .admin-report-meta { color: #705A3A; font-size: 0.82rem; }
+        .admin-report-meta { color: #65676B; font-size: 0.82rem; }
         .admin-report-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
         .admin-report-controls select, .admin-report-controls button, .admin-reports-heading button {
             min-height: 40px;
-            border: 1px solid #C6A850;
+            border: 1px solid #CED0D4;
             border-radius: 7px;
             padding: 7px 11px;
-            background: #F7EEDB;
+            background: #FFFFFF;
             color: var(--nau-den);
             font: inherit;
             cursor: pointer;
@@ -2800,9 +2944,9 @@
         .admin-trash-panel {
             margin-top: 16px;
             padding: 14px;
-            border: 1px dashed #C6A850;
+            border: 1px dashed #CED0D4;
             border-radius: 10px;
-            background: rgba(247, 238, 219, .6);
+            background: #F0F2F5;
         }
         .admin-trash-panel[hidden] { display: none; }
         .admin-trash-list { display: grid; gap: 10px; margin-top: 10px; }
@@ -2812,12 +2956,12 @@
             justify-content: space-between;
             gap: 14px;
             padding: 12px;
-            border: 1px solid #D6C2A0;
+            border: 1px solid #E4E6EB;
             border-radius: 9px;
-            background: #FFFDF8;
+            background: #FFFFFF;
         }
         .admin-trash-card p { margin: 4px 0; overflow-wrap: anywhere; }
-        .admin-trash-card__meta { color: #705A3A; font-size: .82rem; }
+        .admin-trash-card__meta { color: #65676B; font-size: .82rem; }
         .admin-trash-restore {
             flex: 0 0 auto;
             min-height: 44px;
@@ -2842,13 +2986,13 @@
             max-height: min(84dvh, 720px);
             overflow: auto;
             padding: 0;
-            border: 1.5px solid var(--vang-dong);
+            border: 1px solid #E4E6EB;
             border-radius: 14px;
             color: var(--nau-den);
-            background: var(--giay-co);
-            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+            background: #FFFFFF;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
         }
-        .forum-report-dialog::backdrop { background: rgba(20, 12, 8, 0.68); }
+        .forum-report-dialog::backdrop { background: rgba(0, 0, 0, 0.55); }
         .report-dialog-form { padding: 20px; }
         .report-dialog-heading { margin-bottom: 16px; }
         .report-dialog-heading button {
@@ -2857,27 +3001,27 @@
         }
         .report-dialog-form label { display: block; margin: 12px 0 6px; font-weight: 700; }
         .report-dialog-form select, .report-dialog-form textarea {
-            width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #C6A850;
-            border-radius: 7px; background: #FFFDF8; color: var(--nau-den); font: inherit;
+            width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #CED0D4;
+            border-radius: 7px; background: #F0F2F5; color: var(--nau-den); font: inherit;
         }
         .report-dialog-form textarea { min-height: 110px; resize: vertical; }
         .report-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
         .report-dialog-actions button {
-            min-height: 44px; padding: 9px 15px; border: 1px solid #C6A850; border-radius: 7px;
-            background: #F7EEDB; color: var(--nau-den); font: inherit; font-weight: 700; cursor: pointer;
+            min-height: 44px; padding: 9px 15px; border: 1px solid #CED0D4; border-radius: 7px;
+            background: #F0F2F5; color: var(--nau-den); font: inherit; font-weight: 700; cursor: pointer;
         }
         .report-dialog-actions .report-submit { background: var(--do-ba-trau); color: #FFF; }
         :root[data-theme="dark"] .admin-reports-panel,
-        :root[data-theme="dark"] .forum-report-dialog { background: #211A16; color: #F1E7D6; }
-        :root[data-theme="dark"] .admin-report-card { background: #302720; border-color: #705A3A; }
+        :root[data-theme="dark"] .forum-report-dialog { background: #242526; color: #E4E6EB; border-color: #383A3C; }
+        :root[data-theme="dark"] .admin-report-card { background: #3A3B3C; border-color: #4E4F50; }
         :root[data-theme="dark"] .admin-reports-heading h4,
         :root[data-theme="dark"] .report-dialog-heading h3 { color: #F3D981; }
-        :root[data-theme="dark"] .admin-report-meta { color: #C6AE83; }
-        :root[data-theme="dark"] .admin-trash-panel { background: #2A2119; border-color: #705A3A; }
-        :root[data-theme="dark"] .admin-trash-card { background: #302720; border-color: #705A3A; }
-        :root[data-theme="dark"] .admin-trash-card__meta { color: #C6AE83; }
+        :root[data-theme="dark"] .admin-report-meta { color: #B0B3B8; }
+        :root[data-theme="dark"] .admin-trash-panel { background: #2A2B2C; border-color: #383A3C; }
+        :root[data-theme="dark"] .admin-trash-card { background: #3A3B3C; border-color: #4E4F50; }
+        :root[data-theme="dark"] .admin-trash-card__meta { color: #B0B3B8; }
         :root[data-theme="dark"] .report-dialog-form select,
-        :root[data-theme="dark"] .report-dialog-form textarea { background: #302720; color: #F1E7D6; }
+        :root[data-theme="dark"] .report-dialog-form textarea { background: #3A3B3C; color: #E4E6EB; border-color: #4E4F50; }
 
         /* ====================================================== */
         /*  KHU VỰC 3: BÌNH LUẬN (Reply Drawer)                   */
@@ -2948,17 +3092,17 @@
         .comment-input-wrap {
             flex: 1;
             min-width: 0;
-            background: var(--qah-card-bg, #FFFDF8);
-            border: 1.5px solid rgba(212, 175, 55, 0.35);
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 1px solid var(--qah-border, #E4E6EB);
             border-radius: 12px;
             padding: 8px 12px;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         :root[data-theme="dark"] .comment-input-wrap {
-            background: #241C17;
-            border-color: #59472E;
+            background: #242526;
+            border-color: #383A3C;
         }
 
         .comment-input-wrap:focus-within {
@@ -3094,16 +3238,16 @@
         .comment-bubble {
             flex: 1;
             min-width: 0;
-            background: rgba(244, 236, 216, 0.55);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: #F0F2F5;
+            border: 1px solid #E4E6EB;
             border-radius: 12px;
             padding: 8px 12px;
             transition: all 0.2s ease;
         }
 
         :root[data-theme="dark"] .comment-bubble {
-            background: #251D18;
-            border-color: #59472E;
+            background: #3A3B3C;
+            border-color: #4E4F50;
         }
 
         .comment-bubble-header {
@@ -3210,10 +3354,10 @@
         .empty-feed-state, .loading-state {
             text-align: center;
             padding: 40px 20px;
-            background: #FFFDF8;
-            border: 2px dashed #C4A575;
+            background: var(--qah-card-bg, #FFFFFF);
+            border: 2px dashed var(--qah-border, #E4E6EB);
             border-radius: 12px;
-            color: var(--nau-go);
+            color: var(--qah-text-muted, #65676B);
         }
 
         .loading-spinner {
@@ -3255,27 +3399,31 @@
         }
 
         .composer-media-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-        .btn-media-picker { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border: 1px solid #C4A575; border-radius: 8px; color: var(--nau-go); background: #F7EEDB; cursor: pointer; font: inherit; font-size: 0.84rem; }
-        .media-hint { color: #7D6B58; font-size: 0.78rem; }
+        .btn-media-picker { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border: 1px solid var(--qah-border, #E4E6EB); border-radius: 8px; color: var(--qah-text-main, #1C1E21); background: var(--qah-card-bg-elevated, #F0F2F5); cursor: pointer; font: inherit; font-size: 0.84rem; }
+        .media-hint { color: var(--qah-text-muted, #65676B); font-size: 0.78rem; }
         .media-preview { display: none; margin-top: 12px; align-items: flex-start; gap: 12px; }
         .media-preview.visible { display: flex; }
-        .media-preview img, .media-preview video { max-width: min(100%, 360px); max-height: 240px; border-radius: 10px; border: 1px solid #C5AC81; object-fit: contain; background: #1E1815; }
+        .media-preview img, .media-preview video { max-width: min(100%, 360px); max-height: 240px; border-radius: 10px; border: 1px solid var(--qah-border, #E4E6EB); object-fit: contain; background: #18191A; }
         .media-preview button { border: 1px solid #A33; border-radius: 50%; width: 34px; height: 34px; background: #7B1E1E; color: white; font-size: 1.15rem; cursor: pointer; }
-        .media-upload-status { margin-top: 10px; color: var(--nau-go); font-size: 0.82rem; }
+        .media-upload-status { margin-top: 10px; color: var(--qah-text-muted, #65676B); font-size: 0.82rem; }
         .media-upload-status progress { display: block; width: min(100%, 420px); height: 10px; margin-top: 5px; accent-color: var(--do-ba-trau); }
-        .post-media { display: block; width: min(100%, 720px); max-height: 520px; object-fit: contain; border-radius: 12px; border: 1px solid #C5AC81; background: #1E1815; margin: 0 0 18px; }
+        .post-media { display: block; width: min(100%, 720px); max-height: 520px; object-fit: contain; border-radius: 12px; border: 1px solid var(--qah-border, #E4E6EB); background: #18191A; margin: 0 0 18px; }
 
         :root[data-theme="dark"] body { 
-            color: #F1E7D6; 
-            background-color: #17120F;
-            background-image: 
-                radial-gradient(circle at 50% 0%, #30241D 0%, #17120F 70%, #100D0B 100%),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.035' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+            color: #E4E6EB !important; 
+            background-color: #18191A !important;
+            background-image: none !important;
         }
         :root[data-theme="dark"] .scroll-composer,
         :root[data-theme="dark"] .scroll-post-card,
         :root[data-theme="dark"] .empty-feed-state,
-        :root[data-theme="dark"] .loading-state { background-color: #241C17; color: #F1E7D6; }
+        :root[data-theme="dark"] .loading-state {
+            background-color: #242526;
+            background-image: none;
+            color: #E4E6EB;
+            border-color: #383A3C;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        }
         :root[data-theme="dark"] .composer-title,
         :root[data-theme="dark"] .feed-heading,
         :root[data-theme="dark"] .post-author-name,
@@ -3286,38 +3434,38 @@
         :root[data-theme="dark"] .composer-textarea,
         :root[data-theme="dark"] .composer-hashtags-input,
         :root[data-theme="dark"] .comment-input,
-        :root[data-theme="dark"] .comment-item { background: #302720; color: #F1E7D6; border-color: #705A3A; }
-        :root[data-theme="dark"] .composer-hashtags-row { background: #2B211A; border-color: #705A3A; }
-        :root[data-theme="dark"] .composer-hashtags-label { color: #E6C894; }
-        :root[data-theme="dark"] .composer-hashtags-input::placeholder { color: #9A8671; }
-        :root[data-theme="dark"] .composer-fact-chips { background: #2B211A; border-color: #705A3A; }
+        :root[data-theme="dark"] .comment-item { background: #3A3B3C; color: #E4E6EB; border-color: #4E4F50; }
+        :root[data-theme="dark"] .composer-hashtags-row { background: #323334; border-color: #4E4F50; }
+        :root[data-theme="dark"] .composer-hashtags-label { color: #F3D981; }
+        :root[data-theme="dark"] .composer-hashtags-input::placeholder { color: #8A8D91; }
+        :root[data-theme="dark"] .composer-fact-chips { background: #323334; border-color: #4E4F50; }
         :root[data-theme="dark"] .fact-chips-title { color: #F3D981; }
-        :root[data-theme="dark"] .fact-chip-btn { background: #382B20; color: #F3D981; border-color: #80682F; }
-        :root[data-theme="dark"] .fact-chip-btn:hover { background: #80682F; color: #FFF; }
+        :root[data-theme="dark"] .fact-chip-btn { background: #3A3B3C; color: #E4E6EB; border-color: #4E4F50; }
+        :root[data-theme="dark"] .fact-chip-btn:hover { background: #4E4F50; color: #FFF; }
         :root[data-theme="dark"] .post-hashtag-item { background: rgba(212, 175, 55, 0.15); color: #F3D981; border-color: rgba(212, 175, 55, 0.35); }
         :root[data-theme="dark"] .post-hashtag-item:hover { background: rgba(212, 175, 55, 0.28); }
         :root[data-theme="dark"] .post-body-content,
-        :root[data-theme="dark"] .comment-text { color: #F1E7D6; }
-        :root[data-theme="dark"] .feed-controls-bar { background: #251D18; border-color: #59472E; }
+        :root[data-theme="dark"] .comment-text { color: #E4E6EB; }
+        :root[data-theme="dark"] .feed-controls-bar { background: #242526; border-color: #383A3C; }
         :root[data-theme="dark"] .viewer-topic-label { color: #F3D981; }
-        :root[data-theme="dark"] .viewer-topic-select { background: #302720; border-color: #705A3A; color: #F1E7D6; }
-        :root[data-theme="dark"] .viewer-feed-stats { color: #CDB79E; }
-        :root[data-theme="dark"] .btn-shuffle-feed { background: #35281E; color: #F3D981; border-color: #80682F; }
-        :root[data-theme="dark"] .btn-shuffle-feed:hover { background: #80682F; color: #FFF; }
+        :root[data-theme="dark"] .viewer-topic-select { background: #3A3B3C; border-color: #4E4F50; color: #E4E6EB; }
+        :root[data-theme="dark"] .viewer-feed-stats { color: #B0B3B8; }
+        :root[data-theme="dark"] .btn-shuffle-feed { background: #3A3B3C; color: #E4E6EB; border-color: #4E4F50; }
+        :root[data-theme="dark"] .btn-shuffle-feed:hover { background: #4E4F50; color: #FFF; }
         :root[data-theme="dark"] .post-unread-badge { background: #2ECC71; color: #102416; }
         :root[data-theme="dark"] .post-royal-seal { border-color: #E74C3C; color: #FF7675; background: rgba(231, 76, 60, 0.15); }
         :root[data-theme="dark"] .rank-tuong-soai { background: rgba(212, 175, 55, 0.2); color: #F3D981; border-color: #D4AF37; }
         :root[data-theme="dark"] .rank-han-lam { background: rgba(46, 204, 113, 0.2); color: #58D68D; border-color: #27AE60; }
         :root[data-theme="dark"] .rank-hien-si { background: rgba(231, 76, 60, 0.2); color: #E6B0AA; border-color: #922B21; }
-        :root[data-theme="dark"] .btn-quote-comment { color: #C6AE83; }
+        :root[data-theme="dark"] .btn-quote-comment { color: #B0B3B8; }
         :root[data-theme="dark"] .btn-quote-comment:hover { color: #F3D981; background: rgba(212, 175, 55, 0.15); }
         :root[data-theme="dark"] .post-category-tag,
         :root[data-theme="dark"] .feed-filter-btn,
-        :root[data-theme="dark"] .btn-media-picker { background: #382B20; color: #F3D981; border-color: #80682F; }
-        :root[data-theme="dark"] .comments-drawer { background: rgba(10, 8, 7, 0.45); border-color: #59472E; }
-        :root[data-theme="dark"] .sub-navbar__dropdown { background: linear-gradient(180deg, #2A170E 0%, #1A0D08 100%); border-color: #C6A850; }
-        :root[data-theme="dark"] .sub-navbar__dropdown li a { color: #F1E7D6; }
-        :root[data-theme="dark"] .sub-navbar__dropdown li a:hover { background: #3D2214; color: #F3D981; border-left-color: #F3D981; }
+        :root[data-theme="dark"] .btn-media-picker { background: #3A3B3C; color: #E4E6EB; border-color: #4E4F50; }
+        :root[data-theme="dark"] .comments-drawer { background: rgba(24, 25, 26, 0.65); border-color: #383A3C; }
+        :root[data-theme="dark"] .sub-navbar__dropdown { background: #242526; border-color: #383A3C; }
+        :root[data-theme="dark"] .sub-navbar__dropdown li a { color: #E4E6EB; }
+        :root[data-theme="dark"] .sub-navbar__dropdown li a:hover { background: #3A3B3C; color: #F3D981; border-left-color: #D4AF37; }
 
         /* TOAST THÔNG BÁO */
         .toast-box {
@@ -3417,7 +3565,14 @@
             .composer-hashtags-row { flex-direction: column; align-items: stretch; gap: 6px; }
             .composer-footer { flex-direction: column; align-items: stretch; }
             .btn-submit-post { width: 100%; min-height: 44px; justify-content: center; }
-            .feed-header { flex-direction: column; align-items: flex-start; }
+            .feed-header { flex-direction: column; align-items: stretch; width: 100%; max-width: 100%; min-width: 0; }
+            .feed-filter-tabs { width: 100%; max-width: 100%; min-width: 0; }
+            .forum-hero { padding: 28px 16px 24px; }
+            .forum-hero__title { font-size: 1.8rem; margin-bottom: 8px; }
+            .forum-hero__desc { font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
+            .forum-stats-bar { gap: 8px; margin-top: 14px; }
+            .stat-badge { padding: 6px 12px; font-size: 0.8rem; }
+            .forum-honor-roll { margin-top: 18px; padding: 12px 14px; }
             .post-top-meta { flex-direction: column; align-items: flex-start; }
             .header-user-status { flex-wrap: wrap; justify-content: center; }
             .comment-composer-box { gap: 8px; }
@@ -3562,14 +3717,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- 5. VIDEO TƯ LIỆU (Đích đến thật đã tồn tại) -->
-                    <li class="sub-navbar__item" id="nav-item-video-direct">
-                        <a href="trang-chinh.html?modal=video" class="qah-nav-tab" title="Video tư liệu lịch sử">
-                            <span class="qah-nav-icon">🎬</span>
-                            <span class="qah-nav-label">Video</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
 
@@ -3580,8 +3727,8 @@
                     <span>🎵</span>
                 </button>
 
-                <!-- Nút chuyển đổi giao diện Sáng (Trúc Thư) / Tối (Mực Cổ) -->
-                <button type="button" id="theme-toggle" class="qah-icon-btn theme-toggle" onclick="doiGiaoDien()" title="Chuyển giao diện Trúc Thư / Mực Cổ" aria-label="Chuyển giao diện">
+                <!-- Nút chuyển đổi giao diện Sáng / Tối -->
+                <button type="button" id="theme-toggle" class="qah-icon-btn theme-toggle" onclick="doiGiaoDien()" title="Chuyển giao diện Sáng / Tối" aria-label="Chuyển giao diện Sáng / Tối">
                     <span id="theme-toggle-icon">🌙</span>
                 </button>
 
@@ -3595,9 +3742,9 @@
     </header>
 
     <!-- ============================================================ -->
-    <!--  2. HERO BANNER CỔ ĐIỂN                                      -->
+    <!--  2. HERO BANNER QUẢN ANH HỘI (DÀNH RIÊNG QUẢN TRỊ VIÊN)     -->
     <!-- ============================================================ -->
-    <section class="forum-hero">
+    <section class="forum-hero" id="forum-hero" style="display: none;">
         <canvas id="forum-hero-canvas" class="forum-hero-canvas" aria-hidden="true"></canvas>
         <div class="forum-hero__inner">
             <span class="forum-hero__badge">ĐÀM ĐẠO SỬ HỌC ĐẠI VIỆT</span>
@@ -4222,6 +4369,7 @@
                 onAuthStateChanged(auth, user => {
                     nguoiDungHienTai = user;
                     capNhatNutBaoCaoAdmin();
+                    capNhatHienThiForumHero();
                     capNhatSidebarTrai(user);
                     if (typeof window.renderBangTin === 'function') window.renderBangTin();
                     const displayName = user && (user.displayName || user.email || localStorage.getItem('tenNguoiDung'));
@@ -4720,24 +4868,46 @@
         const binhLuanCache = new Map();
 
         const themeSaved = localStorage.getItem('quanAnhHoi_theme');
-        if (themeSaved === 'dark') document.documentElement.dataset.theme = 'dark';
+        if (themeSaved === 'dark') {
+            document.documentElement.dataset.theme = 'dark';
+        } else if (themeSaved === 'light') {
+            document.documentElement.dataset.theme = 'light';
+        }
+        if (document.body) {
+            const isDarkInit = document.documentElement.dataset.theme === 'dark';
+            document.body.classList.toggle('theme-muc-co', isDarkInit);
+            document.body.classList.toggle('theme-truc-thu', !isDarkInit);
+        }
         capNhatNutGiaoDien();
+
         window.doiGiaoDien = function() {
-            const dark = document.documentElement.dataset.theme !== 'dark';
-            document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-            localStorage.setItem('quanAnhHoi_theme', dark ? 'dark' : 'light');
+            const isDark = document.documentElement.dataset.theme === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+            document.documentElement.dataset.theme = nextTheme;
+            if (document.body) {
+                document.body.classList.toggle('theme-muc-co', nextTheme === 'dark');
+                document.body.classList.toggle('theme-truc-thu', nextTheme === 'light');
+            }
+            localStorage.setItem('quanAnhHoi_theme', nextTheme);
+            if (typeof window.setDclsTheme === 'function') {
+                window.setDclsTheme(nextTheme === 'dark' ? 'dark' : 'truc-thu');
+                if (nextTheme === 'light') {
+                    document.documentElement.dataset.theme = 'light';
+                }
+            }
             capNhatNutGiaoDien();
         };
+
         function capNhatNutGiaoDien() {
             const btn = document.getElementById('theme-toggle');
             if (!btn) return;
-            const dark = document.documentElement.dataset.theme === 'dark';
+            const isDark = document.documentElement.dataset.theme === 'dark';
             const icon = document.getElementById('theme-toggle-icon');
-            if (icon) icon.textContent = dark ? '☀️' : '🌙';
-            else btn.innerHTML = `<span id="theme-toggle-icon">${dark ? '☀️' : '🌙'}</span>`;
-            btn.setAttribute('aria-pressed', String(dark));
-            btn.setAttribute('title', dark ? 'Chuyển sang nền sáng Trúc Thư' : 'Chuyển sang nền tối Mực Cổ');
-            btn.setAttribute('aria-label', dark ? 'Chuyển sang nền sáng Trúc Thư' : 'Chuyển sang nền tối Mực Cổ');
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            else btn.innerHTML = `<span id="theme-toggle-icon">${isDark ? '☀️' : '🌙'}</span>`;
+            btn.setAttribute('aria-pressed', String(isDark));
+            btn.setAttribute('title', isDark ? 'Chuyển sang giao diện Sáng' : 'Chuyển sang giao diện Tối');
+            btn.setAttribute('aria-label', isDark ? 'Chuyển sang giao diện Sáng' : 'Chuyển sang giao diện Tối');
         }
 
         window.cuonToiChuDe = function(event) {
@@ -5462,7 +5632,21 @@ const docRef = await addDoc(collection(db, "posts"), {
         const postActionsInProgress = new Set();
 
         function laQuanTriVien() {
-            return Boolean(nguoiDungHienTai && forumAdminUids.has(nguoiDungHienTai.uid));
+            if (nguoiDungHienTai && forumAdminUids.has(nguoiDungHienTai.uid)) return true;
+            const tenHienThi = (nguoiDungHienTai && (nguoiDungHienTai.displayName || nguoiDungHienTai.email)) || localStorage.getItem('tenNguoiDung') || '';
+            const tenLower = tenHienThi.toLowerCase();
+            if (tenLower.includes('(admin)') || tenLower.includes('[admin]')) return true;
+            const role = (localStorage.getItem('vaiTro') || localStorage.getItem('role') || '').toLowerCase();
+            if (role === 'admin' || role === 'quantri' || role === 'quan_tri') return true;
+            if (localStorage.getItem('isAdmin') === 'true') return true;
+            return false;
+        }
+
+        function capNhatHienThiForumHero() {
+            const hero = document.getElementById('forum-hero');
+            if (!hero) return;
+            const isAdmin = laQuanTriVien();
+            hero.style.display = isAdmin ? 'block' : 'none';
         }
 
         function capNhatNutBaoCaoAdmin() {
@@ -5470,7 +5654,12 @@ const docRef = await addDoc(collection(db, "posts"), {
             const panel = document.getElementById('admin-reports-panel');
             if (button) button.hidden = !laQuanTriVien();
             if (!laQuanTriVien() && panel && !panel.hidden) window.dongDongBaoCaoAdmin();
+            capNhatHienThiForumHero();
         }
+
+        window.laQuanTriVien = laQuanTriVien;
+        window.capNhatHienThiForumHero = capNhatHienThiForumHero;
+        window.capNhatNutBaoCaoAdmin = capNhatNutBaoCaoAdmin;
 
         window.moBaoCaoBaiViet = function(postId) {
             if (!nguoiDungHienTai) {
@@ -6267,6 +6456,7 @@ const docRef = await addDoc(collection(db, "posts"), {
 
         // Cập nhật thẻ hồ sơ sĩ tử ở Sidebar Trái & Thẻ soạn bài (Prompt 3 & 4)
         function capNhatSidebarTrai(user) {
+            capNhatHienThiForumHero();
             const profileBox = document.getElementById('qah-user-profile-box');
             const guestBox = document.getElementById('qah-guest-box');
             const nameEl = document.getElementById('qah-profile-name');
@@ -6861,6 +7051,7 @@ const docRef = await addDoc(collection(db, "posts"), {
             dongBoViewerTopicUI(boLocHienTai);
             dongBoFilterTabsUI(boLocHienTai);
             capNhatSidebarTrai(nguoiDungHienTai);
+            capNhatHienThiForumHero();
             capNhatThaoLuanSoiNoi();
             capNhatDaiChuDeNoiBat();
             dongBoDaiChuDeUI(boLocHienTai);
