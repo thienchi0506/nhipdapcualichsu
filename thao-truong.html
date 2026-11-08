@@ -57705,52 +57705,74 @@ function executeSubmitExam() {
 
   // Best score save to localStorage (Chỉ lưu điểm cho đề thi thật, không ghi đè khi luyện tập câu sai)
   if (!currentExam.isMistakesPractice) {
-    const prevBest = localStorage.getItem('thao_truong_best_' + currentExam.id);
-    if (!prevBest || totalScore > parseFloat(prevBest)) {
-      localStorage.setItem('thao_truong_best_' + currentExam.id, totalScore.toFixed(2));
+    try {
+      const prevBest = localStorage.getItem('thao_truong_best_' + currentExam.id);
+      if (!prevBest || totalScore > parseFloat(prevBest)) {
+        localStorage.setItem('thao_truong_best_' + currentExam.id, totalScore.toFixed(2));
+      }
+    } catch (error) {
+      console.warn('[Thao Trường] Không thể lưu điểm cao nhất trên thiết bị:', error);
     }
   }
 
   // Tự động ghi nhận câu trả lời sai vào Sổ tay câu sai (Prompt 1)
-  if (!currentExam.isMistakesPractice) {
-    handleExamMistakesSubmission(currentExam, wrongP1Items, wrongP2Items);
+  try {
+    if (!currentExam.isMistakesPractice) {
+      handleExamMistakesSubmission(currentExam, wrongP1Items, wrongP2Items);
+    }
+    updateMistakesCountBadges();
+  } catch (error) {
+    console.warn('[Thao Trường] Không thể cập nhật Sổ tay câu sai:', error);
   }
-  updateMistakesCountBadges();
 
   // Ghi nhận lịch sử làm bài cho Biểu đồ Năng lực học tập (Prompt 2)
   if (!currentExam.isMistakesPractice) {
-    recordExamAttemptForAnalytics({
-      examId: currentExam.id,
-      examTitle: currentExam.title,
-      grade: typeof getExamCatalogGrade === 'function' ? getExamCatalogGrade(currentExam) : 12,
-      topicKey: getExamTopicKey(currentExam),
-      score: totalScore,
-      scoreP1: scoreP1,
-      scoreP2: scoreP2,
-      p1Total: p1Len,
-      p1Correct: p1Correct,
-      p2Total: p2StatementsTotal,
-      p2Correct: p2StatementsCorrect,
-      timestamp: Date.now()
-    });
+    try {
+      recordExamAttemptForAnalytics({
+        examId: currentExam.id,
+        examTitle: currentExam.title,
+        grade: typeof getExamCatalogGrade === 'function' ? getExamCatalogGrade(currentExam) : 12,
+        topicKey: getExamTopicKey(currentExam),
+        score: totalScore,
+        scoreP1: scoreP1,
+        scoreP2: scoreP2,
+        p1Total: p1Len,
+        p1Correct: p1Correct,
+        p2Total: p2StatementsTotal,
+        p2Correct: p2StatementsCorrect,
+        timestamp: Date.now()
+      });
 
-    // Đánh giá điều kiện mở khóa Thẻ Nhân Vật & Ghi danh Bảng Vàng (Prompt 3)
-    evaluateCardUnlockConditions(
-      currentExam, 
-      totalScore, 
-      p1Correct, 
-      scoreP2, 
-      p2StatementsTotal, 
-      p2StatementsCorrect, 
-      submissionElapsedSeconds
-    );
+      // Đánh giá điều kiện mở khóa Thẻ Nhân Vật & Ghi danh Bảng Vàng (Prompt 3)
+      evaluateCardUnlockConditions(
+        currentExam,
+        totalScore,
+        p1Correct,
+        scoreP2,
+        p2StatementsTotal,
+        p2StatementsCorrect,
+        submissionElapsedSeconds
+      );
+    } catch (error) {
+      console.warn('[Thao Trường] Không thể cập nhật thống kê/thành tựu:', error);
+    }
   }
 
   // Bonus peace points
   const peaceReward = Math.round(totalScore * 10);
-  let peace = parseInt(localStorage.getItem('dcls_peaceScore') || '1000', 10);
+  let peace = 1000;
+  try {
+    peace = parseInt(localStorage.getItem('dcls_peaceScore') || '1000', 10);
+    if (!Number.isFinite(peace)) peace = 1000;
+  } catch (error) {
+    console.warn('[Thao Trường] Không thể đọc điểm Thái Bình đã lưu:', error);
+  }
   peace += peaceReward;
-  localStorage.setItem('dcls_peaceScore', peace);
+  try {
+    localStorage.setItem('dcls_peaceScore', peace);
+  } catch (error) {
+    console.warn('[Thao Trường] Không thể lưu điểm Thái Bình:', error);
+  }
   $('peace-badge').textContent = '🕊️ Thái Bình: ' + peace;
   $('res-stat-bonus').textContent = `🕊️ +${peaceReward} Điểm Thái Bình`;
 
@@ -57828,18 +57850,25 @@ function executeSubmitExam() {
   }
   $('res-comment').textContent = rankMsg;
 
-  // Show top summary board and hide bottom submit button
+  // Hiện kết quả trước các phần giải thích bổ sung để chúng không thể chặn
+  // thí sinh xem điểm nếu một tiện ích ôn tập gặp lỗi dữ liệu.
   $('result-summary-box').style.display = 'block';
   $('bottom-submit-wrapper').style.display = 'none';
+  $('result-summary-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   // Apply Review styles directly to questions
-  applyReviewStylingToQuestions();
+  try {
+    applyReviewStylingToQuestions();
+  } catch (error) {
+    console.error('[Thao Trường] Không thể dựng phần giải thích sau khi nộp:', error);
+  }
 
   // Generate Roadmap to Tang Thu Cac
-  generateRoadmapToTangThuCac(p1Correct < p1Len || p2StatementsCorrect < p2StatementsTotal);
-
-  // Smooth scroll to top of exam paper
-  $('result-summary-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  try {
+    generateRoadmapToTangThuCac(p1Correct < p1Len || p2StatementsCorrect < p2StatementsTotal);
+  } catch (error) {
+    console.error('[Thao Trường] Không thể dựng gợi ý ôn tập sau bài thi:', error);
+  }
 }
 
 // APPLY DIRECT IN-PLACE REVIEW STYLES (GREEN FOR CORRECT, RED FOR WRONG, EXPLANATIONS & WIDGETS)
