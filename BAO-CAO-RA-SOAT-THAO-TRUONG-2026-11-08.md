@@ -2634,3 +2634,36 @@ Theo chỉ dẫn mới nhất của người dùng, phương án được tô đ
 - Số lần lặp nguyên câu trước/sau vẫn là 4; không có bản sao mới.
 - Đã kiểm tra JSON nhúng trong `thao-truong.html` có thể phân tích, so sánh cấu trúc trước/sau và chạy `git diff --check`.
 - Chưa chạy thử nộp bài trên trình duyệt ở lượt này. Các mục chưa ghép được và 6 trường hợp mâu thuẫn cần tiếp tục rà trước khi tuyên bố hoàn tất khóa đáp án cả bộ.
+
+### Rà tiếp phần còn lại — 09/11/2026
+
+Không tìm kiếm nguồn ngoài theo yêu cầu tiết kiệm thời gian. Quét lại vùng đề lớp 12 sau chỉnh sửa: không còn các lỗi gõ/OCR đã xác định trong lượt trước. Không bổ sung khóa cho 973 câu chưa ghép chắc với PDF và không chọn thay cho 6 mục có dấu đỏ mâu thuẫn. Đây là giới hạn của tài liệu nguồn hiện có; muốn xác nhận chính xác phần còn lại cần bản đề/đáp án tương ứng hoặc ảnh trang rõ hơn.
+
+
+### Cập nhật xử lý khối 10 — 09/11/2026
+
+- Chỉ sửa dữ liệu Lịch sử 10 trong `grade10-exams.js`; không chỉnh lớp 11/12, logic chấm hay giao diện.
+- Đã đổi 173 khóa Đúng/Sai được hồ sơ rà trước đó xác định rõ là sai. Hai mục chỉ là tiêu đề bị chèn vào câu hỏi (Chủ đề 6 phần 3, nhóm 2(d); đề Tổng ôn, nhóm 11(d)) đã được bỏ khỏi danh sách mệnh đề để không chấm một dòng tiêu đề như đáp án; các nhóm này còn 3 mệnh đề hợp lệ.
+- Sửa các lỗi trắc nghiệm đã xác định: Chủ đề 3 phần 1 câu 18 (Ấn Độ → Ai Cập trong tiền đề), câu 21 (đổi thành câu hỏi về Harappa/lưu vực sông Ấn); Chủ đề 5 câu 3; Chủ đề 5 câu 33 (thay Thạt Luổng bằng quần thể Ăng-co); Chủ đề 4 phần 2 câu 25 (sửa địa lý sang châu Âu, khóa Đức); đề Tổng ôn câu 25 (bổ sung Đức và khóa đúng).
+- Chuẩn hóa một số lỗi gõ rõ ràng đã được ghi trong hồ sơ: phản ảnh/tri thức/thu thập và/sau đây/Hà Nội/Văn minh/khai mỏ/giỗ/thờ/giáo sĩ/thời kì/bờ biển/với/Hồng lâu mộng; sửa thời kỳ trong tư liệu chuyện Thôi Trữ từ Chiến Quốc thành Xuân Thu.
+- Kiểm tra cấu trúc dữ liệu: 14 đề, 428 MCQ, 99 nhóm Đúng/Sai, 394 mệnh đề sau khi bỏ hai dòng tiêu đề. Tất cả MCQ có khóa trong phạm vi lựa chọn và hai trường `ans`/`answer` đồng nhất; mọi mệnh đề có khóa boolean. `git diff --check` không báo lỗi.
+- Đối chiếu đáp án MCQ với tài liệu DOCX nguồn: 376/428 câu ghép khớp chính xác giữa câu hỏi và phương án tô đỏ; trong các câu ghép được, khóa trước sửa trùng đáp án tô đỏ. Còn 52 câu chưa ghép chắc do khác cách viết, dạng điền khuyết hoặc không có bản tương ứng; không tự đổi khóa của các câu này. Những lỗi wording/nguồn chưa đủ căn cứ vẫn cần đối chiếu tài liệu gốc trước khi khẳng định đã xác minh toàn bộ khối 10.
+- Bước kế tiếp nếu tiếp tục: rà riêng 52 MCQ chưa ghép, các mệnh đề Đúng/Sai được đánh dấu chưa đủ căn cứ và vấn đề trùng ý; khối 11 vẫn để sau theo yêu cầu.
+
+
+## Đối chiếu tài liệu đáp án lớp 11 do người dùng cung cấp — 09/11/2026
+
+**Nguồn:** `TRẮC NGHIỆM ĐÚNG-SAI SỬ 11 NĂM 2024-2025.rar`, giải nén tại thư mục Downloads. Nhận diện bản có đáp án bằng các đoạn chữ đỏ trong DOCX; bản in và bản có đáp án được giữ riêng. Chữ đỏ chỉ là khóa tham chiếu, không được xem mặc định là đúng vì người dùng lưu ý có một số câu tô nhầm.
+
+- Kho hiện tại có 13 đề lớp 11, 426 câu trắc nghiệm và 394 mệnh đề Đúng/Sai. So theo **nội dung lựa chọn tô đỏ** với đáp án đang lưu trên web, 419 đáp án A–D được đọc và khớp với lựa chọn mà web đang chấm; 7 câu còn lại chưa thể so theo cách máy đọc này do thiếu dấu đỏ/nhãn câu không ổn định hoặc là dạng điền từ. Riêng Bài 8 có 4 mục tô đỏ không theo nhãn A–D (các dạng điền/ghép từ và một đáp án chỉ tô phần nội dung), nên không dùng phép so A–D cho các mục đó.
+- Đối chiếu chuỗi Đúng/Sai: 11/13 tài liệu có số mệnh đề tương ứng với web và các khóa cùng thứ tự khớp hoàn toàn. Tài liệu Bài 1 chỉ cung cấp 24 ý so với 38 ý trên web; Bài 7 chỉ cung cấp 20 ý so với 28 ý. Không suy rộng phần đáp án thiếu để thay khóa trên web.
+- Bài 6 có nhãn câu bị lặp/khuyết quanh câu về Lapu-Lapu và Diponegoro; không ghép máy theo số câu. Bài 7 có thứ tự/nhãn câu nguồn lệch so với dữ liệu web; phép ghép tuần tự không đáng tin. Không dùng các kết quả lệch chỉ số này để sửa.
+- Có các bất thường đã được ghi trong phần source-check kiến thức của báo cáo: Bài 6 câu về Diponegoro ghi “cuối thế kỉ XIX” trong khi sự kiện thuộc 1825–1830; Bài 8 có phương án bị nhiễm đoạn điền/đáp án; Bài 13 câu 28 suy luận kết luận pháp lý quá mức từ việc không có phản đối tại hội nghị. Đây là lỗi nội dung/câu hỏi hoặc dấu đáp án cần sửa/đối chiếu, không phải lý do để ghi đè hàng loạt khóa.
+
+**Kết luận xử lý:** chưa sửa đáp án lớp 11 trong lượt này vì phép so khớp không xác định được một khóa website cụ thể sai mà không lẫn lỗi đánh số hoặc khác dạng câu. Giữ nguyên nội dung và khóa hiện tại; các lỗi đã được kiểm chứng độc lập tiếp tục nằm trong danh sách ưu tiên hiệu đính ở các mục source-check theo từng bài. Không thay đổi lớp 10 hoặc chức năng chấm thi.
+
+### Checkpoint
+
+- Đã trích xuất/đối chiếu các bản DOCX trong archive ở mức đáp án đánh dấu; không thay đổi `grade11-exams.js`.
+- `grade10-exams.js` vẫn giữ nguyên thay đổi có trước lượt này.
+- Bước kế tiếp: nếu tiếp tục lớp 11, xử lý các mục đã được xác nhận sai khóa/nhiễm nội dung trong báo cáo theo từng bài, tách riêng sửa đáp án và sửa câu chữ để tránh thay đổi ngoài ý muốn.

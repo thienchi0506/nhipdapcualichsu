@@ -112,7 +112,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "Ngày 2 – 9 – 1945 , tại Quảng trường Ba Đình (Hà Nội), Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập, khai sinh ra nước Việt Nam Dân chủ Cộng hòa. Sự kiện này là kết quả của Cách mạng tháng Tám năm 1945, cuộc cách mạng giải phóng dân tộc điển hình.\nĐoạn tư liệu phản ảnh nội dung nào của khái niệm lịch sử?",
+        "q": "Ngày 2 – 9 – 1945 , tại Quảng trường Ba Đình (Hà Nội), Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập, khai sinh ra nước Việt Nam Dân chủ Cộng hòa. Sự kiện này là kết quả của Cách mạng tháng Tám năm 1945, cuộc cách mạng giải phóng dân tộc điển hình.\nĐoạn tư liệu phản ánh nội dung nào của khái niệm lịch sử?",
         "options": [
           "Tư liệu gốc phục vụ việc nghiên cứu và học tập lịch sử.",
           "Tất cả những tri thức về lịch sử đã được nhận thức lại.",
@@ -247,7 +247,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "q": "Một trong những lí do cần khám phá lịch sử suốt đời là giúp mỗi người",
         "options": [
           "bắt kịp những công nghệ mới.",
-          "làm giàu trí thức cho bản thân.",
+          "làm giàu tri thức cho bản thân.",
           "hoàn thiện năng lực thẩm mĩ.",
           "hoàn thiện năng lực tính toán."
         ],
@@ -354,7 +354,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 0
       },
       {
-        "q": "Nội dung nào sau đây phản ánh đúng quy trình thu thậpvà xử lí thông tin sử liệu trong quá trình nghiên cứu, tìm hiểu lịch sử?",
+        "q": "Nội dung nào sau đây phản ánh đúng quy trình thu thập và xử lí thông tin sử liệu trong quá trình nghiên cứu, tìm hiểu lịch sử?",
         "options": [
           "Xác định vấn đề => Sưu tầm sử liệu => Chọn lọc, phân loại => Xác định, đánh giá.",
           "Xác định vấn đề => Chọn lọc, phân loại => Xác định, đánh giá => Sưu tầm sử liệu.",
@@ -444,7 +444,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Nhận thức “Mỹ ném bom nguyên tử xuống Nhật Bản hạn chế thiệt hại sinh mạng cho các bên tham chiến” có trước sự kiện Mỹ ném bom nguyên tử xuống Nhật Bản.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -454,7 +454,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Sự kiện quân đội Mỹ ném bom nguyên tử xuống Nhật Bản được nhận thức giống nhau và khách quan.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -480,7 +480,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Tất cả những nhận thức về sự kiện cách mạng tháng Tám năm 1945 ở Việt Nam thành công đều khách quan, trung thực, phản ánh đúng bản chất sự kiện.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -501,12 +501,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Theo tấm bia tưởng niệm Ma – gien – lăng thì đội quân của La – pu – la – pu là một đội quân đi xâm lược và Ma – gien – lăng là một anh hùng đánh đuổi quân xâm lược.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
             "text": "Hai tấm bia tưởng niệm có sự khác nhau về nguồn sử liệu nhưng lại giống nhau về thế giới quan và quan điểm tiếp cận lịch sử.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -517,12 +517,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Bài tựa sách của Phạm Công Trứ tóm tắt lại nội dung một tác phẩm văn học.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
             "text": "Phạm Công Trứ khẳng định việc viết quốc sử chỉ nhằm giáo dục và nêu gương.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -532,7 +532,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Đoạn trích phản ánh các nội dung khác nhau của khái niệm lịch sử.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -543,7 +543,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Đại cáo bình Ngô là bài cáo được viết bằng chữ Hán vào thế kỉ XVI.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -553,7 +553,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Cuộc khởi nghĩa Lam Sơn chỉ có thể được khôi phục qua Đại cáo bình Ngô.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -569,7 +569,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Ngay từ khi xuất hiện, con người đã có nhận thức đúng đắn về đối tượng nghiên cứu của Sử học.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -600,7 +600,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Toàn bộ cuộc chiến đấu của nhân dân ta trong thế kỉ XX chỉ có thể được khôi phục lại qua cuốn Việt Nam sử lược.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -610,7 +610,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Chức năng xã hội của cuốn Việt Nam sử lược được nhắc đến trong đoạn tư liệu chính là “biên soạn mạch lạc về lịch sử nước nhà”.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -626,7 +626,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "“…việc hay hoặc dở đều dùng làm gương răn cho đời sau” phản ánh nhiệm vụ cung cấp tri thức khoa học của Sử học.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -641,7 +641,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         ]
       },
       {
-        "passage": "Đọc đoạn tư liệu sau đây:\nCâu chuyện “Thôi Trữ giết vua”\nThời Chiến Quốc, Tề Trang Công bị Thôi Trữ là quan đại phu nước Tề giết chết. Thôi Trữ lệnh cho Thái sử Bá (quan chép sử) viết: “Tề Trang Công chết do bị sốt rét”, để che giấu sự thật. Thái sử Bá không chịu, kiên quyết viết rằng: “Thôi Trữ giết vua Quang (tức Tề Trang Công)”. Thôi Trữ nổi giận, giết chết Thái sử Bá.\nThái sử Bá có ba người em trai là Trọng, Thúc, Quý. Trọng và Thúc được gọi đến và cũng chép vào sách sử câu chữ đúng như người anh đã viết. Thôi Trữ lại giết Trọng và Thúc. Còn lại Quý cũng cầm lấy thẻ sách viết đúng như câu của ba người anh.\nThôi Trữ cầm sách xem, hỏi Quý: “Ba người anh của nhà ngươi đều vì câu này mà bị giết chết, lẽ nào ngươi không biết quý tiếc mạng sống của mình sao?”.\nQuý ung dung đáp rằng: “Viết đúng sự thật là chức trách của quan chép sử. Nếu vì cầu sống mà làm chuyện sai trái, vậy thần thà chết còn hơn!”.\nThôi Trữ nghe xong đành trả lại thẻ sách cho Quý và không giết ông nữa.\n(Theo Khổng Tử, Xuân Thu tam truyện, Tập 4, NXB Thành phố Hồ Chí Minh, 2002, tr.168 – 170)",
+        "passage": "Đọc đoạn tư liệu sau đây:\nCâu chuyện “Thôi Trữ giết vua”\nThời Xuân Thu, Tề Trang Công bị Thôi Trữ là quan đại phu nước Tề giết chết. Thôi Trữ lệnh cho Thái sử Bá (quan chép sử) viết: “Tề Trang Công chết do bị sốt rét”, để che giấu sự thật. Thái sử Bá không chịu, kiên quyết viết rằng: “Thôi Trữ giết vua Quang (tức Tề Trang Công)”. Thôi Trữ nổi giận, giết chết Thái sử Bá.\nThái sử Bá có ba người em trai là Trọng, Thúc, Quý. Trọng và Thúc được gọi đến và cũng chép vào sách sử câu chữ đúng như người anh đã viết. Thôi Trữ lại giết Trọng và Thúc. Còn lại Quý cũng cầm lấy thẻ sách viết đúng như câu của ba người anh.\nThôi Trữ cầm sách xem, hỏi Quý: “Ba người anh của nhà ngươi đều vì câu này mà bị giết chết, lẽ nào ngươi không biết quý tiếc mạng sống của mình sao?”.\nQuý ung dung đáp rằng: “Viết đúng sự thật là chức trách của quan chép sử. Nếu vì cầu sống mà làm chuyện sai trái, vậy thần thà chết còn hơn!”.\nThôi Trữ nghe xong đành trả lại thẻ sách cho Quý và không giết ông nữa.\n(Theo Khổng Tử, Xuân Thu tam truyện, Tập 4, NXB Thành phố Hồ Chí Minh, 2002, tr.168 – 170)",
         "source": "Ôn tập Lịch sử 10 · Chủ đề 1",
         "statements": [
           {
@@ -652,12 +652,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Câu chuyện cho thấy nguyên tắc trung thực, khách quan trong ghi chép Sử có thể được vận dụng linh hoạt cho từng tình huống.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
             "text": "Thái sử Bá, Thái sử Trọng có nguyên tắc ghi chép sử khác với Thái sử Thúc và Thái sử Quý.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -770,7 +770,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 1
       },
       {
-        "q": "Nội dung nào sao đây không phải là vai trò của Sử học đối với việc bảo tồn, phát huy giá trị di sản văn hóa, di sản thiên nhiên?",
+        "q": "Nội dung nào sau đây không phải là vai trò của Sử học đối với việc bảo tồn, phát huy giá trị di sản văn hóa, di sản thiên nhiên?",
         "options": [
           "Sử học nghiên cứu quá trình hình thành, phát triển của di sản.",
           "Sử học giúp xác định đúng vị trí, vai trò và ý nghĩa của di sản.",
@@ -957,7 +957,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "Nội dung nào sao đây không phản ánh đúng vai trò của lịch sử - văn hóa đối với du lịch?",
+        "q": "Nội dung nào sau đây không phản ánh đúng vai trò của lịch sử - văn hóa đối với du lịch?",
         "options": [
           "Là di sản, tài nguyên quý giá để phát triển du lịch.",
           "Tạo sức hấp dẫn to lớn để thu hút khách du lịch.",
@@ -1001,7 +1001,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "Nội dung nào sao đây không phải là biện pháp để bảo tồn và phát huy giá trị di sản văn hóa?",
+        "q": "Nội dung nào sau đây không phải là biện pháp để bảo tồn và phát huy giá trị di sản văn hóa?",
         "options": [
           "Tăng cường tuyên truyền, phổ biến, giáo dục pháp luật.",
           "Nâng cao hiệu quả quản lý nhà nước về di sản văn hóa.",
@@ -1095,7 +1095,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Việc quảng bá hình ảnh, giá trị của Dân ca Quan họ trong cả nước và ra nước ngoài là nhiệm vụ duy nhất của những nhà nghiên cứu Sử học.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -1106,7 +1106,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Thành phố Vơ – ni – dơ và đầm phá Vơ – ni – dơ là di sản văn hóa phi vật thể của đất nước I - ta - li - a đã được UNESCO ghi danh.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -1132,7 +1132,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Đoạn tư liệu cung cấp thông tin về vai trò của Sử học đối với công tác bảo tồn và phát huy giá trị của di sản văn hóa.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -1142,12 +1142,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Phố cổ (Hà Nội), Cố đô Hoa Lư (Ninh Bình), Phố cổ Hội An (Quảng Nam), Vịnh Hạ Long (Quảng Ninh) đều là các di tích lịch sử - văn hóa có sức hấp dẫn của nước ta.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
             "text": "Các di sản văn hóa, di sản thiên nhiên của nước ta được chính phủ và chính quyền địa phương quan tâm kết hợp bảo tồn và khai thác khoa học thông qua các hoạt động quảng bá và du lịch.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -1158,7 +1158,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Chiến trường Điện Biên Phủ là quần thể di tích lịch sử của nước ta được Nhà nước và thế giới xếp hạng, ghi danh.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -1168,7 +1168,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Các cứ điểm A1, C1, D1, C2 là nơi đã diễn ra những trận đánh quyết liệt giữa quân đội Việt Nam với đế quốc Mĩ năm 1954, hiện nay đã trở thành các điểm di tích thu hút nhiều khách tham quan.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -1178,18 +1178,18 @@ window.GRADE10_ARCHIVE_EXAMS = [
         ]
       },
       {
-        "passage": "Đọc đoạn tư liệu sau đây:\nKhu di tích trung tâm Hoàng thành Thăng Long có địa chỉ 18 Hoàng Diệu (phường Điện Biên, quận Ba Đình, thành phố Hà Nôi). Đây là quần thể di tích gắn với lịch sử kinh thành Thăng Long (thời Lý – Trần), Đông Kinh (thời Hậu Lê) và tỉnh thành Hà Nội (thời Nguyễn)….\nHoàng thành Thăng Long được hình thành vào năm 1010, khi vua Lý Thái Tổ dời đô từ Hoa Lư ra Đại La và cho xây dựng kinh thành quy mô lớn….\nVới những giá trị lịch sử, văn hóa mà công trình kiến trúc đặc biệt này mang lại, năm 2010, UNESCO đã ghi danh Khu di tích trung tâm Hoàng thành Thăng Long là Di sản Văn hóa thế giới và nơi đây đã trở thành một trong những địa điểm nghiên cứu khoa học cũng như tham quan, du lịch nổi tiếng của Hà Nội.\n(Tài liệu tổng hợp từ Trung tâm Bảo tồn Di sản Thăng Long – Hà Nội)",
+        "passage": "Đọc đoạn tư liệu sau đây:\nKhu di tích trung tâm Hoàng thành Thăng Long có địa chỉ 18 Hoàng Diệu (phường Điện Biên, quận Ba Đình, thành phố Hà Nội). Đây là quần thể di tích gắn với lịch sử kinh thành Thăng Long (thời Lý – Trần), Đông Kinh (thời Hậu Lê) và tỉnh thành Hà Nội (thời Nguyễn)….\nHoàng thành Thăng Long được hình thành vào năm 1010, khi vua Lý Thái Tổ dời đô từ Hoa Lư ra Đại La và cho xây dựng kinh thành quy mô lớn….\nVới những giá trị lịch sử, văn hóa mà công trình kiến trúc đặc biệt này mang lại, năm 2010, UNESCO đã ghi danh Khu di tích trung tâm Hoàng thành Thăng Long là Di sản Văn hóa thế giới và nơi đây đã trở thành một trong những địa điểm nghiên cứu khoa học cũng như tham quan, du lịch nổi tiếng của Hà Nội.\n(Tài liệu tổng hợp từ Trung tâm Bảo tồn Di sản Thăng Long – Hà Nội)",
         "source": "Ôn tập Lịch sử 10 · Chủ đề 2",
         "statements": [
           {
             "letter": "a",
             "text": "Trung tâm Hoàng thành Thăng Long là di tích lịch sử - cách mạng của nước ta đã được UNESCO ghi danh.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
             "text": "Hoàng thành Thăng Long được hình thành vào thế kỉ XI và trở thành kinh đô của nước Đại Việt trong suốt các triều đại Lý, Trần, Hậu Lê, Nguyễn.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -1225,7 +1225,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Theo tác giả, chỉ có những địa phương có di sản văn hóa được UNESCO ghi danh hoặc có các loại hình nghệ thuật truyền thống đặc sắc thì mới phát triển được du lịch, dịch vụ.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -1241,12 +1241,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Trách nhiệm bảo tồn và phát huy giá trị của các di sản thuộc về hai đối tượng là các cấp chính quyền và những nhà nghiên cứu lịch sử, văn hóa.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
             "text": "Việc bảo tồn và phát huy giá trị của các di tích, di sản là việc làm quan trọng, cần thiết, vì đây là cách duy nhất để có thể quảng bá hình ảnh đất nước và con người Việt Nam ra thế giới.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -1272,12 +1272,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Sự phát triển của du lịch là nguyên nhân duy nhất khiến các cấp chính quyền và nhân dân quan tâm đến việc bảo tồn và phát huy giá trị của các di tích, di sản.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
             "text": "Sự phát triển của ngành du lịch và việc bảo vệ các di tích, di sản có quan hệ tỉ lệ nghịch với nhau.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -1293,7 +1293,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Luật du lịch Việt Nam năm 2010 quy định tài nguyên du lịch văn hóa bao gồm cả di sản văn hóa vật thể và phi vật thể.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -1303,7 +1303,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Theo tác giả Phơxt Glô – bơn Vi – da, tài nguyên du lịch văn hóa chiếm tỉ trọng gần như tuyệt đối trong giá trị du lịch ở châu Âu.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -1314,7 +1314,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Với giá trị lịch sử - văn hóa lâu đời, cố đô Huế là quần thể di tích duy nhất của nước ta đã được UNESCO ghi danh.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -1324,7 +1324,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "“1274 tỉ đồng” được nhắc đến trong đoạn tư liệu chính là số tiền thu được thông qua hoạt động du lịch tại Cố đô Huế và được sử dụng một phần để tu bổ, phục hồi lại di tích.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -1539,7 +1539,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
       "answer": 1
     },
     {
-      "q": "Kĩ thuật ướp xác là một trong những thành tựu tiêu biểu của văn minh Ấn Độ trên lĩnh vực nào sau đây?",
+      "q": "Kĩ thuật ướp xác là một trong những thành tựu tiêu biểu của văn minh Ai Cập trên lĩnh vực nào sau đây?",
       "options": [
         "Thiên văn",
         "Y học",
@@ -1572,15 +1572,15 @@ window.GRADE10_ARCHIVE_EXAMS = [
       "answer": 2
     },
     {
-      "q": "Nền văn minh Ấn Độ thời kì cổ - trung đại được hình thành ở lưu vực con sông nào sau đây?",
+      "q": "Văn minh Harappa thời cổ đại hình thành chủ yếu ở lưu vực con sông nào sau đây?",
       "options": [
-        "Sông Hằng",
-        "Sông Nin",
-        "Sông Hoàng Hà",
-        "Sông Trường Giang"
-      ],
-      "ans": 0,
-      "answer": 0
+          "Sông Hằng",
+          "Sông Ấn",
+          "Sông Hoàng Hà",
+          "Sông Trường Giang"
+        ],
+      "ans": 1,
+      "answer": 1
     },
     {
       "q": "Nền văn minh Ấn Độ cổ - trung đại được hình thành ở châu lục nào sau đây?",
@@ -1640,7 +1640,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Bà – la – môn giáo, Phật giáo, Giai – na giáo là những tôn giáo được du nhập từ bên ngoài và nhanh chóng phát triển mạnh mẽ ở Ấn Độ.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -1666,12 +1666,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Hệ thống chữ số tự nhiên được cư dân Ấn Độ sáng tạo ra vào khoảng thế kỉ VIII.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Dựa trên các tư liệu lịch sử, hiện nay, hầu hết ý kiến đều cho rằng chữ số 0 là do người Ả Rập sáng tạo nên.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -1687,7 +1687,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Kheops là kim tự tháp lớn nhất của Ai Cập, còn tồn tại nguyên vẹn đến ngày nay.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -1697,7 +1697,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Điểm khác biệt của kim tự tháp Kheops so với các kim tự tháp khác ở Ai Cập thể hiện ở chỗ, đây chính là lăng mộ của nhà vua.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -1718,7 +1718,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Lăng Ta – giơ Ma – han được xây dựng dưới thời kì vương triều Môn – gôn với mục đích ban đầu là làm lăng mộ cho nhà vua Sa – gia – han sau khi ông qua đời.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -2039,7 +2039,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Sử thi Ra – ma – y – a – na là một tác phẩm văn học tiêu biểu của văn minh Ai Cập thời kì cổ đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -2049,7 +2049,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Trường ca Phạ - lắc Phạ - lam chính là bản chuyển thể nguyên vẹn sử thi Ra – ma – y – a – na từ chữ Phạn sang chữ Lào cổ.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -2065,7 +2065,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Trung Hoa là nền văn minh duy nhất ở phương Đông phát triển liên tục từ thời cổ đại đến thời trung đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -2074,8 +2074,8 @@ window.GRADE10_ARCHIVE_EXAMS = [
         },
         {
           "letter": "d",
-          "text": "Văm minh phương Tây ra đời muộn hơn văn minh phương Đông và kế thừa toàn bộ những thành tựu của văn minh phương Đông.",
-          "isTrue": true
+          "text": "Văn minh phương Tây ra đời muộn hơn văn minh phương Đông và kế thừa toàn bộ những thành tựu của văn minh phương Đông.",
+          "isTrue": false
         }
       ]
     },
@@ -2086,7 +2086,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Chữ giáp cốt là một thành tựu về văn học của người Trung Quốc thời cổ đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -2096,12 +2096,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Chữ viết của người Ai Cập, Lưỡng Hà và Trung Quốc thời cổ đại lúc đầu được viết trên các chất liệu giấy khác nhau.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "Hiện nay, các nhà khảo cổ học đã phát hiện được rất nhiều chữ giáp cốt và các tác phẩm văn học đồ sộ viết bằng chữ giáp cốt.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -2112,7 +2112,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Cư dân Ai Cập cổ đại viết chữ tượng hình trên mai rùa hoặc xương thú",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -2433,7 +2433,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn trích phản ánh tác động toàn diện của các cuộc cách mạng công nghiệp thời cận đại đối với đời sống con người.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -2443,7 +2443,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Cách mạng công nghiệp lần thứ nhất mở ra thời kì cơ khí hóa sản xuất, còn cách mạng công nghiệp lần thứ hai mở ra thời kì điện khí hóa và tự động hóa nền sản xuất.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -2459,7 +2459,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Cuối thế kỉ XIX đầu thế kỉ XX, sản lượng thép của các nước tư bản tăng lên nhanh chóng là nhờ những tiến bộ kĩ thuật trong cuộc cách mạng công nghiệp lần thứ nhất.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -2469,12 +2469,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Anh, Mỹ, Đức đều là những quốc gia khởi đầu cuộc cách mạng công nghiệp lần thứ hai nhưng tốc độ tăng trưởng trong ngành sản xuất thép không đồng đều.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "Từ năm 1880 đến năm 1900, tốc độ tăng trưởng sản lượng thép của nước Đức gấp hơn 9 lần tốc độ tăng trưởng sản lượng thép của nước Anh.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -2516,7 +2516,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Động cơ điện và các thiết bị điện là những phát minh tiêu biểu của cuộc cách mạng công nghiệp lần thứ nhất.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -2526,7 +2526,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Sau khi được Ê – đi – xơn phát minh vào cuối thế kỉ XIX, bóng đèn điện đã được sản xuất hàng loạt và ứng dụng rộng rãi trong thực tế cuộc sống.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     }
@@ -2813,15 +2813,15 @@ window.GRADE10_ARCHIVE_EXAMS = [
       "answer": 0
     },
     {
-      "q": "Quốc gia nào sau đây ở châu Á đã khởi đầu cuộc cách mạng công nghiệp lần thứ tư?",
+      "q": "Quốc gia nào sau đây ở châu Âu gắn với sự khởi đầu của cuộc cách mạng công nghiệp lần thứ tư?",
       "options": [
         "Mĩ",
         "Nhật Bản",
         "Anh",
         "Đức"
       ],
-      "ans": 1,
-      "answer": 1
+      "ans": 3,
+      "answer": 3
     }
   ],
   "part2": [
@@ -2837,11 +2837,11 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Động cơ hơi nước bắt đầu được sử dụng trong các nhà máy từ cuối thế kỉ XVII.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
-          "text": "Không chỉ được ứng dụng trong các lĩnh vực sản xuất vật chất, động cơ hơi nước còn được ứng dụng rộng rãi trong các ngành luyện kim, khải mỏ.",
+          "text": "Không chỉ được ứng dụng trong các lĩnh vực sản xuất vật chất, động cơ hơi nước còn được ứng dụng rộng rãi trong các ngành luyện kim, khai mỏ.",
           "isTrue": true
         },
         {
@@ -2858,7 +2858,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "“Tình cảnh giai cấp công nhân Anh” của Ăng – ghen là một tác phẩm văn học nghệ thuật tiêu biểu cuối thế kỉ XIX.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -2868,12 +2868,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Trong xã hội tư bản, giai cấp công nhân bị tư sản áp bức bóc lột nặng nề thông qua pháp luật hà khắc và sức mạnh thô bạo.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "Mâu thuẫn đối kháng giữa giai cấp công nhân và tư sản đã tạo ra những tiền đề dẫn đến các cuộc cách mạng tư sản.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -2884,12 +2884,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Ô tô, máy bay là những thành tựu tiêu biểu trong lĩnh vực giao thông vận tải của các cuộc cách mạng công nghiệp thời kì hiện đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "Sự ra đời của máy bay đầu thế kỉ XX đã mở ra khả năng phát triển một loại hình giao thông vận tải hoàn toàn mới lúc bấy giờ.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -2899,7 +2899,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "CÁCH MẠNG CÔNG NGHIỆP THỜI HIỆN ĐẠI",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -2915,7 +2915,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Cuộc cách mạng công nghiệp lần thứ tư chỉ dẫn đến những hệ lụy tiêu cực cho lực lượng lao động trong tương lai.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -2925,7 +2925,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "AI, Robot chỉ có thể thay thế sức lao động của con người trong lĩnh vực sản xuất vật chất.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     }
@@ -2974,8 +2974,8 @@ window.GRADE10_ARCHIVE_EXAMS = [
           "các quốc gia phát triển đến thời kì cực thịnh.",
           "các quốc gia có nhiều chuyển biến mới về văn hoá."
         ],
-        "ans": 2,
-        "answer": 2
+        "ans": 0,
+        "answer": 0
       },
       {
         "q": "Một trong những yếu tố tác động đến sự khủng hoảng và suy vong của nhiều quốc gia phong kiến Đông Nam Á từ thế kỉ XVI đến thế kỉ XIX là",
@@ -3059,14 +3059,14 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "options": [
           "Tín ngưỡng thờ cúng tổ tiên",
           "Tín ngưỡng phồn thực",
-          "Tín ngưỡng tờ thần tự nhiên",
+          "Tín ngưỡng thờ thần tự nhiên",
           "Tín ngưỡng thờ thần động vật"
         ],
         "ans": 2,
         "answer": 2
       },
       {
-        "q": "“Dù ai đi ngược về xuôi\nNhớ ngày giỗ tổ mùng mười tháng ba”\nNgày giổ tổ Hùng Vương của Việt Nam hàng năm là một biểu hiện của hình thức tín ngưỡng nào sau đây?",
+        "q": "“Dù ai đi ngược về xuôi\nNhớ ngày giỗ tổ mùng mười tháng ba”\nNgày giỗ tổ Hùng Vương của Việt Nam hàng năm là một biểu hiện của hình thức tín ngưỡng nào sau đây?",
         "options": [
           "Thờ thần động vật.",
           "Thờ thần tự nhiên.",
@@ -3092,7 +3092,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "options": [
           "Tín ngưỡng thờ cúng tổ tiên",
           "Tín ngưỡng phồn thực",
-          "Tín ngưỡng tờ thần tự nhiên",
+          "Tín ngưỡng thờ thần tự nhiên",
           "Tín ngưỡng thờ thần động vật"
         ],
         "ans": 3,
@@ -3110,7 +3110,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 0
       },
       {
-        "q": "Từ thế kỉ XVI, thông qua hoạt động của các gião sĩ phương Tây, tôn giáo nào sau đây đã từng bước được du nhập vào Đông Nam Á ?",
+        "q": "Từ thế kỉ XVI, thông qua hoạt động của các giáo sĩ phương Tây, tôn giáo nào sau đây đã từng bước được du nhập vào Đông Nam Á ?",
         "options": [
           "Phật giáo",
           "Đạo giáo",
@@ -3299,7 +3299,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
       {
         "q": "Công trình kiến trúc nào ở khu vực Đông Nam Á là di sản văn hóa thế giới?",
         "options": [
-          "tháp Thạt Luổng",
+          "Quần thể Ăng-co (Angkor)",
           "Đền Pác – tê – nông",
           "Vạn lý trường thành",
           "Kim tự tháp"
@@ -3330,7 +3330,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         "answer": 0
       },
       {
-        "q": "Một trong những công trình điêu khắc tiêu biểu ở khu vực Đông Nam Á thòi kì cổ - trung đại là",
+        "q": "Một trong những công trình điêu khắc tiêu biểu ở khu vực Đông Nam Á thời kì cổ - trung đại là",
         "options": [
           "trống đồng Đông Sơn",
           "tượng lực sĩ ném đĩa",
@@ -3398,12 +3398,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Vương quốc Pa- gan thuộc đất nước Mi – an – ma hiện nay là vương quốc có Phật giáo, Đạo giáo và Hin – đu giáo rất phát triển.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
             "text": "Trong quá trình tồn tại của mình, các quốc vương của Pa – gan đã cho xây dựng khoảng 5000 ngôi chùa và hầu hết vẫn còn lại di tích đến ngày nay.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -3419,12 +3419,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Đoạn tư liệu cung cấp thông tin về quá trình hình thành và phát triển của Thiên chúa giáo tại tỉnh Nam Lây – tê (Phi – lip – pin)",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
             "text": "Thánh lễ Thiên chúa giáo đầu tiên của Đông Nam Á diễn ra tại đất nước Phi – lip – pin vào thế kỉ XV.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -3445,7 +3445,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Lễ hội té nước là một tín ngưỡng đặc sắc của khu vực Đông Nam Á.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -3455,12 +3455,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Lễ hội té nước có nhiều tên gọi khác nhau, được tổ chức ở nhiều thời điểm khác nhau ở các nước Đông Nam Á.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
             "text": "Lễ hội té nước cũng đồng thời là nghi thức đón năm mới của tất cả các quốc gia Đông Nam Á.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -3476,7 +3476,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Người Lào chỉ tổ chức lễ Ba – xi khi chào đón năm mới và trong lễ cưới.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -3486,7 +3486,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Ở Lào, lễ hội Ba – xi chỉ có ý nghĩa duy nhất là cầu chúc sức khỏe, may mắn cho những người thân trong gia đình.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -3502,7 +3502,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "Các bức phù điêu của ngôi đền Ăngco Vát là một minh chứng cho thấy ảnh hưởng sâu sắc của văn hóa Ấn Độ và Ai Cập đến quốc gia này.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -3523,12 +3523,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Chùa Vàng là ngôi chùa nổi tiếng của đất nước Mi – an – ma được một vị hoàng hậu xây dựng vào nửa đầu thế kỉ XV.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
             "text": "Chùa Vàng là một minh chứng cho sự du nhập đạo Hin – đu vào Mi – an – ma từ đất nước Ấn Độ.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -3538,7 +3538,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Một trong những cổ vật làm nên giá trị nổi bật của ngôi chùa Vàng là hai quả chuông đồng có trọng lượng và niên đại giống hệt như nhau.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -3549,7 +3549,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Tháp Thạt Luổng là một công trình kiến trúc nổi tiếng ở khu vực Đông Nam Á thuộc dòng kiến trúc cung đình.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -3559,7 +3559,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Tháp Thạt Luổng đã trở thành biểu tượng của quốc gia Lào, được in trên quốc kì của nước Lào.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -3575,12 +3575,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Đoạn tư liệu cung cấp thông tin về hệ thống các văn bia cổ của vương quốc Chămpa.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
             "text": "Thông qua các văn bia cổ, ta thấy rằng, cư dân nhiều nước Đông Nam Á đã tiếp thu và sử dụng duy nhất chữ viết của Ấn Độ trong suốt thời kì tồn tại của vương quốc mình.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -3590,7 +3590,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "d",
             "text": "Vương quốc Chămpa là vương quốc duy nhất ở Đông Nam Á đã sáng tạo ra được chữ viết riêng của mình trên cơ sở chữ Phạn của Ấn Độ.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -3601,22 +3601,22 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Hoạt động thương mại và truyền giáo không liên quan đến quá trình du nhập đạo Phật và đạo Hinđu vào khu vực Đông Nam Á.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
             "text": "Đạo Hinđu được truyền bá vào khu vực Đông Nam Á ngay từ thời cổ đại nhưng không phát triển bằng đạo Phật",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
             "text": "Thần Bra – ma, thần Vi – snu và thần Si – va là những vị thần tiêu biểu của đạo Hinđu và đạo Phật, được thờ cúng rộng rãi ở khu vực Đông Nam Á.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
             "text": "Theo quan niệm của người Cham – pa, thần Si – va là vị thần Sáng tạo, đồng thời cũng có khả năng hủy diệt những gì vô ích trên Trái Đất.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -3637,12 +3637,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Người Việt Nam đã sáng tạo ra chữ viết riêng của mình trên cơ sở tiếp thu chữ viết từ Ấn Độ.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
             "text": "Từ thế kỉ XVI, chữ viết của tất cả các quốc gia Đông Nam Á đã được Latinh hóa theo ngôn ngữ phương Tây.",
-            "isTrue": true
+            "isTrue": false
           }
         ]
       },
@@ -3658,7 +3658,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "b",
             "text": "A – giút – thay – a đã từng là kinh đô của đất nước Thái Lan vào thế kỉ XIII.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "c",
@@ -3705,7 +3705,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "a",
             "text": "Thánh đường Hồi giáo Bai – tu – ra – man (In – đô – nê – xi - a) lần đầu tiên được xây dựng vào cuối thế kỉ XIX bởi người Hà Lan.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "b",
@@ -3715,7 +3715,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Thánh đường Hồi giáo Bai – tu – ra – man là một công trình kiến trúc độc đáo của In – đô – nê – xi – a thuộc dòng kiến trúc dân gian.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -3741,7 +3741,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
           {
             "letter": "c",
             "text": "Văn học Trung Quốc ảnh hưởng đến văn học của hầu hết các quốc gia trong khu vực Đông Nam Á, đặc biệt là Việt Nam.",
-            "isTrue": true
+            "isTrue": false
           },
           {
             "letter": "d",
@@ -4067,7 +4067,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Toàn bộ sự tồn tại và phát triển của quốc gia - dân tộc Việt Nam sau này phụ thuộc hoàn toàn vào nền văn minh đầu tiên của người Việt cổ.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4078,7 +4078,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn tư liệu trên đã tóm tắt lại một tác phẩm văn học dân gian của nước ta.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4088,12 +4088,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Ngày giỗ tổ mùng 10 tháng Ba âm lịch lần đầu tiên được tổ chức vào năm 2012 khi tín ngưỡng này được UNESCO ghi danh.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "Tín ngưỡng thờ Quốc Tổ Hùng Vương là tín ngưỡng duy nhất của Việt Nam hiện nay đã phát huy cao độ truyền thống “uống nước nhớ nguồn” của dân tộc.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4104,7 +4104,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Hiện nay, trống đồng Đông Sơn được coi là hiện vật duy nhất chứng minh cho kĩ thuật chế tác đồng thau của người Việt cổ đạt đến đỉnh cao.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4119,7 +4119,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Trống đồng Đông Sơn là biểu tượng của văn minh Văn Lang – Âu Lạc, đồng thời cũng là biểu tượng duy nhất của văn hóa Việt Nam.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4130,7 +4130,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Nhà nước Âu Lạc phát triển hơn về nhiều mặt so với nhà nước Văn Lang và độc lập hoàn toàn so với nhà nước Văn Lang.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4140,7 +4140,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Hai nhà nước Văn Lang và Âu Lạc đều được hình thành trên cơ sở nền văn hóa Đông Sơn và đều được hình thành sau một cuộc kháng chiến chống ngoại xâm.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -4451,7 +4451,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Thành Cổ Loa là một công trình văn hóa và quân sự nổi bật của nước ta còn tồn tại nguyên vẹn đến ngày nay.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4466,7 +4466,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Dưới thời An Dương Vương, ngành đúc đồng và chế tạo vũ khí được khuyến khích phá triển và trở thành ngành kinh tế chủ đạo.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4477,7 +4477,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Nhà nước Văn Lang ra đời trên cơ sở xã hội đã có sự phân chia thành các giai cấp, tầng lớp khác nhau và mâu thuẫn giai cấp đã trở nên gay gắt.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4487,7 +4487,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Xã hội Văn Lang phân chia thành 3 tầng lớp, trong đó tầng lớp quý tộc và tầng lớp dân tự do là tầng lớp thống trị.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -4508,7 +4508,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Các “hình tượng sinh thực khí nam, nữ cách điệu hóa” được in trên mặt trống đồng Đông Sơn chính là biểu hiện của tín ngưỡng sùng bái tự nhiên.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -4518,7 +4518,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Trống đồng Đông Sơn có nhiều tên gọi khác nhau nhưng cách bài trí hoa văn trên các trống đồng đều giống hệt như nhau.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4529,7 +4529,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Nhà nước Văn Lang ra đời vào thế kỉ III TCN trên cơ sở liên kết các bộ lạc ở sông Hồng, sông Mã và sông Cả.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4850,22 +4850,22 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn tư liệu cung cấp thông tin thành tựu về chữ viết, văn học của cư dân Văn Lang – Âu Lạc.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "Cư dân Văn Lang – Âu Lạc có chữ viết riêng và sớm tạo dựng được một nền văn học viết phát triển rực rỡ.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Kho tàng văn học dân gian của cư dân Văn Lang – Âu Lạc rất phong phú với nhiều thể loại như thần thoại, truyền thuyết, truyện ngắn, kí sự…",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "Các truyện như Lạc Long Quân và Âu Cơ, Sơn Tinh – Thủy Tinh, Tháng Gióng đều kể về các nhân vật anh hùng có thật trong lịch sử.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4876,22 +4876,17 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Nước Văn Lang được chia thành 15 bộ, đứng đầu các bộ là Lạc hầu và Lạc tướng. Vua Hùng chỉ trực tiếp cai quản bộ Văn Lang.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "“Phụ đạo” được nhắc đến trong đoạn tư liệu trên chính là tục lệ cha truyền con nối đối với tất cả các chức quan trong triều đình.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Lạc hầu, Lạc tướng, Bồ chính, Quan lang, Mị nương là tên gọi các chức quan dưới thời kì nhà nước Văn Lang.",
-          "isTrue": true
-        },
-        {
-          "letter": "d",
-          "text": "VĂN MINH CHĂM -PA, VĂN MINH PHÙ NAM",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4917,7 +4912,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Các vị thần như Si – va, Bra – ma, Vít – xnu được thờ tự trong đền tháp Chăm đều là các vị thần của đạo Hin – đu và đạo Phật.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -4928,7 +4923,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn tư liệu cung cấp thông tin những cơ sở về kiều kiện tự nhiên, kinh tế, xã hội cho sự hình thành nền văn minh Chăm – pa.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -4938,7 +4933,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Điều kiện tự nhiên của vương quốc Chăm – pa hoàn toàn không thuận lợi cho sự phát triển của nông nghiệp trồng lúa nước.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -5249,7 +5244,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Vương quốc Chăm - pa là một quốc gia rộng lớn có lãnh thổ trải rộng từ miền Bắc vào miền Nam Việt Nam.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -5264,7 +5259,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Di tích Cao Lao Hạ thuộc khu vực Nam Trung Bộ được tìm thấy là một trong các di tích thuộc văn hóa Chăm – pa.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -5280,7 +5275,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Giống như quốc gia Văn Lang – Âu Lạc, thể chế chính trị của vương quốc Chăm – pa chịu ảnh hưởng sâu sắc của văn minh Ấn Độ.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -5306,12 +5301,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Khu di tích thánh địa Mỹ Sơn (Quảng Nam) là công trình kiến trúc duy nhất của văn minh Chăm – pa còn tồn tại đến ngày nay.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Văn minh Chăm – pa là nền văn minh có trình độ phát triển cao nhất ở khu vực Đông Nam Á thời kì cổ - trung đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -5342,7 +5337,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Nhà nước Chăm – pa là nhà nước quân chủ chuyên chế trung ương tập quyền theo đường lối pháp trị.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     }
@@ -5648,7 +5643,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn tư liệu cung cấp thông tin về hoạt động kinh tế nông nghiệp, thủ công nghiệp và thương nghiệp của cư dân Chăm – pa.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -5679,7 +5674,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Văn học dân gian của Chăm – pa có các thể loại tiêu biểu như: ca dao, tục ngữ, câu đố, sử thi, truyền thuyết, văn bia kí…",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -5715,7 +5710,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Hầu hết các điệu múa và lễ hội của cư dân Chăm – pa không còn được bảo tồn đến ngày nay.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -5731,12 +5726,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Nhiều phong tục, tập quán tốt đẹp của người Chăm vẫn được bảo tồn nguyên vẹn đến ngày nay.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Tín ngưỡng thờ cúng tổ tiên của cư dân Chăm - pa có nhiều điểm tương đồng và khác biệt với cư dân Văn Lang – Âu Lạc.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -6057,7 +6052,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Nghệ thuật Phù Nam chịu ảnh hưởng sâu sắc của các tôn giáo có nguồn gốc từ Ấn Độ và Trung Hoa.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -6109,12 +6104,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Trong quá trình tồn tại, vương quốc Phù Nam không ngừng mở rộng lãnh thổ ra bên ngoài và trở thành một đế quốc ở Đông Nam Á.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "So với vương quốc Chăm – pa, vương quốc Phù Nam ra đời muộn hơn nhưng phát triển hùng mạnh hơn và tồn tại trong một khoảng thời gian dài.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -6130,7 +6125,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Những thành tựu của văn minh Phù Nam chỉ có thể được phục dựng thông qua các di chỉ khảo cổ học.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -6225,7 +6220,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
       "q": "Tác phẩm văn học nào sau đây của Trung Quốc là một bộ tổng hợp thơ ca dân gian, đồng thời là một trong năm bộ kinh điển của Nho giáo?",
       "options": [
         "Tây du kí",
-        "Hồng lâu mông",
+        "Hồng lâu mộng",
         "Kinh Thi",
         "Thủy hử"
       ],
@@ -6433,11 +6428,11 @@ window.GRADE10_ARCHIVE_EXAMS = [
     {
       "q": "Quốc gia nào sau đây ở châu Âu đã khởi đầu cuộc cách mạng công nghiệp lần thứ tư?",
       "options": [
-        "Mĩ",
-        "Trung Quốc",
-        "Anh",
-        "Ấn Độ"
-      ],
+          "Mĩ",
+          "Đức",
+          "Anh",
+          "Ấn Độ"
+        ],
       "ans": 1,
       "answer": 1
     },
@@ -6895,7 +6890,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Khác với văn minh Trung Hoa, văn minh Ấn Độ là một nền văn minh mang đậm tính tôn giáo huyền bí và khép kín.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -6916,7 +6911,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Cách mạng công nghiệp lần thứ ba và cách mạng công nghiệp lần thứ tư là các cuộc cách mạng công nghiệp thời kì cận đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -6942,7 +6937,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Máy tính cá nhân ra đời đầu tiên ở nước Mĩ vào thập niên 70 của thế kỉ XIX.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -6968,12 +6963,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Các cuộc cách mạng công nghiệp thời kì hiện đại chỉ gây ra những tác động tiêu cực đối với đời sống con người.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "“…làm gia tăng sự xung đột giữa giá trị văn hóa truyền thống và hiện đại” là tác động tích cực của cuộc cách mạng công nghiệp thời hiện đại trên lĩnh vực văn hóa.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -6983,7 +6978,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Tất cả mọi thông tin được chia sẻ thông qua các ứng dụng trên internet đều có độ tin cậy cao và con người có thể dễ dàng tiếp cận, chia sẻ.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -6999,12 +6994,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Mĩ là quốc gia khởi đầu cuộc cách mạng công nghiệp lần thứ ba, đồng thời là một trong những quốc gia khởi đầu cuộc cách mạng công nghiệp lần thứ tư.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Nhật Bản là quốc gia duy nhất ở châu Á khởi đầu cuộc cách mạng công nghiệp lần thứ tư.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7025,7 +7020,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Trong các cuộc cách mạng công nghiệp thời kì hiện đại, sự phát triển của công nghệ sinh học có tính độc lập hoàn toàn với sự phát triển của các công nghệ khác.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7046,12 +7041,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn tư liệu cung cấp thông tin về những thành tựu trên mọi lĩnh vực của các cuộc cách mạng công nghiệp thời kì hiện đại.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "“Máy tính cá nhân”, “Windows”, “Internet” là những thành tựu tiêu biểu được khởi nguồn từ cuộc cách mạng công nghiệp lần thứ tư.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7061,7 +7056,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Chỉ khi có sự xuất hiện của internet, con người mới nảy sinh nhu cầu trao đổi và chia sẻ thông tin với nhau.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7072,7 +7067,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Rô – bốt Xô – phi – a là rô – bốt đầu tiên trên thế giới mà con người sáng tạo ra.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -7082,7 +7077,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Rô – bốt Xô – phi – a là một trong những thành tựu tiêu biểu trên lĩnh vực công nghệ sinh học.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7113,7 +7108,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Nội dung khắc trên bia đá cổ ở Đồng Tháp ca ngợi công đức và phẩm hạnh của một Thái tử ở Phù Nam trong công cuộc chống giặc ngoại xâm.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7129,7 +7124,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Vương quốc Phù Nam đã bị Chân Lạp thôn tính và sụp đổ vào thế kỉ VI.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7160,12 +7155,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Các sản phẩm từ nông nghiệp và khai thác lâm thổ sản của cư dân Phù Nam chỉ phục vụ cho nhu cầu của người dân chứ không buôn bán với bên ngoài.",
-          "isTrue": true
-        },
-        {
-          "letter": "d",
-          "text": "VĂN MINH ĐẠI VIỆT",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7176,7 +7166,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Thăng Long là kinh đô của nước Đại Việt qua nhiều triều đại phong kiến từ Đinh, Tiền Lê đến Lý, Trần, Lê sơ.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -7186,7 +7176,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Trung tâm Hoàng thành Thăng Long là một quần thể kiến trúc đồ sộ, còn nguyên vẹn đến ngày nay, được công nhận là Di sản văn hóa Thế giới",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7233,7 +7223,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Tất cả các triều đại phong kiến Việt Nam đều có công chống giặc ngoại xâm, bảo vệ và củng cố vững chắc nền độc lập dân tộc.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7243,7 +7233,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Chỉ khi được độc lập về chính trị, cư dân Đại Việt mới có ý thức độc lập về văn hóa.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7259,7 +7249,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Việc tiếp thu có chọn lọc tinh hoa văn hóa từ bên ngoài là nhân tố quan trọng hàng đầu dẫn đến sự phát triển rực rỡ của văn minh Đại Việt",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7269,7 +7259,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Cư dân Đại Việt tiếp thu thành tựu về chữ viết duy nhất từ nền văn minh Trung Hoa.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7280,12 +7270,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Chữ Nôm xuất hiện trước chữ Hán, là chữ viết do người Việt sáng tạo ra.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "Chữ viết chính thức của người Việt hiện nay đã được ra đời từ thế kỉ XVII.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7306,12 +7296,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Đoạn tư liệu cung cấp thông tin về một số biện pháp của vương triều nhà Trần nhằm phát triển sản xuất nông nghiệp và thủ công nghiệp.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
           "text": "Điểm độc đáo của nhà Trần so với các triều đại phong kiến khác là đặc biệt quan tâm đến công tác đắp đê, trị thủy.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7320,7 +7310,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         },
         {
           "letter": "d",
-          "text": "Việc đắp đê quai vạc từ đầu nguồn đến tận bở biển lần đầu tiên được tổ chức dưới vương triều nhà Trần",
+          "text": "Việc đắp đê quai vạc từ đầu nguồn đến tận bờ biển lần đầu tiên được tổ chức dưới vương triều nhà Trần",
           "isTrue": true
         }
       ]
@@ -7337,12 +7327,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Bộ luật Hình thư được ban hành vào thế kỉ XI dưới vương triều nhà Trần.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Hình thư là bộ luật thành văn đầu tiên của nước ta và còn được lưu giữ nguyên vẹn đến ngày nay.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7358,7 +7348,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "a",
           "text": "Thế kỉ XI đến thế kỉ XV là giai đoạn văn minh Đại Việt bước đầu được định hình và phát triển.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "b",
@@ -7368,12 +7358,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Từ thế kỉ XV, Nho giáo đã được du nhập vào nước ta và trở thành hệ tư tưởng chính thống.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
           "text": "Từ thế kỉ XI – XV, sự phát triển của giáo dục, khoa cử Đại Việt gắn liền với quá trình củng cố vị thế của Nho giáo.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7389,12 +7379,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Thành Đại La – vốn là kinh đô của một số triều đại phong kiến độc lập của Việt Nam trước đó, là nơi hội tụ mọi điều kiện thuận lợi để phát triển trong điều kiện mới.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Việc dời đô của Lý Thái Tổ chủ yếu xuất phát từ nhu cầu phòng thủ, bảo vệ đất nước.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7415,12 +7405,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Quốc triều hình luật là bộ luật thành văn đầu tiên của nước ta, nhưng chỉ được thực thi từ thời Lê sơ đến thời Lê Trung hưng.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
           "text": "Điểm chung của các Điều 388, 391, 374 và 375 trong bộ Quốc triều hình luật là bảo vệ quyền lợi của phụ nữ và những người yếu thế trong xã hội.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7451,7 +7441,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Trong thế kỉ XVII, gốm sứ Đại Việt đã chiếm lĩnh hầu hết thị phần ở khu vực Đông Nam Á.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
@@ -7467,7 +7457,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "b",
           "text": "Văn minh Đại Việt là một nền văn minh phát triển rực rỡ, toàn diện trên tất cả mọi mặt, đặc biệt là lĩnh vực khoa học – kĩ thuật.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "c",
@@ -7477,12 +7467,12 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "d",
           "text": "Văn minh Đại Việt có ý nghĩa quyết định đến thành công của Việt Nam trong quá trình hội nhập và phát triển hiện nay.",
-          "isTrue": true
+          "isTrue": false
         }
       ]
     },
     {
-      "passage": "Đọc đoạn tư liệu sau đây\n“Văn hóa Lý – Trần – Hồ là giai đoạn phát triển thịnh đạt của văn hóa Đại Việt. Văn hóa Lý – Trần – Hồ đã chủ động khôi phục lại những yếu tố văn hóa Việt cổ, đồng thời cải biến tích hợp những yếu tố văn hóa ngoại sinh, tạo nên một phong cách riêng cho mình. Văn hóa Đại Việt thời Lý – Trần – Hồ, vì thế, đã mang tính dân tộc sâu sắc.\nCũng dựa trên sự cân bằng văn hóa, văn hóa Lý – Trần – Hồ là sự hỗn dung của dòng văn hóa dân gian vói dòng văn hóa cung đình, giữa những yếu tố bình dân với những yếu tố bác học, giữa Phật – Đạo và Nho. Gam màu nổi bật của văn hóa thời kì này là sự ưu trội của dòng văn hóa dân gian, đan xen vào sinh hoạt văn hóa cung đình, tuy xu thế phát triển của nó là ngả dần sang văn hóa Đông Á Nho giáo. Văn hóa Đại Việt thời Lý – Trần – Hồ đã mang đậm tính dân gian”.\n(Nguyễn Quang Ngọc (Chủ biên), Tiến trình lịch sử Việt Nam, NXB Giáo dục, 2007, tr.106)",
+      "passage": "Đọc đoạn tư liệu sau đây\n“Văn hóa Lý – Trần – Hồ là giai đoạn phát triển thịnh đạt của văn hóa Đại Việt. Văn hóa Lý – Trần – Hồ đã chủ động khôi phục lại những yếu tố văn hóa Việt cổ, đồng thời cải biến tích hợp những yếu tố văn hóa ngoại sinh, tạo nên một phong cách riêng cho mình. Văn hóa Đại Việt thời Lý – Trần – Hồ, vì thế, đã mang tính dân tộc sâu sắc.\nCũng dựa trên sự cân bằng văn hóa, văn hóa Lý – Trần – Hồ là sự hỗn dung của dòng văn hóa dân gian với dòng văn hóa cung đình, giữa những yếu tố bình dân với những yếu tố bác học, giữa Phật – Đạo và Nho. Gam màu nổi bật của văn hóa thời kì này là sự ưu trội của dòng văn hóa dân gian, đan xen vào sinh hoạt văn hóa cung đình, tuy xu thế phát triển của nó là ngả dần sang văn hóa Đông Á Nho giáo. Văn hóa Đại Việt thời Lý – Trần – Hồ đã mang đậm tính dân gian”.\n(Nguyễn Quang Ngọc (Chủ biên), Tiến trình lịch sử Việt Nam, NXB Giáo dục, 2007, tr.106)",
       "source": "Ôn tập Lịch sử 10 · Chủ đề 6",
       "statements": [
         {
@@ -7498,7 +7488,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Văn hóa Lý – Trần – Hồ phát triển thịnh đạt hoàn toàn dựa trên cơ sở khôi phục lại những yếu tố văn hóa truyền thống trước kia.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
@@ -7524,7 +7514,7 @@ window.GRADE10_ARCHIVE_EXAMS = [
         {
           "letter": "c",
           "text": "Sự phát triển của kinh thành Thăng Long chỉ có thể được phục dựng lại thông qua các di tích tìm thấy tại Hoàng thành Thăng Long.",
-          "isTrue": true
+          "isTrue": false
         },
         {
           "letter": "d",
