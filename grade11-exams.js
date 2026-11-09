@@ -2771,12 +2771,12 @@ window.GRADE11_ARCHIVE_EXAMS = [
         "answer": 0
       },
       {
-        "q": "Một trong những cuộc khởi nghĩa tiêu biểu của nhân dân In – đô – nê – xi – a chống lại thực dân xâm lược cuối thế kỉ XIX là",
+        "q": "Một trong những cuộc khởi nghĩa tiêu biểu ở In-đô-nê-xi-a chống thực dân Hà Lan vào đầu thế kỉ XIX là",
         "options": [
-          "Khởi nghĩa của La – pu – la – pu",
-          "Khởi nghĩa của nhà vua Nô – rô – đôm",
-          "Khởi nghĩa của Hô – xê Ri – đan",
-          "Khởi nghĩa của Hoàng tử Đi – pô – nê – gô - rô"
+          "Khởi nghĩa của La-pu-la-pu.",
+          "Khởi nghĩa của nhà vua Nô-rô-đôm.",
+          "Khởi nghĩa của Hô-xê Ri-dan.",
+          "Khởi nghĩa của Hoàng tử Đi-pô-nê-gô-rô."
         ],
         "ans": 3,
         "answer": 3
@@ -4049,15 +4049,15 @@ window.GRADE11_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "Chọn các từ cho sẵn sau đây đặt vào vị trí đánh số trong đoạn thông tin để thể hiện nội dung cuộc khởi nghĩa Hai Bà Trưng:",
+        "q": "Chọn phương án điền đúng vào các vị trí (1)–(6) trong đoạn thông tin về khởi nghĩa Hai Bà Trưng: Nhà ...(1) đặt ách thống trị nặng nề lên vùng ...(2), đặc biệt dưới thời ...(3) làm ...(4). Nhà Hán cử ...(5) đưa quân sang đàn áp. Sau một thời gian kháng cự, Hai Bà Trưng lui quân về ...(6) và hi sinh.",
         "options": [
-          "Mã Viện.",
-          "Tô Định.",
-          "Đông Hán.",
-          "Hát Môn, E. Thái thú, G. Giao Chỉ. Cuộc khởi nghĩa Hai Bà Trưng bùng nổ năm 40, trong bối cảnh nhà ... (1) đang đặt ách thống trị nặng nề lên vùng ... (2), đặc biệt là thời kì ... (3) làm ... (4). Một thời gian sau đó, nhà Hán cử ... (5) đưa quân sang đàn áp. Sau một thời gian kháng cự, Hai Bà Trưng lui quân về ... (6) và hi sinh. 1. Đông Hán 2. Giao Chỉ 3. Tô Định 4. Thái thú 5. Mã Viện 6. Hát Môn"
+          "(1) Đông Hán; (2) Giao Chỉ; (3) Tô Định; (4) thái thú; (5) Mã Viện; (6) Hát Môn.",
+          "(1) Đông Hán; (2) Giao Chỉ; (3) Mã Viện; (4) thái thú; (5) Tô Định; (6) Hát Môn.",
+          "(1) Nhà Đường; (2) Giao Chỉ; (3) Tô Định; (4) thái thú; (5) Mã Viện; (6) Hát Môn.",
+          "(1) Đông Hán; (2) Giao Chỉ; (3) Tô Định; (4) thái thú; (5) Mã Viện; (6) Mê Linh."
         ],
-        "ans": 3,
-        "answer": 3
+        "ans": 0,
+        "answer": 0
       },
       {
         "q": "Nội dung nào sau đây không phản ánh đúng đặc điểm nổi bật của các cuộc khởi nghĩa của nhân dân ta thời kì Bắc thuộc?",
@@ -4126,26 +4126,26 @@ window.GRADE11_ARCHIVE_EXAMS = [
         "answer": 0
       },
       {
-        "q": "Chọn các từ cho sẵn sau đây điền vào chỗ trống:",
+        "q": "Chọn phương án điền đúng vào các vị trí (1)–(4): Khởi nghĩa Lam Sơn phát triển thành một cuộc ...(1), có tính chất ...(2) rộng rãi. Thắng lợi chấm dứt ách đô hộ của ...(3), khôi phục nền ...(4), đập tan âm mưu thủ tiêu văn hóa Đại Việt và mở ra thời kì phát triển mới.",
         "options": [
-          "Nhân dân",
-          "Nhà Minh",
-          "Chiến tranh giải phóng dân tộc",
-          "Độc lập dân tộc Khởi nghĩa Lam Sơn đã phát triển thành một cuộc ...(1), có tính chất ...(2) rộng rãi. Cuộc khởi nghĩa thắng lợi đã chấm dứt thời kì đô hộ của ...(3), khôi phục nền ...(4), đập tan âm mưu thủ tiêu nền văn hoá Đại Việt, mở ra thời kì phát triển mới của đất nước. (1) chiến tranh giải phóng dân tộc (2) nhân dân (3) nhà Minh (4) độc lập dân tộc"
+          "(1) khởi nghĩa địa phương; (2) quân sự; (3) nhà Minh; (4) chủ quyền lãnh thổ.",
+          "(1) chiến tranh giải phóng dân tộc; (2) nhân dân; (3) nhà Minh; (4) độc lập dân tộc.",
+          "(1) chiến tranh bảo vệ Tổ quốc; (2) phong kiến; (3) nhà Thanh; (4) thống nhất quốc gia.",
+          "(1) khởi nghĩa nông dân; (2) quý tộc; (3) nhà Đường; (4) độc lập dân tộc."
         ],
-        "ans": 3,
-        "answer": 3
+        "ans": 1,
+        "answer": 1
       },
       {
-        "q": "Chọn các từ cho sẵn sau đây điền vào chỗ trống:",
+        "q": "Chọn phương án điền đúng vào các vị trí (1)–(6): Phong trào Tây Sơn từ một ...(1) phát triển thành ...(2) rộng lớn, lật đổ các chính quyền phong kiến ...(3), xóa bỏ tình trạng ...(4), đồng thời bảo vệ nền ...(5) và ...(6) của Tổ quốc.",
         "options": [
-          "chủ quyền lãnh thổ",
-          "cuộc khởi nghĩa địa phương",
-          "chia cắt đất nước",
-          "độc lập dân tộc E. Nguyễn – Trịnh F. phong trào dân tộc Phong trào Tây Sơn từ một ..(1) đã phát triển thành ...(2) rộng lớn, lập nên những chiến công hiển hách. Phong trào đã lật đổ các chính quyền phong kiến ...(3)..., xoá bỏ tình trạng ...(4) Đồng thời, phong trào còn đánh tan các thế lực ngoại xâm hùng mạnh, bảo vệ vững chắc nền ...(5) và ...(6) của Tổ quốc. (1) cuộc khởi nghĩa địa phương (2) phong trào dân tộc (3) Nguyễn - Trịnh (4) chia cắt đất nước (5) độc lập dân tộc (6) chủ quyền lãnh thổ"
+          "(1) cuộc khởi nghĩa địa phương; (2) phong trào dân tộc; (3) Nguyễn – Trịnh; (4) chia cắt đất nước; (5) độc lập dân tộc; (6) chủ quyền lãnh thổ.",
+          "(1) phong trào dân tộc; (2) cuộc khởi nghĩa địa phương; (3) Nguyễn – Trịnh; (4) chia cắt đất nước; (5) chủ quyền lãnh thổ; (6) độc lập dân tộc.",
+          "(1) cuộc khởi nghĩa địa phương; (2) phong trào dân tộc; (3) Nguyễn – Trịnh; (4) mất độc lập dân tộc; (5) thống nhất quốc gia; (6) chủ quyền lãnh thổ.",
+          "(1) cuộc khởi nghĩa địa phương; (2) phong trào dân tộc; (3) Nguyễn – Trịnh; (4) chia cắt đất nước; (5) độc lập dân tộc; (6) nền quân chủ."
         ],
-        "ans": 3,
-        "answer": 3
+        "ans": 0,
+        "answer": 0
       },
       {
         "q": "Nguyên nhân sâu xa bùng nổ các cuộc đấu tranh của nhân dân Việt Nam thời Bắc thuộc là",
@@ -7136,12 +7136,12 @@ window.GRADE11_ARCHIVE_EXAMS = [
         "answer": 2
       },
       {
-        "q": "Tại hội nghị Hoà bình Xan Phran-xi-xcô (1951), khi chủ quyền của Việt Nam đối với quần đảo Hoàng Sa và quần đảo Trường Sa tiếp tục được tuyên bố mà không bị các quốc gia tham dự hội nghị phản đối. Điều đó cho thấy",
+        "q": "Tại Hội nghị Hòa bình Xan Phran-xi-xcô năm 1951, đại diện Quốc gia Việt Nam đã tuyên bố điều gì liên quan đến quần đảo Hoàng Sa và Trường Sa?",
         "options": [
-          "tính pháp lý quốc tế và lịch sử về chủ quyền của Việt Nam.",
-          "đây là những quần đảo không có giá trị cao về kinh tế.",
-          "đây là những quần đảo không có giá trị cao về quốc phòng.",
-          "các quốc gia tham dự hội nghị đều tuyệt đối tôn trọng luật Biển."
+          "Tái khẳng định chủ quyền của Việt Nam đối với hai quần đảo Hoàng Sa và Trường Sa.",
+          "Đề nghị giao hai quần đảo cho Liên Hợp Quốc quản lý.",
+          "Tuyên bố từ bỏ yêu sách của Việt Nam đối với hai quần đảo.",
+          "Đề nghị chuyển quyền quản lý hai quần đảo cho một quốc gia khác."
         ],
         "ans": 0,
         "answer": 0
