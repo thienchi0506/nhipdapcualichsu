@@ -57,56 +57,84 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-li{height:24px;}
-input{height:20px;padding:0;vertical-align:top;}
-</style>
 </head>
 <body style="font-family:'Times New Roman';font-size:20px;">
 <b>Tạo form đăng ký sau:</b>
-<fieldset style="width:1100px;height:800px;">
-<center>PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br><b>Năm Học 2026 – 2027</b></center>
+<fieldset style="width:1100px;height:800px;padding:20px;">
+<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
 <form action="/action_page.php">
-<img src="logo.png" width="130" height="110" style="float:right;">
+<img src="logo.png" width="130" height="110" style="float:right;margin-right:40px;">
 <b>I/ THÔNG TIN HỌC SINH</b>
-<ol style="margin-top:0;">
-<li><label for="fname">Họ và tên:</label><input type="text" id="fname" size="25"></li>
-<li><label for="fname">Nam:</label><input type="checkbox" id="fname"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="fname">nữ:</label><input type="checkbox" id="fname"></li>
-<li><label for="fname">Dân tộc:</label><input type="text" id="fname" size="25"></li>
-<li><label for="fname">Ngày, tháng, năm, sinh:</label><input type="text" id="fname" size="25"></li>
-<li><label for="fname">Số điện thoại liên lạc:</label><input type="text" id="fname" size="25"></li>
+<ol>
+<li><label for="hovaten">Họ và tên:</label>
+<input type="text" id="hovaten"></li>
+<li><label for="nam10">Nam:</label>
+<input type="checkbox" id="nam10"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label for="nu10">nữ:</label>
+<input type="checkbox" id="nu10"></li>
+<li><label for="dantoc10">Dân tộc:</label>
+<input type="text" id="dantoc10"></li>
+<li><label for="ngaysinh10">Ngày, tháng, năm sinh:</label>
+<input type="text" id="ngaysinh10"></li>
+<li><label for="lienlac">Số điện thoại liên lạc:</label>
+<input type="text" id="lienlac"></li>
 <li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
 </ol>
-<table border="1" cellspacing="0" cellpadding="5" width="1000" height="100" align="center" style="border-collapse:collapse;">
-<tr align="center"><td>Môn</td><td>Văn</td><td>Toán</td><td>Anh văn</td><td>KHTN</td><td>Lịch sử<br>Địa lý</td><td>GDCD</td><td>Công nghệ</td><td>Tin học</td></tr>
-<tr><td>Điểm TB<br>cuối năm</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-</table><br>
-<b>2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b><br><br>
-<fieldset style="float:right;width:380px;height:240px;font-size:12px;">
-<fieldset>
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-<label for="fname">CÁC MÔN HỌC LỰA CHỌN:</label><br>
-<select id="fname" style="width:100%;font-size:12px;">
+<table border="1" cellspacing="0" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
+<tr style="height:45px;text-align:center;">
+<td>Môn</td>
+<td>Văn</td>
+<td>Toán</td>
+<td>Anh văn</td>
+<td>KHTN</td>
+<td>Lịch sử<br>Địa lý</td>
+<td>GDCD</td>
+<td>Công nghệ</td>
+<td>Tin học</td>
+</tr>
+<tr style="height:45px;">
+<td>Điểm TB<br>cuối năm</td>
+<td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td>
+</tr>
+</table>
+<br>
+<b>2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b>
+<br><br>
+
+<fieldset style="float:right;width:380px;height:240px;padding:15px;font-size:12px;">
+<fieldset style="height:190px;border:1px solid lightgray;padding:12px;">
+ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ
+<br><br>
+<label for="chonmonphai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
+<select id="chonmonphai" style="width:100%;font-size:12px;">
 <option>CÁC PHƯƠNG ÁN</option>
 <option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
 <option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
 <option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
 <option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><input type="submit" value="ĐĂNG KÝ">
-</fieldset></fieldset>
-<fieldset style="width:620px;height:190px;padding:10px;border:1px solid black;">
-<fieldset style="border:none;border-right:7px solid lightgray;height:170px;padding:10px;margin:0;">
-<fieldset style="padding:10px;margin:0;border:1px solid lightgray;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-<label for="fname">CÁC MÔN HỌC LỰA CHỌN:</label><br>
-<select id="fname" style="width:100%;">
+</select><br>
+<input type="submit" value="ĐĂNG KÝ">
+</fieldset>
+</fieldset>
+
+<fieldset style="width:620px;height:190px;padding:8px 15px 8px 5px;">
+<fieldset style="border:none;border-top:5px solid lightgray;border-right:5px solid lightgray;height:170px;margin:0;padding:6px 8px 0 0;">
+<fieldset style="height:140px;margin:0;padding:15px 12px 0 12px;">
+ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ
+<br><br>
+<label for="chonmontrai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
+<select id="chonmontrai" style="width:100%;">
 <option>CÁC PHƯƠNG ÁN</option>
 <option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
 <option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
 <option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
 <option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><input type="submit" value="ĐĂNG KÝ">
-</fieldset></fieldset></fieldset>
+</select><br>
+<input type="submit" value="ĐĂNG KÝ">
+</fieldset>
+</fieldset>
+</fieldset>
 </form>
 </fieldset>
 </body>
