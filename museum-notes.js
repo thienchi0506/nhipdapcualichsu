@@ -262,7 +262,7 @@
 <fieldset>
 <center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
 <form>
-<img src="[https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-an-open-book-with-a-tree-growing-from-it-flying-birds-image_16591912.jpg](https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-an-open-book-with-a-tree-growing-from-it-flying-birds-image_16591912.jpg)" width="200" height="110" style="float:right;">
+<img src="https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-an-open-book-with-a-tree-growing-from-it-flying-birds-image_16591912.jpg" width="200" height="110" style="float:right;">
 <b>I/ THÔNG TIN HỌC SINH</b>
 <ol>
 <li>Họ và tên:<input></li>
