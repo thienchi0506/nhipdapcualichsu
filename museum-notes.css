@@ -1,0 +1,70 @@
+.museum-notes {
+    box-sizing: border-box;
+    width: min(1100px, calc(100% - 24px));
+    max-width: calc(100% - 24px);
+    max-height: 90vh;
+    max-height: 90dvh;
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    color: #382414;
+    background: #fff9ed;
+    border: 2px solid #c6a326;
+    border-radius: 16px;
+    box-shadow: 0 20px 70px #0008;
+}
+.museum-notes::backdrop { background: #140c08b8; }
+.museum-notes__header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4px 16px;
+    padding: 12px 20px;
+    background: #711c1c;
+    color: #ffedb0;
+}
+.museum-notes__header h2 { margin: 0; font-size: clamp(21px, 4vw, 30px); }
+.museum-notes__status { grid-column: 1 / -1; margin: 0; font-size: 15px; }
+.museum-notes__status:empty { display: none; }
+.museum-notes__body { padding: 16px clamp(12px, 3vw, 24px) 24px; }
+.museum-notes__body section + section { margin-top: 28px; }
+.museum-notes__toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.museum-notes__toolbar h3 { margin: 0; font-size: 22px; }
+.museum-notes button {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1px solid #b98d21;
+    border-radius: 8px;
+    background: #711c1c;
+    color: #fff4cc;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+.museum-notes button:active { background: #4e1212; }
+.museum-notes button:disabled { opacity: .65; cursor: wait; }
+.museum-notes .museum-notes__close { width: 48px; min-width: 48px; padding: 0; font-size: 34px; line-height: 1; }
+.museum-notes pre {
+    box-sizing: border-box;
+    max-width: 100%;
+    margin: 12px 0 0;
+    padding: 16px;
+    overflow-x: auto;
+    white-space: pre;
+    overflow-wrap: normal;
+    word-break: normal;
+    tab-size: 4;
+    user-select: text;
+    background: #f3eadb;
+    color: #251b14;
+    border: 1px solid #d8c7a9;
+    border-radius: 8px;
+    font: 14px/1.65 Consolas, 'Courier New', monospace;
+}
+.museum-notes :focus-visible { outline: 3px solid #2392ba; outline-offset: 2px; }
+.museum-notes__copy-buffer { position: fixed; width: 1px; height: 1px; opacity: 0; }
+:root[data-theme='dark'] .museum-notes { background: #241b15; color: #f5e7cc; }
+:root[data-theme='dark'] .museum-notes pre { background: #171310; color: #f5e7cc; border-color: #796342; }
