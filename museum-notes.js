@@ -53,6 +53,38 @@
 </fieldset>
 </body>
 </html>` },
+        { title: 'Đề ngắn 2', text: String.raw`<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:'Times New Roman';font-size:20px;">
+<fieldset>
+<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
+<form action="/action_page.php">
+<img src="hinhanh.jpg" width="200" height="110" style="float:right;">
+<b>I/ THÔNG TIN HỌC SINH</b>
+<ol>
+<li><label for="tenhs">Họ và tên:</label><input id="tenhs"></li>
+<li><label for="gtnam">Nam:</label><input type="checkbox" id="gtnam"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="gtnu">nữ:</label><input type="checkbox" id="gtnu"></li>
+<li><label for="dtoc">Dân tộc:</label><input id="dtoc"></li>
+<li><label for="nsinh">Ngày, tháng, năm sinh:</label><input id="nsinh"></li>
+<li><label for="sdt">Số điện thoại liên lạc:</label><input id="sdt"></li>
+</ol>
+<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
+<fieldset style="width:550px;height:270px;padding:8px 30px 8px 5px;">
+<fieldset style="border:none;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px;margin:0;padding:6px 8px 0 0;">
+<fieldset style="height:110px;margin:0;padding:20px 12px 0 12px;">
+ĐĂNG KÝ NGUYỆN VỌNG:<br><br>
+<label for="chontruong">Lựa chọn các nguyện vọng:</label>
+<select id="chontruong">
+<option>Đại học Bách Khoa TPHCM</option>
+<option>Đại học Y Khoa TPHCM</option>
+<option selected>Đại học Tôn Đức Thắng</option>
+<option>Đại học Nguyễn Tất Thành</option>
+</select><br><input type="submit" value="Gửi truy vấn">
+</fieldset></fieldset></fieldset>
+</form></fieldset>
+</body>
+</html>` },
         { title: 'Đề dài', text: String.raw`<!DOCTYPE html>
 <html>
 <head>
@@ -137,6 +169,57 @@
 </fieldset>
 </form>
 </fieldset>
+</body>
+</html>` },
+        { title: 'Đề dài 2', text: String.raw`<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:'Times New Roman';font-size:20px;">
+<b>Tạo form đăng ký sau:</b>
+<fieldset style="width:1100px;height:800px;padding:20px;">
+<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
+<form action="/action_page.php">
+<img src="logo.png" width="130" height="110" style="float:right;margin-right:40px;">
+<b>I/ THÔNG TIN HỌC SINH</b>
+<ol>
+<li><label for="hovaten">Họ và tên:</label><input id="hovaten"></li>
+<li><label for="nam10">Nam:</label><input type="checkbox" id="nam10"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="nu10">nữ:</label><input type="checkbox" id="nu10"></li>
+<li><label for="dantoc10">Dân tộc:</label><input id="dantoc10"></li>
+<li><label for="ngaysinh10">Ngày, tháng, năm sinh:</label><input id="ngaysinh10"></li>
+<li><label for="lienlac">Số điện thoại liên lạc:</label><input id="lienlac"></li>
+<li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
+</ol>
+<table border="1" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
+<tr style="height:45px;text-align:center;"><td>Môn</td><td>Văn</td><td>Toán</td><td>Anh văn</td><td>KHTN</td><td>Lịch sử<br>Địa lý</td><td>GDCD</td><td>Công nghệ</td><td>Tin học</td></tr>
+<tr style="height:45px;"><td>Điểm TB<br>cuối năm</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table><br>
+<b>2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b><br><br>
+<fieldset style="float:right;width:380px;height:240px;padding:15px;font-size:12px;">
+<fieldset style="height:190px;border:1px solid lightgray;padding:12px;">
+ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
+<label for="chonmonphai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
+<select id="chonmonphai" style="width:100%;font-size:12px;">
+<option>CÁC PHƯƠNG ÁN</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
+<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
+<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
+</select><br><input type="submit" value="ĐĂNG KÝ">
+</fieldset></fieldset>
+<fieldset style="width:620px;height:190px;padding:8px 15px 8px 5px;">
+<fieldset style="border:none;border-top:5px solid lightgray;border-right:5px solid lightgray;height:170px;margin:0;padding:6px 8px 0 0;">
+<fieldset style="height:140px;margin:0;padding:15px 12px 0 12px;">
+ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
+<label for="chonmontrai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
+<select id="chonmontrai" style="width:100%;">
+<option>CÁC PHƯƠNG ÁN</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
+<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
+<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
+</select><br><input type="submit" value="ĐĂNG KÝ">
+</fieldset></fieldset></fieldset>
+</form></fieldset>
 </body>
 </html>` }
     ];
