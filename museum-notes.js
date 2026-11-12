@@ -85,6 +85,39 @@
 </form></fieldset>
 </body>
 </html>` },
+        { title: 'Đề ngắn 3', text: String.raw`<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:'Times New Roman';font-size:20px;">
+<fieldset>
+<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
+<form action="/action_page.php">
+<img src="hinhanh.jpg" width="200" height="110" style="float:right;">
+<b>I/ THÔNG TIN HỌC SINH</b>
+<ol>
+<li><label for="tenhs">Họ và tên:</label><input id="tenhs"></li>
+<li><label for="gtnam">Nam:</label><input type="checkbox" id="gtnam" name="gioitinh" value="Nam" onclick="document.getElementById('gtnu').checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label for="gtnu">nữ:</label><input type="checkbox" id="gtnu" name="gioitinh" value="Nữ" onclick="document.getElementById('gtnam').checked=false"></li>
+<li><label for="dtoc">Dân tộc:</label><input id="dtoc"></li>
+<li><label for="nsinh">Ngày, tháng, năm sinh:</label><input id="nsinh"></li>
+<li><label for="sdt">Số điện thoại liên lạc:</label><input id="sdt"></li>
+</ol>
+<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
+<fieldset style="width:550px;height:270px;padding:8px 30px 8px 5px;">
+<fieldset style="border:none;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px;margin:0;padding:6px 8px 0 0;">
+<fieldset style="height:110px;margin:0;padding:20px 12px 0 12px;">
+ĐĂNG KÝ NGUYỆN VỌNG:<br><br>
+<label for="chontruong">Lựa chọn các nguyện vọng:</label>
+<select id="chontruong">
+<option>Đại học Bách Khoa TPHCM</option>
+<option>Đại học Y Khoa TPHCM</option>
+<option selected>Đại học Tôn Đức Thắng</option>
+<option>Đại học Nguyễn Tất Thành</option>
+</select><br><input type="submit" value="Gửi truy vấn">
+</fieldset></fieldset></fieldset>
+</form></fieldset>
+</body>
+</html>` },
         { title: 'Đề dài', text: String.raw`<!DOCTYPE html>
 <html>
 <head>
@@ -221,7 +254,87 @@
 </fieldset></fieldset></fieldset>
 </form></fieldset>
 </body>
-</html>` }
+</html>` },
+        { title: 'Đề 1 hoàn thiện', text: String.raw`<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:'Times New Roman';font-size:20px;">
+<fieldset>
+<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
+<form>
+<img src="[https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-an-open-book-with-a-tree-growing-from-it-flying-birds-image_16591912.jpg](https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-an-open-book-with-a-tree-growing-from-it-flying-birds-image_16591912.jpg)" width="200" height="110" style="float:right;">
+<b>I/ THÔNG TIN HỌC SINH</b>
+<ol>
+<li>Họ và tên:<input></li>
+<li>Nam:<input type="checkbox" onclick="this.nextElementSibling.checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nữ:<input type="checkbox" onclick="this.previousElementSibling.checked=false"></li>
+<li>Dân tộc:<input></li>
+<li>Ngày, tháng, năm sinh:<input></li>
+<li>Số điện thoại liên lạc:<input></li>
+</ol>
+<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
+<fieldset style="width:550px;height:270px;padding:8px 30px 8px 5px;">
+<fieldset style="border:0;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px;margin:0;padding:6px 8px 0 0;">
+<fieldset style="height:110px;margin:0;padding:20px 12px 0;">
+ĐĂNG KÝ NGUYỆN VỌNG:<br><br>
+Lựa chọn các nguyện vọng:
+<select>
+<option>Đại học Bách Khoa TPHCM</option>
+<option>Đại học Y Khoa TPHCM</option>
+<option selected>Đại học Tôn Đức Thắng</option>
+<option>Đại học Nguyễn Tất Thành</option>
+</select><br><button>Gửi truy vấn</button>
+</fieldset></fieldset></fieldset>
+</form></fieldset>
+</body>
+</html>` },
+        { title: 'Đề 2 hoàn thiện', text: String.raw`<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family:'Times New Roman';font-size:20px;">
+<b>Tạo form đăng ký sau:</b>
+<fieldset style="width:1100px;height:800px;padding:20px;">
+<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
+<form>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWVLX8iWvT40_ueA8kbg52_ZbCraIk0pQ1jvy8pQjGFQ&s=10" width="130" height="110" style="float:right;margin-right:40px;">
+<b>I/ THÔNG TIN HỌC SINH</b>
+<ol>
+<li>Họ và tên:<input></li>
+<li>Nam:<input type="checkbox" onclick="this.nextElementSibling.checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nữ:<input type="checkbox" onclick="this.previousElementSibling.checked=false"></li>
+<li>Dân tộc:<input></li>
+<li>Ngày, tháng, năm sinh:<input></li>
+<li>Số điện thoại liên lạc:<input></li>
+<li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
+</ol>
+<table border="1" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
+<tr style="height:45px;text-align:center;"><td>Môn</td><td>Văn</td><td>Toán</td><td>Anh văn</td><td>KHTN</td><td>Lịch sử<br>Địa lý</td><td>GDCD</td><td>Công nghệ</td><td>Tin học</td></tr>
+<tr style="height:45px;"><td>Điểm TB<br>cuối năm</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table><br>
+<b style="font-size:20px;">2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b><br><br>
+<fieldset style="float:right;width:380px;height:240px;padding:10px;border:1px solid black;font-size:13px;">
+<fieldset style="height:190px;padding:10px;border:1px solid lightgray;">
+ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
+CÁC MÔN HỌC LỰA CHỌN:<br>
+<select style="width:100%;font-size:13px;">
+<option>CÁC PHƯƠNG ÁN</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
+<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
+<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
+</select><br><button>ĐĂNG KÝ</button>
+</fieldset></fieldset>
+<fieldset style="width:620px;height:190px;padding:10px;border:1px solid black;font-size:18px;">
+<fieldset style="border:0;border-right:5px solid lightgray;height:170px;padding:10px;margin:0;">
+<fieldset style="height:120px;padding:10px;margin:0;border:1px solid lightgray;">
+ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
+CÁC MÔN HỌC LỰA CHỌN:<br>
+<select style="width:100%;font-size:16px;">
+<option>CÁC PHƯƠNG ÁN</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
+<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
+<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
+<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
+</select><br><button>ĐĂNG KÝ</button>
+</fieldset></fieldset></fieldset>` }
     ];
 
     const opener = document.getElementById('museum-notes-open');
@@ -253,7 +366,7 @@
         status.setAttribute('role', 'status');
         status.setAttribute('aria-live', 'polite');
 
-        notes.forEach(note => {
+        notes.forEach((note, index) => {
             const section = document.createElement('section');
             const toolbar = document.createElement('div');
             toolbar.className = 'museum-notes__toolbar';
@@ -277,7 +390,25 @@
             code.tabIndex = 0;
             code.setAttribute('aria-label', 'Nội dung ' + note.title.toLowerCase());
             code.textContent = note.text;
-            toolbar.append(heading, copy);
+            code.id = 'museum-notes-code-' + index;
+            code.hidden = true;
+            const toggle = document.createElement('button');
+            toggle.type = 'button';
+            toggle.className = 'museum-notes__toggle';
+            toggle.textContent = 'Xem thêm';
+            toggle.setAttribute('aria-label', 'Xem thêm ' + note.title.toLowerCase());
+            toggle.setAttribute('aria-controls', code.id);
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.addEventListener('click', () => {
+                code.hidden = !code.hidden;
+                toggle.textContent = code.hidden ? 'Xem thêm' : 'Thu gọn';
+                toggle.setAttribute('aria-label', toggle.textContent + ' ' + note.title.toLowerCase());
+                toggle.setAttribute('aria-expanded', String(!code.hidden));
+            });
+            const actions = document.createElement('div');
+            actions.className = 'museum-notes__actions';
+            actions.append(toggle, copy);
+            toolbar.append(heading, actions);
             section.append(toolbar, code);
             body.append(section);
         });
