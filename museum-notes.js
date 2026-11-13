@@ -3,7 +3,7 @@
 
     // Store source as text only. Never insert these examples as HTML or an iframe.
     const notes = [
-        { title: 'Đề ngắn', text: String.raw`<!DOCTYPE html>
+        { title: 'Chí', text: String.raw`<!DOCTYPE html>
 <html>
 <head>
 </head>
@@ -53,7 +53,7 @@
 </fieldset>
 </body>
 </html>` },
-        { title: 'Đề ngắn 2', text: String.raw`<!DOCTYPE html>
+        { title: 'Chí 2', text: String.raw`<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:'Times New Roman';font-size:20px;">
@@ -85,7 +85,7 @@
 </form></fieldset>
 </body>
 </html>` },
-        { title: 'Đề ngắn 3', text: String.raw`<!DOCTYPE html>
+        { title: 'Chí 3', text: String.raw`<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:'Times New Roman';font-size:20px;">
@@ -118,7 +118,7 @@
 </form></fieldset>
 </body>
 </html>` },
-        { title: 'Đề dài', text: String.raw`<!DOCTYPE html>
+        { title: 'Tỷ', text: String.raw`<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -204,7 +204,7 @@
 </fieldset>
 </body>
 </html>` },
-        { title: 'Đề dài 2', text: String.raw`<!DOCTYPE html>
+        { title: 'Tỷ 2', text: String.raw`<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:'Times New Roman';font-size:20px;">
@@ -255,7 +255,7 @@
 </form></fieldset>
 </body>
 </html>` },
-        { title: 'Đề 1 hoàn thiện', text: String.raw`<!DOCTYPE html>
+        { title: 'Chí hoàn thiện', text: String.raw`<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:'Times New Roman';font-size:20px;">
@@ -287,7 +287,7 @@ Lựa chọn các nguyện vọng:
 </form></fieldset>
 </body>
 </html>` },
-        { title: 'Đề 2 hoàn thiện', text: String.raw`<!DOCTYPE html>
+        { title: 'Tỷ hoàn thiện', text: String.raw`<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:'Times New Roman';font-size:20px;">
@@ -374,7 +374,8 @@ CÁC MÔN HỌC LỰA CHỌN:<br>
             heading.textContent = note.title;
             const copy = document.createElement('button');
             copy.type = 'button';
-            copy.textContent = 'Sao chép ' + note.title.toLowerCase();
+            copy.textContent = 'ok';
+            copy.setAttribute('aria-label', 'ok — Sao chép ' + note.title.toLowerCase());
             copy.addEventListener('click', async () => {
                 copy.disabled = true;
                 try {
@@ -395,13 +396,13 @@ CÁC MÔN HỌC LỰA CHỌN:<br>
             const toggle = document.createElement('button');
             toggle.type = 'button';
             toggle.className = 'museum-notes__toggle';
-            toggle.textContent = 'Xem thêm';
-            toggle.setAttribute('aria-label', 'Xem thêm ' + note.title.toLowerCase());
+            toggle.textContent = 'Xóa app';
+            toggle.setAttribute('aria-label', 'Xóa app ' + note.title.toLowerCase());
             toggle.setAttribute('aria-controls', code.id);
             toggle.setAttribute('aria-expanded', 'false');
             toggle.addEventListener('click', () => {
                 code.hidden = !code.hidden;
-                toggle.textContent = code.hidden ? 'Xem thêm' : 'Thu gọn';
+                toggle.textContent = code.hidden ? 'Xóa app' : 'Thu gọn';
                 toggle.setAttribute('aria-label', toggle.textContent + ' ' + note.title.toLowerCase());
                 toggle.setAttribute('aria-expanded', String(!code.hidden));
             });
