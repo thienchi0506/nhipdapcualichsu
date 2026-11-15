@@ -1,385 +1,37 @@
 (() => {
     'use strict';
 
-    // Store source as text only. Never insert these examples as HTML or an iframe.
-    const notes = [
-        { title: 'Chí', text: String.raw`<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<fieldset>
-<center><h2>PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
-<form action="/action_page.php">
-<img src="https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-a-tree-growing-from-an-open-book-the-background-is-blurred-image_16591834.jpg" width="200" height="110"style="float:right;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li><label for="hoten">Họ và tên:</label><input type="text" id="hoten">
-</li>
-<li><label for="nam">Nam:</label>
-<input type="checkbox" id="nam">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<label for="nu">nữ:</label>
-<input type="checkbox" id="nu">
-</li>
-<li>
- <label for="dantoc">Dân tộc:</label>
-<input type="text" id="dantoc"></li>
-<li>
-<label for="ngaysinh">Ngày, tháng, năm sinh:</label>
-<input type="text" id="ngaysinh"></li>
-<li>
-<label for="phone">Số điện thoại liên lạc:</label>
-<input type="text" id="phone"></li>
-</ol>
-<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
-<fieldset style="width:550px; height:270px;padding:8px 30px 8px 5px;">
-<fieldset style="border:none;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px; margin:0;padding:6px 8px 0 0;">
-<fieldset style="height:110px; margin:0;padding:20px 12px 0 12px;">
- ĐĂNG KÝ NGUYỆN VỌNG:
-<br><br>
-<label for="nguyenvong">Lựa chọn các nguyện vọng:</label>
-<select id="nguyenvong">
-<option>Đại học Bách Khoa TPHCM</option>
-<option>Đại học Y Khoa TPHCM</option>
-<option selected>Đại học Tôn Đức Thắng</option>
-<option>Đại học Nguyễn Tất Thành</option></select><br>
-<input type="submit" value="Gửi truy vấn">
- </fieldset>
-</fieldset>
-</fieldset>
-</form>
-</fieldset>
-</body>
-</html>` },
-        { title: 'Chí 2', text: String.raw`<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<fieldset>
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
-<form action="/action_page.php">
-<img src="hinhanh.jpg" width="200" height="110" style="float:right;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li><label for="tenhs">Họ và tên:</label><input id="tenhs"></li>
-<li><label for="gtnam">Nam:</label><input type="checkbox" id="gtnam"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="gtnu">nữ:</label><input type="checkbox" id="gtnu"></li>
-<li><label for="dtoc">Dân tộc:</label><input id="dtoc"></li>
-<li><label for="nsinh">Ngày, tháng, năm sinh:</label><input id="nsinh"></li>
-<li><label for="sdt">Số điện thoại liên lạc:</label><input id="sdt"></li>
-</ol>
-<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
-<fieldset style="width:550px;height:270px;padding:8px 30px 8px 5px;">
-<fieldset style="border:none;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px;margin:0;padding:6px 8px 0 0;">
-<fieldset style="height:110px;margin:0;padding:20px 12px 0 12px;">
-ĐĂNG KÝ NGUYỆN VỌNG:<br><br>
-<label for="chontruong">Lựa chọn các nguyện vọng:</label>
-<select id="chontruong">
-<option>Đại học Bách Khoa TPHCM</option>
-<option>Đại học Y Khoa TPHCM</option>
-<option selected>Đại học Tôn Đức Thắng</option>
-<option>Đại học Nguyễn Tất Thành</option>
-</select><br><input type="submit" value="Gửi truy vấn">
-</fieldset></fieldset></fieldset>
-</form></fieldset>
-</body>
-</html>` },
-        { title: 'Chí 3', text: String.raw`<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<fieldset>
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
-<form action="/action_page.php">
-<img src="hinhanh.jpg" width="200" height="110" style="float:right;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li><label for="tenhs">Họ và tên:</label><input id="tenhs"></li>
-<li><label for="gtnam">Nam:</label><input type="checkbox" id="gtnam" name="gioitinh" value="Nam" onclick="document.getElementById('gtnu').checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<label for="gtnu">nữ:</label><input type="checkbox" id="gtnu" name="gioitinh" value="Nữ" onclick="document.getElementById('gtnam').checked=false"></li>
-<li><label for="dtoc">Dân tộc:</label><input id="dtoc"></li>
-<li><label for="nsinh">Ngày, tháng, năm sinh:</label><input id="nsinh"></li>
-<li><label for="sdt">Số điện thoại liên lạc:</label><input id="sdt"></li>
-</ol>
-<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
-<fieldset style="width:550px;height:270px;padding:8px 30px 8px 5px;">
-<fieldset style="border:none;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px;margin:0;padding:6px 8px 0 0;">
-<fieldset style="height:110px;margin:0;padding:20px 12px 0 12px;">
-ĐĂNG KÝ NGUYỆN VỌNG:<br><br>
-<label for="chontruong">Lựa chọn các nguyện vọng:</label>
-<select id="chontruong">
-<option>Đại học Bách Khoa TPHCM</option>
-<option>Đại học Y Khoa TPHCM</option>
-<option selected>Đại học Tôn Đức Thắng</option>
-<option>Đại học Nguyễn Tất Thành</option>
-</select><br><input type="submit" value="Gửi truy vấn">
-</fieldset></fieldset></fieldset>
-</form></fieldset>
-</body>
-</html>` },
-        { title: 'Tỷ', text: String.raw`<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<b>Tạo form đăng ký sau:</b>
-<fieldset style="width:1100px;height:800px;padding:20px;">
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
-<form action="/action_page.php">
-<img src="logo.png" width="130" height="110" style="float:right;margin-right:40px;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li><label for="hovaten">Họ và tên:</label>
-<input type="text" id="hovaten"></li>
-<li><label for="nam10">Nam:</label>
-<input type="checkbox" id="nam10"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<label for="nu10">nữ:</label>
-<input type="checkbox" id="nu10"></li>
-<li><label for="dantoc10">Dân tộc:</label>
-<input type="text" id="dantoc10"></li>
-<li><label for="ngaysinh10">Ngày, tháng, năm sinh:</label>
-<input type="text" id="ngaysinh10"></li>
-<li><label for="lienlac">Số điện thoại liên lạc:</label>
-<input type="text" id="lienlac"></li>
-<li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
-</ol>
-<table border="1" cellspacing="0" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
-<tr style="height:45px;text-align:center;">
-<td>Môn</td>
-<td>Văn</td>
-<td>Toán</td>
-<td>Anh văn</td>
-<td>KHTN</td>
-<td>Lịch sử<br>Địa lý</td>
-<td>GDCD</td>
-<td>Công nghệ</td>
-<td>Tin học</td>
-</tr>
-<tr style="height:45px;">
-<td>Điểm TB<br>cuối năm</td>
-<td></td><td></td><td></td><td></td>
-<td></td><td></td><td></td><td></td>
-</tr>
-</table>
-<br>
-<b>2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b>
-<br><br>
-
-<fieldset style="float:right;width:380px;height:240px;padding:15px;font-size:12px;">
-<fieldset style="height:190px;border:1px solid lightgray;padding:12px;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ
-<br><br>
-<label for="chonmonphai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
-<select id="chonmonphai" style="width:100%;font-size:12px;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br>
-<input type="submit" value="ĐĂNG KÝ">
-</fieldset>
-</fieldset>
-
-<fieldset style="width:620px;height:190px;padding:8px 15px 8px 5px;">
-<fieldset style="border:none;border-top:5px solid lightgray;border-right:5px solid lightgray;height:170px;margin:0;padding:6px 8px 0 0;">
-<fieldset style="height:140px;margin:0;padding:15px 12px 0 12px;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ
-<br><br>
-<label for="chonmontrai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
-<select id="chonmontrai" style="width:100%;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br>
-<input type="submit" value="ĐĂNG KÝ">
-</fieldset>
-</fieldset>
-</fieldset>
-</form>
-</fieldset>
-</body>
-</html>` },
-        { title: 'Tỷ 2', text: String.raw`<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<b>Tạo form đăng ký sau:</b>
-<fieldset style="width:1100px;height:800px;padding:20px;">
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
-<form action="/action_page.php">
-<img src="logo.png" width="130" height="110" style="float:right;margin-right:40px;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li><label for="hovaten">Họ và tên:</label><input id="hovaten"></li>
-<li><label for="nam10">Nam:</label><input type="checkbox" id="nam10"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="nu10">nữ:</label><input type="checkbox" id="nu10"></li>
-<li><label for="dantoc10">Dân tộc:</label><input id="dantoc10"></li>
-<li><label for="ngaysinh10">Ngày, tháng, năm sinh:</label><input id="ngaysinh10"></li>
-<li><label for="lienlac">Số điện thoại liên lạc:</label><input id="lienlac"></li>
-<li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
-</ol>
-<table border="1" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
-<tr style="height:45px;text-align:center;"><td>Môn</td><td>Văn</td><td>Toán</td><td>Anh văn</td><td>KHTN</td><td>Lịch sử<br>Địa lý</td><td>GDCD</td><td>Công nghệ</td><td>Tin học</td></tr>
-<tr style="height:45px;"><td>Điểm TB<br>cuối năm</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-</table><br>
-<b>2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b><br><br>
-<fieldset style="float:right;width:380px;height:240px;padding:15px;font-size:12px;">
-<fieldset style="height:190px;border:1px solid lightgray;padding:12px;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-<label for="chonmonphai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
-<select id="chonmonphai" style="width:100%;font-size:12px;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><input type="submit" value="ĐĂNG KÝ">
-</fieldset></fieldset>
-<fieldset style="width:620px;height:190px;padding:8px 15px 8px 5px;">
-<fieldset style="border:none;border-top:5px solid lightgray;border-right:5px solid lightgray;height:170px;margin:0;padding:6px 8px 0 0;">
-<fieldset style="height:140px;margin:0;padding:15px 12px 0 12px;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-<label for="chonmontrai">CÁC MÔN HỌC LỰA CHỌN:</label><br>
-<select id="chonmontrai" style="width:100%;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><input type="submit" value="ĐĂNG KÝ">
-</fieldset></fieldset></fieldset>
-</form></fieldset>
-</body>
-</html>` },
-        { title: 'Chí hoàn thiện', text: String.raw`<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<fieldset>
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN THI TỐT NGHIỆP 12<br>Năm Học 2026 – 2027</h2></center>
-<form>
-<img src="https://png.pngtree.com/thumb_back/fh260/background/20241113/pngtree-an-open-book-with-a-tree-growing-from-it-flying-birds-image_16591912.jpg" width="200" height="110" style="float:right;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li>Họ và tên:<input></li>
-<li>Nam:<input type="checkbox" onclick="this.nextElementSibling.checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nữ:<input type="checkbox" onclick="this.previousElementSibling.checked=false"></li>
-<li>Dân tộc:<input></li>
-<li>Ngày, tháng, năm sinh:<input></li>
-<li>Số điện thoại liên lạc:<input></li>
-</ol>
-<b>2/. ĐĂNG KÝ NGUYỆN VỌNG XÉT TUYỂN ĐẠI HỌC</b>
-<fieldset style="width:550px;height:270px;padding:8px 30px 8px 5px;">
-<fieldset style="border:0;border-top:7px solid lightgray;border-right:7px solid lightgray;height:245px;margin:0;padding:6px 8px 0 0;">
-<fieldset style="height:110px;margin:0;padding:20px 12px 0;">
-ĐĂNG KÝ NGUYỆN VỌNG:<br><br>
-Lựa chọn các nguyện vọng:
-<select>
-<option>Đại học Bách Khoa TPHCM</option>
-<option>Đại học Y Khoa TPHCM</option>
-<option selected>Đại học Tôn Đức Thắng</option>
-<option>Đại học Nguyễn Tất Thành</option>
-</select><br><button>Gửi truy vấn</button>
-</fieldset></fieldset></fieldset>
-</form></fieldset>
-</body>
-</html>` },
-        { title: 'Tỷ hoàn thiện', text: String.raw`<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<b>Tạo form đăng ký sau:</b>
-<fieldset style="width:1100px;height:800px;padding:20px;">
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
-<form>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWVLX8iWvT40_ueA8kbg52_ZbCraIk0pQ1jvy8pQjGFQ&s=10" width="130" height="110" style="float:right;margin-right:40px;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li>Họ và tên:<input></li>
-<li>Nam:<input type="checkbox" onclick="this.nextElementSibling.checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nữ:<input type="checkbox" onclick="this.previousElementSibling.checked=false"></li>
-<li>Dân tộc:<input></li>
-<li>Ngày, tháng, năm sinh:<input></li>
-<li>Số điện thoại liên lạc:<input></li>
-<li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
-</ol>
-<table border="1" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
-<tr style="height:45px;text-align:center;"><td>Môn</td><td>Văn</td><td>Toán</td><td>Anh văn</td><td>KHTN</td><td>Lịch sử<br>Địa lý</td><td>GDCD</td><td>Công nghệ</td><td>Tin học</td></tr>
-<tr style="height:45px;"><td>Điểm TB<br>cuối năm</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-</table><br>
-<b style="font-size:20px;">2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b><br><br>
-<fieldset style="float:right;width:380px;height:240px;padding:10px;border:1px solid black;font-size:13px;">
-<fieldset style="height:190px;padding:10px;border:1px solid lightgray;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-CÁC MÔN HỌC LỰA CHỌN:<br>
-<select style="width:100%;font-size:13px;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><button>ĐĂNG KÝ</button>
-</fieldset></fieldset>
-<fieldset style="width:620px;height:190px;padding:10px;border:1px solid black;font-size:18px;">
-<fieldset style="border:0;border-right:5px solid lightgray;height:170px;padding:10px;margin:0;">
-<fieldset style="height:120px;padding:10px;margin:0;border:1px solid lightgray;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-CÁC MÔN HỌC LỰA CHỌN:<br>
-<select style="width:100%;font-size:16px;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><button>ĐĂNG KÝ</button>
-</fieldset></fieldset></fieldset>` },
-        { title: 'Tỷ gọn hoàn thiện', text: String.raw`<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family:'Times New Roman';font-size:20px;">
-<b>Tạo form đăng ký sau:</b>
-<fieldset style="width:1100px;height:800px;padding:20px;">
-<center><h2 style="font-size:20px;">PHIẾU ĐĂNG KÝ CHỌN TỔ HỢP MÔN LỚP 10<br>Năm Học 2026 – 2027</h2></center>
-<form>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWVLX8iWvT40_ueA8kbg52_ZbCraIk0pQ1jvy8pQjGFQ&s=10" width="130" height="110" style="float:right;margin-right:40px;">
-<b>I/ THÔNG TIN HỌC SINH</b>
-<ol>
-<li>Họ và tên:<input></li>
-<li>Nam:<input type="checkbox" onclick="this.nextElementSibling.checked=false"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nữ:<input type="checkbox" onclick="this.previousElementSibling.checked=false"></li>
-<li>Dân tộc:<input></li>
-<li>Ngày, tháng, năm sinh:<input></li>
-<li>Số điện thoại liên lạc:<input></li>
-<li>Điểm tổng kết lớp 9 năm học 2025 – 2026:</li>
-</ol>
-<table border="1" cellpadding="5" style="width:94%;margin-left:30px;border-collapse:collapse;table-layout:fixed;">
-<tr style="height:45px;text-align:center;"><td>Môn</td><td>Văn</td><td>Toán</td><td>Anh văn</td><td>KHTN</td><td>Lịch sử<br>Địa lý</td><td>GDCD</td><td>Công nghệ</td><td>Tin học</td></tr>
-<tr style="height:45px;"><td>Điểm TB<br>cuối năm</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-</table><br>
-<b style="font-size:20px;">2/. ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ</b><br><br>
-<fieldset style="width:620px;height:190px;padding:10px;border:1px solid black;font-size:18px;">
-<fieldset style="border:0;border-right:5px solid lightgray;height:170px;padding:10px;margin:0;">
-<fieldset style="height:120px;padding:10px;margin:0;border:1px solid lightgray;">
-ĐĂNG KÝ CÁC MÔN HỌC LỰA CHỌN VÀ CỤM CHUYÊN ĐỀ<br><br>
-CÁC MÔN HỌC LỰA CHỌN:<br>
-<select style="width:100%;font-size:16px;">
-<option>CÁC PHƯƠNG ÁN</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)</option>
-<option>Lý, Hóa, Sinh, Tin học (Khoa học máy tính)b</option>
-<option>Địa, GDKT&amp;PL, Lý, Tin học (Tin học ứng dụng)</option>
-<option>Địa, GDKT&amp;PL, Công nghệ (Thiết kế&amp;CN), Tin học (Tin học ứng dụng)</option>
-</select><br><button>ĐĂNG KÝ</button>
-</fieldset></fieldset></fieldset>
-</form>
-</fieldset>
-</body>
-</html>` }
-    ];
+    // Decrypt on demand; display examples as text, never executable HTML.
+    const dataUrl = new URL('museum-notes-data.json', document.currentScript.src);
+    let notes = null;
 
     const opener = document.getElementById('museum-notes-open');
     if (!opener) return;
     let dialog;
+    let unlockAttempt = 0;
+
+    async function unlockNotes(password) {
+        if (!window.crypto?.subtle) throw new Error('UNSUPPORTED');
+        let data;
+        try {
+            const response = await fetch(dataUrl, { cache: 'no-store' });
+            if (!response.ok) throw new Error('LOAD');
+            data = await response.json();
+        } catch (_) {
+            throw new Error('LOAD');
+        }
+        if (data.version !== 1 || data.iterations !== 210000) throw new Error('LOAD');
+        const bytes = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
+        const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+        const key = await crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: bytes(data.salt), iterations: data.iterations, hash: 'SHA-256' },
+            material, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+        );
+        const plaintext = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(data.iv) }, key, bytes(data.ciphertext));
+        const decoded = JSON.parse(new TextDecoder().decode(plaintext));
+        if (!Array.isArray(decoded) || !decoded.every(note => typeof note.title === 'string' && typeof note.text === 'string')) throw new Error('LOAD');
+        return decoded;
+    }
 
     function buildDialog() {
         dialog = document.createElement('dialog');
@@ -406,7 +58,62 @@ CÁC MÔN HỌC LỰA CHỌN:<br>
         status.setAttribute('role', 'status');
         status.setAttribute('aria-live', 'polite');
 
-        notes.forEach((note, index) => {
+        const lockForm = document.createElement('form');
+        lockForm.className = 'museum-notes__lock';
+        const instruction = document.createElement('p');
+        instruction.textContent = 'Nhập mật khẩu để mở Ghi chú.';
+        const label = document.createElement('label');
+        label.htmlFor = 'museum-notes-password';
+        label.textContent = 'Mật khẩu';
+        const password = document.createElement('input');
+        password.id = 'museum-notes-password';
+        password.type = 'password';
+        password.inputMode = 'numeric';
+        password.autocomplete = 'current-password';
+        password.required = true;
+        const submit = document.createElement('button');
+        submit.type = 'submit';
+        submit.textContent = 'Mở ghi chú';
+        lockForm.append(instruction, label, password, submit);
+        body.append(lockForm);
+        password.addEventListener('input', () => {
+            password.removeAttribute('aria-invalid');
+            status.textContent = '';
+        });
+        lockForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            if (submit.disabled) return;
+            const attempt = ++unlockAttempt;
+            const secret = password.value;
+            password.value = '';
+            password.disabled = submit.disabled = true;
+            status.textContent = 'Đang mở ghi chú…';
+            try {
+                const decoded = await unlockNotes(secret);
+                if (attempt !== unlockAttempt || !dialog.open) return;
+                notes = decoded;
+                status.textContent = '';
+                renderNotes();
+                body.querySelector('button')?.focus();
+            } catch (error) {
+                if (attempt !== unlockAttempt || !dialog.open) return;
+                status.textContent = error.message === 'LOAD'
+                    ? 'Không tải được ghi chú. Hãy kiểm tra kết nối và thử lại.'
+                    : error.message === 'UNSUPPORTED'
+                        ? 'Hãy mở website bằng HTTPS trong trình duyệt hỗ trợ mã hóa.'
+                        : 'Mật khẩu chưa đúng. Vui lòng thử lại.';
+                password.setAttribute('aria-invalid', 'true');
+            } finally {
+                if (attempt === unlockAttempt) {
+                    password.disabled = submit.disabled = false;
+                    if (!notes && dialog.open) password.focus();
+                }
+            }
+        });
+
+        function renderNotes() {
+            body.replaceChildren();
+            notes.forEach((note, index) => {
             const section = document.createElement('section');
             const toolbar = document.createElement('div');
             toolbar.className = 'museum-notes__toolbar';
@@ -452,7 +159,8 @@ CÁC MÔN HỌC LỰA CHỌN:<br>
             toolbar.append(heading, actions);
             section.append(toolbar, code);
             body.append(section);
-        });
+            });
+        }
         header.append(status);
         dialog.append(header, body);
         dialog.addEventListener('click', event => {
@@ -460,6 +168,12 @@ CÁC MÔN HỌC LỰA CHỌN:<br>
             if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
         });
         dialog.addEventListener('close', () => {
+            ++unlockAttempt;
+            notes = null;
+            lockForm.reset();
+            password.disabled = submit.disabled = false;
+            password.removeAttribute('aria-invalid');
+            body.replaceChildren(lockForm);
             status.textContent = '';
             document.querySelector('#nav-item-bao-tang > a')?.focus();
         });
@@ -487,6 +201,9 @@ CÁC MÔN HỌC LỰA CHỌN:<br>
         event.preventDefault();
         if (typeof window.dongTatCaDropdown === 'function') window.dongTatCaDropdown();
         if (!dialog) buildDialog();
-        if (!dialog.open) dialog.showModal();
+        if (!dialog.open) {
+            dialog.showModal();
+            document.getElementById('museum-notes-password').focus();
+        }
     });
 })();

@@ -68,5 +68,21 @@
 }
 .museum-notes :focus-visible { outline: 3px solid #2392ba; outline-offset: 2px; }
 .museum-notes__copy-buffer { position: fixed; width: 1px; height: 1px; opacity: 0; }
+.museum-notes__lock { display: grid; gap: 14px; max-width: 420px; margin: 12px auto; }
+.museum-notes__lock p { margin: 0; }
+.museum-notes__lock label { font-weight: bold; }
+.museum-notes__lock input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 12px;
+    border: 1px solid #b98d21;
+    border-radius: 8px;
+    background: #fff;
+    color: #251b14;
+    font: 18px sans-serif;
+}
+.museum-notes__lock input[aria-invalid='true'] { border-color: #bd2828; }
 :root[data-theme='dark'] .museum-notes { background: #241b15; color: #f5e7cc; }
 :root[data-theme='dark'] .museum-notes pre { background: #171310; color: #f5e7cc; border-color: #796342; }
